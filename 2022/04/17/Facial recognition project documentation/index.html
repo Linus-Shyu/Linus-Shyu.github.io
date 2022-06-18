@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Linus Shyu">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Facial recognition project documentation | Linus Shyu
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Linus Shyu</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Facial recognition project documentation</h2>
+  <p class="post-date">2022-04-17</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="Facial-recognition-project-documentation"><a href="#Facial-recognition-project-documentation" class="headerlink" title="Facial recognition project documentation"></a>Facial recognition project documentation</h1><h3 id="Project-introduction"><a href="#Project-introduction" class="headerlink" title="Project introduction"></a>Project introduction</h3><p>This project is developed by linuxu. It is a face model recognition project developed based on the python computer vision library open cv. It will continue to be updated and improved. I hope this project I developed can be liked by you.</p>
+<h3 id="Libraris-and-languages-used-by-the-project"><a href="#Libraris-and-languages-used-by-the-project" class="headerlink" title="Libraris and languages used by the project"></a>Libraris and languages used by the project</h3><p>Python(3.9.1)</p>
+<p>opencv-python(4.5.3.56)</p>
+<p>face-recognition(1.3.0)</p>
+<h3 id="Supported-platforms"><a href="#Supported-platforms" class="headerlink" title="Supported platforms"></a>Supported platforms</h3><p>1.Python</p>
+<p>2.Visual Vtudio code</p>
+<p>3.Pycham</p>
+<p>4.Jupyter notebook</p>
+<p>……</p>
+<h3 id="Participating-developers"><a href="#Participating-developers" class="headerlink" title="Participating developers"></a>Participating developers</h3><p>Vitalik Linuxu(Xu faxin)</p>
+<h3 id="Instructions"><a href="#Instructions" class="headerlink" title="Instructions"></a>Instructions</h3><p>1.Download the project zip package</p>
+<p>2.Find the code section to open</p>
+<p>3.Click to run and it’s ok,or open the command line and enter:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 code.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="Fresh"><a href="#Fresh" class="headerlink" title="Fresh"></a>Fresh</h3><p>Support loop</p>
+<p>Use mainstream language python</p>
+<h3 id="Project-display"><a href="#Project-display" class="headerlink" title="Project display"></a>Project display</h3><img width="1680" alt="截屏2021-10-01 下午7 56 23" src="https://user-images.githubusercontent.com/83543818/135643628-11044166-f610-4dbf-936b-322b59c6654e.png">
+<img width="1680" alt="截屏2021-10-01 下午7 56 59" src="https://user-images.githubusercontent.com/83543818/135643633-44702ac0-1a51-4b35-af93-81957e1efe72.png">
+<img width="1680" alt="截屏2021-10-01 下午7 55 37" src="https://user-images.githubusercontent.com/83543818/135643617-f52702fb-6de1-4c9f-9624-cf52d71d58be.png">
+
+<h3 id="Developer-email"><a href="#Developer-email" class="headerlink" title="Developer email"></a>Developer email</h3><p><a href="mailto:&#65;&#119;&#x6d;&#x74;&#x66;&#116;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#65;&#119;&#x6d;&#x74;&#x66;&#116;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks!"></a>Thanks!</h2><h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入cv2</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment">#导入人脸识别的模块</span></span><br><span class="line"><span class="keyword">import</span> face_recognition</span><br><span class="line"><span class="comment">#读取照片</span></span><br><span class="line">img=cv2.imread(<span class="string">&#x27;face/face7.jpg&#x27;</span>)</span><br><span class="line"><span class="comment">#获取人脸位置</span></span><br><span class="line">locations=face_recognition.face_locations(img)</span><br><span class="line"><span class="comment">#连续标记人脸位置</span></span><br><span class="line"><span class="keyword">for</span> top,right,bottom,left <span class="keyword">in</span> locations:</span><br><span class="line">    cv2.rectangle(img,(left,top),(right,bottom),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line"><span class="comment">#展示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;Window&#x27;</span>,img)</span><br><span class="line"><span class="comment">#等待键盘时间</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#释放窗口</span></span><br><span class="line">cv2.destroyAllWindows</span><br></pre></td></tr></table></figure>
+
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#python项目展示" >
+    <span class="tag-code">python项目展示</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/04/14/%E9%9F%B3%E4%B9%90/">
+        <span class="nav-arrow">← </span>
+        
+          音乐课上唱的歌（离谱啊）
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/04/17/Symmetrical-lam%20Automated%20mouse%20click%20script%20description%20document/">
+        
+          Symmetrical-lam Automated mouse click script description document
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Facial-recognition-project-documentation"><span class="toc-nav-text">Facial recognition project documentation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Project-introduction"><span class="toc-nav-text">Project introduction</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Libraris-and-languages-used-by-the-project"><span class="toc-nav-text">Libraris and languages used by the project</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Supported-platforms"><span class="toc-nav-text">Supported platforms</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Participating-developers"><span class="toc-nav-text">Participating developers</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Instructions"><span class="toc-nav-text">Instructions</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Fresh"><span class="toc-nav-text">Fresh</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Project-display"><span class="toc-nav-text">Project display</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Developer-email"><span class="toc-nav-text">Developer email</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thanks"><span class="toc-nav-text">Thanks!</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#code"><span class="toc-nav-text">code</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://example.com/2022/04/17/Facial recognition project documentation/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

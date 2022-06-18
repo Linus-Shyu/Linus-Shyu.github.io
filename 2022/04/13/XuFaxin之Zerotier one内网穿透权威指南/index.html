@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Linus Shyu">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      许发鑫之Zerotier one内网穿透权威指南 | Linus Shyu
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Linus Shyu</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>许发鑫之Zerotier one内网穿透权威指南</h2>
+  <p class="post-date">2022-04-13</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>对于XuFaxin来说，世上最痛苦的事就是找自己程序的报错原因，以及环境</p>
+<p>变了，配置环境找安装依赖，关闭CSDN和B站的十几个标签页的无奈，不过</p>
+<p>这些都是自己编程路上的一种历练，毕竟谁让我们这些极客，乐于折腾呢？</p>
+<p>by XuFaxin</p>
+<p>前情要提</p>
+<p><a target="_blank" rel="noopener" href="http://www.xf2021.com/">www.xf2021.com</a> 的站长也就费哥借给我了一台服务器，让我在上面跑</p>
+<p>web项目。但我平常是喜欢用ssh来连接服务器管理code资源和部署项目，</p>
+<p>但是没有考虑过共享硬件资源这件事，正好我的朋友eulur，提议让我，费</p>
+<p>哥，还有他共同来使用这台服务器来做各自想做的事，毕竟我只是把这台服</p>
+<p>务器当作Linux开发环境和web服务器，还有许多硬件资源剩余，不如共</p>
+<p>享。于是就有了这期使用Zerotier one来实现内网穿透的教程。</p>
+<h2 id="内网穿透原理-amp-介绍-amp-选择Zerotier的原因"><a href="#内网穿透原理-amp-介绍-amp-选择Zerotier的原因" class="headerlink" title="内网穿透原理&amp;介绍&amp;选择Zerotier的原因"></a>内网穿透原理&amp;介绍&amp;选择Zerotier的原因</h2><p>内网穿透，即NAT穿透，映射端口，能让外网的电脑找到处于内网的电脑。</p>
+<p>首先我不使用传统frp的原因是，它配置麻烦，而且我没有外网服务器设</p>
+<p>备，我摊牌了，我就是想白嫖，不想花钱买阿里云的服务器罢了，因为frp</p>
+<p>依赖外网服务器：</p>
+<p>内网的电脑————&gt;外网服务器服务器&lt;———–外网的电脑</p>
+<p>而Zerotier很好的通过虚拟网络填补了我没有外网服务器这个空缺。</p>
+<p>最重要的是个人用户还免费，最多可以添加50个内网设备，对于个人用户来说也是足够了！！！</p>
+<h2 id="教程开始"><a href="#教程开始" class="headerlink" title="教程开始"></a>教程开始</h2><p>1.首先既然是基于Zerotier one那么我们就得注册一个Zerotier的账</p>
+<p>号，来管理我们在虚拟网络当中的设备。</p>
+<h2 id="1-百度or谷歌搜索Zerotier官网"><a href="#1-百度or谷歌搜索Zerotier官网" class="headerlink" title="1.百度or谷歌搜索Zerotier官网"></a>1.百度or谷歌搜索Zerotier官网</h2><p>1.2.第一个就是官网我们点击进入。</p>
+<p>官网链接我已经备好了：<a target="_blank" rel="noopener" href="https://www.zerotier.com/">https://www.zerotier.com</a></p>
+<h2 id="2-然后注册一个Zerotier账号，点击sign-up注册"><a href="#2-然后注册一个Zerotier账号，点击sign-up注册" class="headerlink" title="2.然后注册一个Zerotier账号，点击sign up注册"></a>2.然后注册一个Zerotier账号，点击sign up注册</h2><p>2.1.填写好e-mail地址和密码点击Register，等待网站的机器人发送验证邮件。</p>
+<p>2.2.点击侧边栏使用谷歌，Github，微软的账号进行快捷方式的登陆。</p>
+<p>PS:不太建议第二种方式，如果网站与厂商存在有关快捷登陆的漏洞，后果我就不用说了把，懂得都懂。</p>
+<h2 id="3-点击邮箱验证连接，刷新点击了Register界面，点击Create-A-Network来创建虚拟网络服务"><a href="#3-点击邮箱验证连接，刷新点击了Register界面，点击Create-A-Network来创建虚拟网络服务" class="headerlink" title="3.点击邮箱验证连接，刷新点击了Register界面，点击Create A Network来创建虚拟网络服务"></a>3.点击邮箱验证连接，刷新点击了Register界面，点击Create A Network来创建虚拟网络服务</h2><h2 id="4-点击NETWORK-ID进入服务管理页面"><a href="#4-点击NETWORK-ID进入服务管理页面" class="headerlink" title="4.点击NETWORK ID进入服务管理页面"></a>4.点击NETWORK ID进入服务管理页面</h2><h2 id="5-添加各项设置"><a href="#5-添加各项设置" class="headerlink" title="5.添加各项设置"></a>5.添加各项设置</h2><p>这几步类似于创建Github代码仓库时的操作。</p>
+<p>5.1在Name项下添加你虚拟网络的名字。</p>
+<p>5.2在Description项下添加虚拟网络的说明。</p>
+<p>5.3设置该虚拟网络服务为私有还是公有，点击Private（私有）和</p>
+<p>Public（公共）来进行选择。</p>
+<p>5.4在Network ID下复制虚拟网络ID</p>
+<p>PS:注意注意注意！！！私有和共有是两个不同的概念，私有是我们授权的</p>
+<p>设备可以加入虚拟网络，而公共是所有人任何人都可以加入这个虚拟网络，</p>
+<p>为了你内网设备的安全考虑，请慎重选择！！！</p>
+<h2 id="6-添加内网设备，接下来以费哥的network展示设备添加的全过程"><a href="#6-添加内网设备，接下来以费哥的network展示设备添加的全过程" class="headerlink" title="6.添加内网设备，接下来以费哥的network展示设备添加的全过程"></a>6.添加内网设备，接下来以费哥的network展示设备添加的全过程</h2><p>6.1因为服务器被我用移动硬盘安装了ubuntu，所以客户端安装流程就走</p>
+<p>官网给的教程。</p>
+<p>PS：ubuntu是Linux的发行版本。</p>
+<p>6.2打开ubuntu的终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">#这条命令的意思是以最高权限更新软件。</span><br><span class="line">#apt update的作用是进行升级系统软件。</span><br><span class="line">#Linux系统的更新还有软件都得靠apt这个包。</span><br><span class="line">#接下来终端会提示输入root密码。</span><br><span class="line">#PS:注意Linux下，安装，升级，卸载，都需要root权限，不然会因为权限不足因而失败。</span><br></pre></td></tr></table></figure>
+
+<p>6.3然后我们来安装crul用于安装Zerotier的Linux的客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install curl</span><br><span class="line">#这条命令的意思是以管理员权限在apt软件管理包中安装curl。</span><br><span class="line">#介绍一下curl这个工具，它可以与网站建立连接，并下载所需的软件和文件，是我在Linux用过vim后第二好用的工具。</span><br></pre></td></tr></table></figure>
+
+<p>6.4最后来使用curl安装Zerotier的Linux客户端：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br><span class="line">#这条命令的意思是在bash下以最高权限请求Zerotier服务器，不显示下载进度图，安装Zerotier的Linux客户端。</span><br><span class="line">#curl -s就是安装不显示下载进度图。</span><br><span class="line">#sudo bash就是在bash下以最高权限运行。</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-5安装好之后，我们就来加入Zerotier虚拟网络，在终端输入"><a href="#6-5安装好之后，我们就来加入Zerotier虚拟网络，在终端输入" class="headerlink" title="6.5安装好之后，我们就来加入Zerotier虚拟网络，在终端输入"></a>6.5安装好之后，我们就来加入Zerotier虚拟网络，在终端输入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo zerotier-cli join XXXXXXXXXXXXXXXX</span><br><span class="line">#这条命令的意思是以最高权限启动Zerotier客户端加入虚拟网络。</span><br><span class="line">#PS:；这里后面那16位随机数是虚拟网络的地址粘贴在join后就好了。</span><br></pre></td></tr></table></figure>
+
+<p>7.刷新一下虚拟网络的管理界面，你能够看到加入的内网设备，注意一定</p>
+<p>要刷新，不然是看不到的！！！</p>
+<p>7.1内网服务器加入虚拟网络完成后，虚拟网络的管理界面会出现等待加</p>
+<p>入设备授权的状况。</p>
+<p>7.2点击红色虚线后的小方框，完成授权后红色虚线就变绿色线段了，这</p>
+<p>样我们就完成了对内网服务器的授权。</p>
+<h2 id="这里你已经成功了一半但不要高兴的太早，Zerotier的虚拟网络服务至少得添加两个设备才能工作，这简直太坑了！！！一定要注意！！！那就让我们继续添加设备吧"><a href="#这里你已经成功了一半但不要高兴的太早，Zerotier的虚拟网络服务至少得添加两个设备才能工作，这简直太坑了！！！一定要注意！！！那就让我们继续添加设备吧" class="headerlink" title="这里你已经成功了一半但不要高兴的太早，Zerotier的虚拟网络服务至少得添加两个设备才能工作，这简直太坑了！！！一定要注意！！！那就让我们继续添加设备吧"></a>这里你已经成功了一半但不要高兴的太早，Zerotier的虚拟网络服务至少得添加两个设备才能工作，这简直太坑了！！！一定要注意！！！那就让我们继续添加设备吧</h2><h2 id="Mac-OS客户端安装"><a href="#Mac-OS客户端安装" class="headerlink" title="Mac OS客户端安装"></a>Mac OS客户端安装</h2><p>因为本人换了新电脑，选择了Macbook Air，所以说我的Thinkpad X1</p>
+<p>被我在闲鱼出掉了。</p>
+<p>8.来到Zerotier官网主页，点击download(下载)。</p>
+<p>8.1点击Mac OS下载安装包。</p>
+<p>8.2点击下载好的安装包。</p>
+<p>8.3一直点击继续就安装完成了</p>
+<p>9.加入Zerotier虚拟网络。</p>
+<p>9.1安装完成后我们可以在Mac的任务栏上会出现一个像钥匙一样的图标，</p>
+<p>点击图标。</p>
+<p>9.2选择Open Control Panel…打开Zerotier客户端。</p>
+<p>9.3在最下方输入虚拟网络的地址(XXXXXXXXXXXXXXXX)，点击join(加</p>
+<p>入)，这样就成功加入了该虚拟网络，重复授权操作，该设备就能访问到我</p>
+<p>们的服务器了。</p>
+<h2 id="内网穿透部署完成让我们测试一下"><a href="#内网穿透部署完成让我们测试一下" class="headerlink" title="内网穿透部署完成让我们测试一下"></a>内网穿透部署完成让我们测试一下</h2><p>1.给自己的电脑换上不同于服务器的网络（wifi）</p>
+<p>2.首先还是来到Zerotier虚拟网络管理页面。</p>
+<p>2.在Managed IPs项下复制Zerotier虚拟网络分配给设备的虚拟IP。</p>
+<p>3.接下来使用快捷键（command+k），打开连接服务器页面。</p>
+<p>4.在地址栏里输入刚才复制的虚拟IP地址，点击连接。</p>
+<h2 id="到此本教程结束，有兴趣的小伙伴可以自己部署玩一玩。简单上手，也确实不难"><a href="#到此本教程结束，有兴趣的小伙伴可以自己部署玩一玩。简单上手，也确实不难" class="headerlink" title="到此本教程结束，有兴趣的小伙伴可以自己部署玩一玩。简单上手，也确实不难"></a>到此本教程结束，有兴趣的小伙伴可以自己部署玩一玩。简单上手，也确实不难</h2></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#内网穿透" >
+    <span class="tag-code">内网穿透</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/04/04/weichuos%E5%9B%A2%E9%98%9F%E4%BB%8B%E7%BB%8D/">
+        <span class="nav-arrow">← </span>
+        
+          关于团队（WEICHUOS TEAM）
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/04/13/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+        
+          本站介绍
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%8E%9F%E7%90%86-amp-%E4%BB%8B%E7%BB%8D-amp-%E9%80%89%E6%8B%A9Zerotier%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-nav-text">内网穿透原理&amp;介绍&amp;选择Zerotier的原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%95%99%E7%A8%8B%E5%BC%80%E5%A7%8B"><span class="toc-nav-text">教程开始</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-%E7%99%BE%E5%BA%A6or%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2Zerotier%E5%AE%98%E7%BD%91"><span class="toc-nav-text">1.百度or谷歌搜索Zerotier官网</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-%E7%84%B6%E5%90%8E%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AAZerotier%E8%B4%A6%E5%8F%B7%EF%BC%8C%E7%82%B9%E5%87%BBsign-up%E6%B3%A8%E5%86%8C"><span class="toc-nav-text">2.然后注册一个Zerotier账号，点击sign up注册</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-%E7%82%B9%E5%87%BB%E9%82%AE%E7%AE%B1%E9%AA%8C%E8%AF%81%E8%BF%9E%E6%8E%A5%EF%BC%8C%E5%88%B7%E6%96%B0%E7%82%B9%E5%87%BB%E4%BA%86Register%E7%95%8C%E9%9D%A2%EF%BC%8C%E7%82%B9%E5%87%BBCreate-A-Network%E6%9D%A5%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1"><span class="toc-nav-text">3.点击邮箱验证连接，刷新点击了Register界面，点击Create A Network来创建虚拟网络服务</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-%E7%82%B9%E5%87%BBNETWORK-ID%E8%BF%9B%E5%85%A5%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2"><span class="toc-nav-text">4.点击NETWORK ID进入服务管理页面</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E5%90%84%E9%A1%B9%E8%AE%BE%E7%BD%AE"><span class="toc-nav-text">5.添加各项设置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-%E6%B7%BB%E5%8A%A0%E5%86%85%E7%BD%91%E8%AE%BE%E5%A4%87%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%E4%BB%A5%E8%B4%B9%E5%93%A5%E7%9A%84network%E5%B1%95%E7%A4%BA%E8%AE%BE%E5%A4%87%E6%B7%BB%E5%8A%A0%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="toc-nav-text">6.添加内网设备，接下来以费哥的network展示设备添加的全过程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6-5%E5%AE%89%E8%A3%85%E5%A5%BD%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%88%91%E4%BB%AC%E5%B0%B1%E6%9D%A5%E5%8A%A0%E5%85%A5Zerotier%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%EF%BC%8C%E5%9C%A8%E7%BB%88%E7%AB%AF%E8%BE%93%E5%85%A5"><span class="toc-nav-text">6.5安装好之后，我们就来加入Zerotier虚拟网络，在终端输入</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%BF%99%E9%87%8C%E4%BD%A0%E5%B7%B2%E7%BB%8F%E6%88%90%E5%8A%9F%E4%BA%86%E4%B8%80%E5%8D%8A%E4%BD%86%E4%B8%8D%E8%A6%81%E9%AB%98%E5%85%B4%E7%9A%84%E5%A4%AA%E6%97%A9%EF%BC%8CZerotier%E7%9A%84%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E8%87%B3%E5%B0%91%E5%BE%97%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AA%E8%AE%BE%E5%A4%87%E6%89%8D%E8%83%BD%E5%B7%A5%E4%BD%9C%EF%BC%8C%E8%BF%99%E7%AE%80%E7%9B%B4%E5%A4%AA%E5%9D%91%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B3%A8%E6%84%8F%EF%BC%81%EF%BC%81%EF%BC%81%E9%82%A3%E5%B0%B1%E8%AE%A9%E6%88%91%E4%BB%AC%E7%BB%A7%E7%BB%AD%E6%B7%BB%E5%8A%A0%E8%AE%BE%E5%A4%87%E5%90%A7"><span class="toc-nav-text">这里你已经成功了一半但不要高兴的太早，Zerotier的虚拟网络服务至少得添加两个设备才能工作，这简直太坑了！！！一定要注意！！！那就让我们继续添加设备吧</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Mac-OS%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="toc-nav-text">Mac OS客户端安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90%E8%AE%A9%E6%88%91%E4%BB%AC%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B"><span class="toc-nav-text">内网穿透部署完成让我们测试一下</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%88%B0%E6%AD%A4%E6%9C%AC%E6%95%99%E7%A8%8B%E7%BB%93%E6%9D%9F%EF%BC%8C%E6%9C%89%E5%85%B4%E8%B6%A3%E7%9A%84%E5%B0%8F%E4%BC%99%E4%BC%B4%E5%8F%AF%E4%BB%A5%E8%87%AA%E5%B7%B1%E9%83%A8%E7%BD%B2%E7%8E%A9%E4%B8%80%E7%8E%A9%E3%80%82%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%EF%BC%8C%E4%B9%9F%E7%A1%AE%E5%AE%9E%E4%B8%8D%E9%9A%BE"><span class="toc-nav-text">到此本教程结束，有兴趣的小伙伴可以自己部署玩一玩。简单上手，也确实不难</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://example.com/2022/04/13/XuFaxin之Zerotier one内网穿透权威指南/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

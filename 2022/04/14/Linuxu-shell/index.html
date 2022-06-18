@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Linus Shyu">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Linuxu-shell | Linus Shyu
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Linus Shyu</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Linuxu-shell</h2>
+  <p class="post-date">2022-04-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="这是个好玩的东西，我可能是世界上第一个python写这个东西的人"><a href="#这是个好玩的东西，我可能是世界上第一个python写这个东西的人" class="headerlink" title="这是个好玩的东西，我可能是世界上第一个python写这个东西的人"></a>这是个好玩的东西，我可能是世界上第一个python写这个东西的人</h2><h2 id="让我们看看吧"><a href="#让我们看看吧" class="headerlink" title="让我们看看吧"></a>让我们看看吧</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#library</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> clear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#string aphoto</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot; _   _      _ _    __        __         _     _            .____    .__                        &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;| | | | ___| | | __\\ \\      / /__  _ __| | __| |           |    |   |__| ____  __ _____  _____ __                       &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;| |_| |/ _ \\ | |/ _ \\ \\ /\\ / / _ \\| &#x27;__| |/ _` |           |    |   |  |/    \|  |  \  \/  /  |  \                      &quot;</span>) </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;|  _  |  __/ | | (_) \\ V  V / (_) | |  | | (_| |           |    |___|  |   |  \  |  /&gt;    &lt;|  |  /                      &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;|_| |_|\\___|_|_|\\___/ \\_/\\_/ \\___/|_|  |_|\\__,_|           |_______ \__|___|  /____//__/\_ \____/                       &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;                                                                                                                                   &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;                                                                                                                                   &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;                                                                                                                                   &quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#password &amp; user name</span></span><br><span class="line">join_key=<span class="number">3</span></span><br><span class="line">again_key=<span class="number">4</span></span><br><span class="line">name=<span class="string">&quot;XuFaxin&quot;</span></span><br><span class="line">password=<span class="string">&quot;Xinxin080502&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;--------------------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line">input_name=<span class="built_in">input</span>(<span class="string">&quot;Please type the user name: &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;--------------------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line">input_password=<span class="built_in">input</span>(<span class="string">&quot;Please type the password: &quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;--------------------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;welcome to Linuxu system!!!&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;                                                                                                                                            &quot;</span>)</span><br><span class="line"><span class="keyword">while</span>(join_key==<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">if</span> input_name==<span class="string">&quot;XuFaxin&quot;</span> <span class="keyword">and</span> input_password==<span class="string">&quot;Xinxin080502&quot;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                           &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                           &quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Bye,you are not user!&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#command shell</span></span><br><span class="line">    command=<span class="built_in">input</span>(<span class="string">&quot;XuFaxin@computer% &quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#root command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;root&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                           &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;you are rooter!&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                           &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;But don&#x27;t be happy too soon&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                           &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;-----------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                        In the world of Linuxu XuFaxin is god!&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;-----------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                                                                                                                   &quot;</span>)    </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#Calculator command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;math&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Develop by XuFaxin&quot;</span>)</span><br><span class="line">        counts=<span class="number">3</span></span><br><span class="line">        <span class="keyword">while</span> counts&gt;<span class="number">0</span>:</span><br><span class="line">            str1=<span class="built_in">input</span>(<span class="string">&quot;First number: &quot;</span>)</span><br><span class="line">            str2=<span class="built_in">input</span>(<span class="string">&quot;Second number:&quot;</span>)</span><br><span class="line">            X=<span class="built_in">int</span>(str1)</span><br><span class="line">            Y=<span class="built_in">int</span>(str2)</span><br><span class="line">            <span class="built_in">print</span>(X+Y)</span><br><span class="line">            <span class="built_in">print</span>(X-Y)</span><br><span class="line">            <span class="built_in">print</span>(X*Y)</span><br><span class="line">            <span class="built_in">print</span>(X/Y)</span><br><span class="line">            <span class="built_in">print</span>(X**Y)</span><br><span class="line">            <span class="built_in">print</span>(X//Y)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#game command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;game&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Welcome to XuFaxin&#x27;s guess number game!&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;You have three chances&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Guess an integer between 1 and 10&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;develop by XuFaxin&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                              &quot;</span>)</span><br><span class="line">        <span class="keyword">import</span> random</span><br><span class="line">        answer=random.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br><span class="line">        counts=<span class="number">3</span></span><br><span class="line">        <span class="keyword">while</span> counts&gt;<span class="number">0</span>:</span><br><span class="line">            temp=<span class="built_in">input</span>(<span class="string">&quot;Guess a number: &quot;</span>)</span><br><span class="line">            guess=<span class="built_in">int</span>(temp)</span><br><span class="line">            <span class="keyword">if</span> guess==answer:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;                        &quot;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;Win&quot;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;                        &quot;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;Win!!! But no pay! HAHA!&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> guess&gt;<span class="number">0</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;             &quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;Big!&quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;             &quot;</span>)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;      &quot;</span>)</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;small!&quot;</span>)</span><br><span class="line">            counts=counts-<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">    <span class="comment">#clear command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;clear&quot;</span>):</span><br><span class="line">        os.system( <span class="string">&#x27;cls&#x27;</span> )</span><br><span class="line">        os.system(<span class="string">&quot;clear&quot;</span>)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#list command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;ls&quot;</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;-------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot; ||game|| ||math||   &quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;-------------------------------------------------------------------------------------------------------------------------------&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#exit command</span></span><br><span class="line">    <span class="keyword">if</span>(command==<span class="string">&quot;exit&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;                                                                                                                    &quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;See you again!&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#python项目展示" >
+    <span class="tag-code">python项目展示</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/04/13/B2002%20Hello,World!/">
+        <span class="nav-arrow">← </span>
+        
+          洛谷B2002 Hello,World!
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/04/14/%E9%9F%B3%E4%B9%90/">
+        
+          音乐课上唱的歌（离谱啊）
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%BF%99%E6%98%AF%E4%B8%AA%E5%A5%BD%E7%8E%A9%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%8C%E6%88%91%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%96%E7%95%8C%E4%B8%8A%E7%AC%AC%E4%B8%80%E4%B8%AApython%E5%86%99%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF%E7%9A%84%E4%BA%BA"><span class="toc-nav-text">这是个好玩的东西，我可能是世界上第一个python写这个东西的人</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9C%8B%E7%9C%8B%E5%90%A7"><span class="toc-nav-text">让我们看看吧</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://example.com/2022/04/14/Linuxu-shell/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>
