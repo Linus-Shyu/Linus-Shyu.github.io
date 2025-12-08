@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>飞驰人生2影评 | Linus Shyu的认知库</title>
+  <meta name="keywords" content=" 电影 ">
+  <meta name="description" content="飞驰人生2影评 | Linus Shyu的认知库">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 918 (Div. 4) B">
+<meta property="og:url" content="http://example.com/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/index.html">
+<meta property="og:site_name" content="Linus Shyu的认知库">
+<meta property="og:description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-30T05:22:57.980Z">
+<meta property="article:author" content="LinusShyu">
+<meta property="article:tag" content="C++基础语法">
+<meta property="article:tag" content="codeforces">
+<meta property="article:tag" content="div.3">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://avatars.githubusercontent.com/u/83543818?s=400&u=91c63ed9cc4734532b3567b31173be3f8e927fcb&v=4">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+<script src="/js/custom-iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://avatars.githubusercontent.com/u/83543818?s=400&amp;u=91c63ed9cc4734532b3567b31173be3f8e927fcb&amp;v=4"/>
+</a>
+<div class="author">
+    <span>LinusShyu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="youtube"
+               href="https://www.youtube.com/channel/UC4KtR-YsWDfWtikRGOZb58Q"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-youtube"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="bilibili"
+               href="https://space.bilibili.com/411591950"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/Linus-Shyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="twitter"
+               href="https://twitter.com/Linus_Shyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-twitter"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="instagram"
+               href="https://www.instagram.com/linusshyu/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:xufaxin2022@163.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=1697689923&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=3321151478"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="codeforces"
+               href="https://codeforces.com/profile/TechNerd233"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-codeforces"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="Podcast"
+               href="https://podcasts.apple.com/us/podcast/ethers-js/id1697357336"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-Podcast"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="wechat"
+               href="https://linus-shyu.github.io/img/wechat.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-wechat"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="ETH"
+               href="https://linus-shyu.github.io/img/ETH.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-ETH"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="coin-bitcoin"
+               href="https://linus-shyu.github.io/img/BTC.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-coin-bitcoin"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+    <a class="more-menus">更多菜单</a>
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(4)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="生活">
+            
+            生活
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="题解">
+            
+            题解
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+                <a class="dynamic-menu "
+                   target="_blank"
+                        
+                   href="https://github.com/Linus-Shyu">github</a>
+        
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="4">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/3461565867100564/">一颗照烧脆骨丸的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/543786075/">是檩子耶的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/2031197724/">我叫王大钢的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/3493287352600775/">Linus_Shyu的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1965727865/">東鴆的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/525755416/">无聊得自己的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/538790154/">阿某不会打oi的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1092504546/">蚀与修的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1834085711/">姗姗来迟的文sir的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/325357448">晓费同学的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1403990279/">YangNing2022的B站</a></li>
+            
+            <li><a target="_blank" href="https://www.luogu.com.cn/blog/A-zjzj/">A_zjzj的博客</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/393496433/">RoamMate的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1345353920/">DuckweedOS的B站</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>电影</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>abc</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ATcoder</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>C++基础语法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>codeforces</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>div.3</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All 题解 "
+           href="/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/"
+           data-tag="C++基础语法,codeforces,div.3"
+           data-author="" >
+            <span class="post-title" title="Codeforces Round 918 (Div. 4) B">Codeforces Round 918 (Div. 4) B</span>
+            <span class="post-date" title="2024-03-29 00:00:00">2024/03/29</span>
+        </a>
+        
+        
+        <a  class="All 题解 "
+           href="/2024/03/24/Codeforces-Round-933-Div-3-A/"
+           data-tag="C++基础语法,codeforces,div.3"
+           data-author="" >
+            <span class="post-title" title="Codeforces Round 933 (Div. 3) A">Codeforces Round 933 (Div. 3) A</span>
+            <span class="post-date" title="2024-03-24 00:00:00">2024/03/24</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2024/02/24/%E9%A3%9E%E9%A9%B0%E4%BA%BA%E7%94%9F2/"
+           data-tag="电影"
+           data-author="" >
+            <span class="post-title" title="飞驰人生2影评">飞驰人生2影评</span>
+            <span class="post-date" title="2024-02-24 00:00:00">2024/02/24</span>
+        </a>
+        
+        
+        <a  class="All 题解 "
+           href="/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/"
+           data-tag="C++基础语法,ATcoder,abc"
+           data-author="" >
+            <span class="post-title" title="ABC327B题解">ABC327B题解</span>
+            <span class="post-date" title="2023-11-21 00:00:00">2023/11/21</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-飞驰人生2" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">飞驰人生2影评</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="生活">生活</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">电影</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2024-03-24 14:52:00'>2024-02-24 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E4%BA%8B"><span class="toc-text">故事</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前提">前提</h2>
+<p>看完飞驰人生2我和我自己和解了
+首先我想说一下自己的浅见，电影作为一种艺术作品，其实是给人提供情绪价值的，飞2也确实给我提供了可贵的情绪价值，我甚至可以感同身受。
+我想以一个信息学竞赛选手（Oler），和一名地平线4玩家客观的评价一下这部电影。
+飞1是我喜欢的电影之一，自然而然我没有选择其他电影，而是选择了飞2，起初我本是想体验的情绪价值是张弛夺冠后的喜悦，而让我没想到的是这部电影的重点不是最后的夺冠，而是整个过程让我热泪盈眶。</p>
+<h2 id="故事">故事</h2>
+<p>故事的开始是辛地机械厂子效益不好，厂长希望张弛组建一支车队，跑完巴音布鲁克全程拿到积分让厂子迎来转机。在签约仪式前，组织了一场友谊赛，而张弛也发现了一名有潜力的小伙，打算招至麾下，他就是厂长的儿子厉小海。</p>
+<p>辛地车队的组成是由两位拉力赛车手，张弛和厉小海，以及两位领航员孙宇强和刘显德，以及机械师记星组成。</p>
+<p>而理想是丰满的，现实是骨感的，他们只有400万预算，其中最后因为厂子被告侵权，厂长需要拿剩下的100万去打官司，于是尾款没有拿到，由于张弛因为被现实和金钱洗脑忘记了自己的梦想，于是他打算将厉小海转会到飞1当中叶经理的车队光刻时代（LightTime），厉小海既能拿到顶级车队的席位参加巴音布鲁克的拉力赛而且能在自己的赛车和赛服上拥有辛地机械的Logo让厂子的效益能够扭转，张弛也能拿到100万的转会费，从中获利，自己则中途退赛即可，其中关于退赛我深刻记得孙宇强说的一句话：“既然你一开始就知道那件事做不好，那就不要去做。“这也是一句真理让我感到十分受用。然而到光刻时代（LightTime）厉小海发现车队贴纸没有自己的名字，于是质问叶经理为什么贴纸没有自己的名字，被叶经理一通糊弄，说今年没有他的席位，让他明年一定能够参加巴音布鲁克拉力赛，然而今年是最后一届比赛，厉小海的梦想就是能够参加一次巴音布鲁克拉力赛，既然参加不了于是索性退出光刻时代（LightTime）
+回到张弛所在的辛地机械，而张弛也因为没拿冠军的不甘通过模拟过弯找回了初心，其中因为翻车而痛哭的场景，我能深刻的体会到，明明别人可以做到自己却做不到而崩溃，这也是成功路上的挫折吧，最后有辛地机械赞助的300万买了赛车本体，加上张弛等人的东拼西凑，凑了50万买了拉力赛车改装的零件。</p>
+<p>通过张弛对厉小海的摸底，决定让他驾驶满配的拉力赛车，自己由于预算问题，驾驶一辆还未准备好的赛车，车队机械师记星将赛车进行了彻底的改装，以便参加巴音布鲁克拉力赛前的碰撞测试，然而让张弛等人没想到的是拉力赛车的机械碰撞测试并没有通过，最后发现是光刻时代（LightTime）使用了违规材料，这也是电影叶经理人性的充分体现，本来按照蓝皮书相关的条款可以让光刻时代（LightTime）直接禁赛，由于证据以及条款的不充分，只能让两方车队重新安排一次碰撞测试，而预算也就是因为两次测试而减少的。
+到了比赛时，由于光刻时代（LightTime）
+的第二车队车手感觉到厉小海的压力，以及不甘为第一车队做替补，为了比他更快完赛拿到第一，于是分配了全速的动力，导致过弯时没来得及进行动力分配而翻车导致退赛，不出意外厉小海拿到了选手第二的成绩。</p>
+<p>到了张弛时，飞1中的富二代车手林臻东给他打来电话，希望他比赛好运，从车牌可以看出是在英国，说明林臻东此时已经不开赛车在英国生活，他因为四年被光刻时代（LightTime）垄断第一第二，估计没有心情再玩车了。</p>
+<p>第一车队发车了，由于光刻时代（LightTime）第二车队退赛，为了能够保住车队第二的位置，由于与赛事主管私交甚好，叶经理故意给赛事主管打电话，让他切断主办方的直播权，并让第一车队假装爆胎，在张弛快要超越他们时重新上车，通过风沙来阻挡张弛的视线来拖慢他比赛的时间进度，于是记星去申诉，结果无果，于是张弛靠在过弯时抢先一步超越了光刻时代（Light
+Time）的第一车队，由于巴音布鲁克遇到了暴风雪天气，导致路况非常艰难，还下起了冰雹，拉力赛车性能的问题，张弛的拉力赛车即将爆缸，孙宇强建议他停下来进行暂时性的修理，张弛说的那句：“我已经努力过了，然而机会仅仅出现在那一两次。”和我的经历非常相似，我学习很努力了，但也没到自己的预期，于是我认为选择大于努力，我开始打竞赛来降分，加上我平时正常的努力也能取得一个好的结果。最终张弛选择撞掉了不重要的发热组件来减缓发动机发热的问题。最终宇强和张弛超过了第七成为了第六，整个车队也拿下了最后一届巴音布鲁克拉力赛的车队冠军。</p>
+<h2 id="总结">总结</h2>
+<p>这部电影对我的启发就是将自己的爱好发展成事业是非常酷的一件事，当然这和我的同龄人的想法估计是不一样的，他们不懂我也懒得说，其次像韩寒，朴树以及很多像他们的人也会有自己的追求，只不过只是在自己热爱的领域，在热爱的领域我们会拼尽全力，当然如前文孙宇强说的：“既然你知道结果不好，那就不要去做。”一味的努力付出是根本没用的，只有有效努力才是最重要的，张弛翻车的场景和我期末考试崩溃之后骑车去西宁一样，都是发泄的产物。
+最后我想说的是，我已经和我自己和解，我朋友少本来就是我和别人不一样，认知的差距，其次我懒得和低能的人废话，我庆幸我与别人的不同，能够让我独处来提高我的认知，让我有了现在别人遥不可及的成就和强大的心理承受能力。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 xufaxin2022@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">Title:</span>飞驰人生2影评</p>
+    
+    <p><span class="copy-title">Author:</span><a  title="LinusShyu">LinusShyu</a></p>
+    <p><span class="copy-title">Created At:</span>2024-02-24, 00:00:00</p>
+    <p><span class="copy-title">Updated At:</span>2024-03-24, 14:52:00</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2024/02/24/%E9%A3%9E%E9%A9%B0%E4%BA%BA%E7%94%9F2/" title="飞驰人生2影评">http://example.com/2024/02/24/%E9%A3%9E%E9%A9%B0%E4%BA%BA%E7%94%9F2/</a>
+    <p>
+        <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2022-2024 LinusShyu
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    #post {
+        background: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg);
+    }
+    
+    
+    #post .index {
+        background: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg);
+    }
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+<div class="mobile-menus-out" >
+
+</div>
+<div class="mobile-menus">
+    
+    
+    
+    
+    <a class="dynamic-menu " target="_blank"  href="https://github.com/Linus-Shyu">github</a>
+    
+</div>
+
+
+</html>
