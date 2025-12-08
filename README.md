@@ -1,24 +1,21 @@
-# blog
+# Hexo Blog
 
-## Project setup
+## 安装依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## 本地预览
 ```
-npm run serve
+npm run server
 ```
 
-### Compiles and minifies for production
+## 生成静态文件
 ```
 npm run build
 ```
 
-### Lints and fixes files
+## 发布到 docs（含 .nojekyll/CNAME）
 ```
-npm run lint
+npm run deploy
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
