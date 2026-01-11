@@ -1203,6 +1203,10 @@ body {
     border-radius: var(--radius-lg);
 }
 
+[data-theme="dark"] .sponsor-thanks {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(255, 192, 203, 0.15) 100%);
+}
+
 .sponsor-thanks p {
     font-size: var(--font-size-lg);
     color: var(--color-text);
@@ -1490,15 +1494,27 @@ body {
     font-weight: 500;
 }
 
+[data-theme="dark"] .company-info {
+    color: var(--color-text-secondary);
+}
+
 .footer-bottom p {
     color: rgba(255, 255, 255, 0.7);
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
 }
 
+[data-theme="dark"] .footer-bottom p {
+    color: var(--color-text-secondary);
+}
+
 .footer-tagline {
     color: rgba(255, 255, 255, 0.5);
     font-size: var(--font-size-xs);
+}
+
+[data-theme="dark"] .footer-tagline {
+    color: var(--color-text-tertiary);
 }
 
 /* Animations */
@@ -1741,6 +1757,28 @@ body {
 [data-theme="dark"] .footer {
     background: var(--color-bg-secondary);
     border-top-color: var(--color-border);
+}
+
+/* Ensure all text is visible in dark mode */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-subtitle,
+[data-theme="dark"] .hero-title,
+[data-theme="dark"] .hero-subtitle,
+[data-theme="dark"] .feature-title,
+[data-theme="dark"] .feature-description,
+[data-theme="dark"] .benefit-item h3,
+[data-theme="dark"] .benefit-item p,
+[data-theme="dark"] .download-info h3,
+[data-theme="dark"] .sponsor-header h3,
+[data-theme="dark"] .contact-item h3,
+[data-theme="dark"] .developer-title,
+[data-theme="dark"] .developer-details h4 {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .download-label,
+[data-theme="dark"] .download-subtitle {
+    color: #FFFFFF;
 }
 
 /* Smooth theme transition */
