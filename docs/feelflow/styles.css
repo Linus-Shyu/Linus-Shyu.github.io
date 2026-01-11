@@ -873,11 +873,12 @@ body {
 }
 
 .feature-card {
-    background: white;
+    background: var(--color-bg);
     padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
+    border: 1px solid var(--color-border);
 }
 
 .feature-card:hover {
@@ -905,7 +906,7 @@ body {
 /* Why Choose Section */
 .why-choose {
     padding: var(--spacing-2xl) 0;
-    background: white;
+    background: var(--color-bg);
 }
 
 .benefits-grid {
@@ -1066,7 +1067,7 @@ body {
 /* Sponsor Section */
 .sponsor {
     padding: var(--spacing-2xl) 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
 }
 
 .sponsor-methods {
@@ -1077,11 +1078,12 @@ body {
 }
 
 .sponsor-card {
-    background: white;
+    background: var(--color-bg);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
+    border: 1px solid var(--color-border);
 }
 
 .sponsor-card:hover {
@@ -1206,9 +1208,10 @@ body {
 .credits-section {
     margin-top: var(--spacing-2xl);
     padding: var(--spacing-2xl);
-    background: white;
+    background: var(--color-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
 }
 
 .credits-title {
@@ -1254,7 +1257,7 @@ body {
 /* Contact Section */
 .contact {
     padding: var(--spacing-2xl) 0;
-    background: white;
+    background: var(--color-bg);
 }
 
 .contact-info {
@@ -1314,9 +1317,10 @@ body {
     max-width: 600px;
     margin: 0 auto;
     padding: var(--spacing-lg);
-    background: white;
+    background: var(--color-bg);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
 }
 
 .developer-avatar {
@@ -1331,7 +1335,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     box-shadow: var(--shadow-md);
-    border: 4px solid white;
+    border: 4px solid var(--color-bg);
     transition: all 0.3s ease;
 }
 
@@ -1393,8 +1397,13 @@ body {
 /* Footer */
 .footer {
     background: var(--color-text);
-    color: white;
+    color: #FFFFFF;
     padding: var(--spacing-2xl) 0 var(--spacing-lg);
+}
+
+[data-theme="dark"] .footer {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
 }
 
 .footer-content {
@@ -1414,6 +1423,10 @@ body {
     color: rgba(255, 255, 255, 0.7);
 }
 
+[data-theme="dark"] .footer-brand p {
+    color: var(--color-text-secondary);
+}
+
 .footer-links {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1424,6 +1437,7 @@ body {
     font-size: var(--font-size-base);
     font-weight: 600;
     margin-bottom: var(--spacing-md);
+    color: inherit;
 }
 
 .footer-column ul {
@@ -1441,14 +1455,26 @@ body {
     transition: color 0.2s ease;
 }
 
+[data-theme="dark"] .footer-column a {
+    color: var(--color-text-secondary);
+}
+
 .footer-column a:hover {
     color: white;
+}
+
+[data-theme="dark"] .footer-column a:hover {
+    color: var(--color-text);
 }
 
 .footer-bottom {
     padding-top: var(--spacing-lg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
+}
+
+[data-theme="dark"] .footer-bottom {
+    border-top-color: var(--color-border);
 }
 
 .company-info {
