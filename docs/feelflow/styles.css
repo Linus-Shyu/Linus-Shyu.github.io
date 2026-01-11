@@ -1045,7 +1045,7 @@ body {
 }
 
 .feature-highlight {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
     padding: var(--spacing-lg);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
@@ -1062,6 +1062,12 @@ body {
 .feature-highlight p {
     color: var(--color-text-secondary);
     line-height: 1.6;
+}
+
+/* Dark mode specific styling for feature-highlight */
+[data-theme="dark"] .feature-highlight {
+    background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+    border-color: var(--color-border);
 }
 
 /* Sponsor Section */
