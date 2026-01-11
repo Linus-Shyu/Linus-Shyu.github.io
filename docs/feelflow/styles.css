@@ -123,6 +123,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-md);
 }
 
 .nav-logo {
@@ -185,13 +186,14 @@ body {
 
 /* Theme Toggle Button */
 .nav-actions {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: var(--spacing-md);
+    flex-shrink: 0;
 }
 
 .theme-toggle {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -203,20 +205,33 @@ body {
     transition: all 0.3s ease;
     font-size: 20px;
     padding: 0;
+    position: relative;
+    z-index: 1001;
+    flex-shrink: 0;
 }
 
 .theme-toggle:hover {
     background: var(--color-bg-tertiary);
     transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary);
 }
 
 .theme-toggle:active {
     transform: scale(0.95);
 }
 
+.theme-toggle:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 .theme-icon {
     display: inline-block;
     transition: transform 0.3s ease;
+    font-size: 20px;
+    line-height: 1;
+    user-select: none;
 }
 
 [data-theme="dark"] .theme-icon {
@@ -1669,6 +1684,7 @@ body {
         width: 36px;
         height: 36px;
         font-size: 18px;
+        display: flex !important;
     }
 }
 
