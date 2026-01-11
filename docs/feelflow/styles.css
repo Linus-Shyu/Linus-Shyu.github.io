@@ -46,6 +46,30 @@
     --font-size-5xl: 3rem;
 }
 
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --color-primary: #0A84FF;
+    --color-primary-dark: #0051D5;
+    --color-secondary: #5E5CE6;
+    --color-success: #30D158;
+    --color-warning: #FF9F0A;
+    --color-danger: #FF453A;
+    
+    --color-bg: #000000;
+    --color-bg-secondary: #1C1C1E;
+    --color-bg-tertiary: #2C2C2E;
+    
+    --color-text: #FFFFFF;
+    --color-text-secondary: #EBEBF5;
+    --color-text-tertiary: #AEAEB2;
+    
+    --color-border: #38383A;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
 /* Reset & Base Styles */
 * {
     margin: 0;
@@ -86,6 +110,10 @@ body {
     border-bottom: 1px solid var(--color-border);
     z-index: 1000;
     transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .nav {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .nav-container {
@@ -153,6 +181,46 @@ body {
     height: 2px;
     background: var(--color-text);
     transition: all 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background: var(--color-bg-tertiary);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .theme-icon {
+    transform: rotate(180deg);
 }
 
 /* Hero Section */
@@ -1438,6 +1506,10 @@ body {
         z-index: 999;
     }
 
+    [data-theme="dark"] .nav-menu {
+        background: rgba(0, 0, 0, 0.98);
+    }
+
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
@@ -1588,4 +1660,42 @@ body {
     .btn {
         width: 100%;
     }
+
+    .nav-actions {
+        gap: var(--spacing-sm);
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+/* Dark Mode Specific Styles */
+[data-theme="dark"] .phone-screen.dark-mode {
+    background: #1C1C1E;
+}
+
+[data-theme="dark"] .analysis-card {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .benefit-item,
+[data-theme="dark"] .sponsor-card,
+[data-theme="dark"] .contact-item {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .footer {
+    background: var(--color-bg-secondary);
+    border-top-color: var(--color-border);
+}
+
+/* Smooth theme transition */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

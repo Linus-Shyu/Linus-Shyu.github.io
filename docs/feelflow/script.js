@@ -1,5 +1,42 @@
 // FeelFlow 官网交互脚本
 
+// 主题切换功能
+(function() {
+    const html = document.documentElement;
+    
+    // 更新主题切换按钮图标
+    function updateThemeIcon(theme) {
+        const themeIcon = document.querySelector('.theme-icon');
+        if (themeIcon) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    // 初始化图标（主题已在 HTML 头部应用）
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentTheme = html.getAttribute('data-theme') || 'light';
+        updateThemeIcon(currentTheme);
+    });
+    
+    // 主题切换函数
+    window.toggleTheme = function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    };
+    
+    // 监听主题切换按钮点击
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', window.toggleTheme);
+        }
+    });
+})();
+
 // 移动端导航菜单切换
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
