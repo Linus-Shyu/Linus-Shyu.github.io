@@ -32,6 +32,26 @@
                 <span class="control maximize"></span>
             </div>
             <div class="terminal-title" data-i18n="terminal.title">StarFetch ⭐ - Terminal</div>
+            <div class="terminal-actions">
+                <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
+                    <span class="theme-icon">☀️</span>
+                </button>
+                <div class="lang-selector">
+                    <button class="btn btn-toggle" id="langToggle" aria-label="切换语言">
+                        <span class="lang-icon">🌐</span>
+                        <span class="lang-text" id="currentLangText">中文</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
+                        <button class="lang-option" data-lang="en">🇺🇸 English</button>
+                        <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
+                        <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
+                        <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
+                        <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+                        <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -62,12 +82,6 @@
                     <a href="#install" class="btn btn-secondary">
                         <span class="icon">🚀</span> <span data-i18n="button.install">安装指南</span>
                     </a>
-                    <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
-                        <span class="theme-icon">☀️</span>
-                    </button>
-                    <button class="btn btn-toggle" id="langToggle" aria-label="切换语言">
-                        <span class="lang-icon" data-lang="zh">🌐</span>
-                    </button>
                 </div>
             </div>
 
