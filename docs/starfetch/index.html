@@ -8,12 +8,32 @@
     <title>StarFetch ⭐ - 极速系统信息工具</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // 立即应用主题，避免闪烁
+        // 立即应用主题和语言，避免闪烁
         (function() {
-            const savedTheme = localStorage.getItem('starfetch-theme') || 'dark';
+            const savedTheme = localStorage.getItem('starfetch-theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const savedLang = localStorage.getItem('starfetch-lang');
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // 检测浏览器语言
+            let detectedLang = 'en';
+            if (browserLang.startsWith('zh')) detectedLang = 'zh';
+            else if (browserLang.startsWith('ja')) detectedLang = 'ja';
+            else if (browserLang.startsWith('ko')) detectedLang = 'ko';
+            else if (browserLang.startsWith('fr')) detectedLang = 'fr';
+            else if (browserLang.startsWith('es')) detectedLang = 'es';
+            else if (browserLang.startsWith('de')) detectedLang = 'de';
+            
+            const lang = savedLang || detectedLang;
+            const langMap = {
+                'zh': 'zh-CN', 'ja': 'ja-JP', 'ko': 'ko-KR',
+                'fr': 'fr-FR', 'es': 'es-ES', 'de': 'de-DE', 'en': 'en-US'
+            };
+            document.documentElement.setAttribute('lang', langMap[lang] || 'en-US');
         })();
     </script>
+    <script src="i18n.js"></script>
 </head>
 <body>
     <!-- Terminal-style Header -->
@@ -24,7 +44,27 @@
                 <span class="control minimize"></span>
                 <span class="control maximize"></span>
             </div>
-            <div class="terminal-title">StarFetch ⭐ - Terminal</div>
+            <div class="terminal-title" data-i18n="terminal.title">StarFetch ⭐ - Terminal</div>
+            <div class="terminal-actions">
+                <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
+                    <span class="theme-icon">☀️</span>
+                </button>
+                <div class="lang-selector">
+                    <button class="btn btn-toggle" id="langToggle" aria-label="切换语言">
+                        <span class="lang-icon">🌐</span>
+                        <span class="lang-text" id="currentLangText">中文</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
+                        <button class="lang-option" data-lang="en">🇺🇸 English</button>
+                        <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
+                        <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
+                        <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
+                        <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+                        <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -39,25 +79,22 @@
             
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="prompt">$</span> starfetch
+                    <span class="prompt">$</span> <span data-i18n="hero.title">starfetch</span>
                 </h1>
-                <p class="hero-subtitle">用 Rust 编写的极速系统信息工具</p>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">用 Rust 编写的极速系统信息工具</p>
                 <div class="hero-badges">
                     <span class="badge badge-rust">🦀 Rust</span>
-                    <span class="badge badge-mit">📜 MIT License</span>
-                    <span class="badge badge-opensource">🔓 Open Source</span>
+                    <span class="badge badge-mit" data-i18n="badge.mit">📜 MIT License</span>
+                    <span class="badge badge-opensource" data-i18n="badge.opensource">🔓 Open Source</span>
                 </div>
                 
                 <div class="hero-actions">
                     <a href="https://github.com/Linus-Shyu/StarFetch_Core" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                        <span class="icon">📦</span> View on GitHub
+                        <span class="icon">📦</span> <span data-i18n="button.viewGitHub">View on GitHub</span>
                     </a>
                     <a href="#install" class="btn btn-secondary">
-                        <span class="icon">🚀</span> 安装指南
+                        <span class="icon">🚀</span> <span data-i18n="button.install">安装指南</span>
                     </a>
-                    <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
-                        <span class="theme-icon">☀️</span>
-                    </button>
                 </div>
             </div>
 
@@ -123,44 +160,44 @@
     <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">
-                <span class="prompt">$</span> starfetch --features
+                <span class="prompt">$</span> <span data-i18n="features.title">starfetch --features</span>
             </h2>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
-                    <h3 class="feature-title">自适应 ASCII 艺术</h3>
-                    <p class="feature-description">根据终端宽度自动调整显示，支持宽屏和窄屏终端</p>
+                    <h3 class="feature-title" data-i18n="feature.adaptive">自适应 ASCII 艺术</h3>
+                    <p class="feature-description" data-i18n="feature.adaptive.desc">根据终端宽度自动调整显示，支持宽屏和窄屏终端</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🖥️</div>
-                    <h3 class="feature-title">完整系统信息</h3>
-                    <p class="feature-description">显示主机名、操作系统、内核、运行时间、CPU、内存和包管理信息</p>
+                    <h3 class="feature-title" data-i18n="feature.system">完整系统信息</h3>
+                    <p class="feature-description" data-i18n="feature.system.desc">显示主机名、操作系统、内核、运行时间、CPU、内存和包管理信息</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔗</div>
-                    <h3 class="feature-title">智能超链接</h3>
-                    <p class="feature-description">在现代终端中显示可点击的开发者链接</p>
+                    <h3 class="feature-title" data-i18n="feature.hyperlink">智能超链接</h3>
+                    <p class="feature-description" data-i18n="feature.hyperlink.desc">在现代终端中显示可点击的开发者链接</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🌈</div>
-                    <h3 class="feature-title">优雅色彩</h3>
-                    <p class="feature-description">支持 ANSI 颜色码，提供美观的终端输出</p>
+                    <h3 class="feature-title" data-i18n="feature.colors">优雅色彩</h3>
+                    <p class="feature-description" data-i18n="feature.colors.desc">支持 ANSI 颜色码，提供美观的终端输出</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">极速性能</h3>
-                    <p class="feature-description">使用 Rust 编写，提供最佳性能和极速启动</p>
+                    <h3 class="feature-title" data-i18n="feature.performance">极速性能</h3>
+                    <p class="feature-description" data-i18n="feature.performance.desc">使用 Rust 编写，提供最佳性能和极速启动</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔧</div>
-                    <h3 class="feature-title">跨平台支持</h3>
-                    <p class="feature-description">支持 macOS、Linux 和 Windows</p>
+                    <h3 class="feature-title" data-i18n="feature.crossplatform">跨平台支持</h3>
+                    <p class="feature-description" data-i18n="feature.crossplatform.desc">支持 macOS、Linux 和 Windows</p>
                 </div>
             </div>
         </div>
@@ -170,29 +207,29 @@
     <section id="install" class="install">
         <div class="container">
             <h2 class="section-title">
-                <span class="prompt">$</span> cargo install starfetch
+                <span class="prompt">$</span> <span data-i18n="install.title">cargo install starfetch</span>
             </h2>
-            <p class="section-subtitle">快速安装和开始使用</p>
+            <p class="section-subtitle" data-i18n="install.subtitle">快速安装和开始使用</p>
 
             <div class="install-content">
                 <div class="install-steps">
-                    <h3>📦 从源码构建</h3>
+                    <h3 data-i18n="install.build">📦 从源码构建</h3>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># 克隆仓库
+                        <pre><code><span data-i18n="install.code.clone"># 克隆仓库</span>
 git clone https://github.com/Linus-Shyu/StarFetch_Core.git
 cd StarFetch_Core/StarFetch
 
-# 构建项目
+<span data-i18n="install.code.build"># 构建项目</span>
 cargo build --release
 
-# 运行
+<span data-i18n="install.code.run"># 运行</span>
 ./target/release/starfetch</code></pre>
                     </div>
 
-                    <h3>🌐 全局安装</h3>
+                    <h3 data-i18n="install.global">🌐 全局安装</h3>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">bash</span>
@@ -200,22 +237,22 @@ cargo build --release
                         <pre><code>cd StarFetch_Core/StarFetch
 cargo install --path .
 
-# 安装后，可在任何地方运行
+<span data-i18n="install.code.after"># 安装后，可在任何地方运行</span>
 starfetch</code></pre>
                     </div>
                 </div>
 
                 <div class="requirements">
-                    <h3>系统要求</h3>
+                    <h3 data-i18n="install.requirements">系统要求</h3>
                     <ul class="requirements-list">
-                        <li><span class="check">✓</span> Rust (最新稳定版)</li>
-                        <li><span class="check">✓</span> Cargo (随 Rust 一起安装)</li>
-                        <li><span class="check">✓</span> macOS / Linux / Windows</li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.rust">Rust (最新稳定版)</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.cargo">Cargo (随 Rust 一起安装)</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.platforms">macOS / Linux / Windows</span></li>
                     </ul>
 
                     <div class="quick-start">
-                        <h3>快速开始</h3>
-                        <p>安装 Rust (如果还没有):</p>
+                        <h3 data-i18n="install.quickstart">快速开始</h3>
+                        <p data-i18n="install.quickstart.desc">安装 Rust (如果还没有):</p>
                         <div class="code-block inline">
                             <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
                         </div>
@@ -229,54 +266,54 @@ starfetch</code></pre>
     <section id="opensource" class="opensource">
         <div class="container">
             <h2 class="section-title">
-                <span class="prompt">$</span> echo "开源精神"
+                <span class="prompt">$</span> <span data-i18n="opensource.title">echo "开源精神"</span>
             </h2>
-            <p class="section-subtitle">遵循 Linux 哲学，完全开源和自由</p>
+            <p class="section-subtitle" data-i18n="opensource.subtitle">遵循 Linux 哲学，完全开源和自由</p>
 
             <div class="opensource-content">
                 <div class="opensource-principles">
                     <div class="principle-card">
                         <div class="principle-icon">🔓</div>
-                        <h3>完全开源</h3>
-                        <p>MIT 许可证 - 自由使用、修改和分发</p>
+                        <h3 data-i18n="opensource.fully">完全开源</h3>
+                        <p data-i18n="opensource.fully.desc">MIT 许可证 - 自由使用、修改和分发</p>
                     </div>
 
                     <div class="principle-card">
                         <div class="principle-icon">🤝</div>
-                        <h3>欢迎贡献</h3>
-                        <p>欢迎提交 PR、报告 Issue 和提出改进建议</p>
+                        <h3 data-i18n="opensource.contribute">欢迎贡献</h3>
+                        <p data-i18n="opensource.contribute.desc">欢迎提交 PR、报告 Issue 和提出改进建议</p>
                     </div>
 
                     <div class="principle-card">
                         <div class="principle-icon">🌍</div>
-                        <h3>社区驱动</h3>
-                        <p>由社区维护，为社区服务</p>
+                        <h3 data-i18n="opensource.community">社区驱动</h3>
+                        <p data-i18n="opensource.community.desc">由社区维护，为社区服务</p>
                     </div>
 
                     <div class="principle-card">
                         <div class="principle-icon">⚙️</div>
-                        <h3>极客文化</h3>
-                        <p>致敬 neofetch，延续命令行工具的优秀传统</p>
+                        <h3 data-i18n="opensource.geek">极客文化</h3>
+                        <p data-i18n="opensource.geek.desc">致敬 neofetch，延续命令行工具的优秀传统</p>
                     </div>
                 </div>
 
                 <div class="contribute-box">
-                    <h3>参与贡献</h3>
+                    <h3 data-i18n="opensource.contribute.title">参与贡献</h3>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># Fork 仓库
-# 创建功能分支
+                        <pre><code><span data-i18n="install.code.fork"># Fork 仓库</span>
+<span data-i18n="install.code.branch"># 创建功能分支</span>
 git checkout -b feature/amazing-feature
 
-# 提交更改
+<span data-i18n="install.code.commit"># 提交更改</span>
 git commit -m 'Add some amazing feature'
 
-# 推送分支
+<span data-i18n="install.code.push"># 推送分支</span>
 git push origin feature/amazing-feature
 
-# 创建 Pull Request</code></pre>
+<span data-i18n="install.code.pr"># 创建 Pull Request</span></code></pre>
                     </div>
                 </div>
             </div>
@@ -289,19 +326,19 @@ git push origin feature/amazing-feature
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">🦀</div>
-                    <div class="stat-label">Rust 100%</div>
+                    <div class="stat-label" data-i18n="stats.rust">Rust 100%</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">⭐</div>
-                    <div class="stat-label">2+ Stars</div>
+                    <div class="stat-label" data-i18n="stats.stars">2+ Stars</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">📦</div>
-                    <div class="stat-label">MIT License</div>
+                    <div class="stat-label" data-i18n="stats.license">MIT License</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">👥</div>
-                    <div class="stat-label">2 Contributors</div>
+                    <div class="stat-label" data-i18n="stats.contributors">2 Contributors</div>
                 </div>
             </div>
         </div>
@@ -313,19 +350,19 @@ git push origin feature/amazing-feature
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>StarFetch ⭐</h3>
-                    <p>A beautiful and fast system information tool written in Rust</p>
+                    <p data-i18n="footer.tagline">A beautiful and fast system information tool written in Rust</p>
                     <div class="footer-links">
                         <a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📦</span> GitHub
+                            <span class="icon">📦</span> <span data-i18n="footer.github">GitHub</span>
                         </a>
                         <a href="https://github.com/Linus-Shyu/StarFetch_Core/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📜</span> MIT License
+                            <span class="icon">📜</span> <span data-i18n="footer.mit">MIT License</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="footer-authors">
-                    <h4>Authors</h4>
+                    <h4 data-i18n="footer.authors">Authors</h4>
                     <ul>
                         <li>
                             <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener noreferrer">
@@ -341,18 +378,18 @@ git push origin feature/amazing-feature
                 </div>
 
                 <div class="footer-info">
-                    <h4>Info</h4>
+                    <h4 data-i18n="footer.info">Info</h4>
                     <ul>
-                        <li>Version: <code>0.1.4</code></li>
-                        <li>Inspired by <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">neofetch</a></li>
-                        <li>Built with ❤️ using Rust</li>
+                        <li><span data-i18n="footer.version">Version</span>: <code>0.1.4</code></li>
+                        <li><span data-i18n="footer.inspired">Inspired by</span> <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">neofetch</a></li>
+                        <li data-i18n="footer.built">Built with ❤️ using Rust</li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p class="footer-copyright">
-                    <span class="prompt">$</span> echo "Made with ❤️ by open source community"
+                    <span class="prompt">$</span> <span data-i18n="footer.copyright">echo "Made with ❤️ by open source community"</span>
                 </p>
                 <p class="footer-license">© 2024 StarFetch. MIT License.</p>
             </div>

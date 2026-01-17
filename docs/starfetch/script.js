@@ -1,5 +1,66 @@
 // StarFetch 官网交互脚本
 
+// 多语言初始化 - 等待 i18n.js 加载
+(function() {
+    function initI18n() {
+        if (window.i18n) {
+            window.i18n.init();
+            
+            // 语言选择下拉菜单
+            const langToggle = document.getElementById('langToggle');
+            const langDropdown = document.getElementById('langDropdown');
+            const langOptions = document.querySelectorAll('.lang-option');
+            const currentLangText = document.getElementById('currentLangText');
+            
+            // 切换下拉菜单显示/隐藏
+            if (langToggle && langDropdown) {
+                langToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    langDropdown.classList.toggle('active');
+                });
+                
+                // 点击外部关闭下拉菜单
+                document.addEventListener('click', function(e) {
+                    if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
+                        langDropdown.classList.remove('active');
+                    }
+                });
+                
+                // 选择语言
+                langOptions.forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const lang = this.getAttribute('data-lang');
+                        window.i18n.applyLanguage(lang);
+                        
+                        // 更新当前语言显示
+                        if (currentLangText) {
+                            const langNames = window.i18n.langNames || {};
+                            currentLangText.textContent = langNames[lang] || lang.toUpperCase();
+                        }
+                        
+                        // 更新选中状态
+                        langOptions.forEach(opt => opt.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 关闭下拉菜单
+                        langDropdown.classList.remove('active');
+                    });
+                });
+            }
+        } else {
+            // 如果 i18n 还没加载，稍后再试
+            setTimeout(initI18n, 100);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initI18n);
+    } else {
+        initI18n();
+    }
+})();
+
 // 主题切换功能
 (function() {
     const html = document.documentElement;
@@ -85,7 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (code) {
             // 可以添加复制按钮
             const copyBtn = document.createElement('button');
-            copyBtn.textContent = '复制';
+            copyBtn.textContent = window.i18n ? window.i18n.t('code.copy') : '复制';
+            copyBtn.setAttribute('data-i18n', 'code.copy');
             copyBtn.className = 'copy-btn';
             copyBtn.style.cssText = `
                 position: absolute;
@@ -105,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
             copyBtn.addEventListener('click', function() {
                 navigator.clipboard.writeText(code.textContent).then(() => {
                     const originalText = copyBtn.textContent;
-                    copyBtn.textContent = '已复制!';
+                    copyBtn.textContent = window.i18n ? window.i18n.t('code.copied') : '已复制!';
                     setTimeout(() => {
                         copyBtn.textContent = originalText;
                     }, 2000);
