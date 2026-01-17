@@ -15,22 +15,9 @@
             
             const savedLang = localStorage.getItem('starfetch-lang');
             const browserLang = navigator.language || navigator.userLanguage;
-            
-            // 检测浏览器语言
-            let detectedLang = 'en';
-            if (browserLang.startsWith('zh')) detectedLang = 'zh';
-            else if (browserLang.startsWith('ja')) detectedLang = 'ja';
-            else if (browserLang.startsWith('ko')) detectedLang = 'ko';
-            else if (browserLang.startsWith('fr')) detectedLang = 'fr';
-            else if (browserLang.startsWith('es')) detectedLang = 'es';
-            else if (browserLang.startsWith('de')) detectedLang = 'de';
-            
+            const detectedLang = browserLang.startsWith('zh') ? 'zh' : 'en';
             const lang = savedLang || detectedLang;
-            const langMap = {
-                'zh': 'zh-CN', 'ja': 'ja-JP', 'ko': 'ko-KR',
-                'fr': 'fr-FR', 'es': 'es-ES', 'de': 'de-DE', 'en': 'en-US'
-            };
-            document.documentElement.setAttribute('lang', langMap[lang] || 'en-US');
+            document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
         })();
     </script>
     <script src="i18n.js"></script>
@@ -45,26 +32,6 @@
                 <span class="control maximize"></span>
             </div>
             <div class="terminal-title" data-i18n="terminal.title">StarFetch ⭐ - Terminal</div>
-            <div class="terminal-actions">
-                <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
-                    <span class="theme-icon">☀️</span>
-                </button>
-                <div class="lang-selector">
-                    <button class="btn btn-toggle" id="langToggle" aria-label="切换语言">
-                        <span class="lang-icon">🌐</span>
-                        <span class="lang-text" id="currentLangText">中文</span>
-                    </button>
-                    <div class="lang-dropdown" id="langDropdown">
-                        <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
-                        <button class="lang-option" data-lang="en">🇺🇸 English</button>
-                        <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
-                        <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
-                        <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
-                        <button class="lang-option" data-lang="es">🇪🇸 Español</button>
-                        <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
 
@@ -95,6 +62,12 @@
                     <a href="#install" class="btn btn-secondary">
                         <span class="icon">🚀</span> <span data-i18n="button.install">安装指南</span>
                     </a>
+                    <button class="btn btn-toggle" id="themeToggle" aria-label="切换主题">
+                        <span class="theme-icon">☀️</span>
+                    </button>
+                    <button class="btn btn-toggle" id="langToggle" aria-label="切换语言">
+                        <span class="lang-icon" data-lang="zh">🌐</span>
+                    </button>
                 </div>
             </div>
 
@@ -218,14 +191,14 @@
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code><span data-i18n="install.code.clone"># 克隆仓库</span>
+                        <pre><code># 克隆仓库
 git clone https://github.com/Linus-Shyu/StarFetch_Core.git
 cd StarFetch_Core/StarFetch
 
-<span data-i18n="install.code.build"># 构建项目</span>
+# 构建项目
 cargo build --release
 
-<span data-i18n="install.code.run"># 运行</span>
+# 运行
 ./target/release/starfetch</code></pre>
                     </div>
 
@@ -237,7 +210,7 @@ cargo build --release
                         <pre><code>cd StarFetch_Core/StarFetch
 cargo install --path .
 
-<span data-i18n="install.code.after"># 安装后，可在任何地方运行</span>
+# 安装后，可在任何地方运行
 starfetch</code></pre>
                     </div>
                 </div>
@@ -245,9 +218,9 @@ starfetch</code></pre>
                 <div class="requirements">
                     <h3 data-i18n="install.requirements">系统要求</h3>
                     <ul class="requirements-list">
-                        <li><span class="check">✓</span> <span data-i18n="install.requirements.rust">Rust (最新稳定版)</span></li>
-                        <li><span class="check">✓</span> <span data-i18n="install.requirements.cargo">Cargo (随 Rust 一起安装)</span></li>
-                        <li><span class="check">✓</span> <span data-i18n="install.requirements.platforms">macOS / Linux / Windows</span></li>
+                        <li><span class="check">✓</span> Rust (最新稳定版)</li>
+                        <li><span class="check">✓</span> Cargo (随 Rust 一起安装)</li>
+                        <li><span class="check">✓</span> macOS / Linux / Windows</li>
                     </ul>
 
                     <div class="quick-start">
@@ -303,17 +276,17 @@ starfetch</code></pre>
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code><span data-i18n="install.code.fork"># Fork 仓库</span>
-<span data-i18n="install.code.branch"># 创建功能分支</span>
+                        <pre><code># Fork 仓库
+# 创建功能分支
 git checkout -b feature/amazing-feature
 
-<span data-i18n="install.code.commit"># 提交更改</span>
+# 提交更改
 git commit -m 'Add some amazing feature'
 
-<span data-i18n="install.code.push"># 推送分支</span>
+# 推送分支
 git push origin feature/amazing-feature
 
-<span data-i18n="install.code.pr"># 创建 Pull Request</span></code></pre>
+# 创建 Pull Request</code></pre>
                     </div>
                 </div>
             </div>
@@ -326,19 +299,19 @@ git push origin feature/amazing-feature
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">🦀</div>
-                    <div class="stat-label" data-i18n="stats.rust">Rust 100%</div>
+                    <div class="stat-label">Rust 100%</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">⭐</div>
-                    <div class="stat-label" data-i18n="stats.stars">2+ Stars</div>
+                    <div class="stat-label">2+ Stars</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">📦</div>
-                    <div class="stat-label" data-i18n="stats.license">MIT License</div>
+                    <div class="stat-label">MIT License</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">👥</div>
-                    <div class="stat-label" data-i18n="stats.contributors">2 Contributors</div>
+                    <div class="stat-label">2 Contributors</div>
                 </div>
             </div>
         </div>
@@ -350,13 +323,13 @@ git push origin feature/amazing-feature
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>StarFetch ⭐</h3>
-                    <p data-i18n="footer.tagline">A beautiful and fast system information tool written in Rust</p>
+                    <p>A beautiful and fast system information tool written in Rust</p>
                     <div class="footer-links">
                         <a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📦</span> <span data-i18n="footer.github">GitHub</span>
+                            <span class="icon">📦</span> GitHub
                         </a>
                         <a href="https://github.com/Linus-Shyu/StarFetch_Core/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
-                            <span class="icon">📜</span> <span data-i18n="footer.mit">MIT License</span>
+                            <span class="icon">📜</span> MIT License
                         </a>
                     </div>
                 </div>
@@ -383,6 +356,7 @@ git push origin feature/amazing-feature
                         <li><span data-i18n="footer.version">Version</span>: <code>0.1.4</code></li>
                         <li><span data-i18n="footer.inspired">Inspired by</span> <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">neofetch</a></li>
                         <li data-i18n="footer.built">Built with ❤️ using Rust</li>
+                        <li data-i18n="footer.company">星落湖探人工智能应用软件（杭州）有限公司</li>
                     </ul>
                 </div>
             </div>
@@ -391,7 +365,7 @@ git push origin feature/amazing-feature
                 <p class="footer-copyright">
                     <span class="prompt">$</span> <span data-i18n="footer.copyright">echo "Made with ❤️ by open source community"</span>
                 </p>
-                <p class="footer-license">© 2024 StarFetch. MIT License.</p>
+                <p class="footer-license">© 2024 StarFetch. MIT License. <span data-i18n="footer.company.short">星落湖探人工智能应用软件（杭州）有限公司</span></p>
             </div>
         </div>
     </footer>

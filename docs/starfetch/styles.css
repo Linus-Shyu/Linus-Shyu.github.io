@@ -158,82 +158,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-.terminal-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    flex-shrink: 0;
-}
-
-/* Language Selector */
-.lang-selector {
-    position: relative;
-}
-
-.lang-selector .btn-toggle {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
-    width: auto;
-    min-width: 80px;
-}
-
-.lang-text {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-}
-
-.lang-dropdown {
-    position: absolute;
-    top: calc(100% + var(--spacing-xs));
-    right: 0;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    min-width: 150px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1001;
-    overflow: hidden;
-}
-
-.lang-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.lang-option {
-    display: block;
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    text-align: left;
-    background: transparent;
-    border: none;
-    color: var(--color-text);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.lang-option:hover {
-    background: var(--color-bg-secondary);
-}
-
-.lang-option.active {
-    background: var(--color-primary);
-    color: white;
-}
-
-.lang-option.active:hover {
-    background: var(--color-primary-dark);
-}
-
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -422,9 +346,6 @@ body {
 }
 
 .btn-toggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
     background: var(--color-bg-secondary);
     color: var(--color-text);
     border: 1px solid var(--color-border);
@@ -432,20 +353,15 @@ body {
     width: 44px;
     height: 44px;
     border-radius: var(--radius-md);
-    flex-shrink: 0;
 }
 
 .btn-toggle:hover {
     background: var(--color-bg-tertiary);
     transform: scale(1.05);
-    box-shadow: var(--shadow-sm);
 }
 
-.theme-icon,
-.lang-icon {
+.theme-icon {
     font-size: 1.25rem;
-    display: inline-block;
-    line-height: 1;
 }
 
 .icon {
@@ -863,20 +779,6 @@ body {
     .btn {
         width: 100%;
         max-width: 300px;
-    }
-
-    .lang-selector .btn-toggle {
-        width: auto;
-        min-width: 80px;
-    }
-
-    .lang-text {
-        display: inline;
-    }
-
-    .lang-dropdown {
-        right: 0;
-        min-width: 150px;
     }
 }
 

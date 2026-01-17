@@ -6,46 +6,11 @@
         if (window.i18n) {
             window.i18n.init();
             
-            // 语言选择下拉菜单
+            // 语言切换按钮
             const langToggle = document.getElementById('langToggle');
-            const langDropdown = document.getElementById('langDropdown');
-            const langOptions = document.querySelectorAll('.lang-option');
-            const currentLangText = document.getElementById('currentLangText');
-            
-            // 切换下拉菜单显示/隐藏
-            if (langToggle && langDropdown) {
-                langToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    langDropdown.classList.toggle('active');
-                });
-                
-                // 点击外部关闭下拉菜单
-                document.addEventListener('click', function(e) {
-                    if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
-                        langDropdown.classList.remove('active');
-                    }
-                });
-                
-                // 选择语言
-                langOptions.forEach(option => {
-                    option.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const lang = this.getAttribute('data-lang');
-                        window.i18n.applyLanguage(lang);
-                        
-                        // 更新当前语言显示
-                        if (currentLangText) {
-                            const langNames = window.i18n.langNames || {};
-                            currentLangText.textContent = langNames[lang] || lang.toUpperCase();
-                        }
-                        
-                        // 更新选中状态
-                        langOptions.forEach(opt => opt.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // 关闭下拉菜单
-                        langDropdown.classList.remove('active');
-                    });
+            if (langToggle) {
+                langToggle.addEventListener('click', function() {
+                    window.i18n.toggleLanguage();
                 });
             }
         } else {

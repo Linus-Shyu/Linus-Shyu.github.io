@@ -7,6 +7,13 @@
     <meta name="keywords" content="FeelFlow, AI日记, 情感分析, 心情记录, 心理健康, 智能笔记">
     <title>FeelFlow - 用AI读懂你的内心世界</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -21,11 +28,16 @@
                 <li><a href="#credits">致谢名单</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            </div>
         </div>
     </nav>
 
