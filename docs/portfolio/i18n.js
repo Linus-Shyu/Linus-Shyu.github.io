@@ -12,7 +12,12 @@ window.PORTFOLIO_I18N = {
       para2: "我也喜欢骑自行车、滑滑板、摄影、弹钢琴。",
       bilibili: "Bilibili",
       youtube: "YouTube",
-      instagram: "Instagram"
+      instagram: "Instagram",
+      twitter: "X",
+      linkedin: "LinkedIn",
+      xiaohongshu: "小红书",
+      netease: "网易云音乐",
+      codeforces: "CodeForces"
     },
     comp: {
       title: "竞赛与实习经历",
@@ -129,7 +134,12 @@ window.PORTFOLIO_I18N = {
       para2: "I also like riding bicycles, skateboarding, photography and playing piano.",
       bilibili: "Bilibili",
       youtube: "YouTube",
-      instagram: "Instagram"
+      instagram: "Instagram",
+      twitter: "X",
+      linkedin: "LinkedIn",
+      xiaohongshu: "Xiaohongshu",
+      netease: "NetEase Music",
+      codeforces: "CodeForces"
     },
     comp: {
       title: "Competition and internship experience",
