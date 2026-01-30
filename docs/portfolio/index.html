@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linus Shyu — Portfolio</title>
+    <meta name="description" content="Linus Shyu · 17岁开发者，Star Lake AI 联合创始人兼 CTO。FeelFlow、XTerminal、StarFetch 作者。Rust & Swift · 数字主权 · 极简主义。">
+    <meta name="keywords" content="Linus Shyu, 许发鑫, portfolio, FeelFlow, XTerminal, StarFetch, PayTube, Rust, Swift, 星落湖探, Star Lake AI">
+    <meta property="og:title" content="Linus Shyu — Portfolio">
+    <meta property="og:description" content="17 · Developer · CTO · Minimalist. Building with Rust & Swift. FeelFlow, XTerminal, StarFetch.">
+    <meta property="og:image" content="https://github.com/Linus-Shyu.png">
+    <meta property="og:url" content="https://linusshyu.dev/portfolio/">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function () {
+            var theme = localStorage.getItem('portfolio-theme') || 'dark';
+            var lang = localStorage.getItem('portfolio-lang') || (navigator.language && navigator.language.indexOf('zh') === 0 ? 'zh' : 'en');
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+        })();
+    </script>
+    <script src="i18n.js"></script>
+</head>
+<body>
+    <!-- Terminal-style Header (StarFetch style) -->
+    <header class="terminal-header" role="banner">
+        <div class="terminal-bar container">
+            <div class="terminal-controls">
+                <span class="control close" aria-hidden="true"></span>
+                <span class="control minimize" aria-hidden="true"></span>
+                <span class="control maximize" aria-hidden="true"></span>
+            </div>
+            <div class="terminal-title">Linus Shyu — Portfolio</div>
+            <div class="terminal-actions">
+                <button type="button" class="btn btn-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <div class="lang-selector">
+                    <button type="button" class="btn btn-toggle" id="langToggle" aria-label="Language">
+                        <span class="lang-icon" aria-hidden="true">🌐</span>
+                        <span class="lang-text" id="currentLangText">English</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button type="button" class="lang-option" data-lang="zh">🇨🇳 中文</button>
+                        <button type="button" class="lang-option" data-lang="en">🇺🇸 English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner container">
+            <p class="hero-eyebrow" data-i18n="hero.eyebrow">17-year-old CTO & Developer.</p>
+            <h1 class="hero-headline" data-i18n="hero.headline">Building the Future with Rust & Swift.</h1>
+            <p class="hero-subheadline" data-i18n="hero.subheadline">Linus Shyu. Exploring Digital Sovereignty and Minimalist Aesthetics.</p>
+        </div>
+    </section>
+
+    <!-- About me -->
+    <section class="about-section" aria-labelledby="about-heading">
+        <div class="container">
+            <h2 id="about-heading" class="section-title about-section__title" data-i18n="about.title">About me</h2>
+            <div class="about-inner">
+                <div class="about-content">
+                    <p class="about-para" data-i18n="about.para1">I'm Linus, from Qinghai. I'm currently a Grade 11 student. I love computer science and enjoy building interesting projects. I'm also a tech creator and like to share what I learn. You can find my channel "Linus Shyu" on Bilibili or YouTube, where I document my learning and creations.</p>
+                    <p class="about-para" data-i18n="about.para2">Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.</p>
+                    <p class="about-para" data-i18n="about.para3">Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals—and rethinking what I could build with Solidity that truly resonates, beyond crypto alone.</p>
+                </div>
+                <div class="about-photo">
+                    <img src="https://github.com/Linus-Shyu.png" alt="Linus Shyu" class="about-photo__img" width="320" height="320" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My hobby -->
+    <section class="hobby-section" aria-labelledby="hobby-heading">
+        <div class="container">
+            <h2 id="hobby-heading" class="section-title" data-i18n="hobby.title">My hobby</h2>
+            <p class="hobby-para" data-i18n="hobby.para1">I am a self-media creator in the technology field. I really like to share what I have learned in technology. This is my Bilibili channel and YouTube channel.</p>
+            <p class="hobby-links">
+                <a href="https://space.bilibili.com/411591950" class="hobby-link" target="_blank" rel="noopener noreferrer" data-i18n="hobby.bilibili">Bilibili</a>
+                <span class="hobby-sep">·</span>
+                <a href="https://www.youtube.com/@LinusShyu" class="hobby-link" target="_blank" rel="noopener noreferrer" data-i18n="hobby.youtube">YouTube</a>
+                <span class="hobby-sep">·</span>
+                <a href="https://www.instagram.com/linusshyu/" class="hobby-link" target="_blank" rel="noopener noreferrer" data-i18n="hobby.instagram">Instagram</a>
+            </p>
+            <p class="hobby-para" data-i18n="hobby.para2">I also like riding bicycles, skateboarding, photography and playing piano.</p>
+        </div>
+    </section>
+
+    <!-- Core Projects -->
+    <section class="core-projects" aria-labelledby="core-projects-heading">
+        <h2 id="core-projects-heading" class="visually-hidden" data-i18n="projects.heading">Core Projects</h2>
+
+        <!-- Row 1: Text Left, Image Right (FeelFlow) -->
+        <article class="project-row project-row--text-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.feelflow.title">FeelFlow.</h3>
+                    <p class="project-subhead" data-i18n="projects.feelflow.subhead">AI-Powered Emotional Journal. Privacy First.</p>
+                    <p class="project-body" data-i18n="projects.feelflow.body">Native SwiftUI app tailored for iOS 18. Local-only data storage respecting digital sovereignty. Features distinct AI personalities for deep empathy capabilities.</p>
+                    <a href="https://apps.apple.com/us/app/feelflow/id6753738362" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View FeelFlow on App Store" data-i18n="projects.feelflow.link">View on App Store &gt;</a>
+                </div>
+                <div class="project-block project-block--media">
+                    <img src="img/FeelFlow.png" alt="FeelFlow — 情感洞察 / Emotional Insight" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- Row 2: Image Left, Text Right (XTerminal) -->
+        <article class="project-row project-row--image-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--media">
+                    <img src="img/Hack.JPG" alt="AdventureX 2025 Hackathon — XTerminal" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.xterminal.title">XTerminal.</h3>
+                    <p class="project-subhead" data-i18n="projects.xterminal.subhead">Next-Gen CLI for Competitive Programmers.</p>
+                    <p class="project-body" data-i18n="projects.xterminal.body">Built with C++ for speed. Winner of AdventureX 2025 Hackathon. Integrating real-time AI analysis directly into the terminal workflow for NOI/ACM athletes.</p>
+                    <a href="https://github.com/XTerminalApp/XTerminal" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View XTerminal on GitHub" data-i18n="projects.xterminal.link">View on GitHub &gt;</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Row 3: Text Left, Image Right (StarFetch) -->
+        <article class="project-row project-row--text-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.starfetch.title">StarFetch.</h3>
+                    <p class="project-subhead" data-i18n="projects.starfetch.subhead">Extreme Minimalist System Info Tool.</p>
+                    <p class="project-body" data-i18n="projects.starfetch.body">Written in Rust for sheer performance. Features adaptive ASCII art styling and modern clickable terminal hyperlinks. A tribute to system aesthetics.</p>
+                    <a href="https://github.com/Linus-Shyu/StarFetch_Core" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View StarFetch on GitHub" data-i18n="projects.starfetch.link">View on GitHub &gt;</a>
+                </div>
+                <div class="project-block project-block--media">
+                    <img src="img/StarFetch.PNG" alt="StarFetch terminal output" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- Row 4: Image Left, Text Right (Landscape Photography) -->
+        <article class="project-row project-row--image-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--media">
+                    <img src="img/Landscape.JPG" alt="Stars & Milky Way" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.photo.title">Landscape Photography.</h3>
+                    <p class="project-subhead" data-i18n="projects.photo.subhead">Stars & nature.</p>
+                    <p class="project-body" data-i18n="projects.photo.body">Landscape photographer. Capturing the night sky, Milky Way, and natural scenery in Qinghai and on the road.</p>
+                    <a href="https://www.instagram.com/linusshyu/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram" data-i18n="projects.photo.link">View on Instagram &gt;</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Row 5: Text Left, Image Right (Homelab) -->
+        <article class="project-row project-row--text-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.homelab.title">Homelab.</h3>
+                    <p class="project-subhead" data-i18n="projects.homelab.subhead">Home lab enthusiast.</p>
+                    <p class="project-body" data-i18n="projects.homelab.body">Homelab player. Sharing hardcore computer science and tech knowledge on Bilibili. Dell PowerEdge, VMware ESXi, and enterprise virtualization at home.</p>
+                    <a href="https://space.bilibili.com/411591950" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Bilibili Channel" data-i18n="projects.homelab.link">Bilibili Channel &gt;</a>
+                </div>
+                <div class="project-block project-block--media">
+                    <img src="img/Server.JPG" alt="Homelab — Dell PowerEdge R630, VMware ESXi" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+            </div>
+        </article>
+
+        <!-- Row 6: Image Left, Text Right (PayTube) -->
+        <article class="project-row project-row--image-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--media">
+                    <img src="img/PayTube.png" alt="PayTube — Ethereum Payment" class="project-image" width="1200" height="800" loading="lazy">
+                </div>
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.paytube.title">PayTube.</h3>
+                    <p class="project-subhead" data-i18n="projects.paytube.subhead">Crypto payment engine for geeks.</p>
+                    <p class="project-body" data-i18n="projects.paytube.body">Blockchain & Web3 developer and miner. PayTube supports Ethereum and more; connect MetaMask and support open source with crypto.</p>
+                    <a href="/paytube/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Open PayTube" data-i18n="projects.paytube.link">Open PayTube &gt;</a>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Skills & Experiences (Bento Grid) -->
+    <section class="skills-section" aria-labelledby="skills-heading">
+        <div class="container">
+            <h2 id="skills-heading" class="skills-section__title" data-i18n="skills.title">Skills & Experiences</h2>
+            <div class="bento-grid">
+                <div class="bento-card bento-card--large" id="bento-tech">
+                    <span class="bento-card__label" data-i18n="skills.techStack">Tech Stack</span>
+                    <ul class="bento-card__list bento-card__list--icons">
+                        <li><span class="bento-icon" aria-hidden="true">🦀</span> <span data-i18n="skills.rustLabel">Rust (Expert)</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">🐍</span> <span data-i18n="skills.pythonLabel">Python</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">🍎</span> <span data-i18n="skills.swiftLabel">Swift (Advanced)</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">⚙️</span> <span data-i18n="skills.cppLabel">C++</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">⌨️</span> <span data-i18n="skills.neovimLabel">Neovim IDE</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">🪟</span> <span data-i18n="skills.toolsLabel">macOS: yabai + skhd + sketchybar</span></li>
+                        <li><span class="bento-icon" aria-hidden="true">🔐</span> <span data-i18n="skills.privacyLabel">Digital sovereignty: PGP · ProtonMail</span></li>
+                    </ul>
+                </div>
+                <div class="bento-card bento-card--medium" id="bento-role">
+                    <span class="bento-card__label" data-i18n="skills.role">Role</span>
+                    <p class="bento-card__text" data-i18n="skills.roleText">Co-founder & CTO at Star Lake AI.</p>
+                </div>
+                <div class="bento-card bento-card--medium" id="bento-awards">
+                    <span class="bento-card__label" data-i18n="skills.awards">Awards</span>
+                    <p class="bento-card__text" data-i18n="skills.awardsText">2026 Swift Student Challenge Participant, AdventureX Winner.</p>
+                </div>
+                <div class="bento-card bento-card--small" id="bento-volunteer">
+                    <span class="bento-card__label" data-i18n="skills.volunteer">Volunteer</span>
+                    <p class="bento-card__text" data-i18n="skills.volunteerText">COP28 UN Climate Change Conference.</p>
+                </div>
+                <div class="bento-card bento-card--small" id="bento-art">
+                    <span class="bento-card__label" data-i18n="skills.art">Art</span>
+                    <p class="bento-card__text" data-i18n="skills.artText">Piano Grade 7.</p>
+                </div>
+                <div class="bento-card bento-card--small" id="bento-journey">
+                    <span class="bento-card__label" data-i18n="skills.journey">Journey</span>
+                    <p class="bento-card__text" data-i18n="skills.journeyText">HKU 2027 → MIT.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition and internship experience -->
+    <section class="comp-section" aria-labelledby="comp-heading">
+        <div class="container">
+            <h2 id="comp-heading" class="section-title comp-section__title" data-i18n="comp.title">Competition and internship experience</h2>
+
+            <div class="comp-block">
+                <h3 class="comp-block__label" data-i18n="comp.computer">Computer field</h3>
+                <ul class="comp-list">
+                    <li data-i18n="comp.tsinghua">Tsinghua University Programming Contest Preliminary Contest 2026: Finalists</li>
+                    <li data-i18n="comp.google">Google I/O Connect China: Guest</li>
+                    <li data-i18n="comp.adventurex">Adventure X 2025 Hackathon: Finalists</li>
+                    <li data-i18n="comp.noi25">NOI 2025 Winter Camp: Finalists</li>
+                    <li data-i18n="comp.noi24">NOI 2024 Winter Camp: Finalists</li>
+                    <li data-i18n="comp.noip24">2024 National Olympiad in Informatics in Provinces: Finalists</li>
+                    <li data-i18n="comp.noip23">2023 National Olympiad in Informatics in Provinces: Finalists</li>
+                    <li data-i18n="comp.qinghai40">The 40th Qinghai Youth Science and Technology Innovation Competition: Finalists</li>
+                    <li data-i18n="comp.stanford">Stanford Math Tournament 2024 Online: Finalists</li>
+                </ul>
+            </div>
+
+            <div class="comp-block">
+                <h3 class="comp-block__label" data-i18n="comp.robotics">Robotics</h3>
+                <ul class="comp-list">
+                    <li data-i18n="comp.robotCaptain">Captain of a school's robotics team</li>
+                    <li data-i18n="comp.qinghai15">The 15th Qinghai Province Primary and Secondary School Student Robot Competition: Finalists</li>
+                    <li data-i18n="comp.huzhu">Huzhu District Primary and Secondary School Robot Science Festival: Finalists</li>
+                </ul>
+            </div>
+
+            <div class="comp-block">
+                <h3 class="comp-block__label" data-i18n="comp.music">Music field</h3>
+                <ul class="comp-list">
+                    <li data-i18n="comp.piano7">2020 China Conservatory of Music Piano Test Level 7</li>
+                    <li data-i18n="comp.theoryMid">2019 Central Conservatory of Music Music Theory Examination Intermediate Level</li>
+                    <li data-i18n="comp.piano4">2020 China Conservatory of Music Piano Test Level 4</li>
+                    <li data-i18n="comp.theoryBegin">2018 Central Conservatory of Music Music Theory Examination Beginner</li>
+                    <li data-i18n="comp.piano2">2019 Central Conservatory of Music Piano Grade Level 2</li>
+                </ul>
+            </div>
+
+            <div class="comp-block">
+                <h3 class="comp-block__label" data-i18n="comp.volunteer">Volunteering</h3>
+                <ul class="comp-list">
+                    <li data-i18n="comp.cop28">The 28th United Nations Climate Change Conference: Volunteer</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="portfolio-footer">
+        <div class="container">
+            <p class="footer-contact-label" data-i18n="footer.contact">Contact</p>
+            <p class="footer-email">
+                <a href="mailto:0x11@linusshyu.dev" class="footer-link">0x11@linusshyu.dev</a>
+            </p>
+            <nav class="footer-social" aria-label="Social links">
+                <a href="https://github.com/Linus-Shyu" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                <span class="footer-social__sep">·</span>
+                <a href="https://space.bilibili.com/411591950" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="Bilibili">Bilibili</a>
+                <span class="footer-social__sep">·</span>
+                <a href="https://www.youtube.com/@LinusShyu" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
+                <span class="footer-social__sep">·</span>
+                <a href="https://www.instagram.com/linusshyu/" class="footer-social__link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            </nav>
+            <p class="footer-copy">© 2026 Linus Shyu</p>
+        </div>
+    </footer>
+
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
