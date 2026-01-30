@@ -242,6 +242,7 @@ body {
     background-color: var(--color-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: 3.5rem; /* space for fixed header */
 }
 
 /* ========== Layout Container ========== */
@@ -396,6 +397,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 3rem;
+    }
+
     .about-inner {
         flex-direction: column;
         gap: 2rem;
@@ -405,6 +410,41 @@ body {
         width: 100%;
         max-width: 320px;
         margin: 0 auto;
+    }
+
+    .hobby-sep {
+        display: none;
+    }
+
+    .terminal-bar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
+        max-width: 14ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-toggle {
+        min-height: 44px;
+        padding: 0.5rem 0.65rem;
+    }
+
+    .lang-selector .btn-toggle {
+        min-width: 76px;
+    }
+
+    .footer-social {
+        gap: 0.35rem 0.5rem;
+    }
+
+    .footer-social__link,
+    .footer-social__sep {
+        font-size: 0.8125rem;
     }
 }
 
@@ -431,6 +471,11 @@ body {
 
 .hobby-links {
     margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem 0.6rem;
 }
 
 .hobby-link {
@@ -446,8 +491,9 @@ body {
 }
 
 .hobby-sep {
-    margin: 0 0.5rem;
+    margin: 0;
     color: var(--color-text-tertiary);
+    font-size: 0.75rem;
 }
 
 /* ========== Competition & Experience Section ========== */
@@ -701,6 +747,7 @@ body {
 .project-image {
     width: 100%;
     height: 100%;
+    max-width: 100%;
     object-fit: cover;
     display: block;
 }
@@ -910,5 +957,56 @@ body {
 
     .bento-card {
         min-height: 0;
+    }
+}
+
+/* Extra small screens: tighter padding, hero height */
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 1rem;
+    }
+
+    body {
+        padding-top: 2.75rem;
+    }
+
+    .hero {
+        min-height: 70vh;
+    }
+
+    .hero .hero-inner {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .terminal-bar {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .terminal-title {
+        max-width: 12ch;
+    }
+
+    .section-title {
+        font-size: 1.35rem;
+    }
+
+    .project-headline {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .project-link {
+        padding: 0.65rem 1.25rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .back-to-top {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 2.75rem;
+        height: 2.75rem;
     }
 }
