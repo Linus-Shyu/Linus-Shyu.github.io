@@ -28,6 +28,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': '快速安装和开始使用',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': '使用 Homebrew 一键安装，当前版本 v0.2.1',
         'install.build': '从源码构建',
         'install.global': '全局安装',
         'install.requirements': '系统要求',
@@ -114,6 +116,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': 'Quick installation and getting started',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'One-line install via Homebrew, v0.2.1',
         'install.build': 'Build from Source',
         'install.global': 'Install Globally',
         'install.requirements': 'Requirements',
@@ -200,6 +204,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': 'クイックインストールと開始',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'Homebrew でワンライナーインストール、v0.2.1',
         'install.build': 'ソースからビルド',
         'install.global': 'グローバルにインストール',
         'install.requirements': '要件',
@@ -226,8 +232,8 @@ const translations = {
         'footer.version': 'バージョン',
         'footer.inspired': 'インスパイア元',
         'footer.built': 'Rust で ❤️ とともに構築',
-        'footer.company': '星落湖探人工智能应用软件（杭州）有限公司',
-        'footer.company.short': '星落湖探AI（杭州）',
+        'footer.company': 'Xingluotan AI Application Software (Hangzhou) Co., Ltd.',
+        'footer.company.short': 'Xingluotan AI (Hangzhou)',
         'footer.copyright': 'オープンソースコミュニティが ❤️ で作成',
         
         // Terminal Display
@@ -274,6 +280,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': '빠른 설치 및 시작',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'Homebrew로 원라인 설치, v0.2.1',
         'install.build': '소스에서 빌드',
         'install.global': '전역 설치',
         'install.requirements': '요구사항',
@@ -312,8 +320,8 @@ const translations = {
         'footer.version': '버전',
         'footer.inspired': '영감을 받은',
         'footer.built': 'Rust로 ❤️와 함께 제작',
-        'footer.company': '星落湖探人工智能应用软件（杭州）有限公司',
-        'footer.company.short': '星落湖探AI（杭州）',
+        'footer.company': 'Xingluotan AI Application Software (Hangzhou) Co., Ltd.',
+        'footer.company.short': 'Xingluotan AI (Hangzhou)',
         'footer.copyright': '오픈소스 커뮤니티가 ❤️로 제작',
         
         // Terminal Display
@@ -360,6 +368,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': 'Installation rapide et démarrage',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'Installation en une ligne via Homebrew, v0.2.1',
         'install.build': 'Compiler depuis les sources',
         'install.global': 'Installer globalement',
         'install.requirements': 'Exigences',
@@ -446,6 +456,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': 'Instalación rápida y comienzo',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'Instalación en una línea con Homebrew, v0.2.1',
         'install.build': 'Compilar desde Fuentes',
         'install.global': 'Instalar Globalmente',
         'install.requirements': 'Requisitos',
@@ -532,6 +544,8 @@ const translations = {
         // Installation
         'install.title': 'cargo install starfetch',
         'install.subtitle': 'Schnelle Installation und Start',
+        'install.homebrew': '🍺 Homebrew (macOS)',
+        'install.homebrew.desc': 'Einzeilige Installation mit Homebrew, v0.2.1',
         'install.build': 'Aus Quellen bauen',
         'install.global': 'Global installieren',
         'install.requirements': 'Anforderungen',

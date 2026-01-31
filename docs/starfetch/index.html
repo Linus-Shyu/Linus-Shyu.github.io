@@ -6,7 +6,7 @@
     <meta name="description" content="StarFetch - 用 Rust 编写的极速系统信息工具，受 neofetch 启发。展示优雅的 ASCII 艺术和智能终端适配。">
     <meta name="keywords" content="StarFetch, Rust, neofetch, 系统信息, 命令行工具, 开源, 极客">
     <title>StarFetch ⭐ - 极速系统信息工具</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/starfetch/styles.css">
     <script>
         // 立即应用主题和语言，避免闪烁
         (function() {
@@ -20,7 +20,7 @@
             document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
         })();
     </script>
-    <script src="i18n.js"></script>
+    <script src="/starfetch/i18n.js"></script>
 </head>
 <body>
     <!-- Terminal-style Header -->
@@ -200,19 +200,37 @@
 
             <div class="install-content">
                 <div class="install-steps">
+                    <h3 data-i18n="install.homebrew">🍺 Homebrew (macOS)</h3>
+                    <p class="install-desc" data-i18n="install.homebrew.desc">使用 Homebrew 一键安装，当前版本 v0.2.1</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">bash</span>
+                        </div>
+                        <pre><code># Install
+brew tap Linus-Shyu/tap
+brew install starfetch
+
+# Update
+brew upgrade starfetch
+
+# Uninstall
+brew uninstall starfetch
+brew untap Linus-Shyu/tap</code></pre>
+                    </div>
+
                     <h3 data-i18n="install.build">📦 从源码构建</h3>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># 克隆仓库
+                        <pre><code># Clone repository
 git clone https://github.com/Linus-Shyu/StarFetch_Core.git
 cd StarFetch_Core/StarFetch
 
-# 构建项目
+# Build project
 cargo build --release
 
-# 运行
+# Run
 ./target/release/starfetch</code></pre>
                     </div>
 
@@ -224,7 +242,7 @@ cargo build --release
                         <pre><code>cd StarFetch_Core/StarFetch
 cargo install --path .
 
-# 安装后，可在任何地方运行
+# After installation, run anywhere
 starfetch</code></pre>
                     </div>
                 </div>
@@ -232,9 +250,9 @@ starfetch</code></pre>
                 <div class="requirements">
                     <h3 data-i18n="install.requirements">系统要求</h3>
                     <ul class="requirements-list">
-                        <li><span class="check">✓</span> Rust (最新稳定版)</li>
-                        <li><span class="check">✓</span> Cargo (随 Rust 一起安装)</li>
-                        <li><span class="check">✓</span> macOS / Linux / Windows</li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.rust">Rust (latest stable)</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.cargo">Cargo (comes with Rust)</span></li>
+                        <li><span class="check">✓</span> <span data-i18n="install.requirements.platforms">macOS / Linux / Windows</span></li>
                     </ul>
 
                     <div class="quick-start">
@@ -290,17 +308,17 @@ starfetch</code></pre>
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># Fork 仓库
-# 创建功能分支
+                        <pre><code># Fork repository
+# Create feature branch
 git checkout -b feature/amazing-feature
 
-# 提交更改
+# Commit changes
 git commit -m 'Add some amazing feature'
 
-# 推送分支
+# Push branch
 git push origin feature/amazing-feature
 
-# 创建 Pull Request</code></pre>
+# Create Pull Request</code></pre>
                     </div>
                 </div>
             </div>
@@ -367,7 +385,7 @@ git push origin feature/amazing-feature
                 <div class="footer-info">
                     <h4 data-i18n="footer.info">Info</h4>
                     <ul>
-                        <li><span data-i18n="footer.version">Version</span>: <code>0.1.9</code></li>
+                        <li><span data-i18n="footer.version">Version</span>: <code id="starfetch-version">0.2.1</code></li>
                         <li><span data-i18n="footer.inspired">Inspired by</span> <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">neofetch</a></li>
                         <li data-i18n="footer.built">Built with ❤️ using Rust</li>
                         <li data-i18n="footer.company">星落湖探人工智能应用软件（杭州）有限公司</li>
@@ -384,6 +402,6 @@ git push origin feature/amazing-feature
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/starfetch/script.js"></script>
 </body>
 </html>

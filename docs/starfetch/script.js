@@ -98,6 +98,22 @@
     });
 })();
 
+// 自动从 GitHub Releases 获取最新版本号
+(function() {
+    const versionEl = document.getElementById('starfetch-version');
+    if (!versionEl) return;
+    const fallbackVersion = versionEl.textContent.trim();
+    fetch('https://api.github.com/repos/Linus-Shyu/StarFetch_Core/releases/latest', {
+        headers: { 'Accept': 'application/vnd.github.v3+json' }
+    })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(data => {
+            const tag = data.tag_name || '';
+            versionEl.textContent = tag.replace(/^v/, '') || fallbackVersion;
+        })
+        .catch(() => { /* 网络失败时保留默认版本 */ });
+})();
+
 // 平滑滚动
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
