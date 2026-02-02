@@ -200,22 +200,48 @@
 
             <div class="install-content">
                 <div class="install-steps">
-                    <h3 data-i18n="install.homebrew">🍺 Homebrew (macOS)</h3>
-                    <p class="install-desc" data-i18n="install.homebrew.desc">使用 Homebrew 一键安装，当前版本 v0.2.1</p>
+                    <h3 data-i18n="install.apt">📦 APT (Ubuntu / Debian / Kali)</h3>
+                    <p class="install-desc" data-i18n="install.apt.desc">Linux 上两条命令即可完成安装（x86_64 与 ARM64）</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># Install
-brew tap Linus-Shyu/tap
-brew install starfetch
+                        <pre><code>curl -1sLf 'https://dl.cloudsmith.io/public/starlakeai/starfetch/setup.deb.sh' | sudo -E bash
+sudo apt-get install starfetch</code></pre>
+                    </div>
 
-# Update
-brew upgrade starfetch
+                    <h3 data-i18n="install.homebrew">🍺 Homebrew (macOS)</h3>
+                    <p class="install-desc" data-i18n="install.homebrew.desc">使用 Homebrew 一键安装，当前版本 v0.2.3</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">bash</span>
+                        </div>
+                        <pre><code>brew tap Linus-Shyu/tap
+brew install starfetch</code></pre>
+                    </div>
 
-# Uninstall
-brew uninstall starfetch
-brew untap Linus-Shyu/tap</code></pre>
+                    <h3 data-i18n="install.winget">🪟 Winget (Windows)</h3>
+                    <p class="install-desc" data-i18n="install.winget.desc">Windows 包管理器一键安装</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">powershell</span>
+                        </div>
+                        <pre><code>winget install Linus-Shyu.StarFetch</code></pre>
+                    </div>
+
+                    <h3 data-i18n="install.script">📜 通用安装脚本</h3>
+                    <p class="install-desc" data-i18n="install.script.desc">无包管理器时使用（Linux / macOS / BSD 或 Windows PowerShell）</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">bash</span>
+                        </div>
+                        <pre><code>curl -fsSL https://raw.githubusercontent.com/Linus-Shyu/StarFetch_Core/master/install.sh | bash</code></pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">powershell</span>
+                        </div>
+                        <pre><code>irm https://raw.githubusercontent.com/Linus-Shyu/StarFetch_Core/master/install.ps1 | iex</code></pre>
                     </div>
 
                     <h3 data-i18n="install.build">📦 从源码构建</h3>
@@ -223,15 +249,9 @@ brew untap Linus-Shyu/tap</code></pre>
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code># Clone repository
-git clone https://github.com/Linus-Shyu/StarFetch_Core.git
+                        <pre><code>git clone https://github.com/Linus-Shyu/StarFetch_Core.git
 cd StarFetch_Core/StarFetch
-
-# Build project
-cargo build --release
-
-# Run
-./target/release/starfetch</code></pre>
+cargo build --release</code></pre>
                     </div>
 
                     <h3 data-i18n="install.global">🌐 全局安装</h3>
@@ -239,11 +259,7 @@ cargo build --release
                         <div class="code-header">
                             <span class="code-lang">bash</span>
                         </div>
-                        <pre><code>cd StarFetch_Core/StarFetch
-cargo install --path .
-
-# After installation, run anywhere
-starfetch</code></pre>
+                        <pre><code>cargo install --path .</code></pre>
                     </div>
                 </div>
 
@@ -385,7 +401,7 @@ git push origin feature/amazing-feature
                 <div class="footer-info">
                     <h4 data-i18n="footer.info">Info</h4>
                     <ul>
-                        <li><span data-i18n="footer.version">Version</span>: <code id="starfetch-version">0.2.1</code></li>
+                        <li><span data-i18n="footer.version">Version</span>: <code id="starfetch-version">0.2.3</code></li>
                         <li><span data-i18n="footer.inspired">Inspired by</span> <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">neofetch</a></li>
                         <li data-i18n="footer.built">Built with ❤️ using Rust</li>
                         <li data-i18n="footer.company">星落湖探人工智能应用软件（杭州）有限公司</li>
@@ -397,7 +413,7 @@ git push origin feature/amazing-feature
                 <p class="footer-copyright">
                     <span class="prompt">$</span> <span data-i18n="footer.copyright">echo "Made with ❤️ by open source community"</span>
                 </p>
-                <p class="footer-license">© 2024 StarFetch. MIT License. <span data-i18n="footer.company.short">星落湖探人工智能应用软件（杭州）有限公司</span></p>
+                <p class="footer-license">© 2026 StarFetch. MIT License. <span data-i18n="footer.company.short">星落湖探人工智能应用软件（杭州）有限公司</span></p>
             </div>
         </div>
     </footer>
