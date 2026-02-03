@@ -85,11 +85,15 @@ const translations = {
         'code.copy': '复制',
         'code.copied': '已复制!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': '感谢每一位贡献者',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -179,11 +183,15 @@ const translations = {
         'code.copy': 'Copy',
         'code.copied': 'Copied!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': 'Thanks to every contributor',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -264,11 +272,15 @@ const translations = {
         'code.copy': 'コピー',
         'code.copied': 'コピーしました!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': 'すべてのコントリビューターに感謝',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -358,11 +370,15 @@ const translations = {
         'code.copy': '복사',
         'code.copied': '복사되었습니다!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': '모든 기여자에게 감사합니다',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -452,11 +468,15 @@ const translations = {
         'code.copy': 'Copier',
         'code.copied': 'Copié!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': 'Merci à chaque contributeur',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -546,11 +566,15 @@ const translations = {
         'code.copy': 'Copiar',
         'code.copied': '¡Copiado!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': 'Gracias a cada colaborador',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
@@ -640,11 +664,15 @@ const translations = {
         'code.copy': 'Kopieren',
         'code.copied': 'Kopiert!',
         
+        // Contributors
+        'contributors.title': 'Contributors',
+        'contributors.subtitle': 'Danke an alle Mitwirkenden',
+        
         // Stats
         'stats.rust': 'Rust 100%',
         'stats.stars': '2+ Stars',
         'stats.license': 'MIT License',
-        'stats.contributors': '2 Contributors',
+        'stats.contributors': '4 Contributors',
         
         // Footer links
         'footer.github': 'GitHub',
