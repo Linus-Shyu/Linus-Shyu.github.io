@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CauseLink - 智能错题本与举一反三训练平台。OCR 扫描、AI 解析、思维导图与闯关训练，让错题变成成长路径。">
+    <meta name="keywords" content="CauseLink, 智能错题本, OCR, AI解析, 思维导图, 举一反三, iOS">
+    <title>CauseLink - 把错题变成成长路径</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">CauseLink</div>
+            <ul class="nav-menu">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#why">为什么选择</a></li>
+                <li><a href="#download">下载</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题" id="themeToggle" type="button">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">把错题变成<br>成长路径</h1>
+            <p class="hero-subtitle">CauseLink 是你的智能错题本与举一反三训练平台，OCR 扫描 + AI 解析 + 闯关拼图，让每一次错题都变成进步。</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">立即下载</a>
+                <a href="#features" class="btn btn-secondary">了解更多</a>
+            </div>
+            <div class="hero-rating">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <span class="rating-text">专为高效复盘而生</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="iphone-17-pro-max">
+                <div class="phone-frame">
+                    <div class="volume-buttons">
+                        <div class="volume-up"></div>
+                        <div class="volume-down"></div>
+                    </div>
+                    <div class="power-button"></div>
+                    <div class="dynamic-island">
+                        <div class="island-camera"></div>
+                    </div>
+                    <div class="phone-screen dark-mode">
+                        <div class="status-bar">
+                            <span class="status-time">21:08</span>
+                            <div class="status-icons">
+                                <div class="signal-icon">
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                </div>
+                                <div class="wifi-icon">
+                                    <svg width="15" height="12" viewBox="0 0 15 12" fill="none">
+                                        <path d="M7.5 3C9.1 3 10.5 3.4 11.6 4.1L10.7 5C9.9 4.5 8.8 4.2 7.5 4.2C6.2 4.2 5.1 4.5 4.3 5L3.4 4.1C4.5 3.4 5.9 3 7.5 3Z" fill="white" opacity="0.5"/>
+                                        <path d="M7.5 6C8.3 6 9 6.3 9.4 6.7L7.5 8.6L5.6 6.7C6 6.3 6.7 6 7.5 6Z" fill="white"/>
+                                        <circle cx="7.5" cy="10.5" r="1" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div class="battery-icon">
+                                    <div class="battery-body">
+                                        <div class="battery-level" style="width: 82%;"></div>
+                                    </div>
+                                    <div class="battery-cap"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-bar">
+                            <button class="nav-button">完成</button>
+                            <h1 class="nav-title">错题复盘</h1>
+                            <button class="nav-icon">⭐</button>
+                        </div>
+                        <div class="app-content">
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <div class="card-icon emotion-icon">🧠</div>
+                                    <h3 class="card-title">AI 解析</h3>
+                                    <div class="card-info">
+                                        <div class="info-item">知识点: 二次函数</div>
+                                        <div class="info-item secondary">步骤: 审题 → 建模 → 推导 → 结论</div>
+                                    </div>
+                                </div>
+                                <div class="confidence-bar">
+                                    <span>掌握度:</span>
+                                    <span class="confidence-value">72%</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 72%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="analysis-card">
+                                <div class="card-header">
+                                    <div class="card-icon category-icon">🧩</div>
+                                    <h3 class="card-title">举一反三</h3>
+                                    <div class="card-info">
+                                        <div class="info-item">关卡: 第 1 关</div>
+                                        <div class="info-item secondary">拖拽拼图完成通关</div>
+                                    </div>
+                                </div>
+                                <div class="keywords-grid">
+                                    <span class="keyword-tag" style="background: #FF9500;">建模</span>
+                                    <span class="keyword-tag" style="background: #34C759;">推导</span>
+                                    <span class="keyword-tag" style="background: #5856D6;">结论</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">强大功能</h2>
+            <p class="section-subtitle">把错题整理、分析、训练合成一条进步链路</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3 class="feature-title">OCR 扫描录入</h3>
+                    <p class="feature-description">拍照或相册导入，自动识别题目文字并结构化保存。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">AI 智能解析</h3>
+                    <p class="feature-description">步骤拆解、知识点提取、主观题过程分布与个性化鼓励。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3 class="feature-title">思维导图 & 全考点</h3>
+                    <p class="feature-description">一键生成导图与文档，系统化复盘知识结构。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3 class="feature-title">举一反三闯关</h3>
+                    <p class="feature-description">拖拽拼图完成关卡，强化迁移能力与步骤记忆。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">成就徽章系统</h3>
+                    <p class="feature-description">按学科与技能自动授予徽章，持续激励学习。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">本地存储</h3>
+                    <p class="feature-description">错题与分析持久化保存，随时复盘不丢失。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" class="why-choose">
+        <div class="container">
+            <h2 class="section-title">为什么选择 CauseLink？</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>高效复盘</h3>
+                    <p>从扫描到分析只需几秒，节省整理时间。</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>能力迁移</h3>
+                    <p>举一反三题目与闯关机制强化理解与迁移。</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🧭</div>
+                    <h3>体系化成长</h3>
+                    <p>思维导图与全考点文档建立知识结构。</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎨</div>
+                    <h3>现代化体验</h3>
+                    <p>玻璃质感 UI 与动效，让学习更有趣。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">下载 CauseLink</h2>
+            <p class="section-subtitle">安装包已准备好，立即体验智能错题复盘</p>
+            <div class="download-content">
+                <div class="download-info">
+                    <h3>系统要求</h3>
+                    <ul class="requirements-list">
+                        <li>iOS 16.0 或更高版本</li>
+                        <li>需要网络连接（用于 AI 分析）</li>
+                        <li>建议 Wi‑Fi 下载 IPA</li>
+                    </ul>
+                    <div class="download-steps">
+                        <h3>安装说明</h3>
+                        <ol class="steps-list">
+                            <li>点击右侧按钮下载 IPA</li>
+                            <li>使用签名工具安装（如 AltStore/自签）</li>
+                            <li>打开应用开始扫描错题</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="download-buttons">
+                    <a href="file:///Users/linusshyu/Downloads/Composer2%202026-02-06%2022-46-45/Composer2.ipa" class="download-btn app-store">
+                        <span class="download-label">下载 iPhone 安装包</span>
+                        <span class="download-subtitle">CauseLink.ipa</span>
+                    </a>
+                    <div class="feature-highlight">
+                        <h4>✨ 一键开始</h4>
+                        <p>下载后即可离线整理错题，联网时自动获取 AI 解析</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <p class="section-subtitle">欢迎提出建议与反馈</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <h3>反馈邮箱</h3>
+                    <a href="mailto:0x11@linusshyu.dev">0x11@linusshyu.dev</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📺</div>
+                    <h3>B站频道</h3>
+                    <a href="https://space.bilibili.com/411591950?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer">@Linus-Shyu</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🐦</div>
+                    <h3>开发者 X</h3>
+                    <a href="https://x.com/Linus_Shyu" target="_blank" rel="noopener noreferrer">@Linus_Shyu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>CauseLink</h3>
+                    <p>把错题变成成长路径</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>产品</h4>
+                        <ul>
+                            <li><a href="#features">功能</a></li>
+                            <li><a href="#why">特性</a></li>
+                            <li><a href="#download">下载</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>支持</h4>
+                        <ul>
+                            <li><a href="#contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CauseLink. All rights reserved.</p>
+                <p class="footer-tagline">让复盘成为成长仪式</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
