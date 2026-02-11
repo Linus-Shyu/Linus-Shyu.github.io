@@ -6,19 +6,21 @@
   <meta name="keywords" content=" C++基础语法 , ATcoder , abc ">
   <meta name="description" content="ABC327B题解 | Linus Shyu的认知库">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta name="description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces Round 918 (Div. 4) B">
-<meta property="og:url" content="http://example.com/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/index.html">
+<meta property="og:title" content="MoonShot48游记">
+<meta property="og:url" content="http://example.com/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Linus Shyu的认知库">
-<meta property="og:description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta property="og:description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-30T05:22:57.980Z">
+<meta property="article:published_time" content="2026-01-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-11T06:11:29.780Z">
 <meta property="article:author" content="LinusShyu">
-<meta property="article:tag" content="C++基础语法">
-<meta property="article:tag" content="codeforces">
-<meta property="article:tag" content="div.3">
+<meta property="article:tag" content="MoonShot">
+<meta property="article:tag" content="北京">
+<meta property="article:tag" content="探月">
+<meta property="article:tag" content="游记">
+<meta property="article:tag" content="黑客松">
 <meta name="twitter:card" content="summary">
 
 
@@ -47,7 +49,7 @@
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 <script src="/js/custom-iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -241,7 +243,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(4)</small>
+                <small>(5)</small>
             
         </div>
     </li>
@@ -253,7 +255,7 @@
         <div data-rel="生活">
             
             生活
-            <small>(1)</small>
+            <small>(2)</small>
         </div>
         
     </li>
@@ -301,7 +303,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_posts_number" value="5">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -374,7 +376,23 @@
     <div class="tag-wrapper">
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>北京</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>电影</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>黑客松</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>探月</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游记</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -397,12 +415,25 @@
                 <i class="iconfont icon-tag"></i><a>div.3</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MoonShot</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="All 生活 "
+           href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/"
+           data-tag="游记,探月,黑客松,北京,MoonShot"
+           data-author="" >
+            <span class="post-title" title="MoonShot48游记">MoonShot48游记</span>
+            <span class="post-date" title="2026-01-29 00:00:00">2026/01/29</span>
+        </a>
         
         
         <a  class="All 题解 "
@@ -489,7 +520,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2024-03-30 13:24:05'>2023-11-21 00:00</time>
+            Created At : <time class="date" title='Updated At: 2026-01-11 22:32:05'>2023-11-21 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -531,9 +562,8 @@
 <p>常规思路是用C++当中的pow()函数来做这一道题目，但是pow()函数也是有一定限制的，所以数据量稍微大一点就过不去这一道题，而且Atcoder没有像洛谷一样AC多少测试点给多少分的习惯，必须要把题调清楚才能拿分，所以你骗分基本是不可能的，像我花了差不多一个小时也没把这一道题写出来，还是太菜了。</p>
 <h2 id="题目大意">题目大意</h2>
 <p>设计一个程序找到A这个能满足一下表达式的数字： <span
-class="math display">\[
-A^{A} = B
-\]</span> 如果有就输出a，如果没有就输出-1。</p>
+class="math display"><em>A</em><sup><em>A</em></sup> = <em>B</em></span>
+如果有就输出a，如果没有就输出-1。</p>
 <p>正如之前所说我用pow()函数做这一题代码只能过一点点测试点，现在给大家看看我之前的代码。</p>
 <pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
 <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
@@ -692,8 +722,8 @@ i的这个循环仅仅只能每次只能*i，没办法实现判断是否存在i�
     
     <p><span class="copy-title">Author:</span><a  title="LinusShyu">LinusShyu</a></p>
     <p><span class="copy-title">Created At:</span>2023-11-21, 00:00:00</p>
-    <p><span class="copy-title">Updated At:</span>2024-03-30, 13:24:05</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/" title="ABC327B题解">http://example.com/2023/11/21/[ABC327B]%20A^A%20%E9%A2%98%E8%A7%A3/</a>
+    <p><span class="copy-title">Updated At:</span>2026-01-11, 22:32:05</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/" title="ABC327B题解">http://example.com/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
@@ -751,9 +781,8 @@ i的这个循环仅仅只能每次只能*i，没办法实现判断是否存在i�
     </div>
     <div class="copyright">
         <p class="footer-entry">
-    ©2022-2025 Linus Shyu
+    ©2022-2024 LinusShyu
 </p>
-
 
     </div>
     <div class="full-toc">

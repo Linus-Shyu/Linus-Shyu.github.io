@@ -744,24 +744,23 @@ body {
     box-shadow: var(--shadow-project);
 }
 
-/* 海报类图片完整显示，不裁剪（竖版海报 1079×1527） */
+/* 仅 CauseLink：右栏内海报完整显示，不裁剪，保持两栏布局 */
 .project-block--media--contain {
     aspect-ratio: auto;
-    overflow: visible;
-    min-height: 0;
+    overflow: hidden;
     align-self: start;
-    display: block;
-    background: var(--color-bg-secondary, #f5f5f7);
+    min-height: 0;
+    border-radius: var(--radius-card);
 }
 
 .project-block--media--contain .project-image {
     width: 100%;
     height: auto;
     max-width: 100%;
-    max-height: min(90vh, 1527px);
-    display: block;
+    max-height: 85vh;
     object-fit: contain;
-    object-position: top center;
+    display: block;
+    border-radius: inherit;
 }
 
 .project-image {

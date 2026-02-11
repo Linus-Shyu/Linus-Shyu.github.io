@@ -6,19 +6,21 @@
   <meta name="keywords" content=" C++基础语法 , codeforces , div.3 ">
   <meta name="description" content="Codeforces Round 933 (Div. 3) A | Linus Shyu的认知库">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta name="description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces Round 918 (Div. 4) B">
-<meta property="og:url" content="http://example.com/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/index.html">
+<meta property="og:title" content="MoonShot48游记">
+<meta property="og:url" content="http://example.com/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Linus Shyu的认知库">
-<meta property="og:description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta property="og:description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-30T05:22:57.980Z">
+<meta property="article:published_time" content="2026-01-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-11T06:11:29.780Z">
 <meta property="article:author" content="LinusShyu">
-<meta property="article:tag" content="C++基础语法">
-<meta property="article:tag" content="codeforces">
-<meta property="article:tag" content="div.3">
+<meta property="article:tag" content="MoonShot">
+<meta property="article:tag" content="北京">
+<meta property="article:tag" content="探月">
+<meta property="article:tag" content="游记">
+<meta property="article:tag" content="黑客松">
 <meta name="twitter:card" content="summary">
 
 
@@ -47,7 +49,7 @@
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 <script src="/js/custom-iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -241,7 +243,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(4)</small>
+                <small>(5)</small>
             
         </div>
     </li>
@@ -253,7 +255,7 @@
         <div data-rel="生活">
             
             生活
-            <small>(1)</small>
+            <small>(2)</small>
         </div>
         
     </li>
@@ -301,7 +303,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_posts_number" value="5">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -374,7 +376,23 @@
     <div class="tag-wrapper">
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>北京</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>电影</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>黑客松</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>探月</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游记</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -397,12 +415,25 @@
                 <i class="iconfont icon-tag"></i><a>div.3</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MoonShot</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="All 生活 "
+           href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/"
+           data-tag="游记,探月,黑客松,北京,MoonShot"
+           data-author="" >
+            <span class="post-title" title="MoonShot48游记">MoonShot48游记</span>
+            <span class="post-date" title="2026-01-29 00:00:00">2026/01/29</span>
+        </a>
         
         
         <a  class="All 题解 "
@@ -489,7 +520,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2024-03-24 18:53:29'>2024-03-24 00:00</time>
+            Created At : <time class="date" title='Updated At: 2026-01-11 22:32:05'>2024-03-24 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -532,18 +563,17 @@
 target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc327/tasks/abc327_b">ABC327B</a>循环不会的那道题一摸一样。</p>
 <h2 id="题目大意">题目大意</h2>
 <p>设计一个程序，使其满足：</p>
-<p><span class="math display">\[
-b_{i} + c_{i} \leq k
-\]</span></p>
+<p><span
+class="math display"><em>b</em><sub><em>i</em></sub> + <em>c</em><sub><em>i</em></sub> ≤ <em>k</em></span></p>
 <p>如果满足条件就计数，在遍历完所有的数组后输出。</p>
 <h2 id="分析">分析</h2>
-<p><span class="math display">\[
+<p><span class="math display">$$
 1.\text{首先需要一个for循环来读}b_{i}\text{.}\\
 2.\text{其次还需要一个for循环来读}c_{i}\text{.}\\
 3.\text{最后需要使用一个for循环来让}b_{i}\text{的值和}c_{i}\text{的值在同一局域内方便比较。}\\
 4.\text{使用if来匹配是否满足}b_{i} + c_{i}\leq k\text{的条件}\\
 4.\text{如果匹配到就计数，最后在数组遍历完输出即可。}
-\]</span> 放一张图便于理解：</p>
+$$</span> 放一张图便于理解：</p>
 <p><a target="_blank" rel="noopener" href="https://postimg.cc/7bH31cK9"><img
 src="https://i.postimg.cc/XNFsW6FR/1.jpg"
 alt="匹配过程图像化" /></a></p>
@@ -604,7 +634,7 @@ alt="匹配过程图像化" /></a></p>
     
     <p><span class="copy-title">Author:</span><a  title="LinusShyu">LinusShyu</a></p>
     <p><span class="copy-title">Created At:</span>2024-03-24, 00:00:00</p>
-    <p><span class="copy-title">Updated At:</span>2024-03-24, 18:53:29</p>
+    <p><span class="copy-title">Updated At:</span>2026-01-11, 22:32:05</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2024/03/24/Codeforces-Round-933-Div-3-A/" title="Codeforces Round 933 (Div. 3) A">http://example.com/2024/03/24/Codeforces-Round-933-Div-3-A/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
@@ -663,9 +693,8 @@ alt="匹配过程图像化" /></a></p>
     </div>
     <div class="copyright">
         <p class="footer-entry">
-    ©2022-2025 Linus Shyu
+    ©2022-2024 LinusShyu
 </p>
-
 
     </div>
     <div class="full-toc">
