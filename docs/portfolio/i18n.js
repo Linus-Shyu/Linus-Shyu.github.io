@@ -63,6 +63,12 @@ window.PORTFOLIO_I18N = {
         body: "Python 编写。AdventureX 2025 黑客松获奖作品。针对 NOI/ACM 选手设计，将实时代码分析整合进终端流。已获软件著作权。",
         link: "GitHub 查看 >"
       },
+      causelink: {
+        title: "CauseLink.",
+        subhead: "聚焦「错因分析」的 AI 学习诊断工具。",
+        body: "智能错题本：OCR 扫描、AI 解析、思维导图与举一反三闯关。智能识别错因、生成对应练习，并为教师提供群体错因统计与学情报告。",
+        link: "查看 CauseLink >"
+      },
       starfetch: {
         title: "StarFetch.",
         subhead: "终端里的系统美学。",
@@ -184,6 +190,12 @@ window.PORTFOLIO_I18N = {
         subhead: "Productivity tool built for competitive programming.",
         body: "Written in Python. AdventureX 2025 Hackathon winner. Real-time code analysis in the terminal for NOI/ACM athletes. Software copyright registered.",
         link: "View on GitHub >"
+      },
+      causelink: {
+        title: "CauseLink.",
+        subhead: "AI learning diagnostic focused on error-cause analysis.",
+        body: "Smart wrong-question notebook: OCR scan, AI parsing, mind maps & drill games. Identifies error causes, generates practice, and provides group analytics for teachers.",
+        link: "View CauseLink >"
       },
       starfetch: {
         title: "StarFetch.",
