@@ -6,19 +6,21 @@
   <meta name="keywords" content="">
   <meta name="description" content="Linus Shyu的认知库">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta name="description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Codeforces Round 918 (Div. 4) B">
-<meta property="og:url" content="http://example.com/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/index.html">
+<meta property="og:title" content="MoonShot48游记">
+<meta property="og:url" content="https://linusshyu.dev/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Linus Shyu的认知库">
-<meta property="og:description" content="题意 给你一个每一行元素为A,B,C的矩阵，设计一个程序找出这个矩阵中缺少哪个元素并输出。 \[ 建个图，举个例子：\\ 比如在这个矩阵中我们要求出？具体是哪一个元素，很显然是A，我们只需要输出A即可。\\ \left[ \begin{matrix} A &amp; B &amp; C \\ C &amp; ? &amp; B \\ B &amp; C &amp; A \end{matrix} \">
+<meta property="og:description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-30T05:22:57.980Z">
+<meta property="article:published_time" content="2026-01-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-26T14:13:35.105Z">
 <meta property="article:author" content="LinusShyu">
-<meta property="article:tag" content="C++基础语法">
-<meta property="article:tag" content="codeforces">
-<meta property="article:tag" content="div.3">
+<meta property="article:tag" content="游记">
+<meta property="article:tag" content="探月">
+<meta property="article:tag" content="黑客松">
+<meta property="article:tag" content="北京">
+<meta property="article:tag" content="MoonShot">
 <meta name="twitter:card" content="summary">
 
 
@@ -47,7 +49,7 @@
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 <script src="/js/custom-iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -135,7 +137,7 @@
     
         
             <a title="email"
-               href="mailto:xufaxin2022@163.com"
+               href="mailto:0x11@linusshyu.dev"
                target="_blank">
                 
                     <svg class="iconfont-svg" aria-hidden="true">
@@ -164,18 +166,6 @@
                 
                     <svg class="iconfont-svg" aria-hidden="true">
                         <use xlink:href="#icon-neteasemusic"></use>
-                    </svg>
-                
-            </a>
-        
-    
-        
-            <a title="codeforces"
-               href="https://codeforces.com/profile/TechNerd233"
-               target="_blank">
-                
-                    <svg class="iconfont-svg" aria-hidden="true">
-                        <use xlink:href="#icon-codeforces"></use>
                     </svg>
                 
             </a>
@@ -241,7 +231,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(4)</small>
+                <small>(5)</small>
             
         </div>
     </li>
@@ -253,7 +243,7 @@
         <div data-rel="生活">
             
             生活
-            <small>(1)</small>
+            <small>(2)</small>
         </div>
         
     </li>
@@ -288,6 +278,11 @@
                         
                    href="https://github.com/Linus-Shyu">github</a>
         
+            
+                <a class="dynamic-menu site_url"
+                   
+                   href="/academic/">Academic</a>
+        
     </div>
     <div>
         
@@ -301,7 +296,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_posts_number" value="5">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -374,7 +369,23 @@
     <div class="tag-wrapper">
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>北京</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>电影</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>黑客松</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>探月</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游记</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -397,12 +408,25 @@
                 <i class="iconfont icon-tag"></i><a>div.3</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MoonShot</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="All 生活 "
+           href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/"
+           data-tag="游记,探月,黑客松,北京,MoonShot"
+           data-author="" >
+            <span class="post-title" title="MoonShot48游记">MoonShot48游记</span>
+            <span class="post-date" title="2026-01-29 00:00:00">2026/01/29</span>
+        </a>
         
         
         <a  class="All 题解 "
@@ -461,8 +485,8 @@
         <article class="index">
             <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#about-me-%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-text">About me &#x2F; 个人简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#my-hobby-%E6%88%91%E7%9A%84%E7%88%B1%E5%A5%BD"><span class="toc-text">My hobby &#x2F; 我的爱好</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#competition-and-internship-experience-%E7%AB%9E%E8%B5%9B%E4%B8%8E%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86"><span class="toc-text">Competition
-and internship experience &#x2F; 竞赛与实习经历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#computer-field-%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%A2%86%E5%9F%9F"><span class="toc-text">Computer field &#x2F; 计算机领域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#robotics-%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%A2%86%E5%9F%9F"><span class="toc-text">Robotics &#x2F; 机器人领域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#music-field-%E9%9F%B3%E4%B9%90%E9%A2%86%E5%9F%9F"><span class="toc-text">Music field &#x2F; 音乐领域</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volunteering-%E5%BF%97%E6%84%BF%E8%80%85%E7%BB%8F%E5%8E%86"><span class="toc-text">Volunteering &#x2F; 志愿者经历</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#my-hobby-%E6%88%91%E7%9A%84%E7%88%B1%E5%A5%BD"><span class="toc-text">My hobby &#x2F; 我的爱好</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#competition-and-internship-experience-%E7%AB%9E%E8%B5%9B%E4%B8%8E%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86"><span class="toc-text">Competition
+and internship experience &#x2F; 竞赛与实习经历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#computer-field-%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%A2%86%E5%9F%9F"><span class="toc-text">Computer field &#x2F; 计算机领域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#robotics-%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%A2%86%E5%9F%9F"><span class="toc-text">Robotics &#x2F; 机器人领域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#music-field-%E9%9F%B3%E4%B9%90%E9%A2%86%E5%9F%9F"><span class="toc-text">Music field &#x2F; 音乐领域</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volunteering-%E5%BF%97%E6%84%BF%E8%80%85%E7%BB%8F%E5%8E%86"><span class="toc-text">Volunteering &#x2F; 志愿者经历</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -479,7 +503,56 @@ and internship experience &#x2F; 竞赛与实习经历</span></a><ol class="toc-
 <p>I am Linus Shyu, a middle school student from China. I like computer
 science and develop some interesting projects.</p>
 <p>我是许发鑫，一个来自中国大陆青海省的高中生，我喜欢计算机科学和开发一些有意思的项目。</p>
-<h2 id="my-hobby-我的爱好">My hobby / 我的爱好</h2>
+
+            
+
+
+<h3 id="网站目录-site-map">网站目录 / Site Map</h3>
+
+
+
+<p>📄 Blog &amp; About / 博客与关于：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/">linusshyu.dev/</a>（题解、游记、个人简介与竞赛经历）</p>
+
+
+
+<p>📄 Academic / 学术主页：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/academic/">linusshyu.dev/academic/</a>（英文，默认）· 
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/academic/zh/">中文版</a>（论文、经历与新闻）</p>
+
+
+
+<p>🎨 Portfolio / 作品集：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/portfolio/">linusshyu.dev/portfolio/</a>（项目与开发作品展示）</p>
+
+
+
+<p>💜 FeelFlow：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/feelflow/">linusshyu.dev/feelflow/</a>（情绪记录 App，联合创始人 &amp; CTO）</p>
+
+
+
+<p>🧠 CauseLink：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/causelink/">linusshyu.dev/causelink/</a>（智能错题本，OCR + AI 解析 + 闯关训练）</p>
+
+
+
+<p>⭐ StarFetch：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/starfetch/">linusshyu.dev/starfetch/</a>（Rust 版系统信息工具，NeoFetch 致敬作）</p>
+
+
+
+<p>💎 PayTube：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/paytube/">linusshyu.dev/paytube/</a>（Web3 加密支付与 NFT 实验页）</p>
+
+
+
+<p>📁 Archives / 归档：
+<a target="_blank" rel="noopener" href="https://linusshyu.dev/archives/">linusshyu.dev/archives/</a>（按时间浏览全部文章）</p>
+
+
+
+            <h2 id="my-hobby-我的爱好">My hobby / 我的爱好</h2>
 <p>I am a self-media creator in the technology field. I really like to
 share what I have learned in technology. This is my Bilibili channel and
 YouTube channel.</p>
@@ -493,13 +566,18 @@ piano.</p>
 id="competition-and-internship-experience-竞赛与实习经历">Competition
 and internship experience / 竞赛与实习经历</h3>
 <h4 id="computer-field-计算机领域">Computer field / 计算机领域</h4>
+<p>MoonShot48: Finalists</p>
+<p>MoonShot48 黑客松：入围者</p>
+<p>AdventureX 2026: Finalists</p>
+<p>AdventureX 2026 黑客松：入围者</p>
 <p>Tsinghua University Programming Contest Preliminary Contest 2026:
 Finalists</p>
 <p>清华大学程序设计竞赛2026初赛：入围者</p>
 <p>Google I/O Connect China: Guest</p>
 <p>Google 2025 开发者大会：嘉宾</p>
 <p>Adventure X 2025 Hackathon: Finalists</p>
-<p>Adventure X 2025 黑客松大赛：入围者</p>
+<p>Adventure X 2025 黑客松大赛：入围者（🥉 三等奖 &amp; MSA
+Beijing）</p>
 <p>NOI 2025 Winter Camp: Finalists</p>
 <p>NOI 2025 冬令营：入围者</p>
 <p>NOI 2024 Winter Camp: Finalists</p>
@@ -549,9 +627,8 @@ Beginner</p>
     </div>
     <div class="copyright">
         <p class="footer-entry">
-    ©2022-2025 Linus Shyu
+    ©2022-2024 LinusShyu
 </p>
-
 
     </div>
 </div>
@@ -732,6 +809,9 @@ Beginner</p>
     
     
     <a class="dynamic-menu " target="_blank"  href="https://github.com/Linus-Shyu">github</a>
+    
+    
+    <a class="dynamic-menu site_url"   href="/academic/">Academic</a>
     
 </div>
 

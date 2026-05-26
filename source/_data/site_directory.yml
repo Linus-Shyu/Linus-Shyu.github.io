@@ -1,0 +1,57 @@
+# 网站目录 — 唯一数据源，改这里即可同步到博客 About 页
+# Site directory — edit this file only; About page reads it on build
+
+base: https://linusshyu.dev
+
+entries:
+  - icon: "📄"
+    label: "Blog & About / 博客与关于"
+    path: /
+    display: "linusshyu.dev/"
+    desc: "题解、游记、个人简介与竞赛经历"
+
+  - icon: "📄"
+    label: "Academic / 学术主页"
+    path: /academic/
+    display: "linusshyu.dev/academic/"
+    note: "（英文，默认）· "
+    sub_links:
+      - text: "中文版"
+        path: /academic/zh/
+    desc: "论文、经历与新闻"
+
+  - icon: "🎨"
+    label: "Portfolio / 作品集"
+    path: /portfolio/
+    display: "linusshyu.dev/portfolio/"
+    desc: "项目与开发作品展示"
+
+  - icon: "💜"
+    label: "FeelFlow"
+    path: /feelflow/
+    display: "linusshyu.dev/feelflow/"
+    desc: "情绪记录 App，联合创始人 & CTO"
+
+  - icon: "🧠"
+    label: "CauseLink"
+    path: /causelink/
+    display: "linusshyu.dev/causelink/"
+    desc: "智能错题本，OCR + AI 解析 + 闯关训练"
+
+  - icon: "⭐"
+    label: "StarFetch"
+    path: /starfetch/
+    display: "linusshyu.dev/starfetch/"
+    desc: "Rust 版系统信息工具，NeoFetch 致敬作"
+
+  - icon: "💎"
+    label: "PayTube"
+    path: /paytube/
+    display: "linusshyu.dev/paytube/"
+    desc: "Web3 加密支付与 NFT 实验页"
+
+  - icon: "📁"
+    label: "Archives / 归档"
+    path: /archives/
+    display: "linusshyu.dev/archives/"
+    desc: "按时间浏览全部文章"

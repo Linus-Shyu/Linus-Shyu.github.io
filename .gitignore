@@ -6,3 +6,15 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+
+# Hexo 构建产物只放在 docs/，勿提交根目录重复静态文件
+/2023/
+/2024/
+/archives/
+/categories/
+/tags/
+/css/
+/js/
+/img/
+/index.html
+/academic/

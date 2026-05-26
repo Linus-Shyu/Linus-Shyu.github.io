@@ -5,14 +5,15 @@
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
+    "prepare:pages": "node bin/prepare-pages.js",
+    "deploy": "npm run build && npm run prepare:pages",
     "server": "hexo server"
   },
   "hexo": {
-    "version": "7.1.1"
+    "version": "7.3.0"
   },
   "dependencies": {
-    "hexo": "^7.0.0",
+    "hexo": "^7.2.0",
     "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",

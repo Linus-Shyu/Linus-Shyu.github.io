@@ -1,0 +1,12 @@
+<% const dir = site.data.site_directory; %>
+<% if (dir && dir.entries && dir.entries.length) { %>
+<% const base = (dir.base || '').replace(/\/$/, ''); %>
+<h3 id="网站目录-site-map">网站目录 / Site Map</h3>
+<% dir.entries.forEach(function (item) { %>
+<% const href = item.path.startsWith('http') ? item.path : base + item.path; %>
+<% const display = item.display || href.replace(/^https?:\/\//, ''); %>
+<p><%= item.icon %> <%= item.label %>：
+<a target="_blank" rel="noopener" href="<%= href %>"><%= display %></a><% if (item.note) { %><%= item.note %><% } %><% if (item.sub_links && item.sub_links.length) { %><% item.sub_links.forEach(function (sub) { %>
+<a target="_blank" rel="noopener" href="<%= sub.path.startsWith('http') ? sub.path : base + sub.path %>"><%= sub.text %></a><% }); %><% } %>（<%= item.desc %>）</p>
+<% }); %>
+<% } %>

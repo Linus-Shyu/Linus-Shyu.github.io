@@ -1,9 +1,3 @@
-# About me / 个人简介
-
-I am Linus Shyu, a middle school student from China. I like computer science and develop some interesting projects.
-
-我是许发鑫，一个来自中国大陆青海省的高中生，我喜欢计算机科学和开发一些有意思的项目。
-
 ## My hobby / 我的爱好
 
 I am a self-media creator in the technology field. I really like to share what I have learned in technology. This is my Bilibili channel and YouTube channel.
@@ -18,6 +12,14 @@ I also like riding bicycles, skateboarding,photography and play piano.
 
 #### Computer field / 计算机领域
 
+MoonShot48: Finalists
+
+MoonShot48 黑客松：入围者
+
+AdventureX 2026: Finalists
+
+AdventureX 2026 黑客松：入围者
+
 Tsinghua University Programming Contest Preliminary Contest 2026: Finalists
 
 清华大学程序设计竞赛2026初赛：入围者
@@ -28,7 +30,7 @@ Google 2025 开发者大会：嘉宾
 
 Adventure X 2025 Hackathon: Finalists
 
-Adventure X 2025 黑客松大赛：入围者
+Adventure X 2025 黑客松大赛：入围者（🥉 三等奖 & MSA Beijing）
 
 NOI 2025 Winter Camp: Finalists
 

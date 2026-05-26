@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://linusshyu.dev
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -22,13 +22,14 @@ pretty_urls:
 
 # Directory
 source_dir: source
-public_dir: docs
+public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - academic/**/*
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -104,4 +105,6 @@ theme: 3-hexo
 deploy:
   type: git
   repo: https://github.com/Linus-Shyu/Linus-Shyu.github.io.git
-  branch: main
+  branch: master
+  extend_dirs:
+    - .github
