@@ -6,12 +6,12 @@
   <meta name="keywords" content=" C++基础语法 , ATcoder , abc ">
   <meta name="description" content="ABC327B题解 | Linus Shyu的认知库">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
+<meta name="description" content="前言作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直接去">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MoonShot48游记">
 <meta property="og:url" content="https://linusshyu.dev/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Linus Shyu的认知库">
-<meta property="og:description" content="前言 作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0 晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直">
+<meta property="og:description" content="前言作为前信息学竞赛选手，不知道从什么时候起培养起了写游记的习惯，包括这次去北京也是，我还是打算写一篇游记来纪念每一次的比赛。 Day0晚上刚到北京就被陈姐拉去参加她的婚礼。说实话选的地方确实好，是一个类似于牧场的露天婚礼地点。由于我不能喝酒，强行拿着一杯雪碧和附近认识的人聊，当然也包括我的前女友。我原本以为会很尴尬但其实并没有，和陈姐好好聊了聊之后，跟朋友们说完再见，然后和她说了拜拜，我就直接去">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-28T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-05-26T14:56:39.917Z">
@@ -551,13 +551,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前提">前提</h2>
-<p>常规思路是用C++当中的pow()函数来做这一道题目，但是pow()函数也是有一定限制的，所以数据量稍微大一点就过不去这一道题，而且Atcoder没有像洛谷一样AC多少测试点给多少分的习惯，必须要把题调清楚才能拿分，所以你骗分基本是不可能的，像我花了差不多一个小时也没把这一道题写出来，还是太菜了。</p>
-<h2 id="题目大意">题目大意</h2>
-<p>设计一个程序找到A这个能满足一下表达式的数字： <span
-class="math display">\[
-A^{A} = B
-\]</span> 如果有就输出a，如果没有就输出-1。</p>
+        <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>常规思路是用C++当中的pow()函数来做这一道题目，但是pow()函数也是有一定限制的，所以数据量稍微大一点就过不去这一道题，而且Atcoder没有像洛谷一样AC多少测试点给多少分的习惯，必须要把题调清楚才能拿分，所以你骗分基本是不可能的，像我花了差不多一个小时也没把这一道题写出来，还是太菜了。</p>
+<h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>设计一个程序找到A这个能满足一下表达式的数字：<br>$$<br>A^{A} &#x3D; B<br>$$<br>如果有就输出a，如果没有就输出-1。</p>
 <p>正如之前所说我用pow()函数做这一题代码只能过一点点测试点，现在给大家看看我之前的代码。</p>
 <pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
 <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
@@ -622,10 +617,9 @@ A^{A} = B
     &#125;
     <span class="keyword">return</span> <span class="number">0</span>;
 &#125;</code></pre>
-<p><a
-target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc327/submissions/47270597">过了一点点测试点的代码</a></p>
-<h2 id="分析">分析</h2>
-<p>我没能成功实现计算表达式的方法，所以我在看了AA竞程dreamoon老师的视频之后终于知道我的问题出现在了哪里。</p>
+
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc327/submissions/47270597">过了一点点测试点的代码</a></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我没能成功实现计算表达式的方法，所以我在看了AA竞程dreamoon老师的视频之后终于知道我的问题出现在了哪里。</p>
 <p>以下是dreamoon老师的AC代码，我们来拆开研究一下。</p>
 <pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
 <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
@@ -693,12 +687,10 @@ target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc327/submissi
     &#125;
     <span class="keyword">return</span> <span class="number">0</span>;
 &#125;</code></pre>
-<p>dreamoon老师写了两个for循环，我寻思这东西不是一个循环就能解决吗还在纠结这个问题，如果只用j
-&lt;=
-i的这个循环仅仅只能每次只能*i，没办法实现判断是否存在i的i次方，所以我们要写两个循环。</p>
+
+<p>dreamoon老师写了两个for循环，我寻思这东西不是一个循环就能解决吗还在纠结这个问题，如果只用j &lt;&#x3D; i的这个循环仅仅只能每次只能*i，没办法实现判断是否存在i的i次方，所以我们要写两个循环。</p>
 <p>第二个for循环类似于计数器，可以实现计算i的i次方的方法，这个类似于一个模板，如果下次还需要用到类似于计算i的i次方的这种问题我们可以用上他。</p>
-<h2 id="结语">结语</h2>
-<p>还是需要培养解决难题的能力，我也很庆幸能够弄懂这道题目的解决思路，在期中考试开始前半个小时我还在思考为什么不能用一个for循环这件事，也许我比较较真吧，不过没影响文化课考试，这一道题目也顺利解决了。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>还是需要培养解决难题的能力，我也很庆幸能够弄懂这道题目的解决思路，在期中考试开始前半个小时我还在思考为什么不能用一个for循环这件事，也许我比较较真吧，不过没影响文化课考试，这一道题目也顺利解决了。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 0x11@linusshyu.dev </span>
