@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FeelFlow - 用AI读懂你的内心世界。智能情感日记应用，记录心情，分析情绪，获得温暖回应。">
+    <meta name="keywords" content="FeelFlow, AI日记, 情感分析, 心情记录, 心理健康, 智能笔记">
+    <title>FeelFlow - 用AI读懂你的内心世界</title>
+    <link rel="stylesheet" href="/feelflow/styles.css">
+    <script>
+        // 立即应用主题，避免闪烁
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">FeelFlow</div>
+            <ul class="nav-menu">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#why">为什么选择</a></li>
+                <li><a href="#download">下载</a></li>
+                <li><a href="#sponsor">支持</a></li>
+                <li><a href="#credits">致谢名单</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="切换主题" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">用AI读懂你的<br>内心世界</h1>
+            <p class="hero-subtitle">FeelFlow 不只是日记本，更是你的情感分析师和心灵陪伴者</p>
+            <div class="hero-buttons">
+                <a href="https://apps.apple.com/us/app/feelflow/id6753738362" class="btn btn-primary" target="_blank" rel="noopener noreferrer">立即下载</a>
+                <a href="#features" class="btn btn-secondary">了解更多</a>
+            </div>
+            <div class="hero-rating">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <span class="rating-text">5.0 评分 · 已在 App Store 上线</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="iphone-17-pro-max">
+                <!-- Phone Frame -->
+                <div class="phone-frame">
+                    <!-- Side Buttons -->
+                    <div class="volume-buttons">
+                        <div class="volume-up"></div>
+                        <div class="volume-down"></div>
+                    </div>
+                    <div class="power-button"></div>
+                    
+                    <!-- Dynamic Island -->
+                    <div class="dynamic-island">
+                        <div class="island-camera"></div>
+                    </div>
+                    
+                    <!-- Screen -->
+                    <div class="phone-screen dark-mode">
+                        <!-- Status Bar -->
+                        <div class="status-bar">
+                            <span class="status-time">17:25</span>
+                            <div class="status-icons">
+                                <!-- 信号强度图标 -->
+                                <div class="signal-icon">
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                    <span class="signal-bar"></span>
+                                </div>
+                                <!-- WiFi 图标 -->
+                                <div class="wifi-icon">
+                                    <svg width="15" height="12" viewBox="0 0 15 12" fill="none">
+                                        <path d="M7.5 3C9.1 3 10.5 3.4 11.6 4.1L10.7 5C9.9 4.5 8.8 4.2 7.5 4.2C6.2 4.2 5.1 4.5 4.3 5L3.4 4.1C4.5 3.4 5.9 3 7.5 3Z" fill="white" opacity="0.5"/>
+                                        <path d="M7.5 6C8.3 6 9 6.3 9.4 6.7L7.5 8.6L5.6 6.7C6 6.3 6.7 6 7.5 6Z" fill="white"/>
+                                        <circle cx="7.5" cy="10.5" r="1" fill="white"/>
+                                    </svg>
+                                </div>
+                                <!-- 电池图标 -->
+                                <div class="battery-icon">
+                                    <div class="battery-body">
+                                        <div class="battery-level" style="width: 85%;"></div>
+                                    </div>
+                                    <div class="battery-cap"></div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <!-- Navigation Bar -->
+                    <div class="nav-bar">
+                        <button class="nav-button">完成</button>
+                        <h1 class="nav-title">情感洞察</h1>
+                        <button class="nav-icon">📤</button>
+                    </div>
+                    
+                    <!-- App Content -->
+                    <div class="app-content">
+                        <!-- Emotion Analysis Card -->
+                        <div class="analysis-card">
+                            <div class="card-header">
+                                <div class="card-icon emotion-icon">❤️</div>
+                                <h3 class="card-title">情绪分析</h3>
+                                <div class="card-info">
+                                    <div class="info-item">主要情绪: 快乐</div>
+                                    <div class="info-item secondary">情感倾向: 正面</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Emotion Chart -->
+                            <div class="emotion-chart">
+                                <div class="chart-bar" style="height: 60%; background: #FFD700;">
+                                    <span class="bar-label">快乐</span>
+                                    <span class="bar-value">0.6</span>
+                                </div>
+                                <div class="chart-bar" style="height: 20%; background: #FF9500;">
+                                    <span class="bar-label">惊讶</span>
+                                    <span class="bar-value">0.2</span>
+                                </div>
+                                <div class="chart-bar" style="height: 18%; background: #8E8E93;">
+                                    <span class="bar-label">中性</span>
+                                    <span class="bar-value">0.18</span>
+                                </div>
+                                <div class="chart-bar" style="height: 5%; background: #007AFF;">
+                                    <span class="bar-label">悲伤</span>
+                                    <span class="bar-value">0.05</span>
+                                </div>
+                            </div>
+                            
+                            <div class="confidence-bar">
+                                <span>分析置信度:</span>
+                                <span class="confidence-value">85.0%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Category Card -->
+                        <div class="analysis-card">
+                            <div class="card-header">
+                                <div class="card-icon category-icon">📁</div>
+                                <h3 class="card-title">内容分类</h3>
+                                <div class="card-info">
+                                    <div class="info-item">分类: 情感</div>
+                                    <div class="info-item secondary">子分类: 用户反馈与感谢</div>
+                                </div>
+                            </div>
+                            
+                            <div class="category-content">
+                                <div class="donut-chart">
+                                    <svg width="80" height="80" viewBox="0 0 80 80">
+                                        <circle cx="40" cy="40" r="32" fill="none" stroke="#2C2C2E" stroke-width="8"/>
+                                        <circle cx="40" cy="40" r="32" fill="none" stroke="#5856D6" stroke-width="8" 
+                                                stroke-dasharray="170" stroke-dashoffset="25" stroke-linecap="round" 
+                                                transform="rotate(-90 40 40)"/>
+                                        <text x="40" y="38" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="bold">85%</text>
+                                        <text x="40" y="50" text-anchor="middle" fill="#8E8E93" font-size="10">置信度</text>
+                                    </svg>
+                                </div>
+                                
+                                <div class="topics-list">
+                                    <div class="topic-item">融资进展</div>
+                                    <div class="topic-item">用户陪伴需求</div>
+                                    <div class="topic-item">致谢名单</div>
+                                    <div class="topic-item">+1更多</div>
+                                </div>
+                            </div>
+                            
+                            <div class="confidence-bar">
+                                <span>分类置信度:</span>
+                                <span class="confidence-value">85.0%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Keywords Card -->
+                        <div class="analysis-card">
+                            <div class="card-header">
+                                <div class="card-icon keyword-icon">🏷️</div>
+                                <h3 class="card-title">关键词云</h3>
+                                <div class="keyword-count">5个关键词</div>
+                            </div>
+                            
+                            <div class="keywords-grid">
+                                <span class="keyword-tag" style="background: #007AFF;">FeelFlow</span>
+                                <span class="keyword-tag" style="background: #34C759;">融资目标</span>
+                                <span class="keyword-tag" style="background: #FF9500;">用户</span>
+                                <span class="keyword-tag" style="background: #5856D6;">致谢名单</span>
+                                <span class="keyword-tag" style="background: #FF3B30;">建议</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">强大功能</h2>
+            <p class="section-subtitle">让记录心情成为一种享受</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">智能笔记管理</h3>
+                    <p class="feature-description">简洁优雅的写作界面，灵活的标签系统，轻松分类整理你的珍贵回忆。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">AI情感洞察</h3>
+                    <p class="feature-description">智能分析你的情绪状态，识别情感倾向，自动分类内容，提取关键词生成词云。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💌</div>
+                    <h3 class="feature-title">心灵回响</h3>
+                    <p class="feature-description">AI阅读你的文字，给予温暖真诚的回信，提供情感共鸣和贴心建议。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">数据可视化</h3>
+                    <p class="feature-description">情绪分析图、分类统计图、关键词云，以艺术化方式呈现你的思维轨迹。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3 class="feature-title">精美分享</h3>
+                    <p class="feature-description">一键生成高颜值分享卡片，保留数据可视化效果，让你的心情成为艺术品。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">小组件支持</h3>
+                    <p class="feature-description">支持 iOS 小组件，在主屏幕显示每日格言。支持 Live Activities 实时活动功能。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">隐私安全</h3>
+                    <p class="feature-description">所有数据存储在本地设备，不上传到服务器。API密钥已内置，无需配置即可使用。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💭</div>
+                    <h3 class="feature-title">每日格言</h3>
+                    <p class="feature-description">精选中文格言，每天自动更新，为你带来正能量的启发和思考，开启美好的一天。</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3 class="feature-title">智能标签</h3>
+                    <p class="feature-description">灵活的标签系统，轻松分类管理笔记，快速检索内容，让每一份回忆都井然有序。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section id="why" class="why-choose">
+        <div class="container">
+            <h2 class="section-title">为什么选择 FeelFlow？</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>开箱即用</h3>
+                    <p>API 密钥已内置，下载即可使用所有 AI 功能，无需任何配置</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔬</div>
+                    <h3>专业AI技术</h3>
+                    <p>采用 DeepSeek 先进语言模型，对中文内容有深度理解和优化</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>深度情感分析</h3>
+                    <p>不只是简单记录，更能帮你发现情绪模式，提升自我觉察能力</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">💝</div>
+                    <h3>温暖陪伴</h3>
+                    <p>AI回信功能如同贴心朋友，在你需要倾诉时给予理解和支持</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎨</div>
+                    <h3>精美设计</h3>
+                    <p>现代化UI设计，流畅的动画效果，优雅的数据可视化</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <h3>完美体验</h3>
+                    <p>支持 iOS 小组件和 Live Activities，每日格言自动更新</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">开始你的情感探索之旅</h2>
+            <p class="section-subtitle">让AI成为你的情感分析师和心灵陪伴者</p>
+            
+            <div class="download-content">
+                <div class="download-info">
+                    <h3>系统要求</h3>
+                    <ul class="requirements-list">
+                        <li>iOS 18.0 或更高版本</li>
+                        <li>iPhone、iPad、Mac 兼容</li>
+                        <li>需要网络连接（用于AI分析功能）</li>
+                        <li>API 密钥已内置，无需配置</li>
+                    </ul>
+                    
+                    <div class="download-steps">
+                        <h3>快速开始</h3>
+                        <ol class="steps-list">
+                            <li>从 App Store 下载 FeelFlow</li>
+                            <li>打开应用，开始创建第一篇笔记</li>
+                            <li>点击"情感洞察"获取AI分析</li>
+                            <li>使用"心灵回响"获得AI回应</li>
+                            <li>在主屏幕添加小组件，每日获取格言</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="download-buttons">
+                    <a href="https://apps.apple.com/us/app/feelflow/id6753738362" class="download-btn app-store" target="_blank" rel="noopener noreferrer">
+                        <span class="download-label">在 App Store 下载</span>
+                        <span class="download-subtitle">立即体验</span>
+                    </a>
+                    
+                    <div class="feature-highlight">
+                        <h4>✨ 开箱即用</h4>
+                        <p>无需配置 API 密钥，下载即可使用所有 AI 功能</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsor Section -->
+    <section id="sponsor" class="sponsor">
+        <div class="container">
+            <h2 class="section-title">支持</h2>
+            <p class="section-subtitle">如果您喜欢这个应用，可以考虑通过以下方式支持开发者的工作</p>
+            
+            <div class="sponsor-methods">
+                <!-- ETH捐赠 -->
+                <div class="sponsor-card">
+                    <div class="sponsor-header">
+                        <div class="sponsor-icon eth">💎</div>
+                        <h3>ETH捐赠</h3>
+                    </div>
+                    <div class="sponsor-address">
+                        <code id="eth-address">0x5ad59e6eaf578e033ece8ffd802da03534b13423</code>
+                        <button class="copy-btn" onclick="copyAddress('eth-address', 'ETH地址已复制到剪贴板')">复制地址</button>
+                    </div>
+                </div>
+
+                <!-- USDT支付 -->
+                <div class="sponsor-card">
+                    <div class="sponsor-header">
+                        <div class="sponsor-icon usdt">💵</div>
+                        <h3>USDT支付 (Aptos)</h3>
+                    </div>
+                    <div class="sponsor-address">
+                        <code id="usdt-address">0x3e864d0f5045c4bce620da7666e33694e3e58efe9d1327390b2429a5a584c9a0</code>
+                        <button class="copy-btn" onclick="copyAddress('usdt-address', 'USDT地址已复制到剪贴板')">复制地址</button>
+                    </div>
+                </div>
+
+                <!-- 微信支付 -->
+                <div class="sponsor-card">
+                    <div class="sponsor-header">
+                        <div class="sponsor-icon wechat">💚</div>
+                        <h3>微信支付</h3>
+                    </div>
+                    <div class="sponsor-wechat">
+                        <img src="/feelflow/assets/images/wechat_qr.jpg" alt="微信收款码" class="wechat-qr">
+                        <p>扫描二维码进行微信支付</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sponsor-thanks">
+                <p>🙏 感谢您的支持！您的支持将帮助我们持续改进应用功能，为用户提供更好的体验。</p>
+            </div>
+
+            <!-- Credits Section -->
+            <div id="credits" class="credits-section">
+                <h3 class="credits-title">致谢名单</h3>
+                <p class="credits-subtitle">感谢所有支持我们的用户！</p>
+                <div class="credits-grid">
+                    <div class="credit-item">❤️ Sherry</div>
+                    <div class="credit-item">❤️ 臻林</div>
+                    <div class="credit-item">❤️ Bili Wang</div>
+                    <div class="credit-item">❤️ 老赵</div>
+                    <div class="credit-item">❤️ 君君</div>
+                    <div class="credit-item">❤️ 赖芸</div>
+                    <div class="credit-item">❤️ 明庭</div>
+                    <div class="credit-item">❤️ 建旭</div>
+                    <div class="credit-item">❤️ 不唠嗑成</div>
+                    <div class="credit-item">❤️ Emma</div>
+                    <div class="credit-item">❤️ Alexine</div>
+                    <div class="credit-item">❤️ 陆宇航</div>
+                    <div class="credit-item">❤️ 维奇老哥</div>
+                    <div class="credit-item">❤️ Carleight Wu</div>
+                    <div class="credit-item">❤️ 铉宇老哥</div>
+                    <div class="credit-item">❤️ 周昊老哥</div>
+                    <div class="credit-item">❤️ 老代</div>
+                    <div class="credit-item">❤️ 俞浅姐姐</div>
+                    <div class="credit-item">❤️ Dylan Su</div>
+                    <div class="credit-item">❤️ 艺明哥</div>
+                    <div class="credit-item">❤️ 刘域老哥</div>
+                    <div class="credit-item">❤️ Edge</div>
+                    <div class="credit-item">❤️ Betty. QS</div>
+                    <div class="credit-item">❤️ 澍老哥 & his Lover 泛兮老姐</div>
+                    <div class="credit-item">❤️ Linus Shyu</div>
+                    <div class="credit-item">❤️ Poly老哥</div>
+                    <div class="credit-item">❤️ 艺平哥</div>
+                    <div class="credit-item">❤️ Zhao Song</div>
+                    <div class="credit-item">❤️ 冬慕姐</div>
+                    <div class="credit-item">❤️ 许许姐</div>
+                    <div class="credit-item">❤️ Aiven老哥</div>
+                    <div class="credit-item">❤️ Aehxy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <p class="section-subtitle">我们期待听到你的声音</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <h3>反馈渠道</h3>
+                    <a href="mailto:0x11@linusshyu.dev">0x11@linusshyu.dev</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🐦</div>
+                    <h3>官方账号</h3>
+                    <a href="https://x.com/FeelFlowApp" target="_blank" rel="noopener noreferrer">@FeelFlowApp</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📺</div>
+                    <h3>B站频道</h3>
+                    <a href="https://space.bilibili.com/411591950?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer">@Linus-Shyu</a>
+                </div>
+            </div>
+
+            <!-- Developer Section -->
+            <div class="developer-section">
+                <h3 class="developer-title">开发者</h3>
+                <div class="developer-info">
+                    <div class="developer-avatar">
+                        <img src="/feelflow/assets/images/developer_avatar.jpg" alt="Linus Shyu" class="avatar-image">
+                    </div>
+                    <div class="developer-details">
+                        <h4>Linus Shyu</h4>
+                        <p class="developer-role">iOS Founder & Developer</p>
+                        <div class="developer-social">
+                            <a href="https://x.com/Linus_Shyu" class="social-link" target="_blank" rel="noopener noreferrer">
+                                <span class="social-icon">🐦</span>
+                                <span>@Linus_Shyu</span>
+                            </a>
+                            <a href="https://space.bilibili.com/411591950?spm_id_from=333.1007.0.0" class="social-link" target="_blank" rel="noopener noreferrer">
+                                <span class="social-icon">📺</span>
+                                <span>B站关注</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>FeelFlow</h3>
+                    <p>用AI读懂你的内心世界</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>产品</h4>
+                        <ul>
+                            <li><a href="#features">功能</a></li>
+                            <li><a href="#why">特性</a></li>
+                            <li><a href="#download">下载</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>支持</h4>
+                        <ul>
+                            <li><a href="#sponsor">支持</a></li>
+                            <li><a href="#contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>关注我们</h4>
+                        <ul>
+                            <li><a href="https://x.com/FeelFlowApp" target="_blank" rel="noopener noreferrer">官方 Twitter/X</a></li>
+                            <li><a href="https://x.com/Linus_Shyu" target="_blank" rel="noopener noreferrer">开发者 Twitter</a></li>
+                            <li><a href="https://space.bilibili.com/411591950?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer">开发者 B站</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="company-info">星落湖探人工智能应用软件（杭州）有限公司</p>
+                <p>&copy; 2024 FeelFlow. All rights reserved.</p>
+                <p class="footer-tagline">记录每一份情感，洞察每一次心动 ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/feelflow/script.js"></script>
+</body>
+</html>

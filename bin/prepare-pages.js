@@ -1,6 +1,6 @@
 /**
  * Sync Hexo build output (public/) into docs/ for GitHub Pages.
- * Preserves docs/CNAME.
+ * Preserves docs/CNAME and standalone subsites (portfolio, feelflow, etc.).
  */
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +11,15 @@ const docsDir = path.join(root, 'docs');
 const cnamePath = path.join(docsDir, 'CNAME');
 const defaultCname = 'linusshyu.dev\n';
 
+/** Folders in docs/ that are not produced by Hexo — do not delete on sync. */
+const PRESERVE_DIRS = new Set([
+  'feelflow',
+  'portfolio',
+  'causelink',
+  'starfetch',
+  'paytube',
+]);
+
 if (!fs.existsSync(publicDir)) {
   console.error('Missing public/ — run `npm run build` first.');
   process.exit(1);
@@ -19,15 +28,6 @@ if (!fs.existsSync(publicDir)) {
 const cname = fs.existsSync(cnamePath)
   ? fs.readFileSync(cnamePath, 'utf8')
   : defaultCname;
-
-function rmExceptCname(dir) {
-  if (!fs.existsSync(dir)) return;
-  for (const name of fs.readdirSync(dir)) {
-    if (name === 'CNAME') continue;
-    const target = path.join(dir, name);
-    fs.rmSync(target, { recursive: true, force: true });
-  }
-}
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -39,10 +39,18 @@ function copyDir(src, dest) {
   }
 }
 
+function rmHexoOutput(dir) {
+  if (!fs.existsSync(dir)) return;
+  for (const name of fs.readdirSync(dir)) {
+    if (name === 'CNAME' || PRESERVE_DIRS.has(name)) continue;
+    fs.rmSync(path.join(dir, name), { recursive: true, force: true });
+  }
+}
+
 fs.mkdirSync(docsDir, { recursive: true });
-rmExceptCname(docsDir);
+rmHexoOutput(docsDir);
 copyDir(publicDir, docsDir);
 fs.writeFileSync(path.join(docsDir, '.nojekyll'), '');
 fs.writeFileSync(cnamePath, cname.trim() + '\n');
 
-console.log('Prepared docs/ for GitHub Pages.');
+console.log('Prepared docs/ for GitHub Pages (preserved subsites).');
