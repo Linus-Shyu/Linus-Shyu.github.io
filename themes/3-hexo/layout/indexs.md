@@ -28,10 +28,6 @@ Google I/O Connect China: Guest
 
 Google 2025 开发者大会：嘉宾
 
-Adventure X 2025 Hackathon: Finalists
-
-Adventure X 2025 黑客松大赛：入围者（🥉 三等奖 & MSA Beijing）
-
 NOI 2025 Winter Camp: Finalists
 
 NOI 2025 冬令营：入围者
