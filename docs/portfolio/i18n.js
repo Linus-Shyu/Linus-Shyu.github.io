@@ -107,7 +107,7 @@ window.PORTFOLIO_I18N = {
       toolsLabel: "macOS 窗口管理（yabai + skhd + sketchybar）",
       privacyLabel: "数字主权（PGP · ProtonMail）",
       role: "身份",
-      roleText: "杭州星落湖探人工智能有限公司 (Star Lake AI) 联合创始人兼 CTO。",
+      roleText: "杭州星落湖探人工智能有限公司 (星落湖探 AI) 联合创始人兼 CTO。",
       awards: "竞赛与荣誉",
       awardsText: "青海省第四十届青少年科技创新大赛市级评选二等奖；青海省第十五届中小学生机器人竞赛 APM 机器人挑战赛中学组三等奖；Adventure X 2025 Kimi for Vibe Coding 三等奖；AdventureX 2025 黑客松胜出；Swift Student Challenge 2026 参与者；XTerminal 软件著作权。",
       volunteer: "跨界经历",
@@ -175,7 +175,7 @@ window.PORTFOLIO_I18N = {
     hero: {
       eyebrow: "17 · Developer · CTO · Minimalist",
       headline: "Building the future where Rust meets Swift.",
-      subheadline: "Co-founder & CTO at Star Lake AI (Hangzhou). Focused on digital sovereignty and privacy."
+      subheadline: "Co-founder & CTO at Star Lake Explorer AI (Hangzhou). Focused on digital sovereignty and privacy."
     },
     projects: {
       heading: "Core Projects",
@@ -235,7 +235,7 @@ window.PORTFOLIO_I18N = {
       toolsLabel: "macOS window management (yabai + skhd + sketchybar)",
       privacyLabel: "Digital sovereignty (PGP · ProtonMail)",
       role: "Role",
-      roleText: "Co-founder & CTO at Star Lake AI (Hangzhou).",
+      roleText: "Co-founder & CTO at Star Lake Explorer AI (Hangzhou).",
       awards: "Milestones",
       awardsText: "The 40th Qinghai Youth Science and Technology Innovation Competition, municipal second prize; The 15th Qinghai Province Primary and Secondary School Student Robot Competition, APM Robot Challenge middle school division third prize; Adventure X 2025 Kimi for Vibe Coding third prize; AdventureX 2025 Hackathon winner; Swift Student Challenge 2026 participant; XTerminal software copyright.",
       volunteer: "Beyond tech",
