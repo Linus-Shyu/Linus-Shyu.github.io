@@ -282,6 +282,19 @@ img { max-width: 100%; height: auto; display: block; }
 
 .project__name a:hover { color: var(--accent); }
 
+.section__lead {
+  margin: -12px 0 20px;
+  font-size: 15px;
+  color: var(--gray-700);
+}
+
+.project__stars {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  margin-left: 6px;
+}
+
 .project__venue {
   display: inline-block;
   font-size: 11px;
