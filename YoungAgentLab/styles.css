@@ -282,6 +282,26 @@ img { max-width: 100%; height: auto; display: block; }
 
 .project__name a:hover { color: var(--accent); }
 
+.project__venue {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--accent);
+  padding: 2px 7px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.project__meta {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--gray-500);
+  font-style: italic;
+}
+
 .project__desc {
   margin: 0;
   font-size: 15px;
