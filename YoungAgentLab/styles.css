@@ -1,0 +1,461 @@
+/* Young Agent Lab — MIT Media Lab–inspired group page */
+
+:root {
+  --black: #111111;
+  --gray-900: #1a1a1a;
+  --gray-700: #444444;
+  --gray-500: #767676;
+  --gray-300: #c8c8c8;
+  --gray-100: #f2f2f2;
+  --white: #ffffff;
+  --accent: #e8192f;
+  --accent-dark: #c41428;
+  --max: 1180px;
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--black);
+  background: var(--white);
+}
+
+a {
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover { color: var(--accent); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* —— Site chrome —— */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  color: var(--white);
+  border-bottom: 3px solid var(--accent);
+}
+
+.site-header__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 56px;
+}
+
+.site-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.site-brand:hover { color: var(--white); opacity: 0.9; }
+
+.site-brand__parent {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.site-brand__name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover {
+  color: var(--white);
+  border-bottom-color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+/* —— Hero —— */
+.hero {
+  background: var(--gray-100);
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.hero__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 72px 24px 64px;
+}
+
+.hero__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 20px;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 18ch;
+}
+
+/* —— Layout —— */
+.page {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 56px;
+  align-items: start;
+}
+
+.main { min-width: 0; }
+
+/* —— Sections —— */
+.section {
+  padding-top: 56px;
+}
+
+.section__title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.section__title--news::after {
+  content: " in the news";
+  color: var(--black);
+}
+
+.overview p {
+  margin: 0 0 1.25em;
+  color: var(--gray-900);
+}
+
+.overview p:last-child { margin-bottom: 0; }
+
+/* —— Feed cards (MIT-style) —— */
+.feed { list-style: none; margin: 0; padding: 0; }
+
+.feed__item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.feed__item:first-child { padding-top: 0; }
+
+.feed__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.feed__type {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--black);
+  padding: 3px 8px;
+}
+
+.feed__type--project { background: var(--accent); }
+.feed__type--event { background: var(--gray-700); }
+
+.feed__date {
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.feed__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.feed__title a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+.feed__title a:hover { color: var(--accent); }
+
+.feed__excerpt {
+  margin: 0;
+  font-size: 16px;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
+/* —— Projects grid —— */
+.projects {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.project:first-child { padding-top: 0; }
+
+.project__name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.project__name a {
+  text-decoration: none;
+}
+
+.project__name a:hover { color: var(--accent); }
+
+.project__desc {
+  margin: 0;
+  font-size: 15px;
+  color: var(--gray-700);
+}
+
+/* —— People —— */
+.people { list-style: none; margin: 0; padding: 0; }
+
+.person {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.person:first-child { padding-top: 0; }
+
+.person__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: grayscale(20%);
+}
+
+.person__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.person__role {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin: 0 0 6px;
+}
+
+.person__bio {
+  font-size: 15px;
+  color: var(--gray-700);
+  margin: 0;
+}
+
+/* —— Research topics —— */
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topics a {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  text-decoration: none;
+  padding: 6px 12px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  transition: background 0.15s, color 0.15s;
+}
+
+.topics a:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+/* —— Sidebar —— */
+.sidebar { position: sticky; top: 80px; }
+
+.sidebar__block {
+  margin-bottom: 40px;
+}
+
+.sidebar__heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin: 0 0 14px;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+.sidebar__list li {
+  margin-bottom: 8px;
+}
+
+.sidebar__list a { text-decoration: none; font-weight: 600; }
+.sidebar__list a:hover { color: var(--accent); }
+
+.sidebar__contact {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sidebar__contact a { font-weight: 600; text-decoration: none; }
+.sidebar__contact a:hover { color: var(--accent); }
+
+/* —— Footer —— */
+.site-footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 32px 24px;
+  font-size: 13px;
+}
+
+.site-footer__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.site-footer a {
+  color: var(--white);
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.site-footer a:hover {
+  opacity: 1;
+  color: var(--white);
+  text-decoration: underline;
+}
+
+/* —— Responsive —— */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .sidebar {
+    position: static;
+    padding-top: 48px;
+    border-top: 1px solid var(--gray-300);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-toggle { display: block; }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--gray-900);
+    flex-direction: column;
+    padding: 16px 24px 20px;
+    gap: 12px;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .site-nav.is-open { display: flex; }
+
+  .site-header__inner { position: relative; flex-wrap: wrap; }
+
+  .hero__inner { padding: 48px 24px 40px; }
+}

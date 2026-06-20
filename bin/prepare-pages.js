@@ -18,7 +18,11 @@ const PRESERVE_DIRS = new Set([
   'causelink',
   'starfetch',
   'paytube',
+  'YoungAgentLab',
 ]);
+
+/** Standalone subsites maintained at repo root — copied into docs/ on each deploy. */
+const SUBSITE_SOURCES = ['YoungAgentLab'];
 
 if (!fs.existsSync(publicDir)) {
   console.error('Missing public/ — run `npm run build` first.');
@@ -50,6 +54,16 @@ function rmHexoOutput(dir) {
 fs.mkdirSync(docsDir, { recursive: true });
 rmHexoOutput(docsDir);
 copyDir(publicDir, docsDir);
+
+for (const name of SUBSITE_SOURCES) {
+  const src = path.join(root, name);
+  const dest = path.join(docsDir, name);
+  if (fs.existsSync(src)) {
+    fs.rmSync(dest, { recursive: true, force: true });
+    copyDir(src, dest);
+  }
+}
+
 fs.writeFileSync(path.join(docsDir, '.nojekyll'), '');
 fs.writeFileSync(cnamePath, cname.trim() + '\n');
 
