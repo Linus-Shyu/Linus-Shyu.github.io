@@ -110,6 +110,20 @@ img { max-width: 100%; height: auto; display: block; }
   border-bottom-color: var(--accent);
 }
 
+.lang-nav a {
+  opacity: 0.85;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 2px 10px !important;
+  border-radius: 3px;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.lang-nav a:hover {
+  border-bottom-color: transparent;
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -188,6 +202,10 @@ img { max-width: 100%; height: auto; display: block; }
 .section__title--news::after {
   content: " in the news";
   color: var(--black);
+}
+
+html[lang="zh-CN"] .section__title--news::after {
+  content: " 动态";
 }
 
 .overview p {
