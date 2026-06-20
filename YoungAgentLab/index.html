@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Young Agent Lab — Overview</title>
   <meta name="description" content="Young Agent Lab researches tool-using agents, applied machine learning, and human-centered AI systems for young builders.">
-  <meta name="keywords" content="Young Agent Lab, agent systems, applied ML, Linus Shyu, Star Lake AI, FeelFlow">
+  <meta name="keywords" content="Young Agent Lab, agent systems, applied ML, Linus Shyu, Gong HaoYan, BillW Gong, Star Lake AI, FeelFlow">
   <meta property="og:title" content="Young Agent Lab">
   <meta property="og:description" content="Designing agent systems that learn, plan, and collaborate in the real world.">
   <meta property="og:url" content="https://linusshyu.dev/YoungAgentLab/">
@@ -20,23 +20,53 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-brand" href="/YoungAgentLab/">
-        <span class="site-brand__parent">Young Agent Lab · Research Group</span>
-        <span class="site-brand__name">Young Agent Lab</span>
+        <span class="site-brand__mark" aria-hidden="true">YAL</span>
+        <span class="site-brand__text">
+          <span class="site-brand__parent">Young Agent Lab · Research Group</span>
+          <span class="site-brand__name">Young Agent Lab</span>
+        </span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav>
-        <ul class="site-nav" id="site-nav">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#opensource">Open Source</a></li>
-          <li><a href="#people">People</a></li>
-          <li><a href="#topics">Topics</a></li>
-          <li><a href="/academic/">Academic</a></li>
-          <li><a href="/">Blog</a></li>
-          <li class="lang-nav"><a href="zh/">中文</a></li>
-        </ul>
-      </nav>
+      <div class="site-header__end">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-header__nav" aria-label="Primary">
+          <ul class="site-nav" id="site-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#opensource">Source</a></li>
+            <li><a href="#people">People</a></li>
+            <li><a href="#topics">Topics</a></li>
+            <li><a href="#collaborate">Join</a></li>
+            <li class="site-nav__extra site-nav__extra-label" aria-hidden="true">Academic</li>
+            <li class="site-nav__extra"><a href="/academic/">Linus Shyu</a></li>
+            <li class="site-nav__extra"><a href="https://xuanmingliu.github.io/xuanming.github.io/">Xuanming Liu</a></li>
+            <li class="site-nav__extra"><a href="https://billwblog.top">Gong HaoYan</a></li>
+            <li class="site-nav__extra site-nav__extra-label" aria-hidden="true">Blog</li>
+            <li class="site-nav__extra"><a href="/">Linus Shyu</a></li>
+            <li class="site-nav__extra"><a href="https://billwblog.top/blog">Gong HaoYan</a></li>
+            <li class="site-nav__extra"><a href="https://xuanmingliu.github.io/xuanming.github.io/">Xuanming Liu</a></li>
+          </ul>
+        </nav>
+        <div class="site-header__utils">
+          <div class="site-dropdown">
+            <button type="button" class="site-dropdown__toggle" aria-expanded="false" aria-haspopup="true">Academic</button>
+            <ul class="site-dropdown__menu" role="menu">
+              <li role="none"><a role="menuitem" href="/academic/">Linus Shyu</a></li>
+              <li role="none"><a role="menuitem" href="https://xuanmingliu.github.io/xuanming.github.io/">Xuanming Liu</a></li>
+              <li role="none"><a role="menuitem" href="https://billwblog.top">Gong HaoYan</a></li>
+            </ul>
+          </div>
+          <div class="site-dropdown">
+            <button type="button" class="site-dropdown__toggle" aria-expanded="false" aria-haspopup="true">Blog</button>
+            <ul class="site-dropdown__menu" role="menu">
+              <li role="none"><a role="menuitem" href="/">Linus Shyu</a></li>
+              <li role="none"><a role="menuitem" href="https://billwblog.top/blog">Gong HaoYan</a></li>
+              <li role="none"><a role="menuitem" href="https://xuanmingliu.github.io/xuanming.github.io/">Xuanming Liu</a></li>
+            </ul>
+          </div>
+          <a class="site-lang" href="zh/" hreflang="zh">中文</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -44,6 +74,7 @@
     <div class="hero__inner">
       <p class="hero__label">Overview ‹ Young Agent Lab</p>
       <h1 class="hero__title">Advancing human capability by designing agent systems that learn, plan, and collaborate in the real world</h1>
+      <p class="hero__subtitle">A young-researcher collective bridging top-tier ML research with products, open source, and hackathon engineering.</p>
     </div>
   </section>
 
@@ -53,85 +84,109 @@
 
         <section class="section overview" id="overview">
           <h2 class="section__title">Overview</h2>
-          <p>
-            The <strong>Young Agent Lab</strong> brings together young researchers building
-            <em>agent systems</em>, <em>generative AI</em>, and <em>human-centered products</em>
-            — from efficient multimodal models to tool-using agents that ship in the real world.
+          <p class="overview__mission">
+            <strong>Young Agent Lab</strong> is a collaborative research community — not a single institution, but a shared identity for young builders who pursue both rigorous research and real-world shipping.
           </p>
           <p>
-            Our primary motivation is to make intelligent systems that stay <em>practical</em> — fast enough to deploy,
-            reliable enough to trust, and structured enough to improve over time. Members study dynamic compute allocation,
-            agentic omni models, emotion-aware applications, and competitive engineering under real constraints.
+            The lab brings together <em>agent systems</em>, <em>generative AI</em>, and <em>human-centered products</em>
+            — from efficient multimodal models to tool-using agents that deploy under real constraints.
           </p>
           <p>
-            Lab output spans top-tier conference publications (ICLR, ICML), open-source releases,
-            and products aimed at learning, creativity, and technical independence.
+            Our motivation is to keep intelligent systems <em>practical</em>: fast enough to deploy, reliable enough to trust, and structured enough to improve over time. Members study dynamic compute allocation, agentic omni models, emotion-aware applications, and competitive engineering.
           </p>
+          <p>
+            <strong>Attribution:</strong> Conference papers listed here are co-authored through member affiliations (e.g. <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Sphere Lab</a>). Products, open-source tools, and hackathon projects are lab-adjacent work led by individual members and showcased as collective output.
+          </p>
+          <div class="pillars">
+            <div class="pillar">
+              <h3 class="pillar__title">Research Track</h3>
+              <p>Top-tier publications in efficient video/flow generation and agentic omni models — advanced through collaborations with established research groups.</p>
+            </div>
+            <div class="pillar">
+              <h3 class="pillar__title">Builder Track</h3>
+              <p>Shipped apps, open-source infrastructure, and hackathon prototypes — where ideas meet deadlines, users, and production constraints.</p>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="news">
-          <h2 class="section__title section__title--news">Young Agent Lab</h2>
+          <h2 class="section__title">News</h2>
           <ul class="feed">
-            <li class="feed__item">
+            <li class="feed__item" data-topics="generative-ai efficient-models">
               <div class="feed__meta">
                 <span class="feed__type">Research</span>
                 <span class="feed__date">2026</span>
               </div>
+              <p class="feed__attribution"><strong>Member:</strong> Xuanming Liu · <em>w/ Sphere Lab (CUHK)</em></p>
               <h3 class="feed__title">
-                <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">XYZFlow accepted at ICML 2026</a>
+                <a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow accepted at ICML 2026</a>
               </h3>
               <p class="feed__excerpt">Lab member Xuanming Liu — multidimensional shortcut flows for efficient generative modeling; intensive scaling via structured probability-flow constraints.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="generative-ai efficient-models">
               <div class="feed__meta">
                 <span class="feed__type">Research</span>
                 <span class="feed__date">2026</span>
               </div>
+              <p class="feed__attribution"><strong>Member:</strong> Xuanming Liu · <em>w/ Sphere Lab (CUHK)</em></p>
               <h3 class="feed__title">
-                <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Diagonal Distillation accepted at ICLR 2026</a>
+                <a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">Diagonal Distillation accepted at ICLR 2026</a>
               </h3>
               <p class="feed__excerpt">Streaming autoregressive video generation via diagonal distillation — top 10.75% at ICLR 2026; 1.53× speedup over CausVid. Open source at Sphere-AI-Lab/diagdistill.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="human-centered-products competitive-engineering">
               <div class="feed__meta">
                 <span class="feed__type feed__type--project">Project</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">Composer — Apple Swift Student Challenge 2026</h3>
+              <p class="feed__attribution"><strong>Member:</strong> Linus Shyu</p>
+              <h3 class="feed__title">
+                <a href="https://developer.apple.com/swift-student-challenge/" target="_blank" rel="noopener">Composer — Apple Swift Student Challenge 2026</a>
+              </h3>
               <p class="feed__excerpt">Submitted an App Playground project exploring creative tooling and interactive learning for young developers.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="competitive-engineering human-centered-products">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">Event</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">AdventureX 2026 — Finalist</h3>
+              <p class="feed__attribution"><strong>Member:</strong> Linus Shyu</p>
+              <h3 class="feed__title">
+                <a href="https://adventure-x.org/" target="_blank" rel="noopener">AdventureX 2026 — Finalist</a>
+              </h3>
               <p class="feed__excerpt">Selected as a finalist at AdventureX 2026, continuing the lab's hackathon-driven approach to rapid agent and product prototyping.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="competitive-engineering human-centered-products community-building">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">Event</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">MoonShot48 Hackathon — 3rd Prize</h3>
+              <p class="feed__attribution"><strong>Members:</strong> Linus Shyu, Gong HaoYan</p>
+              <h3 class="feed__title">
+                <a href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/" target="_blank" rel="noopener">MoonShot48 Hackathon — 3rd Prize</a>
+              </h3>
               <p class="feed__excerpt">Team-based product hackathon in Beijing; shipped a working prototype under tight time constraints with strong user-facing design.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="human-centered-products agent-systems">
               <div class="feed__meta">
                 <span class="feed__type">Article</span>
                 <span class="feed__date">2025</span>
               </div>
+              <p class="feed__attribution"><strong>Member:</strong> Linus Shyu · <em>FeelFlow / Star Lake AI</em></p>
               <h3 class="feed__title">
-                <a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow launched on the App Store</a>
+                <a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">FeelFlow launched on the App Store</a>
               </h3>
               <p class="feed__excerpt">An emotion-aware product from the lab's applied ML line — full-stack engineering with a focus on daily wellbeing workflows.</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="community-building">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">Event</span>
                 <span class="feed__date">2025</span>
               </div>
-              <h3 class="feed__title">Google I/O Connect China — Guest</h3>
+              <p class="feed__attribution"><strong>Member:</strong> Linus Shyu</p>
+              <h3 class="feed__title">
+                <a href="https://www.itdks.com/Home/Act/apply?id=8347" target="_blank" rel="noopener">Google I/O Connect China — Guest</a>
+              </h3>
               <p class="feed__excerpt">Participated as a guest at Google I/O Connect China, engaging with the developer community on agents, mobile, and AI tooling.</p>
             </li>
           </ul>
@@ -139,40 +194,54 @@
 
         <section class="section" id="projects">
           <h2 class="section__title">Projects</h2>
+          <p class="section__lead">Research papers are credited to member affiliations; products and tools are member-led lab showcases.</p>
           <ul class="projects">
-            <li class="project">
-              <p class="project__name"><span class="project__venue">ICLR 2026</span> <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Streaming Autoregressive Video Generation via Diagonal Distillation</a></p>
+            <li class="project" data-topics="generative-ai efficient-models">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Xuanming Liu <span class="project__affil">· w/ Sphere Lab (CUHK)</span></p>
+              <p class="project__name"><span class="project__venue">ICLR 2026</span> <a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">Streaming Autoregressive Video Generation via Diagonal Distillation</a></p>
               <p class="project__meta">Xuanming Liu*, Jinxiu Liu*, Kangfu Mei, Yandong Wen, Ming-Hsuan Yang, Weiyang Liu</p>
+              <p class="project__links"><a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">Paper</a> · <a href="https://openreview.net/forum?id=X7YW6STzeL" target="_blank" rel="noopener">OpenReview</a> · <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Code</a></p>
               <p class="project__desc">Diagonal forced training + flow distribution matching for streaming video generation; 1.53× faster than CausVid. Accepted at ICLR 2026 (top 10.75%).</p>
             </li>
-            <li class="project">
-              <p class="project__name"><span class="project__venue">ICML 2026</span> <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">XYZFlow: Scaling Multidimensional Shortcut Flows</a></p>
+            <li class="project" data-topics="generative-ai efficient-models">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Xuanming Liu <span class="project__affil">· w/ Sphere Lab (CUHK)</span></p>
+              <p class="project__name"><span class="project__venue">ICML 2026</span> <a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow: Scaling Multidimensional Shortcut Flows</a></p>
               <p class="project__meta">Xuanming Liu*, Jinxiu Liu*, Kangfu Mei, Yandong Wen, Weiyang Liu</p>
+              <p class="project__links"><a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">Paper</a></p>
               <p class="project__desc">Structured multidimensional constraints on probability flow for efficient generative modeling — intensive scaling beyond model expansion. Accepted at ICML 2026.</p>
             </li>
-            <li class="project">
-              <p class="project__name"><span class="project__venue">Under Review</span> SymbOmni: Evolving Agentic Omni Models via Symbolic Concept Learning</p>
+            <li class="project" data-topics="generative-ai agent-systems">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Xuanming Liu <span class="project__affil">· w/ Sphere Lab (CUHK)</span></p>
+              <p class="project__name"><span class="project__venue project__venue--review">Under Review</span> <a href="https://brandon-liu-jx.github.io/SymbOmni__Evolving_Agentic_Omni_Models_via_Symbolic_Concept_Learning_.pdf" target="_blank" rel="noopener">SymbOmni: Evolving Agentic Omni Models via Symbolic Concept Learning</a></p>
               <p class="project__meta">Jinxiu Liu*, Jianru Li*, Kuang Tanqing*, Xuanming Liu, Kangfu Mei, Yandong Wen, Weiyang Liu</p>
+              <p class="project__links"><a href="https://brandon-liu-jx.github.io/SymbOmni__Evolving_Agentic_Omni_Models_via_Symbolic_Concept_Learning_.pdf" target="_blank" rel="noopener">Paper</a></p>
               <p class="project__desc">Symbolic Concept Box with induction-transformation loop; evolves agentic omni models without gradient fine-tuning, cutting token use by 40%+.</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow</a></p>
+            <li class="project" data-topics="human-centered-products agent-systems">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Linus Shyu <span class="project__affil">· FeelFlow / Star Lake AI</span></p>
+              <p class="project__name"><span class="project__venue project__venue--product">Product</span> <a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">FeelFlow</a></p>
+              <p class="project__links"><a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">App Store</a> · <a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">Product Site</a></p>
               <p class="project__desc">Emotion-aware journaling and wellbeing app — co-founded product line exploring applied ML in everyday mental health workflows.</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://linusshyu.dev/causelink/" target="_blank" rel="noopener">CauseLink</a></p>
+            <li class="project" data-topics="education-tech agent-systems">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Linus Shyu</p>
+              <p class="project__name"><span class="project__venue project__venue--product">Product</span> <a href="https://linusshyu.dev/causelink/" target="_blank" rel="noopener">CauseLink</a></p>
               <p class="project__desc">Intelligent mistake notebook with OCR, AI explanation, and gamified practice — agent-assisted learning for students.</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch</a></p>
+            <li class="project" data-topics="open-source competitive-engineering">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Linus Shyu</p>
+              <p class="project__name"><span class="project__venue project__venue--product">Open Source</span> <a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch</a></p>
               <p class="project__desc">Rust-based system information tool with Homebrew integration — systems literacy as infrastructure for builder agents.</p>
             </li>
-            <li class="project">
-              <p class="project__name">Composer</p>
+            <li class="project" data-topics="human-centered-products competitive-engineering">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Linus Shyu</p>
+              <p class="project__name"><span class="project__venue project__venue--product">Product</span> <a href="https://developer.apple.com/swift-student-challenge/" target="_blank" rel="noopener">Composer</a></p>
               <p class="project__desc">Swift Student Challenge 2026 App Playground — creative coding environment for young developers to compose and experiment.</p>
             </li>
-            <li class="project">
-              <p class="project__name">XTerminal</p>
+            <li class="project" data-topics="competitive-engineering agent-systems">
+              <p class="project__lab"><span class="project__lab-label">Member</span> Linus Shyu</p>
+              <p class="project__name"><span class="project__venue project__venue--event">Hackathon</span> <a href="https://github.com/XTerminalApp/XTerminal" target="_blank" rel="noopener">XTerminal</a></p>
+              <p class="project__links"><a href="https://github.com/XTerminalApp/XTerminal" target="_blank" rel="noopener">GitHub</a> · <a href="/portfolio/" target="_blank" rel="noopener">Portfolio</a></p>
               <p class="project__desc">C++ terminal workflow with real-time AI analysis for competitive programming — AdventureX 2025 track-winning hackathon project.</p>
             </li>
           </ul>
@@ -180,25 +249,25 @@
 
         <section class="section" id="opensource">
           <h2 class="section__title">Open Source</h2>
-          <p class="section__lead">By <a href="/academic/">Linus Shyu</a> · <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub @Linus-Shyu</a></p>
+          <p class="section__lead">Infrastructure and tools maintained by lab members. Primary releases by <a href="/academic/">Linus Shyu</a> · <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub @Linus-Shyu</a> — supporting agent building, systems literacy, and competitive engineering.</p>
           <ul class="projects">
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch_Core</a> <span class="project__stars">★ 12</span></p>
               <p class="project__desc">Rust NeoFetch-style system info tool with adaptive ASCII art and clickable terminal links; macOS / Linux / Windows. <a href="https://github.com/Linus-Shyu/homebrew-tap" target="_blank" rel="noopener">Homebrew Tap</a></p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/dot-crypto-ticker" target="_blank" rel="noopener">dot-crypto-ticker</a> <span class="project__stars">★ 4</span></p>
               <p class="project__desc">Lightweight Rust app showing real-time crypto prices on Dot devices.</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source education-tech">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/Luogu-problems" target="_blank" rel="noopener">Luogu-problems</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">Luogu OJ solutions with AC code and writeups.</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source agent-systems">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/facial-recognition" target="_blank" rel="noopener">facial-recognition</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">Python facial recognition experiment.</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/StarDao" target="_blank" rel="noopener">StarDao</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">Solidity smart-contract learning project inspired by RandomDAO.</p>
             </li>
@@ -212,7 +281,7 @@
               <img class="person__photo" src="https://avatars.githubusercontent.com/u/83543818?s=400&u=91c63ed9cc4734532b3567b31173be3f8e927fcb&v=4" alt="Linus Shyu" width="72" height="72">
               <div>
                 <p class="person__name"><a href="/academic/">Linus Shyu (许发鑫)</a></p>
-                <p class="person__role">Founder &amp; Principal Investigator</p>
+                <p class="person__role">Chief Researcher</p>
                 <p class="person__bio">High school researcher from Qinghai. Co-Founder &amp; CTO at Star Lake AI and FeelFlow. Focused on applied ML, agent systems, and shipping real-world software. <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </li>
@@ -220,8 +289,16 @@
               <img class="person__photo" src="https://xuanmingliu.github.io/xuanming.github.io/poster_photo.jpg" alt="Xuanming Liu" width="72" height="72">
               <div>
                 <p class="person__name"><a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">Xuanming Liu (刘轩铭)</a></p>
-                <p class="person__role">Research Member · Generative AI &amp; Efficient Multimodal Models</p>
+                <p class="person__role">Chief Researcher · Generative AI &amp; Efficient Multimodal Models</p>
                 <p class="person__bio">Student researcher from Nanjing. Intern at <strong>Sphere Lab</strong> (CUHK), advised by Jinxiu Liu and Weiyang Liu. ICLR 2026 &amp; ICML 2026 publications on efficient video and flow-based generation. <a href="https://github.com/xuanmingliu" target="_blank" rel="noopener">GitHub</a> · <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">Homepage</a></p>
+              </div>
+            </li>
+            <li class="person">
+              <img class="person__photo" src="https://avatars.githubusercontent.com/u/226689574?s=400&v=4" alt="Gong HaoYan" width="72" height="72">
+              <div>
+                <p class="person__name"><a href="https://billwblog.top" target="_blank" rel="noopener">Gong HaoYan (龚浩岩)</a></p>
+                <p class="person__role">Chief Researcher · Full-Stack Systems &amp; Community Building</p>
+                <p class="person__bio">Student builder from Shenzhen. Founder of <strong>AstraCore</strong>, co-founder of _entropy, and YOUTHGALA builder. Full-stack web developer, event organizer, and PM — shipping products and inclusive communities. MoonShot48 Beijing 2026 contestant. <a href="https://github.com/BillWGong" target="_blank" rel="noopener">GitHub</a> · <a href="https://billwblog.top" target="_blank" rel="noopener">Homepage</a></p>
               </div>
             </li>
           </ul>
@@ -229,51 +306,77 @@
 
         <section class="section" id="topics">
           <h2 class="section__title">Research Topics</h2>
+          <p class="topic-filter-hint" id="topic-filter-hint" data-label-all="Showing all topics — click a tag to filter News &amp; Projects" data-label-one="Filtered by">Showing all topics — click a tag to filter News &amp; Projects</p>
           <ul class="topics">
-            <li><a href="#topics">#generative-ai</a></li>
-            <li><a href="#topics">#efficient-multimodal-models</a></li>
-            <li><a href="#topics">#video-generation</a></li>
-            <li><a href="#topics">#agent-systems</a></li>
-            <li><a href="#topics">#applied-machine-learning</a></li>
-            <li><a href="#topics">#human-computer-interaction</a></li>
-            <li><a href="#topics">#tool-using-agents</a></li>
-            <li><a href="#topics">#affective-computing</a></li>
-            <li><a href="#topics">#education-technology</a></li>
-            <li><a href="#topics">#competitive-programming</a></li>
-            <li><a href="#topics">#mobile-systems</a></li>
-            <li><a href="#topics">#open-source</a></li>
-            <li><a href="#topics">#wellbeing</a></li>
-            <li><a href="#topics">#swift</a></li>
-            <li><a href="#topics">#rust</a></li>
+            <li><a href="#topics" data-topic-filter="">All</a></li>
+            <li><a href="#topics" data-topic-filter="generative-ai">#generative-ai</a></li>
+            <li><a href="#topics" data-topic-filter="efficient-models">#efficient-models</a></li>
+            <li><a href="#topics" data-topic-filter="agent-systems">#agent-systems</a></li>
+            <li><a href="#topics" data-topic-filter="human-centered-products">#human-centered-products</a></li>
+            <li><a href="#topics" data-topic-filter="education-tech">#education-tech</a></li>
+            <li><a href="#topics" data-topic-filter="open-source">#open-source</a></li>
+            <li><a href="#topics" data-topic-filter="competitive-engineering">#competitive-engineering</a></li>
+            <li><a href="#topics" data-topic-filter="community-building">#community-building</a></li>
           </ul>
+        </section>
+
+        <section class="section collaborate" id="collaborate">
+          <h2 class="section__title">Collaborate</h2>
+          <p>Young Agent Lab welcomes research exchanges, hackathon teams, product collaborations, and open-source contributions. We are especially interested in work that connects <em>rigorous ML research</em> with <em>systems that ship</em>.</p>
+          <p>Research collaborations typically flow through member affiliations (e.g. Sphere Lab). Builder collaborations — apps, agents, community events — can start directly with the lab.</p>
+          <div class="collaborate__actions">
+            <a class="collaborate__btn" href="mailto:0x11@linusshyu.dev">Email the Lab</a>
+            <a class="collaborate__btn collaborate__btn--outline" href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a>
+            <a class="collaborate__btn collaborate__btn--outline" href="/portfolio/">Portfolio</a>
+          </div>
         </section>
 
       </main>
 
       <aside class="sidebar">
         <div class="sidebar__block">
-          <h3 class="sidebar__heading">Group Contact</h3>
+          <h3 class="sidebar__heading">Collaborate</h3>
           <p class="sidebar__contact">
             <a href="mailto:0x11@linusshyu.dev">0x11@linusshyu.dev</a>
           </p>
+          <p class="sidebar__contact" style="margin-top:10px;font-size:14px;color:var(--gray-700);font-weight:400;line-height:1.5">Research · Products · Hackathons · Open Source</p>
         </div>
         <div class="sidebar__block">
           <h3 class="sidebar__heading">Affiliations</h3>
           <ul class="sidebar__list">
-            <li><a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">DiagDistill (ICLR 2026)</a></li>
-            <li><a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">Xuanming Liu</a></li>
-            <li><a href="https://github.com/FeelFlowApp" target="_blank" rel="noopener">FeelFlow</a></li>
-            <li><a href="/academic/">Academic Profile</a></li>
-            <li><a href="/portfolio/">Portfolio</a></li>
+            <li><a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Sphere Lab</a></li>
+            <li><a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">DiagDistill (ICLR 2026)</a></li>
+            <li><a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow (ICML 2026)</a></li>
+            <li><a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow</a></li>
           </ul>
         </div>
         <div class="sidebar__block">
-          <h3 class="sidebar__heading">Find</h3>
-          <ul class="sidebar__list">
-            <li><a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://space.bilibili.com/411591950" target="_blank" rel="noopener">Bilibili</a></li>
-            <li><a href="/">Blog</a></li>
-          </ul>
+          <h3 class="sidebar__heading">Lab &amp; Members</h3>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">Linus Shyu</span>
+            <div class="sidebar__member-links">
+              <a href="/academic/">Academic</a>
+              <a href="/">Blog</a>
+              <a href="/portfolio/">Portfolio</a>
+              <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://space.bilibili.com/411591950" target="_blank" rel="noopener">Bilibili</a>
+            </div>
+          </div>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">Xuanming Liu</span>
+            <div class="sidebar__member-links">
+              <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">Academic</a>
+              <a href="https://github.com/xuanmingliu" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">Gong HaoYan</span>
+            <div class="sidebar__member-links">
+              <a href="https://billwblog.top" target="_blank" rel="noopener">Homepage</a>
+              <a href="https://billwblog.top/blog" target="_blank" rel="noopener">Blog</a>
+              <a href="https://github.com/BillWGong" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
         </div>
       </aside>
     </div>
@@ -286,16 +389,6 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('site-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    })();
-  </script>
+  <script src="/YoungAgentLab/lab.js"></script>
 </body>
 </html>

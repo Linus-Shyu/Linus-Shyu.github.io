@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>青年智能体实验室 — 概览</title>
   <meta name="description" content="青年智能体实验室研究工具型智能体、应用机器学习与人本 AI 系统。">
-  <meta name="keywords" content="青年智能体实验室, Young Agent Lab, 智能体, 刘轩铭, 许发鑫, Linus Shyu">
+  <meta name="keywords" content="青年智能体实验室, Young Agent Lab, 智能体, 刘轩铭, 龚浩岩, 许发鑫, Linus Shyu, BillW Gong">
   <meta property="og:title" content="青年智能体实验室">
   <meta property="og:description" content="设计能够学习、规划并在真实世界中协作的智能体系统。">
   <meta property="og:url" content="https://linusshyu.dev/YoungAgentLab/zh/">
@@ -20,23 +20,53 @@
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-brand" href="/YoungAgentLab/zh/">
-        <span class="site-brand__parent">青年智能体实验室 · 研究组</span>
-        <span class="site-brand__name">Young Agent Lab</span>
+        <span class="site-brand__mark" aria-hidden="true">YAL</span>
+        <span class="site-brand__text">
+          <span class="site-brand__parent">青年智能体实验室 · 研究组</span>
+          <span class="site-brand__name">Young Agent Lab</span>
+        </span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">菜单</button>
-      <nav>
-        <ul class="site-nav" id="site-nav">
-          <li><a href="#overview">概览</a></li>
-          <li><a href="#news">动态</a></li>
-          <li><a href="#projects">项目</a></li>
-          <li><a href="#opensource">开源</a></li>
-          <li><a href="#people">成员</a></li>
-          <li><a href="#topics">方向</a></li>
-          <li><a href="/academic/zh/">学术主页</a></li>
-          <li><a href="/">博客</a></li>
-          <li class="lang-nav"><a href="../">EN</a></li>
-        </ul>
-      </nav>
+      <div class="site-header__end">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">菜单</button>
+        <nav class="site-header__nav" aria-label="主导航">
+          <ul class="site-nav" id="site-nav">
+            <li><a href="#overview">概览</a></li>
+            <li><a href="#news">动态</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#opensource">开源</a></li>
+            <li><a href="#people">成员</a></li>
+            <li><a href="#topics">方向</a></li>
+            <li><a href="#collaborate">合作</a></li>
+            <li class="site-nav__extra site-nav__extra-label" aria-hidden="true">学术主页</li>
+            <li class="site-nav__extra"><a href="/academic/zh/">许发鑫</a></li>
+            <li class="site-nav__extra"><a href="https://xuanmingliu.github.io/xuanming.github.io/">刘轩铭</a></li>
+            <li class="site-nav__extra"><a href="https://billwblog.top">龚浩岩</a></li>
+            <li class="site-nav__extra site-nav__extra-label" aria-hidden="true">博客</li>
+            <li class="site-nav__extra"><a href="/">许发鑫</a></li>
+            <li class="site-nav__extra"><a href="https://billwblog.top/blog">龚浩岩</a></li>
+            <li class="site-nav__extra"><a href="https://xuanmingliu.github.io/xuanming.github.io/">刘轩铭</a></li>
+          </ul>
+        </nav>
+        <div class="site-header__utils">
+          <div class="site-dropdown">
+            <button type="button" class="site-dropdown__toggle" aria-expanded="false" aria-haspopup="true">学术主页</button>
+            <ul class="site-dropdown__menu" role="menu">
+              <li role="none"><a role="menuitem" href="/academic/zh/">许发鑫 (Linus)</a></li>
+              <li role="none"><a role="menuitem" href="https://xuanmingliu.github.io/xuanming.github.io/">刘轩铭</a></li>
+              <li role="none"><a role="menuitem" href="https://billwblog.top">龚浩岩</a></li>
+            </ul>
+          </div>
+          <div class="site-dropdown">
+            <button type="button" class="site-dropdown__toggle" aria-expanded="false" aria-haspopup="true">博客</button>
+            <ul class="site-dropdown__menu" role="menu">
+              <li role="none"><a role="menuitem" href="/">许发鑫 (Linus)</a></li>
+              <li role="none"><a role="menuitem" href="https://billwblog.top/blog">龚浩岩</a></li>
+              <li role="none"><a role="menuitem" href="https://xuanmingliu.github.io/xuanming.github.io/">刘轩铭</a></li>
+            </ul>
+          </div>
+          <a class="site-lang" href="../" hreflang="en">EN</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -44,6 +74,7 @@
     <div class="hero__inner">
       <p class="hero__label">概览 ‹ 青年智能体实验室</p>
       <h1 class="hero__title">通过设计能够学习、规划并在真实世界中协作的智能体系统，拓展人类的能力边界</h1>
+      <p class="hero__subtitle">年轻研究者共同体：连接顶会级 ML 研究与产品落地、开源工具与黑客松工程实践。</p>
     </div>
   </section>
 
@@ -53,83 +84,109 @@
 
         <section class="section overview" id="overview">
           <h2 class="section__title">概览</h2>
-          <p>
-            <strong>青年智能体实验室（Young Agent Lab）</strong>汇聚年轻研究者，共同探索
-            <em>智能体系统</em>、<em>生成式 AI</em> 与 <em>人本产品</em>
-            ——从高效多模态模型到可落地的工具型智能体。
+          <p class="overview__mission">
+            <strong>青年智能体实验室（Young Agent Lab）</strong>是一个协作式研究共同体——并非单一机构，而是年轻 builder 共享的身份，同时追求严谨科研与真实交付。
           </p>
           <p>
-            我们的核心目标是让智能系统保持 <em>实用</em>：部署够快、行为够稳、并能持续改进。成员研究动态算力分配、
-            Agentic Omni 模型、情感感知应用，以及在真实约束下的竞赛式工程实践。
+            实验室汇聚 <em>智能体系统</em>、<em>生成式 AI</em> 与 <em>人本产品</em>
+            ——从高效多模态模型到可在真实约束下部署的工具型智能体。
           </p>
           <p>
-            实验室成果涵盖顶会论文（ICLR、ICML）、开源发布，以及面向学习、创造力与技术自主的产品实践。
+            核心目标是让智能系统保持 <em>实用</em>：部署够快、行为够稳、并能持续改进。成员研究动态算力分配、Agentic Omni 模型、情感感知应用，以及竞赛式工程实践。
           </p>
+          <p>
+            <strong>成果归属说明：</strong>所列顶会论文通过成员合作单位完成（如 <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Sphere Lab</a>）。产品、开源与黑客松项目由各位成员主导，作为实验室共同展示的成果。
+          </p>
+          <div class="pillars">
+            <div class="pillar">
+              <h3 class="pillar__title">科研线</h3>
+              <p>高效视频/流模型与 Agentic Omni 等方向，通过与成熟研究组协作发表于 ICLR、ICML 等顶会。</p>
+            </div>
+            <div class="pillar">
+              <h3 class="pillar__title">工程线</h3>
+              <p>已上架 App、开源基础设施与黑客松原型——在截止日期、用户与生产约束下把想法做出来。</p>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="news">
-          <h2 class="section__title section__title--news">青年智能体实验室</h2>
+          <h2 class="section__title">最新动态</h2>
           <ul class="feed">
-            <li class="feed__item">
+            <li class="feed__item" data-topics="generative-ai efficient-models">
               <div class="feed__meta">
                 <span class="feed__type">科研</span>
                 <span class="feed__date">2026</span>
               </div>
+              <p class="feed__attribution"><strong>成员：</strong>刘轩铭 · <em>合作 Sphere Lab（香港中文大学）</em></p>
               <h3 class="feed__title">
-                <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">XYZFlow 被 ICML 2026 接收</a>
+                <a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow 被 ICML 2026 接收</a>
               </h3>
               <p class="feed__excerpt">实验室成员刘轩铭 — 多维 shortcut flows 高效生成建模；通过结构化概率流约束实现 intensive scaling。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="generative-ai efficient-models">
               <div class="feed__meta">
                 <span class="feed__type">科研</span>
                 <span class="feed__date">2026</span>
               </div>
+              <p class="feed__attribution"><strong>成员：</strong>刘轩铭 · <em>合作 Sphere Lab（香港中文大学）</em></p>
               <h3 class="feed__title">
-                <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Diagonal Distillation 被 ICLR 2026 接收</a>
+                <a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">Diagonal Distillation 被 ICLR 2026 接收</a>
               </h3>
               <p class="feed__excerpt">流式自回归视频生成 — ICLR 2026 前 10.75%；较 CausVid 提速 1.53×。开源仓库 Sphere-AI-Lab/diagdistill。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="human-centered-products competitive-engineering">
               <div class="feed__meta">
                 <span class="feed__type feed__type--project">项目</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">Composer — Apple Swift Student Challenge 2026</h3>
+              <p class="feed__attribution"><strong>成员：</strong>许发鑫</p>
+              <h3 class="feed__title">
+                <a href="https://developer.apple.com/swift-student-challenge/" target="_blank" rel="noopener">Composer — Apple Swift Student Challenge 2026</a>
+              </h3>
               <p class="feed__excerpt">提交 App Playground 项目，探索面向年轻开发者的创意工具与交互式学习。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="competitive-engineering human-centered-products">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">活动</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">AdventureX 2026 — 入围</h3>
+              <p class="feed__attribution"><strong>成员：</strong>许发鑫</p>
+              <h3 class="feed__title">
+                <a href="https://adventure-x.org/" target="_blank" rel="noopener">AdventureX 2026 — 入围</a>
+              </h3>
               <p class="feed__excerpt">入围 AdventureX 2026，延续实验室以黑客松驱动智能体与产品快速原型的路径。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="competitive-engineering human-centered-products community-building">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">活动</span>
                 <span class="feed__date">2026</span>
               </div>
-              <h3 class="feed__title">MoonShot48 黑客松 — 三等奖</h3>
+              <p class="feed__attribution"><strong>成员：</strong>许发鑫、龚浩岩</p>
+              <h3 class="feed__title">
+                <a href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/" target="_blank" rel="noopener">MoonShot48 黑客松 — 三等奖</a>
+              </h3>
               <p class="feed__excerpt">北京团队产品黑客松；在紧张赛程内交付可运行原型与完整用户体验。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="human-centered-products agent-systems">
               <div class="feed__meta">
                 <span class="feed__type">产品</span>
                 <span class="feed__date">2025</span>
               </div>
+              <p class="feed__attribution"><strong>成员：</strong>许发鑫 · <em>FeelFlow / 星落湖 AI</em></p>
               <h3 class="feed__title">
-                <a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow 上架 App Store</a>
+                <a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">FeelFlow 上架 App Store</a>
               </h3>
               <p class="feed__excerpt">实验室应用 ML 产品线的情感感知 App — 全栈工程，聚焦日常心理健康工作流。</p>
             </li>
-            <li class="feed__item">
+            <li class="feed__item" data-topics="community-building">
               <div class="feed__meta">
                 <span class="feed__type feed__type--event">活动</span>
                 <span class="feed__date">2025</span>
               </div>
-              <h3 class="feed__title">Google I/O Connect China — 嘉宾</h3>
+              <p class="feed__attribution"><strong>成员：</strong>许发鑫</p>
+              <h3 class="feed__title">
+                <a href="https://www.itdks.com/Home/Act/apply?id=8347" target="_blank" rel="noopener">Google I/O Connect China — 嘉宾</a>
+              </h3>
               <p class="feed__excerpt">以嘉宾身份参与 Google I/O Connect China，与开发者社区交流智能体、移动端与 AI 工具。</p>
             </li>
           </ul>
@@ -137,40 +194,54 @@
 
         <section class="section" id="projects">
           <h2 class="section__title">项目</h2>
+          <p class="section__lead">论文成果标注成员与合作单位；产品与工具为成员主导、实验室共同展示。</p>
           <ul class="projects">
-            <li class="project">
-              <p class="project__name"><span class="project__venue">ICLR 2026</span> <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Streaming Autoregressive Video Generation via Diagonal Distillation</a></p>
+            <li class="project" data-topics="generative-ai efficient-models">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 刘轩铭 <span class="project__affil">· 合作 Sphere Lab（香港中文大学）</span></p>
+              <p class="project__name"><span class="project__venue">ICLR 2026</span> <a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">Streaming Autoregressive Video Generation via Diagonal Distillation</a></p>
               <p class="project__meta">Xuanming Liu*, Jinxiu Liu*, Kangfu Mei, Yandong Wen, Ming-Hsuan Yang, Weiyang Liu</p>
+              <p class="project__links"><a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">论文</a> · <a href="https://openreview.net/forum?id=X7YW6STzeL" target="_blank" rel="noopener">OpenReview</a> · <a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">代码</a></p>
               <p class="project__desc">对角强制训练 + 流分布匹配实现流式视频生成；较 CausVid 快 1.53×。ICLR 2026 接收（前 10.75%）。</p>
             </li>
-            <li class="project">
-              <p class="project__name"><span class="project__venue">ICML 2026</span> <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">XYZFlow: Scaling Multidimensional Shortcut Flows</a></p>
+            <li class="project" data-topics="generative-ai efficient-models">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 刘轩铭 <span class="project__affil">· 合作 Sphere Lab（香港中文大学）</span></p>
+              <p class="project__name"><span class="project__venue">ICML 2026</span> <a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow: Scaling Multidimensional Shortcut Flows</a></p>
               <p class="project__meta">Xuanming Liu*, Jinxiu Liu*, Kangfu Mei, Yandong Wen, Weiyang Liu</p>
+              <p class="project__links"><a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">论文</a></p>
               <p class="project__desc">对概率流施加结构化多维约束，以 intensive scaling 超越单纯扩模。ICML 2026 接收。</p>
             </li>
-            <li class="project">
-              <p class="project__name"><span class="project__venue">审稿中</span> SymbOmni: Evolving Agentic Omni Models via Symbolic Concept Learning</p>
+            <li class="project" data-topics="generative-ai agent-systems">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 刘轩铭 <span class="project__affil">· 合作 Sphere Lab（香港中文大学）</span></p>
+              <p class="project__name"><span class="project__venue project__venue--review">审稿中</span> <a href="https://brandon-liu-jx.github.io/SymbOmni__Evolving_Agentic_Omni_Models_via_Symbolic_Concept_Learning_.pdf" target="_blank" rel="noopener">SymbOmni: Evolving Agentic Omni Models via Symbolic Concept Learning</a></p>
               <p class="project__meta">Jinxiu Liu*, Jianru Li*, Kuang Tanqing*, Xuanming Liu, Kangfu Mei, Yandong Wen, Weiyang Liu</p>
+              <p class="project__links"><a href="https://brandon-liu-jx.github.io/SymbOmni__Evolving_Agentic_Omni_Models_via_Symbolic_Concept_Learning_.pdf" target="_blank" rel="noopener">论文</a></p>
               <p class="project__desc">符号概念盒 + 归纳-变换循环；无需梯度微调即可演化 Agentic Omni 模型，token 用量降低 40%+。</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow</a></p>
+            <li class="project" data-topics="human-centered-products agent-systems">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 许发鑫 <span class="project__affil">· FeelFlow / 星落湖 AI</span></p>
+              <p class="project__name"><span class="project__venue project__venue--product">产品</span> <a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">FeelFlow</a></p>
+              <p class="project__links"><a href="https://apps.apple.com/us/app/feelflow/id6753738362" target="_blank" rel="noopener">App Store</a> · <a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">产品站</a></p>
               <p class="project__desc">情感感知日记与心理健康 App — 探索应用 ML 在日常情绪工作流中的产品化落地。</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://linusshyu.dev/causelink/" target="_blank" rel="noopener">CauseLink</a></p>
+            <li class="project" data-topics="education-tech agent-systems">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 许发鑫</p>
+              <p class="project__name"><span class="project__venue project__venue--product">产品</span> <a href="https://linusshyu.dev/causelink/" target="_blank" rel="noopener">CauseLink</a></p>
               <p class="project__desc">智能错题本：OCR、AI 解析与闯关练习 — 面向学生的智能体辅助学习工具。</p>
             </li>
-            <li class="project">
-              <p class="project__name"><a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch</a></p>
+            <li class="project" data-topics="open-source competitive-engineering">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 许发鑫</p>
+              <p class="project__name"><span class="project__venue project__venue--product">开源</span> <a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch</a></p>
               <p class="project__desc">基于 Rust 的系统信息工具，支持 Homebrew 集成 — 为 builder 智能体提供系统层基础设施。</p>
             </li>
-            <li class="project">
-              <p class="project__name">Composer</p>
+            <li class="project" data-topics="human-centered-products competitive-engineering">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 许发鑫</p>
+              <p class="project__name"><span class="project__venue project__venue--product">产品</span> <a href="https://developer.apple.com/swift-student-challenge/" target="_blank" rel="noopener">Composer</a></p>
               <p class="project__desc">Swift Student Challenge 2026 App Playground — 面向年轻开发者的创意编程环境。</p>
             </li>
-            <li class="project">
-              <p class="project__name">XTerminal</p>
+            <li class="project" data-topics="competitive-engineering agent-systems">
+              <p class="project__lab"><span class="project__lab-label">成员</span> 许发鑫</p>
+              <p class="project__name"><span class="project__venue project__venue--event">黑客松</span> <a href="https://github.com/XTerminalApp/XTerminal" target="_blank" rel="noopener">XTerminal</a></p>
+              <p class="project__links"><a href="https://github.com/XTerminalApp/XTerminal" target="_blank" rel="noopener">GitHub</a> · <a href="/portfolio/" target="_blank" rel="noopener">作品集</a></p>
               <p class="project__desc">C++ 终端工作流 + 实时代码分析，服务信息学竞赛 — AdventureX 2025 赛道获奖黑客松项目。</p>
             </li>
           </ul>
@@ -178,25 +249,25 @@
 
         <section class="section" id="opensource">
           <h2 class="section__title">开源项目</h2>
-          <p class="section__lead">作者 <a href="/academic/zh/">许发鑫 (Linus Shyu)</a> · <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub @Linus-Shyu</a></p>
+          <p class="section__lead">由实验室成员维护的基础设施与工具。主要由 <a href="/academic/zh/">许发鑫</a> 发布 · <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub @Linus-Shyu</a> —— 支撑智能体构建、系统能力与竞赛工程。</p>
           <ul class="projects">
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/StarFetch_Core" target="_blank" rel="noopener">StarFetch_Core</a> <span class="project__stars">★ 12</span></p>
               <p class="project__desc">Rust 版 NeoFetch 风格系统信息工具，自适应 ASCII 与可点击终端链接；支持 macOS / Linux / Windows。<a href="https://github.com/Linus-Shyu/homebrew-tap" target="_blank" rel="noopener">Homebrew Tap</a></p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/dot-crypto-ticker" target="_blank" rel="noopener">dot-crypto-ticker</a> <span class="project__stars">★ 4</span></p>
               <p class="project__desc">轻量 Rust 应用，在 Dot 设备上实时显示加密货币价格。</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source education-tech">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/Luogu-problems" target="_blank" rel="noopener">Luogu-problems</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">洛谷 OJ 题解与 AC 代码归档。</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source agent-systems">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/facial-recognition" target="_blank" rel="noopener">facial-recognition</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">Python 人脸识别实验项目。</p>
             </li>
-            <li class="project">
+            <li class="project" data-topics="open-source">
               <p class="project__name"><a href="https://github.com/Linus-Shyu/StarDao" target="_blank" rel="noopener">StarDao</a> <span class="project__stars">★ 2</span></p>
               <p class="project__desc">Solidity 智能合约学习项目，灵感来自 RandomDAO。</p>
             </li>
@@ -210,7 +281,7 @@
               <img class="person__photo" src="https://avatars.githubusercontent.com/u/83543818?s=400&u=91c63ed9cc4734532b3567b31173be3f8e927fcb&v=4" alt="许发鑫" width="72" height="72">
               <div>
                 <p class="person__name"><a href="/academic/zh/">许发鑫 (Linus Shyu)</a></p>
-                <p class="person__role">创始人 &amp; 首席研究员 (PI)</p>
+                <p class="person__role">首席研究员</p>
                 <p class="person__bio">来自青海的高中生研究者。星落湖 AI 与 FeelFlow 联合创始人 &amp; CTO。专注应用 ML、智能体系统与可落地软件。<a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </li>
@@ -218,8 +289,16 @@
               <img class="person__photo" src="https://xuanmingliu.github.io/xuanming.github.io/poster_photo.jpg" alt="刘轩铭" width="72" height="72">
               <div>
                 <p class="person__name"><a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">刘轩铭 (Xuanming Liu)</a></p>
-                <p class="person__role">研究成员 · 生成式 AI 与高效多模态模型</p>
+                <p class="person__role">首席研究员 · 生成式 AI 与高效多模态模型</p>
                 <p class="person__bio">来自南京的学生研究者。<strong>Sphere Lab</strong>（香港中文大学）实习生，导师 Jinxiu Liu 与 Weiyang Liu。ICLR 2026 与 ICML 2026 高效视频与流模型论文作者。<a href="https://github.com/xuanmingliu" target="_blank" rel="noopener">GitHub</a> · <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">个人主页</a></p>
+              </div>
+            </li>
+            <li class="person">
+              <img class="person__photo" src="https://avatars.githubusercontent.com/u/226689574?s=400&v=4" alt="龚浩岩" width="72" height="72">
+              <div>
+                <p class="person__name"><a href="https://billwblog.top" target="_blank" rel="noopener">龚浩岩 (Gong HaoYan)</a></p>
+                <p class="person__role">首席研究员 · 全栈系统与社区建设</p>
+                <p class="person__bio">来自深圳的学生 builder。<strong>AstraCore 量子星辰</strong> 创始人、_entropy 联合创始人、YOUTHGALA Builder。全栈 Web 开发者、活动组织者与 PM，专注产品与包容性社区。MoonShot48 北京 2026 参赛者。<a href="https://github.com/BillWGong" target="_blank" rel="noopener">GitHub</a> · <a href="https://billwblog.top" target="_blank" rel="noopener">个人主页</a></p>
               </div>
             </li>
           </ul>
@@ -227,51 +306,77 @@
 
         <section class="section" id="topics">
           <h2 class="section__title">研究方向</h2>
+          <p class="topic-filter-hint" id="topic-filter-hint" data-label-all="显示全部方向 — 点击标签可筛选动态与项目" data-label-one="当前筛选">显示全部方向 — 点击标签可筛选动态与项目</p>
           <ul class="topics">
-            <li><a href="#topics">#生成式-ai</a></li>
-            <li><a href="#topics">#高效多模态模型</a></li>
-            <li><a href="#topics">#视频生成</a></li>
-            <li><a href="#topics">#智能体系统</a></li>
-            <li><a href="#topics">#应用机器学习</a></li>
-            <li><a href="#topics">#人机交互</a></li>
-            <li><a href="#topics">#工具型智能体</a></li>
-            <li><a href="#topics">#情感计算</a></li>
-            <li><a href="#topics">#教育科技</a></li>
-            <li><a href="#topics">#信息学竞赛</a></li>
-            <li><a href="#topics">#移动系统</a></li>
-            <li><a href="#topics">#开源</a></li>
-            <li><a href="#topics">#心理健康</a></li>
-            <li><a href="#topics">#swift</a></li>
-            <li><a href="#topics">#rust</a></li>
+            <li><a href="#topics" data-topic-filter="">全部</a></li>
+            <li><a href="#topics" data-topic-filter="generative-ai">#生成式-ai</a></li>
+            <li><a href="#topics" data-topic-filter="efficient-models">#高效模型</a></li>
+            <li><a href="#topics" data-topic-filter="agent-systems">#智能体系统</a></li>
+            <li><a href="#topics" data-topic-filter="human-centered-products">#人本产品</a></li>
+            <li><a href="#topics" data-topic-filter="education-tech">#教育科技</a></li>
+            <li><a href="#topics" data-topic-filter="open-source">#开源</a></li>
+            <li><a href="#topics" data-topic-filter="competitive-engineering">#竞赛工程</a></li>
+            <li><a href="#topics" data-topic-filter="community-building">#社区建设</a></li>
           </ul>
+        </section>
+
+        <section class="section collaborate" id="collaborate">
+          <h2 class="section__title">合作交流</h2>
+          <p>青年智能体实验室欢迎科研交流、黑客松组队、产品协作与开源贡献。我们特别关注能把 <em>严谨 ML 研究</em> 与 <em>可交付系统</em> 连接起来的工作。</p>
+          <p>科研合作通常通过成员所在研究组推进（如 Sphere Lab）；产品与工程类合作可直接联系实验室。</p>
+          <div class="collaborate__actions">
+            <a class="collaborate__btn" href="mailto:0x11@linusshyu.dev">邮件联系实验室</a>
+            <a class="collaborate__btn collaborate__btn--outline" href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a>
+            <a class="collaborate__btn collaborate__btn--outline" href="/portfolio/">作品集</a>
+          </div>
         </section>
 
       </main>
 
       <aside class="sidebar">
         <div class="sidebar__block">
-          <h3 class="sidebar__heading">实验室联系</h3>
+          <h3 class="sidebar__heading">合作联系</h3>
           <p class="sidebar__contact">
             <a href="mailto:0x11@linusshyu.dev">0x11@linusshyu.dev</a>
           </p>
+          <p class="sidebar__contact" style="margin-top:10px;font-size:14px;color:var(--gray-700);font-weight:400;line-height:1.5">科研 · 产品 · 黑客松 · 开源</p>
         </div>
         <div class="sidebar__block">
           <h3 class="sidebar__heading">相关链接</h3>
           <ul class="sidebar__list">
-            <li><a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">DiagDistill (ICLR 2026)</a></li>
-            <li><a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">刘轩铭</a></li>
-            <li><a href="https://github.com/FeelFlowApp" target="_blank" rel="noopener">FeelFlow</a></li>
-            <li><a href="/academic/zh/">学术主页</a></li>
-            <li><a href="/portfolio/">作品集</a></li>
+            <li><a href="https://github.com/Sphere-AI-Lab/diagdistill" target="_blank" rel="noopener">Sphere Lab</a></li>
+            <li><a href="https://arxiv.org/abs/2603.09488" target="_blank" rel="noopener">DiagDistill (ICLR 2026)</a></li>
+            <li><a href="https://icml.cc/virtual/2026/poster/62738" target="_blank" rel="noopener">XYZFlow (ICML 2026)</a></li>
+            <li><a href="https://linusshyu.dev/feelflow/" target="_blank" rel="noopener">FeelFlow</a></li>
           </ul>
         </div>
         <div class="sidebar__block">
-          <h3 class="sidebar__heading">发现</h3>
-          <ul class="sidebar__list">
-            <li><a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://space.bilibili.com/411591950" target="_blank" rel="noopener">Bilibili</a></li>
-            <li><a href="/">博客</a></li>
-          </ul>
+          <h3 class="sidebar__heading">实验室与成员</h3>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">许发鑫 (Linus)</span>
+            <div class="sidebar__member-links">
+              <a href="/academic/zh/">学术主页</a>
+              <a href="/">博客</a>
+              <a href="/portfolio/">作品集</a>
+              <a href="https://github.com/Linus-Shyu" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://space.bilibili.com/411591950" target="_blank" rel="noopener">B站</a>
+            </div>
+          </div>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">刘轩铭</span>
+            <div class="sidebar__member-links">
+              <a href="https://xuanmingliu.github.io/xuanming.github.io/" target="_blank" rel="noopener">学术主页</a>
+              <a href="https://github.com/xuanmingliu" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+          <div class="sidebar__member">
+            <span class="sidebar__member-name">龚浩岩</span>
+            <div class="sidebar__member-links">
+              <a href="https://billwblog.top" target="_blank" rel="noopener">个人主页</a>
+              <a href="https://billwblog.top/blog" target="_blank" rel="noopener">博客</a>
+              <a href="https://github.com/BillWGong" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
         </div>
       </aside>
     </div>
@@ -284,16 +389,6 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('site-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    })();
-  </script>
+  <script src="/YoungAgentLab/lab.js"></script>
 </body>
 </html>
