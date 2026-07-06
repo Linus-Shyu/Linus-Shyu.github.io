@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,17 @@
       name="description"
       content="A production-style X bot growth operations dashboard for metrics, reply queues, service health, and API spend."
     />
-    <link rel="stylesheet" href="./styles.css?v=20260706-ops1" />
+    <script>
+      (() => {
+        const theme = localStorage.getItem("xbot-dashboard-theme") || "light";
+        const savedLang = localStorage.getItem("xbot-dashboard-lang");
+        const lang = savedLang || ((navigator.language || "").startsWith("zh") ? "zh" : "en");
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.lang = lang;
+        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css?v=20260706-ops2" />
   </head>
   <body>
     <div class="ops-shell">
@@ -17,29 +27,29 @@
           <span class="brand-mark">LS</span>
           <span>
             <strong>Tech Signals</strong>
-            <small>Growth Ops</small>
+            <small data-i18n="brand_subtitle">Growth Ops</small>
           </span>
         </a>
 
         <div class="env-card">
           <div class="env-line">
             <span class="status-dot"></span>
-            <strong>Production</strong>
+            <strong data-i18n="production">Production</strong>
           </div>
           <span id="updated-at">Loading</span>
         </div>
 
         <nav class="rail-nav">
-          <a href="#overview" class="active">Overview</a>
-          <a href="#services">Services</a>
-          <a href="#today">Workflow</a>
-          <a href="#drafts">Reply Queue</a>
-          <a href="#performance">Signals</a>
-          <a href="#cost">Cost</a>
+          <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
+          <a href="#services" data-i18n="nav_services">Services</a>
+          <a href="#today" data-i18n="nav_workflow">Workflow</a>
+          <a href="#drafts" data-i18n="nav_queue">Reply Queue</a>
+          <a href="#performance" data-i18n="nav_signals">Signals</a>
+          <a href="#cost" data-i18n="nav_cost">Cost</a>
         </nav>
 
         <div class="rail-budget">
-          <span>X API Budget</span>
+          <span data-i18n="x_api_budget">X API Budget</span>
           <strong id="rail-api-left">-</strong>
           <div class="meter"><div id="rail-api-meter"></div></div>
           <small id="rail-api-spend">Loading spend</small>
@@ -49,12 +59,22 @@
       <main class="ops-main">
         <header class="topbar">
           <div>
-            <p class="eyebrow">X Bot / Production Console</p>
-            <h1>X Bot Command Center</h1>
+            <p class="eyebrow" data-i18n="top_eyebrow">X Bot / Production Console</p>
+            <h1 data-i18n="title">X Bot Command Center</h1>
           </div>
           <div class="top-actions">
             <span class="live-pill"><span></span><strong id="mode-label">Zero extra X API</strong></span>
-            <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open X</a>
+            <div class="toolbar-group" aria-label="Dashboard preferences">
+              <div class="segmented" role="group" aria-label="Theme">
+                <button type="button" data-theme-value="light">Light</button>
+                <button type="button" data-theme-value="dark">Dark</button>
+              </div>
+              <div class="segmented" role="group" aria-label="Language">
+                <button type="button" data-lang-value="en">EN</button>
+                <button type="button" data-lang-value="zh">中文</button>
+              </div>
+            </div>
+            <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
 
@@ -62,17 +82,17 @@
           <article class="command-card">
             <div class="command-head">
               <div>
-                <p class="eyebrow">Mission Control</p>
-                <h2>Daily growth loop is ready for manual distribution.</h2>
+                <p class="eyebrow" data-i18n="mission_eyebrow">Mission Control</p>
+                <h2 data-i18n="mission_title">Daily growth loop is ready for manual distribution.</h2>
               </div>
-              <span class="server-badge">Live</span>
+              <span class="server-badge" data-i18n="live">Live</span>
             </div>
-            <p class="command-copy">
+            <p class="command-copy" data-i18n="mission_copy">
               Open the highest-signal tech conversations, paste vetted replies, and keep X API spend flat.
             </p>
             <div class="command-actions">
-              <a class="button button-primary" href="#today">Start loop</a>
-              <button class="button button-secondary" type="button" id="copy-top-three">Copy top 3 drafts</button>
+              <a class="button button-primary" href="#today" data-i18n="start_loop">Start loop</a>
+              <button class="button button-secondary" type="button" id="copy-top-three" data-i18n="copy_top_three">Copy top 3 drafts</button>
             </div>
             <div class="ops-terminal">
               <div class="terminal-bar">
@@ -88,28 +108,28 @@ track(metrics)</code></pre>
 
           <aside class="server-card" aria-label="Live server status">
             <div class="server-top">
-              <span>Deployment</span>
+              <span data-i18n="deployment">Deployment</span>
               <strong id="sync-updated">Loading</strong>
             </div>
             <div class="server-screen">
               <div class="pulse-ring">
                 <span></span>
                 <strong id="hero-followers">-</strong>
-                <small>followers</small>
+                <small data-i18n="followers">followers</small>
               </div>
               <div class="server-stats">
                 <div>
-                  <span>24h Impr.</span>
+                  <span data-i18n="impressions_24h_short">24h Impr.</span>
                   <strong id="hero-impressions">-</strong>
                 </div>
                 <div>
-                  <span>API Left</span>
+                  <span data-i18n="api_left">API Left</span>
                   <strong id="hero-api-left">-</strong>
                 </div>
               </div>
             </div>
             <div class="next-reply">
-              <span>Next reply draft</span>
+              <span data-i18n="next_reply">Next reply draft</span>
               <p id="hero-draft">Loading latest reply draft...</p>
             </div>
           </aside>
@@ -121,10 +141,10 @@ track(metrics)</code></pre>
           <article class="panel panel-wide" id="services">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Server Health</p>
-                <h2>Runtime services</h2>
+                <p class="eyebrow" data-i18n="server_health">Server Health</p>
+                <h2 data-i18n="runtime_services">Runtime services</h2>
               </div>
-              <span class="pill">No extra X reads</span>
+              <span class="pill" data-i18n="no_extra_x_reads">No extra X reads</span>
             </div>
             <div class="service-grid" id="service-grid"></div>
           </article>
@@ -132,8 +152,8 @@ track(metrics)</code></pre>
           <article class="panel">
             <div class="panel-heading compact-heading">
               <div>
-                <p class="eyebrow">Traffic</p>
-                <h2>7d signal shape</h2>
+                <p class="eyebrow" data-i18n="traffic">Traffic</p>
+                <h2 data-i18n="signal_shape">7d signal shape</h2>
               </div>
             </div>
             <div class="spark-panel" id="trend-bars"></div>
@@ -144,10 +164,10 @@ track(metrics)</code></pre>
           <article class="panel panel-wide" id="today">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Posting Pipeline</p>
-                <h2>Today workflow</h2>
+                <p class="eyebrow" data-i18n="posting_pipeline">Posting Pipeline</p>
+                <h2 data-i18n="today_workflow">Today workflow</h2>
               </div>
-              <span class="pill">Manual web actions only</span>
+              <span class="pill" data-i18n="manual_web_actions">Manual web actions only</span>
             </div>
             <div class="action-board" id="action-board"></div>
           </article>
@@ -155,8 +175,8 @@ track(metrics)</code></pre>
           <article class="panel">
             <div class="panel-heading compact-heading">
               <div>
-                <p class="eyebrow">Runbook</p>
-                <h2>Operator notes</h2>
+                <p class="eyebrow" data-i18n="runbook">Runbook</p>
+                <h2 data-i18n="operator_notes">Operator notes</h2>
               </div>
             </div>
             <ol class="diagnosis-list" id="diagnosis-list"></ol>
@@ -167,8 +187,8 @@ track(metrics)</code></pre>
           <article class="panel panel-wide" id="drafts">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Reply Queue</p>
-                <h2>Copy-ready drafts</h2>
+                <p class="eyebrow" data-i18n="reply_queue">Reply Queue</p>
+                <h2 data-i18n="copy_ready_drafts">Copy-ready drafts</h2>
               </div>
             </div>
             <div class="draft-list" id="draft-list"></div>
@@ -177,10 +197,10 @@ track(metrics)</code></pre>
           <article class="panel" id="cost">
             <div class="panel-heading compact-heading">
               <div>
-                <p class="eyebrow">Cost Guard</p>
-                <h2>X API budget</h2>
+                <p class="eyebrow" data-i18n="cost_guard">Cost Guard</p>
+                <h2 data-i18n="x_api_budget">X API budget</h2>
               </div>
-              <span class="pill pill-good">Guarded</span>
+              <span class="pill pill-good" data-i18n="guarded">Guarded</span>
             </div>
             <div class="budget-card">
               <div class="budget-line">
@@ -188,7 +208,7 @@ track(metrics)</code></pre>
                 <span id="api-cap-label">-</span>
               </div>
               <div class="meter"><div id="api-meter"></div></div>
-              <p>Dashboard sync uses GitHub API only. It does not add X API search/read calls.</p>
+              <p data-i18n="cost_note">Dashboard sync uses GitHub API only. It does not add X API search/read calls.</p>
             </div>
             <div class="api-list" id="api-usage"></div>
           </article>
@@ -197,20 +217,20 @@ track(metrics)</code></pre>
         <section class="panel" id="performance">
           <div class="panel-heading">
             <div>
-              <p class="eyebrow">Signal Store</p>
-              <h2>Recent winners</h2>
+              <p class="eyebrow" data-i18n="signal_store">Signal Store</p>
+              <h2 data-i18n="recent_winners">Recent winners</h2>
             </div>
-            <span class="pill pill-neutral">Last 7 days</span>
+            <span class="pill pill-neutral" data-i18n="last_7_days">Last 7 days</span>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Score</th>
-                  <th>Impr.</th>
-                  <th>Likes</th>
-                  <th>Format</th>
-                  <th>Tweet</th>
+                  <th data-i18n="score">Score</th>
+                  <th data-i18n="impr">Impr.</th>
+                  <th data-i18n="likes">Likes</th>
+                  <th data-i18n="format">Format</th>
+                  <th data-i18n="tweet">Tweet</th>
                 </tr>
               </thead>
               <tbody id="top-posts"></tbody>
@@ -221,6 +241,10 @@ track(metrics)</code></pre>
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <script src="./script.js?v=20260706-ops1" defer></script>
+    <footer class="site-footer">
+      <span>© <span id="copyright-year"></span> Linus Shyu.</span>
+      <span data-i18n="copyright_suffix">All rights reserved.</span>
+    </footer>
+    <script src="./script.js?v=20260706-ops2" defer></script>
   </body>
 </html>
