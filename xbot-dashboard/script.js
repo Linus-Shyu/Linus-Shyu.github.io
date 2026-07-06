@@ -119,6 +119,9 @@ const translations = {
     top_eyebrow: "X Bot / Production Console",
     title: "X Bot Command Center",
     zero_extra_x_api: "Zero extra X API",
+    live_data: "Live data",
+    data_stale: "Data stale",
+    fallback_data: "Fallback data",
     open_x: "Open X",
     mission_eyebrow: "Mission Control",
     mission_title: "Daily growth loop is ready for manual distribution.",
@@ -206,6 +209,9 @@ const translations = {
     top_eyebrow: "X Bot / 生产控制台",
     title: "X Bot 指挥中心",
     zero_extra_x_api: "零额外 X API",
+    live_data: "实时数据",
+    data_stale: "数据过期",
+    fallback_data: "备用数据",
     open_x: "打开 X",
     mission_eyebrow: "任务控制",
     mission_title: "今日增长循环已就绪，等待人工分发。",
@@ -329,6 +335,7 @@ const money = (value) => `$${number(value).toFixed(3)}`;
 let dashboardData = fallbackData;
 let currentLang = document.documentElement.dataset.lang === "zh" ? "zh" : "en";
 let currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+let dataLoadStatus = "fallback";
 
 function t(key, vars = {}) {
   const value = translations[currentLang]?.[key] ?? translations.en[key] ?? key;
@@ -369,8 +376,10 @@ async function loadData() {
     const response = await fetch(`./data.json?ts=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     dashboardData = await response.json();
+    dataLoadStatus = "live";
   } catch {
     dashboardData = fallbackData;
+    dataLoadStatus = "fallback";
   }
 }
 
@@ -442,6 +451,15 @@ function localizeDraftMeta(draft, fallbackTitle = "Relevant tech post") {
   };
 }
 
+function dataFreshness() {
+  if (dataLoadStatus !== "live") return { key: "fallback_data", className: "danger" };
+  const updated = new Date(dashboardData.updatedAt);
+  if (Number.isNaN(updated.getTime())) return { key: "data_stale", className: "warn" };
+  const ageHours = (Date.now() - updated.getTime()) / 36e5;
+  if (ageHours > 12) return { key: "data_stale", className: "warn" };
+  return { key: "live_data", className: "ok" };
+}
+
 function draftFor(index) {
   const drafts = dashboardData.drafts || [];
   return drafts[Math.min(Math.max(0, index), Math.max(0, drafts.length - 1))] || fallbackData.drafts[0];
@@ -450,7 +468,11 @@ function draftFor(index) {
 function renderHeader() {
   const updated = formatDate(dashboardData.updatedAt);
   const { spend, cap, remaining, ratio } = apiBudget();
-  $("#mode-label").textContent = t("zero_extra_x_api");
+  const freshness = dataFreshness();
+  const livePill = document.querySelector(".live-pill");
+  $("#mode-label").textContent = t(freshness.key);
+  livePill.classList.toggle("warn", freshness.className === "warn");
+  livePill.classList.toggle("danger", freshness.className === "danger");
   $("#updated-at").textContent = t("updated", { date: updated });
   $("#sync-updated").textContent = updated;
   $("#rail-api-left").textContent = t("money_left", { amount: remaining.toFixed(2) });
