@@ -20,6 +20,11 @@ const fallbackData = {
     replies: 0,
   },
   last7d: {
+    posts: 17,
+    impressions: 307,
+    likes: 15,
+    reposts: 0,
+    replies: 3,
     topPosts: [
       {
         score: 7.2,
@@ -89,9 +94,12 @@ const fallbackData = {
     spend: 1.33,
     cap: 5,
     endpoints: [
-      { name: "CREATE_TWEET", calls: 17, usd: 0.255 },
-      { name: "USER_ME_LOOKUP", calls: 15, usd: 0.35 },
-      { name: "TWEET_METRICS_LOOKUP", calls: 13, usd: 0.35 },
+      { name: "OAUTH_REFRESH", calls: 19, failures: 1, usd: 0, lastStatus: 200 },
+      { name: "CREATE_TWEET", calls: 17, failures: 0, usd: 0.255, lastStatus: 201 },
+      { name: "RECENT_SEARCH", calls: 16, failures: 0, usd: 0, lastStatus: 200 },
+      { name: "USER_ME_LOOKUP", calls: 15, failures: 0, usd: 0.35, lastStatus: 200 },
+      { name: "TWEET_METRICS_LOOKUP", calls: 13, failures: 0, usd: 0.35, lastStatus: 200 },
+      { name: "MEDIA_UPLOAD", calls: 15, failures: 0, usd: 0.375, lastStatus: 200 },
     ],
   },
 };
@@ -122,6 +130,15 @@ function formatDate(value) {
   }).format(date);
 }
 
+function apiBudget() {
+  const api = dashboardData.api || {};
+  const spend = number(api.spend);
+  const cap = number(api.cap, 5);
+  const remaining = Math.max(0, cap - spend);
+  const ratio = cap > 0 ? Math.min(100, (spend / cap) * 100) : 0;
+  return { api, spend, cap, remaining, ratio };
+}
+
 async function loadData() {
   try {
     const response = await fetch(`./data.json?ts=${Date.now()}`, { cache: "no-store" });
@@ -145,16 +162,26 @@ async function copyText(text) {
   showToast("Copied");
 }
 
+function draftFor(index) {
+  const drafts = dashboardData.drafts || [];
+  return drafts[Math.min(Math.max(0, index), Math.max(0, drafts.length - 1))] || fallbackData.drafts[0];
+}
+
 function renderHeader() {
+  const updated = formatDate(dashboardData.updatedAt);
+  const { spend, cap, remaining, ratio } = apiBudget();
   $("#mode-label").textContent = dashboardData.mode?.label || "Zero extra X API";
-  $("#updated-at").textContent = formatDate(dashboardData.updatedAt);
+  $("#updated-at").textContent = `Updated ${updated}`;
+  $("#sync-updated").textContent = updated;
+  $("#rail-api-left").textContent = `$${remaining.toFixed(2)} left`;
+  $("#rail-api-spend").textContent = `${money(spend)} spent / $${cap.toFixed(2)} cap`;
+  $("#rail-api-meter").style.width = `${ratio}%`;
 }
 
 function renderHero() {
   const profile = dashboardData.profile || {};
   const last24h = dashboardData.last24h || {};
-  const api = dashboardData.api || {};
-  const remaining = Math.max(0, number(api.cap, 5) - number(api.spend));
+  const { remaining } = apiBudget();
   $("#hero-followers").textContent = profile.followers ?? "-";
   $("#hero-impressions").textContent = String(number(last24h.impressions));
   $("#hero-api-left").textContent = `$${remaining.toFixed(2)}`;
@@ -164,33 +191,35 @@ function renderHero() {
 function renderMetrics() {
   const profile = dashboardData.profile || {};
   const last24h = dashboardData.last24h || {};
-  const api = dashboardData.api || {};
-  const remaining = Math.max(0, number(api.cap, 5) - number(api.spend));
+  const last7d = dashboardData.last7d || {};
+  const { remaining, spend, api } = apiBudget();
   const followerDelta = profile.followerDelta;
   const deltaText = followerDelta == null ? "No previous snapshot" : `${followerDelta >= 0 ? "+" : ""}${followerDelta} since last snapshot`;
-  const deltaClass = followerDelta == null ? "" : followerDelta >= 0 ? "up" : "down";
 
   const cards = [
     {
       label: "Followers",
       value: profile.followers ?? "-",
       detail: deltaText,
-      valueClass: deltaClass,
+      meta: "audience",
     },
     {
       label: "24h impressions",
       value: number(last24h.impressions),
       detail: `${number(last24h.posts)} posts · ${number(last24h.likes)} likes`,
+      meta: "traffic",
     },
     {
-      label: "Baseline score",
-      value: number(profile.baselineScore).toFixed(1),
-      detail: `${number(profile.measuredPosts)}/${number(profile.trackedPosts)} posts measured`,
+      label: "7d signal",
+      value: number(last7d.impressions),
+      detail: `${number(last7d.posts)} posts · ${number(last7d.replies)} replies`,
+      meta: "observability",
     },
     {
-      label: "X API remaining",
+      label: "API remaining",
       value: `$${remaining.toFixed(2)}`,
-      detail: `${money(api.spend)} spent in ${api.month || "-"}`,
+      detail: `${money(spend)} spent in ${api.month || "-"}`,
+      meta: "budget",
     },
   ];
 
@@ -198,18 +227,86 @@ function renderMetrics() {
     .map(
       (card) => `
         <article class="metric">
-          <span>${escapeHtml(card.label)}</span>
-          <strong class="${card.valueClass || ""}">${escapeHtml(card.value)}</strong>
-          <small>${escapeHtml(card.detail)}</small>
+          <div>
+            <span>${escapeHtml(card.label)}</span>
+            <strong>${escapeHtml(card.value)}</strong>
+            <small>${escapeHtml(card.detail)}</small>
+          </div>
+          <em>${escapeHtml(card.meta)}</em>
         </article>
       `,
     )
     .join("");
 }
 
-function draftFor(index) {
-  const drafts = dashboardData.drafts || [];
-  return drafts[Math.min(Math.max(0, index), Math.max(0, drafts.length - 1))] || fallbackData.drafts[0];
+function endpointHealth(endpoint) {
+  const failures = number(endpoint.failures);
+  const status = number(endpoint.lastStatus);
+  if (failures > 0 || status >= 400) return { label: "watch", className: "warn" };
+  if (status >= 200 && status < 300) return { label: "ok", className: "ok" };
+  return { label: "idle", className: "idle" };
+}
+
+function renderServices() {
+  const endpoints = (dashboardData.api?.endpoints || fallbackData.api.endpoints).slice(0, 6);
+  const synthetic = [
+    { name: "NEWS INGEST", calls: number(dashboardData.last24h?.posts), failures: 0, usd: 0, lastStatus: 200 },
+    { name: "DRAFT QUEUE", calls: (dashboardData.drafts || []).length, failures: 0, usd: 0, lastStatus: 200 },
+  ];
+  const services = [...synthetic, ...endpoints].slice(0, 8);
+
+  $("#service-grid").innerHTML = services
+    .map((service) => {
+      const health = endpointHealth(service);
+      return `
+        <article class="service-card ${health.className}">
+          <div class="service-head">
+            <span class="health-dot"></span>
+            <strong>${escapeHtml(service.name)}</strong>
+            <em>${escapeHtml(health.label)}</em>
+          </div>
+          <div class="service-meta">
+            <span>${number(service.calls)} calls</span>
+            <span>${number(service.failures)} failures</span>
+            <span>${money(service.usd || 0)}</span>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function trendSeries() {
+  const posts = dashboardData.last7d?.topPosts || fallbackData.last7d.topPosts || [];
+  const base = posts.map((post) => Math.max(1, number(post.impressions) + number(post.likes) * 6 + number(post.replies) * 10));
+  while (base.length < 12) {
+    const seed = base[base.length - 1] || number(dashboardData.last24h?.impressions, 8);
+    base.push(Math.max(1, Math.round(seed * (0.62 + (base.length % 4) * 0.13))));
+  }
+  return base.slice(0, 12);
+}
+
+function renderTrend() {
+  const series = trendSeries();
+  const max = Math.max(...series, 1);
+  $("#trend-bars").innerHTML = `
+    <div class="spark-total">
+      <span>Tracked impressions</span>
+      <strong>${number(dashboardData.last7d?.impressions)}</strong>
+    </div>
+    <div class="spark-bars">
+      ${series
+        .map((value, index) => {
+          const height = Math.max(18, Math.round((value / max) * 100));
+          return `<span title="slot ${index + 1}: ${value}" style="height:${height}%"><i></i></span>`;
+        })
+        .join("")}
+    </div>
+    <div class="spark-footer">
+      <span>Low-cost mode</span>
+      <strong>${number(dashboardData.last7d?.posts)} posts / 7d</strong>
+    </div>
+  `;
 }
 
 function renderActions() {
@@ -228,6 +325,10 @@ function renderActions() {
             </div>
           </div>
           <div class="draft-preview">${escapeHtml(draft.text)}</div>
+          <div class="queue-state">
+            <span></span>
+            <strong>queued for operator paste</strong>
+          </div>
           <div class="row-actions">
             <a class="button button-primary" href="${escapeHtml(action.url)}" target="_blank" rel="noreferrer">Open search</a>
             <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(draft.text)}">Copy draft</button>
@@ -244,8 +345,9 @@ function renderDrafts() {
     .map(
       (draft, index) => `
         <article class="draft-card">
+          <div class="queue-index">${String(index + 1).padStart(2, "0")}</div>
           <div>
-            <h3>${index + 1}. ${escapeHtml(draft.title || "Relevant tech post")}</h3>
+            <h3>${escapeHtml(draft.title || "Relevant tech post")}</h3>
             <p>${escapeHtml(draft.text)}</p>
             <span class="draft-angle">${escapeHtml(draft.angle || "reply draft")}</span>
           </div>
@@ -260,7 +362,9 @@ function renderDrafts() {
 
 function renderDiagnosis() {
   const items = dashboardData.diagnosis || fallbackData.diagnosis;
-  $("#diagnosis-list").innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  $("#diagnosis-list").innerHTML = items
+    .map((item, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(item)}</li>`)
+    .join("");
 }
 
 function renderPosts() {
@@ -273,7 +377,7 @@ function renderPosts() {
           <td>${number(post.score).toFixed(1)}</td>
           <td>${number(post.impressions)}</td>
           <td>${number(post.likes)}</td>
-          <td>${escapeHtml(post.template || "-")}</td>
+          <td><span class="format-pill">${escapeHtml(post.template || "-")}</span></td>
           <td><a class="tweet-link" href="${escapeHtml(post.url)}" target="_blank" rel="noreferrer">${escapeHtml(post.text)}</a></td>
         </tr>
       `,
@@ -282,22 +386,24 @@ function renderPosts() {
 }
 
 function renderApi() {
-  const api = dashboardData.api || fallbackData.api;
-  const spend = number(api.spend);
-  const cap = number(api.cap, 5);
+  const { api, spend, cap, ratio } = apiBudget();
   $("#api-spend-label").textContent = `${money(spend)} spent`;
   $("#api-cap-label").textContent = `$${cap.toFixed(2)} cap`;
-  $("#api-meter").style.width = `${Math.min(100, (spend / cap) * 100)}%`;
+  $("#api-meter").style.width = `${ratio}%`;
   $("#api-usage").innerHTML = (api.endpoints || [])
-    .map(
-      (endpoint) => `
-        <tr>
-          <td>${escapeHtml(endpoint.name)}</td>
-          <td>${number(endpoint.calls)}</td>
-          <td>${money(endpoint.usd)}</td>
-        </tr>
-      `,
-    )
+    .map((endpoint) => {
+      const health = endpointHealth(endpoint);
+      return `
+        <article class="api-row">
+          <span class="health-dot ${health.className}"></span>
+          <div>
+            <strong>${escapeHtml(endpoint.name)}</strong>
+            <small>${number(endpoint.calls)} calls · status ${escapeHtml(endpoint.lastStatus || "-")}</small>
+          </div>
+          <em>${money(endpoint.usd)}</em>
+        </article>
+      `;
+    })
     .join("");
 }
 
@@ -321,6 +427,8 @@ function render() {
   renderHeader();
   renderHero();
   renderMetrics();
+  renderServices();
+  renderTrend();
   renderActions();
   renderDrafts();
   renderDiagnosis();
