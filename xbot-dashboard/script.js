@@ -150,6 +150,17 @@ function renderHeader() {
   $("#updated-at").textContent = formatDate(dashboardData.updatedAt);
 }
 
+function renderHero() {
+  const profile = dashboardData.profile || {};
+  const last24h = dashboardData.last24h || {};
+  const api = dashboardData.api || {};
+  const remaining = Math.max(0, number(api.cap, 5) - number(api.spend));
+  $("#hero-followers").textContent = profile.followers ?? "-";
+  $("#hero-impressions").textContent = String(number(last24h.impressions));
+  $("#hero-api-left").textContent = `$${remaining.toFixed(2)}`;
+  $("#hero-draft").textContent = draftFor(0).text;
+}
+
 function renderMetrics() {
   const profile = dashboardData.profile || {};
   const last24h = dashboardData.last24h || {};
@@ -308,6 +319,7 @@ function bindCopyButtons() {
 
 function render() {
   renderHeader();
+  renderHero();
   renderMetrics();
   renderActions();
   renderDrafts();

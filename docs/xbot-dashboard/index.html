@@ -3,148 +3,165 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>X Bot Growth Command Center</title>
+    <title>X Bot Growth Dashboard</title>
     <meta
       name="description"
-      content="Daily X growth command center with live bot metrics, reply actions, API spend, and copy-ready drafts."
+      content="A clean X growth dashboard for daily distribution actions, reply drafts, performance, and API spend."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="shell">
-      <aside class="rail" aria-label="Dashboard navigation">
-        <div class="brand-mark">LS</div>
-        <nav>
-          <a href="#today">Today</a>
-          <a href="#drafts">Drafts</a>
-          <a href="#performance">Posts</a>
-          <a href="#cost">Cost</a>
-        </nav>
-      </aside>
+    <header class="site-nav" aria-label="Primary navigation">
+      <a class="brand" href="#">
+        <span class="brand-mark">LS</span>
+        <span>Tech Signals</span>
+      </a>
+      <nav>
+        <a href="#today">Today</a>
+        <a href="#drafts">Drafts</a>
+        <a href="#performance">Performance</a>
+        <a href="#cost">Cost</a>
+      </nav>
+      <a class="nav-cta" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open X</a>
+    </header>
 
-      <main>
-        <header class="masthead">
-          <div>
-            <p class="eyebrow">Linus Shyu | Tech Signals</p>
-            <h1>Growth Command Center</h1>
-            <p class="masthead-copy">
-              One page for the daily manual distribution loop: open X searches, copy the best reply, and keep API spend controlled.
-            </p>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">X Bot Growth System</p>
+          <h1>Bring X growth into one clean control surface.</h1>
+          <p class="hero-subcopy">
+            The bot keeps posting and learning. This dashboard turns the daily distribution work into three precise manual actions with zero extra X API spend.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#today">Start today's loop</a>
+            <a class="button button-secondary" href="#drafts">Copy replies</a>
           </div>
-          <div class="masthead-actions">
-            <a class="button button-secondary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open profile</a>
-            <a class="button button-primary" href="#today">Start today</a>
-          </div>
-        </header>
+        </div>
 
-        <section class="alert-row" aria-label="Dashboard status">
-          <div class="alert alert-good">
-            <span>Mode</span>
-            <strong id="mode-label">Zero extra X API</strong>
+        <aside class="spectrum-console" aria-label="Live dashboard preview">
+          <div class="console-top">
+            <span id="mode-label">Zero extra X API</span>
+            <span id="updated-at">Loading</span>
           </div>
-          <div class="alert">
-            <span>Last sync</span>
-            <strong id="updated-at">Loading</strong>
+          <div class="channel-card active-channel">
+            <span>01 / Target Accounts</span>
+            <strong>Open high-signal tech conversations</strong>
+            <p id="hero-draft">Loading latest reply draft...</p>
           </div>
-          <div class="alert">
-            <span>Rule</span>
-            <strong>3-5 useful replies, then stop</strong>
-          </div>
-        </section>
-
-        <section class="metric-grid" id="metric-grid" aria-label="Key metrics"></section>
-
-        <section class="workbench" id="today">
-          <div class="section-title">
+          <div class="mini-grid">
             <div>
-              <p class="eyebrow">Today's loop</p>
-              <h2>Do these in order</h2>
+              <span>Followers</span>
+              <strong id="hero-followers">-</strong>
             </div>
-            <span class="pill">Manual web actions only</span>
+            <div>
+              <span>24h Impr.</span>
+              <strong id="hero-impressions">-</strong>
+            </div>
+            <div>
+              <span>API Left</span>
+              <strong id="hero-api-left">-</strong>
+            </div>
           </div>
-          <div class="action-board" id="action-board"></div>
+          <pre><code>// daily routing
+open("Target Accounts")
+copy(bestReply)
+reply(3 to 5)</code></pre>
+        </aside>
+      </section>
+
+      <section class="metric-grid" id="metric-grid" aria-label="Key metrics"></section>
+
+      <section class="section-panel" id="today">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Daily workflow</p>
+            <h2>Three channels. Three replies. Stop.</h2>
+          </div>
+          <span class="pill">Manual web actions only</span>
+        </div>
+        <div class="action-board" id="action-board"></div>
+      </section>
+
+      <section class="two-column">
+        <section class="section-panel" id="drafts">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Reply bank</p>
+              <h2>Copy-ready replies</h2>
+            </div>
+            <button class="button button-secondary" type="button" id="copy-top-three">Copy top 3</button>
+          </div>
+          <div class="draft-list" id="draft-list"></div>
         </section>
 
-        <section class="split">
-          <section class="workbench" id="drafts">
-            <div class="section-title">
-              <div>
-                <p class="eyebrow">Reply bank</p>
-                <h2>Copy-ready drafts</h2>
-              </div>
-              <button class="button button-secondary" type="button" id="copy-top-three">Copy top 3</button>
+        <section class="section-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Diagnosis</p>
+              <h2>What matters now</h2>
             </div>
-            <div class="draft-list" id="draft-list"></div>
-          </section>
+          </div>
+          <ol class="diagnosis-list" id="diagnosis-list"></ol>
+        </section>
+      </section>
 
-          <section class="workbench">
-            <div class="section-title">
-              <div>
-                <p class="eyebrow">Diagnosis</p>
-                <h2>What matters now</h2>
-              </div>
+      <section class="two-column">
+        <section class="section-panel" id="performance">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Performance</p>
+              <h2>Recent winners</h2>
             </div>
-            <ol class="diagnosis-list" id="diagnosis-list"></ol>
-          </section>
+            <span class="pill pill-neutral">Last 7 days</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Score</th>
+                  <th>Impr.</th>
+                  <th>Likes</th>
+                  <th>Format</th>
+                  <th>Tweet</th>
+                </tr>
+              </thead>
+              <tbody id="top-posts"></tbody>
+            </table>
+          </div>
         </section>
 
-        <section class="split">
-          <section class="workbench" id="performance">
-            <div class="section-title">
-              <div>
-                <p class="eyebrow">Performance</p>
-                <h2>Best recent posts</h2>
-              </div>
-              <span class="pill pill-neutral">Last 7 days</span>
+        <section class="section-panel" id="cost">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cost control</p>
+              <h2>X API budget</h2>
             </div>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Score</th>
-                    <th>Impr.</th>
-                    <th>Likes</th>
-                    <th>Format</th>
-                    <th>Tweet</th>
-                  </tr>
-                </thead>
-                <tbody id="top-posts"></tbody>
-              </table>
+            <span class="pill pill-good">Low-cost</span>
+          </div>
+          <div class="budget-card">
+            <div class="budget-line">
+              <span id="api-spend-label">-</span>
+              <span id="api-cap-label">-</span>
             </div>
-          </section>
-
-          <section class="workbench" id="cost">
-            <div class="section-title">
-              <div>
-                <p class="eyebrow">Spend</p>
-                <h2>X API budget</h2>
-              </div>
-              <span class="pill pill-good">Low-cost</span>
-            </div>
-            <div class="budget-block">
-              <div class="budget-line">
-                <span id="api-spend-label">-</span>
-                <span id="api-cap-label">-</span>
-              </div>
-              <div class="meter"><div id="api-meter"></div></div>
-              <p class="budget-note">Dashboard sync uses GitHub API only. It does not add X API search/read calls.</p>
-            </div>
-            <div class="table-wrap compact">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Endpoint</th>
-                    <th>Calls</th>
-                    <th>USD</th>
-                  </tr>
-                </thead>
-                <tbody id="api-usage"></tbody>
-              </table>
-            </div>
-          </section>
+            <div class="meter"><div id="api-meter"></div></div>
+            <p>Dashboard sync uses GitHub API only. It does not add X API search/read calls.</p>
+          </div>
+          <div class="table-wrap compact">
+            <table>
+              <thead>
+                <tr>
+                  <th>Endpoint</th>
+                  <th>Calls</th>
+                  <th>USD</th>
+                </tr>
+              </thead>
+              <tbody id="api-usage"></tbody>
+            </table>
+          </div>
         </section>
-      </main>
-    </div>
+      </section>
+    </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
     <script src="./script.js" defer></script>
