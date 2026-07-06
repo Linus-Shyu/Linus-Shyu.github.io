@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X Bot Growth Dashboard</title>
+    <meta
+      name="description"
+      content="A low-cost X growth dashboard for daily reply actions, tweet performance, and API spend."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Linus Shyu | Tech Signals</p>
+        <h1>X Bot Growth Dashboard</h1>
+      </div>
+      <div class="topbar-actions">
+        <a class="button button-secondary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open X</a>
+        <a class="button button-primary" href="#daily-actions">Today's actions</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="status-strip" aria-label="Dashboard summary">
+        <div class="status-item">
+          <span class="status-label">Mode</span>
+          <strong>Zero extra X API</strong>
+          <small>Web links + manual paste</small>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Updated</span>
+          <strong id="updated-at">-</strong>
+          <small>From latest report</small>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Decision</span>
+          <strong>Distribution first</strong>
+          <small>主贴养主页，回复借流量</small>
+        </div>
+      </section>
+
+      <section class="kpi-grid" id="kpi-grid" aria-label="Key metrics"></section>
+
+      <section class="layout">
+        <section class="panel action-panel" id="daily-actions">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Daily workflow</p>
+              <h2>今天只做这三步</h2>
+            </div>
+            <span class="badge">3-5 replies max</span>
+          </div>
+          <div class="action-list" id="action-list"></div>
+        </section>
+
+        <aside class="panel diagnosis-panel">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Diagnosis</p>
+              <h2>为什么还没起量</h2>
+            </div>
+          </div>
+          <ul class="diagnosis-list" id="diagnosis-list"></ul>
+        </aside>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Copy-paste bank</p>
+            <h2>回复草稿</h2>
+          </div>
+          <button class="button button-secondary" type="button" id="copy-first-three">Copy top 3</button>
+        </div>
+        <div class="draft-grid" id="draft-grid"></div>
+      </section>
+
+      <section class="layout">
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Performance</p>
+              <h2>最近 7 天最好推文</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Score</th>
+                  <th>Impr.</th>
+                  <th>Likes</th>
+                  <th>Template</th>
+                  <th>Tweet</th>
+                </tr>
+              </thead>
+              <tbody id="top-posts"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Cost control</p>
+              <h2>X API 花费</h2>
+            </div>
+            <span class="badge badge-green">Low-cost mode</span>
+          </div>
+          <div class="cost-meter">
+            <div class="meter-label">
+              <span id="api-spend-label">-</span>
+              <span>$5 monthly cap</span>
+            </div>
+            <div class="meter-track" aria-hidden="true"><div class="meter-fill" id="api-meter"></div></div>
+          </div>
+          <div class="table-wrap compact-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Endpoint</th>
+                  <th>Calls</th>
+                  <th>USD</th>
+                </tr>
+              </thead>
+              <tbody id="api-usage"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>

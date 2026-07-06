@@ -19,10 +19,11 @@ const PRESERVE_DIRS = new Set([
   'starfetch',
   'paytube',
   'YoungAgentLab',
+  'xbot-dashboard',
 ]);
 
 /** Standalone subsites maintained at repo root — copied into docs/ on each deploy. */
-const SUBSITE_SOURCES = ['YoungAgentLab'];
+const SUBSITE_SOURCES = ['YoungAgentLab', 'xbot-dashboard'];
 
 if (!fs.existsSync(publicDir)) {
   console.error('Missing public/ — run `npm run build` first.');
