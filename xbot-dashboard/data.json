@@ -1,63 +1,63 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T00:17:43.839Z",
+  "updatedAt": "2026-07-06T15:50:43.434Z",
   "mode": {
     "label": "Zero extra X API",
     "description": "Web search links + manual paste replies."
   },
   "profile": {
-    "followers": 66,
+    "followers": 65,
     "followerDelta": -1,
-    "followerCheckedAt": "2026-07-06T00:17:43.830Z",
+    "followerCheckedAt": "2026-07-06T15:50:33.163Z",
     "trackedPosts": 120,
     "measuredPosts": 120,
     "baselineScore": 3.9
   },
   "last24h": {
-    "posts": 3,
-    "impressions": 8,
-    "likes": 0,
+    "posts": 2,
+    "impressions": 12,
+    "likes": 1,
     "reposts": 0,
     "replies": 0,
     "topPosts": [
       {
+        "id": "2073904896760512550",
+        "text": "Printer buying rule: if it needs a cloud account, proprietary ink, or a mystery driver, don't buy it. Pay more for repair docs, standard parts, and open firmware. Cheap printers are just financing plans with paper trays. #OpenSource #Hardware",
+        "url": "https://x.com/i/web/status/2073904896760512550",
+        "score": 2,
+        "impressions": 3,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "template": "decision_rule",
+        "source": "news.ycombinator.com",
+        "postedAt": "2026-07-05T23:00:33.472Z"
+      },
+      {
         "id": "2073828007999914189",
-        "text": "Google's AI-Declaration ad exposes the real operator pain: AI makes first drafts cheap, but taste becomes the bottleneck.",
+        "text": "Google’s AI-Declaration ad exposes the real operator pain: AI makes first drafts cheap, but taste becomes the bottleneck. Someone still has to know what must not sound like Google Docs. #AI #BigTech",
         "url": "https://x.com/i/web/status/2073828007999914189",
-        "score": 0,
-        "impressions": 4,
+        "score": 0.1,
+        "impressions": 9,
         "likes": 0,
         "reposts": 0,
         "replies": 0,
         "template": "operator_pain",
         "source": "techcrunch.com",
-        "postedAt": "2026-07-05T17:55:01.768Z"
-      },
-      {
-        "id": "2073787528960778374",
-        "text": "Decision rule for AI-written copy: use ChatGPT for structure, never for taste.",
-        "url": "https://x.com/i/web/status/2073787528960778374",
-        "score": 0,
-        "impressions": 4,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "decision_rule",
-        "source": "theguardian.com",
-        "postedAt": "2026-07-05T15:14:10.834Z"
+        "postedAt": "2026-07-05T17:55:01.763Z"
       }
     ]
   },
   "last7d": {
-    "posts": 17,
-    "impressions": 307,
-    "likes": 15,
+    "posts": 21,
+    "impressions": 381,
+    "likes": 19,
     "reposts": 0,
-    "replies": 3,
+    "replies": 2,
     "topPosts": [
       {
         "id": "2072393488411365572",
-        "text": "If a workflow already has clear permissions, logs, and rollback, test Claude Sonnet 5 this week.",
+        "text": "If a workflow already has clear permissions, logs, and rollback, test Claude Sonnet 5 this week. If it relies on “ask Alex before doing anything,” wait. Agentic AI punishes fuzzy ops. #AI #DevTools",
         "url": "https://x.com/i/web/status/2072393488411365572",
         "score": 7.2,
         "impressions": 20,
@@ -66,11 +66,11 @@
         "replies": 1,
         "template": "decision_rule",
         "source": "oschina.net",
-        "postedAt": "2026-07-01T18:54:45.647Z"
+        "postedAt": "2026-07-01T18:54:45.644Z"
       },
       {
         "id": "2072030422519717955",
-        "text": "Claude Sonnet 5 is not a chatbot launch. It is Anthropic trying to own the coding coworker slot before IDEs become model routers.",
+        "text": "Claude Sonnet 5 is not a chatbot launch. It is Anthropic trying to own the coding coworker slot before IDEs become model routers. If Sonnet wins the PR loop, who keeps pricing power: Cursor, GitHub, or Anthropic? #AI #DevTools",
         "url": "https://x.com/i/web/status/2072030422519717955",
         "score": 5.3,
         "impressions": 29,
@@ -83,7 +83,7 @@
       },
       {
         "id": "2072818745689674227",
-        "text": "AI chip news has one useful test. If Anthropic can move real Claude inference onto Samsung silicon, price cuts get durable.",
+        "text": "AI chip news has one useful test. If Anthropic can move real Claude inference onto Samsung silicon, price cuts get durable. If it stays training-lab hardware, ignore the logo and watch cloud bills. #AI #Cloud",
         "url": "https://x.com/i/web/status/2072818745689674227",
         "score": 4.3,
         "impressions": 26,
@@ -92,20 +92,72 @@
         "replies": 0,
         "template": "decision_rule",
         "source": "techcrunch.com",
-        "postedAt": "2026-07-02T23:04:34.875Z"
+        "postedAt": "2026-07-02T23:04:34.871Z"
+      },
+      {
+        "id": "2072747821120606660",
+        "text": "Tesla’s real signal is deliveries > production. Decision rule: if a hardware company sells through inventory, watch backlog and margins before celebrating demand. If both don’t hold, it bought growth with price and mix. #EV #ConsumerTech",
+        "url": "https://x.com/i/web/status/2072747821120606660",
+        "score": 4.1,
+        "impressions": 10,
+        "likes": 2,
+        "reposts": 0,
+        "replies": 0,
+        "template": "decision_rule",
+        "source": "feeds.arstechnica.com",
+        "postedAt": "2026-07-02T18:22:45.128Z"
       },
       {
         "id": "2072458736153551105",
-        "text": "Claude Fable 5 is back, but don't just flip the switch. Rerun evals, check cost ceilings, review data residency, keep a fallback warm.",
+        "text": "Claude Fable 5 is back, but don’t just flip the switch. Rerun evals, check cost ceilings, review data residency, keep a fallback warm. Access returning is not the same as operational stability. #AI #Cloud",
         "url": "https://x.com/i/web/status/2072458736153551105",
-        "score": 2.7,
+        "score": 2.6,
         "impressions": 65,
         "likes": 1,
         "reposts": 0,
         "replies": 0,
         "template": "playbook",
         "source": "simonwillison.net",
-        "postedAt": "2026-07-01T23:14:01.927Z"
+        "postedAt": "2026-07-01T23:14:01.923Z"
+      },
+      {
+        "id": "2073106361697620394",
+        "text": "New job for AI platform teams: make model bans survivable. When Alibaba can remove Claude Code from every workflow, someone must map agents, prompts, repos, secrets, and fallbacks before the deadline hits. #AI #DevTools",
+        "url": "https://x.com/i/web/status/2073106361697620394",
+        "score": 2.3,
+        "impressions": 30,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "template": "operator_pain",
+        "source": "oschina.net",
+        "postedAt": "2026-07-03T18:07:27.879Z"
+      },
+      {
+        "id": "2073180461581406360",
+        "text": "The hidden cost of AI judgement: you must delete rules. Fable performs worse when every preference is pinned down. Good operators write the objective, the non-negotiables, and the review bar. #AI #DevTools",
+        "url": "https://x.com/i/web/status/2073180461581406360",
+        "score": 2.2,
+        "impressions": 22,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "template": "contrarian_cost",
+        "source": "simonwillison.net",
+        "postedAt": "2026-07-03T23:01:54.669Z"
+      },
+      {
+        "id": "2072313895234961900",
+        "text": "Sonnet 5 的真实成本不是 token，是你得把流程写到机器能接管， 接下来团队拼的不是谁会提示词，而是谁的权限、测试、回滚更干净。 #Claude #LLM",
+        "url": "https://x.com/i/web/status/2072313895234961900",
+        "score": 2.2,
+        "impressions": 22,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "template": "contrarian_cost",
+        "source": "producthunt.com",
+        "postedAt": "2026-07-01T13:38:29.286Z"
       }
     ]
   },
@@ -132,72 +184,239 @@
       "draftIndex": 2
     }
   ],
+  "searchLinks": [
+    {
+      "label": "Target Accounts",
+      "url": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this first; it borrows distribution from high-signal tech accounts."
+    },
+    {
+      "label": "AI / DevTools",
+      "url": "https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this for model launches, coding agents, chips, and AI platform threads."
+    },
+    {
+      "label": "Big Tech / Consumer Tech",
+      "url": "https://x.com/search?q=(Apple%20OR%20Google%20OR%20Microsoft%20OR%20Meta%20OR%20Amazon%20OR%20Tesla)%20(AI%20OR%20app%20OR%20product%20OR%20privacy%20OR%20security%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this for broader tech posts beyond the AI-builder bubble."
+    },
+    {
+      "label": "Startups / Product",
+      "url": "https://x.com/search?q=(startup%20OR%20founder%20OR%20product%20OR%20SaaS%20OR%20%22developer%20tools%22%20OR%20cloud)%20(AI%20OR%20software%20OR%20growth%20OR%20security)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this when you want replies that reach founders and operators."
+    }
+  ],
   "drafts": [
     {
-      "title": "AI product launch posts, model demos, agent releases",
-      "text": "Launch rule for AI products: demo quality matters less than failure shape. If users can't predict when it will be wrong, support cost becomes the real roadmap.",
-      "angle": "hidden cost",
-      "createdAt": "2026-07-06T00:17:43.839Z"
+      "title": "AI product launch posts, model demos, agent announcements",
+      "text": "Decision rule for AI launches: judge the demo by what happens on day 30. If users still need a human to verify every output, the product sold speed but not trust.",
+      "angle": "trust over demo speed",
+      "createdAt": "2026-07-06T15:50:43.414Z"
     },
     {
-      "title": "Big Tech policy changes, app store rules, cloud bundling, ecosystem moves",
-      "text": "Platform shift rule: if a Big Tech change can rewrite your margin, roadmap, or distribution overnight, it is not a partnership. It is rented ground with APIs.",
-      "angle": "business impact",
-      "createdAt": "2026-07-06T00:17:43.839Z"
+      "title": "Big Tech policy changes, app store rules, search/social algorithm shifts",
+      "text": "Platform shift rule: when Big Tech changes defaults, treat it like a tax change. The winners are teams that already know their dependency map and can move distribution fast.",
+      "angle": "dependency risk",
+      "createdAt": "2026-07-06T15:50:43.414Z"
     },
     {
-      "title": "Consumer app launches, growth discussions, mobile/social product threads",
-      "text": "Consumer app distribution is now a product feature. The best UX loses if onboarding depends on app stores, identity gates, notifications, and algorithmic luck all behaving.",
-      "angle": "distribution tradeoff",
-      "createdAt": "2026-07-06T00:17:43.839Z"
+      "title": "consumer app launches, growth posts, app strategy discussions",
+      "text": "Consumer app lesson: distribution is now a product feature. If onboarding, sharing, and switching costs are not designed together, a better app still loses to the default.",
+      "angle": "distribution over features",
+      "createdAt": "2026-07-06T15:50:43.414Z"
     },
     {
-      "title": "Cloud platform launches, serverless, database, hosting, dev platform posts",
-      "text": "Cloud decision rule: optimize for boring exits. If your stack is cheap only while every managed service stays forever, you bought convenience with future negotiation power.",
-      "angle": "decision rule",
-      "createdAt": "2026-07-06T00:17:43.839Z"
+      "title": "cloud pricing, dev platforms, serverless, infrastructure debates",
+      "text": "Cloud decision rule: cheap compute is only cheap if exit is possible. Track proprietary APIs, data gravity, and rollback paths before the invoice becomes the architecture.",
+      "angle": "lock-in cost",
+      "createdAt": "2026-07-06T15:50:43.415Z"
     },
     {
-      "title": "AI coding tools, browser agents, enterprise security, privacy discussions",
-      "text": "Security rule for AI tooling: treat every agent with repo, inbox, or browser access like a junior employee with production permissions. Log it, scope it, rotate secrets.",
-      "angle": "security impact",
-      "createdAt": "2026-07-06T00:17:43.839Z"
+      "title": "cybersecurity, privacy, AI agents, SaaS integration posts",
+      "text": "Security rule for AI and SaaS tools: if it can read repos, inboxes, tickets, or customer data, it is not a plugin. It is production access with a nicer UI.",
+      "angle": "access control",
+      "createdAt": "2026-07-06T15:50:43.415Z"
     }
   ],
   "performance": {
     "templates": [
-      { "name": "decision_rule", "avgScore": 2.7, "samples": 8 },
-      { "name": "sharp_question", "avgScore": 2.7, "samples": 2 },
-      { "name": "contrarian_cost", "avgScore": 2.2, "samples": 2 }
+      {
+        "name": "unknown",
+        "avgScore": 4.2,
+        "samples": 100
+      },
+      {
+        "name": "decision_rule",
+        "avgScore": 3.3,
+        "samples": 8
+      },
+      {
+        "name": "sharp_question",
+        "avgScore": 2.7,
+        "samples": 2
+      },
+      {
+        "name": "contrarian_cost",
+        "avgScore": 2.2,
+        "samples": 2
+      },
+      {
+        "name": "prediction",
+        "avgScore": 2.1,
+        "samples": 2
+      }
     ],
     "sources": [
-      { "name": "feeds.arstechnica.com", "avgScore": 5.5, "samples": 4 },
-      { "name": "techcrunch.com", "avgScore": 5.4, "samples": 6 },
-      { "name": "venturebeat.com", "avgScore": 5.1, "samples": 8 }
+      {
+        "name": "cnbeta.com.tw",
+        "avgScore": 11.3,
+        "samples": 3
+      },
+      {
+        "name": "feeds.arstechnica.com",
+        "avgScore": 5.5,
+        "samples": 4
+      },
+      {
+        "name": "techcrunch.com",
+        "avgScore": 5.4,
+        "samples": 6
+      },
+      {
+        "name": "sspai.com",
+        "avgScore": 5.4,
+        "samples": 3
+      },
+      {
+        "name": "venturebeat.com",
+        "avgScore": 5.1,
+        "samples": 8
+      }
     ],
     "hashtags": [
-      { "name": "softwareengineering", "avgScore": 5.1, "samples": 6 },
-      { "name": "llm", "avgScore": 4.9, "samples": 26 },
-      { "name": "devtools", "avgScore": 4.6, "samples": 21 }
+      {
+        "name": "gemini",
+        "avgScore": 7.8,
+        "samples": 2
+      },
+      {
+        "name": "softwareengineering",
+        "avgScore": 5.1,
+        "samples": 6
+      },
+      {
+        "name": "llm",
+        "avgScore": 5,
+        "samples": 26
+      },
+      {
+        "name": "devtools",
+        "avgScore": 4.6,
+        "samples": 21
+      },
+      {
+        "name": "automation",
+        "avgScore": 4.2,
+        "samples": 6
+      },
+      {
+        "name": "ai",
+        "avgScore": 4,
+        "samples": 97
+      },
+      {
+        "name": "apple",
+        "avgScore": 4,
+        "samples": 5
+      },
+      {
+        "name": "steammachine",
+        "avgScore": 3.6,
+        "samples": 5
+      }
     ]
   },
   "diagnosis": [
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 24 小时记录到 3 条推文、8 次曝光；瓶颈是分发入口，不是发帖数量。",
+    "最近 24 小时记录到 2 条推文、12 次曝光；瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制回复，避免增加 X search/read API。",
     "回复优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
   "api": {
     "month": "2026-07",
-    "spend": 1.33,
+    "spend": 1.43,
     "cap": 5,
     "endpoints": [
-      { "name": "OAUTH_REFRESH", "calls": 19, "failures": 1, "usd": 0, "lastStatus": 200 },
-      { "name": "CREATE_TWEET", "calls": 17, "failures": 0, "usd": 0.255, "lastStatus": 201 },
-      { "name": "RECENT_SEARCH", "calls": 16, "failures": 0, "usd": 0, "lastStatus": 200 },
-      { "name": "USER_ME_LOOKUP", "calls": 15, "failures": 0, "usd": 0.35, "lastStatus": 200 },
-      { "name": "TWEET_METRICS_LOOKUP", "calls": 13, "failures": 0, "usd": 0.35, "lastStatus": 200 },
-      { "name": "MEDIA_UPLOAD", "calls": 15, "failures": 0, "usd": 0.375, "lastStatus": 200 }
+      {
+        "name": "OAUTH_REFRESH",
+        "calls": 20,
+        "failures": 1,
+        "usd": 0,
+        "lastStatus": 200
+      },
+      {
+        "name": "CREATE_TWEET",
+        "calls": 17,
+        "failures": 0,
+        "usd": 0.255,
+        "lastStatus": 201
+      },
+      {
+        "name": "USER_ME_LOOKUP",
+        "calls": 16,
+        "failures": 0,
+        "usd": 0.4,
+        "lastStatus": 200
+      },
+      {
+        "name": "RECENT_SEARCH",
+        "calls": 16,
+        "failures": 0,
+        "usd": 0,
+        "lastStatus": 200
+      },
+      {
+        "name": "TWEET_METRICS_LOOKUP",
+        "calls": 14,
+        "failures": 0,
+        "usd": 0.4,
+        "lastStatus": 200
+      },
+      {
+        "name": "MEDIA_INITIALIZE",
+        "calls": 5,
+        "failures": 0,
+        "usd": 0.075,
+        "lastStatus": 200
+      },
+      {
+        "name": "MEDIA_APPEND",
+        "calls": 5,
+        "failures": 0,
+        "usd": 0.15,
+        "lastStatus": 200
+      },
+      {
+        "name": "MEDIA_FINALIZE",
+        "calls": 5,
+        "failures": 0,
+        "usd": 0.15,
+        "lastStatus": 200
+      },
+      {
+        "name": "AUTO_REPLY_SEARCH",
+        "calls": 2,
+        "failures": 0,
+        "usd": 0,
+        "lastStatus": 200
+      },
+      {
+        "name": "CREATE_REPLY",
+        "calls": 1,
+        "failures": 1,
+        "usd": 0,
+        "lastStatus": 403
+      }
     ]
   }
 }
