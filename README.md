@@ -31,6 +31,13 @@ About 页的「网站目录 / Site Map」由 **`source/_data/site_directory.yml`
 - `.github/workflows/pages.yml`：Pages 部署工作流（监听 `master`）
 - `bin/prepare-pages.js`：将 `public/` 同步到 `docs/` 并保留 `CNAME`
 
+## X Bot Dashboard
+
+- 页面：<https://linusshyu.dev/xbot-dashboard/>
+- 源文件：`xbot-dashboard/`
+- 发布目录：`docs/xbot-dashboard/`
+- 数据文件：`xbot-dashboard/data.json` 与 `docs/xbot-dashboard/data.json`，由 `Linus-Shyu/x_bot` 的 `growth maintenance` workflow 同步更新。
+
 ## 自定义域名
 - `docs/CNAME` 固定为 `linusshyu.dev`，无需每次手动设置。若需更换域名，直接修改该文件。
 

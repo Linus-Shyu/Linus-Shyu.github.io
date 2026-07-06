@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-06T00:17:43.839Z",
+  "mode": {
+    "label": "Zero extra X API",
+    "description": "Web search links + manual paste replies."
+  },
+  "profile": {
+    "followers": 66,
+    "followerDelta": -1,
+    "followerCheckedAt": "2026-07-06T00:17:43.830Z",
+    "trackedPosts": 120,
+    "measuredPosts": 120,
+    "baselineScore": 3.9
+  },
+  "last24h": {
+    "posts": 3,
+    "impressions": 8,
+    "likes": 0,
+    "reposts": 0,
+    "replies": 0,
+    "topPosts": [
+      {
+        "id": "2073828007999914189",
+        "text": "Google's AI-Declaration ad exposes the real operator pain: AI makes first drafts cheap, but taste becomes the bottleneck.",
+        "url": "https://x.com/i/web/status/2073828007999914189",
+        "score": 0,
+        "impressions": 4,
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "template": "operator_pain",
+        "source": "techcrunch.com",
+        "postedAt": "2026-07-05T17:55:01.768Z"
+      },
+      {
+        "id": "2073787528960778374",
+        "text": "Decision rule for AI-written copy: use ChatGPT for structure, never for taste.",
+        "url": "https://x.com/i/web/status/2073787528960778374",
+        "score": 0,
+        "impressions": 4,
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "template": "decision_rule",
+        "source": "theguardian.com",
+        "postedAt": "2026-07-05T15:14:10.834Z"
+      }
+    ]
+  },
+  "last7d": {
+    "posts": 17,
+    "impressions": 307,
+    "likes": 15,
+    "reposts": 0,
+    "replies": 3,
+    "topPosts": [
+      {
+        "id": "2072393488411365572",
+        "text": "If a workflow already has clear permissions, logs, and rollback, test Claude Sonnet 5 this week.",
+        "url": "https://x.com/i/web/status/2072393488411365572",
+        "score": 7.2,
+        "impressions": 20,
+        "likes": 2,
+        "reposts": 0,
+        "replies": 1,
+        "template": "decision_rule",
+        "source": "oschina.net",
+        "postedAt": "2026-07-01T18:54:45.647Z"
+      },
+      {
+        "id": "2072030422519717955",
+        "text": "Claude Sonnet 5 is not a chatbot launch. It is Anthropic trying to own the coding coworker slot before IDEs become model routers.",
+        "url": "https://x.com/i/web/status/2072030422519717955",
+        "score": 5.3,
+        "impressions": 29,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 1,
+        "template": "sharp_question",
+        "source": "hnrss.org",
+        "postedAt": "2026-06-30T18:52:04.124Z"
+      },
+      {
+        "id": "2072818745689674227",
+        "text": "AI chip news has one useful test. If Anthropic can move real Claude inference onto Samsung silicon, price cuts get durable.",
+        "url": "https://x.com/i/web/status/2072818745689674227",
+        "score": 4.3,
+        "impressions": 26,
+        "likes": 2,
+        "reposts": 0,
+        "replies": 0,
+        "template": "decision_rule",
+        "source": "techcrunch.com",
+        "postedAt": "2026-07-02T23:04:34.875Z"
+      },
+      {
+        "id": "2072458736153551105",
+        "text": "Claude Fable 5 is back, but don't just flip the switch. Rerun evals, check cost ceilings, review data residency, keep a fallback warm.",
+        "url": "https://x.com/i/web/status/2072458736153551105",
+        "score": 2.7,
+        "impressions": 65,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "template": "playbook",
+        "source": "simonwillison.net",
+        "postedAt": "2026-07-01T23:14:01.927Z"
+      }
+    ]
+  },
+  "actions": [
+    {
+      "step": 1,
+      "label": "Target Accounts",
+      "url": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this first; it borrows distribution from high-signal tech accounts.",
+      "draftIndex": 0
+    },
+    {
+      "step": 2,
+      "label": "AI / DevTools",
+      "url": "https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this for model launches, coding agents, chips, and AI platform threads.",
+      "draftIndex": 1
+    },
+    {
+      "step": 3,
+      "label": "Big Tech / Consumer Tech",
+      "url": "https://x.com/search?q=(Apple%20OR%20Google%20OR%20Microsoft%20OR%20Meta%20OR%20Amazon%20OR%20Tesla)%20(AI%20OR%20app%20OR%20product%20OR%20privacy%20OR%20security%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "reason": "Use this for broader tech posts beyond the AI-builder bubble.",
+      "draftIndex": 2
+    }
+  ],
+  "drafts": [
+    {
+      "title": "AI product launch posts, model demos, agent releases",
+      "text": "Launch rule for AI products: demo quality matters less than failure shape. If users can't predict when it will be wrong, support cost becomes the real roadmap.",
+      "angle": "hidden cost",
+      "createdAt": "2026-07-06T00:17:43.839Z"
+    },
+    {
+      "title": "Big Tech policy changes, app store rules, cloud bundling, ecosystem moves",
+      "text": "Platform shift rule: if a Big Tech change can rewrite your margin, roadmap, or distribution overnight, it is not a partnership. It is rented ground with APIs.",
+      "angle": "business impact",
+      "createdAt": "2026-07-06T00:17:43.839Z"
+    },
+    {
+      "title": "Consumer app launches, growth discussions, mobile/social product threads",
+      "text": "Consumer app distribution is now a product feature. The best UX loses if onboarding depends on app stores, identity gates, notifications, and algorithmic luck all behaving.",
+      "angle": "distribution tradeoff",
+      "createdAt": "2026-07-06T00:17:43.839Z"
+    },
+    {
+      "title": "Cloud platform launches, serverless, database, hosting, dev platform posts",
+      "text": "Cloud decision rule: optimize for boring exits. If your stack is cheap only while every managed service stays forever, you bought convenience with future negotiation power.",
+      "angle": "decision rule",
+      "createdAt": "2026-07-06T00:17:43.839Z"
+    },
+    {
+      "title": "AI coding tools, browser agents, enterprise security, privacy discussions",
+      "text": "Security rule for AI tooling: treat every agent with repo, inbox, or browser access like a junior employee with production permissions. Log it, scope it, rotate secrets.",
+      "angle": "security impact",
+      "createdAt": "2026-07-06T00:17:43.839Z"
+    }
+  ],
+  "performance": {
+    "templates": [
+      { "name": "decision_rule", "avgScore": 2.7, "samples": 8 },
+      { "name": "sharp_question", "avgScore": 2.7, "samples": 2 },
+      { "name": "contrarian_cost", "avgScore": 2.2, "samples": 2 }
+    ],
+    "sources": [
+      { "name": "feeds.arstechnica.com", "avgScore": 5.5, "samples": 4 },
+      { "name": "techcrunch.com", "avgScore": 5.4, "samples": 6 },
+      { "name": "venturebeat.com", "avgScore": 5.1, "samples": 8 }
+    ],
+    "hashtags": [
+      { "name": "softwareengineering", "avgScore": 5.1, "samples": 6 },
+      { "name": "llm", "avgScore": 4.9, "samples": 26 },
+      { "name": "devtools", "avgScore": 4.6, "samples": 21 }
+    ]
+  },
+  "diagnosis": [
+    "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
+    "最近 24 小时记录到 3 条推文、8 次曝光；瓶颈是分发入口，不是发帖数量。",
+    "当前低成本路线是人工点网页搜索、复制回复，避免增加 X search/read API。",
+    "回复优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
+  ],
+  "api": {
+    "month": "2026-07",
+    "spend": 1.33,
+    "cap": 5,
+    "endpoints": [
+      { "name": "OAUTH_REFRESH", "calls": 19, "failures": 1, "usd": 0, "lastStatus": 200 },
+      { "name": "CREATE_TWEET", "calls": 17, "failures": 0, "usd": 0.255, "lastStatus": 201 },
+      { "name": "RECENT_SEARCH", "calls": 16, "failures": 0, "usd": 0, "lastStatus": 200 },
+      { "name": "USER_ME_LOOKUP", "calls": 15, "failures": 0, "usd": 0.35, "lastStatus": 200 },
+      { "name": "TWEET_METRICS_LOOKUP", "calls": 13, "failures": 0, "usd": 0.35, "lastStatus": 200 },
+      { "name": "MEDIA_UPLOAD", "calls": 15, "failures": 0, "usd": 0.375, "lastStatus": 200 }
+    ]
+  }
+}
