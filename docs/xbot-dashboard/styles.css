@@ -2036,6 +2036,57 @@ h3 {
   margin-top: 16px;
 }
 
+.dispatch-strip {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.3fr) repeat(4, minmax(120px, 0.7fr));
+  gap: 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 10px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 72%, transparent), transparent 68%),
+    var(--surface);
+}
+
+.dispatch-strip > div,
+.dispatch-metric {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 10px;
+  background: color-mix(in srgb, var(--surface-soft) 78%, transparent);
+}
+
+.dispatch-strip strong,
+.dispatch-metric strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dispatch-metric span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 840;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dispatch-metric.warn {
+  border-color: color-mix(in srgb, var(--warn) 42%, var(--line));
+}
+
+.dispatch-metric.danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
+}
+
 .action-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.68fr);
@@ -2085,6 +2136,33 @@ h3 {
   gap: 14px;
   padding: 14px;
   background: var(--surface);
+}
+
+.mission-card {
+  border: 1px solid var(--line-soft);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.mission-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.mission-meta span {
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 6px 7px;
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .action-top {
@@ -2974,6 +3052,10 @@ body[data-demo-step="actions"] .action-hero {
 
   .service-grid,
   .action-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dispatch-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -4647,6 +4729,11 @@ body:not(.demo-mode) .demo-strip {
   .expo-story-grid,
   .monitor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dispatch-strip,
+  .mission-meta {
+    grid-template-columns: 1fr;
   }
 
   .pipeline-panel {

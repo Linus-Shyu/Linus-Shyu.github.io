@@ -319,6 +319,71 @@ const fallbackData = {
       "Manual web routes spend 0 X API read budget.",
     ],
   },
+  distributionOps: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "manual_distribution",
+    queueHealth: "ok",
+    zeroExtraXReads: true,
+    manualReplyTarget: 3,
+    readyMissions: 2,
+    missionCount: 2,
+    primaryRoute: {
+      label: "Target Accounts",
+      url: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      score: 7.2,
+      confidence: "medium",
+    },
+    opsMetrics: [
+      { id: "target", label: "reply target", value: "3/day", status: "ok" },
+      { id: "queue", label: "mission queue", value: "2/2", status: "ok" },
+      { id: "budget", label: "X read budget", value: "0 reads", status: "ok" },
+      { id: "learning", label: "writeback", value: "120 posts", status: "ok" },
+    ],
+    runbook: [
+      "Open the top route in X web.",
+      "Paste 3 useful replies under fresh, high-signal conversations.",
+      "Prefer posts less than 2 hours old with active technical debate.",
+      "Let the next maintenance run write engagement back into the learning layer.",
+    ],
+    missions: [
+      {
+        id: "template:decision_rule",
+        priority: 1,
+        label: "decision rule replies",
+        kind: "format",
+        routeLabel: "Target Accounts",
+        routeUrl: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        routeReason: "Reuse the current winning format and paste it under active high-signal tech conversations.",
+        evidence: "format: avg 2.8, n=10",
+        score: 7.2,
+        expectedLiftPct: 84.6,
+        confidence: "medium",
+        targetReplies: 2,
+        operatorSlaMinutes: 10,
+        draftText: "Launch rule for AI products: demo quality matters less than failure shape. If users can’t predict when it will be wrong, support cost becomes the real roadmap.",
+        draftAngle: "hidden cost",
+        zeroExtraXReads: true,
+      },
+      {
+        id: "source:techcrunch.com",
+        priority: 2,
+        label: "Source watch: techcrunch.com",
+        kind: "source",
+        routeLabel: "AI / DevTools",
+        routeUrl: "https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        routeReason: "Look for fresh related discussions before posting more standalone takes.",
+        evidence: "source: avg 5.4, n=6",
+        score: 5.4,
+        expectedLiftPct: 38.5,
+        confidence: "medium",
+        targetReplies: 1,
+        operatorSlaMinutes: 20,
+        draftText: "Platform shift rule: if a Big Tech change can rewrite your margin, roadmap, or distribution overnight, it is not a partnership. It is rented ground with APIs.",
+        draftAngle: "business impact",
+        zeroExtraXReads: true,
+      },
+    ],
+  },
   growthGoal: {
     targetFollowers: 1000,
     nextMilestone: 100,
@@ -569,6 +634,16 @@ const translations = {
     posting_pipeline: "Inference Pipeline",
     today_workflow: "Today workflow",
     manual_web_actions: "Human-in-loop web actions",
+    dispatch_eyebrow: "Distribution Ops",
+    dispatch_title: "Operator dispatch queue",
+    dispatch_state: "{ready}/{total} missions armed",
+    dispatch_primary: "Primary route",
+    dispatch_sla: "SLA {minutes}m",
+    dispatch_replies: "{count} replies",
+    dispatch_expected: "+{lift}% expected lift",
+    dispatch_zero_reads: "0 X read ops",
+    dispatch_runbook: "Operator runbook",
+    dispatch_empty: "No dispatch missions queued.",
     runbook: "Runbook",
     operator_notes: "Runbook notes",
     cost_note: "Dashboard sync uses GitHub API only. It does not add X API search/read calls.",
@@ -880,6 +955,16 @@ const translations = {
     posting_pipeline: "推理流水线",
     today_workflow: "今日流程",
     manual_web_actions: "人工闭环网页操作",
+    dispatch_eyebrow: "分发运维",
+    dispatch_title: "操作员派发队列",
+    dispatch_state: "{ready}/{total} 个任务就绪",
+    dispatch_primary: "主路由",
+    dispatch_sla: "SLA {minutes} 分钟",
+    dispatch_replies: "{count} 条回复",
+    dispatch_expected: "预期提升 +{lift}%",
+    dispatch_zero_reads: "0 次 X 读取",
+    dispatch_runbook: "操作手册",
+    dispatch_empty: "暂无派发任务。",
     runbook: "运行手册",
     operator_notes: "运行手册备注",
     cost_note: "看板同步只使用 GitHub API，不增加 X API 搜索/读取调用。",
@@ -1558,6 +1643,48 @@ function dataFreshness() {
 function draftFor(index) {
   const drafts = dashboardData.drafts || [];
   return drafts[Math.min(Math.max(0, index), Math.max(0, drafts.length - 1))] || fallbackData.drafts[0];
+}
+
+function distributionOpsData() {
+  const incoming = dashboardData.distributionOps || fallbackData.distributionOps;
+  if (incoming?.missions?.length) return incoming;
+  const actions = dashboardData.actions?.length ? dashboardData.actions : fallbackData.actions || [];
+  const missions = actions.slice(0, 3).map((action, index) => {
+    const draft = draftFor(action.draftIndex ?? index);
+    return {
+      id: `route:${action.label || index + 1}`,
+      priority: index + 1,
+      label: action.label,
+      routeLabel: action.label,
+      routeUrl: action.url,
+      routeReason: action.reason,
+      score: number(dashboardData.profile?.baselineScore, fallbackData.profile.baselineScore),
+      expectedLiftPct: 0,
+      confidence: "low",
+      targetReplies: 1,
+      operatorSlaMinutes: 10 + index * 10,
+      draftText: draft.text,
+      draftAngle: draft.angle,
+      zeroExtraXReads: true,
+    };
+  });
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: cadenceData().mode,
+    queueHealth: missions.length ? "ok" : "warn",
+    zeroExtraXReads: true,
+    manualReplyTarget: missions.length,
+    readyMissions: missions.length,
+    missionCount: missions.length,
+    primaryRoute: missions[0] ? { label: missions[0].routeLabel, url: missions[0].routeUrl, score: missions[0].score } : null,
+    opsMetrics: [
+      { id: "target", label: "reply target", value: `${missions.length}/day`, status: "ok" },
+      { id: "queue", label: "mission queue", value: `${missions.length}/${missions.length}`, status: missions.length ? "ok" : "warn" },
+      { id: "budget", label: "X read budget", value: "0 reads", status: "ok" },
+    ],
+    runbook: [],
+    missions,
+  };
 }
 
 function renderHeader() {
@@ -3090,32 +3217,47 @@ function renderProof() {
 }
 
 function renderActions() {
-  const actions = dashboardData.actions || fallbackData.actions;
-  const firstAction = actions[0] || fallbackData.actions[0];
-  const firstDraft = draftFor(firstAction.draftIndex ?? 0);
-  const localizedFirstAction = localizeAction(firstAction);
-  const actionCards = actions
+  const ops = distributionOpsData();
+  const missions = Array.isArray(ops.missions) ? ops.missions : [];
+  if (!missions.length) {
+    $("#action-board").innerHTML = `<p class="empty-state">${escapeHtml(t("dispatch_empty"))}</p>`;
+    return;
+  }
+  const primary = missions[0];
+  const localizedPrimary = localizeAction({ label: primary.routeLabel || primary.label, reason: primary.routeReason });
+  const metricCards = (ops.opsMetrics || [])
+    .slice(0, 4)
+    .map((metric) => `
+      <div class="dispatch-metric ${escapeHtml(metric.status || "ok")}">
+        <span>${escapeHtml(metric.label || metric.id || "-")}</span>
+        <strong>${escapeHtml(String(metric.value || "-"))}</strong>
+      </div>
+    `)
+    .join("");
+  const missionCards = missions
     .slice(0, 3)
-    .map((action, index) => {
-      const localizedAction = localizeAction(action);
-      const draft = draftFor(action.draftIndex ?? index);
+    .map((mission, index) => {
+      const localizedRoute = localizeAction({ label: mission.routeLabel || mission.label, reason: mission.routeReason });
+      const draftText = mission.draftText || draftFor(index).text || "";
       return `
-        <article class="action-card">
+        <article class="action-card mission-card ${escapeHtml(mission.kind || "route")}">
           <div class="action-top">
-            <span class="step">${escapeHtml(action.step || index + 1)}</span>
+            <span class="step">${String(mission.priority || index + 1).padStart(2, "0")}</span>
             <div>
-              <h3>${escapeHtml(localizedAction.label)}</h3>
-              <p>${escapeHtml(localizedAction.reason)}</p>
+              <h3>${escapeHtml(mission.label || localizedRoute.label)}</h3>
+              <p>${escapeHtml(localizedRoute.reason || mission.evidence || "-")}</p>
             </div>
           </div>
-          <div class="draft-preview">${escapeHtml(draft.text)}</div>
-          <div class="queue-state">
-            <span></span>
-            <strong>${t("queued_for_operator")}</strong>
+          <div class="mission-meta">
+            <span>${escapeHtml(t("dispatch_sla", { minutes: formatNumber(mission.operatorSlaMinutes || 10) }))}</span>
+            <span>${escapeHtml(t("dispatch_replies", { count: formatNumber(mission.targetReplies || 1) }))}</span>
+            <span>${escapeHtml(t("dispatch_expected", { lift: formatNumber(mission.expectedLiftPct || 0, 1) }))}</span>
           </div>
+          <div class="draft-preview">${escapeHtml(draftText)}</div>
+          <div class="queue-state"><span></span><strong>${t("queued_for_operator")} · ${t("dispatch_zero_reads")}</strong></div>
           <div class="row-actions">
-            <a class="button button-primary" href="${escapeHtml(action.url)}" target="_blank" rel="noreferrer">${t("open_search")}</a>
-            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(draft.text)}">${t("copy_draft")}</button>
+            ${mission.routeUrl ? `<a class="button button-primary" href="${escapeHtml(mission.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(draftText)}">${t("copy_draft")}</button>
           </div>
         </article>
       `;
@@ -3123,20 +3265,27 @@ function renderActions() {
     .join("");
 
   $("#action-board").innerHTML = `
+    <div class="dispatch-strip">
+      <div>
+        <span class="eyebrow">${escapeHtml(t("dispatch_eyebrow"))}</span>
+        <strong>${escapeHtml(t("dispatch_state", { ready: formatNumber(ops.readyMissions || missions.length), total: formatNumber(ops.missionCount || missions.length) }))}</strong>
+      </div>
+      ${metricCards}
+    </div>
     <article class="action-hero">
       <div>
         <span class="pill pill-neutral">${t("zero_api_action")}</span>
-        <h3>${t("daily_action_title")}</h3>
-        <p>${t("daily_action_copy")}</p>
+        <h3>${escapeHtml(t("dispatch_title"))}</h3>
+        <p><strong>${escapeHtml(t("dispatch_primary"))}: ${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong> · ${escapeHtml(localizedPrimary.reason || primary.evidence || t("daily_action_copy"))}</p>
         <div class="row-actions">
-          <a class="button button-primary" href="${escapeHtml(firstAction.url)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedFirstAction.label)}</a>
-          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(firstDraft.text)}">${t("copy_first_reply")}</button>
+          ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primary.draftText || "")}">${t("copy_first_reply")}</button>
         </div>
       </div>
-      <blockquote>${escapeHtml(firstDraft.text)}</blockquote>
+      <blockquote>${escapeHtml(primary.draftText || "")}</blockquote>
     </article>
     <div class="action-list">
-      ${actionCards}
+      ${missionCards}
     </div>
   `;
 }
