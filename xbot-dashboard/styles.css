@@ -8681,3 +8681,163 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .rail-budget .meter div {
   background: linear-gradient(90deg, #f6a13a, #ffd84d) !important;
 }
+
+/* Rail contrast lock v4: light mode keeps the same dark NOC rail as the main ops surface. */
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --rail: #070b11;
+  --rail-soft: #101823;
+  --rail-text: #eef4fb;
+  --nav-rail-bg: #070b11;
+  --nav-rail-bg-mid: #0b111a;
+  --nav-rail-bg-soft: #101823;
+  --nav-rail-panel: #121b28;
+  --nav-rail-panel-strong: #182436;
+  --nav-rail-line: rgba(153, 166, 186, 0.34);
+  --nav-rail-line-hot: rgba(246, 161, 58, 0.58);
+  --nav-rail-text: #eef4fb;
+  --nav-rail-muted: #aeb9c8;
+  --nav-rail-hot: #f6a13a;
+  --nav-rail-green: #6ec86f;
+  --nav-rail-glow: rgba(246, 161, 58, 0.3);
+}
+
+:root[data-theme="light"] .side-rail,
+:root[data-theme="dark"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -8%, rgba(246, 161, 58, 0.24), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.015) 150px, transparent 320px),
+    linear-gradient(180deg, #151f2c 0%, var(--nav-rail-bg-soft) 34%, var(--nav-rail-bg-mid) 66%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.1),
+    18px 0 36px rgba(8, 13, 20, 0.24) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="dark"] .brand,
+:root[data-theme="light"] .env-card,
+:root[data-theme="dark"] .env-card,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="dark"] .rack-mini div,
+:root[data-theme="light"] .rail-budget,
+:root[data-theme="dark"] .rail-budget {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(246, 161, 58, 0.035), transparent 48%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root[data-theme="light"] .brand:hover,
+:root[data-theme="dark"] .brand:hover,
+:root[data-theme="light"] .rack-mini div:hover,
+:root[data-theme="dark"] .rack-mini div:hover,
+:root[data-theme="light"] .rail-budget:hover,
+:root[data-theme="dark"] .rail-budget:hover {
+  background-color: var(--nav-rail-panel-strong) !important;
+}
+
+:root[data-theme="light"] .brand-mark,
+:root[data-theme="dark"] .brand-mark {
+  color: #070b11 !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--nav-rail-hot) 58%, #d97821 100%) !important;
+  box-shadow:
+    0 12px 24px var(--nav-rail-glow),
+    0 0 0 1px rgba(255, 255, 255, 0.32) inset !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="dark"] .brand strong,
+:root[data-theme="light"] .env-line strong,
+:root[data-theme="dark"] .env-line strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="dark"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="dark"] .rail-nav a,
+:root[data-theme="light"] .rail-nav a::after,
+:root[data-theme="dark"] .rail-nav a::after {
+  color: var(--nav-rail-text) !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="dark"] .brand small,
+:root[data-theme="light"] .env-card > span,
+:root[data-theme="dark"] .env-card > span,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="dark"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="dark"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small,
+:root[data-theme="dark"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+}
+
+:root[data-theme="light"] .env-line .status-dot,
+:root[data-theme="dark"] .env-line .status-dot,
+:root[data-theme="light"] .rack-mini span,
+:root[data-theme="dark"] .rack-mini span {
+  background: var(--nav-rail-green) !important;
+  box-shadow: 0 0 0 4px rgba(110, 200, 111, 0.18) !important;
+}
+
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="dark"] .rail-nav a {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="dark"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a:focus-visible,
+:root[data-theme="dark"] .rail-nav a:focus-visible,
+:root[data-theme="light"] .rail-nav a.active,
+:root[data-theme="dark"] .rail-nav a.active {
+  color: #fff7ed !important;
+  border-color: var(--nav-rail-line-hot) !important;
+  background:
+    linear-gradient(135deg, rgba(246, 161, 58, 0.3), rgba(246, 161, 58, 0.085)),
+    rgba(255, 255, 255, 0.05) !important;
+  box-shadow:
+    0 14px 26px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::after,
+:root[data-theme="dark"] .rail-nav a:hover::after,
+:root[data-theme="light"] .rail-nav a:focus-visible::after,
+:root[data-theme="dark"] .rail-nav a:focus-visible::after,
+:root[data-theme="light"] .rail-nav a.active::after,
+:root[data-theme="dark"] .rail-nav a.active::after {
+  color: #fff7ed !important;
+}
+
+:root[data-theme="light"] .rail-budget,
+:root[data-theme="dark"] .rail-budget {
+  border-color: rgba(246, 161, 58, 0.5) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(246, 161, 58, 0.22), transparent 64%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02)) !important;
+}
+
+:root[data-theme="light"] .rail-budget strong,
+:root[data-theme="dark"] .rail-budget strong {
+  color: #ffd84d !important;
+  text-shadow: 0 0 18px rgba(255, 216, 77, 0.3) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter,
+:root[data-theme="dark"] .rail-budget .meter {
+  background: rgba(174, 185, 200, 0.24) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter div,
+:root[data-theme="dark"] .rail-budget .meter div {
+  background: linear-gradient(90deg, #f6a13a, #ffd84d) !important;
+}
