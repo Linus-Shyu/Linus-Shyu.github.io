@@ -998,6 +998,23 @@ const translations = {
     triage_no_incidents: "no active fault partitions",
     triage_runbook: "operator runbook",
     triage_failure_rate: "{rate}% failure rate",
+    governor_eyebrow: "Rate-Limit Governor",
+    governor_title: "Budget reactor boundary",
+    governor_ok: "reactor nominal",
+    governor_warn: "boundary watch",
+    governor_danger: "read gate sealed",
+    governor_read_gate: "read gate",
+    governor_post_gate: "post gate",
+    governor_safe_cap: "safe cap",
+    governor_safe_left: "safe left",
+    governor_429: "429 partition",
+    governor_503: "503 partition",
+    governor_cooldown: "cooldown",
+    governor_no_cooldown: "none",
+    governor_cooldown_minutes: "{count} min",
+    governor_runbook_ok: "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
+    governor_runbook_warn: "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
+    governor_runbook_danger: "Seal live search/read partitions. Use cached telemetry and manual outputs until cooldown clears.",
     mission_eyebrow: "NOC Console",
     mission_title: "Live server-matrix growth operations.",
     mission_copy: "Monitor feed ingress, model inference, route queues, feedback loops, and API cost boundaries from one command surface.",
@@ -1470,6 +1487,23 @@ const translations = {
     triage_no_incidents: "无活跃故障分区",
     triage_runbook: "操作员运行手册",
     triage_failure_rate: "{rate}% 失败率",
+    governor_eyebrow: "限流控制器",
+    governor_title: "预算反应堆边界",
+    governor_ok: "反应堆正常",
+    governor_warn: "边界观察",
+    governor_danger: "读取闸门封闭",
+    governor_read_gate: "读取闸门",
+    governor_post_gate: "发帖闸门",
+    governor_safe_cap: "安全上限",
+    governor_safe_left: "安全剩余",
+    governor_429: "429 分区",
+    governor_503: "503 分区",
+    governor_cooldown: "冷却",
+    governor_no_cooldown: "无",
+    governor_cooldown_minutes: "{count} 分钟",
+    governor_runbook_ok: "缓存路由清晰。除非 cadence 闸门明确放行，否则保持实时 X 读取为零。",
+    governor_runbook_warn: "暂停可选读取，改走已准备的网页目标，并等待成本边界恢复。",
+    governor_runbook_danger: "封闭实时搜索/读取分区。冷却解除前，只使用缓存遥测和人工输出。",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时服务器矩阵增长运维。",
     mission_copy: "在一个指挥界面里监控 feed 入口、模型推理、路由队列、反馈闭环和 API 成本边界。",
@@ -5220,11 +5254,89 @@ function renderMediaRoiGate() {
   `;
 }
 
+function gateLabel(value) {
+  const raw = String(value || "-").replace(/_/g, " ");
+  return raw || "-";
+}
+
+function renderRateGovernor() {
+  const target = $("#rate-governor");
+  if (!target) return;
+  const { api, spend, cap, remaining } = apiBudget();
+  const guard = dashboardData.automation?.budgetGuard || fallbackData.automation?.budgetGuard || {};
+  const triage = apiStatusTriage();
+  const control = controlPlaneData();
+  const cadence = cadenceData();
+  const cooldown = api.cooldown || {};
+  const active429 = number(triage.activeRateLimit429 ?? triage.rateLimit429);
+  const active503 = number(triage.activeBackendFault5xx ?? triage.backendFault5xx);
+  const cooldownActive = Boolean(cooldown.active);
+  const safeCap = number(api.safeCap, number(guard.safeCapUsd, cap * 0.9));
+  const safeLeft = number(api.safeRemaining, Math.max(0, safeCap - spend));
+  const severity = cooldownActive || active429 || active503 || control.readGate === "closed"
+    ? "danger"
+    : safeLeft <= 0 || control.publishGate === "closed"
+      ? "warn"
+      : "ok";
+  const readGate = cooldownActive || severity === "danger" ? "closed" : control.readGate || "cached_only";
+  const publishGate = control.publishGate || (cadence.publishAllowed ? "open" : "review");
+  const cooldownLabel = cooldownActive
+    ? t("governor_cooldown_minutes", { count: formatNumber(cooldown.remainingMinutes || cooldown.cooldownMinutes || 0) })
+    : t("governor_no_cooldown");
+  const runbook = severity === "danger"
+    ? t("governor_runbook_danger")
+    : severity === "warn"
+      ? t("governor_runbook_warn")
+      : t("governor_runbook_ok");
+  const boundaryRatio = safeCap > 0 ? clamp((safeLeft / safeCap) * 100, 0, 100) : 100;
+  const cells = [
+    { label: t("governor_read_gate"), value: gateLabel(readGate), tone: severity === "danger" ? "danger" : "ok" },
+    { label: t("governor_post_gate"), value: gateLabel(publishGate), tone: publishGate === "open" ? "ok" : "warn" },
+    { label: t("governor_429"), value: formatNumber(active429), tone: active429 ? "danger" : "ok" },
+    { label: t("governor_503"), value: formatNumber(active503), tone: active503 ? "danger" : "ok" },
+    { label: t("governor_safe_cap"), value: money(safeCap), tone: "neutral" },
+    { label: t("governor_safe_left"), value: money(safeLeft || remaining), tone: safeLeft > 0.5 ? "ok" : safeLeft > 0 ? "warn" : "danger" },
+  ];
+
+  target.innerHTML = `
+    <div class="governor-head ${escapeHtml(severity)}">
+      <div>
+        <span>${escapeHtml(t("governor_eyebrow"))}</span>
+        <strong>${escapeHtml(t("governor_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t(`governor_${severity}`))}</em>
+    </div>
+    <div class="governor-reactor">
+      <div class="reactor-core ${escapeHtml(severity)}" style="--reactor-fill:${boundaryRatio}%">
+        <span></span>
+        <strong>${escapeHtml(formatNumber(boundaryRatio, 0))}%</strong>
+      </div>
+      <div class="governor-cells">
+        ${cells
+          .map(
+            (cell) => `
+              <span class="${escapeHtml(cell.tone)}">
+                <em>${escapeHtml(cell.label)}</em>
+                <strong>${escapeHtml(cell.value)}</strong>
+              </span>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="governor-runbook">
+      <span>${escapeHtml(t("governor_cooldown"))}: ${escapeHtml(cooldownLabel)}</span>
+      <p>${escapeHtml(runbook)}</p>
+    </div>
+  `;
+}
+
 function renderApi() {
   const { api, spend, cap, ratio } = apiBudget();
   $("#api-spend-label").textContent = currentLang === "zh" ? `已花 ${money(spend)}` : `${money(spend)} spent`;
   $("#api-cap-label").textContent = currentLang === "zh" ? `上限 $${cap.toFixed(2)}` : `$${cap.toFixed(2)} cap`;
   $("#api-meter").style.width = `${ratio}%`;
+  renderRateGovernor();
   renderMediaRoiGate();
   $("#api-usage").innerHTML = (api.endpoints || [])
     .map((endpoint) => {

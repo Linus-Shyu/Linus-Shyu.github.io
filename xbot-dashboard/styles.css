@@ -7962,6 +7962,200 @@ body:not(.demo-mode) .demo-strip {
   background: rgba(148, 163, 184, 0.2);
 }
 
+.rate-governor {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 12% 0, rgba(0, 240, 255, 0.12), transparent 36%),
+    radial-gradient(circle at 100% 100%, rgba(255, 0, 122, 0.08), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 22px rgba(0, 240, 255, 0.08),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 58%, transparent);
+}
+
+.governor-head,
+.governor-reactor,
+.governor-cells,
+.governor-runbook {
+  display: grid;
+  gap: 8px;
+}
+
+.governor-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.governor-head span,
+.governor-runbook span,
+.governor-cells em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 780;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.governor-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.governor-head > em {
+  border: 1px solid rgba(0, 255, 102, 0.34);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.08);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.governor-head.warn > em {
+  color: #ff9f1c;
+  border-color: rgba(255, 159, 28, 0.38);
+  background: rgba(255, 159, 28, 0.1);
+}
+
+.governor-head.danger > em {
+  color: #ff007a;
+  border-color: rgba(255, 0, 122, 0.38);
+  background: rgba(255, 0, 122, 0.1);
+}
+
+.governor-reactor {
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: center;
+}
+
+.reactor-core {
+  position: relative;
+  display: grid;
+  width: 86px;
+  height: 86px;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, var(--surface) 0 42%, transparent 43%),
+    conic-gradient(#00ff66 0 var(--reactor-fill, 0%), rgba(148, 163, 184, 0.24) var(--reactor-fill, 0%) 100%);
+  box-shadow:
+    0 0 24px rgba(0, 255, 102, 0.1),
+    inset 0 0 0 1px rgba(0, 255, 102, 0.16);
+}
+
+.reactor-core.warn {
+  background:
+    radial-gradient(circle, var(--surface) 0 42%, transparent 43%),
+    conic-gradient(#ff9f1c 0 var(--reactor-fill, 0%), rgba(148, 163, 184, 0.24) var(--reactor-fill, 0%) 100%);
+  box-shadow: 0 0 24px rgba(255, 159, 28, 0.13);
+}
+
+.reactor-core.danger {
+  background:
+    radial-gradient(circle, var(--surface) 0 42%, transparent 43%),
+    conic-gradient(#ff007a 0 var(--reactor-fill, 0%), rgba(148, 163, 184, 0.24) var(--reactor-fill, 0%) 100%);
+  box-shadow: 0 0 26px rgba(255, 0, 122, 0.14);
+}
+
+.reactor-core span {
+  position: absolute;
+  inset: 13px;
+  border: 1px solid color-mix(in srgb, #00f0ff 24%, transparent);
+  border-radius: inherit;
+  box-shadow: inset 0 0 18px rgba(0, 240, 255, 0.08);
+}
+
+.reactor-core strong {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.governor-cells {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.governor-cells span {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  padding: 7px;
+  background: color-mix(in srgb, var(--surface) 62%, transparent);
+}
+
+.governor-cells span.ok {
+  border-color: rgba(0, 255, 102, 0.22);
+}
+
+.governor-cells span.warn {
+  border-color: rgba(255, 159, 28, 0.3);
+}
+
+.governor-cells span.danger {
+  border-color: rgba(255, 0, 122, 0.32);
+}
+
+.governor-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.governor-cells .ok strong {
+  color: #00ff66;
+}
+
+.governor-cells .warn strong {
+  color: #ff9f1c;
+}
+
+.governor-cells .danger strong {
+  color: #ff007a;
+}
+
+.governor-runbook {
+  border-left: 2px solid color-mix(in srgb, #00f0ff 42%, transparent);
+  padding-left: 9px;
+}
+
+.governor-runbook p {
+  margin: 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .media-firewall {
   display: grid;
   gap: 10px;
