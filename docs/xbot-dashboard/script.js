@@ -341,6 +341,13 @@ const translations = {
     pipeline_metric_measured: "Measured",
     pipeline_metric_drafts: "Drafts",
     pipeline_metric_budget: "Budget",
+    pipeline_metric_cadence: "Cadence",
+    cadence_ready: "publish ready",
+    cadence_advisory: "operator review",
+    cadence_blocked: "publish blocked",
+    cadence_status_publish: "{mode} · main post allowed",
+    cadence_status_hold: "{mode} · manual distribution first",
+    runlog_cadence: "cadence.control",
     runlog_eyebrow: "Task log",
     runlog_ready: "operator ready",
     runlog_ingest: "rss.ingest",
@@ -606,6 +613,13 @@ const translations = {
     pipeline_metric_measured: "已测",
     pipeline_metric_drafts: "草稿",
     pipeline_metric_budget: "预算",
+    pipeline_metric_cadence: "节奏",
+    cadence_ready: "可以发帖",
+    cadence_advisory: "人工复核",
+    cadence_blocked: "已拦截发帖",
+    cadence_status_publish: "{mode} · 允许主帖",
+    cadence_status_hold: "{mode} · 先做人工分发",
+    runlog_cadence: "cadence.control",
     runlog_eyebrow: "任务日志",
     runlog_ready: "操作者就绪",
     runlog_ingest: "rss.ingest",
@@ -932,6 +946,57 @@ function apiBudget() {
       : Math.max(0, cap - spend);
   const ratio = cap > 0 ? Math.min(100, (spend / cap) * 100) : 0;
   return { api, spend, cap, remaining, ratio };
+}
+
+function formatCadenceMode(mode, { compact = false } = {}) {
+  const normalized = String(mode || "publish_experiment");
+  const labels = currentLang === "zh"
+    ? {
+        publish_experiment: compact ? "发帖" : "发帖实验",
+        manual_distribution_only: compact ? "人工分发" : "仅人工分发",
+        refresh_metrics_first: compact ? "刷新" : "先刷新数据",
+        manual_override: compact ? "手动" : "手动覆盖",
+        wait: compact ? "等待" : "等待窗口",
+        disabled: compact ? "关闭" : "控制器关闭",
+      }
+    : {
+        publish_experiment: compact ? "publish" : "publish experiment",
+        manual_distribution_only: compact ? "manual" : "manual distribution",
+        refresh_metrics_first: compact ? "refresh" : "refresh metrics first",
+        manual_override: compact ? "override" : "manual override",
+        wait: compact ? "wait" : "wait window",
+        disabled: compact ? "off" : "controller disabled",
+      };
+  return labels[normalized] || normalized.replace(/_/g, " ");
+}
+
+function cadenceData() {
+  const cadence = dashboardData.cadence || fallbackData.cadence;
+  if (cadence) return cadence;
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const goal = dashboardData.growthGoal || fallbackData.growthGoal || {};
+  const { remaining } = apiBudget();
+  const posts = number(last24h.posts);
+  const target = Math.max(1, number(goal.dailyPosts, 1));
+  const publishAllowed = remaining > 0 && posts < target;
+  return {
+    enabled: true,
+    enforcement: "derived",
+    mode: publishAllowed ? "publish_experiment" : "manual_distribution_only",
+    publishAllowed,
+    willBlockPublish: !publishAllowed && remaining <= 0,
+    reasonCode: publishAllowed ? "ok" : posts >= target ? "daily_target_reached" : "budget_safe_cap",
+    severity: publishAllowed ? "ok" : "warn",
+    reason: publishAllowed
+      ? "Cadence allows the next post."
+      : "Derived cadence prefers manual distribution before another post.",
+    nextAction: publishAllowed
+      ? "Proceed with the next post candidate."
+      : "Use manual reply routes and keep X API spend flat.",
+    postsLast24h: posts,
+    dailyPostTarget: target,
+    safeTextPostsLeft: remaining > 0 ? Math.floor(remaining / 0.015) : 0,
+  };
 }
 
 const SIGNAL_NODE_COORDS = {
@@ -1265,13 +1330,24 @@ function renderExpoStory() {
   const { remaining } = apiBudget();
   const freshness = dataFreshness();
   const { bestHook } = learningData();
+  const cadence = cadenceData();
+  const cadenceMode = formatCadenceMode(cadence.mode);
+  const cadenceModeCompact = formatCadenceMode(cadence.mode, { compact: true });
+  const cadenceStatus = cadence.willBlockPublish
+    ? t("cadence_blocked")
+    : cadence.publishAllowed
+      ? t("cadence_ready")
+      : t("cadence_advisory");
+  const cadenceHealth = cadence.willBlockPublish ? "danger" : cadence.publishAllowed ? "ok" : "warn";
   const bestHookName = formatTemplate(bestHook?.name || bestPost()?.template || "decision_rule");
   const measuredPosts = number(profile.measuredPosts, number(profile.trackedPosts, number(last7d.posts)));
 
   $("#story-outcome-score").textContent = t("story_outcome_score");
   $("#story-outcome-copy").textContent = t("story_outcome_copy");
-  $("#pipeline-status").textContent = t("pipeline_status", { stages: 5 });
-  $("#runlog-status").textContent = t("runlog_ready");
+  $("#pipeline-status").textContent = cadence.publishAllowed
+    ? t("cadence_status_publish", { mode: cadenceMode })
+    : t("cadence_status_hold", { mode: cadenceMode });
+  $("#runlog-status").textContent = cadenceStatus;
 
   const outcomeStats = [
     { label: t("outcome_extra_reads"), value: "0" },
@@ -1294,6 +1370,7 @@ function renderExpoStory() {
     { label: t("pipeline_metric_measured"), value: formatNumber(measuredPosts) },
     { label: t("pipeline_metric_drafts"), value: formatNumber(drafts.length) },
     { label: t("pipeline_metric_budget"), value: `$${remaining.toFixed(2)}` },
+    { label: t("pipeline_metric_cadence"), value: cadenceModeCompact },
   ];
   $("#pipeline-metrics").innerHTML = pipelineMetrics
     .map(
@@ -1312,6 +1389,7 @@ function renderExpoStory() {
       ? t("runlog_stale_data")
       : t("runlog_fallback_data");
   const runlog = [
+    { label: t("runlog_cadence"), value: cadence.reason || cadenceMode, status: cadenceHealth },
     { label: t("runlog_ingest"), value: freshnessText, status: freshness.className },
     { label: t("runlog_score"), value: t("runlog_posts_measured", { count: formatNumber(measuredPosts) }), status: "ok" },
     { label: t("runlog_queue"), value: t("runlog_drafts_ready", { count: formatNumber(drafts.length) }), status: drafts.length ? "ok" : "warn" },
