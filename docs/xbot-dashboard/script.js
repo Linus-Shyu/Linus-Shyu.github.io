@@ -254,6 +254,47 @@ const fallbackData = {
       ],
     },
   },
+  hourlyLoadBalancer: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    source: "tweet_analytics.postedAt + tweet_metrics",
+    lookbackDays: 30,
+    sampleCount: 120,
+    minSamples: 2,
+    confidence: "medium",
+    mode: "wait_for_peak",
+    zeroExtraXReads: true,
+    currentHour: { hour: 2, label: "02:00", loadScore: 18.2, posts: 1, impressions: 8, avgScore: 2.4, status: "dark" },
+    nextWindow: { hour: 13, label: "13:00", hoursFromNow: 11, loadScore: 88.4, posts: 9, impressions: 284, avgScore: 7.9, status: "hot" },
+    bestHours: [
+      { hour: 13, label: "13:00", loadScore: 88.4, posts: 9, impressions: 284, avgScore: 7.9, status: "hot" },
+      { hour: 17, label: "17:00", loadScore: 81.6, posts: 7, impressions: 233, avgScore: 7.2, status: "hot" },
+      { hour: 22, label: "22:00", loadScore: 72.8, posts: 6, impressions: 188, avgScore: 6.4, status: "warm" },
+      { hour: 4, label: "04:00", loadScore: 58.5, posts: 5, impressions: 117, avgScore: 5.1, status: "warm" },
+    ],
+    nextAction: "Hold standalone posts for learned UTC peaks; use manual replies during cold windows.",
+    hours: Array.from({ length: 24 }, (_, hour) => {
+      const load = {
+        0: 22, 1: 12, 2: 18, 3: 28, 4: 58, 5: 44,
+        6: 20, 7: 15, 8: 24, 9: 36, 10: 41, 11: 47,
+        12: 63, 13: 88, 14: 76, 15: 54, 16: 62, 17: 82,
+        18: 69, 19: 51, 20: 38, 21: 57, 22: 73, 23: 46,
+      }[hour] || 0;
+      const status = load >= 75 ? "hot" : load >= 52 ? "warm" : load >= 20 ? "cool" : "dark";
+      return {
+        hour,
+        label: `${String(hour).padStart(2, "0")}:00`,
+        posts: load ? Math.max(1, Math.round(load / 14)) : 0,
+        impressions: Math.round(load * 3.2),
+        likes: Math.round(load / 18),
+        reposts: 0,
+        replies: Math.round(load / 33),
+        avgScore: Number((load / 10).toFixed(1)),
+        loadScore: load,
+        status,
+        current: hour === 2,
+      };
+    }),
+  },
   automation: {
     publishMode: "manual_paste",
     zeroWasteManualMode: true,
@@ -647,6 +688,12 @@ const translations = {
     runlog_budget_left: "{amount} budget left",
     runlog_best_hook: "{hook} rule wins",
     monitor_load: "Total ingestion throughput / L7 traffic load",
+    monitor_hourly: "UTC load balancer",
+    hourly_current: "current {hour} · score {score}",
+    hourly_next: "next {hour} · {hours}h",
+    hourly_best: "best windows",
+    hourly_samples: "{count} samples · {days}d",
+    hourly_zero_reads: "0 X reads",
     monitor_alerts: "HTTP status triage",
     monitor_partition: "API partition usage",
     monitor_requests: "X API operations per run",
@@ -1003,6 +1050,12 @@ const translations = {
     runlog_budget_left: "预算剩余 {amount}",
     runlog_best_hook: "胜出规则：{hook}",
     monitor_load: "总入口吞吐 / L7 流量负载",
+    monitor_hourly: "UTC 负载均衡器",
+    hourly_current: "当前 {hour} · 评分 {score}",
+    hourly_next: "下个 {hour} · {hours} 小时",
+    hourly_best: "最佳窗口",
+    hourly_samples: "{count} 样本 · {days} 天",
+    hourly_zero_reads: "0 次 X 读取",
     monitor_alerts: "HTTP 状态分诊",
     monitor_partition: "API 分区用量",
     monitor_requests: "每轮 X API 操作",
@@ -1409,6 +1462,7 @@ function formatCadenceMode(mode, { compact = false } = {}) {
         refresh_metrics_first: compact ? "刷新" : "先刷新数据",
         manual_override: compact ? "手动" : "手动覆盖",
         wait: compact ? "等待" : "等待窗口",
+        wait_for_learned_peak: compact ? "等峰值" : "等待学习峰值",
         disabled: compact ? "关闭" : "控制器关闭",
       }
     : {
@@ -1417,6 +1471,7 @@ function formatCadenceMode(mode, { compact = false } = {}) {
         refresh_metrics_first: compact ? "refresh" : "refresh metrics first",
         manual_override: compact ? "override" : "manual override",
         wait: compact ? "wait" : "wait window",
+        wait_for_learned_peak: compact ? "peak wait" : "wait learned peak",
         disabled: compact ? "off" : "controller disabled",
       };
   return labels[normalized] || normalized.replace(/_/g, " ");
@@ -2457,6 +2512,58 @@ function impressionSeries(periodData, chartKey = "impressions24h") {
   return cumulativeSeries(values);
 }
 
+function hourlyLoadData() {
+  return dashboardData.hourlyLoadBalancer || fallbackData.hourlyLoadBalancer || {};
+}
+
+function renderHourlyLoadBalancer() {
+  const container = $("#monitor-hourly-heatmap");
+  if (!container) return;
+  const balancer = hourlyLoadData();
+  const hours = Array.isArray(balancer.hours) && balancer.hours.length
+    ? balancer.hours
+    : fallbackData.hourlyLoadBalancer.hours;
+  const next = balancer.nextWindow || null;
+  const current = balancer.currentHour || hours.find((hour) => hour.current) || hours[0] || null;
+  const bestHourIds = new Set((balancer.bestHours || []).map((hour) => Number(hour.hour)));
+  $("#monitor-hourly-current").textContent = next
+    ? t("hourly_next", { hour: next.label || "-", hours: formatNumber(next.hoursFromNow, 1) })
+    : t("hourly_current", { hour: current?.label || "-", score: formatNumber(current?.loadScore, 1) });
+  const best = (balancer.bestHours || []).slice(0, 3);
+  container.innerHTML = `
+    <div class="hourly-grid">
+      ${hours
+        .slice(0, 24)
+        .map((hour) => {
+          const score = clamp(number(hour.loadScore), 0, 100);
+          const status = hour.status || (score >= 75 ? "hot" : score >= 52 ? "warm" : score >= 20 ? "cool" : "dark");
+          const classes = [
+            "hour-cell",
+            status,
+            Number(hour.hour) === Number(current?.hour) ? "current" : "",
+            Number(hour.hour) === Number(next?.hour) ? "next" : "",
+            bestHourIds.has(Number(hour.hour)) ? "best" : "",
+          ].filter(Boolean).join(" ");
+          return `
+            <span class="${escapeHtml(classes)}" style="--load:${score.toFixed(1)}%" title="${escapeHtml(`${hour.label} UTC · score ${formatNumber(score, 1)} · ${formatNumber(hour.impressions)} L7 events · ${formatNumber(hour.posts)} posts`)}">
+              <em>${escapeHtml(String(hour.hour).padStart(2, "0"))}</em>
+              <strong>${escapeHtml(formatNumber(score, 0))}</strong>
+            </span>
+          `;
+        })
+        .join("")}
+    </div>
+    <div class="hourly-footer">
+      <span>${escapeHtml(t("hourly_samples", { count: formatNumber(balancer.sampleCount), days: formatNumber(balancer.lookbackDays) }))}</span>
+      <strong>${escapeHtml(t("hourly_zero_reads"))}</strong>
+    </div>
+    <div class="hourly-best">
+      <span>${escapeHtml(t("hourly_best"))}</span>
+      <strong>${escapeHtml(best.map((hour) => `${hour.label} ${formatNumber(hour.loadScore, 0)}`).join(" / ") || "-")}</strong>
+    </div>
+  `;
+}
+
 function renderMonitorPanels() {
   const loadChart = $("#monitor-load-chart");
   if (!loadChart) return;
@@ -2480,6 +2587,7 @@ function renderMonitorPanels() {
       <span>${escapeHtml(t("chart_points", { count: formatNumber(impressionPoints) }))}</span>
     </div>
   `;
+  renderHourlyLoadBalancer();
 
   const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
   const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);

@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260708-angle1" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-rail1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -186,6 +186,14 @@
             <div class="monitor-chart" id="monitor-load-chart"></div>
           </article>
 
+          <article class="monitor-panel monitor-heatmap-panel">
+            <div class="monitor-head">
+              <strong data-i18n="monitor_hourly">UTC load balancer</strong>
+              <em id="monitor-hourly-current">current -</em>
+            </div>
+            <div class="hourly-heatmap" id="monitor-hourly-heatmap"></div>
+          </article>
+
           <article class="monitor-panel monitor-alert">
             <div class="monitor-head">
               <strong data-i18n="monitor_alerts">Alert state</strong>
@@ -214,7 +222,7 @@
             </div>
           </article>
 
-          <article class="monitor-panel monitor-panel-wide">
+          <article class="monitor-panel monitor-panel-wide monitor-requests-panel">
             <div class="monitor-head">
               <strong data-i18n="monitor_requests">X API operations per run</strong>
               <em id="monitor-request-current">current -</em>
@@ -609,6 +617,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260708-angle1" defer></script>
+    <script src="./script.js?v=20260708-rail1" defer></script>
   </body>
 </html>
