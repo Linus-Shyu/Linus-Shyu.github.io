@@ -1523,7 +1523,8 @@ h3 {
 }
 
 .signal-node-button.x {
-  width: 152px;
+  width: 178px;
+  padding-right: 40px;
   border-color: color-mix(in srgb, var(--accent-2) 46%, var(--line));
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 13%, transparent), transparent 58%),
@@ -1537,6 +1538,14 @@ h3 {
 
 .signal-node-button.x .signal-node-label {
   color: color-mix(in srgb, var(--ink) 78%, var(--accent-2));
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.signal-node-button.x em {
+  color: color-mix(in srgb, var(--accent-2) 74%, var(--muted));
+  font-size: 9px;
+  font-weight: 820;
 }
 
 .signal-node-button.draft::before {

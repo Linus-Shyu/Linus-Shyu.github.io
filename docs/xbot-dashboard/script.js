@@ -2275,6 +2275,17 @@ function formatSignalNodeValue(node) {
   return node.unit ? `${value} ${signalUnitLabel(node.unit)}` : value;
 }
 
+function signalNodeSubLabel(node) {
+  if (!node) return "-";
+  if (node.id === "x") {
+    const routeValue = Number.isFinite(Number(node.value)) ? formatNumber(node.value) : "0";
+    return currentLang === "zh"
+      ? `${routeValue} 路由 · 0 读取`
+      : `${routeValue} routes · 0 reads`;
+  }
+  return formatSignalNodeValue(node);
+}
+
 function signalNodeDetail(node, fallback = "") {
   if (!node) return fallback;
   if (node.id === "x") {
@@ -3735,7 +3746,7 @@ function renderSignalNodes() {
     button.setAttribute("aria-label", `${label}: ${formatSignalNodeValue(node)}. ${signalNodeDetail(node)}`.trim());
     button.innerHTML = `
       <span class="signal-node-label">${escapeHtml(label)}</span>
-      <em>${escapeHtml(formatSignalNodeValue(node))}</em>
+      <em>${escapeHtml(signalNodeSubLabel(node))}</em>
     `;
   });
 }
