@@ -1065,6 +1065,21 @@ const translations = {
     next_reply: "Next swarm output",
     server_health: "Server Health",
     runtime_services: "Runtime services",
+    inference_eyebrow: "Swarm Intelligence",
+    inference_title: "Model inference stream",
+    inference_cached: "cached stream",
+    inference_live: "tracked usage",
+    inference_calls: "inference calls",
+    inference_tokens: "tokens",
+    inference_cost: "model cost",
+    inference_failures: "faults",
+    inference_no_calls: "No tracked model calls yet; rendering cached outputs from the swarm queue.",
+    inference_model_fallback: "cached-output-router",
+    inference_purpose_fallback: "manual_reply_drafts",
+    inference_status_ok: "model stream nominal",
+    inference_status_watch: "model stream watch",
+    inference_model_calls: "{count} calls",
+    inference_token_short: "{count} tok",
     no_extra_x_reads: "No extra X reads",
     traffic: "L7 traffic",
     signal_shape: "7d ingestion waveform",
@@ -1522,6 +1537,21 @@ const translations = {
     next_reply: "下一条群体输出",
     server_health: "服务健康",
     runtime_services: "运行服务",
+    inference_eyebrow: "群体智能",
+    inference_title: "模型推理流",
+    inference_cached: "缓存流",
+    inference_live: "已追踪用量",
+    inference_calls: "推理调用",
+    inference_tokens: "tokens",
+    inference_cost: "模型成本",
+    inference_failures: "故障",
+    inference_no_calls: "暂未追踪到模型调用；正在从群体输出队列渲染缓存流。",
+    inference_model_fallback: "缓存输出路由器",
+    inference_purpose_fallback: "人工回复输出",
+    inference_status_ok: "模型流正常",
+    inference_status_watch: "模型流观察",
+    inference_model_calls: "{count} 次调用",
+    inference_token_short: "{count} tok",
     no_extra_x_reads: "不增加 X 读取",
     traffic: "L7 流量",
     signal_shape: "7 日入口吞吐波形",
@@ -4574,6 +4604,105 @@ function renderServices() {
     .join("");
 }
 
+function inferenceStreamData() {
+  const openai = dashboardData.openai || {};
+  const purposes = Array.isArray(openai.purposes) ? openai.purposes : [];
+  const models = Array.isArray(openai.models) ? openai.models : [];
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const calls = purposes.reduce((sum, item) => sum + number(item.calls), 0);
+  const failures = purposes.reduce((sum, item) => sum + number(item.failures), 0);
+  const tokens = purposes.reduce((sum, item) => sum + number(item.totalTokens), 0);
+  const spend = number(openai.spend);
+  if (calls > 0 || tokens > 0 || spend > 0 || models.length) {
+    return {
+      mode: "live",
+      calls,
+      failures,
+      tokens,
+      spend,
+      updatedAt: openai.updatedAt || dashboardData.updatedAt,
+      models,
+      purposes,
+      status: failures > 0 ? "warn" : "ok",
+    };
+  }
+
+  const estimatedTokens = drafts.reduce((sum, draft) => {
+    const text = `${draft.title || ""} ${draft.angle || ""} ${draft.text || ""}`;
+    return sum + Math.max(24, Math.ceil(text.length / 3.8));
+  }, 0);
+  return {
+    mode: "cached",
+    calls: drafts.length,
+    failures: 0,
+    tokens: estimatedTokens,
+    spend: 0,
+    updatedAt: dashboardData.updatedAt,
+    models: [
+      {
+        name: t("inference_model_fallback"),
+        calls: drafts.length,
+        totalTokens: estimatedTokens,
+        usd: 0,
+      },
+    ],
+    purposes: [
+      {
+        name: t("inference_purpose_fallback"),
+        calls: drafts.length,
+        failures: 0,
+        totalTokens: estimatedTokens,
+        usd: 0,
+        lastStatus: 200,
+      },
+    ],
+    status: drafts.length ? "ok" : "warn",
+  };
+}
+
+function renderInferenceStream() {
+  const root = $("#inference-stream-body");
+  if (!root) return;
+  const stream = inferenceStreamData();
+  $("#inference-mode").textContent = stream.mode === "live" ? t("inference_live") : t("inference_cached");
+  $("#inference-mode").className = `pill ${stream.status === "ok" ? "pill-good" : "pill-neutral"}`;
+  const primaryModel = stream.models[0] || {};
+  const primaryPurpose = stream.purposes[0] || {};
+  const lanes = [
+    { label: t("inference_calls"), value: formatNumber(stream.calls), tone: "cyan" },
+    { label: t("inference_tokens"), value: formatNumber(stream.tokens), tone: "green" },
+    { label: t("inference_cost"), value: money(stream.spend), tone: "magenta" },
+    { label: t("inference_failures"), value: formatNumber(stream.failures), tone: stream.failures ? "magenta" : "green" },
+  ];
+  root.innerHTML = `
+    <div class="inference-headline ${escapeHtml(stream.status)}">
+      <span class="triage-led ${escapeHtml(stream.status)}"></span>
+      <div>
+        <strong>${escapeHtml(stream.status === "ok" ? t("inference_status_ok") : t("inference_status_watch"))}</strong>
+        <p>${escapeHtml(stream.mode === "live" ? `${primaryModel.name || "model"} · ${formatDate(stream.updatedAt)}` : t("inference_no_calls"))}</p>
+      </div>
+    </div>
+    <div class="inference-lanes">
+      ${lanes.map((lane) => `
+        <span class="${escapeHtml(lane.tone)}">
+          <em>${escapeHtml(lane.label)}</em>
+          <strong>${escapeHtml(lane.value)}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="inference-model-row">
+      <span>${escapeHtml(primaryModel.name || t("inference_model_fallback"))}</span>
+      <strong>${escapeHtml(t("inference_model_calls", { count: formatNumber(primaryModel.calls || stream.calls) }))}</strong>
+      <em>${money(primaryModel.usd || 0)}</em>
+    </div>
+    <div class="inference-purpose-row">
+      <span>${escapeHtml(primaryPurpose.name || t("inference_purpose_fallback"))}</span>
+      <strong>HTTP ${escapeHtml(String(primaryPurpose.lastStatus || 200))}</strong>
+      <em>${escapeHtml(t("inference_token_short", { count: formatNumber(primaryPurpose.totalTokens || stream.tokens) }))}</em>
+    </div>
+  `;
+}
+
 function trendSeries() {
   return impressionSeries(dashboardData.last7d || fallbackData.last7d || {}, "impressions7d");
 }
@@ -5217,6 +5346,7 @@ function render() {
   renderSignalDetail();
   renderProof();
   renderServices();
+  renderInferenceStream();
   renderTrend();
   renderOpportunities();
   renderActions();

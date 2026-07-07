@@ -2144,6 +2144,149 @@ h3 {
   white-space: nowrap;
 }
 
+.inference-stream {
+  display: grid;
+  gap: 9px;
+}
+
+.inference-headline,
+.inference-model-row,
+.inference-purpose-row {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, #00f0ff 20%, var(--line-soft));
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #00f0ff 7%, transparent), transparent 52%),
+    color-mix(in srgb, var(--surface-soft) 84%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, #00f0ff 6%, transparent);
+}
+
+.inference-headline {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  padding: 10px;
+}
+
+.inference-headline.warn {
+  border-color: color-mix(in srgb, #ff007a 34%, var(--line-soft));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #ff007a 9%, transparent), transparent 58%),
+    color-mix(in srgb, var(--surface-soft) 84%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, #ff007a 10%, transparent);
+}
+
+.inference-headline strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 14px;
+  font-weight: 880;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inference-headline p {
+  margin: 4px 0 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 10px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+}
+
+.inference-lanes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.inference-lanes span {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 88%, transparent));
+}
+
+.inference-lanes span.cyan {
+  border-color: color-mix(in srgb, #00f0ff 36%, var(--line));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, #00f0ff 78%, transparent);
+}
+
+.inference-lanes span.green {
+  border-color: color-mix(in srgb, #00ff66 34%, var(--line));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, #00ff66 70%, transparent);
+}
+
+.inference-lanes span.magenta {
+  border-color: color-mix(in srgb, #ff007a 42%, var(--line));
+  box-shadow:
+    inset 2px 0 0 color-mix(in srgb, #ff007a 78%, transparent),
+    0 0 14px color-mix(in srgb, #ff007a 9%, transparent);
+}
+
+.inference-lanes em,
+.inference-model-row span,
+.inference-purpose-row span,
+.inference-model-row em,
+.inference-purpose-row em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inference-lanes strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 15px;
+  font-weight: 880;
+  line-height: 1;
+}
+
+.inference-lanes span.cyan strong {
+  color: #00f0ff;
+  text-shadow: 0 0 14px color-mix(in srgb, #00f0ff 22%, transparent);
+}
+
+.inference-lanes span.green strong {
+  color: #00ff66;
+}
+
+.inference-lanes span.magenta strong {
+  color: #ff007a;
+  text-shadow: 0 0 14px color-mix(in srgb, #ff007a 22%, transparent);
+}
+
+.inference-model-row,
+.inference-purpose-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 9px;
+}
+
+.inference-model-row strong,
+.inference-purpose-row strong {
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
 .spark-panel {
   padding: 14px;
   background: var(--surface);
@@ -9317,4 +9460,273 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .rail-budget .meter div {
   background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
   box-shadow: 0 0 14px rgba(255, 0, 122, 0.28) !important;
+}
+
+/* Light rail v7: readable, main-canvas-aligned sidebar for the white UI. */
+:root[data-theme="light"] {
+  --nav-rail-bg: #eef3f8;
+  --nav-rail-bg-mid: #f5f7fa;
+  --nav-rail-bg-soft: #ffffff;
+  --nav-rail-panel: #ffffff;
+  --nav-rail-panel-strong: #f2f6fb;
+  --nav-rail-line: rgba(15, 23, 42, 0.13);
+  --nav-rail-line-hot: rgba(26, 86, 219, 0.42);
+  --nav-rail-line-boundary: rgba(249, 115, 22, 0.44);
+  --nav-rail-text: #111827;
+  --nav-rail-muted: #5f6c80;
+  --nav-rail-hot: #1a56db;
+  --nav-rail-boundary: #f97316;
+  --nav-rail-green: #16a34a;
+  --nav-rail-glow: rgba(26, 86, 219, 0.16);
+  --nav-rail-boundary-glow: rgba(249, 115, 22, 0.18);
+}
+
+:root[data-theme="light"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -12%, rgba(26, 86, 219, 0.12), transparent 34%),
+    radial-gradient(circle at 0 82%, rgba(22, 163, 74, 0.1), transparent 30%),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.035) 0 1px, transparent 1px 46px),
+    linear-gradient(180deg, var(--nav-rail-bg-soft) 0%, var(--nav-rail-bg-mid) 40%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.72),
+    14px 0 34px rgba(15, 23, 42, 0.08) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .env-card,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="light"] .rail-budget {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 248, 252, 0.88)),
+    linear-gradient(135deg, rgba(26, 86, 219, 0.05), transparent 58%) !important;
+  box-shadow:
+    0 12px 26px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+:root[data-theme="light"] .brand:hover,
+:root[data-theme="light"] .rack-mini div:hover,
+:root[data-theme="light"] .rail-budget:hover {
+  background-color: var(--nav-rail-panel-strong) !important;
+}
+
+:root[data-theme="light"] .brand-mark {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #111827 0%, var(--nav-rail-hot) 58%, var(--nav-rail-green) 100%) !important;
+  box-shadow:
+    0 12px 22px var(--nav-rail-glow),
+    0 0 0 1px rgba(17, 24, 39, 0.08) inset !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="light"] .env-line strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="light"] .rail-nav a::after {
+  color: var(--nav-rail-text) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="light"] .env-card > span,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .env-line .status-dot,
+:root[data-theme="light"] .rack-mini span {
+  background: var(--nav-rail-green) !important;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.13) !important;
+}
+
+:root[data-theme="light"] .rail-nav a {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(245, 248, 252, 0.72)) !important;
+}
+
+:root[data-theme="light"] .rail-nav a::before {
+  background: color-mix(in srgb, var(--nav-rail-muted) 58%, transparent) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a:focus-visible,
+:root[data-theme="light"] .rail-nav a.active {
+  color: var(--nav-rail-hot) !important;
+  border-color: var(--nav-rail-line-hot) !important;
+  background:
+    radial-gradient(circle at 16% 50%, rgba(26, 86, 219, 0.15), transparent 42%),
+    linear-gradient(135deg, rgba(26, 86, 219, 0.12), rgba(22, 163, 74, 0.06)),
+    rgba(255, 255, 255, 0.9) !important;
+  box-shadow:
+    0 12px 24px rgba(26, 86, 219, 0.1),
+    0 0 0 1px rgba(26, 86, 219, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::after,
+:root[data-theme="light"] .rail-nav a:focus-visible::after,
+:root[data-theme="light"] .rail-nav a.active::after {
+  color: var(--nav-rail-hot) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::before,
+:root[data-theme="light"] .rail-nav a:focus-visible::before,
+:root[data-theme="light"] .rail-nav a.active::before {
+  background: var(--nav-rail-hot) !important;
+  box-shadow: 0 0 0 4px var(--nav-rail-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget {
+  border-color: var(--nav-rail-line-boundary) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(249, 115, 22, 0.13), transparent 62%),
+    linear-gradient(135deg, rgba(26, 86, 219, 0.05), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 248, 252, 0.88)) !important;
+  box-shadow:
+    0 12px 26px rgba(15, 23, 42, 0.07),
+    0 0 22px var(--nav-rail-boundary-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+:root[data-theme="light"] .rail-budget strong {
+  color: var(--nav-rail-boundary) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter {
+  background: rgba(15, 23, 42, 0.12) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.18) !important;
+}
+
+@media (min-width: 1081px) {
+  :root[data-theme="light"] .ops-shell {
+    grid-template-columns: 232px minmax(0, 1fr) !important;
+    gap: 18px;
+  }
+
+  :root[data-theme="light"] .side-rail {
+    top: 14px !important;
+    height: calc(100vh - 28px) !important;
+    min-height: 0 !important;
+    border-width: 1px !important;
+    border-radius: 8px !important;
+    overflow-y: auto !important;
+    padding: 14px !important;
+  }
+
+  :root[data-theme="light"] .brand {
+    min-height: 58px !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 9px 10px !important;
+  }
+
+  :root[data-theme="light"] .brand > span:not(.brand-mark),
+  :root[data-theme="light"] .env-card {
+    display: block !important;
+  }
+
+  :root[data-theme="light"] .brand-mark {
+    width: 40px !important;
+    height: 40px !important;
+    flex-basis: 40px !important;
+  }
+
+  :root[data-theme="light"] .brand strong {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+  }
+
+  :root[data-theme="light"] .brand small {
+    font-size: 10px !important;
+    line-height: 1.16 !important;
+  }
+
+  :root[data-theme="light"] .env-card {
+    margin-top: 14px !important;
+    padding: 12px !important;
+  }
+
+  :root[data-theme="light"] .rack-mini {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  :root[data-theme="light"] .rack-mini div {
+    min-height: 58px !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    justify-items: start !important;
+    gap: 7px !important;
+    padding: 9px !important;
+  }
+
+  :root[data-theme="light"] .rack-mini strong {
+    max-width: none !important;
+    font-size: 11px !important;
+    text-align: left !important;
+  }
+
+  :root[data-theme="light"] .rack-mini em {
+    display: block !important;
+    font-size: 10px !important;
+  }
+
+  :root[data-theme="light"] .rail-nav {
+    gap: 7px !important;
+    margin: 18px 0 !important;
+  }
+
+  :root[data-theme="light"] .rail-nav a {
+    min-height: 38px !important;
+    justify-content: flex-start !important;
+    gap: 9px !important;
+    padding: 0 11px !important;
+    font-size: 13px !important;
+  }
+
+  :root[data-theme="light"] .rail-nav a::before {
+    content: "" !important;
+    display: block !important;
+    width: 7px !important;
+    height: 7px !important;
+    flex: 0 0 7px !important;
+    border-radius: 999px !important;
+  }
+
+  :root[data-theme="light"] .rail-nav a::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  :root[data-theme="light"] .rail-budget {
+    padding: 13px !important;
+  }
+
+  :root[data-theme="light"] .rail-budget span,
+  :root[data-theme="light"] .rail-budget small {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+  }
+
+  :root[data-theme="light"] .rail-budget strong {
+    font-size: 25px !important;
+    text-align: left !important;
+  }
 }

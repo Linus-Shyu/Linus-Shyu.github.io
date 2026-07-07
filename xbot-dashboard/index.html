@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260708-cyberrail1" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-lightrail7" />
   </head>
   <body>
     <div class="ops-shell">
@@ -511,6 +511,17 @@ learn(metrics)</code></pre>
               <span class="pill" data-i18n="no_extra_x_reads">No extra X reads</span>
             </div>
             <div class="service-grid" id="service-grid"></div>
+          </article>
+
+          <article class="panel inference-panel" id="inference-stream">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="inference_eyebrow">Swarm Intelligence</p>
+                <h2 data-i18n="inference_title">Model inference stream</h2>
+              </div>
+              <span class="pill pill-neutral" id="inference-mode">cached</span>
+            </div>
+            <div class="inference-stream" id="inference-stream-body"></div>
           </article>
 
           <article class="panel">
