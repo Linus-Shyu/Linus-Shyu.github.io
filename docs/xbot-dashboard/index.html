@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260706-ops3" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-expo1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -80,29 +80,53 @@
 
         <section class="overview-grid" id="overview">
           <article class="command-card">
-            <div class="command-head">
-              <div>
-                <p class="eyebrow" data-i18n="mission_eyebrow">Mission Control</p>
-                <h2 data-i18n="mission_title">Daily growth loop is ready for manual distribution.</h2>
+            <div class="hero-copy">
+              <div class="command-head">
+                <div>
+                  <p class="eyebrow" data-i18n="mission_eyebrow">Mission Control</p>
+                  <h2 data-i18n="mission_title">Turn tech news into daily X growth moves.</h2>
+                </div>
+                <span class="server-badge" data-i18n="expo_mode">Expo Mode</span>
               </div>
-              <span class="server-badge" data-i18n="live">Live</span>
-            </div>
-            <p class="command-copy" data-i18n="mission_copy">
-              Open the highest-signal tech conversations, paste vetted replies, and keep X API spend flat.
-            </p>
-            <div class="command-actions">
-              <a class="button button-primary" href="#today" data-i18n="start_loop">Start loop</a>
-              <button class="button button-secondary" type="button" id="copy-top-three" data-i18n="copy_top_three">Copy top 3 drafts</button>
-            </div>
-            <div class="ops-terminal">
-              <div class="terminal-bar">
-                <span></span><span></span><span></span>
-                <strong>growth-router.sh</strong>
+              <p class="command-copy" data-i18n="mission_copy">
+                The bot scans signal, writes copy-ready replies, tracks outcomes, and keeps API spend visible.
+              </p>
+              <div class="command-actions">
+                <a class="button button-primary" href="#today" data-i18n="start_loop">Start loop</a>
+                <button class="button button-secondary" type="button" id="copy-top-three" data-i18n="copy_top_three">Copy top 3 drafts</button>
               </div>
-              <pre><code>open("Target Accounts")
-copy(bestReply)
-reply(3 to 5)
-track(metrics)</code></pre>
+              <div class="ops-terminal">
+                <div class="terminal-bar">
+                  <span></span><span></span><span></span>
+                  <strong>growth-router.sh</strong>
+                </div>
+                <pre><code>scan(signal)
+draft(replies)
+route(conversation)
+learn(metrics)</code></pre>
+              </div>
+            </div>
+
+            <div class="signal-stage" aria-label="Live growth signal map">
+              <canvas id="signal-canvas" width="640" height="420"></canvas>
+              <div class="signal-head">
+                <span class="signal-live"><i></i><span data-i18n="live">Live</span></span>
+                <strong data-i18n="signal_map">Signal Map</strong>
+              </div>
+              <div class="signal-metrics" aria-label="Signal metrics">
+                <div>
+                  <span data-i18n="hero_signal_label">Signal score</span>
+                  <strong id="hero-signal-score">-</strong>
+                </div>
+                <div>
+                  <span data-i18n="hero_loop_label">Today's loop</span>
+                  <strong id="hero-loop-count">-</strong>
+                </div>
+                <div>
+                  <span data-i18n="hero_cost_label">Cost guard</span>
+                  <strong id="hero-cost-guard">-</strong>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -245,6 +269,6 @@ track(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-ops4" defer></script>
+    <script src="./script.js?v=20260707-expo1" defer></script>
   </body>
 </html>

@@ -123,10 +123,15 @@ const translations = {
     data_stale: "Data stale",
     fallback_data: "Fallback data",
     open_x: "Open X",
-    mission_eyebrow: "Mission Control",
-    mission_title: "Daily growth loop is ready for manual distribution.",
-    mission_copy: "Open the highest-signal tech conversations, paste vetted replies, and keep X API spend flat.",
+    mission_eyebrow: "Signal Engine",
+    mission_title: "Turn tech news into daily X growth moves.",
+    mission_copy: "The bot scans signal, writes copy-ready replies, tracks outcomes, and keeps API spend visible.",
+    expo_mode: "Expo Mode",
     live: "Live",
+    signal_map: "Signal Map",
+    hero_signal_label: "Signal score",
+    hero_loop_label: "Today's loop",
+    hero_cost_label: "Cost guard",
     start_loop: "Start loop",
     copy_top_three: "Copy top 3 drafts",
     deployment: "Deployment",
@@ -213,10 +218,15 @@ const translations = {
     data_stale: "数据过期",
     fallback_data: "备用数据",
     open_x: "打开 X",
-    mission_eyebrow: "任务控制",
-    mission_title: "今日增长循环已就绪，等待人工分发。",
-    mission_copy: "打开高信号科技讨论，粘贴已审核回复，并保持 X API 花费不增加。",
+    mission_eyebrow: "信号引擎",
+    mission_title: "把科技热点变成每天可执行的 X 增长动作。",
+    mission_copy: "系统筛选热点、生成可复制回复、追踪效果，并把 API 成本放在同一屏。",
+    expo_mode: "Expo 模式",
     live: "在线",
+    signal_map: "信号地图",
+    hero_signal_label: "信号评分",
+    hero_loop_label: "今日流程",
+    hero_cost_label: "成本守卫",
     start_loop: "开始流程",
     copy_top_three: "复制前 3 条草稿",
     deployment: "部署",
@@ -337,6 +347,8 @@ let dashboardData = fallbackData;
 let currentLang = document.documentElement.dataset.lang === "zh" ? "zh" : "en";
 let currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 let dataLoadStatus = "fallback";
+let signalAnimationFrame = null;
+let signalResizeTimer = null;
 
 function t(key, vars = {}) {
   const value = translations[currentLang]?.[key] ?? translations.en[key] ?? key;
@@ -426,6 +438,7 @@ function setTheme(theme) {
   currentTheme = theme === "dark" ? "dark" : "light";
   localStorage.setItem("xbot-dashboard-theme", currentTheme);
   applyChromeText();
+  setupSignalCanvas();
 }
 
 function setLang(lang) {
@@ -484,11 +497,209 @@ function renderHeader() {
 function renderHero() {
   const profile = dashboardData.profile || {};
   const last24h = dashboardData.last24h || {};
+  const last7d = dashboardData.last7d || {};
+  const topScores = (last7d.topPosts || []).map((post) => number(post.score));
+  const bestScore = Math.max(number(profile.baselineScore), ...topScores, 0);
   const { remaining } = apiBudget();
+  const actions = dashboardData.actions || fallbackData.actions;
   $("#hero-followers").textContent = profile.followers ?? "-";
   $("#hero-impressions").textContent = String(number(last24h.impressions));
   $("#hero-api-left").textContent = `$${remaining.toFixed(2)}`;
   $("#hero-draft").textContent = draftFor(0).text;
+  $("#hero-signal-score").textContent = bestScore ? bestScore.toFixed(1) : "-";
+  $("#hero-loop-count").textContent = `${Math.min(actions.length, 3)}/3`;
+  $("#hero-cost-guard").textContent = `$${remaining.toFixed(2)}`;
+}
+
+function colorWithAlpha(color, alpha) {
+  const value = String(color || "").trim();
+  if (!value) return `rgba(26, 86, 219, ${alpha})`;
+  if (value.startsWith("#")) {
+    const hex = value.slice(1);
+    const full = hex.length === 3
+      ? hex.split("").map((char) => char + char).join("")
+      : hex.padEnd(6, "0").slice(0, 6);
+    const int = Number.parseInt(full, 16);
+    const red = (int >> 16) & 255;
+    const green = (int >> 8) & 255;
+    const blue = int & 255;
+    return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+  }
+  if (value.startsWith("rgba(")) {
+    return value.replace(/rgba\(([^)]+),\s*[\d.]+\)/, `rgba($1, ${alpha})`);
+  }
+  if (value.startsWith("rgb(")) {
+    return value.replace("rgb(", "rgba(").replace(")", `, ${alpha})`);
+  }
+  return value;
+}
+
+function signalCanvasPalette() {
+  const styles = getComputedStyle(document.documentElement);
+  return {
+    accent: styles.getPropertyValue("--accent").trim() || "#1a56db",
+    ink: styles.getPropertyValue("--ink").trim() || "#111827",
+    body: styles.getPropertyValue("--body").trim() || "#4b5563",
+    line: styles.getPropertyValue("--line").trim() || "#e5e7eb",
+    surface: styles.getPropertyValue("--surface").trim() || "#ffffff",
+    ok: styles.getPropertyValue("--ok").trim() || "#16a34a",
+    warn: styles.getPropertyValue("--warn").trim() || "#d97706",
+  };
+}
+
+function drawRoundedRect(ctx, x, y, width, height, radius) {
+  if (typeof ctx.roundRect === "function") {
+    ctx.roundRect(x, y, width, height, radius);
+    return;
+  }
+  const safeRadius = Math.min(radius, width / 2, height / 2);
+  ctx.moveTo(x + safeRadius, y);
+  ctx.lineTo(x + width - safeRadius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + safeRadius);
+  ctx.lineTo(x + width, y + height - safeRadius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - safeRadius, y + height);
+  ctx.lineTo(x + safeRadius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - safeRadius);
+  ctx.lineTo(x, y + safeRadius);
+  ctx.quadraticCurveTo(x, y, x + safeRadius, y);
+}
+
+function drawSignalCanvas(canvas, ctx, time) {
+  const palette = signalCanvasPalette();
+  const width = canvas.width;
+  const height = canvas.height;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const grid = 44 * dpr;
+  const center = { x: width * 0.5, y: height * 0.52 };
+  const nodes = [
+    { x: width * 0.14, y: height * 0.25, label: "RSS" },
+    { x: width * 0.3, y: height * 0.74, label: "Draft" },
+    { x: width * 0.52, y: height * 0.17, label: "Score" },
+    { x: width * 0.76, y: height * 0.31, label: "X" },
+    { x: width * 0.83, y: height * 0.72, label: "Learn" },
+  ];
+  const routes = [
+    [nodes[0], center],
+    [nodes[1], center],
+    [nodes[2], center],
+    [center, nodes[3]],
+    [center, nodes[4]],
+    [nodes[3], nodes[4]],
+  ];
+
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.64 : 0.78);
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.save();
+  ctx.lineWidth = 1 * dpr;
+  ctx.strokeStyle = colorWithAlpha(palette.line, currentTheme === "dark" ? 0.32 : 0.72);
+  for (let x = (time / 28) % grid; x < width; x += grid) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  }
+  for (let y = (time / 34) % grid; y < height; y += grid) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  const ringMax = Math.max(width, height) * 0.42;
+  for (let index = 0; index < 4; index += 1) {
+    const radius = 42 * dpr + ((time * 0.028 + index * 82 * dpr) % ringMax);
+    const alpha = Math.max(0, 0.24 - radius / ringMax / 4);
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = colorWithAlpha(index % 2 ? palette.ok : palette.accent, alpha);
+    ctx.lineWidth = 1.5 * dpr;
+    ctx.stroke();
+  }
+
+  ctx.lineWidth = 2 * dpr;
+  routes.forEach(([from, to], index) => {
+    ctx.beginPath();
+    ctx.moveTo(from.x, from.y);
+    const midX = (from.x + to.x) / 2;
+    const midY = (from.y + to.y) / 2 - (index % 2 ? 28 : -18) * dpr;
+    ctx.quadraticCurveTo(midX, midY, to.x, to.y);
+    ctx.strokeStyle = colorWithAlpha(palette.accent, currentTheme === "dark" ? 0.3 : 0.24);
+    ctx.stroke();
+
+    const progress = (time / 1300 + index * 0.19) % 1;
+    const oneMinus = 1 - progress;
+    const dotX = oneMinus * oneMinus * from.x + 2 * oneMinus * progress * midX + progress * progress * to.x;
+    const dotY = oneMinus * oneMinus * from.y + 2 * oneMinus * progress * midY + progress * progress * to.y;
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 4.5 * dpr, 0, Math.PI * 2);
+    ctx.fillStyle = colorWithAlpha(index % 2 ? palette.ok : palette.accent, 0.92);
+    ctx.fill();
+  });
+
+  ctx.save();
+  ctx.translate(center.x, center.y);
+  ctx.rotate(time / 3300);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(width * 0.26, -height * 0.1);
+  ctx.strokeStyle = colorWithAlpha(palette.warn, currentTheme === "dark" ? 0.38 : 0.26);
+  ctx.lineWidth = 2 * dpr;
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.beginPath();
+  ctx.arc(center.x, center.y, 34 * dpr, 0, Math.PI * 2);
+  ctx.fillStyle = colorWithAlpha(palette.accent, currentTheme === "dark" ? 0.2 : 0.12);
+  ctx.fill();
+  ctx.strokeStyle = colorWithAlpha(palette.accent, 0.72);
+  ctx.lineWidth = 2 * dpr;
+  ctx.stroke();
+  ctx.fillStyle = palette.ink;
+  ctx.font = `${11 * dpr}px ui-sans-serif, system-ui, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("CORE", center.x, center.y);
+
+  nodes.forEach((node, index) => {
+    const size = (index === 3 ? 46 : 38) * dpr;
+    const x = node.x - size / 2;
+    const y = node.y - size / 2;
+    ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.86 : 0.96);
+    ctx.strokeStyle = colorWithAlpha(index % 2 ? palette.ok : palette.accent, 0.72);
+    ctx.lineWidth = 1.5 * dpr;
+    ctx.beginPath();
+    drawRoundedRect(ctx, x, y, size, size, 8 * dpr);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = palette.ink;
+    ctx.font = `${10 * dpr}px ui-sans-serif, system-ui, sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(node.label, node.x, node.y);
+  });
+}
+
+function setupSignalCanvas() {
+  const canvas = $("#signal-canvas");
+  if (!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const width = Math.round(rect.width * dpr);
+  const height = Math.round(rect.height * dpr);
+  if (canvas.width !== width) canvas.width = width;
+  if (canvas.height !== height) canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  if (signalAnimationFrame) cancelAnimationFrame(signalAnimationFrame);
+  const animate = (time) => {
+    drawSignalCanvas(canvas, ctx, time);
+    signalAnimationFrame = requestAnimationFrame(animate);
+  };
+  animate(0);
 }
 
 function renderMetrics() {
@@ -756,6 +967,7 @@ function render() {
   renderDiagnosis();
   renderPosts();
   renderApi();
+  setupSignalCanvas();
 }
 
 async function init() {
@@ -763,6 +975,10 @@ async function init() {
   render();
   bindCopyButtons();
   bindPreferenceButtons();
+  window.addEventListener("resize", () => {
+    clearTimeout(signalResizeTimer);
+    signalResizeTimer = setTimeout(setupSignalCanvas, 120);
+  });
 }
 
 init();

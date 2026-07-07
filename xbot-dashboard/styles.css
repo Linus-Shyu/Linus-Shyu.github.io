@@ -10,8 +10,11 @@
   --line: #e5e7eb;
   --line-soft: #eef0f4;
   --accent: #1a56db;
+  --accent-2: #059669;
+  --accent-3: #f97316;
   --accent-ink: #ffffff;
   --accent-soft: rgba(26, 86, 219, 0.08);
+  --accent-line: rgba(26, 86, 219, 0.18);
   --rail: #ffffff;
   --rail-soft: #edf2f7;
   --ok: #16a34a;
@@ -33,7 +36,10 @@
   --line: #263244;
   --line-soft: #1b2534;
   --accent: #4f8cff;
+  --accent-2: #34d399;
+  --accent-3: #fb923c;
   --accent-soft: rgba(79, 140, 255, 0.14);
+  --accent-line: rgba(79, 140, 255, 0.28);
   --rail: #0f172a;
   --rail-soft: #1b2534;
   --shadow: 0 10px 34px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.22);
@@ -56,7 +62,9 @@ body {
   overflow-x: hidden;
   color: var(--body);
   background:
-    linear-gradient(180deg, rgba(26, 86, 219, 0.045), transparent 360px),
+    linear-gradient(180deg, rgba(26, 86, 219, 0.06), transparent 420px),
+    repeating-linear-gradient(90deg, rgba(17, 24, 39, 0.032) 0 1px, transparent 1px 86px),
+    repeating-linear-gradient(0deg, rgba(17, 24, 39, 0.026) 0 1px, transparent 1px 86px),
     var(--bg);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -67,7 +75,9 @@ body {
 
 :root[data-theme="dark"] body {
   background:
-    linear-gradient(180deg, rgba(79, 140, 255, 0.08), transparent 360px),
+    linear-gradient(180deg, rgba(79, 140, 255, 0.12), transparent 420px),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.055) 0 1px, transparent 1px 86px),
+    repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.04) 0 1px, transparent 1px 86px),
     var(--bg);
 }
 
@@ -78,11 +88,11 @@ a {
 .ops-shell {
   display: grid;
   grid-template-columns: 248px minmax(0, 1fr);
-  gap: 22px;
-  width: min(1480px, 100%);
+  gap: 24px;
+  width: min(1600px, 100%);
   min-height: 100vh;
   margin: 0 auto;
-  padding: 22px;
+  padding: 24px;
 }
 
 .side-rail {
@@ -124,7 +134,8 @@ a {
   place-items: center;
   border-radius: 8px;
   color: var(--accent-ink);
-  background: var(--accent);
+  background:
+    linear-gradient(135deg, var(--ink), var(--accent) 58%, var(--accent-2));
   font-size: 12px;
   font-weight: 900;
 }
@@ -232,11 +243,16 @@ a {
 
 .topbar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 18px;
-  padding: 4px 2px 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
 }
 
 .eyebrow {
@@ -262,7 +278,7 @@ h3 {
 }
 
 h1 {
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 840;
   line-height: 1;
 }
@@ -413,8 +429,8 @@ h3 {
 }
 
 .overview-grid {
-  grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.78fr);
-  margin-bottom: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: 18px;
 }
 
 .ops-grid {
@@ -436,9 +452,15 @@ h3 {
 .command-card {
   position: relative;
   display: grid;
-  min-height: 396px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.78fr);
+  gap: 28px;
+  min-height: 520px;
   overflow: hidden;
-  padding: 26px;
+  padding: 30px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 48%, transparent), transparent 54%),
+    var(--surface);
+  box-shadow: var(--shadow-strong);
 }
 
 .command-card::before {
@@ -447,12 +469,20 @@ h3 {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, var(--accent-soft), transparent 56%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--line) 42%, transparent) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--line) 32%, transparent) 0 1px, transparent 1px 72px);
+  mask-image: linear-gradient(90deg, black, transparent 72%);
+  opacity: 0.55;
 }
 
 .command-card > * {
   position: relative;
+}
+
+.hero-copy {
+  display: grid;
+  align-content: center;
+  min-width: 0;
 }
 
 .command-head,
@@ -464,15 +494,16 @@ h3 {
 }
 
 .command-head h2 {
-  max-width: 680px;
-  font-size: 32px;
-  line-height: 1.06;
+  max-width: 760px;
+  font-size: 54px;
+  line-height: 0.98;
+  letter-spacing: 0;
 }
 
 .server-badge,
 .pill {
   min-height: 30px;
-  border: 1px solid rgba(26, 86, 219, 0.14);
+  border: 1px solid var(--accent-line);
   padding: 0 11px;
   color: var(--accent);
   background: var(--accent-soft);
@@ -481,16 +512,17 @@ h3 {
 }
 
 .command-copy {
-  max-width: 740px;
-  margin: 15px 0 22px;
+  max-width: 680px;
+  margin: 20px 0 24px;
   color: var(--body);
-  font-size: 15px;
-  line-height: 1.62;
+  font-size: 18px;
+  line-height: 1.58;
 }
 
 .ops-terminal {
   align-self: end;
-  margin-top: 26px;
+  max-width: 560px;
+  margin-top: 34px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -530,9 +562,109 @@ h3 {
   line-height: 1.58;
 }
 
+.signal-stage {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 86%, var(--accent-soft)), var(--surface-soft)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+#signal-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+}
+
+.signal-head {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.signal-head strong,
+.signal-live {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+  border-radius: 999px;
+  padding: 0 11px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: 12px;
+  font-weight: 800;
+  backdrop-filter: blur(14px);
+}
+
+.signal-live {
+  gap: 8px;
+  color: var(--accent-2);
+}
+
+.signal-live i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-2);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-2) 18%, transparent);
+}
+
+.signal-metrics {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.signal-metrics div {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 8px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.signal-metrics span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.signal-metrics strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 880;
+  line-height: 1;
+}
+
 .server-card {
   display: grid;
-  gap: 12px;
+  grid-template-columns: minmax(180px, 0.62fr) minmax(320px, 1.08fr) minmax(260px, 1fr);
+  gap: 14px;
+  align-items: stretch;
   padding: 16px;
 }
 
@@ -567,7 +699,7 @@ h3 {
 
 .pulse-ring {
   display: grid;
-  min-height: 205px;
+  min-height: 180px;
   place-items: center;
   align-content: center;
   gap: 8px;
@@ -579,12 +711,12 @@ h3 {
 .pulse-ring span {
   width: 58px;
   height: 58px;
-  border: 1px solid rgba(26, 86, 219, 0.2);
+  border: 1px solid var(--accent-line);
   border-radius: 999px;
-  background: rgba(26, 86, 219, 0.08);
+  background: var(--accent-soft);
   box-shadow:
-    0 0 0 14px rgba(26, 86, 219, 0.045),
-    0 0 0 28px rgba(26, 86, 219, 0.024);
+    0 0 0 14px color-mix(in srgb, var(--accent) 7%, transparent),
+    0 0 0 28px color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 .pulse-ring strong {
@@ -611,7 +743,7 @@ h3 {
 .server-stats div {
   display: grid;
   align-content: center;
-  min-height: 96px;
+  min-height: 84px;
   padding: 14px;
 }
 
@@ -642,11 +774,35 @@ h3 {
 }
 
 .metric {
+  position: relative;
   display: flex;
   justify-content: space-between;
   gap: 14px;
   min-height: 122px;
+  overflow: hidden;
   padding: 18px;
+}
+
+.metric::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: var(--accent);
+}
+
+.metric:nth-child(2)::before {
+  background: var(--accent-2);
+}
+
+.metric:nth-child(3)::before {
+  background: var(--accent-3);
+}
+
+.metric:nth-child(4)::before {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
 .metric span {
@@ -679,6 +835,16 @@ h3 {
   font-size: 11px;
   font-style: normal;
   font-weight: 760;
+}
+
+.metric:nth-child(2) em {
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 11%, transparent);
+}
+
+.metric:nth-child(3) em {
+  color: var(--accent-3);
+  background: color-mix(in srgb, var(--accent-3) 12%, transparent);
 }
 
 .panel {
@@ -1165,9 +1331,29 @@ td {
     grid-template-columns: 1fr;
   }
 
+  .server-card {
+    grid-template-columns: 1fr;
+  }
+
   .service-grid,
   .action-board {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .command-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .command-head h2 {
+    font-size: 42px;
+  }
+
+  .signal-stage,
+  #signal-canvas {
+    min-height: 360px;
   }
 }
 
@@ -1221,11 +1407,33 @@ td {
 
   .command-card {
     min-height: 0;
-    padding: 24px;
+    padding: 20px;
   }
 
   .command-head h2 {
-    font-size: 28px;
+    font-size: 34px;
+    line-height: 1.02;
+  }
+
+  .command-copy {
+    font-size: 16px;
+  }
+
+  .signal-stage,
+  #signal-canvas {
+    min-height: 320px;
+  }
+
+  .signal-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-metrics div {
+    padding: 10px;
+  }
+
+  .signal-metrics strong {
+    font-size: 21px;
   }
 
   .server-screen,
