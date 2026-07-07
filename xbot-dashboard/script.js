@@ -1234,6 +1234,16 @@ const translations = {
     angle_mode_recovery_route: "recovery route",
     angle_mode_sample_discovery: "sample discovery",
     angle_mode_controlled_rotation: "controlled rotation",
+    writeback_eyebrow: "Learning Writeback",
+    writeback_title: "Rule mutation ledger",
+    writeback_zero_reads: "0 X read ops",
+    writeback_source: "Source",
+    writeback_epoch: "Epoch",
+    writeback_active: "Active rule",
+    writeback_next: "Next writeback",
+    writeback_mutations: "Mutations",
+    writeback_directives: "Committed directives",
+    writeback_empty: "No learning writeback ledger available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -1723,6 +1733,16 @@ const translations = {
     angle_mode_recovery_route: "恢复路由",
     angle_mode_sample_discovery: "样本探索",
     angle_mode_controlled_rotation: "受控轮换",
+    writeback_eyebrow: "学习写回",
+    writeback_title: "规则变更账本",
+    writeback_zero_reads: "0 次 X 读取",
+    writeback_source: "来源",
+    writeback_epoch: "周期",
+    writeback_active: "当前规则",
+    writeback_next: "下一次写回",
+    writeback_mutations: "变更",
+    writeback_directives: "已提交指令",
+    writeback_empty: "暂无学习写回账本。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -4004,6 +4024,121 @@ function renderAdaptiveAngleScheduler() {
   `;
 }
 
+function learningWritebackData() {
+  const incoming = dashboardData.learningWriteback || fallbackData.learningWriteback;
+  if (incoming) return incoming;
+  const scheduler = angleSchedulerData();
+  const autopilot = learningAutopilotData();
+  const matrix = temporalAngleMatrixData();
+  const governor = governorData();
+  const primary = (scheduler.nextAngles || [])[0] || autopilot.primaryFormat || null;
+  const temporal = (matrix.slots || [])[0] || null;
+  const holdIds = [
+    ...new Set([
+      ...(autopilot.holdFormats || []).map((row) => row.id).filter(Boolean),
+      ...(scheduler.scoringBias?.holdFormatIds || []).filter(Boolean),
+    ]),
+  ];
+  const readGate = governor?.gates?.read || "cached_only";
+  return {
+    generatedAt: scheduler.generatedAt || dashboardData.updatedAt || fallbackData.updatedAt,
+    source: "derived cached telemetry",
+    zeroExtraXReads: true,
+    mode: scheduler.mode || autopilot.mode || "controlled_rule_writeback",
+    confidence: scheduler.confidence || autopilot.confidence || "low",
+    epoch: String(scheduler.generatedAt || dashboardData.updatedAt || fallbackData.updatedAt || "").slice(0, 16),
+    sampleCount: number(scheduler.sampleCount, number(autopilot.sampleCount)),
+    baselineScore: number(scheduler.baselineScore, number(autopilot.baselineScore)),
+    activeRule: primary
+      ? {
+          id: primary.formatId || primary.id,
+          label: primary.label || formatTemplate(primary.formatId || primary.id),
+          action: primary.action || "test",
+          weight: number(primary.weight, number(primary.score)),
+          avgScore: number(primary.avgScore),
+          samples: number(primary.samples),
+          reason: primary.reason || "-",
+        }
+      : null,
+    nextWriteback: primary
+      ? `Promote ${primary.label || formatTemplate(primary.formatId || primary.id)} into the next prompt route.`
+      : "-",
+    cells: [
+      { id: "samples", label: "sample ledger", value: number(scheduler.sampleCount, number(autopilot.sampleCount)), status: "ok" },
+      { id: "baseline", label: "baseline score", value: number(scheduler.baselineScore, number(autopilot.baselineScore)), status: "ok" },
+      { id: "safe_slots", label: "safe slots", value: number((dashboardData.experimentPlan || fallbackData.experimentPlan || {}).budgetSafeSlots), status: "ok" },
+      { id: "read_gate", label: "read gate", value: readGate, status: readGate === "closed" ? "danger" : "ok" },
+    ],
+    mutations: [
+      { id: "primary_rule", label: "primary rule", before: "baseline rotation", after: primary?.formatId || primary?.id || "-", status: primary?.action === "exploit" ? "ok" : "warn", score: number(primary?.weight), reason: primary?.reason || "-" },
+      { id: "temporal_slot", label: "UTC fire-control", before: "current cadence", after: temporal ? `${temporal.windowLabel} UTC / ${temporal.formatId}` : "-", status: temporal?.status === "hot" ? "ok" : "warn", score: number(temporal?.score), reason: temporal?.reason || matrix.nextAction || "-" },
+      { id: "hold_gate", label: "hold filter", before: "all formats", after: holdIds.length ? holdIds.join(", ") : "none", status: holdIds.length ? "warn" : "ok", score: holdIds.length, reason: holdIds.length ? "Under-baseline formats stay gated." : "No held formats." },
+    ],
+    directives: [...(scheduler.promptDirectives || []), ...(autopilot.directives || [])].filter(Boolean).slice(0, 5),
+  };
+}
+
+function mutationTone(status) {
+  if (status === "danger") return "danger";
+  if (status === "warn" || status === "hold") return "warn";
+  if (status === "ok" || status === "hot") return "ok";
+  return "neutral";
+}
+
+function renderLearningWriteback() {
+  const ledger = learningWritebackData();
+  const container = $("#learning-writeback");
+  if (!container) return;
+  const mutations = Array.isArray(ledger.mutations) ? ledger.mutations : [];
+  const cells = Array.isArray(ledger.cells) ? ledger.cells : [];
+  const directives = Array.isArray(ledger.directives) ? ledger.directives.slice(0, 4) : [];
+  if (!mutations.length && !cells.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("writeback_empty"))}</p>`;
+    return;
+  }
+  const active = ledger.activeRule || {};
+  container.innerHTML = `
+    <div class="writeback-head">
+      <div>
+        <span>${escapeHtml(t("writeback_eyebrow"))}</span>
+        <strong>${escapeHtml(t("writeback_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("writeback_zero_reads"))}</em>
+    </div>
+    <div class="writeback-meta">
+      <div><span>${escapeHtml(t("writeback_source"))}</span><strong>${escapeHtml(ledger.source || "-")}</strong></div>
+      <div><span>${escapeHtml(t("writeback_epoch"))}</span><strong>${escapeHtml(ledger.epoch || formatDate(ledger.generatedAt))}</strong></div>
+      <div><span>${escapeHtml(t("writeback_active"))}</span><strong>${escapeHtml(active.label || active.id || "-")} · ${escapeHtml(active.action || "-")}</strong></div>
+    </div>
+    <div class="writeback-cells">
+      ${cells.slice(0, 4).map((cell) => `
+        <span class="${escapeHtml(mutationTone(cell.status))}">
+          <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+          <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="writeback-mutations">
+      <span>${escapeHtml(t("writeback_mutations"))}</span>
+      ${mutations.slice(0, 4).map((mutation) => `
+        <article class="${escapeHtml(mutationTone(mutation.status))}">
+          <div>
+            <strong>${escapeHtml(mutation.label || mutation.id || "-")}</strong>
+            <em>${escapeHtml(gateLabel(mutation.before))} -> ${escapeHtml(gateLabel(mutation.after))}</em>
+          </div>
+          <small>${escapeHtml(formatNumber(mutation.score, 1))}</small>
+          <p>${escapeHtml(mutation.reason || "-")}</p>
+        </article>
+      `).join("")}
+    </div>
+    <div class="writeback-directives">
+      <span>${escapeHtml(t("writeback_next"))}</span>
+      <code>${escapeHtml(ledger.nextWriteback || "-")}</code>
+      ${directives.length ? `<span>${escapeHtml(t("writeback_directives"))}</span>${directives.map((directive) => `<code>${escapeHtml(directive)}</code>`).join("")}` : ""}
+    </div>
+  `;
+}
+
 function audienceRouterData() {
   return dashboardData.audienceExpansionRouter || fallbackData.audienceExpansionRouter || {};
 }
@@ -4202,6 +4337,7 @@ function renderLearning() {
     .join("");
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
+  renderLearningWriteback();
   renderAudienceRouter();
   renderTrendVelocityRadar();
   renderTemporalAngleMatrix();
