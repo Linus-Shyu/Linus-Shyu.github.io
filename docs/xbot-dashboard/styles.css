@@ -5443,26 +5443,77 @@ body,
 .alert-console {
   display: grid;
   min-height: 178px;
-  align-content: center;
-  gap: 10px;
+  align-content: stretch;
+  gap: 9px;
   margin: 8px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00f0ff 24%, var(--line));
+  border-radius: 6px;
+  padding: 12px;
   background:
-    radial-gradient(circle at 0 0, color-mix(in srgb, var(--ok) 10%, transparent), transparent 54%),
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 14%, transparent), transparent 38%),
+    radial-gradient(circle at 100% 0, color-mix(in srgb, #ff007a 10%, transparent), transparent 42%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--line) 28%, transparent) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
     var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent),
+    0 0 18px color-mix(in srgb, #00f0ff 8%, transparent);
 }
 
-.alert-console strong {
+.triage-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+}
+
+.triage-led {
+  width: 11px;
+  height: 11px;
+  margin-top: 3px;
+  border-radius: 999px;
+  background: var(--ok);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--ok) 12%, transparent),
+    0 0 18px color-mix(in srgb, var(--ok) 42%, transparent);
+}
+
+.triage-led.cached {
+  background: var(--accent);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.triage-led.warn {
+  background: var(--warn);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--warn) 12%, transparent),
+    0 0 18px color-mix(in srgb, var(--warn) 42%, transparent);
+}
+
+.triage-led.danger {
+  background: var(--danger);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--danger) 12%, transparent),
+    0 0 20px color-mix(in srgb, var(--danger) 48%, transparent);
+}
+
+.triage-hero strong {
   color: var(--ink);
+  font-family: var(--code-font);
   font-size: 14px;
+  font-weight: 880;
+  letter-spacing: 0;
 }
 
-.alert-console p {
+.triage-hero p,
+.triage-runbook p {
   margin: 0;
   color: var(--body);
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.38;
 }
 
 .triage-grid {
@@ -5474,19 +5525,39 @@ body,
 .triage-grid span,
 .triage-incidents span {
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--line) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 74%, transparent);
   border-radius: 6px;
-  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 84%, transparent));
 }
 
 .triage-grid span {
   display: grid;
-  gap: 2px;
-  padding: 7px 8px;
+  gap: 4px;
+  padding: 8px 8px;
+}
+
+.triage-grid span.ok {
+  border-color: color-mix(in srgb, var(--ok) 34%, var(--line));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--ok) 72%, transparent);
+}
+
+.triage-grid span.warn {
+  border-color: color-mix(in srgb, var(--warn) 46%, var(--line));
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--warn) 72%, transparent);
+}
+
+.triage-grid span.danger {
+  border-color: color-mix(in srgb, var(--danger) 56%, var(--line));
+  box-shadow:
+    inset 2px 0 0 color-mix(in srgb, var(--danger) 86%, transparent),
+    0 0 16px color-mix(in srgb, var(--danger) 12%, transparent);
 }
 
 .triage-grid em,
-.triage-incidents em {
+.triage-grid small,
+.triage-incidents em,
+.triage-runbook span {
   overflow: hidden;
   color: var(--muted);
   font-family: var(--code-font);
@@ -5500,14 +5571,27 @@ body,
 .triage-grid strong {
   color: var(--ink);
   font-family: var(--code-font);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 850;
   line-height: 1;
 }
 
+.triage-grid span.ok strong {
+  color: var(--ok);
+}
+
+.triage-grid span.warn strong {
+  color: var(--warn);
+}
+
+.triage-grid span.danger strong {
+  color: var(--danger);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--danger) 28%, transparent);
+}
+
 .triage-incidents {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 5px;
 }
 
@@ -5519,12 +5603,20 @@ body,
   padding: 6px 8px;
 }
 
+.triage-incidents span.ok {
+  border-color: color-mix(in srgb, var(--ok) 36%, var(--line));
+}
+
 .triage-incidents span.warn {
   border-color: color-mix(in srgb, var(--warn) 48%, var(--line));
 }
 
 .triage-incidents span.danger {
   border-color: color-mix(in srgb, var(--danger) 54%, var(--line));
+}
+
+.triage-incidents span.active {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--warn) 11%, transparent);
 }
 
 .triage-incidents strong {
@@ -5537,8 +5629,15 @@ body,
   white-space: nowrap;
 }
 
-.triage-action {
-  font-size: 12px;
+.triage-runbook {
+  display: grid;
+  gap: 5px;
+  border: 1px solid color-mix(in srgb, #00f0ff 18%, var(--line));
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, #00f0ff 7%, transparent), transparent 58%),
+    color-mix(in srgb, var(--surface) 66%, transparent);
 }
 
 .alert-console code {
@@ -5552,22 +5651,30 @@ body,
 
 .alert-console.ok {
   border-color: color-mix(in srgb, var(--ok) 54%, var(--line));
-  background: color-mix(in srgb, var(--ok) 10%, var(--surface-soft));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--ok) 10%, transparent);
 }
 
 .alert-console.warn {
   border-color: color-mix(in srgb, var(--warn) 58%, var(--line));
-  background: color-mix(in srgb, var(--warn) 12%, var(--surface-soft));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--warn) 12%, transparent);
 }
 
 .alert-console.cached {
   border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface-soft));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .alert-console.danger {
   border-color: color-mix(in srgb, var(--danger) 70%, var(--line));
-  background: color-mix(in srgb, var(--danger) 14%, var(--surface-soft));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent),
+    0 0 20px color-mix(in srgb, var(--danger) 16%, transparent);
 }
 
 .monitor-table-wrap {

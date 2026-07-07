@@ -949,7 +949,7 @@ const translations = {
     hourly_best: "best windows",
     hourly_samples: "{count} samples · {days}d",
     hourly_zero_reads: "0 X reads",
-    monitor_alerts: "HTTP status triage",
+    monitor_alerts: "HTTP Status Triage (429 Rate-Limit / 503 Backend Faults)",
     monitor_partition: "API partition usage",
     monitor_requests: "X API operations per run",
     gauge_data_age: "Data age",
@@ -989,9 +989,14 @@ const translations = {
     triage_action_auth: "Check OAuth scopes/tokens before the next publish or live read.",
     triage_action_client: "Inspect endpoint payloads and keep cached telemetry fallback active.",
     triage_429: "429 rate-limit",
-    triage_5xx: "5xx backend",
+    triage_5xx: "503 / 5xx backend",
     triage_auth: "401/403 auth",
     triage_client: "4xx client",
+    triage_active: "{count} active",
+    triage_clear: "clear",
+    triage_fault_partitions: "fault partitions",
+    triage_no_incidents: "no active fault partitions",
+    triage_runbook: "operator runbook",
     triage_failure_rate: "{rate}% failure rate",
     mission_eyebrow: "NOC Console",
     mission_title: "Live server-matrix growth operations.",
@@ -1401,7 +1406,7 @@ const translations = {
     hourly_best: "最佳窗口",
     hourly_samples: "{count} 样本 · {days} 天",
     hourly_zero_reads: "0 次 X 读取",
-    monitor_alerts: "HTTP 状态分诊",
+    monitor_alerts: "HTTP 状态分诊（429 限流 / 503 后端故障）",
     monitor_partition: "API 分区用量",
     monitor_requests: "每轮 X API 操作",
     gauge_data_age: "数据年龄",
@@ -1441,9 +1446,14 @@ const translations = {
     triage_action_auth: "下次发布或实时读取前检查 OAuth scope/token。",
     triage_action_client: "检查 endpoint payload，并保持缓存遥测兜底。",
     triage_429: "429 限流",
-    triage_5xx: "5xx 后端",
+    triage_5xx: "503 / 5xx 后端",
     triage_auth: "401/403 授权",
     triage_client: "4xx 客户端",
+    triage_active: "{count} 个活跃",
+    triage_clear: "清空",
+    triage_fault_partitions: "故障分区",
+    triage_no_incidents: "无活跃故障分区",
+    triage_runbook: "操作员运行手册",
     triage_failure_rate: "{rate}% 失败率",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时服务器矩阵增长运维。",
@@ -3231,6 +3241,40 @@ function triageAction(triage) {
   return t("triage_action_client");
 }
 
+function triageCounterSeverity(total, active, dangerWhenActive = false) {
+  const totalValue = number(total);
+  const activeValue = number(active);
+  if (activeValue > 0 && dangerWhenActive) return "danger";
+  if (activeValue > 0 || totalValue > 0) return "warn";
+  return "ok";
+}
+
+function triageCounter(labelKey, total, active, dangerWhenActive = false) {
+  const severity = triageCounterSeverity(total, active, dangerWhenActive);
+  const activeValue = number(active);
+  const laneState = activeValue > 0
+    ? t("triage_active", { count: formatNumber(activeValue) })
+    : t("triage_clear");
+  return `
+    <span class="${escapeHtml(severity)}">
+      <em>${escapeHtml(t(labelKey))}</em>
+      <strong>${formatNumber(total)}</strong>
+      <small>${escapeHtml(laneState)}</small>
+    </span>
+  `;
+}
+
+function triageIncidentRow(incident) {
+  const status = incident.lastStatus || "-";
+  const activeClass = incident.active ? "active" : "cached";
+  return `
+    <span class="${escapeHtml(incident.severity || "warn")} ${activeClass}">
+      <strong>${escapeHtml(incident.endpoint || "-")}</strong>
+      <em>HTTP ${escapeHtml(String(status))}</em>
+    </span>
+  `;
+}
+
 function chartPointValues(chart) {
   if (!Array.isArray(chart?.points) || !chart.points.length) return [];
   return chart.points.map((point) => number(point.value));
@@ -3388,28 +3432,32 @@ function renderMonitorPanels() {
   const body = triage.severity === "ok" && freshnessKey !== "ok"
     ? `${t(`alert_${alertKey}_body`)} ${triageSummary(triage)}`
     : triageSummary(triage);
-  const incidents = (triage.incidents || []).slice(0, 2);
+  const incidents = (triage.incidents || []).slice(0, 3);
+  const incidentRows = incidents.length
+    ? incidents.map(triageIncidentRow).join("")
+    : `<span class="ok cached"><strong>${escapeHtml(t("triage_no_incidents"))}</strong><em>HTTP 2xx</em></span>`;
   alert.innerHTML = `
-    <strong>${escapeHtml(title)}</strong>
-    <p>${escapeHtml(body)}</p>
-    <div class="triage-grid" aria-label="HTTP status triage counters">
-      <span><em>${escapeHtml(t("triage_429"))}</em><strong>${formatNumber(triage.rateLimit429)}</strong></span>
-      <span><em>${escapeHtml(t("triage_5xx"))}</em><strong>${formatNumber(triage.backendFault5xx)}</strong></span>
-      <span><em>${escapeHtml(t("triage_auth"))}</em><strong>${formatNumber(triage.authFault4xx)}</strong></span>
-      <span><em>${escapeHtml(t("triage_client"))}</em><strong>${formatNumber(triage.clientFault4xx)}</strong></span>
-    </div>
-    ${incidents.length ? `
-      <div class="triage-incidents">
-        ${incidents.map((incident) => `
-          <span class="${escapeHtml(incident.severity || "warn")}">
-            <strong>${escapeHtml(incident.endpoint || "-")}</strong>
-            <em>${escapeHtml(String(incident.lastStatus || "-"))}</em>
-          </span>
-        `).join("")}
+    <div class="triage-hero">
+      <span class="triage-led ${escapeHtml(alertKey)}"></span>
+      <div>
+        <strong>${escapeHtml(title)}</strong>
+        <p>${escapeHtml(body)}</p>
       </div>
-    ` : ""}
-    <p class="triage-action">${escapeHtml(triageAction(triage))}</p>
-    <code>${escapeHtml(t("triage_failure_rate", { rate: formatNumber(triage.failureRate, 2) }))} · ${escapeHtml(formatDate(telemetryTime))}</code>
+    </div>
+    <div class="triage-grid" aria-label="HTTP status triage counters">
+      ${triageCounter("triage_429", triage.rateLimit429, triage.activeRateLimit429, true)}
+      ${triageCounter("triage_5xx", triage.backendFault5xx, triage.activeBackendFault5xx, true)}
+      ${triageCounter("triage_auth", triage.authFault4xx, triage.activeAuthFault4xx)}
+      ${triageCounter("triage_client", triage.clientFault4xx, triage.activeClientFault4xx)}
+    </div>
+    <div class="triage-incidents" aria-label="${escapeHtml(t("triage_fault_partitions"))}">
+      ${incidentRows}
+    </div>
+    <div class="triage-runbook">
+      <span>${escapeHtml(t("triage_runbook"))}</span>
+      <p>${escapeHtml(triageAction(triage))}</p>
+      <code>${escapeHtml(t("triage_failure_rate", { rate: formatNumber(triage.failureRate, 2) }))} · ${escapeHtml(formatDate(telemetryTime))}</code>
+    </div>
   `;
 }
 
