@@ -1136,6 +1136,16 @@ const translations = {
     operator_packet_lift: "Lift model",
     operator_packet_budget: "Cost mode",
     operator_packet_copy: "Copy packet",
+    dispatch_manifest_eyebrow: "Dispatch Manifest",
+    dispatch_manifest_title: "Today's zero-read route packet",
+    dispatch_manifest_ready: "Packets ready",
+    dispatch_manifest_x_reads: "X read ops",
+    dispatch_manifest_cost: "Incremental X API",
+    dispatch_manifest_lift: "Lift model",
+    dispatch_manifest_next: "Next action",
+    dispatch_manifest_copy: "Copy full manifest",
+    dispatch_manifest_packets: "Route packets",
+    dispatch_manifest_checks: "Guard checks",
     operator_protocol: "Execution protocol",
     operator_progress: "{done}/{total} steps armed",
     operator_step_done: "done",
@@ -1658,6 +1668,16 @@ const translations = {
     operator_packet_lift: "增益模型",
     operator_packet_budget: "成本模式",
     operator_packet_copy: "复制数据包",
+    dispatch_manifest_eyebrow: "派发清单",
+    dispatch_manifest_title: "今日零读取路由包",
+    dispatch_manifest_ready: "就绪包",
+    dispatch_manifest_x_reads: "X 读取操作",
+    dispatch_manifest_cost: "增量 X API",
+    dispatch_manifest_lift: "增益模型",
+    dispatch_manifest_next: "下一步",
+    dispatch_manifest_copy: "复制完整清单",
+    dispatch_manifest_packets: "路由数据包",
+    dispatch_manifest_checks: "守卫检查",
     operator_protocol: "执行协议",
     operator_progress: "{done}/{total} 步已完成",
     operator_step_done: "完成",
@@ -2687,6 +2707,87 @@ function operatorSloData(ops = distributionOpsData()) {
       "Paste only useful replies under active technical threads; stop at target count.",
       "Metrics write back on the next maintenance run and rebalance route weights.",
     ],
+  };
+}
+
+function operatorDispatchPacketData(ops = distributionOpsData()) {
+  const incoming = dashboardData.operatorDispatchPacket || fallbackData.operatorDispatchPacket;
+  if (incoming?.packets?.length) return incoming;
+  const missions = Array.isArray(ops?.missions) ? ops.missions.slice(0, 5) : [];
+  const api = apiBudget();
+  const targetReplies = missions.reduce((sum, mission) => sum + number(mission?.targetReplies, 1), 0) || number(ops?.manualReplyTarget, 3);
+  const expectedLiftPct = missions.length
+    ? missions.reduce((sum, mission) => sum + number(mission?.expectedLiftPct, 0), 0) / missions.length
+    : 0;
+  const packets = missions.map((mission, index) => {
+    const draft = mission?.draftText || draftFor(index).text || "";
+    return {
+      id: mission?.id || `dispatch:${index + 1}`,
+      priority: mission?.priority || index + 1,
+      label: mission?.label || mission?.routeLabel || `Route ${index + 1}`,
+      routeLabel: mission?.routeLabel || mission?.label || `Route ${index + 1}`,
+      routeUrl: mission?.routeUrl || null,
+      reason: mission?.routeReason || mission?.evidence || "",
+      evidence: mission?.evidence || mission?.routeReason || "",
+      draftText: draft,
+      draftAngle: mission?.draftAngle || "",
+      targetReplies: number(mission?.targetReplies, 1),
+      operatorSlaMinutes: number(mission?.operatorSlaMinutes, 10 + index * 10),
+      expectedLiftPct: number(mission?.expectedLiftPct, 0),
+      confidence: mission?.confidence || "low",
+      zeroExtraXReads: true,
+      ready: Boolean(mission?.routeUrl && draft),
+    };
+  });
+  const readyPackets = packets.filter((packet) => packet.ready).length;
+  const severity = readyPackets >= Math.min(2, packets.length || 1) ? "ok" : readyPackets ? "warn" : "danger";
+  const copyBlock = [
+    "CODEX DAILY DISPATCH PACKET",
+    `Generated: ${dashboardData.updatedAt || fallbackData.updatedAt}`,
+    `Mode: ${ops?.mode || "manual_zero_read_dispatch"}`,
+    `Cost guard: 0 extra X search/read API ops · budget left ${money(api.remaining)}`,
+    `Target: ${formatNumber(targetReplies)} useful manual replies · expected lift +${formatNumber(expectedLiftPct, 1)}%`,
+    "",
+    "Protocol:",
+    "1. Open the top X web route; use live recency in the browser only.",
+    "2. Pick technical conversations with active replies and clear topic fit.",
+    "3. Paste one useful reply, lightly edit for context, then move to the next route.",
+    "4. Stop at the target count; metrics write back on the next maintenance run.",
+    "",
+    "Packets:",
+    ...packets.flatMap((packet) => [
+      `${packet.priority}. ${packet.routeLabel} · SLA ${formatNumber(packet.operatorSlaMinutes)}m · target ${formatNumber(packet.targetReplies)} · ${packet.ready ? "READY" : "MISSING_ROUTE_OR_DRAFT"}`,
+      packet.reason ? `Why: ${packet.reason}` : null,
+      packet.routeUrl ? `Route: ${packet.routeUrl}` : null,
+      packet.draftText ? `Reply: ${packet.draftText}` : null,
+      "",
+    ].filter(Boolean)),
+    "Stop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+  ].join("\n");
+
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: ops?.mode || "manual_zero_read_dispatch",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    safeRemainingUsd: api.remaining,
+    targetReplies,
+    readyPackets,
+    totalPackets: packets.length,
+    expectedLiftPct,
+    bestRouteLabel: packets[0]?.routeLabel || null,
+    nextAction: packets[0]?.routeLabel
+      ? `Open ${packets[0].routeLabel} in X web, paste the first ready reply, then stop at ${formatNumber(targetReplies)} useful route ops.`
+      : "Generate or refresh manual reply drafts before dispatching.",
+    copyBlock,
+    checks: [
+      { id: "x_reads", label: "X read partition", value: "0 ops", status: "ok", detail: "Manual web routes do not call recent_search." },
+      { id: "budget", label: "cost boundary", value: money(api.remaining), status: api.remaining > 0 ? "ok" : "danger", detail: "No incremental X API cost for the dispatch packet." },
+      { id: "queue", label: "route queue", value: `${readyPackets}/${packets.length}`, status: severity, detail: "Route URL and reply text are present." },
+    ],
+    packets,
   };
 }
 
@@ -5354,6 +5455,39 @@ function renderActions() {
       </div>
     `)
     .join("");
+  const dispatchPacket = operatorDispatchPacketData(ops);
+  const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
+  const manifestPackets = (dispatchPacket.packets || [])
+    .slice(0, 5)
+    .map((packet) => {
+      const ready = packet.ready ? "ok" : "warn";
+      return `
+        <article class="manifest-packet ${escapeHtml(ready)}">
+          <div>
+            <span>${String(packet.priority || 1).padStart(2, "0")}</span>
+            <strong>${escapeHtml(packet.routeLabel || packet.label || "-")}</strong>
+            <em>${escapeHtml(packet.confidence || "low")} · ${escapeHtml(formatNumber(packet.operatorSlaMinutes || 0))}m SLA</em>
+          </div>
+          <p>${escapeHtml(packet.reason || packet.evidence || packet.draftAngle || "-")}</p>
+          <blockquote>${escapeHtml(packet.draftText || "-")}</blockquote>
+          <div class="manifest-packet-actions">
+            ${packet.routeUrl ? `<a class="button button-primary" href="${escapeHtml(packet.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("open_search"))}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(packet.draftText || "")}">${escapeHtml(t("copy_draft"))}</button>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+  const manifestChecks = (dispatchPacket.checks || [])
+    .slice(0, 4)
+    .map((check) => `
+      <div class="manifest-check ${escapeHtml(check.status || "ok")}">
+        <span>${escapeHtml(sreLabel(check.label || check.id || "-"))}</span>
+        <strong>${escapeHtml(sreText(check.value || "-"))}</strong>
+        <em>${escapeHtml(sreText(check.detail || ""))}</em>
+      </div>
+    `)
+    .join("");
   const missionCards = missions
     .slice(0, 3)
     .map((mission, index) => {
@@ -5392,6 +5526,37 @@ function renderActions() {
       </div>
       ${metricCards}
     </div>
+    <article class="dispatch-manifest ${escapeHtml(manifestStatus)}">
+      <div class="manifest-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("dispatch_manifest_eyebrow"))}</span>
+          <strong>${escapeHtml(t("dispatch_manifest_title"))}</strong>
+        </div>
+        <em>${escapeHtml(dispatchPacket.mode || "manual_zero_read_dispatch")}</em>
+      </div>
+      <div class="manifest-matrix">
+        <div><span>${escapeHtml(t("dispatch_manifest_ready"))}</span><strong>${escapeHtml(`${formatNumber(dispatchPacket.readyPackets || 0)}/${formatNumber(dispatchPacket.totalPackets || 0)}`)}</strong></div>
+        <div><span>${escapeHtml(t("dispatch_manifest_x_reads"))}</span><strong>${escapeHtml(formatNumber(dispatchPacket.estimatedXReadOps || 0))}</strong></div>
+        <div><span>${escapeHtml(t("dispatch_manifest_cost"))}</span><strong>${escapeHtml(money(dispatchPacket.estimatedIncrementalXApiUsd || 0))}</strong></div>
+        <div><span>${escapeHtml(t("dispatch_manifest_lift"))}</span><strong>${escapeHtml(`+${formatNumber(dispatchPacket.expectedLiftPct || 0, 1)}%`)}</strong></div>
+      </div>
+      <div class="manifest-command">
+        <span>${escapeHtml(t("dispatch_manifest_next"))}</span>
+        <strong>${escapeHtml(dispatchPacket.nextAction || "-")}</strong>
+      </div>
+      <div class="manifest-body">
+        <section>
+          <div class="manifest-section-title"><span>${escapeHtml(t("dispatch_manifest_packets"))}</span><strong>${escapeHtml(t("dispatch_zero_reads"))}</strong></div>
+          <div class="manifest-packets">${manifestPackets}</div>
+        </section>
+        <aside>
+          <div class="manifest-section-title"><span>${escapeHtml(t("dispatch_manifest_checks"))}</span><strong>${escapeHtml(manifestStatus)}</strong></div>
+          <div class="manifest-checks">${manifestChecks}</div>
+          <pre class="manifest-copy"><code>${escapeHtml(dispatchPacket.copyBlock || "")}</code></pre>
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(dispatchPacket.copyBlock || "")}">${escapeHtml(t("dispatch_manifest_copy"))}</button>
+        </aside>
+      </div>
+    </article>
     <article class="operator-packet ${escapeHtml(primary.kind || "route")}">
       <div class="packet-head">
         <div>

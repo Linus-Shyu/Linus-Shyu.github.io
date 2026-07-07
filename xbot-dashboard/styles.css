@@ -2609,6 +2609,266 @@ h3 {
   border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
 }
 
+.dispatch-manifest {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
+  border-radius: 7px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 8% 0, color-mix(in srgb, var(--accent) 16%, transparent), transparent 36%),
+    radial-gradient(circle at 92% 14%, color-mix(in srgb, var(--ok) 10%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 88%, transparent), transparent 64%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent),
+    0 0 30px color-mix(in srgb, var(--accent) 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.dispatch-manifest::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--ok), transparent);
+  opacity: 0.84;
+}
+
+.dispatch-manifest.warn {
+  border-color: color-mix(in srgb, var(--warn) 42%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warn) 10%, transparent),
+    0 0 28px color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.dispatch-manifest.danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--danger) 12%, transparent),
+    0 0 30px color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+.manifest-head,
+.manifest-command,
+.manifest-section-title,
+.manifest-packet > div,
+.manifest-packet-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.manifest-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.manifest-head > div,
+.manifest-command strong {
+  min-width: 0;
+}
+
+.manifest-head em,
+.manifest-section-title strong {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  text-transform: uppercase;
+}
+
+.manifest-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.manifest-matrix div,
+.manifest-check,
+.manifest-command {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: color-mix(in srgb, var(--surface-soft) 78%, transparent);
+}
+
+.manifest-matrix span,
+.manifest-command span,
+.manifest-section-title span,
+.manifest-check span {
+  display: block;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.manifest-matrix strong,
+.manifest-command strong,
+.manifest-check strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manifest-command strong {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.manifest-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.manifest-body section,
+.manifest-body aside {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.manifest-packets,
+.manifest-checks {
+  display: grid;
+  gap: 8px;
+}
+
+.manifest-packet {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 82%, transparent);
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 58%),
+    color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.manifest-packet.ok {
+  border-color: color-mix(in srgb, var(--ok) 28%, var(--line));
+}
+
+.manifest-packet.warn {
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
+}
+
+.manifest-packet span {
+  display: inline-grid;
+  width: 28px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 5px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 880;
+}
+
+.manifest-packet strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manifest-packet em {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.manifest-packet p {
+  margin: 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.manifest-packet blockquote {
+  margin: 0;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  padding: 8px 9px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface-soft) 82%, transparent);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.manifest-check.ok {
+  border-color: color-mix(in srgb, var(--ok) 28%, var(--line));
+}
+
+.manifest-check.warn {
+  border-color: color-mix(in srgb, var(--warn) 36%, var(--line));
+}
+
+.manifest-check.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+}
+
+.manifest-check em {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manifest-copy {
+  max-height: 160px;
+  overflow: auto;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  padding: 10px;
+  color: var(--body);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06), transparent),
+    color-mix(in srgb, var(--surface-soft) 84%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
 .operator-packet {
   position: relative;
   display: grid;
@@ -10935,6 +11195,22 @@ body:not(.demo-mode) .demo-strip {
 
   .signal-node-button.x .signal-node-label {
     font-size: 10px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .manifest-body,
+  .manifest-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .manifest-head,
+  .manifest-command,
+  .manifest-section-title,
+  .manifest-packet > div,
+  .manifest-packet-actions {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
