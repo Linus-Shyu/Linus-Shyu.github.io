@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light" data-lang="en">
+<html lang="en" data-theme="dark" data-lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,7 +10,7 @@
     />
     <script>
       (() => {
-        const theme = localStorage.getItem("xbot-dashboard-theme") || "light";
+        const theme = localStorage.getItem("xbot-dashboard-theme") || "dark";
         const savedLang = localStorage.getItem("xbot-dashboard-lang");
         const lang = savedLang || ((navigator.language || "").startsWith("zh") ? "zh" : "en");
         document.documentElement.dataset.theme = theme;
@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-fancy1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-ops1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -37,6 +37,13 @@
             <strong data-i18n="production">Production</strong>
           </div>
           <span id="updated-at">Loading</span>
+        </div>
+
+        <div class="rack-mini" aria-label="Runtime nodes">
+          <div><span></span><strong>RSS</strong><em>ingest</em></div>
+          <div><span></span><strong>AI</strong><em>draft</em></div>
+          <div><span></span><strong>X</strong><em>route</em></div>
+          <div><span></span><strong>OPS</strong><em>learn</em></div>
         </div>
 
         <nav class="rail-nav">
@@ -79,6 +86,25 @@
             <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
+
+        <section class="noc-strip" aria-label="Operations status">
+          <div>
+            <span data-i18n="noc_runtime">Runtime</span>
+            <strong data-i18n="noc_runtime_value">Actions online</strong>
+          </div>
+          <div>
+            <span data-i18n="noc_sync">Pages sync</span>
+            <strong data-i18n="noc_sync_value">Static deploy</strong>
+          </div>
+          <div>
+            <span data-i18n="noc_budget">Cost guard</span>
+            <strong data-i18n="noc_budget_value">No X reads</strong>
+          </div>
+          <div>
+            <span data-i18n="noc_operator">Operator mode</span>
+            <strong data-i18n="noc_operator_value">Manual paste</strong>
+          </div>
+        </section>
 
         <section class="demo-strip" aria-live="polite">
           <div>
@@ -384,6 +410,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-fancy1" defer></script>
+    <script src="./script.js?v=20260707-ops1" defer></script>
   </body>
 </html>
