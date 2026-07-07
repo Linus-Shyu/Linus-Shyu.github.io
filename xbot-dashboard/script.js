@@ -1,6 +1,15 @@
 const fallbackData = {
   version: 1,
   updatedAt: "2026-07-06T00:17:43.839Z",
+  telemetry: {
+    dashboardUpdatedAt: "2026-07-06T00:17:43.839Z",
+    checkedAt: "2026-07-07T01:09:59.105Z",
+    accountCheckedAt: "2026-07-07T01:09:50.396Z",
+    tweetMetricsCheckedAt: "2026-07-07T01:09:59.105Z",
+    ageMinutes: 854,
+    refreshMode: "dashboard_only",
+    cachedOnlyRefresh: true,
+  },
   mode: {
     label: "Zero extra X API",
     description: "Web search links + manual paste replies.",
@@ -222,6 +231,7 @@ const translations = {
     title: "X Bot Command Center",
     zero_extra_x_api: "Zero extra X API",
     live_data: "Live data",
+    cached_data: "Cached telemetry",
     data_stale: "Data stale",
     fallback_data: "Fallback data",
     demo_mode: "Demo mode",
@@ -289,6 +299,8 @@ const translations = {
     monitor_calls_summary: "{calls} calls · {failures} failures",
     alert_ok_title: "All growth partitions online",
     alert_ok_body: "Data is fresh, cost guard is active, and manual reply routing is ready.",
+    alert_cached_title: "Dashboard synced from cache",
+    alert_cached_body: "No X reads were used for this refresh. Metrics show the latest cached telemetry timestamp.",
     alert_warn_title: "Attention required",
     alert_warn_body: "The dashboard is using older data. Run growth maintenance before making today's reply decisions.",
     alert_danger_title: "Fallback telemetry active",
@@ -453,6 +465,7 @@ const translations = {
     title: "X Bot 指挥中心",
     zero_extra_x_api: "零额外 X API",
     live_data: "实时数据",
+    cached_data: "缓存遥测",
     data_stale: "数据过期",
     fallback_data: "备用数据",
     demo_mode: "演示模式",
@@ -520,6 +533,8 @@ const translations = {
     monitor_calls_summary: "{calls} 次调用 · {failures} 次失败",
     alert_ok_title: "增长分区全部在线",
     alert_ok_body: "数据新鲜、成本守卫开启，人工回复分发入口已就绪。",
+    alert_cached_title: "Dashboard 已从缓存同步",
+    alert_cached_body: "这次刷新没有读取 X API；指标显示的是最近一次缓存遥测时间。",
     alert_warn_title: "需要关注",
     alert_warn_body: "看板正在使用较旧数据。做今天的回复决策前，先跑一次 growth maintenance。",
     alert_danger_title: "备用遥测启用",
@@ -954,10 +969,12 @@ function localizeDraftMeta(draft, fallbackTitle = "Relevant tech post") {
 
 function dataFreshness() {
   if (dataLoadStatus !== "live") return { key: "fallback_data", className: "danger" };
-  const updated = new Date(dashboardData.updatedAt);
+  const telemetry = dashboardData.telemetry || {};
+  const updated = new Date(telemetry.checkedAt || dashboardData.profile?.followerCheckedAt || dashboardData.updatedAt);
   if (Number.isNaN(updated.getTime())) return { key: "data_stale", className: "warn" };
   const ageHours = (Date.now() - updated.getTime()) / 36e5;
   if (ageHours > FRESH_DATA_MAX_AGE_HOURS) return { key: "data_stale", className: "warn" };
+  if (telemetry.cachedOnlyRefresh) return { key: "cached_data", className: "cached" };
   return { key: "live_data", className: "ok" };
 }
 
@@ -973,6 +990,7 @@ function renderHeader() {
   const livePill = document.querySelector(".live-pill");
   $("#mode-label").textContent = t(freshness.key);
   livePill.classList.toggle("warn", freshness.className === "warn");
+  livePill.classList.toggle("cached", freshness.className === "cached");
   livePill.classList.toggle("danger", freshness.className === "danger");
   $("#updated-at").textContent = t("updated", { date: updated });
   $("#sync-updated").textContent = updated;
@@ -1081,9 +1099,11 @@ function renderExpoStory() {
 }
 
 function dataAgeMinutes() {
-  const updated = new Date(dashboardData.updatedAt);
-  if (Number.isNaN(updated.getTime())) return null;
-  return Math.max(0, Math.round((Date.now() - updated.getTime()) / 60000));
+  const telemetry = dashboardData.telemetry || {};
+  const updated = new Date(telemetry.checkedAt || dashboardData.profile?.followerCheckedAt || dashboardData.updatedAt);
+  if (!Number.isNaN(updated.getTime())) return Math.max(0, Math.round((Date.now() - updated.getTime()) / 60000));
+  if (Number.isFinite(Number(telemetry.ageMinutes))) return Math.max(0, Math.round(Number(telemetry.ageMinutes)));
+  return null;
 }
 
 function gaugeCard(card) {
@@ -1318,13 +1338,20 @@ function renderMonitorPanels() {
 
   const freshness = dataFreshness();
   const alert = $("#monitor-alert");
-  const alertKey = freshness.className === "ok" ? "ok" : freshness.className === "warn" ? "warn" : "danger";
+  const alertKey = freshness.className === "ok"
+    ? "ok"
+    : freshness.className === "cached"
+      ? "cached"
+      : freshness.className === "warn"
+        ? "warn"
+        : "danger";
   $("#monitor-alert-state").textContent = t(freshness.key);
   alert.className = `alert-console ${alertKey}`;
+  const telemetryTime = dashboardData.telemetry?.checkedAt || dashboardData.profile?.followerCheckedAt || dashboardData.updatedAt;
   alert.innerHTML = `
     <strong>${escapeHtml(t(`alert_${alertKey}_title`))}</strong>
     <p>${escapeHtml(t(`alert_${alertKey}_body`))}</p>
-    <code>${escapeHtml(formatDate(dashboardData.updatedAt))}</code>
+    <code>${escapeHtml(formatDate(telemetryTime))}</code>
   `;
 }
 

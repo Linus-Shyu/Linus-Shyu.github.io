@@ -384,6 +384,11 @@ h3 {
   box-shadow: 0 0 0 5px rgba(217, 119, 6, 0.13);
 }
 
+.live-pill.cached span {
+  background: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
 .live-pill.danger span {
   background: var(--danger);
   box-shadow: 0 0 0 5px rgba(220, 38, 38, 0.12);
@@ -3767,6 +3772,11 @@ body,
   box-shadow: 0 0 10px color-mix(in srgb, var(--warn) 52%, transparent);
 }
 
+.runlog-row.cached::before {
+  background: var(--accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
 .runlog-row.danger::before {
   background: var(--danger);
   box-shadow: 0 0 10px color-mix(in srgb, var(--danger) 52%, transparent);
@@ -3865,6 +3875,7 @@ body,
 
 .gauge-card.good .gauge-arc { --gauge-color: var(--ok); }
 .gauge-card.warn .gauge-arc { --gauge-color: var(--warn); }
+.gauge-card.cached .gauge-arc { --gauge-color: var(--accent); }
 .gauge-card.danger .gauge-arc { --gauge-color: var(--danger); }
 
 .gauge-visual strong {
@@ -4053,6 +4064,11 @@ body,
 .alert-console.warn {
   border-color: color-mix(in srgb, var(--warn) 58%, var(--line));
   background: color-mix(in srgb, var(--warn) 12%, var(--surface-soft));
+}
+
+.alert-console.cached {
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-soft));
 }
 
 .alert-console.danger {
