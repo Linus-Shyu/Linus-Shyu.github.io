@@ -2764,6 +2764,338 @@ h3 {
   white-space: nowrap;
 }
 
+.operator-slo {
+  display: grid;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ok) 30%, var(--line));
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 94% -10%, color-mix(in srgb, var(--ok) 16%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 88%, transparent), transparent 56%),
+    var(--surface);
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--ok) 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.operator-slo.warn {
+  border-color: color-mix(in srgb, var(--warn) 36%, var(--line));
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--warn) 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.operator-slo.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--danger) 12%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.slo-head,
+.slo-kpis,
+.slo-card-grid,
+.slo-body,
+.slo-lane,
+.slo-lane dl,
+.slo-section-title {
+  display: grid;
+  gap: 8px;
+}
+
+.slo-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.slo-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.slo-head em {
+  border: 1px solid color-mix(in srgb, var(--ok) 38%, var(--line));
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.operator-slo.warn .slo-head em {
+  border-color: color-mix(in srgb, var(--warn) 42%, var(--line));
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.operator-slo.danger .slo-head em {
+  border-color: color-mix(in srgb, var(--danger) 46%, var(--line));
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+}
+
+.slo-kpis {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.slo-kpis div,
+.slo-card,
+.slo-lane,
+.slo-rules {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 80%, transparent);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-soft) 78%, transparent), color-mix(in srgb, var(--surface) 72%, transparent));
+}
+
+.slo-kpis div {
+  padding: 8px;
+}
+
+.slo-kpis span,
+.slo-card span,
+.slo-section-title span,
+.slo-lane dt {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 840;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.slo-kpis strong,
+.slo-card strong,
+.slo-section-title strong,
+.slo-lane dd {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-weight: 900;
+}
+
+.slo-kpis strong {
+  display: block;
+  margin-top: 5px;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slo-card-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.slo-card {
+  padding: 9px;
+}
+
+.slo-card strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.slo-card em {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  color: var(--body);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slo-card.ok {
+  border-color: color-mix(in srgb, var(--ok) 34%, var(--line));
+}
+
+.slo-card.warn {
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
+}
+
+.slo-card.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+}
+
+.slo-body {
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  align-items: stretch;
+}
+
+.slo-section-title {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.slo-section-title strong {
+  overflow: hidden;
+  color: var(--ok);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slo-lanes {
+  display: grid;
+  gap: 8px;
+}
+
+.slo-lane {
+  grid-template-columns: minmax(180px, 0.72fr) minmax(160px, 0.54fr) minmax(220px, 0.74fr);
+  align-items: center;
+  padding: 8px;
+}
+
+.slo-lane > div:first-child {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 8px;
+  align-items: center;
+}
+
+.slo-lane > div:first-child span {
+  display: inline-grid;
+  width: 24px;
+  height: 20px;
+  grid-row: span 2;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ok) 32%, var(--line));
+  border-radius: 5px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.slo-lane strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slo-lane em {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slo-lane-bars {
+  display: grid;
+  gap: 5px;
+}
+
+.slo-lane-bars i,
+.slo-lane-bars b {
+  position: relative;
+  display: block;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 66%, transparent);
+}
+
+.slo-lane-bars i::before,
+.slo-lane-bars b::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.slo-lane-bars i::before {
+  width: var(--slo-lift, 0%);
+  background: linear-gradient(90deg, var(--ok), var(--accent));
+}
+
+.slo-lane-bars b::before {
+  width: var(--slo-score, 0%);
+  background: linear-gradient(90deg, var(--warn), var(--accent-3));
+}
+
+.slo-lane dl {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.slo-lane dl div {
+  min-width: 0;
+}
+
+.slo-lane dd {
+  margin: 3px 0 0;
+  font-size: 12px;
+}
+
+.slo-lane.warn {
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
+}
+
+.slo-lane.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line));
+}
+
+.slo-rules {
+  padding: 10px;
+}
+
+.slo-rules ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slo-rules li {
+  position: relative;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.42;
+}
+
+.slo-rules li::before {
+  content: "";
+  position: absolute;
+  top: 0.58em;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ok);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
 .action-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.68fr);
@@ -8483,6 +8815,16 @@ body:not(.demo-mode) .demo-strip {
   .packet-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .slo-kpis,
+  .slo-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .slo-body,
+  .slo-lane {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 620px) {
@@ -8506,6 +8848,17 @@ body:not(.demo-mode) .demo-strip {
 
   .operator-packet {
     padding: 12px;
+  }
+
+  .slo-head,
+  .slo-kpis,
+  .slo-card-grid,
+  .slo-lane dl {
+    grid-template-columns: 1fr;
+  }
+
+  .slo-head em {
+    justify-self: start;
   }
 
   .telemetry-grid,

@@ -698,6 +698,65 @@ const fallbackData = {
       },
     ],
   },
+  operatorSlo: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "manual_zero_read_slo",
+    status: "ok",
+    zeroExtraXReads: true,
+    budgetUsdPerReply: 0,
+    targetReplies: 3,
+    readyMissions: 2,
+    missionCount: 2,
+    completionBudgetMinutes: 30,
+    expectedLiftPct: 69.2,
+    expectedScore: 6.6,
+    baselineScore: 3.9,
+    safeRemainingUsd: 2.81,
+    currentWindow: "13:00",
+    sloCards: [
+      { id: "route_readiness", label: "route readiness", value: "2/2", status: "ok", detail: "100% of manual distribution lanes armed" },
+      { id: "reply_latency", label: "operator SLA", value: "30 min", status: "ok", detail: "3 replies inside the daily growth loop" },
+      { id: "x_read_burn", label: "X read burn", value: "0 ops", status: "ok", detail: "manual web routes do not consume X search/read budget" },
+      { id: "learning_writeback", label: "learning writeback", value: "120 posts", status: "ok", detail: "baseline score 3.9 -> expected 6.6" },
+    ],
+    lanes: [
+      {
+        id: "template:decision_rule",
+        label: "decision rule replies",
+        routeLabel: "Target Accounts",
+        priority: 1,
+        status: "ok",
+        targetReplies: 2,
+        operatorSlaMinutes: 10,
+        expectedLiftPct: 84.6,
+        score: 7.2,
+        confidence: "medium",
+        xReadOps: 0,
+        incrementalXApiUsd: 0,
+        efficiencyLabel: "0 incremental X API spend",
+      },
+      {
+        id: "source:techcrunch.com",
+        label: "Source watch: techcrunch.com",
+        routeLabel: "AI / DevTools",
+        priority: 2,
+        status: "ok",
+        targetReplies: 1,
+        operatorSlaMinutes: 20,
+        expectedLiftPct: 38.5,
+        score: 5.4,
+        confidence: "medium",
+        xReadOps: 0,
+        incrementalXApiUsd: 0,
+        efficiencyLabel: "0 incremental X API spend",
+      },
+    ],
+    rules: [
+      "Open routes in X web; do not call recent_search for manual replies.",
+      "Paste only useful replies under active technical threads; stop at target count.",
+      "Metrics write back on the next maintenance run and rebalance route weights.",
+    ],
+  },
   growthGoal: {
     targetFollowers: 1000,
     nextMilestone: 100,
@@ -1043,6 +1102,20 @@ const translations = {
     operator_event_done: "step completed",
     operator_event_pending: "step reopened",
     operator_event_reset: "protocol reset",
+    operator_slo_eyebrow: "Growth SLO",
+    operator_slo_title: "Manual distribution service level",
+    operator_slo_status_ok: "within boundary",
+    operator_slo_status_warn: "needs operator",
+    operator_slo_status_danger: "partition degraded",
+    operator_slo_latency: "completion budget",
+    operator_slo_target: "reply target",
+    operator_slo_lift: "expected lift",
+    operator_slo_score: "score model",
+    operator_slo_budget: "cost per reply",
+    operator_slo_window: "next hot window",
+    operator_slo_lanes: "route lanes",
+    operator_slo_rules: "service rules",
+    operator_slo_zero_reads: "zero X read burn",
     operator_stop: "Stop conditions",
     operator_writeback: "Writeback",
     runbook: "Runbook",
@@ -1481,6 +1554,20 @@ const translations = {
     operator_event_done: "步骤完成",
     operator_event_pending: "步骤重开",
     operator_event_reset: "协议重置",
+    operator_slo_eyebrow: "增长 SLO",
+    operator_slo_title: "人工分发服务等级",
+    operator_slo_status_ok: "边界内",
+    operator_slo_status_warn: "需要操作员",
+    operator_slo_status_danger: "分区降级",
+    operator_slo_latency: "完成预算",
+    operator_slo_target: "回复目标",
+    operator_slo_lift: "预期增益",
+    operator_slo_score: "评分模型",
+    operator_slo_budget: "单次回复成本",
+    operator_slo_window: "下个高峰窗口",
+    operator_slo_lanes: "路由通道",
+    operator_slo_rules: "服务规则",
+    operator_slo_zero_reads: "零 X 读取燃烧",
     operator_stop: "停止条件",
     operator_writeback: "写回",
     runbook: "运行手册",
@@ -2324,6 +2411,69 @@ function distributionOpsData() {
     ],
     runbook: [],
     missions,
+  };
+}
+
+function operatorSloData(ops = distributionOpsData()) {
+  const incoming = dashboardData.operatorSlo;
+  if (incoming?.sloCards?.length || incoming?.lanes?.length) return incoming;
+  if (dashboardData === fallbackData && (fallbackData.operatorSlo?.sloCards?.length || fallbackData.operatorSlo?.lanes?.length)) {
+    return fallbackData.operatorSlo;
+  }
+  const missions = Array.isArray(ops?.missions) ? ops.missions : [];
+  const readyMissions = number(ops?.readyMissions, missions.length);
+  const missionCount = number(ops?.missionCount, missions.length);
+  const targetReplies = missions.reduce((sum, mission) => sum + number(mission?.targetReplies, 1), 0) || number(ops?.manualReplyTarget, 3);
+  const completionBudgetMinutes = missions.reduce((sum, mission, index) => sum + number(mission?.operatorSlaMinutes, 10 + index * 10), 0);
+  const baselineScore = number(dashboardData.profile?.baselineScore, fallbackData.profile.baselineScore);
+  const expectedScore = missions.length
+    ? missions.reduce((sum, mission) => sum + number(mission?.score, baselineScore), 0) / missions.length
+    : baselineScore;
+  const expectedLiftPct = missions.length
+    ? missions.reduce((sum, mission) => sum + number(mission?.expectedLiftPct, 0), 0) / missions.length
+    : 0;
+  const status = readyMissions >= Math.min(2, missionCount || 1) ? "ok" : readyMissions ? "warn" : "danger";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "manual_zero_read_slo",
+    status,
+    zeroExtraXReads: true,
+    budgetUsdPerReply: 0,
+    targetReplies,
+    readyMissions,
+    missionCount,
+    completionBudgetMinutes,
+    expectedLiftPct,
+    expectedScore,
+    baselineScore,
+    safeRemainingUsd: apiBudget().remaining,
+    currentWindow: hourlyLoadData()?.nextWindow?.label || null,
+    sloCards: [
+      { id: "route_readiness", label: "route readiness", value: `${readyMissions}/${missionCount}`, status, detail: `${formatNumber(missionCount ? (readyMissions / missionCount) * 100 : 0)}% of manual distribution lanes armed` },
+      { id: "reply_latency", label: "operator SLA", value: `${formatNumber(completionBudgetMinutes)} min`, status: completionBudgetMinutes <= 45 ? "ok" : "warn", detail: `${formatNumber(targetReplies)} replies inside the daily growth loop` },
+      { id: "x_read_burn", label: "X read burn", value: "0 ops", status: "ok", detail: "manual web routes do not consume X search/read budget" },
+      { id: "learning_writeback", label: "learning writeback", value: `${formatNumber(dashboardData.profile?.measuredPosts || fallbackData.profile.measuredPosts)} posts`, status: "ok", detail: `baseline score ${formatNumber(baselineScore, 1)} -> expected ${formatNumber(expectedScore, 1)}` },
+    ],
+    lanes: missions.slice(0, 4).map((mission, index) => ({
+      id: mission?.id || `slo:${index + 1}`,
+      label: mission?.label || mission?.routeLabel || `Route ${index + 1}`,
+      routeLabel: mission?.routeLabel || mission?.label || `Route ${index + 1}`,
+      priority: mission?.priority || index + 1,
+      status: mission?.routeUrl && mission?.draftText ? "ok" : "warn",
+      targetReplies: number(mission?.targetReplies, 1),
+      operatorSlaMinutes: number(mission?.operatorSlaMinutes, 10 + index * 10),
+      expectedLiftPct: number(mission?.expectedLiftPct, 0),
+      score: number(mission?.score, baselineScore),
+      confidence: mission?.confidence || "low",
+      xReadOps: number(mission?.costEfficiency?.xReadOps, 0),
+      incrementalXApiUsd: number(mission?.costEfficiency?.incrementalXApiUsd, 0),
+      efficiencyLabel: mission?.costEfficiency?.label || t("operator_slo_zero_reads"),
+    })),
+    rules: [
+      "Open routes in X web; do not call recent_search for manual replies.",
+      "Paste only useful replies under active technical threads; stop at target count.",
+      "Metrics write back on the next maintenance run and rebalance route weights.",
+    ],
   };
 }
 
@@ -4432,6 +4582,47 @@ function renderActions() {
   const totalCount = visibleProtocolSteps.length || 1;
   const protocolProgress = t("operator_progress", { done: formatNumber(doneCount), total: formatNumber(totalCount) });
   const operatorTelemetry = operatorTelemetryData(missions, ops);
+  const operatorSlo = operatorSloData(ops);
+  const sloStatus = ["ok", "warn", "danger"].includes(operatorSlo.status) ? operatorSlo.status : "ok";
+  const sloStatusLabel = t(`operator_slo_status_${sloStatus}`);
+  const sloCards = (operatorSlo.sloCards || [])
+    .slice(0, 4)
+    .map((card) => `
+      <div class="slo-card ${escapeHtml(card.status || "ok")}">
+        <span>${escapeHtml(card.label || card.id || "-")}</span>
+        <strong>${escapeHtml(String(card.value || "-"))}</strong>
+        <em>${escapeHtml(card.detail || "")}</em>
+      </div>
+    `)
+    .join("");
+  const maxLaneScore = Math.max(1, ...(operatorSlo.lanes || []).map((lane) => number(lane.score, 0)));
+  const sloLanes = (operatorSlo.lanes || [])
+    .slice(0, 4)
+    .map((lane, index) => {
+      const laneStatus = ["ok", "warn", "danger"].includes(lane.status) ? lane.status : "ok";
+      const liftPct = Math.min(100, Math.max(8, number(lane.expectedLiftPct, 0)));
+      const scorePct = Math.min(100, Math.max(8, (number(lane.score, 0) / maxLaneScore) * 100));
+      return `
+        <div class="slo-lane ${escapeHtml(laneStatus)}" style="--slo-lift:${liftPct}%;--slo-score:${scorePct}%">
+          <div>
+            <span>${String(lane.priority || index + 1).padStart(2, "0")}</span>
+            <strong>${escapeHtml(lane.routeLabel || lane.label || "-")}</strong>
+            <em>${escapeHtml(lane.confidence || "low")} · ${escapeHtml(lane.efficiencyLabel || t("operator_slo_zero_reads"))}</em>
+          </div>
+          <div class="slo-lane-bars">
+            <i></i>
+            <b></b>
+          </div>
+          <dl>
+            <div><dt>${escapeHtml(t("operator_slo_target"))}</dt><dd>${escapeHtml(formatNumber(lane.targetReplies || 1))}</dd></div>
+            <div><dt>${escapeHtml(t("operator_slo_latency"))}</dt><dd>${escapeHtml(`${formatNumber(lane.operatorSlaMinutes || 0)}m`)}</dd></div>
+            <div><dt>${escapeHtml(t("operator_slo_lift"))}</dt><dd>${escapeHtml(`+${formatNumber(lane.expectedLiftPct || 0, 1)}%`)}</dd></div>
+          </dl>
+        </div>
+      `;
+    })
+    .join("");
+  const sloRules = (operatorSlo.rules || []).slice(0, 3).map((rule) => `<li>${escapeHtml(rule)}</li>`).join("");
   const protocolCopy = [
     primaryProtocol.objective || null,
     ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
@@ -4586,6 +4777,34 @@ function renderActions() {
         ${operatorTelemetry.ledger.length ? operatorTelemetry.ledger.map((event) => `
           <p><time>${escapeHtml(formatDate(event.at))}</time><strong>${escapeHtml(t(event.type === "reset" ? "operator_event_reset" : event.state === "done" ? "operator_event_done" : "operator_event_pending"))}</strong><em>${escapeHtml(event.route || "-")} · ${escapeHtml(event.step || "-")}</em></p>
         `).join("") : `<p class="empty">${escapeHtml(t("operator_telemetry_empty"))}</p>`}
+      </div>
+    </article>
+    <article class="operator-slo ${escapeHtml(sloStatus)}">
+      <div class="slo-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("operator_slo_eyebrow"))}</span>
+          <strong>${escapeHtml(t("operator_slo_title"))}</strong>
+        </div>
+        <em>${escapeHtml(sloStatusLabel)} · ${escapeHtml(t("operator_slo_zero_reads"))}</em>
+      </div>
+      <div class="slo-kpis">
+        <div><span>${escapeHtml(t("operator_slo_target"))}</span><strong>${escapeHtml(formatNumber(operatorSlo.targetReplies || 0))}</strong></div>
+        <div><span>${escapeHtml(t("operator_slo_latency"))}</span><strong>${escapeHtml(`${formatNumber(operatorSlo.completionBudgetMinutes || 0)}m`)}</strong></div>
+        <div><span>${escapeHtml(t("operator_slo_lift"))}</span><strong>${escapeHtml(`+${formatNumber(operatorSlo.expectedLiftPct || 0, 1)}%`)}</strong></div>
+        <div><span>${escapeHtml(t("operator_slo_budget"))}</span><strong>${escapeHtml(money(operatorSlo.budgetUsdPerReply || 0))}</strong></div>
+        <div><span>${escapeHtml(t("operator_slo_score"))}</span><strong>${escapeHtml(`${formatNumber(operatorSlo.baselineScore || 0, 1)} -> ${formatNumber(operatorSlo.expectedScore || 0, 1)}`)}</strong></div>
+        <div><span>${escapeHtml(t("operator_slo_window"))}</span><strong>${escapeHtml(operatorSlo.currentWindow || "-")}</strong></div>
+      </div>
+      <div class="slo-card-grid">${sloCards}</div>
+      <div class="slo-body">
+        <section>
+          <div class="slo-section-title"><span>${escapeHtml(t("operator_slo_lanes"))}</span><strong>${escapeHtml(`${formatNumber(operatorSlo.readyMissions || 0)}/${formatNumber(operatorSlo.missionCount || 0)}`)}</strong></div>
+          <div class="slo-lanes">${sloLanes}</div>
+        </section>
+        <section class="slo-rules">
+          <div class="slo-section-title"><span>${escapeHtml(t("operator_slo_rules"))}</span><strong>${escapeHtml(operatorSlo.mode || "manual_zero_read_slo")}</strong></div>
+          <ol>${sloRules}</ol>
+        </section>
       </div>
     </article>
     <article class="action-hero">
