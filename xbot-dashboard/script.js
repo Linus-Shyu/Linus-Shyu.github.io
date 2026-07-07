@@ -428,6 +428,10 @@ const translations = {
     signal_metrics: "Live metrics",
     signal_empty: "No data yet",
     signal_open: "Open",
+    signal_node_value: "Value",
+    signal_node_routes: "Routes",
+    signal_node_health: "Health",
+    signal_node_source: "Source",
     hero_signal_label: "Signal score",
     hero_loop_label: "Today's loop",
     hero_cost_label: "Cost guard",
@@ -689,6 +693,10 @@ const translations = {
     signal_metrics: "实时指标",
     signal_empty: "暂无数据",
     signal_open: "打开",
+    signal_node_value: "数值",
+    signal_node_routes: "连接",
+    signal_node_health: "状态",
+    signal_node_source: "来源",
     hero_signal_label: "信号评分",
     hero_loop_label: "今日流程",
     hero_cost_label: "成本守卫",
@@ -926,6 +934,99 @@ function apiBudget() {
   return { api, spend, cap, remaining, ratio };
 }
 
+const SIGNAL_NODE_COORDS = {
+  rss: { x: 0.17, y: 0.31 },
+  score: { x: 0.48, y: 0.2 },
+  draft: { x: 0.23, y: 0.74 },
+  x: { x: 0.72, y: 0.38 },
+  learn: { x: 0.78, y: 0.73 },
+};
+
+function sumEndpointTotals(api = {}) {
+  return (api.endpoints || []).reduce(
+    (totals, endpoint) => ({
+      calls: totals.calls + number(endpoint.calls),
+      failures: totals.failures + number(endpoint.failures),
+    }),
+    { calls: 0, failures: 0 },
+  );
+}
+
+function buildDerivedSignalMap() {
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const last7d = dashboardData.last7d || fallbackData.last7d || {};
+  const actions = dashboardData.actions || fallbackData.actions || [];
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const posts = last7d.topPosts || [];
+  const bestScore = Math.max(number(profile.baselineScore), ...posts.map((post) => number(post.score)), 0);
+  const endpointTotals = sumEndpointTotals(dashboardData.api || fallbackData.api || {});
+  const sourceCount = new Set(posts.map((post) => post.source).filter(Boolean)).size;
+  const rssValue = Math.max(sourceCount, number(last7d.posts), 1);
+  const measuredPosts = number(profile.measuredPosts, number(last7d.posts));
+
+  return {
+    version: 0,
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    coordinateSystem: "percent",
+    source: "derived dashboard fields",
+    core: {
+      label: "CORE",
+      value: number(profile.baselineScore, bestScore),
+      unit: "baseline",
+      detail: `${endpointTotals.calls} API calls, ${endpointTotals.failures} failures`,
+      x: 0.46,
+      y: 0.54,
+    },
+    nodes: [
+      { id: "rss", label: "RSS", value: rssValue, unit: "signals", detail: `${rssValue} recent signals`, health: "ok", ...SIGNAL_NODE_COORDS.rss },
+      { id: "score", label: "Score", value: Number(bestScore.toFixed(1)), unit: "best", detail: `${measuredPosts} posts measured`, health: measuredPosts ? "ok" : "warn", ...SIGNAL_NODE_COORDS.score },
+      { id: "draft", label: "Draft", value: drafts.length, unit: "ready", detail: `${drafts.length} reply drafts`, health: drafts.length ? "ok" : "warn", ...SIGNAL_NODE_COORDS.draft },
+      { id: "x", label: "X", value: actions.length, unit: "routes", detail: `${actions.length} web routes; 0 X reads`, health: actions.length ? "ok" : "warn", ...SIGNAL_NODE_COORDS.x },
+      { id: "learn", label: "Learn", value: measuredPosts, unit: "posts", detail: `${measuredPosts} measured outcomes`, health: measuredPosts ? "ok" : "warn", ...SIGNAL_NODE_COORDS.learn },
+    ],
+    routes: [
+      { from: "rss", to: "score", value: rssValue, unit: "signals", label: "signals ranked" },
+      { from: "score", to: "draft", value: drafts.length || 1, unit: "drafts", label: "scores shape drafts" },
+      { from: "score", to: "x", value: actions.length || 1, unit: "routes", label: "scores route manual actions" },
+      { from: "draft", to: "x", value: drafts.length || 1, unit: "drafts", label: "drafts paste into X" },
+      { from: "x", to: "learn", value: measuredPosts || 1, unit: "posts", label: "outcomes measured" },
+      { from: "learn", to: "score", value: Math.max(1, number(profile.baselineScore)), unit: "score", label: "learning updates ranker" },
+    ],
+  };
+}
+
+function signalMap() {
+  const incoming = dashboardData.signalMap || fallbackData.signalMap;
+  const map = incoming?.nodes?.length ? incoming : buildDerivedSignalMap();
+  const nodes = (map.nodes || []).map((node) => ({
+    ...node,
+    ...(SIGNAL_NODE_COORDS[node.id] || {}),
+    x: number(node.x, SIGNAL_NODE_COORDS[node.id]?.x ?? 0.5),
+    y: number(node.y, SIGNAL_NODE_COORDS[node.id]?.y ?? 0.5),
+  }));
+  return {
+    ...map,
+    core: {
+      ...(map.core || {}),
+      label: map.core?.label || "CORE",
+      x: number(map.core?.x, 0.46),
+      y: number(map.core?.y, 0.54),
+    },
+    nodes,
+    routes: Array.isArray(map.routes) ? map.routes : [],
+  };
+}
+
+function signalNodeById(nodeId) {
+  return signalMap().nodes.find((node) => node.id === nodeId);
+}
+
+function formatSignalNodeValue(node) {
+  if (!node) return "-";
+  const value = Number.isFinite(Number(node.value)) ? formatNumber(node.value, String(node.value).includes(".") ? 1 : 0) : String(node.value ?? "-");
+  return node.unit ? `${value} ${node.unit}` : value;
+}
+
 function clamp(value, min = 0, max = 100) {
   return Math.min(max, Math.max(min, number(value)));
 }
@@ -1011,6 +1112,7 @@ function setDemoMode(enabled) {
   localStorage.setItem("xbot-dashboard-demo", String(demoMode));
   if (!demoMode) stopAutoDemo();
   updateDemoModeChrome();
+  renderSignalNodes();
   setupSignalCanvas();
 }
 
@@ -1069,6 +1171,7 @@ function setTheme(theme) {
   currentTheme = theme === "dark" ? "dark" : "light";
   localStorage.setItem("xbot-dashboard-theme", currentTheme);
   applyChromeText();
+  renderSignalNodes();
   setupSignalCanvas();
 }
 
@@ -1602,6 +1705,8 @@ function signalCanvasPalette() {
   const styles = getComputedStyle(document.documentElement);
   return {
     accent: styles.getPropertyValue("--accent").trim() || "#1a56db",
+    accent2: styles.getPropertyValue("--accent-2").trim() || "#16a34a",
+    accent3: styles.getPropertyValue("--accent-3").trim() || "#facc15",
     ink: styles.getPropertyValue("--ink").trim() || "#111827",
     body: styles.getPropertyValue("--body").trim() || "#4b5563",
     line: styles.getPropertyValue("--line").trim() || "#e5e7eb",
@@ -1611,28 +1716,47 @@ function signalCanvasPalette() {
   };
 }
 
+function signalCanvasPoint(point, width, height) {
+  return {
+    x: clamp(point?.x ?? 0.5, 0.08, 0.92) * width,
+    y: clamp(point?.y ?? 0.5, 0.12, 0.88) * height,
+  };
+}
+
+function signalRoutePoint(from, to, control, progress) {
+  const rest = 1 - progress;
+  return {
+    x: rest * rest * from.x + 2 * rest * progress * control.x + progress * progress * to.x,
+    y: rest * rest * from.y + 2 * rest * progress * control.y + progress * progress * to.y,
+  };
+}
+
 function drawSignalCanvas(canvas, ctx, time) {
   const palette = signalCanvasPalette();
+  const model = signalMap();
   const width = canvas.width;
   const height = canvas.height;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const grid = 44 * dpr;
-  const center = { x: width * 0.5, y: height * 0.52 };
-  const nodes = [
-    { x: width * 0.14, y: height * 0.25, label: "RSS" },
-    { x: width * 0.3, y: height * 0.74, label: "Draft" },
-    { x: width * 0.52, y: height * 0.17, label: "Score" },
-    { x: width * 0.76, y: height * 0.31, label: "X" },
-    { x: width * 0.83, y: height * 0.72, label: "Learn" },
-  ];
-  const routes = [
-    [nodes[0], center],
-    [nodes[1], center],
-    [nodes[2], center],
-    [center, nodes[3]],
-    [center, nodes[4]],
-    [nodes[3], nodes[4]],
-  ];
+  const center = signalCanvasPoint(model.core, width, height);
+  const nodePoints = new Map(
+    model.nodes.map((node) => [
+      node.id,
+      {
+        ...signalCanvasPoint(node, width, height),
+        node,
+      },
+    ]),
+  );
+  const routes = model.routes
+    .map((route, index) => {
+      const from = route.from === "core" ? { ...center, node: model.core } : nodePoints.get(route.from);
+      const to = route.to === "core" ? { ...center, node: model.core } : nodePoints.get(route.to);
+      if (!from || !to) return null;
+      return { ...route, from, to, index, value: Math.max(0, number(route.value)) };
+    })
+    .filter(Boolean);
+  const maxRouteValue = Math.max(...routes.map((route) => route.value), 1);
 
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.64 : 0.78);
@@ -1666,23 +1790,45 @@ function drawSignalCanvas(canvas, ctx, time) {
     ctx.stroke();
   }
 
-  ctx.lineWidth = 2 * dpr;
-  routes.forEach(([from, to], index) => {
+  nodePoints.forEach((point, nodeId) => {
+    ctx.beginPath();
+    ctx.moveTo(center.x, center.y);
+    ctx.lineTo(point.x, point.y);
+    ctx.strokeStyle = colorWithAlpha(
+      nodeId === "x" || nodeId === "learn" ? palette.ok : palette.accent,
+      currentTheme === "dark" ? 0.11 : 0.13,
+    );
+    ctx.lineWidth = 1 * dpr;
+    ctx.stroke();
+  });
+
+  routes.forEach((route) => {
+    const from = route.from;
+    const to = route.to;
+    const normalized = route.value / maxRouteValue;
+    const color = route.to.node?.id === "x" || route.from.node?.id === "x"
+      ? palette.ok
+      : route.to.node?.id === "draft" || route.from.node?.id === "draft"
+        ? palette.accent3
+        : palette.accent;
+    const bend = ((route.index % 2 ? 32 : -26) + normalized * 18) * dpr;
+    const control = {
+      x: (from.x + to.x) / 2,
+      y: (from.y + to.y) / 2 + bend,
+    };
+
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
-    const midX = (from.x + to.x) / 2;
-    const midY = (from.y + to.y) / 2 - (index % 2 ? 28 : -18) * dpr;
-    ctx.quadraticCurveTo(midX, midY, to.x, to.y);
-    ctx.strokeStyle = colorWithAlpha(palette.accent, currentTheme === "dark" ? 0.3 : 0.24);
+    ctx.quadraticCurveTo(control.x, control.y, to.x, to.y);
+    ctx.strokeStyle = colorWithAlpha(color, currentTheme === "dark" ? 0.38 : 0.28);
+    ctx.lineWidth = (1.35 + normalized * 3.2) * dpr;
     ctx.stroke();
 
-    const progress = (time / 1300 + index * 0.19) % 1;
-    const oneMinus = 1 - progress;
-    const dotX = oneMinus * oneMinus * from.x + 2 * oneMinus * progress * midX + progress * progress * to.x;
-    const dotY = oneMinus * oneMinus * from.y + 2 * oneMinus * progress * midY + progress * progress * to.y;
+    const progress = (time / (1200 + route.index * 80) + route.index * 0.19) % 1;
+    const dot = signalRoutePoint(from, to, control, progress);
     ctx.beginPath();
-    ctx.arc(dotX, dotY, 4.5 * dpr, 0, Math.PI * 2);
-    ctx.fillStyle = colorWithAlpha(index % 2 ? palette.ok : palette.accent, 0.92);
+    ctx.arc(dot.x, dot.y, (3.8 + normalized * 2.6) * dpr, 0, Math.PI * 2);
+    ctx.fillStyle = colorWithAlpha(color, 0.92);
     ctx.fill();
   });
 
@@ -1697,18 +1843,24 @@ function drawSignalCanvas(canvas, ctx, time) {
   ctx.stroke();
   ctx.restore();
 
+  const coreRadius = Math.max(34 * dpr, Math.min(width, height) * 0.075);
   ctx.beginPath();
-  ctx.arc(center.x, center.y, 34 * dpr, 0, Math.PI * 2);
+  ctx.arc(center.x, center.y, coreRadius, 0, Math.PI * 2);
   ctx.fillStyle = colorWithAlpha(palette.accent, currentTheme === "dark" ? 0.2 : 0.12);
   ctx.fill();
   ctx.strokeStyle = colorWithAlpha(palette.accent, 0.72);
   ctx.lineWidth = 2 * dpr;
   ctx.stroke();
   ctx.fillStyle = palette.ink;
-  ctx.font = `${11 * dpr}px ui-sans-serif, system-ui, sans-serif`;
+  ctx.font = `800 ${11 * dpr}px ui-sans-serif, system-ui, sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText("CORE", center.x, center.y);
+  ctx.fillText(model.core?.label || "CORE", center.x, center.y - 4 * dpr);
+  if (model.core?.value != null) {
+    ctx.fillStyle = palette.body;
+    ctx.font = `${9 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    ctx.fillText(formatSignalNodeValue(model.core), center.x, center.y + 11 * dpr);
+  }
 
 }
 
@@ -1730,6 +1882,25 @@ function setupSignalCanvas() {
     signalAnimationFrame = requestAnimationFrame(animate);
   };
   animate(0);
+}
+
+function renderSignalNodes() {
+  const model = signalMap();
+  const nodeById = new Map(model.nodes.map((node) => [node.id, node]));
+  document.querySelectorAll(".signal-node-button[data-signal-node]").forEach((button) => {
+    const node = nodeById.get(button.dataset.signalNode);
+    if (!node) return;
+    button.style.setProperty("--signal-node-x", `${clamp(node.x, 0.08, 0.92) * 100}%`);
+    button.style.setProperty("--signal-node-y", `${clamp(node.y, 0.12, 0.88) * 100}%`);
+    button.classList.toggle("warn", node.health === "warn");
+    button.classList.toggle("danger", node.health === "danger");
+    button.classList.toggle("ok", !node.health || node.health === "ok");
+    button.setAttribute("aria-label", `${node.label}: ${formatSignalNodeValue(node)}. ${node.detail || ""}`.trim());
+    button.innerHTML = `
+      <span class="signal-node-label">${escapeHtml(node.label || button.dataset.signalNode)}</span>
+      <em>${escapeHtml(formatSignalNodeValue(node))}</em>
+    `;
+  });
 }
 
 function renderMetrics() {
@@ -1957,6 +2128,25 @@ function detailStat(label, value) {
   `;
 }
 
+function signalNodeSnapshot(nodeId) {
+  const model = signalMap();
+  const node = model.nodes.find((item) => item.id === nodeId);
+  if (!node) return "";
+  const linkedRoutes = (model.routes || []).filter((route) => route.from === nodeId || route.to === nodeId);
+  const strongestRoute = [...linkedRoutes].sort((left, right) => number(right.value) - number(left.value))[0];
+  return `
+    <div class="signal-detail-grid signal-node-snapshot">
+      ${detailStat(t("signal_node_value"), formatSignalNodeValue(node))}
+      ${detailStat(t("signal_node_routes"), formatNumber(linkedRoutes.length))}
+      ${detailStat(t("signal_node_health"), node.health || "ok")}
+      ${detailStat(t("signal_node_source"), model.source || "dashboard")}
+    </div>
+    <p class="signal-detail-summary signal-node-note">
+      ${escapeHtml(node.detail || strongestRoute?.label || model.core?.detail || "")}
+    </p>
+  `;
+}
+
 function detailSection(title, body) {
   return `
     <section class="signal-detail-section">
@@ -2130,6 +2320,7 @@ function renderSignalDetail() {
   $("#signal-detail-title").textContent = config.title;
   $("#signal-detail-body").innerHTML = `
     <p class="signal-detail-summary">${escapeHtml(config.summary)}</p>
+    ${signalNodeSnapshot(activeSignalNode)}
     ${config.body || `<p class="signal-detail-empty">${escapeHtml(t("signal_empty"))}</p>`}
   `;
   document.querySelectorAll("[data-signal-node]").forEach((button) => {
@@ -2525,6 +2716,7 @@ function render() {
   renderMetrics();
   renderGoal();
   renderLearning();
+  renderSignalNodes();
   renderSignalDetail();
   renderProof();
   renderServices();
@@ -2545,7 +2737,10 @@ async function init() {
   bindPreferenceButtons();
   window.addEventListener("resize", () => {
     clearTimeout(signalResizeTimer);
-    signalResizeTimer = setTimeout(setupSignalCanvas, 120);
+    signalResizeTimer = setTimeout(() => {
+      renderSignalNodes();
+      setupSignalCanvas();
+    }, 120);
   });
 }
 

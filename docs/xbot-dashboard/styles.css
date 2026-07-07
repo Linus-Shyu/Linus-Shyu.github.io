@@ -1301,15 +1301,18 @@ h3 {
 .signal-node-button {
   position: absolute;
   display: inline-flex;
+  left: var(--signal-node-x, 50%);
+  top: var(--signal-node-y, 50%);
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 52px;
-  min-height: 40px;
+  min-width: 82px;
+  min-height: 52px;
   transform: translate(-50%, -50%);
-  gap: 7px;
+  gap: 2px;
   border: 1px solid color-mix(in srgb, var(--line) 60%, var(--accent-line));
   border-radius: 8px;
-  padding: 0 10px;
+  padding: 8px 12px 8px 28px;
   color: var(--ink);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), color-mix(in srgb, var(--surface-soft) 82%, transparent)),
@@ -1322,6 +1325,7 @@ h3 {
   font-size: 11px;
   font-weight: 880;
   letter-spacing: 0;
+  text-align: left;
   pointer-events: auto;
   transition:
     border-color 160ms ease,
@@ -1333,12 +1337,39 @@ h3 {
 
 .signal-node-button::before {
   content: "";
+  position: absolute;
+  top: 13px;
+  left: 12px;
   width: 6px;
   height: 6px;
-  flex: 0 0 6px;
   border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.signal-node-button .signal-node-label,
+.signal-node-button em {
+  display: block;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal-node-button .signal-node-label {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 880;
+  line-height: 1.05;
+}
+
+.signal-node-button em {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 760;
+  line-height: 1.2;
 }
 
 .signal-node-button.x::before,
@@ -1352,6 +1383,16 @@ h3 {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-3) 10%, transparent);
 }
 
+.signal-node-button.warn::before {
+  background: var(--warn);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--warn) 12%, transparent);
+}
+
+.signal-node-button.danger::before {
+  background: var(--danger);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
 .signal-node-button:hover,
 .signal-node-button:focus-visible,
 .signal-node-button.active {
@@ -1363,31 +1404,6 @@ h3 {
     0 16px 42px rgba(26, 86, 219, 0.14);
   outline: 0;
   transform: translate(-50%, -50%) scale(1.04);
-}
-
-.signal-node-button.rss {
-  left: 14%;
-  top: 25%;
-}
-
-.signal-node-button.draft {
-  left: 30%;
-  top: 74%;
-}
-
-.signal-node-button.score {
-  left: 52%;
-  top: 17%;
-}
-
-.signal-node-button.x {
-  left: 76%;
-  top: 31%;
-}
-
-.signal-node-button.learn {
-  left: 83%;
-  top: 72%;
 }
 
 .signal-detail-panel {
@@ -1588,6 +1604,28 @@ h3 {
   font-weight: 880;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.signal-node-snapshot {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.signal-node-snapshot div {
+  border-radius: 7px;
+  padding: 7px 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), color-mix(in srgb, var(--surface-soft) 76%, transparent)),
+    var(--surface-soft);
+}
+
+.signal-node-snapshot strong {
+  font-size: 12px;
+}
+
+.signal-node-note {
+  border-left: 2px solid var(--accent-line);
+  padding-left: 9px;
 }
 
 .signal-mini-copy {
@@ -4750,18 +4788,12 @@ body:not(.demo-mode) .demo-strip {
 }
 
 .signal-node-button {
-  min-width: 46px;
-  min-height: 34px;
+  min-width: clamp(82px, 8vw, 116px);
+  min-height: 52px;
   box-shadow:
     0 16px 36px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 color-mix(in srgb, var(--surface) 82%, white 10%);
 }
-
-.signal-node-button.rss { left: clamp(48px, 14%, calc(100% - 48px)); }
-.signal-node-button.draft { left: clamp(68px, 30%, calc(100% - 68px)); }
-.signal-node-button.score { left: clamp(78px, 52%, calc(100% - 78px)); }
-.signal-node-button.x { left: clamp(56px, 74%, calc(100% - 56px)); }
-.signal-node-button.learn { left: clamp(70px, 82%, calc(100% - 70px)); }
 
 .signal-stage {
   overflow: hidden;
