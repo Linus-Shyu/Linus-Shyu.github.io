@@ -1015,6 +1015,20 @@ const translations = {
     governor_runbook_ok: "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
     governor_runbook_warn: "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
     governor_runbook_danger: "Seal live search/read partitions. Use cached telemetry and manual outputs until cooldown clears.",
+    budget_burn_eyebrow: "Burn-Rate Reactor",
+    budget_burn_title: "Cost boundary runway",
+    budget_burn_ok: "inside envelope",
+    budget_burn_warn: "burn-rate watch",
+    budget_burn_danger: "cost partition sealed",
+    budget_burn_safe_left: "safe left",
+    budget_burn_daily: "daily burn",
+    budget_burn_runway: "runway",
+    budget_burn_month_end: "month-end",
+    budget_burn_series: "14d spend trace",
+    budget_burn_partitions: "spend partitions",
+    budget_burn_zero_reads: "0 extra X reads",
+    budget_burn_safe: "safe",
+    budget_burn_over: "over safe cap",
     mission_eyebrow: "NOC Console",
     mission_title: "Live server-matrix growth operations.",
     mission_copy: "Monitor feed ingress, model inference, route queues, feedback loops, and API cost boundaries from one command surface.",
@@ -1523,6 +1537,20 @@ const translations = {
     governor_runbook_ok: "缓存路由清晰。除非 cadence 闸门明确放行，否则保持实时 X 读取为零。",
     governor_runbook_warn: "暂停可选读取，改走已准备的网页目标，并等待成本边界恢复。",
     governor_runbook_danger: "封闭实时搜索/读取分区。冷却解除前，只使用缓存遥测和人工输出。",
+    budget_burn_eyebrow: "燃烧率反应堆",
+    budget_burn_title: "成本边界续航",
+    budget_burn_ok: "安全包线内",
+    budget_burn_warn: "燃烧率观察",
+    budget_burn_danger: "成本分区封闭",
+    budget_burn_safe_left: "安全剩余",
+    budget_burn_daily: "日燃烧",
+    budget_burn_runway: "续航",
+    budget_burn_month_end: "月底预测",
+    budget_burn_series: "14 天成本轨迹",
+    budget_burn_partitions: "成本分区",
+    budget_burn_zero_reads: "0 次额外 X 读取",
+    budget_burn_safe: "安全",
+    budget_burn_over: "超过安全上限",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时服务器矩阵增长运维。",
     mission_copy: "在一个指挥界面里监控 feed 入口、模型推理、路由队列、反馈闭环和 API 成本边界。",
@@ -5749,12 +5777,162 @@ function renderRateGovernor() {
   `;
 }
 
+function budgetBurnData() {
+  const incoming = dashboardData.budgetBurnReactor || fallbackData.budgetBurnReactor;
+  if (incoming) return incoming;
+  const { api, spend, cap } = apiBudget();
+  const safeCap = number(api.safeCap, cap * 0.9);
+  const safeRemaining = number(api.safeRemaining, Math.max(0, safeCap - spend));
+  const apiDays = Array.isArray(api.days) ? api.days : [];
+  const recentSpend = apiDays.slice(-7).reduce((sum, day) => sum + number(day.usd), 0);
+  const dailyBurn = recentSpend > 0 ? recentSpend / 7 : 0.015;
+  const runwayDays = dailyBurn > 0 ? safeRemaining / dailyBurn : null;
+  const burnPct = safeCap > 0 ? clamp((spend / safeCap) * 100, 0, 140) : 0;
+  const severity = safeRemaining <= 0 || burnPct >= 100 ? "danger" : burnPct >= 72 ? "warn" : "ok";
+  return {
+    severity,
+    mode: severity === "ok" ? "inside_safe_envelope" : severity === "warn" ? "burn_rate_watch" : "cost_partition_sealed",
+    zeroExtraXReads: true,
+    spendUsd: spend,
+    safeCapUsd: safeCap,
+    safeRemainingUsd: safeRemaining,
+    projectedDailyBurnUsd: dailyBurn,
+    runwayDays,
+    monthEndSafe: severity !== "danger",
+    burnPct,
+    safeTextSlots: dailyBurn > 0 ? Math.floor(safeRemaining / 0.015) : 0,
+    safeMediaSlots: Math.floor(safeRemaining / 0.03),
+    runbook: severity === "danger"
+      ? t("governor_runbook_danger")
+      : severity === "warn"
+        ? t("governor_runbook_warn")
+        : t("governor_runbook_ok"),
+    cells: [
+      { id: "burn", label: "safe burn", value: `${formatNumber(burnPct, 1)}%`, status: severity },
+      { id: "runway", label: "runway", value: runwayDays === null ? "unlimited" : `${formatNumber(runwayDays, 1)}d`, status: severity },
+      { id: "text_slots", label: "safe text slots", value: Math.floor(safeRemaining / 0.015), status: safeRemaining > 0 ? "ok" : "danger" },
+      { id: "media_slots", label: "safe media slots", value: Math.floor(safeRemaining / 0.03), status: "warn" },
+    ],
+    partitions: [
+      { id: "manual_routes", label: "manual reply routes", value: "$0.000", status: "ok", detail: "operator paste loop" },
+      { id: "text_publish", label: "text publish", value: "$0.015", status: safeRemaining > 0 ? "ok" : "danger", detail: "budget ledger" },
+      { id: "media_publish", label: "media publish", value: "$0.030", status: "warn", detail: "held behind ROI gate" },
+      { id: "live_reads", label: "live X reads", value: "0 ops", status: "ok", detail: "cached only" },
+    ],
+    series: apiDays.length
+      ? apiDays
+      : Array.from({ length: 14 }, (_, index) => ({
+          index,
+          label: String(index + 1).padStart(2, "0"),
+          value: 0,
+          usd: 0,
+        })),
+  };
+}
+
+function budgetBurnStatusLabel(severity) {
+  return t(`budget_burn_${["ok", "warn", "danger"].includes(severity) ? severity : "ok"}`);
+}
+
+function budgetBurnCellLabel(cell) {
+  const labels = {
+    burn: "safe burn",
+    runway: t("budget_burn_runway"),
+    text_slots: "safe text slots",
+    media_slots: "safe media slots",
+  };
+  return labels[cell?.id] || cell?.label || cell?.id || "-";
+}
+
+function budgetBurnPartitionLabel(partition) {
+  const labels = {
+    manual_routes: currentLang === "zh" ? "人工路由" : "manual routes",
+    text_publish: currentLang === "zh" ? "文本发布" : "text publish",
+    media_publish: currentLang === "zh" ? "媒体发布" : "media publish",
+    live_reads: currentLang === "zh" ? "实时读取" : "live reads",
+  };
+  return labels[partition?.id] || partition?.label || partition?.id || "-";
+}
+
+function renderBudgetBurnReactor() {
+  const target = $("#budget-burn-reactor");
+  if (!target) return;
+  const reactor = budgetBurnData();
+  const severity = ["ok", "warn", "danger"].includes(reactor.severity) ? reactor.severity : "ok";
+  const burnPct = clamp(number(reactor.burnPct), 0, 140);
+  const safeLeft = money(reactor.safeRemainingUsd);
+  const dailyBurn = money(reactor.projectedDailyBurnUsd);
+  const runway = reactor.runwayDays == null ? "∞" : `${formatNumber(reactor.runwayDays, reactor.runwayDays > 30 ? 0 : 1)}d`;
+  const monthEnd = reactor.monthEndSafe ? t("budget_burn_safe") : t("budget_burn_over");
+  const series = Array.isArray(reactor.series) ? reactor.series.slice(-14) : [];
+  const maxSpend = Math.max(0.001, ...series.map((day) => number(day.usd)));
+  const cells = Array.isArray(reactor.cells) ? reactor.cells : [];
+  const partitions = Array.isArray(reactor.partitions) ? reactor.partitions : [];
+
+  target.innerHTML = `
+    <div class="burn-head ${escapeHtml(severity)}">
+      <div>
+        <span>${escapeHtml(t("budget_burn_eyebrow"))}</span>
+        <strong>${escapeHtml(t("budget_burn_title"))}</strong>
+      </div>
+      <em>${escapeHtml(budgetBurnStatusLabel(severity))}</em>
+    </div>
+    <div class="burn-core-grid">
+      <div class="burn-core ${escapeHtml(severity)}" style="--burn-pct:${burnPct}%">
+        <span></span>
+        <strong>${escapeHtml(formatNumber(burnPct, 0))}%</strong>
+        <small>${escapeHtml(t("budget_burn_zero_reads"))}</small>
+      </div>
+      <div class="burn-kpis">
+        <div><span>${escapeHtml(t("budget_burn_safe_left"))}</span><strong>${escapeHtml(safeLeft)}</strong></div>
+        <div><span>${escapeHtml(t("budget_burn_daily"))}</span><strong>${escapeHtml(dailyBurn)}</strong></div>
+        <div><span>${escapeHtml(t("budget_burn_runway"))}</span><strong>${escapeHtml(runway)}</strong></div>
+        <div><span>${escapeHtml(t("budget_burn_month_end"))}</span><strong>${escapeHtml(monthEnd)}</strong></div>
+      </div>
+    </div>
+    <div class="burn-series" aria-label="${escapeHtml(t("budget_burn_series"))}">
+      ${series
+        .map((day) => {
+          const height = clamp((number(day.usd) / maxSpend) * 100, 4, 100);
+          return `<span title="${escapeHtml(day.date || day.label || "")}: ${escapeHtml(money(day.usd))}" style="--burn-height:${height}%"><i></i></span>`;
+        })
+        .join("")}
+    </div>
+    <div class="burn-cells">
+      ${cells
+        .map((cell) => `
+          <span class="${escapeHtml(cell.status || "ok")}">
+            <em>${escapeHtml(budgetBurnCellLabel(cell))}</em>
+            <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+          </span>
+        `)
+        .join("")}
+    </div>
+    <div class="burn-partitions">
+      <span>${escapeHtml(t("budget_burn_partitions"))}</span>
+      ${partitions
+        .map((partition) => `
+          <article class="${escapeHtml(partition.status || "ok")}">
+            <div>
+              <strong>${escapeHtml(budgetBurnPartitionLabel(partition))}</strong>
+              <small>${escapeHtml(partition.detail || "")}</small>
+            </div>
+            <em>${escapeHtml(gateLabel(partition.value))}</em>
+          </article>
+        `)
+        .join("")}
+    </div>
+    <p class="burn-runbook">${escapeHtml(reactor.runbook || "")}</p>
+  `;
+}
+
 function renderApi() {
   const { api, spend, cap, ratio } = apiBudget();
   $("#api-spend-label").textContent = currentLang === "zh" ? `已花 ${money(spend)}` : `${money(spend)} spent`;
   $("#api-cap-label").textContent = currentLang === "zh" ? `上限 $${cap.toFixed(2)}` : `$${cap.toFixed(2)} cap`;
   $("#api-meter").style.width = `${ratio}%`;
   renderRateGovernor();
+  renderBudgetBurnReactor();
   renderMediaRoiGate();
   $("#api-usage").innerHTML = (api.endpoints || [])
     .map((endpoint) => {

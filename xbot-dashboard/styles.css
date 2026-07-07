@@ -8579,6 +8579,279 @@ body:not(.demo-mode) .demo-strip {
   line-height: 1.4;
 }
 
+.budget-burn-reactor {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #ff007a 30%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 0, 122, 0.12), transparent 34%),
+    radial-gradient(circle at 100% 24%, rgba(0, 240, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, transparent), color-mix(in srgb, var(--surface-soft) 94%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 24px rgba(255, 0, 122, 0.08),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 58%, transparent);
+}
+
+.burn-head,
+.burn-core-grid,
+.burn-kpis,
+.burn-cells,
+.burn-partitions {
+  display: grid;
+  gap: 8px;
+}
+
+.burn-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.burn-head span,
+.burn-kpis span,
+.burn-cells em,
+.burn-partitions > span,
+.burn-partitions small {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 790;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.burn-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.burn-head > em {
+  border: 1px solid rgba(0, 255, 102, 0.34);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.08);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.burn-head.warn > em {
+  color: #ff9f1c;
+  border-color: rgba(255, 159, 28, 0.4);
+  background: rgba(255, 159, 28, 0.1);
+}
+
+.burn-head.danger > em {
+  color: #ff007a;
+  border-color: rgba(255, 0, 122, 0.42);
+  background: rgba(255, 0, 122, 0.1);
+}
+
+.burn-core-grid {
+  grid-template-columns: 106px minmax(0, 1fr);
+  align-items: center;
+}
+
+.burn-core {
+  position: relative;
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, var(--surface) 0 43%, transparent 44%),
+    conic-gradient(#00ff66 0 var(--burn-pct, 0%), rgba(148, 163, 184, 0.22) var(--burn-pct, 0%) 100%);
+  box-shadow:
+    0 0 26px rgba(0, 255, 102, 0.11),
+    inset 0 0 0 1px rgba(0, 255, 102, 0.16);
+}
+
+.burn-core.warn {
+  background:
+    radial-gradient(circle, var(--surface) 0 43%, transparent 44%),
+    conic-gradient(#ff9f1c 0 var(--burn-pct, 0%), rgba(148, 163, 184, 0.22) var(--burn-pct, 0%) 100%);
+  box-shadow: 0 0 26px rgba(255, 159, 28, 0.14);
+}
+
+.burn-core.danger {
+  background:
+    radial-gradient(circle, var(--surface) 0 43%, transparent 44%),
+    conic-gradient(#ff007a 0 var(--burn-pct, 0%), rgba(148, 163, 184, 0.22) var(--burn-pct, 0%) 100%);
+  box-shadow: 0 0 28px rgba(255, 0, 122, 0.18);
+}
+
+.burn-core span {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid color-mix(in srgb, #00f0ff 25%, transparent);
+  border-radius: inherit;
+  box-shadow: inset 0 0 18px rgba(0, 240, 255, 0.08);
+}
+
+.burn-core strong {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 950;
+}
+
+.burn-core small {
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+  left: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 820;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.burn-kpis {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.burn-kpis div,
+.burn-cells span,
+.burn-partitions article {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  padding: 7px;
+  background: color-mix(in srgb, var(--surface) 62%, transparent);
+}
+
+.burn-kpis strong,
+.burn-cells strong,
+.burn-partitions em {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.burn-series {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  align-items: end;
+  height: 42px;
+  gap: 3px;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  padding: 5px;
+  background:
+    linear-gradient(0deg, color-mix(in srgb, var(--line) 34%, transparent) 1px, transparent 1px),
+    color-mix(in srgb, var(--surface) 46%, transparent);
+  background-size: 100% 14px;
+}
+
+.burn-series span {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.burn-series i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--burn-height, 4%);
+  border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(180deg, #00f0ff, #ff007a);
+  box-shadow: 0 0 10px rgba(255, 0, 122, 0.13);
+}
+
+.burn-cells {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.burn-cells .ok strong,
+.burn-partitions .ok em {
+  color: #00ff66;
+}
+
+.burn-cells .warn strong,
+.burn-partitions .warn em {
+  color: #ff9f1c;
+}
+
+.burn-cells .danger strong,
+.burn-partitions .danger em {
+  color: #ff007a;
+}
+
+.burn-partitions {
+  gap: 6px;
+}
+
+.burn-partitions article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.burn-partitions strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.burn-partitions small {
+  display: block;
+  margin-top: 3px;
+  text-transform: none;
+}
+
+.burn-runbook {
+  margin: 0;
+  border-left: 2px solid rgba(255, 0, 122, 0.38);
+  padding-left: 9px;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .media-firewall {
   display: grid;
   gap: 10px;
