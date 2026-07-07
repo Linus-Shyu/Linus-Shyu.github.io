@@ -7850,3 +7850,105 @@ body:not(.demo-mode) .demo-strip {
     background: rgba(148, 163, 184, 0.2);
   }
 }
+
+/* Hard contrast lock: the light canvas still uses a dark operations rail. */
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --nav-rail-bg: #070b11;
+  --nav-rail-bg-soft: #101823;
+  --nav-rail-panel: #121b28;
+  --nav-rail-panel-strong: #172234;
+  --nav-rail-line: rgba(151, 164, 184, 0.28);
+  --nav-rail-text: #eaf0f8;
+  --nav-rail-muted: #9dabbd;
+  --nav-rail-hot: #f6a13a;
+  --nav-rail-glow: rgba(246, 161, 58, 0.28);
+}
+
+:root[data-theme="light"] .side-rail,
+:root[data-theme="dark"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(246, 161, 58, 0.24), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 132px),
+    linear-gradient(180deg, #151f2c 0%, var(--nav-rail-bg-soft) 34%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.075),
+    16px 0 34px rgba(8, 13, 20, 0.18) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="dark"] .brand,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="dark"] .rack-mini div,
+:root[data-theme="light"] .rail-budget,
+:root[data-theme="dark"] .rail-budget {
+  border-color: var(--nav-rail-line) !important;
+  color: var(--nav-rail-text) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    var(--nav-rail-panel) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.085) !important;
+}
+
+:root[data-theme="light"] .brand:hover,
+:root[data-theme="dark"] .brand:hover,
+:root[data-theme="light"] .rack-mini div:hover,
+:root[data-theme="dark"] .rack-mini div:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025)),
+    var(--nav-rail-panel-strong) !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="dark"] .brand strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="dark"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="dark"] .rail-nav a {
+  color: var(--nav-rail-text) !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="dark"] .brand small,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="dark"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="dark"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small,
+:root[data-theme="dark"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="dark"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a.active,
+:root[data-theme="dark"] .rail-nav a.active {
+  color: #fff7ed !important;
+  border-color: rgba(246, 161, 58, 0.52) !important;
+  background:
+    linear-gradient(135deg, rgba(246, 161, 58, 0.26), rgba(246, 161, 58, 0.075)),
+    rgba(255, 255, 255, 0.04) !important;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::after,
+:root[data-theme="dark"] .rail-nav a:hover::after,
+:root[data-theme="light"] .rail-nav a.active::after,
+:root[data-theme="dark"] .rail-nav a.active::after {
+  color: #fff7ed !important;
+}
+
+:root[data-theme="light"] .rail-budget strong,
+:root[data-theme="dark"] .rail-budget strong {
+  color: #ffd84d !important;
+  text-shadow: 0 0 18px rgba(255, 216, 77, 0.24) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter,
+:root[data-theme="dark"] .rail-budget .meter {
+  background: rgba(148, 163, 184, 0.22) !important;
+}
