@@ -399,6 +399,26 @@ const fallbackData = {
     nextExperiment: "Double down on decision-rule posts for operator-heavy AI and platform news; avoid broad predictions unless the payoff is specific.",
     nextExperimentZh: "继续加码 decision-rule：把 AI 和平台新闻写成可执行判断规则；除非结论非常具体，否则少用宽泛预测。",
   },
+  learningAutopilot: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "exploit_winners",
+    confidence: "medium",
+    baselineScore: 3.9,
+    sampleCount: 120,
+    primaryFormat: { id: "decision_rule", label: "Decision Rule", action: "exploit", avgScore: 2.8, samples: 10 },
+    exploitFormats: [{ id: "decision_rule", label: "Decision Rule", action: "exploit", avgScore: 2.8, samples: 10 }],
+    testFormats: [{ id: "playbook", label: "Playbook", action: "test", avgScore: 3.6, samples: 2 }],
+    exploreFormats: [{ id: "second_order", label: "Second-order", action: "explore", avgScore: 0, samples: 0 }],
+    holdFormats: [{ id: "prediction", label: "Prediction", action: "hold", avgScore: 2.1, samples: 2 }],
+    sourceBias: [{ name: "techcrunch.com", avgScore: 5.4, samples: 6 }],
+    tagBias: [{ name: "AI", avgScore: 4.8, samples: 12 }],
+    directives: [
+      "Lead with decision_rule: turn the story into a concrete rule.",
+      "Prefer stories from techcrunch.com or adjacent high-signal sources.",
+      "Avoid prediction unless story-fit is unusually strong.",
+      "Reserve one candidate for second_order sample discovery.",
+    ],
+  },
   experimentPlan: {
     slots: 3,
     budgetSafeSlots: 3,
@@ -687,6 +707,15 @@ const translations = {
     daily_target_value: "{replies} replies + {posts} post",
     learning_eyebrow: "Feedback Layer",
     learning_title: "Next inference rule to deploy",
+    autopilot_eyebrow: "Model Inference Stream",
+    autopilot_mode: "Mode",
+    autopilot_samples: "Samples",
+    autopilot_baseline: "Baseline",
+    autopilot_primary: "Primary rule",
+    autopilot_directives: "Prompt directives",
+    autopilot_exploit: "Exploit",
+    autopilot_explore: "Explore",
+    autopilot_hold: "Hold",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -1008,6 +1037,15 @@ const translations = {
     daily_target_value: "{replies} 条回复 + {posts} 条主帖",
     learning_eyebrow: "反馈层",
     learning_title: "下一条要部署的推理规则",
+    autopilot_eyebrow: "模型推理流",
+    autopilot_mode: "模式",
+    autopilot_samples: "样本",
+    autopilot_baseline: "基线",
+    autopilot_primary: "主规则",
+    autopilot_directives: "Prompt 指令",
+    autopilot_exploit: "利用",
+    autopilot_explore: "探索",
+    autopilot_hold: "暂停",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -2703,6 +2741,50 @@ function learningValue(item) {
   return `${name}${score}${samples}`;
 }
 
+function learningAutopilotData() {
+  return dashboardData.learningAutopilot || fallbackData.learningAutopilot || {};
+}
+
+function autopilotFormatLabel(item) {
+  if (!item) return "-";
+  const name = item.label || formatTemplate(item.id || item.name || "-");
+  const score = Number.isFinite(Number(item.avgScore)) ? ` ${formatNumber(item.avgScore, 1)}` : " -";
+  const samples = Number.isFinite(Number(item.samples)) ? ` n=${formatNumber(item.samples)}` : "";
+  return `${name} ·${score}${samples}`;
+}
+
+function renderLearningAutopilot() {
+  const autopilot = learningAutopilotData();
+  const container = $("#autopilot-stream");
+  if (!container) return;
+  const primary = autopilot.primaryFormat || (autopilot.exploitFormats || [])[0] || (autopilot.testFormats || [])[0];
+  const exploit = (autopilot.exploitFormats || []).slice(0, 2).map(autopilotFormatLabel).join(" / ") || "-";
+  const explore = (autopilot.exploreFormats || []).slice(0, 2).map(autopilotFormatLabel).join(" / ") || "-";
+  const hold = (autopilot.holdFormats || []).slice(0, 2).map(autopilotFormatLabel).join(" / ") || "-";
+  const directives = Array.isArray(autopilot.directives) ? autopilot.directives.slice(0, 4) : [];
+  container.innerHTML = `
+    <div class="autopilot-head">
+      <span>${escapeHtml(t("autopilot_eyebrow"))}</span>
+      <strong>${escapeHtml(String(autopilot.mode || "-").replace(/_/g, " "))}</strong>
+      <em>${escapeHtml(autopilot.confidence || "-")}</em>
+    </div>
+    <div class="autopilot-metrics">
+      <div><span>${escapeHtml(t("autopilot_samples"))}</span><strong>${escapeHtml(formatNumber(autopilot.sampleCount))}</strong></div>
+      <div><span>${escapeHtml(t("autopilot_baseline"))}</span><strong>${escapeHtml(formatNumber(autopilot.baselineScore, 1))}</strong></div>
+      <div><span>${escapeHtml(t("autopilot_primary"))}</span><strong>${escapeHtml(autopilotFormatLabel(primary))}</strong></div>
+    </div>
+    <div class="autopilot-lanes">
+      <div class="ok"><span>${escapeHtml(t("autopilot_exploit"))}</span><strong>${escapeHtml(exploit)}</strong></div>
+      <div class="warn"><span>${escapeHtml(t("autopilot_explore"))}</span><strong>${escapeHtml(explore)}</strong></div>
+      <div class="danger"><span>${escapeHtml(t("autopilot_hold"))}</span><strong>${escapeHtml(hold)}</strong></div>
+    </div>
+    <div class="autopilot-directives">
+      <span>${escapeHtml(t("autopilot_directives"))}</span>
+      ${directives.map((directive) => `<code>${escapeHtml(directive)}</code>`).join("")}
+    </div>
+  `;
+}
+
 function renderLearning() {
   const { learning, bestHook, bestSource, worstFormat } = learningData();
   $("#learning-confidence").textContent = currentLang === "zh"
@@ -2727,6 +2809,7 @@ function renderLearning() {
       `,
     )
     .join("");
+  renderLearningAutopilot();
   renderExperimentPlan();
 }
 
