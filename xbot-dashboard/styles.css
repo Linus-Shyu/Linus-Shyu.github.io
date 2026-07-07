@@ -6116,3 +6116,240 @@ body:not(.demo-mode) .demo-strip {
     display: none;
   }
 }
+
+.angle-scheduler {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 10%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 58%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 22px color-mix(in srgb, #00f0ff 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 58%, transparent);
+}
+
+.angle-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.angle-head div {
+  min-width: 0;
+}
+
+.angle-head span,
+.angle-section-label,
+.angle-directives span,
+.angle-metrics span,
+.angle-slot span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.angle-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.angle-head em {
+  border: 1px solid color-mix(in srgb, var(--ok) 40%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.angle-metrics {
+  display: grid;
+  grid-template-columns: 1.15fr 0.9fr 0.8fr 1.1fr 0.9fr;
+  gap: 8px;
+}
+
+.angle-metrics div,
+.angle-slot {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 88%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.angle-metrics div {
+  padding: 8px;
+}
+
+.angle-metrics strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.angle-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.angle-slot {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+  overflow: hidden;
+}
+
+.angle-slot::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--accent);
+  opacity: 0.72;
+}
+
+.angle-slot.hot::before {
+  background: #00ff66;
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.34);
+}
+
+.angle-slot.watch::before,
+.angle-slot.probe::before {
+  background: #ff9f1c;
+  box-shadow: 0 0 14px rgba(255, 159, 28, 0.28);
+}
+
+.angle-slot.hold::before {
+  background: #ff007a;
+  box-shadow: 0 0 14px rgba(255, 0, 122, 0.28);
+}
+
+.angle-slot div {
+  min-width: 0;
+}
+
+.angle-slot strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.angle-slot em {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 3px 6px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.angle-slot.hot em {
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+}
+
+.angle-slot.hold em {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+}
+
+.angle-slot p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 34px;
+  margin: 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.angle-slot small {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.angle-directives {
+  display: grid;
+  gap: 6px;
+}
+
+.angle-directives code {
+  display: block;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 17%, var(--line-soft));
+  border-radius: 6px;
+  padding: 7px 8px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .angle-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .angle-head,
+  .angle-metrics,
+  .angle-slots {
+    grid-template-columns: 1fr;
+  }
+}

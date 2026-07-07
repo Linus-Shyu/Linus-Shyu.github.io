@@ -353,6 +353,82 @@ const fallbackData = {
       "Keep discovery, drafting, routing, and learning online without adding X search/read spend.",
     ],
   },
+  adaptiveAngleScheduler: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "recovery_route",
+    confidence: "medium",
+    zeroExtraXReads: true,
+    sampleCount: 120,
+    baselineScore: 3.9,
+    safeBudgetLeftUsd: 2.81,
+    load: {
+      impressions24h: 233,
+      impressions7d: 621,
+      avgBucket: 38.8,
+      peakBucket: { label: "18:00", value: 219, posts: 1 },
+      quietBucket: { label: "20:00", value: 0, posts: 0 },
+    },
+    nextAngles: [
+      {
+        slot: 1,
+        formatId: "decision_rule",
+        label: "Decision Rule",
+        angle: "decision rule / what to do next",
+        action: "exploit",
+        status: "hot",
+        weight: 91.4,
+        avgScore: 7.2,
+        samples: 10,
+        reason: "Winning reusable rule; convert broad tech news into a concrete operating decision.",
+      },
+      {
+        slot: 2,
+        formatId: "operator_pain",
+        label: "Operator Pain",
+        angle: "operator pain / hidden workflow tax",
+        action: "test",
+        status: "watch",
+        weight: 74.2,
+        avgScore: 4.8,
+        samples: 4,
+        reason: "Makes platform shifts feel practical for builders and teams.",
+      },
+      {
+        slot: 3,
+        formatId: "second_order",
+        label: "Second Order",
+        angle: "second-order distribution or business consequence",
+        action: "explore",
+        status: "probe",
+        weight: 66.8,
+        avgScore: 0,
+        samples: 0,
+        reason: "Needs samples; use only when the story has a clear downstream consequence.",
+      },
+      {
+        slot: 4,
+        formatId: "prediction",
+        label: "Near-term Prediction",
+        angle: "near-term prediction / default shift",
+        action: "hold",
+        status: "hold",
+        weight: 32.1,
+        avgScore: 2.1,
+        samples: 2,
+        reason: "Under baseline; hold unless the timing signal is unusually concrete.",
+      },
+    ],
+    promptDirectives: [
+      "Next angle slot: decision_rule; turn the story into one concrete operating rule.",
+      "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
+      "Do not use held formats unless the story is a perfect fit: prediction.",
+    ],
+    scoringBias: {
+      preferredFormatIds: ["decision_rule", "operator_pain", "second_order"],
+      preferredAngleKeywords: ["rule", "operator", "distribution", "default", "budget"],
+      holdFormatIds: ["prediction"],
+    },
+  },
   distributionOps: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "manual_distribution",
@@ -750,6 +826,23 @@ const translations = {
     autopilot_exploit: "Exploit",
     autopilot_explore: "Explore",
     autopilot_hold: "Hold",
+    angle_eyebrow: "Angle Scheduler",
+    angle_title: "Next prompt routing slots",
+    angle_mode: "Mode",
+    angle_confidence: "Confidence",
+    angle_load: "L7 load",
+    angle_peak: "Peak bucket",
+    angle_budget: "Safe budget",
+    angle_slots: "Scheduled slots",
+    angle_directives: "Runtime directives",
+    angle_slot: "slot {slot}",
+    angle_weight: "weight {weight}",
+    angle_zero_reads: "0 X read ops",
+    angle_empty: "No angle schedule available.",
+    angle_mode_surge_exploit: "surge exploit",
+    angle_mode_recovery_route: "recovery route",
+    angle_mode_sample_discovery: "sample discovery",
+    angle_mode_controlled_rotation: "controlled rotation",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -1089,6 +1182,23 @@ const translations = {
     autopilot_exploit: "利用",
     autopilot_explore: "探索",
     autopilot_hold: "暂停",
+    angle_eyebrow: "角度调度器",
+    angle_title: "下一轮 Prompt 路由槽",
+    angle_mode: "模式",
+    angle_confidence: "置信度",
+    angle_load: "L7 负载",
+    angle_peak: "峰值桶",
+    angle_budget: "安全预算",
+    angle_slots: "已调度槽位",
+    angle_directives: "运行时指令",
+    angle_slot: "槽位 {slot}",
+    angle_weight: "权重 {weight}",
+    angle_zero_reads: "0 次 X 读取",
+    angle_empty: "暂无角度调度。",
+    angle_mode_surge_exploit: "峰值利用",
+    angle_mode_recovery_route: "恢复路由",
+    angle_mode_sample_discovery: "样本探索",
+    angle_mode_controlled_rotation: "受控轮换",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -2838,6 +2948,67 @@ function renderLearningAutopilot() {
   `;
 }
 
+function angleSchedulerData() {
+  return dashboardData.adaptiveAngleScheduler || fallbackData.adaptiveAngleScheduler || {};
+}
+
+function angleModeLabel(mode) {
+  const key = `angle_mode_${String(mode || "").replace(/-/g, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function renderAdaptiveAngleScheduler() {
+  const scheduler = angleSchedulerData();
+  const container = $("#angle-scheduler");
+  if (!container) return;
+  const slots = Array.isArray(scheduler.nextAngles) ? scheduler.nextAngles : [];
+  const directives = Array.isArray(scheduler.promptDirectives) ? scheduler.promptDirectives.slice(0, 3) : [];
+  if (!slots.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("angle_empty"))}</p>`;
+    return;
+  }
+
+  const load = scheduler.load || {};
+  container.innerHTML = `
+    <div class="angle-head">
+      <div>
+        <span>${escapeHtml(t("angle_eyebrow"))}</span>
+        <strong>${escapeHtml(t("angle_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("angle_zero_reads"))}</em>
+    </div>
+    <div class="angle-metrics">
+      <div><span>${escapeHtml(t("angle_mode"))}</span><strong>${escapeHtml(angleModeLabel(scheduler.mode))}</strong></div>
+      <div><span>${escapeHtml(t("angle_confidence"))}</span><strong>${escapeHtml(scheduler.confidence || "-")}</strong></div>
+      <div><span>${escapeHtml(t("angle_load"))}</span><strong>${escapeHtml(formatNumber(load.impressions24h))}</strong></div>
+      <div><span>${escapeHtml(t("angle_peak"))}</span><strong>${escapeHtml(load.peakBucket?.label || "-")} · ${escapeHtml(formatNumber(load.peakBucket?.value))}</strong></div>
+      <div><span>${escapeHtml(t("angle_budget"))}</span><strong>${escapeHtml(money(scheduler.safeBudgetLeftUsd))}</strong></div>
+    </div>
+    <div class="angle-section-label">${escapeHtml(t("angle_slots"))}</div>
+    <div class="angle-slots">
+      ${slots
+        .slice(0, 4)
+        .map((slot) => `
+          <article class="angle-slot ${escapeHtml(slot.status || slot.action || "queue")}">
+            <div>
+              <span>${escapeHtml(t("angle_slot", { slot: slot.slot || "-" }))}</span>
+              <strong>${escapeHtml(slot.label || formatTemplate(slot.formatId))}</strong>
+            </div>
+            <em>${escapeHtml(slot.action || "test")}</em>
+            <p>${escapeHtml(slot.angle || slot.reason || "-")}</p>
+            <small>${escapeHtml(t("angle_weight", { weight: formatNumber(slot.weight, 1) }))} · avg ${escapeHtml(formatNumber(slot.avgScore, 1))} · n=${escapeHtml(formatNumber(slot.samples))}</small>
+          </article>
+        `)
+        .join("")}
+    </div>
+    <div class="angle-directives">
+      <span>${escapeHtml(t("angle_directives"))}</span>
+      ${directives.map((directive) => `<code>${escapeHtml(directive)}</code>`).join("")}
+    </div>
+  `;
+}
+
 function renderLearning() {
   const { learning, bestHook, bestSource, worstFormat } = learningData();
   $("#learning-confidence").textContent = currentLang === "zh"
@@ -2863,6 +3034,7 @@ function renderLearning() {
     )
     .join("");
   renderLearningAutopilot();
+  renderAdaptiveAngleScheduler();
   renderExperimentPlan();
 }
 
