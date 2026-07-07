@@ -430,7 +430,8 @@ h3 {
 
 .overview-grid,
 .ops-grid,
-.proof-grid {
+.proof-grid,
+.goal-grid {
   display: grid;
   gap: 16px;
 }
@@ -450,6 +451,11 @@ h3 {
   margin-bottom: 16px;
 }
 
+.goal-grid {
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1fr);
+  margin-bottom: 16px;
+}
+
 .command-card,
 .server-card,
 .metric,
@@ -459,6 +465,173 @@ h3 {
   border-radius: 8px;
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.demo-strip {
+  display: none;
+  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.demo-strip strong {
+  display: block;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.demo-step-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.demo-step-list button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--body);
+  background: var(--surface);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.demo-step-list button span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.demo-step-list button.active {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.demo-progress {
+  grid-column: 1 / -1;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.demo-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+@keyframes demoProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.goal-panel {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 64%),
+    var(--surface);
+}
+
+.goal-progress {
+  margin-top: 16px;
+}
+
+.goal-progress div {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.goal-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.goal-progress small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.goal-stats,
+.learning-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.goal-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.learning-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.goal-stats div,
+.learning-grid div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 13px;
+  background: var(--surface-soft);
+}
+
+.learning-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.goal-stats span,
+.learning-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.goal-stats strong,
+.learning-grid strong {
+  display: block;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 840;
+  line-height: 1.25;
+}
+
+.goal-stats strong {
+  font-size: 24px;
+  line-height: 1;
 }
 
 .proof-panel {
@@ -1468,6 +1641,10 @@ body.demo-mode .ops-shell {
   padding: 18px;
 }
 
+body.demo-mode .demo-strip {
+  display: grid;
+}
+
 body.demo-mode .side-rail,
 body.demo-mode .support-grid,
 body.demo-mode .detail-grid,
@@ -1514,6 +1691,36 @@ body.demo-mode .workflow-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
+body.demo-mode .command-card,
+body.demo-mode .proof-panel,
+body.demo-mode .goal-panel,
+body.demo-mode .learning-panel,
+body.demo-mode .action-hero,
+body.demo-mode .metric {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+body[data-demo-step="signal"] .command-card,
+body[data-demo-step="proof"] .proof-panel,
+body[data-demo-step="goal"] .goal-panel,
+body[data-demo-step="goal"] .learning-panel,
+body[data-demo-step="actions"] .action-hero {
+  border-color: var(--accent-line);
+  box-shadow:
+    var(--shadow-strong),
+    0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+body[data-demo-step="signal"] .command-card,
+body[data-demo-step="proof"] .proof-panel,
+body[data-demo-step="goal"] .goal-panel,
+body[data-demo-step="actions"] .action-hero {
+  transform: translateY(-1px);
+}
+
 @media (max-width: 1180px) {
   .ops-shell {
     grid-template-columns: 1fr;
@@ -1549,11 +1756,13 @@ body.demo-mode .workflow-grid {
   .overview-grid,
   .ops-grid,
   .metric-grid,
-  .proof-grid {
+  .proof-grid,
+  .goal-grid {
     grid-template-columns: 1fr;
   }
 
   body.demo-mode .proof-grid,
+  body.demo-mode .goal-grid,
   body.demo-mode .workflow-grid {
     grid-template-columns: 1fr;
   }
@@ -1568,6 +1777,12 @@ body.demo-mode .workflow-grid {
 
   .service-grid,
   .action-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goal-stats,
+  .learning-grid,
+  .demo-step-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1695,6 +1910,10 @@ body.demo-mode .workflow-grid {
   .action-hero,
   .proof-body,
   .proof-metrics,
+  .goal-stats,
+  .learning-grid,
+  .demo-strip,
+  .demo-step-list,
   .draft-card {
     grid-template-columns: 1fr;
   }

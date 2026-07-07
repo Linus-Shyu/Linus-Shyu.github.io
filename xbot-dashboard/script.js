@@ -102,6 +102,21 @@ const fallbackData = {
       { name: "MEDIA_UPLOAD", calls: 15, failures: 0, usd: 0.375, lastStatus: 200 },
     ],
   },
+  growthGoal: {
+    targetFollowers: 1000,
+    nextMilestone: 100,
+    dailyReplies: 3,
+    dailyPosts: 1,
+  },
+  learning: {
+    bestHook: { name: "decision_rule", avgScore: 2.7, samples: 8 },
+    worstFormat: { name: "prediction", avgScore: 2.1, samples: 2 },
+    bestSource: { name: "techcrunch.com", avgScore: 5.4, samples: 6 },
+    confidence: "medium",
+    confidenceZh: "中等置信度",
+    nextExperiment: "Double down on decision-rule posts for operator-heavy AI and platform news; avoid broad predictions unless the payoff is specific.",
+    nextExperimentZh: "继续加码 decision-rule：把 AI 和平台新闻写成可执行判断规则；除非结论非常具体，否则少用宽泛预测。",
+  },
 };
 
 const translations = {
@@ -124,6 +139,13 @@ const translations = {
     fallback_data: "Fallback data",
     demo_mode: "Demo mode",
     exit_demo: "Exit demo",
+    auto_demo: "Auto demo",
+    stop_auto_demo: "Stop auto",
+    demo_live: "30-second demo",
+    demo_signal: "Signal Map",
+    demo_proof: "Best Signal",
+    demo_goal: "Growth Goal",
+    demo_actions: "Today Actions",
     open_x: "Open X",
     mission_eyebrow: "Signal Engine",
     mission_title: "Turn tech news into daily X growth moves.",
@@ -181,6 +203,21 @@ const translations = {
     meta_traffic: "traffic",
     meta_observability: "observability",
     meta_budget: "budget",
+    goal_eyebrow: "Growth Goal",
+    goal_title: "1,000 followers is the operating target.",
+    goal_remaining: "{count} to goal",
+    goal_progress: "{current} / {target} followers",
+    goal_current: "Current",
+    goal_target: "Target",
+    goal_next: "Next milestone",
+    goal_daily: "Daily target",
+    daily_target_value: "{replies} replies + {posts} post",
+    learning_eyebrow: "Learning Layer",
+    learning_title: "What the bot should try next",
+    best_hook: "Best hook",
+    worst_format: "Weakest format",
+    best_source: "Best source",
+    next_experiment: "Next experiment",
     proof_eyebrow: "Proof of Work",
     proof_title: "Best signal this week",
     score_label: "Score {score}",
@@ -244,6 +281,13 @@ const translations = {
     fallback_data: "备用数据",
     demo_mode: "演示模式",
     exit_demo: "退出演示",
+    auto_demo: "自动演示",
+    stop_auto_demo: "停止轮播",
+    demo_live: "30 秒演示",
+    demo_signal: "信号地图",
+    demo_proof: "最佳信号",
+    demo_goal: "增长目标",
+    demo_actions: "今日动作",
     open_x: "打开 X",
     mission_eyebrow: "信号引擎",
     mission_title: "把科技热点变成每天可执行的 X 增长动作。",
@@ -301,6 +345,21 @@ const translations = {
     meta_traffic: "流量",
     meta_observability: "观测",
     meta_budget: "预算",
+    goal_eyebrow: "增长目标",
+    goal_title: "1,000 关注者是当前运营目标。",
+    goal_remaining: "距目标还差 {count}",
+    goal_progress: "{current} / {target} 关注者",
+    goal_current: "当前",
+    goal_target: "目标",
+    goal_next: "下一里程碑",
+    goal_daily: "每日目标",
+    daily_target_value: "{replies} 条回复 + {posts} 条主帖",
+    learning_eyebrow: "学习层",
+    learning_title: "机器人下一步应该尝试什么",
+    best_hook: "最佳钩子",
+    worst_format: "最弱格式",
+    best_source: "最佳来源",
+    next_experiment: "下一轮实验",
     proof_eyebrow: "真实证明",
     proof_title: "本周最强信号",
     score_label: "评分 {score}",
@@ -391,13 +450,28 @@ const diagnosisTranslations = {
 const $ = (selector) => document.querySelector(selector);
 const number = (value, fallback = 0) => (Number.isFinite(Number(value)) ? Number(value) : fallback);
 const money = (value) => `$${number(value).toFixed(3)}`;
+const formatNumber = (value, digits = 0) =>
+  number(value).toLocaleString(currentLang === "zh" ? "zh-CN" : "en-US", {
+    maximumFractionDigits: digits,
+    minimumFractionDigits: digits,
+  });
 const FRESH_DATA_MAX_AGE_HOURS = 30;
+const DEMO_STEP_MS = 7500;
+const DEMO_STEPS = [
+  { id: "signal", target: "#overview", labelKey: "demo_signal" },
+  { id: "proof", target: "#proof", labelKey: "demo_proof" },
+  { id: "goal", target: "#goal", labelKey: "demo_goal" },
+  { id: "actions", target: "#today", labelKey: "demo_actions" },
+];
 
 let dashboardData = fallbackData;
 let currentLang = document.documentElement.dataset.lang === "zh" ? "zh" : "en";
 let currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 let dataLoadStatus = "fallback";
 let demoMode = localStorage.getItem("xbot-dashboard-demo") === "true";
+let autoDemo = false;
+let demoStepIndex = 0;
+let demoTimer = null;
 let signalAnimationFrame = null;
 let signalResizeTimer = null;
 
@@ -482,24 +556,92 @@ function applyChromeText() {
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
   });
+  renderDemoSteps();
   updateDemoModeChrome();
   $("#copyright-year").textContent = String(new Date().getFullYear());
 }
 
 function updateDemoModeChrome() {
   document.body.classList.toggle("demo-mode", demoMode);
+  document.body.classList.toggle("autoplay-mode", autoDemo);
+  document.body.dataset.demoStep = DEMO_STEPS[demoStepIndex]?.id || "signal";
   const button = $("#demo-toggle");
-  if (!button) return;
-  button.textContent = t(demoMode ? "exit_demo" : "demo_mode");
-  button.classList.toggle("active", demoMode);
-  button.setAttribute("aria-pressed", String(demoMode));
+  if (button) {
+    button.textContent = t(demoMode ? "exit_demo" : "demo_mode");
+    button.classList.toggle("active", demoMode);
+    button.setAttribute("aria-pressed", String(demoMode));
+  }
+  const autoButton = $("#autoplay-toggle");
+  if (autoButton) {
+    autoButton.textContent = t(autoDemo ? "stop_auto_demo" : "auto_demo");
+    autoButton.classList.toggle("active", autoDemo);
+    autoButton.setAttribute("aria-pressed", String(autoDemo));
+  }
+  const step = DEMO_STEPS[demoStepIndex] || DEMO_STEPS[0];
+  const label = $("#demo-step-label");
+  if (label) label.textContent = t(step.labelKey);
+  document.querySelectorAll("[data-demo-step]").forEach((node) => {
+    node.classList.toggle("active", node.dataset.demoStep === step.id);
+  });
 }
 
 function setDemoMode(enabled) {
   demoMode = Boolean(enabled);
   localStorage.setItem("xbot-dashboard-demo", String(demoMode));
+  if (!demoMode) stopAutoDemo();
   updateDemoModeChrome();
   setupSignalCanvas();
+}
+
+function renderDemoSteps() {
+  const container = $("#demo-step-list");
+  if (!container) return;
+  container.innerHTML = DEMO_STEPS
+    .map(
+      (step, index) => `
+        <button type="button" data-demo-step="${escapeHtml(step.id)}">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          ${escapeHtml(t(step.labelKey))}
+        </button>
+      `,
+    )
+    .join("");
+}
+
+function restartDemoProgress() {
+  const progress = $("#demo-progress-bar");
+  if (!progress) return;
+  progress.style.animation = "none";
+  progress.getBoundingClientRect();
+  progress.style.animation = autoDemo ? `demoProgress ${DEMO_STEP_MS}ms linear forwards` : "";
+}
+
+function activateDemoStep(index, { scroll = true } = {}) {
+  demoStepIndex = ((index % DEMO_STEPS.length) + DEMO_STEPS.length) % DEMO_STEPS.length;
+  const step = DEMO_STEPS[demoStepIndex];
+  updateDemoModeChrome();
+  restartDemoProgress();
+  if (!scroll) return;
+  const target = document.querySelector(step.target);
+  target?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function startAutoDemo() {
+  if (!demoMode) setDemoMode(true);
+  autoDemo = true;
+  clearInterval(demoTimer);
+  activateDemoStep(0, { scroll: false });
+  demoTimer = setInterval(() => activateDemoStep(demoStepIndex + 1), DEMO_STEP_MS);
+  updateDemoModeChrome();
+}
+
+function stopAutoDemo() {
+  autoDemo = false;
+  clearInterval(demoTimer);
+  demoTimer = null;
+  const progress = $("#demo-progress-bar");
+  if (progress) progress.style.animation = "";
+  updateDemoModeChrome();
 }
 
 function setTheme(theme) {
@@ -823,6 +965,93 @@ function renderMetrics() {
     .join("");
 }
 
+function nextMilestoneFor(current, target) {
+  const milestones = [100, 250, 500, 1000, 2500, 5000, 10000];
+  return milestones.find((milestone) => milestone > current) || target;
+}
+
+function goalData() {
+  const profile = dashboardData.profile || {};
+  const configured = dashboardData.growthGoal || fallbackData.growthGoal || {};
+  const current = number(profile.followers, number(configured.currentFollowers));
+  const target = Math.max(current + 1, number(configured.targetFollowers, 1000));
+  const nextMilestone = Math.min(target, number(configured.nextMilestone, nextMilestoneFor(current, target)));
+  const dailyReplies = number(configured.dailyReplies, 3);
+  const dailyPosts = number(configured.dailyPosts, 1);
+  const progress = target > 0 ? Math.min(100, Math.max(0, (current / target) * 100)) : 0;
+  return { current, target, nextMilestone, dailyReplies, dailyPosts, progress };
+}
+
+function renderGoal() {
+  const goal = goalData();
+  const remaining = Math.max(0, goal.target - goal.current);
+  $("#goal-remaining").textContent = t("goal_remaining", { count: formatNumber(remaining) });
+  $("#goal-progress-bar").style.width = `${goal.progress}%`;
+  $("#goal-progress-label").textContent = t("goal_progress", {
+    current: formatNumber(goal.current),
+    target: formatNumber(goal.target),
+  });
+  const stats = [
+    { label: t("goal_current"), value: formatNumber(goal.current) },
+    { label: t("goal_target"), value: formatNumber(goal.target) },
+    { label: t("goal_next"), value: formatNumber(goal.nextMilestone) },
+    { label: t("goal_daily"), value: t("daily_target_value", { replies: goal.dailyReplies, posts: goal.dailyPosts }) },
+  ];
+  $("#goal-stats").innerHTML = stats
+    .map(
+      (item) => `
+        <div>
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${escapeHtml(item.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
+}
+
+function learningData() {
+  const learning = dashboardData.learning || fallbackData.learning || {};
+  const performance = dashboardData.performance || {};
+  const bestHook = learning.bestHook || performance.templates?.[0] || null;
+  const bestSource = learning.bestSource || performance.sources?.[0] || null;
+  const worstFormat = learning.worstFormat || null;
+  return { learning, bestHook, bestSource, worstFormat };
+}
+
+function learningValue(item) {
+  if (!item) return "-";
+  const name = formatTemplate(item.name || item.template || "-");
+  const score = Number.isFinite(Number(item.avgScore)) ? ` · ${Number(item.avgScore).toFixed(1)}` : "";
+  const samples = Number.isFinite(Number(item.samples)) ? ` · n=${Number(item.samples)}` : "";
+  return `${name}${score}${samples}`;
+}
+
+function renderLearning() {
+  const { learning, bestHook, bestSource, worstFormat } = learningData();
+  $("#learning-confidence").textContent = currentLang === "zh"
+    ? learning.confidenceZh || learning.confidence || "-"
+    : learning.confidence || "-";
+  const experiment = currentLang === "zh"
+    ? learning.nextExperimentZh || learning.nextExperiment || "-"
+    : learning.nextExperiment || "-";
+  const cards = [
+    { label: t("best_hook"), value: learningValue(bestHook) },
+    { label: t("worst_format"), value: learningValue(worstFormat) },
+    { label: t("best_source"), value: learningValue(bestSource) },
+    { label: t("next_experiment"), value: experiment, wide: true },
+  ];
+  $("#learning-grid").innerHTML = cards
+    .map(
+      (card) => `
+        <div class="${card.wide ? "wide" : ""}">
+          <span>${escapeHtml(card.label)}</span>
+          <strong>${escapeHtml(card.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
+}
+
 function endpointHealth(endpoint) {
   const failures = number(endpoint.failures);
   const status = number(endpoint.lastStatus);
@@ -1102,21 +1331,43 @@ function bindCopyButtons() {
 
 function bindPreferenceButtons() {
   document.addEventListener("click", (event) => {
-    const demoButton = event.target.closest("[data-demo-toggle]");
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    const demoButton = target.closest("button[data-demo-toggle]");
     if (demoButton) {
       setDemoMode(!demoMode);
       return;
     }
-    const themeButton = event.target.closest("[data-theme-value]");
+    const autoplayButton = target.closest("button[data-autoplay-toggle]");
+    if (autoplayButton) {
+      if (autoDemo) stopAutoDemo();
+      else startAutoDemo();
+      return;
+    }
+    const demoStepButton = target.closest("button[data-demo-step]");
+    if (demoStepButton) {
+      const index = DEMO_STEPS.findIndex((step) => step.id === demoStepButton.dataset.demoStep);
+      if (index >= 0) {
+        if (!demoMode) setDemoMode(true);
+        activateDemoStep(index);
+      }
+      return;
+    }
+    const themeButton = target.closest("button[data-theme-value]");
     if (themeButton) {
       setTheme(themeButton.dataset.themeValue);
       return;
     }
-    const langButton = event.target.closest("[data-lang-value]");
+    const langButton = target.closest("button[data-lang-value]");
     if (langButton) setLang(langButton.dataset.langValue);
   });
 
   document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && autoDemo) {
+      stopAutoDemo();
+      return;
+    }
     if (event.key === "Escape" && demoMode) setDemoMode(false);
   });
 }
@@ -1126,6 +1377,8 @@ function render() {
   renderHeader();
   renderHero();
   renderMetrics();
+  renderGoal();
+  renderLearning();
   renderProof();
   renderServices();
   renderTrend();

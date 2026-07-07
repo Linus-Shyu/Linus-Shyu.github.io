@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-demo1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-autoplay1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -75,9 +75,19 @@
               </div>
             </div>
             <button class="button button-secondary" type="button" id="demo-toggle" data-demo-toggle data-i18n="demo_mode">Demo mode</button>
+            <button class="button button-secondary" type="button" id="autoplay-toggle" data-autoplay-toggle data-i18n="auto_demo">Auto demo</button>
             <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
+
+        <section class="demo-strip" aria-live="polite">
+          <div>
+            <p class="eyebrow" data-i18n="demo_live">30-second demo</p>
+            <strong id="demo-step-label">Signal Map</strong>
+          </div>
+          <div class="demo-step-list" id="demo-step-list"></div>
+          <div class="demo-progress" aria-hidden="true"><span id="demo-progress-bar"></span></div>
+        </section>
 
         <section class="overview-grid" id="overview">
           <article class="command-card">
@@ -161,6 +171,34 @@ learn(metrics)</code></pre>
         </section>
 
         <section class="metric-grid" id="metric-grid" aria-label="Key metrics"></section>
+
+        <section class="goal-grid" id="goal">
+          <article class="panel goal-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="goal_eyebrow">Growth Goal</p>
+                <h2 data-i18n="goal_title">1,000 followers is the operating target.</h2>
+              </div>
+              <span class="pill" id="goal-remaining">-</span>
+            </div>
+            <div class="goal-progress">
+              <div><span id="goal-progress-bar"></span></div>
+              <small id="goal-progress-label">-</small>
+            </div>
+            <div class="goal-stats" id="goal-stats"></div>
+          </article>
+
+          <article class="panel learning-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="learning_eyebrow">Learning Layer</p>
+                <h2 data-i18n="learning_title">What the bot should try next</h2>
+              </div>
+              <span class="pill pill-neutral" id="learning-confidence">-</span>
+            </div>
+            <div class="learning-grid" id="learning-grid"></div>
+          </article>
+        </section>
 
         <section class="proof-grid" id="proof">
           <article class="panel proof-panel">
@@ -303,6 +341,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-demo1" defer></script>
+    <script src="./script.js?v=20260707-autoplay1" defer></script>
   </body>
 </html>
