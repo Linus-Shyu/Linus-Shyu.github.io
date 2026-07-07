@@ -1891,10 +1891,20 @@ function endpointHealth(endpoint) {
 
 function renderServices() {
   const endpoints = (dashboardData.api?.endpoints || fallbackData.api.endpoints).slice(0, 6);
+  const openai = dashboardData.openai;
   const synthetic = [
     { name: t("svc_news_ingest"), calls: number(dashboardData.last24h?.posts), failures: 0, usd: 0, lastStatus: 200 },
     { name: t("svc_draft_queue"), calls: (dashboardData.drafts || []).length, failures: 0, usd: 0, lastStatus: 200 },
-  ];
+    openai
+      ? {
+          name: "OpenAI",
+          calls: (openai.purposes || []).reduce((sum, item) => sum + number(item.calls), 0),
+          failures: (openai.purposes || []).reduce((sum, item) => sum + number(item.failures), 0),
+          usd: number(openai.spend),
+          lastStatus: (openai.purposes || []).find((item) => item.lastStatus)?.lastStatus || 200,
+        }
+      : null,
+  ].filter(Boolean);
   const services = [...synthetic, ...endpoints].slice(0, 8);
 
   $("#service-grid").innerHTML = services
