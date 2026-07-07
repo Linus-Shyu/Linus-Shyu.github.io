@@ -3609,7 +3609,56 @@ function signalCanvasPalette() {
     surface: styles.getPropertyValue("--surface").trim() || "#ffffff",
     ok: styles.getPropertyValue("--ok").trim() || "#16a34a",
     warn: styles.getPropertyValue("--warn").trim() || "#d97706",
+    danger: styles.getPropertyValue("--danger").trim() || "#ef4444",
   };
+}
+
+function signalCanvasHealthColor(entity, palette) {
+  const health = String(entity?.health || entity?.status || "").toLowerCase();
+  if (health === "danger" || health === "critical") return palette.danger;
+  if (health === "warn" || health === "warning") return palette.warn;
+  const id = entity?.id || entity?.node?.id;
+  if (id === "x" || id === "learn") return palette.ok;
+  if (id === "draft") return palette.accent3;
+  return palette.accent;
+}
+
+function signalCanvasRouteColor(route, palette) {
+  return signalCanvasHealthColor(route?.to?.node || route?.from?.node || route, palette);
+}
+
+function signalCanvasText(ctx, text, x, y, maxWidth) {
+  let value = String(text ?? "");
+  if (!value || maxWidth <= 0) return;
+  if (ctx.measureText(value).width <= maxWidth) {
+    ctx.fillText(value, x, y);
+    return;
+  }
+  while (value.length > 3 && ctx.measureText(`${value.slice(0, -1)}...`).width > maxWidth) {
+    value = value.slice(0, -1);
+  }
+  ctx.fillText(value.length > 3 ? `${value.slice(0, -1)}...` : value, x, y);
+}
+
+function signalCanvasRoundRect(ctx, x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+  ctx.lineTo(x + width, y + height - r);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+  ctx.lineTo(x + r, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function signalCanvasRouteLabel(route) {
+  const value = Number.isFinite(Number(route?.value)) ? formatNumber(route.value, String(route.value).includes(".") ? 1 : 0) : String(route?.value ?? "-");
+  const unit = signalUnitLabel(route?.unit || "");
+  return `${value}${unit ? ` ${unit}` : ""}`;
 }
 
 function signalCanvasPoint(point, width, height) {
@@ -3725,11 +3774,7 @@ function drawSignalCanvas(canvas, ctx, time) {
     const from = signalCanvasEdgePoint(rawFrom, rawTo, (rawFrom.radius || coreRadius) * 0.9);
     const to = signalCanvasEdgePoint(rawTo, rawFrom, (rawTo.radius || coreRadius) * 0.9);
     const normalized = route.value / maxRouteValue;
-    const color = rawTo.node?.id === "x" || rawFrom.node?.id === "x"
-      ? palette.ok
-      : rawTo.node?.id === "draft" || rawFrom.node?.id === "draft"
-        ? palette.accent3
-        : palette.accent;
+    const color = signalCanvasRouteColor(route, palette);
     const bend = ((route.index % 2 ? 32 : -26) + normalized * 18) * dpr;
     const control = {
       x: (from.x + to.x) / 2,
@@ -3749,6 +3794,28 @@ function drawSignalCanvas(canvas, ctx, time) {
     ctx.arc(dot.x, dot.y, (3.8 + normalized * 2.6) * dpr, 0, Math.PI * 2);
     ctx.fillStyle = colorWithAlpha(color, 0.92);
     ctx.fill();
+
+    if (route.index % 2 === 0 || normalized > 0.42) {
+      const labelPoint = signalRoutePoint(from, to, control, 0.52);
+      const label = signalCanvasRouteLabel(route);
+      ctx.save();
+      ctx.font = `800 ${8.5 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+      const labelWidth = Math.min(Math.max(ctx.measureText(label).width + 16 * dpr, 50 * dpr), 118 * dpr);
+      const labelHeight = 19 * dpr;
+      const labelX = clamp(labelPoint.x - labelWidth / 2, 8 * dpr, width - labelWidth - 8 * dpr);
+      const labelY = clamp(labelPoint.y - labelHeight / 2, 42 * dpr, height - labelHeight - 14 * dpr);
+      signalCanvasRoundRect(ctx, labelX, labelY, labelWidth, labelHeight, 5 * dpr);
+      ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.72 : 0.9);
+      ctx.fill();
+      ctx.strokeStyle = colorWithAlpha(color, currentTheme === "dark" ? 0.42 : 0.34);
+      ctx.lineWidth = 1 * dpr;
+      ctx.stroke();
+      ctx.fillStyle = color;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      signalCanvasText(ctx, label, labelX + labelWidth / 2, labelY + labelHeight / 2 + 0.5 * dpr, labelWidth - 12 * dpr);
+      ctx.restore();
+    }
   });
 
   ctx.save();
@@ -3779,6 +3846,55 @@ function drawSignalCanvas(canvas, ctx, time) {
     ctx.font = `${9 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     ctx.fillText(formatSignalNodeValue(model.core), center.x, center.y + 11 * dpr);
   }
+
+  nodePoints.forEach((point) => {
+    const node = point.node;
+    const color = signalCanvasHealthColor(node, palette);
+    const cardWidth = Math.min(Math.max(point.radius * 1.62, 112 * dpr), 168 * dpr);
+    const cardHeight = Math.min(Math.max(point.radius * 0.72, 47 * dpr), 62 * dpr);
+    const x = clamp(point.x - cardWidth / 2, 10 * dpr, width - cardWidth - 10 * dpr);
+    const y = clamp(point.y - cardHeight / 2, 44 * dpr, height - cardHeight - 12 * dpr);
+    const status = String(node.health || "ok").toUpperCase();
+
+    ctx.save();
+    signalCanvasRoundRect(ctx, x, y, cardWidth, cardHeight, 7 * dpr);
+    ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.54 : 0.72);
+    ctx.fill();
+    ctx.strokeStyle = colorWithAlpha(color, currentTheme === "dark" ? 0.58 : 0.42);
+    ctx.lineWidth = 1.2 * dpr;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(x + 14 * dpr, y + 17 * dpr, 4.2 * dpr, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.shadowColor = colorWithAlpha(color, 0.42);
+    ctx.shadowBlur = 12 * dpr;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle = palette.ink;
+    ctx.font = `900 ${10 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    signalCanvasText(ctx, signalNodeLabel(node), x + 24 * dpr, y + 20 * dpr, cardWidth - 58 * dpr);
+
+    ctx.fillStyle = colorWithAlpha(palette.body, currentTheme === "dark" ? 0.92 : 0.86);
+    ctx.font = `760 ${8 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    signalCanvasText(ctx, signalNodeSubLabel(node), x + 24 * dpr, y + 36 * dpr, cardWidth - 32 * dpr);
+
+    ctx.font = `900 ${6.8 * dpr}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+    const statusWidth = Math.min(Math.max(ctx.measureText(status).width + 8 * dpr, 24 * dpr), 42 * dpr);
+    const statusX = x + cardWidth - statusWidth - 7 * dpr;
+    const statusY = y + 8 * dpr;
+    signalCanvasRoundRect(ctx, statusX, statusY, statusWidth, 13 * dpr, 999 * dpr);
+    ctx.fillStyle = colorWithAlpha(color, 0.12);
+    ctx.fill();
+    ctx.fillStyle = color;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    signalCanvasText(ctx, status, statusX + statusWidth / 2, statusY + 7 * dpr, statusWidth - 4 * dpr);
+    ctx.restore();
+  });
 
 }
 

@@ -10615,3 +10615,52 @@ body:not(.demo-mode) .demo-strip {
   background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
   box-shadow: 0 0 14px rgba(255, 176, 32, 0.22) !important;
 }
+
+/* Signal topology v2: keep telemetry nodes readable over the live canvas. */
+.signal-node-button {
+  min-width: 142px;
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+}
+
+.signal-node-button .signal-node-label {
+  max-width: 100%;
+  font-size: clamp(11px, 0.78vw, 13px);
+}
+
+.signal-node-button.x {
+  width: clamp(170px, 14vw, 214px);
+  min-width: 170px;
+  padding-right: 44px;
+}
+
+.signal-node-button.x::after {
+  max-width: 44px;
+}
+
+.signal-node-button.x .signal-node-label {
+  font-size: clamp(10px, 0.74vw, 12px);
+  letter-spacing: 0;
+}
+
+.signal-node-button.x em {
+  max-width: 100%;
+  font-size: clamp(8px, 0.64vw, 10px);
+}
+
+@media (max-width: 720px) {
+  .signal-node-button,
+  .signal-node-button.x {
+    width: 126px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 8px 24px 7px 24px;
+  }
+
+  .signal-node-button::after {
+    display: none;
+  }
+
+  .signal-node-button.x .signal-node-label {
+    font-size: 10px;
+  }
+}
