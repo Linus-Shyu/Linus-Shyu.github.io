@@ -175,6 +175,9 @@ const translations = {
     hero_signal_label: "Signal score",
     hero_loop_label: "Today's loop",
     hero_cost_label: "Cost guard",
+    hero_strip_signal: "Signal",
+    hero_strip_cost: "Cost",
+    hero_strip_learning: "Learning",
     start_loop: "Start loop",
     copy_top_three: "Copy top 3 drafts",
     deployment: "Deployment",
@@ -336,6 +339,9 @@ const translations = {
     hero_signal_label: "信号评分",
     hero_loop_label: "今日流程",
     hero_cost_label: "成本守卫",
+    hero_strip_signal: "信号",
+    hero_strip_cost: "成本",
+    hero_strip_learning: "学习",
     start_loop: "开始流程",
     copy_top_three: "复制前 3 条草稿",
     deployment: "部署",
@@ -752,6 +758,7 @@ function renderHero() {
   const bestScore = Math.max(number(profile.baselineScore), ...topScores, 0);
   const { remaining } = apiBudget();
   const actions = dashboardData.actions || fallbackData.actions;
+  const { bestHook } = learningData();
   $("#hero-followers").textContent = profile.followers ?? "-";
   $("#hero-impressions").textContent = String(number(last24h.impressions));
   $("#hero-api-left").textContent = `$${remaining.toFixed(2)}`;
@@ -759,6 +766,13 @@ function renderHero() {
   $("#hero-signal-score").textContent = bestScore ? bestScore.toFixed(1) : "-";
   $("#hero-loop-count").textContent = `${Math.min(actions.length, 3)}/3`;
   $("#hero-cost-guard").textContent = `$${remaining.toFixed(2)}`;
+  $("#hero-strip-signal").textContent = currentLang === "zh"
+    ? `${formatNumber(last7d.posts)} 条已评分`
+    : `${formatNumber(last7d.posts)} posts scored`;
+  $("#hero-strip-cost").textContent = currentLang === "zh"
+    ? `$${remaining.toFixed(2)} 受控`
+    : `$${remaining.toFixed(2)} guarded`;
+  $("#hero-strip-learning").textContent = formatTemplate(bestHook?.name || "decision_rule");
 }
 
 function colorWithAlpha(color, alpha) {

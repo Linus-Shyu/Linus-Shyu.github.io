@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-signal1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-fancy1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -102,6 +102,20 @@
               <p class="command-copy" data-i18n="mission_copy">
                 The bot scans signal, writes copy-ready replies, tracks outcomes, and keeps API spend visible.
               </p>
+              <div class="hero-signal-strip" aria-label="Live growth loop summary">
+                <div>
+                  <span data-i18n="hero_strip_signal">Signal</span>
+                  <strong id="hero-strip-signal">-</strong>
+                </div>
+                <div>
+                  <span data-i18n="hero_strip_cost">Cost</span>
+                  <strong id="hero-strip-cost">-</strong>
+                </div>
+                <div>
+                  <span data-i18n="hero_strip_learning">Learning</span>
+                  <strong id="hero-strip-learning">-</strong>
+                </div>
+              </div>
               <div class="command-actions">
                 <a class="button button-primary" href="#today" data-i18n="start_loop">Start loop</a>
                 <button class="button button-secondary" type="button" id="copy-top-three" data-i18n="copy_top_three">Copy top 3 drafts</button>
@@ -119,6 +133,13 @@ learn(metrics)</code></pre>
             </div>
 
             <div class="signal-stage" aria-label="Live growth signal map">
+              <div class="signal-stage-effects" aria-hidden="true">
+                <span class="signal-edge edge-top"></span>
+                <span class="signal-edge edge-right"></span>
+                <span class="signal-beam beam-a"></span>
+                <span class="signal-beam beam-b"></span>
+                <span class="signal-scan"></span>
+              </div>
               <canvas id="signal-canvas" width="640" height="420"></canvas>
               <div class="signal-head">
                 <span class="signal-live"><i></i><span data-i18n="live">Live</span></span>
@@ -363,6 +384,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-signal1" defer></script>
+    <script src="./script.js?v=20260707-fancy1" defer></script>
   </body>
 </html>
