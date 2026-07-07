@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-expo1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-demo1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -74,6 +74,7 @@
                 <button type="button" data-lang-value="zh">中文</button>
               </div>
             </div>
+            <button class="button button-secondary" type="button" id="demo-toggle" data-demo-toggle data-i18n="demo_mode">Demo mode</button>
             <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
@@ -161,7 +162,40 @@ learn(metrics)</code></pre>
 
         <section class="metric-grid" id="metric-grid" aria-label="Key metrics"></section>
 
-        <section class="ops-grid">
+        <section class="proof-grid" id="proof">
+          <article class="panel proof-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow" data-i18n="proof_eyebrow">Proof of Work</p>
+                <h2 data-i18n="proof_title">Best signal this week</h2>
+              </div>
+              <span class="pill" id="proof-score-pill">Score -</span>
+            </div>
+            <div class="proof-body">
+              <blockquote id="proof-tweet">Loading strongest post...</blockquote>
+              <div class="proof-metrics" id="proof-metrics"></div>
+            </div>
+            <div class="proof-reason">
+              <span data-i18n="why_it_worked">Why it worked</span>
+              <p id="proof-reason">Loading signal explanation...</p>
+            </div>
+            <div class="row-actions">
+              <a class="button button-primary" id="proof-open" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_winner">Open winner</a>
+            </div>
+          </article>
+
+          <article class="panel loop-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="loop_eyebrow">Growth Loop</p>
+                <h2 data-i18n="loop_title">System learns from every post</h2>
+              </div>
+            </div>
+            <div class="loop-steps" id="loop-steps"></div>
+          </article>
+        </section>
+
+        <section class="ops-grid support-grid">
           <article class="panel panel-wide" id="services">
             <div class="panel-heading">
               <div>
@@ -184,7 +218,7 @@ learn(metrics)</code></pre>
           </article>
         </section>
 
-        <section class="ops-grid">
+        <section class="ops-grid workflow-grid">
           <article class="panel panel-wide" id="today">
             <div class="panel-heading">
               <div>
@@ -207,7 +241,7 @@ learn(metrics)</code></pre>
           </article>
         </section>
 
-        <section class="ops-grid">
+        <section class="ops-grid detail-grid">
           <article class="panel panel-wide" id="drafts">
             <div class="panel-heading">
               <div>
@@ -269,6 +303,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-expo1" defer></script>
+    <script src="./script.js?v=20260707-demo1" defer></script>
   </body>
 </html>

@@ -122,6 +122,8 @@ const translations = {
     live_data: "Live data",
     data_stale: "Data stale",
     fallback_data: "Fallback data",
+    demo_mode: "Demo mode",
+    exit_demo: "Exit demo",
     open_x: "Open X",
     mission_eyebrow: "Signal Engine",
     mission_title: "Turn tech news into daily X growth moves.",
@@ -179,6 +181,29 @@ const translations = {
     meta_traffic: "traffic",
     meta_observability: "observability",
     meta_budget: "budget",
+    proof_eyebrow: "Proof of Work",
+    proof_title: "Best signal this week",
+    score_label: "Score {score}",
+    why_it_worked: "Why it worked",
+    open_winner: "Open winner",
+    proof_impressions: "Impressions",
+    proof_likes: "Likes",
+    proof_replies: "Replies",
+    proof_format: "Format",
+    loop_eyebrow: "Growth Loop",
+    loop_title: "System learns from every post",
+    loop_scan: "Scan",
+    loop_scan_detail: "Detect tech stories and broad audience hooks.",
+    loop_write: "Write",
+    loop_write_detail: "Generate copy-ready replies and sharper post formats.",
+    loop_route: "Route",
+    loop_route_detail: "Send the operator to high-signal conversations.",
+    loop_learn: "Learn",
+    loop_learn_detail: "Feed metrics back into tomorrow's style choices.",
+    daily_action_title: "Today: 3 paste-ready moves",
+    daily_action_copy: "Open the first target, paste the prepared reply, then repeat the next two. No extra X API reads.",
+    copy_first_reply: "Copy first reply",
+    zero_api_action: "Zero extra API",
     svc_news_ingest: "NEWS INGEST",
     svc_draft_queue: "DRAFT QUEUE",
     health_watch: "watch",
@@ -217,6 +242,8 @@ const translations = {
     live_data: "实时数据",
     data_stale: "数据过期",
     fallback_data: "备用数据",
+    demo_mode: "演示模式",
+    exit_demo: "退出演示",
     open_x: "打开 X",
     mission_eyebrow: "信号引擎",
     mission_title: "把科技热点变成每天可执行的 X 增长动作。",
@@ -274,6 +301,29 @@ const translations = {
     meta_traffic: "流量",
     meta_observability: "观测",
     meta_budget: "预算",
+    proof_eyebrow: "真实证明",
+    proof_title: "本周最强信号",
+    score_label: "评分 {score}",
+    why_it_worked: "为什么有效",
+    open_winner: "打开赢家",
+    proof_impressions: "曝光",
+    proof_likes: "点赞",
+    proof_replies: "回复",
+    proof_format: "格式",
+    loop_eyebrow: "增长闭环",
+    loop_title: "系统从每条帖中学习",
+    loop_scan: "扫描",
+    loop_scan_detail: "识别科技热点和更大受众会关心的角度。",
+    loop_write: "生成",
+    loop_write_detail: "产出可复制回复和更锋利的发帖格式。",
+    loop_route: "分发",
+    loop_route_detail: "把操作者送到高信号对话入口。",
+    loop_learn: "学习",
+    loop_learn_detail: "把数据反馈到明天的风格选择。",
+    daily_action_title: "今天：3 个可直接粘贴的动作",
+    daily_action_copy: "先打开第一个目标入口，粘贴准备好的回复，再重复后两项。不增加 X API 读取。",
+    copy_first_reply: "复制第一条回复",
+    zero_api_action: "零额外 API",
     svc_news_ingest: "新闻抓取",
     svc_draft_queue: "草稿队列",
     health_watch: "关注",
@@ -347,6 +397,7 @@ let dashboardData = fallbackData;
 let currentLang = document.documentElement.dataset.lang === "zh" ? "zh" : "en";
 let currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 let dataLoadStatus = "fallback";
+let demoMode = localStorage.getItem("xbot-dashboard-demo") === "true";
 let signalAnimationFrame = null;
 let signalResizeTimer = null;
 
@@ -431,7 +482,24 @@ function applyChromeText() {
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
   });
+  updateDemoModeChrome();
   $("#copyright-year").textContent = String(new Date().getFullYear());
+}
+
+function updateDemoModeChrome() {
+  document.body.classList.toggle("demo-mode", demoMode);
+  const button = $("#demo-toggle");
+  if (!button) return;
+  button.textContent = t(demoMode ? "exit_demo" : "demo_mode");
+  button.classList.toggle("active", demoMode);
+  button.setAttribute("aria-pressed", String(demoMode));
+}
+
+function setDemoMode(enabled) {
+  demoMode = Boolean(enabled);
+  localStorage.setItem("xbot-dashboard-demo", String(demoMode));
+  updateDemoModeChrome();
+  setupSignalCanvas();
 }
 
 function setTheme(theme) {
@@ -825,9 +893,80 @@ function renderTrend() {
   `;
 }
 
+function bestPost() {
+  const posts = dashboardData.last7d?.topPosts || fallbackData.last7d.topPosts || [];
+  return [...posts].sort((a, b) => number(b.score) - number(a.score))[0] || fallbackData.last7d.topPosts[0];
+}
+
+function formatTemplate(template) {
+  return String(template || "-").replace(/_/g, " ");
+}
+
+function proofReason(post) {
+  const template = String(post.template || "").toLowerCase();
+  if (currentLang === "zh") {
+    if (template.includes("decision")) return "它把新闻变成了明确决策规则，读者能立刻判断自己是否该行动。";
+    if (template.includes("question")) return "它不是复述新闻，而是提出尖锐问题，更容易引发同意、反驳和转发。";
+    if (template.includes("pain")) return "它点出了真实使用成本，把产品新闻翻译成团队会关心的问题。";
+    return "它具体、有立场，并且不是标题复述，因此更像一个值得回复的观点。";
+  }
+  if (template.includes("decision")) return "It turns a news item into a concrete decision rule, so readers can immediately judge whether to act.";
+  if (template.includes("question")) return "It does not recap the headline. It asks a sharp question that invites agreement, pushback, and reposts.";
+  if (template.includes("pain")) return "It translates product news into an operator pain point, which makes the take useful beyond the launch itself.";
+  return "It is specific, takes a clear position, and avoids headline recap, making it easier to reply to and share.";
+}
+
+function renderProof() {
+  const post = bestPost();
+  const score = number(post.score);
+  $("#proof-score-pill").textContent = t("score_label", { score: score.toFixed(1) });
+  $("#proof-tweet").textContent = post.text || "-";
+  $("#proof-reason").textContent = proofReason(post);
+  const openLink = $("#proof-open");
+  openLink.href = post.url || "https://x.com/Linus_Shyu";
+  $("#proof-metrics").innerHTML = [
+    { label: t("proof_impressions"), value: number(post.impressions) },
+    { label: t("proof_likes"), value: number(post.likes) },
+    { label: t("proof_replies"), value: number(post.replies) },
+    { label: t("proof_format"), value: formatTemplate(post.template) },
+  ]
+    .map(
+      (item) => `
+        <div>
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${escapeHtml(item.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
+
+  const loopSteps = [
+    { label: t("loop_scan"), detail: t("loop_scan_detail") },
+    { label: t("loop_write"), detail: t("loop_write_detail") },
+    { label: t("loop_route"), detail: t("loop_route_detail") },
+    { label: t("loop_learn"), detail: t("loop_learn_detail") },
+  ];
+  $("#loop-steps").innerHTML = loopSteps
+    .map(
+      (step, index) => `
+        <div class="loop-step">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <strong>${escapeHtml(step.label)}</strong>
+            <p>${escapeHtml(step.detail)}</p>
+          </div>
+        </div>
+      `,
+    )
+    .join("");
+}
+
 function renderActions() {
   const actions = dashboardData.actions || fallbackData.actions;
-  $("#action-board").innerHTML = actions
+  const firstAction = actions[0] || fallbackData.actions[0];
+  const firstDraft = draftFor(firstAction.draftIndex ?? 0);
+  const localizedFirstAction = localizeAction(firstAction);
+  const actionCards = actions
     .slice(0, 3)
     .map((action, index) => {
       const localizedAction = localizeAction(action);
@@ -854,6 +993,24 @@ function renderActions() {
       `;
     })
     .join("");
+
+  $("#action-board").innerHTML = `
+    <article class="action-hero">
+      <div>
+        <span class="pill pill-neutral">${t("zero_api_action")}</span>
+        <h3>${t("daily_action_title")}</h3>
+        <p>${t("daily_action_copy")}</p>
+        <div class="row-actions">
+          <a class="button button-primary" href="${escapeHtml(firstAction.url)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedFirstAction.label)}</a>
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(firstDraft.text)}">${t("copy_first_reply")}</button>
+        </div>
+      </div>
+      <blockquote>${escapeHtml(firstDraft.text)}</blockquote>
+    </article>
+    <div class="action-list">
+      ${actionCards}
+    </div>
+  `;
 }
 
 function renderDrafts() {
@@ -945,6 +1102,11 @@ function bindCopyButtons() {
 
 function bindPreferenceButtons() {
   document.addEventListener("click", (event) => {
+    const demoButton = event.target.closest("[data-demo-toggle]");
+    if (demoButton) {
+      setDemoMode(!demoMode);
+      return;
+    }
     const themeButton = event.target.closest("[data-theme-value]");
     if (themeButton) {
       setTheme(themeButton.dataset.themeValue);
@@ -953,6 +1115,10 @@ function bindPreferenceButtons() {
     const langButton = event.target.closest("[data-lang-value]");
     if (langButton) setLang(langButton.dataset.langValue);
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && demoMode) setDemoMode(false);
+  });
 }
 
 function render() {
@@ -960,6 +1126,7 @@ function render() {
   renderHeader();
   renderHero();
   renderMetrics();
+  renderProof();
   renderServices();
   renderTrend();
   renderActions();
