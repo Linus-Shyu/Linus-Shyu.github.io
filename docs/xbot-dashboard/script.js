@@ -470,6 +470,69 @@ const fallbackData = {
       holdFormatIds: ["prediction"],
     },
   },
+  temporalAngleMatrix: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "temporal_rotation",
+    confidence: "medium",
+    source: "cached tweet analytics only",
+    zeroExtraXReads: true,
+    lookbackDays: 30,
+    sampleCount: 120,
+    nextAction: "Use Decision Rule at 13:00 UTC; decision_rule has the strongest current matrix score.",
+    slots: [
+      {
+        slot: 1,
+        hour: 13,
+        windowLabel: "13:00",
+        hoursFromNow: 11,
+        loadScore: 88.4,
+        formatId: "decision_rule",
+        label: "Decision Rule",
+        angle: "decision rule / what to do next",
+        action: "exploit",
+        status: "hot",
+        score: 91.2,
+        avgScore: 7.2,
+        samples: 3,
+        impressions: 118,
+        reason: "Best UTC window with proven reusable-rule format.",
+      },
+      {
+        slot: 2,
+        hour: 17,
+        windowLabel: "17:00",
+        hoursFromNow: 15,
+        loadScore: 81.6,
+        formatId: "operator_pain",
+        label: "Operator Pain",
+        angle: "operator pain / hidden workflow tax",
+        action: "test",
+        status: "watch",
+        score: 79.4,
+        avgScore: 4.8,
+        samples: 2,
+        impressions: 84,
+        reason: "High-load window; pair with practical workflow-tax angle.",
+      },
+      {
+        slot: 3,
+        hour: 22,
+        windowLabel: "22:00",
+        hoursFromNow: 20,
+        loadScore: 72.8,
+        formatId: "second_order",
+        label: "Second Order",
+        angle: "second-order distribution or business consequence",
+        action: "explore",
+        status: "probe",
+        score: 67.1,
+        avgScore: 0,
+        samples: 0,
+        impressions: 0,
+        reason: "Exploration slot for downstream platform consequences.",
+      },
+    ],
+  },
   distributionOps: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "manual_distribution",
@@ -890,6 +953,20 @@ const translations = {
     angle_mode_recovery_route: "recovery route",
     angle_mode_sample_discovery: "sample discovery",
     angle_mode_controlled_rotation: "controlled rotation",
+    matrix_eyebrow: "UTC Angle Matrix",
+    matrix_title: "Temporal prompt fire-control",
+    matrix_zero_reads: "cached analytics",
+    matrix_mode: "Mode",
+    matrix_confidence: "Confidence",
+    matrix_samples: "{count} samples · {days}d",
+    matrix_next: "Next directive",
+    matrix_score: "matrix {score}",
+    matrix_load: "L7 {load}",
+    matrix_avg: "avg {score} · n={samples}",
+    matrix_empty: "No temporal angle matrix available.",
+    matrix_mode_peak_angle_wait: "peak wait",
+    matrix_mode_surge_angle_exploit: "surge exploit",
+    matrix_mode_temporal_rotation: "temporal rotation",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -1252,6 +1329,20 @@ const translations = {
     angle_mode_recovery_route: "恢复路由",
     angle_mode_sample_discovery: "样本探索",
     angle_mode_controlled_rotation: "受控轮换",
+    matrix_eyebrow: "UTC 角度矩阵",
+    matrix_title: "时间 Prompt 火控",
+    matrix_zero_reads: "缓存分析",
+    matrix_mode: "模式",
+    matrix_confidence: "置信度",
+    matrix_samples: "{count} 个样本 · {days} 天",
+    matrix_next: "下一条指令",
+    matrix_score: "矩阵 {score}",
+    matrix_load: "L7 {load}",
+    matrix_avg: "均值 {score} · n={samples}",
+    matrix_empty: "暂无时间角度矩阵。",
+    matrix_mode_peak_angle_wait: "等待峰值",
+    matrix_mode_surge_angle_exploit: "峰值利用",
+    matrix_mode_temporal_rotation: "时间轮换",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -3163,6 +3254,62 @@ function renderAdaptiveAngleScheduler() {
   `;
 }
 
+function temporalAngleMatrixData() {
+  return dashboardData.temporalAngleMatrix || fallbackData.temporalAngleMatrix || {};
+}
+
+function matrixModeLabel(mode) {
+  const key = `matrix_mode_${String(mode || "").replace(/-/g, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function renderTemporalAngleMatrix() {
+  const matrix = temporalAngleMatrixData();
+  const container = $("#temporal-angle-matrix");
+  if (!container) return;
+  const slots = Array.isArray(matrix.slots) ? matrix.slots : [];
+  if (!slots.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("matrix_empty"))}</p>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="matrix-head">
+      <div>
+        <span>${escapeHtml(t("matrix_eyebrow"))}</span>
+        <strong>${escapeHtml(t("matrix_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("matrix_zero_reads"))}</em>
+    </div>
+    <div class="matrix-meta">
+      <div><span>${escapeHtml(t("matrix_mode"))}</span><strong>${escapeHtml(matrixModeLabel(matrix.mode))}</strong></div>
+      <div><span>${escapeHtml(t("matrix_confidence"))}</span><strong>${escapeHtml(matrix.confidence || "-")}</strong></div>
+      <div><span>${escapeHtml(t("angle_slots"))}</span><strong>${escapeHtml(t("matrix_samples", { count: formatNumber(matrix.sampleCount), days: formatNumber(matrix.lookbackDays) }))}</strong></div>
+    </div>
+    <div class="matrix-grid">
+      ${slots.slice(0, 5).map((slot) => `
+        <article class="matrix-slot ${escapeHtml(slot.status || slot.action || "probe")}" style="--matrix-score:${clamp(number(slot.score), 0, 100).toFixed(1)}%">
+          <div class="matrix-window">
+            <span>${escapeHtml(slot.windowLabel || "-")} UTC</span>
+            <strong>${escapeHtml(slot.label || formatTemplate(slot.formatId))}</strong>
+          </div>
+          <p>${escapeHtml(slot.angle || slot.reason || "-")}</p>
+          <div class="matrix-stats">
+            <span>${escapeHtml(t("matrix_score", { score: formatNumber(slot.score, 1) }))}</span>
+            <span>${escapeHtml(t("matrix_load", { load: formatNumber(slot.loadScore, 1) }))}</span>
+            <span>${escapeHtml(t("matrix_avg", { score: formatNumber(slot.avgScore, 1), samples: formatNumber(slot.samples) }))}</span>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+    <div class="matrix-directive">
+      <span>${escapeHtml(t("matrix_next"))}</span>
+      <code>${escapeHtml(matrix.nextAction || "-")}</code>
+    </div>
+  `;
+}
+
 function renderLearning() {
   const { learning, bestHook, bestSource, worstFormat } = learningData();
   $("#learning-confidence").textContent = currentLang === "zh"
@@ -3189,6 +3336,7 @@ function renderLearning() {
     .join("");
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
+  renderTemporalAngleMatrix();
   renderExperimentPlan();
 }
 
