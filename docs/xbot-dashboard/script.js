@@ -5255,48 +5255,77 @@ function renderMediaRoiGate() {
 }
 
 function gateLabel(value) {
-  const raw = String(value || "-").replace(/_/g, " ");
+  const raw = String(value === null || value === undefined || value === "" ? "-" : value).replace(/_/g, " ");
   return raw || "-";
+}
+
+function metricNumber(value, fallback = 0) {
+  return value === null || value === undefined || value === "" ? fallback : number(value, fallback);
+}
+
+function governorData() {
+  return dashboardData.rateLimitGovernor || fallbackData.rateLimitGovernor || null;
+}
+
+function governorCellLabel(cell) {
+  const labels = {
+    read: "governor_read_gate",
+    publish: "governor_post_gate",
+    rate_limit: "governor_429",
+    backend: "governor_503",
+    safe_cap: "governor_safe_cap",
+    safe_left: "governor_safe_left",
+  };
+  return labels[cell?.id] ? t(labels[cell.id]) : cell?.label || cell?.id || "-";
 }
 
 function renderRateGovernor() {
   const target = $("#rate-governor");
   if (!target) return;
-  const { api, spend, cap, remaining } = apiBudget();
+  const governor = governorData();
+  const { api, spend, cap } = apiBudget();
   const guard = dashboardData.automation?.budgetGuard || fallbackData.automation?.budgetGuard || {};
   const triage = apiStatusTriage();
   const control = controlPlaneData();
   const cadence = cadenceData();
-  const cooldown = api.cooldown || {};
-  const active429 = number(triage.activeRateLimit429 ?? triage.rateLimit429);
-  const active503 = number(triage.activeBackendFault5xx ?? triage.backendFault5xx);
+  const cooldown = governor?.cooldown || api.cooldown || {};
+  const active429 = metricNumber(governor?.partitions?.activeRateLimit429, number(triage.activeRateLimit429 ?? triage.rateLimit429));
+  const active503 = metricNumber(governor?.partitions?.activeBackendFault5xx, number(triage.activeBackendFault5xx ?? triage.backendFault5xx));
   const cooldownActive = Boolean(cooldown.active);
-  const safeCap = number(api.safeCap, number(guard.safeCapUsd, cap * 0.9));
-  const safeLeft = number(api.safeRemaining, Math.max(0, safeCap - spend));
-  const severity = cooldownActive || active429 || active503 || control.readGate === "closed"
+  const safeCap = metricNumber(governor?.budget?.safeCapUsd, number(api.safeCap, number(guard.safeCapUsd, cap * 0.9)));
+  const safeLeft = metricNumber(governor?.budget?.safeRemainingUsd, number(api.safeRemaining, Math.max(0, safeCap - spend)));
+  const derivedSeverity = cooldownActive || active429 || active503 || control.readGate === "closed"
     ? "danger"
     : safeLeft <= 0 || control.publishGate === "closed"
       ? "warn"
       : "ok";
-  const readGate = cooldownActive || severity === "danger" ? "closed" : control.readGate || "cached_only";
-  const publishGate = control.publishGate || (cadence.publishAllowed ? "open" : "review");
+  const severity = ["ok", "warn", "danger"].includes(governor?.severity) ? governor.severity : derivedSeverity;
+  const readGate = governor?.gates?.read || (cooldownActive || severity === "danger" ? "closed" : control.readGate || "cached_only");
+  const publishGate = governor?.gates?.publish || control.publishGate || (cadence.publishAllowed ? "open" : "review");
   const cooldownLabel = cooldownActive
     ? t("governor_cooldown_minutes", { count: formatNumber(cooldown.remainingMinutes || cooldown.cooldownMinutes || 0) })
     : t("governor_no_cooldown");
-  const runbook = severity === "danger"
+  const runbook = governor?.runbook || (severity === "danger"
     ? t("governor_runbook_danger")
     : severity === "warn"
       ? t("governor_runbook_warn")
-      : t("governor_runbook_ok");
-  const boundaryRatio = safeCap > 0 ? clamp((safeLeft / safeCap) * 100, 0, 100) : 100;
-  const cells = [
+      : t("governor_runbook_ok"));
+  const boundaryRatio = metricNumber(governor?.reactorFillPct, safeCap > 0 ? clamp((safeLeft / safeCap) * 100, 0, 100) : 100);
+  const derivedCells = [
     { label: t("governor_read_gate"), value: gateLabel(readGate), tone: severity === "danger" ? "danger" : "ok" },
     { label: t("governor_post_gate"), value: gateLabel(publishGate), tone: publishGate === "open" ? "ok" : "warn" },
     { label: t("governor_429"), value: formatNumber(active429), tone: active429 ? "danger" : "ok" },
     { label: t("governor_503"), value: formatNumber(active503), tone: active503 ? "danger" : "ok" },
     { label: t("governor_safe_cap"), value: money(safeCap), tone: "neutral" },
-    { label: t("governor_safe_left"), value: money(safeLeft || remaining), tone: safeLeft > 0.5 ? "ok" : safeLeft > 0 ? "warn" : "danger" },
+    { label: t("governor_safe_left"), value: money(safeLeft), tone: safeLeft > 0.5 ? "ok" : safeLeft > 0 ? "warn" : "danger" },
   ];
+  const cells = Array.isArray(governor?.cells) && governor.cells.length
+    ? governor.cells.map((cell) => ({
+        label: governorCellLabel(cell),
+        value: gateLabel(cell.value),
+        tone: cell.status || "neutral",
+      }))
+    : derivedCells;
 
   target.innerHTML = `
     <div class="governor-head ${escapeHtml(severity)}">
