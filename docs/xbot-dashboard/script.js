@@ -1254,23 +1254,6 @@ function signalCanvasPalette() {
   };
 }
 
-function drawRoundedRect(ctx, x, y, width, height, radius) {
-  if (typeof ctx.roundRect === "function") {
-    ctx.roundRect(x, y, width, height, radius);
-    return;
-  }
-  const safeRadius = Math.min(radius, width / 2, height / 2);
-  ctx.moveTo(x + safeRadius, y);
-  ctx.lineTo(x + width - safeRadius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + safeRadius);
-  ctx.lineTo(x + width, y + height - safeRadius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - safeRadius, y + height);
-  ctx.lineTo(x + safeRadius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - safeRadius);
-  ctx.lineTo(x, y + safeRadius);
-  ctx.quadraticCurveTo(x, y, x + safeRadius, y);
-}
-
 function drawSignalCanvas(canvas, ctx, time) {
   const palette = signalCanvasPalette();
   const width = canvas.width;
@@ -1370,23 +1353,6 @@ function drawSignalCanvas(canvas, ctx, time) {
   ctx.textBaseline = "middle";
   ctx.fillText("CORE", center.x, center.y);
 
-  nodes.forEach((node, index) => {
-    const size = (index === 3 ? 46 : 38) * dpr;
-    const x = node.x - size / 2;
-    const y = node.y - size / 2;
-    ctx.fillStyle = colorWithAlpha(palette.surface, currentTheme === "dark" ? 0.86 : 0.96);
-    ctx.strokeStyle = colorWithAlpha(index % 2 ? palette.ok : palette.accent, 0.72);
-    ctx.lineWidth = 1.5 * dpr;
-    ctx.beginPath();
-    drawRoundedRect(ctx, x, y, size, size, 8 * dpr);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = palette.ink;
-    ctx.font = `${10 * dpr}px ui-sans-serif, system-ui, sans-serif`;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(node.label, node.x, node.y);
-  });
 }
 
 function setupSignalCanvas() {
