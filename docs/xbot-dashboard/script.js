@@ -317,6 +317,21 @@ const translations = {
     noc_budget_value: "No X reads",
     noc_operator: "Operator mode",
     noc_operator_value: "Manual paste",
+    contract_source: "Source",
+    contract_metrics: "Metrics",
+    contract_charts: "Charts",
+    contract_cost: "Cost",
+    contract_live_json: "data.json",
+    contract_fallback_json: "fallbackData",
+    contract_cached_json: "cached telemetry",
+    contract_derived: "derived series",
+    contract_updated: "updated {date}",
+    contract_age: "age {age}",
+    contract_samples: "{count} samples",
+    contract_posts: "{count} posts",
+    contract_cost_detail: "X {xSpend} · OpenAI {openaiSpend}",
+    chart_source: "source {source}",
+    chart_points: "{count} points",
     live: "Live",
     signal_map: "Signal Map",
     signal_detail_close: "Close",
@@ -551,6 +566,21 @@ const translations = {
     noc_budget_value: "不读 X",
     noc_operator: "操作模式",
     noc_operator_value: "人工粘贴",
+    contract_source: "来源",
+    contract_metrics: "指标",
+    contract_charts: "图表",
+    contract_cost: "成本",
+    contract_live_json: "data.json",
+    contract_fallback_json: "备用数据",
+    contract_cached_json: "缓存遥测",
+    contract_derived: "推导序列",
+    contract_updated: "更新 {date}",
+    contract_age: "年龄 {age}",
+    contract_samples: "{count} 个样本",
+    contract_posts: "{count} 条帖",
+    contract_cost_detail: "X {xSpend} · OpenAI {openaiSpend}",
+    chart_source: "来源 {source}",
+    chart_points: "{count} 个点",
     live: "在线",
     signal_map: "信号地图",
     signal_detail_close: "关闭",
@@ -1106,6 +1136,85 @@ function dataAgeMinutes() {
   return null;
 }
 
+function ageLabel(minutes) {
+  if (minutes == null) return "-";
+  if (minutes < 60) return t("gauge_minutes", { count: formatNumber(minutes) });
+  const hours = minutes / 60;
+  if (hours < 48) return currentLang === "zh" ? `${formatNumber(hours, 1)} 小时` : `${formatNumber(hours, 1)}h`;
+  const days = hours / 24;
+  return currentLang === "zh" ? `${formatNumber(days, 1)} 天` : `${formatNumber(days, 1)}d`;
+}
+
+function chartSource(chart, fallbackSource) {
+  if (chart?.source) return chart.source;
+  return fallbackSource || t("contract_derived");
+}
+
+function chartPointCount(chart, fallbackValues = []) {
+  if (Array.isArray(chart?.points) && chart.points.length) return chart.points.length;
+  return fallbackValues.length;
+}
+
+function renderTelemetryContract() {
+  const container = $("#telemetry-contract");
+  if (!container) return;
+  const freshness = dataFreshness();
+  const age = ageLabel(dataAgeMinutes());
+  const updatedAt = dashboardData.telemetry?.checkedAt || dashboardData.profile?.followerCheckedAt || dashboardData.updatedAt;
+  const profile = dashboardData.profile || {};
+  const last7d = dashboardData.last7d || {};
+  const measuredPosts = number(profile.measuredPosts, number(profile.trackedPosts, number(last7d.posts)));
+  const impressionChart = dashboardData.charts?.impressions24h;
+  const apiChart = dashboardData.charts?.xApiCallsDaily;
+  const impressionValues = impressionSeries(dashboardData.last24h || fallbackData.last24h || {}, "impressions24h");
+  const apiValues = endpointCallSeries();
+  const { spend } = apiBudget();
+  const openAI = dashboardData.openai || {};
+  const openAISpend = number(openAI.spend);
+  const sourceLabel = dataLoadStatus === "live"
+    ? dashboardData.telemetry?.cachedOnlyRefresh
+      ? t("contract_cached_json")
+      : t("contract_live_json")
+    : t("contract_fallback_json");
+  const cards = [
+    {
+      label: t("contract_source"),
+      value: sourceLabel,
+      detail: `${t(freshness.key)} · ${t("contract_updated", { date: formatDate(updatedAt) })}`,
+      status: freshness.className,
+    },
+    {
+      label: t("contract_metrics"),
+      value: t("contract_posts", { count: formatNumber(measuredPosts) }),
+      detail: t("contract_age", { age }),
+      status: measuredPosts > 0 ? "ok" : "warn",
+    },
+    {
+      label: t("contract_charts"),
+      value: chartSource(impressionChart, "last24h.topPosts"),
+      detail: `${t("chart_points", { count: chartPointCount(impressionChart, impressionValues) })} · ${chartSource(apiChart, "api.endpoints")}`,
+      status: impressionChart || apiChart ? "ok" : "cached",
+    },
+    {
+      label: t("contract_cost"),
+      value: t("contract_cost_detail", { xSpend: money(spend), openaiSpend: money(openAISpend) }),
+      detail: dashboardData.openai ? t("contract_live_json") : t("contract_derived"),
+      status: spend <= apiBudget().cap * 0.8 ? "ok" : "warn",
+    },
+  ];
+  container.innerHTML = cards
+    .map(
+      (card) => `
+        <article class="contract-card ${escapeHtml(card.status)}">
+          <span>${escapeHtml(card.label)}</span>
+          <strong>${escapeHtml(card.value)}</strong>
+          <small>${escapeHtml(card.detail)}</small>
+        </article>
+      `,
+    )
+    .join("");
+}
+
 function gaugeCard(card) {
   const value = clamp(card.value);
   return `
@@ -1296,11 +1405,17 @@ function renderMonitorPanels() {
     number(impressionChart?.total, number(last24h.impressions)),
   );
   $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(impressionStats.total) });
+  const impressionSource = chartSource(impressionChart, "last24h.topPosts");
+  const impressionPoints = chartPointCount(impressionChart, impressionStats.values);
   loadChart.innerHTML = `
     ${chartSvg(impressionStats.values, "primary")}
     <div class="chart-legend">
       <span><i></i> impressions.load</span>
       <strong>${formatNumber(impressionStats.total)} 24h total</strong>
+    </div>
+    <div class="chart-provenance">
+      <span>${escapeHtml(t("chart_source", { source: impressionSource }))}</span>
+      <span>${escapeHtml(t("chart_points", { count: formatNumber(impressionPoints) }))}</span>
     </div>
   `;
 
@@ -1310,11 +1425,17 @@ function renderMonitorPanels() {
   const endpointChart = dashboardData.charts?.xApiCallsDaily;
   const endpointStats = seriesStats(endpointCallSeries(), number(endpointChart?.total, calls));
   $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(endpointStats.total) });
+  const endpointSource = chartSource(endpointChart, "api.endpoints");
+  const endpointPoints = chartPointCount(endpointChart, endpointStats.values);
   $("#monitor-request-chart").innerHTML = `
     ${chartSvg(endpointStats.values, "secondary")}
     <div class="chart-legend">
       <span><i></i> x_api.calls</span>
       <strong>${formatNumber(endpointStats.total)} calls · ${money(apiBudget().spend)} month</strong>
+    </div>
+    <div class="chart-provenance">
+      <span>${escapeHtml(t("chart_source", { source: endpointSource }))}</span>
+      <span>${escapeHtml(t("chart_points", { count: formatNumber(endpointPoints) }))}</span>
     </div>
   `;
 
@@ -1797,7 +1918,7 @@ function signalDetailConfig(nodeId) {
             const draft = draftFor(action.draftIndex ?? index);
             return detailRow({
               title: `${String(action.step || index + 1).padStart(2, "0")} / ${localized.label}`,
-              meta: t("open_search"),
+              meta: `${t("zero_api_action")} · ${t("open_search")}`,
               body: `${localized.reason} ${draft.text}`,
               href: action.url,
             });
@@ -2222,6 +2343,7 @@ function render() {
   applyChromeText();
   renderHeader();
   renderHero();
+  renderTelemetryContract();
   renderExpoStory();
   renderGauges();
   renderMonitorPanels();

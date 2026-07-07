@@ -4496,3 +4496,179 @@ body:not(.demo-mode) .demo-strip {
     grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.72fr) minmax(330px, 0.9fr);
   }
 }
+
+/* Final NOC polish layer: keeps the dashboard dense, auditable, and consistent across themes. */
+:root {
+  --contract-glow: rgba(26, 86, 219, 0.1);
+  --panel-highlight: rgba(255, 255, 255, 0.82);
+  --panel-depth: rgba(15, 23, 42, 0.055);
+}
+
+:root[data-theme="dark"] {
+  --contract-glow: rgba(242, 162, 58, 0.13);
+  --panel-highlight: rgba(255, 255, 255, 0.055);
+  --panel-depth: rgba(0, 0, 0, 0.38);
+}
+
+.telemetry-contract {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 0 6px;
+}
+
+.contract-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+  border-radius: 7px;
+  padding: 8px 10px 9px 26px;
+  background:
+    linear-gradient(135deg, var(--contract-glow), transparent 38%),
+    linear-gradient(180deg, var(--panel-highlight), transparent 54%),
+    var(--surface);
+  box-shadow:
+    0 16px 42px var(--panel-depth),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 76%, white 14%);
+}
+
+.contract-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ok);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 12%, transparent), 0 0 18px color-mix(in srgb, var(--ok) 44%, transparent);
+}
+
+.contract-card.warn::before,
+.contract-card.cached::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 18px color-mix(in srgb, var(--accent) 44%, transparent);
+}
+
+.contract-card.danger::before {
+  background: var(--danger);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 12%, transparent), 0 0 18px color-mix(in srgb, var(--danger) 44%, transparent);
+}
+
+.contract-card span,
+.contract-card small {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contract-card strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contract-card small {
+  margin-top: 4px;
+  color: color-mix(in srgb, var(--body) 84%, var(--muted));
+}
+
+.chart-provenance {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 6px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 720;
+}
+
+.chart-provenance span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.monitor-chart {
+  align-content: stretch;
+  gap: 6px;
+}
+
+.line-chart {
+  min-height: 120px;
+}
+
+.monitor-chart.compact .line-chart {
+  min-height: 112px;
+}
+
+.signal-node-button {
+  min-width: 46px;
+  min-height: 34px;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 82%, white 10%);
+}
+
+.signal-node-button.rss { left: clamp(48px, 14%, calc(100% - 48px)); }
+.signal-node-button.draft { left: clamp(68px, 30%, calc(100% - 68px)); }
+.signal-node-button.score { left: clamp(78px, 52%, calc(100% - 78px)); }
+.signal-node-button.x { left: clamp(56px, 74%, calc(100% - 56px)); }
+.signal-node-button.learn { left: clamp(70px, 82%, calc(100% - 70px)); }
+
+.signal-stage {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:root[data-theme="light"] .topbar,
+:root[data-theme="light"] .grafana-toolbar,
+:root[data-theme="light"] .noc-strip div,
+:root[data-theme="light"] .outcome-panel,
+:root[data-theme="light"] .pipeline-panel,
+:root[data-theme="light"] .runlog-panel,
+:root[data-theme="light"] .gauge-card,
+:root[data-theme="light"] .monitor-panel,
+:root[data-theme="light"] .command-card,
+:root[data-theme="light"] .server-card,
+:root[data-theme="light"] .metric,
+:root[data-theme="light"] .panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.82)),
+    var(--surface);
+  box-shadow:
+    0 18px 52px rgba(15, 23, 42, 0.055),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+:root[data-theme="dark"] .contract-card,
+:root[data-theme="dark"] .chart-provenance {
+  border-color: rgba(148, 163, 184, 0.13);
+}
+
+@media (max-width: 1080px) {
+  .telemetry-contract {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .telemetry-contract {
+    grid-template-columns: 1fr;
+  }
+}
