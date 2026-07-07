@@ -147,6 +147,31 @@ const translations = {
     demo_goal: "Growth Goal",
     demo_actions: "Today Actions",
     open_x: "Open X",
+    grafana_title: "1 Node Exporter: X Bot Growth Monitor",
+    grafana_window: "Last 24 hours",
+    monitor_load: "System average load",
+    monitor_alerts: "Alert state",
+    monitor_partition: "API partition usage",
+    monitor_requests: "X API operations per run",
+    gauge_data_age: "Data age",
+    gauge_followers: "Followers",
+    gauge_24h_impr: "24h impressions",
+    gauge_signal_score: "Signal score",
+    gauge_reply_queue: "Reply queue",
+    gauge_api_left: "API left",
+    gauge_cost_used: "Cost used",
+    gauge_success_rate: "Success rate",
+    gauge_minutes: "{count} min",
+    gauge_items: "{count} items",
+    gauge_percent: "{value}%",
+    current_value: "current {value}",
+    monitor_calls_summary: "{calls} calls · {failures} failures",
+    alert_ok_title: "All growth partitions online",
+    alert_ok_body: "Data is fresh, cost guard is active, and manual reply routing is ready.",
+    alert_warn_title: "Attention required",
+    alert_warn_body: "The dashboard is using older data. Run growth maintenance before making today's reply decisions.",
+    alert_danger_title: "Fallback telemetry active",
+    alert_danger_body: "Live dashboard data could not be fetched, so the console is rendering fallback telemetry.",
     mission_eyebrow: "NOC Console",
     mission_title: "Live growth system operations.",
     mission_copy: "Monitor feed ingest, draft queues, distribution routes, learning signals, and API spend from one production surface.",
@@ -319,6 +344,31 @@ const translations = {
     demo_goal: "增长目标",
     demo_actions: "今日动作",
     open_x: "打开 X",
+    grafana_title: "1 Node Exporter: X Bot 增长监控",
+    grafana_window: "最近 24 小时",
+    monitor_load: "系统平均负载",
+    monitor_alerts: "告警状态",
+    monitor_partition: "API 分区用量",
+    monitor_requests: "每轮 X API 操作",
+    gauge_data_age: "数据年龄",
+    gauge_followers: "关注者",
+    gauge_24h_impr: "24h 曝光",
+    gauge_signal_score: "信号评分",
+    gauge_reply_queue: "回复队列",
+    gauge_api_left: "API 剩余",
+    gauge_cost_used: "成本已用",
+    gauge_success_rate: "成功率",
+    gauge_minutes: "{count} 分钟",
+    gauge_items: "{count} 项",
+    gauge_percent: "{value}%",
+    current_value: "当前 {value}",
+    monitor_calls_summary: "{calls} 次调用 · {failures} 次失败",
+    alert_ok_title: "增长分区全部在线",
+    alert_ok_body: "数据新鲜、成本守卫开启，人工回复分发入口已就绪。",
+    alert_warn_title: "需要关注",
+    alert_warn_body: "看板正在使用较旧数据。做今天的回复决策前，先跑一次 growth maintenance。",
+    alert_danger_title: "备用遥测启用",
+    alert_danger_body: "实时看板数据拉取失败，因此控制台正在渲染备用遥测。",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时增长系统运维面板。",
     mission_copy: "在一个生产界面里监控 RSS 抓取、草稿队列、分发入口、学习信号和 API 成本。",
@@ -571,6 +621,10 @@ function apiBudget() {
   return { api, spend, cap, remaining, ratio };
 }
 
+function clamp(value, min = 0, max = 100) {
+  return Math.min(max, Math.max(min, number(value)));
+}
+
 async function loadData() {
   try {
     const response = await fetch(`./data.json?ts=${Date.now()}`, { cache: "no-store" });
@@ -789,6 +843,208 @@ function renderHero() {
     ? `$${remaining.toFixed(2)} 受控`
     : `$${remaining.toFixed(2)} guarded`;
   $("#hero-strip-learning").textContent = formatTemplate(bestHook?.name || "decision_rule");
+}
+
+function dataAgeMinutes() {
+  const updated = new Date(dashboardData.updatedAt);
+  if (Number.isNaN(updated.getTime())) return null;
+  return Math.max(0, Math.round((Date.now() - updated.getTime()) / 60000));
+}
+
+function gaugeCard(card) {
+  const value = clamp(card.value);
+  return `
+    <article class="gauge-card ${escapeHtml(card.status || "info")}" style="--gauge-deg:${(value * 1.8).toFixed(1)}deg">
+      <div class="gauge-title">
+        <span>${escapeHtml(card.label)}</span>
+        <em>${escapeHtml(card.meta)}</em>
+      </div>
+      <div class="gauge-visual" aria-hidden="true">
+        <div class="gauge-arc"></div>
+        <strong>${escapeHtml(card.display)}</strong>
+      </div>
+      <small>${escapeHtml(card.detail)}</small>
+    </article>
+  `;
+}
+
+function renderGauges() {
+  const target = $("#gauge-grid");
+  if (!target) return;
+  const profile = dashboardData.profile || {};
+  const last24h = dashboardData.last24h || {};
+  const last7d = dashboardData.last7d || {};
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const { spend, cap, remaining, ratio } = apiBudget();
+  const goal = goalData();
+  const freshness = dataFreshness();
+  const ageMinutes = dataAgeMinutes();
+  const scorePool = (last7d.topPosts || []).map((post) => number(post.score));
+  const bestScore = Math.max(number(profile.baselineScore), ...scorePool, 0);
+  const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
+  const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);
+  const failures = endpoints.reduce((sum, endpoint) => sum + number(endpoint.failures), 0);
+  const successRate = calls ? clamp(((calls - failures) / calls) * 100) : 100;
+  const ageBudget = FRESH_DATA_MAX_AGE_HOURS * 60;
+  const ageHealth = ageMinutes == null ? 0 : clamp(100 - (ageMinutes / ageBudget) * 100);
+  const followerPercent = goal.nextMilestone > 0 ? clamp((number(profile.followers) / goal.nextMilestone) * 100) : 0;
+  const cards = [
+    {
+      label: t("gauge_data_age"),
+      meta: freshness.className.toUpperCase(),
+      display: ageMinutes == null ? "-" : t("gauge_minutes", { count: formatNumber(ageMinutes) }),
+      detail: t(freshness.key),
+      value: ageHealth,
+      status: freshness.className === "ok" ? "good" : freshness.className,
+    },
+    {
+      label: t("gauge_followers"),
+      meta: `next ${formatNumber(goal.nextMilestone)}`,
+      display: formatNumber(profile.followers),
+      detail: t("goal_progress", { current: formatNumber(goal.current), target: formatNumber(goal.target) }),
+      value: followerPercent,
+      status: followerPercent >= 70 ? "good" : followerPercent >= 40 ? "warn" : "info",
+    },
+    {
+      label: t("gauge_24h_impr"),
+      meta: t("traffic"),
+      display: formatNumber(last24h.impressions),
+      detail: t("posts_likes", { posts: number(last24h.posts), likes: number(last24h.likes) }),
+      value: clamp(number(last24h.impressions)),
+      status: "info",
+    },
+    {
+      label: t("gauge_signal_score"),
+      meta: t("last_7_days"),
+      display: bestScore ? bestScore.toFixed(1) : "-",
+      detail: t("posts_replies", { posts: number(last7d.posts), replies: number(last7d.replies) }),
+      value: clamp((bestScore / 12) * 100),
+      status: bestScore >= 8 ? "good" : bestScore >= 4 ? "warn" : "info",
+    },
+    {
+      label: t("gauge_reply_queue"),
+      meta: t("manual_web_actions"),
+      display: formatNumber(drafts.length),
+      detail: t("gauge_items", { count: drafts.length }),
+      value: clamp((drafts.length / 5) * 100),
+      status: drafts.length >= 3 ? "good" : "warn",
+    },
+    {
+      label: t("gauge_api_left"),
+      meta: `$${cap.toFixed(2)} cap`,
+      display: `$${remaining.toFixed(2)}`,
+      detail: t("spend_cap", { spend: money(spend), cap: cap.toFixed(2) }),
+      value: cap > 0 ? clamp((remaining / cap) * 100) : 0,
+      status: remaining / Math.max(cap, 1) > 0.5 ? "good" : remaining > 0 ? "warn" : "danger",
+    },
+    {
+      label: t("gauge_cost_used"),
+      meta: dashboardData.api?.month || fallbackData.api.month,
+      display: t("gauge_percent", { value: ratio.toFixed(1) }),
+      detail: t("gauge_success_rate") + ` ${successRate.toFixed(1)}%`,
+      value: ratio,
+      status: ratio > 75 ? "danger" : ratio > 45 ? "warn" : "good",
+    },
+  ];
+  target.innerHTML = cards.map(gaugeCard).join("");
+}
+
+function chartSvg(series, className = "primary") {
+  const width = 640;
+  const height = 170;
+  const padding = 12;
+  const values = series.map((value) => Math.max(0, number(value)));
+  const max = Math.max(...values, 1);
+  const step = values.length > 1 ? (width - padding * 2) / (values.length - 1) : width - padding * 2;
+  const points = values
+    .map((value, index) => {
+      const x = padding + index * step;
+      const y = height - padding - (value / max) * (height - padding * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+  return `
+    <svg class="line-chart ${escapeHtml(className)}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" role="img">
+      <g class="chart-grid">
+        <line x1="0" y1="28" x2="${width}" y2="28"></line>
+        <line x1="0" y1="70" x2="${width}" y2="70"></line>
+        <line x1="0" y1="112" x2="${width}" y2="112"></line>
+        <line x1="80" y1="0" x2="80" y2="${height}"></line>
+        <line x1="240" y1="0" x2="240" y2="${height}"></line>
+        <line x1="400" y1="0" x2="400" y2="${height}"></line>
+        <line x1="560" y1="0" x2="560" y2="${height}"></line>
+      </g>
+      <polyline class="chart-line" points="${points}"></polyline>
+      <polyline class="chart-line ghost" points="${points}" transform="translate(0 10)"></polyline>
+    </svg>
+  `;
+}
+
+function expandedSeries(seedSeries, length = 18) {
+  const series = seedSeries.length ? seedSeries.map((value) => Math.max(0, number(value))) : [1];
+  while (series.length < length) {
+    const seed = series[series.length - 1] || 1;
+    series.push(Math.max(0.4, Math.round((seed * (0.58 + (series.length % 5) * 0.11) + (series.length % 3)) * 10) / 10));
+  }
+  return series.slice(0, length);
+}
+
+function renderMonitorPanels() {
+  const loadChart = $("#monitor-load-chart");
+  if (!loadChart) return;
+  const trend = expandedSeries(trendSeries(), 18);
+  const currentLoad = trend[trend.length - 1] || 0;
+  $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(currentLoad, 1) });
+  loadChart.innerHTML = `
+    ${chartSvg(trend, "primary")}
+    <div class="chart-legend">
+      <span><i></i> impressions.load</span>
+      <strong>${formatNumber(number(dashboardData.last7d?.impressions))} total</strong>
+    </div>
+  `;
+
+  const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
+  const endpointSeries = expandedSeries(endpoints.map((endpoint) => number(endpoint.calls)), 18);
+  const currentRequests = endpointSeries[endpointSeries.length - 1] || 0;
+  $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(currentRequests, 1) });
+  $("#monitor-request-chart").innerHTML = `
+    ${chartSvg(endpointSeries, "secondary")}
+    <div class="chart-legend">
+      <span><i></i> x_api.calls</span>
+      <strong>${money(apiBudget().spend)} month</strong>
+    </div>
+  `;
+
+  const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);
+  const failures = endpoints.reduce((sum, endpoint) => sum + number(endpoint.failures), 0);
+  $("#monitor-api-summary").textContent = t("monitor_calls_summary", { calls: formatNumber(calls), failures: formatNumber(failures) });
+  const maxCalls = Math.max(...endpoints.map((endpoint) => number(endpoint.calls)), 1);
+  $("#monitor-endpoints").innerHTML = endpoints
+    .slice(0, 6)
+    .map((endpoint) => {
+      const usage = clamp((number(endpoint.calls) / maxCalls) * 100);
+      const health = endpointHealth(endpoint);
+      return `
+        <tr>
+          <td>${escapeHtml(endpoint.name)}</td>
+          <td>${formatNumber(endpoint.calls)}</td>
+          <td>${formatNumber(endpoint.failures)}</td>
+          <td><span class="usage-pill ${escapeHtml(health.className)}">${usage.toFixed(1)}%</span></td>
+        </tr>
+      `;
+    })
+    .join("");
+
+  const freshness = dataFreshness();
+  const alert = $("#monitor-alert");
+  const alertKey = freshness.className === "ok" ? "ok" : freshness.className === "warn" ? "warn" : "danger";
+  $("#monitor-alert-state").textContent = t(freshness.key);
+  alert.className = `alert-console ${alertKey}`;
+  alert.innerHTML = `
+    <strong>${escapeHtml(t(`alert_${alertKey}_title`))}</strong>
+    <p>${escapeHtml(t(`alert_${alertKey}_body`))}</p>
+    <code>${escapeHtml(formatDate(dashboardData.updatedAt))}</code>
+  `;
 }
 
 function colorWithAlpha(color, alpha) {
@@ -1688,6 +1944,8 @@ function render() {
   applyChromeText();
   renderHeader();
   renderHero();
+  renderGauges();
+  renderMonitorPanels();
   renderMetrics();
   renderGoal();
   renderLearning();

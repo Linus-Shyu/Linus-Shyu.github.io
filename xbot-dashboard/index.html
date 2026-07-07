@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-ops1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-grafana1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -87,6 +87,36 @@
           </div>
         </header>
 
+        <section class="grafana-toolbar" aria-label="Dashboard variables">
+          <div class="dashboard-breadcrumb">
+            <span class="grafana-mark">G</span>
+            <strong data-i18n="grafana_title">Node Exporter: X Bot Growth Monitor</strong>
+            <em data-i18n="grafana_window">Last 24 hours</em>
+          </div>
+          <div class="variable-strip">
+            <label>
+              <span>interval</span>
+              <strong>5s</strong>
+            </label>
+            <label>
+              <span>datasource</span>
+              <strong>GitHub Pages</strong>
+            </label>
+            <label>
+              <span>job</span>
+              <strong>x_bot</strong>
+            </label>
+            <label>
+              <span>host</span>
+              <strong>Linus-Shyu</strong>
+            </label>
+            <label>
+              <span>env</span>
+              <strong>prod</strong>
+            </label>
+          </div>
+        </section>
+
         <section class="noc-strip" aria-label="Operations status">
           <div>
             <span data-i18n="noc_runtime">Runtime</span>
@@ -104,6 +134,54 @@
             <span data-i18n="noc_operator">Operator mode</span>
             <strong data-i18n="noc_operator_value">Manual paste</strong>
           </div>
+        </section>
+
+        <section class="gauge-grid" id="gauge-grid" aria-label="Live monitoring gauges"></section>
+
+        <section class="monitor-grid" aria-label="Growth telemetry">
+          <article class="monitor-panel monitor-panel-wide">
+            <div class="monitor-head">
+              <strong data-i18n="monitor_load">System average load</strong>
+              <em id="monitor-load-current">current -</em>
+            </div>
+            <div class="monitor-chart" id="monitor-load-chart"></div>
+          </article>
+
+          <article class="monitor-panel monitor-alert">
+            <div class="monitor-head">
+              <strong data-i18n="monitor_alerts">Alert state</strong>
+              <em id="monitor-alert-state">-</em>
+            </div>
+            <div class="alert-console" id="monitor-alert"></div>
+          </article>
+
+          <article class="monitor-panel monitor-table-panel">
+            <div class="monitor-head">
+              <strong data-i18n="monitor_partition">API partition usage</strong>
+              <em id="monitor-api-summary">-</em>
+            </div>
+            <div class="monitor-table-wrap">
+              <table class="monitor-table">
+                <thead>
+                  <tr>
+                    <th>endpoint</th>
+                    <th>calls</th>
+                    <th>failures</th>
+                    <th>usage</th>
+                  </tr>
+                </thead>
+                <tbody id="monitor-endpoints"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="monitor-panel monitor-panel-wide">
+            <div class="monitor-head">
+              <strong data-i18n="monitor_requests">X API operations per run</strong>
+              <em id="monitor-request-current">current -</em>
+            </div>
+            <div class="monitor-chart compact" id="monitor-request-chart"></div>
+          </article>
         </section>
 
         <section class="demo-strip" aria-live="polite">
@@ -410,6 +488,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-ops1" defer></script>
+    <script src="./script.js?v=20260707-grafana1" defer></script>
   </body>
 </html>
