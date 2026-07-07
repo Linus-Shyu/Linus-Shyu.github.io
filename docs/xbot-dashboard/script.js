@@ -1033,6 +1033,16 @@ const translations = {
     operator_step_saved: "Protocol state saved",
     operator_step_reset: "Protocol reset",
     operator_reset: "Reset protocol",
+    operator_telemetry_eyebrow: "NOC Ledger",
+    operator_telemetry_title: "Local execution telemetry",
+    operator_telemetry_steps: "protocol steps",
+    operator_telemetry_missions: "routes complete",
+    operator_telemetry_zero_reads: "X read ops",
+    operator_telemetry_latest: "recent events",
+    operator_telemetry_empty: "No local execution events yet.",
+    operator_event_done: "step completed",
+    operator_event_pending: "step reopened",
+    operator_event_reset: "protocol reset",
     operator_stop: "Stop conditions",
     operator_writeback: "Writeback",
     runbook: "Runbook",
@@ -1461,6 +1471,16 @@ const translations = {
     operator_step_saved: "协议状态已保存",
     operator_step_reset: "协议已重置",
     operator_reset: "重置协议",
+    operator_telemetry_eyebrow: "NOC 账本",
+    operator_telemetry_title: "本地执行遥测",
+    operator_telemetry_steps: "协议步骤",
+    operator_telemetry_missions: "完成路由",
+    operator_telemetry_zero_reads: "X 读取操作",
+    operator_telemetry_latest: "最近事件",
+    operator_telemetry_empty: "暂无本地执行事件。",
+    operator_event_done: "步骤完成",
+    operator_event_pending: "步骤重开",
+    operator_event_reset: "协议重置",
     operator_stop: "停止条件",
     operator_writeback: "写回",
     runbook: "运行手册",
@@ -1722,6 +1742,8 @@ const formatNumber = (value, digits = 0) =>
 const FRESH_DATA_MAX_AGE_HOURS = 30;
 const DEMO_STEP_MS = 7500;
 const OPERATOR_STATE_PREFIX = "xbot-dashboard-operator-protocol:";
+const OPERATOR_LEDGER_KEY = "xbot-dashboard-operator-ledger";
+const OPERATOR_LEDGER_MAX = 20;
 const DEMO_STEPS = [
   { id: "story", target: "#expo-story", labelKey: "demo_story" },
   { id: "signal", target: "#overview", labelKey: "demo_signal" },
@@ -2371,10 +2393,11 @@ function writeOperatorStateByKey(key, done) {
 function toggleOperatorStepState(key, stepId) {
   const state = readOperatorStateByKey(key);
   const done = new Set(state.done);
-  if (done.has(stepId)) done.delete(stepId);
-  else done.add(stepId);
+  const active = !done.has(stepId);
+  if (active) done.add(stepId);
+  else done.delete(stepId);
   writeOperatorStateByKey(key, done);
-  return done;
+  return { done, active };
 }
 
 function resetOperatorState(key) {
@@ -2384,6 +2407,69 @@ function resetOperatorState(key) {
   } catch {
     // Ignore storage errors; the protocol UI can continue as a fresh queue.
   }
+}
+
+function readOperatorLedger() {
+  try {
+    const raw = localStorage.getItem(OPERATOR_LEDGER_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter((event) => event && typeof event === "object").slice(0, OPERATOR_LEDGER_MAX) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeOperatorLedger(events) {
+  try {
+    localStorage.setItem(OPERATOR_LEDGER_KEY, JSON.stringify(events.slice(0, OPERATOR_LEDGER_MAX)));
+  } catch {
+    // Ledger is local convenience telemetry. Never block dashboard rendering on storage.
+  }
+}
+
+function appendOperatorLedger(event) {
+  const next = [
+    {
+      at: new Date().toISOString(),
+      type: event.type || "step",
+      route: event.route || "-",
+      step: event.step || "-",
+      state: event.state || "-",
+    },
+    ...readOperatorLedger(),
+  ];
+  writeOperatorLedger(next);
+}
+
+function missionProtocolProgress(mission, ops, index) {
+  const protocol = missionOperatorProtocol(mission, ops, index);
+  const steps = (Array.isArray(protocol.steps) ? protocol.steps : [])
+    .slice(0, 4)
+    .map((step, stepIndex) => ({ step, id: operatorStepId(step, stepIndex) }));
+  const state = readOperatorStateByKey(operatorStateKey(mission));
+  const doneSet = new Set(state.done);
+  const done = steps.filter(({ id }) => doneSet.has(id)).length;
+  return {
+    label: mission?.routeLabel || mission?.label || `Route ${index + 1}`,
+    done,
+    total: steps.length || 1,
+    ratio: steps.length ? done / steps.length : 0,
+  };
+}
+
+function operatorTelemetryData(missions, ops) {
+  const rows = missions.slice(0, 4).map((mission, index) => missionProtocolProgress(mission, ops, index));
+  const done = rows.reduce((sum, row) => sum + row.done, 0);
+  const total = rows.reduce((sum, row) => sum + row.total, 0) || 1;
+  const complete = rows.filter((row) => row.done >= row.total).length;
+  return {
+    rows,
+    done,
+    total,
+    complete,
+    completionPct: Math.round((done / total) * 100),
+    ledger: readOperatorLedger().slice(0, 4),
+  };
 }
 
 function renderHeader() {
@@ -4345,6 +4431,7 @@ function renderActions() {
   const doneCount = visibleProtocolSteps.filter(({ id }) => protocolDone.has(id)).length;
   const totalCount = visibleProtocolSteps.length || 1;
   const protocolProgress = t("operator_progress", { done: formatNumber(doneCount), total: formatNumber(totalCount) });
+  const operatorTelemetry = operatorTelemetryData(missions, ops);
   const protocolCopy = [
     primaryProtocol.objective || null,
     ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
@@ -4447,6 +4534,8 @@ function renderActions() {
                 type="button"
                 data-protocol-key="${escapeHtml(protocolKey)}"
                 data-protocol-step="${escapeHtml(id)}"
+                data-protocol-route="${escapeHtml(localizedPrimary.label || primary.label || "-")}"
+                data-protocol-label="${escapeHtml(step.label || step.id || "-")}"
                 aria-pressed="${done ? "true" : "false"}"
                 aria-label="${escapeHtml(`${step.label || step.id || `step ${index + 1}`} ${status}`)}"
               >
@@ -4468,7 +4557,35 @@ function renderActions() {
       <div class="row-actions">
         ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
         <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryPacket)}">${t("operator_packet_copy")}</button>
-        <button class="button button-secondary" type="button" data-protocol-reset="${escapeHtml(protocolKey)}">${t("operator_reset")}</button>
+        <button class="button button-secondary" type="button" data-protocol-reset="${escapeHtml(protocolKey)}" data-protocol-route="${escapeHtml(localizedPrimary.label || primary.label || "-")}">${t("operator_reset")}</button>
+      </div>
+    </article>
+    <article class="operator-telemetry">
+      <div class="telemetry-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("operator_telemetry_eyebrow"))}</span>
+          <strong>${escapeHtml(t("operator_telemetry_title"))}</strong>
+        </div>
+        <em>${escapeHtml(`${operatorTelemetry.completionPct}%`)}</em>
+      </div>
+      <div class="telemetry-grid">
+        <div><span>${escapeHtml(t("operator_telemetry_steps"))}</span><strong>${escapeHtml(`${formatNumber(operatorTelemetry.done)}/${formatNumber(operatorTelemetry.total)}`)}</strong></div>
+        <div><span>${escapeHtml(t("operator_telemetry_missions"))}</span><strong>${escapeHtml(`${formatNumber(operatorTelemetry.complete)}/${formatNumber(operatorTelemetry.rows.length)}`)}</strong></div>
+        <div><span>${escapeHtml(t("operator_telemetry_zero_reads"))}</span><strong>0</strong></div>
+      </div>
+      <div class="telemetry-routes">
+        ${operatorTelemetry.rows.map((row) => `
+          <div class="telemetry-route" style="--operator-route:${Math.round(row.ratio * 100)}%">
+            <span>${escapeHtml(row.label)}</span>
+            <strong>${escapeHtml(`${formatNumber(row.done)}/${formatNumber(row.total)}`)}</strong>
+          </div>
+        `).join("")}
+      </div>
+      <div class="telemetry-log">
+        <span>${escapeHtml(t("operator_telemetry_latest"))}</span>
+        ${operatorTelemetry.ledger.length ? operatorTelemetry.ledger.map((event) => `
+          <p><time>${escapeHtml(formatDate(event.at))}</time><strong>${escapeHtml(t(event.type === "reset" ? "operator_event_reset" : event.state === "done" ? "operator_event_done" : "operator_event_pending"))}</strong><em>${escapeHtml(event.route || "-")} · ${escapeHtml(event.step || "-")}</em></p>
+        `).join("") : `<p class="empty">${escapeHtml(t("operator_telemetry_empty"))}</p>`}
       </div>
     </article>
     <article class="action-hero">
@@ -4680,7 +4797,13 @@ function bindPreferenceButtons() {
 
     const protocolStep = target.closest("button[data-protocol-step]");
     if (protocolStep) {
-      toggleOperatorStepState(protocolStep.dataset.protocolKey, protocolStep.dataset.protocolStep);
+      const result = toggleOperatorStepState(protocolStep.dataset.protocolKey, protocolStep.dataset.protocolStep);
+      appendOperatorLedger({
+        type: "step",
+        route: protocolStep.dataset.protocolRoute,
+        step: protocolStep.dataset.protocolLabel || protocolStep.dataset.protocolStep,
+        state: result.active ? "done" : "pending",
+      });
       renderActions();
       showToast(t("operator_step_saved"));
       return;
@@ -4688,6 +4811,12 @@ function bindPreferenceButtons() {
     const protocolReset = target.closest("button[data-protocol-reset]");
     if (protocolReset) {
       resetOperatorState(protocolReset.dataset.protocolReset);
+      appendOperatorLedger({
+        type: "reset",
+        route: protocolReset.dataset.protocolRoute,
+        step: "protocol",
+        state: "reset",
+      });
       renderActions();
       showToast(t("operator_step_reset"));
       return;

@@ -2592,6 +2592,178 @@ h3 {
   margin-bottom: 3px;
 }
 
+.operator-telemetry {
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--accent) 12%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 86%, transparent), transparent 58%),
+    var(--surface);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--accent) 9%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.telemetry-head,
+.telemetry-grid,
+.telemetry-route,
+.telemetry-log p {
+  display: grid;
+  gap: 8px;
+}
+
+.telemetry-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.telemetry-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+.telemetry-head em {
+  display: inline-grid;
+  min-width: 54px;
+  min-height: 34px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ok) 38%, var(--line));
+  border-radius: 6px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+  font-family: var(--mono);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 900;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.telemetry-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.telemetry-grid div {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 78%, transparent);
+  border-radius: 6px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+}
+
+.telemetry-grid span,
+.telemetry-routes span,
+.telemetry-log > span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.telemetry-grid strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.telemetry-routes {
+  display: grid;
+  gap: 7px;
+}
+
+.telemetry-route {
+  position: relative;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 80%, transparent);
+  border-radius: 6px;
+  padding: 7px 8px;
+  background: color-mix(in srgb, var(--surface) 66%, transparent);
+}
+
+.telemetry-route::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--operator-route, 0%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--ok) 18%, transparent), color-mix(in srgb, var(--accent) 10%, transparent));
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.telemetry-route span,
+.telemetry-route strong {
+  position: relative;
+  z-index: 1;
+}
+
+.telemetry-route strong {
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.telemetry-log {
+  display: grid;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 80%, transparent);
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent),
+    color-mix(in srgb, var(--surface-soft) 78%, transparent);
+}
+
+.telemetry-log p {
+  grid-template-columns: minmax(82px, 0.32fr) minmax(96px, 0.32fr) minmax(0, 1fr);
+  align-items: center;
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--line-soft) 66%, transparent);
+  padding-top: 6px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.telemetry-log p.empty {
+  display: block;
+  color: var(--muted);
+}
+
+.telemetry-log time {
+  color: var(--muted);
+}
+
+.telemetry-log strong {
+  color: var(--ok);
+  font-weight: 860;
+  text-transform: uppercase;
+}
+
+.telemetry-log em {
+  overflow: hidden;
+  color: var(--body);
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .action-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.68fr);
@@ -8334,6 +8506,11 @@ body:not(.demo-mode) .demo-strip {
 
   .operator-packet {
     padding: 12px;
+  }
+
+  .telemetry-grid,
+  .telemetry-log p {
+    grid-template-columns: 1fr;
   }
 }
 
