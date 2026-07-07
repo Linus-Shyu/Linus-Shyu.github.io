@@ -166,6 +166,9 @@ const translations = {
     pipeline_route: "Route",
     pipeline_learn: "Learn",
     pipeline_status: "{stages}-stage loop active · manual publish only",
+    pipeline_metric_measured: "Measured",
+    pipeline_metric_drafts: "Drafts",
+    pipeline_metric_budget: "Budget",
     runlog_eyebrow: "Task log",
     runlog_ready: "operator ready",
     runlog_ingest: "rss.ingest",
@@ -394,6 +397,9 @@ const translations = {
     pipeline_route: "分发",
     pipeline_learn: "学习",
     pipeline_status: "{stages} 阶段闭环在线 · 仅人工发布",
+    pipeline_metric_measured: "已测",
+    pipeline_metric_drafts: "草稿",
+    pipeline_metric_budget: "预算",
     runlog_eyebrow: "任务日志",
     runlog_ready: "操作者就绪",
     runlog_ingest: "rss.ingest",
@@ -932,6 +938,22 @@ function renderExpoStory() {
     { label: t("outcome_best_hook"), value: bestHookName },
   ];
   $("#outcome-stats").innerHTML = outcomeStats
+    .map(
+      (item) => `
+        <div>
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${escapeHtml(item.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
+
+  const pipelineMetrics = [
+    { label: t("pipeline_metric_measured"), value: formatNumber(measuredPosts) },
+    { label: t("pipeline_metric_drafts"), value: formatNumber(drafts.length) },
+    { label: t("pipeline_metric_budget"), value: `$${remaining.toFixed(2)}` },
+  ];
+  $("#pipeline-metrics").innerHTML = pipelineMetrics
     .map(
       (item) => `
         <div>

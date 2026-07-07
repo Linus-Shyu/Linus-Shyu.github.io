@@ -3436,7 +3436,7 @@ body,
   display: grid;
   grid-template-columns: minmax(320px, 0.8fr) minmax(460px, 1.08fr) minmax(320px, 0.82fr);
   gap: 6px;
-  align-items: stretch;
+  align-items: start;
   margin-bottom: 6px;
 }
 
@@ -3480,7 +3480,7 @@ body,
 
 .outcome-score {
   color: var(--ok);
-  font-size: 34px;
+  font-size: 31px;
   font-weight: 820;
   line-height: 1;
 }
@@ -3488,9 +3488,12 @@ body,
 .outcome-panel p {
   max-width: 640px;
   margin: 6px 0 8px;
+  overflow: hidden;
   color: var(--body);
   font-size: 12px;
   line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .outcome-stats {
@@ -3530,14 +3533,14 @@ body,
 .pipeline-rail {
   position: relative;
   display: grid;
-  min-height: 74px;
+  min-height: 66px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
   align-items: center;
   overflow: hidden;
   border: 1px solid var(--line-soft);
   border-radius: 3px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   background:
     linear-gradient(90deg, transparent 0 8%, color-mix(in srgb, var(--ok) 10%, transparent) 50%, transparent 92%),
     var(--surface-soft);
@@ -3578,8 +3581,8 @@ body,
 
 .pipeline-node span {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   place-items: center;
   border: 1px solid color-mix(in srgb, var(--ok) 42%, var(--line));
   border-radius: 999px;
@@ -3607,6 +3610,41 @@ body,
   color: var(--muted);
   font-size: 11px;
   font-weight: 680;
+}
+
+.pipeline-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.pipeline-metrics div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 5px 6px;
+  background: var(--surface-soft);
+}
+
+.pipeline-metrics span,
+.pipeline-metrics strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pipeline-metrics span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.pipeline-metrics strong {
+  margin-top: 2px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 780;
 }
 
 .runlog-list {
@@ -3767,6 +3805,10 @@ body,
 
 .monitor-panel-wide {
   min-height: 208px;
+}
+
+.monitor-grid .monitor-panel:nth-child(4) {
+  grid-column: 1 / -1;
 }
 
 .monitor-head {
@@ -4229,6 +4271,10 @@ body:not(.demo-mode) .demo-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .outcome-panel p {
+    white-space: normal;
+  }
+
   .pipeline-rail {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -4249,6 +4295,10 @@ body:not(.demo-mode) .demo-strip {
   .pipeline-node span {
     width: 34px;
     height: 34px;
+  }
+
+  .pipeline-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .monitor-panel,
