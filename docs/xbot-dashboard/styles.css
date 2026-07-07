@@ -7257,3 +7257,293 @@ body:not(.demo-mode) .demo-strip {
     grid-template-columns: 1fr;
   }
 }
+
+/* Final rail lock: keep the navigation visually tied to the NOC surface in both themes. */
+@media (min-width: 1081px) {
+  :root {
+    --nav-rail-bg: #070b11;
+    --nav-rail-bg-soft: #101823;
+    --nav-rail-panel: #121b28;
+    --nav-rail-line: rgba(151, 164, 184, 0.22);
+    --nav-rail-text: #e7edf6;
+    --nav-rail-muted: #9aa8ba;
+    --nav-rail-hot: #f6a13a;
+    --nav-rail-glow: rgba(246, 161, 58, 0.26);
+  }
+
+  :root[data-theme="light"],
+  :root[data-theme="dark"] {
+    --nav-rail-bg: #070b11;
+    --nav-rail-bg-soft: #101823;
+    --nav-rail-panel: #121b28;
+    --nav-rail-line: rgba(151, 164, 184, 0.22);
+    --nav-rail-text: #e7edf6;
+    --nav-rail-muted: #9aa8ba;
+    --nav-rail-hot: #f6a13a;
+    --nav-rail-glow: rgba(246, 161, 58, 0.26);
+  }
+
+  .ops-shell {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .side-rail {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 100vh;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border-width: 0 1px 0 0;
+    border-color: var(--nav-rail-line);
+    border-radius: 0;
+    padding: 8px 7px;
+    color: var(--nav-rail-text);
+    background:
+      radial-gradient(circle at 50% -10%, rgba(246, 161, 58, 0.22), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 124px),
+      linear-gradient(180deg, #151f2c 0%, var(--nav-rail-bg-soft) 36%, var(--nav-rail-bg) 100%);
+    box-shadow:
+      inset -1px 0 0 rgba(255, 255, 255, 0.07),
+      16px 0 34px rgba(8, 13, 20, 0.18);
+  }
+
+  .brand {
+    min-height: 48px;
+    justify-content: center;
+    gap: 0;
+    border: 1px solid var(--nav-rail-line);
+    border-radius: 7px;
+    padding: 0;
+    color: var(--nav-rail-text);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+      var(--nav-rail-panel);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .brand > span:not(.brand-mark),
+  .env-card {
+    display: none;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 8px;
+    color: #0b0d10;
+    background: linear-gradient(135deg, #ffd66b 0%, var(--nav-rail-hot) 58%, #d97821 100%);
+    font-size: 12px;
+    font-weight: 900;
+    box-shadow:
+      0 12px 24px var(--nav-rail-glow),
+      0 0 0 1px rgba(255, 255, 255, 0.24) inset;
+  }
+
+  .rack-mini {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin-top: 13px;
+  }
+
+  .rack-mini div {
+    min-height: 40px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 4px;
+    border: 1px solid var(--nav-rail-line);
+    border-radius: 7px;
+    padding: 6px 2px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+      var(--nav-rail-panel);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  .rack-mini span {
+    width: 8px;
+    height: 8px;
+    background: #5fc66b;
+    box-shadow: 0 0 0 4px rgba(95, 198, 107, 0.16);
+  }
+
+  .rack-mini strong {
+    max-width: 46px;
+    color: var(--nav-rail-text);
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .rack-mini em {
+    display: none;
+  }
+
+  .rail-nav {
+    display: grid;
+    gap: 8px;
+    margin: 18px 0;
+  }
+
+  .rail-nav a {
+    position: relative;
+    min-height: 36px;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 0;
+    color: var(--nav-rail-text);
+    background: transparent;
+    font-size: 0;
+  }
+
+  .rail-nav a::before {
+    display: none;
+  }
+
+  .rail-nav a::after {
+    display: block;
+    color: var(--nav-rail-text);
+    font-size: 11px;
+    font-weight: 880;
+    line-height: 1;
+  }
+
+  .rail-nav a:nth-child(1)::after { content: "O"; }
+  .rail-nav a:nth-child(2)::after { content: "S"; }
+  .rail-nav a:nth-child(3)::after { content: "W"; }
+  .rail-nav a:nth-child(4)::after { content: "Q"; }
+  .rail-nav a:nth-child(5)::after { content: "P"; }
+  .rail-nav a:nth-child(6)::after { content: "$"; }
+
+  .rail-nav a:hover,
+  .rail-nav a.active {
+    color: #fff7ed;
+    border-color: rgba(246, 161, 58, 0.48);
+    background:
+      linear-gradient(135deg, rgba(246, 161, 58, 0.24), rgba(246, 161, 58, 0.07)),
+      rgba(255, 255, 255, 0.035);
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  }
+
+  .rail-nav a:hover::after,
+  .rail-nav a.active::after {
+    color: #fff7ed;
+  }
+
+  .rail-budget {
+    margin-top: auto;
+    border: 1px solid rgba(246, 161, 58, 0.4);
+    border-radius: 7px;
+    padding: 8px 6px;
+    background:
+      radial-gradient(circle at 50% 0, rgba(246, 161, 58, 0.18), transparent 60%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+      var(--nav-rail-panel);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .rail-budget span,
+  .rail-budget small {
+    overflow: hidden;
+    color: var(--nav-rail-muted);
+    font-size: 9px;
+    line-height: 1.12;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rail-budget strong {
+    margin-top: 6px;
+    color: #ffd84d;
+    font-size: 15px;
+    line-height: 1.05;
+    text-align: center;
+    text-shadow: 0 0 18px rgba(255, 216, 77, 0.22);
+  }
+
+  .rail-budget .meter {
+    height: 4px;
+    margin: 8px 0;
+    background: rgba(148, 163, 184, 0.2);
+  }
+
+  :root[data-theme="light"] .side-rail,
+  :root[data-theme="dark"] .side-rail {
+    color: var(--nav-rail-text);
+    border-color: var(--nav-rail-line);
+    background:
+      radial-gradient(circle at 50% -10%, rgba(246, 161, 58, 0.22), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 124px),
+      linear-gradient(180deg, #151f2c 0%, var(--nav-rail-bg-soft) 36%, var(--nav-rail-bg) 100%);
+    box-shadow:
+      inset -1px 0 0 rgba(255, 255, 255, 0.07),
+      16px 0 34px rgba(8, 13, 20, 0.18);
+  }
+
+  :root[data-theme="light"] .brand,
+  :root[data-theme="dark"] .brand,
+  :root[data-theme="light"] .rack-mini div,
+  :root[data-theme="dark"] .rack-mini div,
+  :root[data-theme="light"] .rail-budget,
+  :root[data-theme="dark"] .rail-budget {
+    border-color: var(--nav-rail-line);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+      var(--nav-rail-panel);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  }
+
+  :root[data-theme="light"] .brand strong,
+  :root[data-theme="dark"] .brand strong,
+  :root[data-theme="light"] .rack-mini strong,
+  :root[data-theme="dark"] .rack-mini strong,
+  :root[data-theme="light"] .rail-nav a,
+  :root[data-theme="dark"] .rail-nav a {
+    color: var(--nav-rail-text);
+  }
+
+  :root[data-theme="light"] .brand small,
+  :root[data-theme="dark"] .brand small,
+  :root[data-theme="light"] .rack-mini em,
+  :root[data-theme="dark"] .rack-mini em,
+  :root[data-theme="light"] .rail-budget span,
+  :root[data-theme="dark"] .rail-budget span,
+  :root[data-theme="light"] .rail-budget small,
+  :root[data-theme="dark"] .rail-budget small {
+    color: var(--nav-rail-muted);
+  }
+
+  :root[data-theme="light"] .rail-nav a:hover,
+  :root[data-theme="dark"] .rail-nav a:hover,
+  :root[data-theme="light"] .rail-nav a.active,
+  :root[data-theme="dark"] .rail-nav a.active {
+    color: #fff7ed;
+    border-color: rgba(246, 161, 58, 0.48);
+    background:
+      linear-gradient(135deg, rgba(246, 161, 58, 0.24), rgba(246, 161, 58, 0.07)),
+      rgba(255, 255, 255, 0.035);
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  }
+
+  :root[data-theme="light"] .rail-budget strong,
+  :root[data-theme="dark"] .rail-budget strong {
+    color: #ffd84d;
+    text-shadow: 0 0 18px rgba(255, 216, 77, 0.22);
+  }
+
+  :root[data-theme="light"] .rail-budget .meter,
+  :root[data-theme="dark"] .rail-budget .meter {
+    background: rgba(148, 163, 184, 0.2);
+  }
+}
