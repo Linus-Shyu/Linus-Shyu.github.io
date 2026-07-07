@@ -4266,6 +4266,7 @@ function renderActions() {
   const primaryProtocol = missionOperatorProtocol(primary, ops, 0);
   const protocolSteps = Array.isArray(primaryProtocol.steps) ? primaryProtocol.steps : [];
   const stopConditions = Array.isArray(primaryProtocol.stopConditions) ? primaryProtocol.stopConditions : [];
+  const primaryCostLabel = primary.costEfficiency?.label || t("dispatch_zero_reads");
   const protocolCopy = [
     primaryProtocol.objective || null,
     ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
@@ -4280,7 +4281,7 @@ function renderActions() {
     `${t("operator_packet_sla")}: ${t("dispatch_sla", { minutes: formatNumber(primary.operatorSlaMinutes || 10) })}`,
     `${t("operator_packet_replies")}: ${t("dispatch_replies", { count: formatNumber(primary.targetReplies || 1) })}`,
     `${t("operator_packet_lift")}: ${t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) })}`,
-    `${t("operator_packet_budget")}: ${t("dispatch_zero_reads")}`,
+    `${t("operator_packet_budget")}: ${primaryCostLabel}`,
     primary.evidence ? `Evidence: ${primary.evidence}` : null,
     protocolCopy ? "" : null,
     protocolCopy,
@@ -4340,7 +4341,7 @@ function renderActions() {
           <span class="eyebrow">${escapeHtml(t("operator_packet_eyebrow"))}</span>
           <strong>${escapeHtml(t("operator_packet_title"))}</strong>
         </div>
-        <em>${escapeHtml(t("operator_packet_armed"))} · ${escapeHtml(t("dispatch_zero_reads"))}</em>
+        <em>${escapeHtml(t("operator_packet_armed"))} · ${escapeHtml(primaryCostLabel)}</em>
       </div>
       <div class="packet-grid">
         <div><span>${escapeHtml(t("operator_packet_route"))}</span><strong>${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong></div>
