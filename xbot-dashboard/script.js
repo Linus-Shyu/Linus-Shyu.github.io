@@ -1027,6 +1027,12 @@ const translations = {
     operator_packet_budget: "Cost mode",
     operator_packet_copy: "Copy packet",
     operator_protocol: "Execution protocol",
+    operator_progress: "{done}/{total} steps armed",
+    operator_step_done: "done",
+    operator_step_pending: "pending",
+    operator_step_saved: "Protocol state saved",
+    operator_step_reset: "Protocol reset",
+    operator_reset: "Reset protocol",
     operator_stop: "Stop conditions",
     operator_writeback: "Writeback",
     runbook: "Runbook",
@@ -1449,6 +1455,12 @@ const translations = {
     operator_packet_budget: "成本模式",
     operator_packet_copy: "复制数据包",
     operator_protocol: "执行协议",
+    operator_progress: "{done}/{total} 步已完成",
+    operator_step_done: "完成",
+    operator_step_pending: "待执行",
+    operator_step_saved: "协议状态已保存",
+    operator_step_reset: "协议已重置",
+    operator_reset: "重置协议",
     operator_stop: "停止条件",
     operator_writeback: "写回",
     runbook: "运行手册",
@@ -1709,6 +1721,7 @@ const formatNumber = (value, digits = 0) =>
   });
 const FRESH_DATA_MAX_AGE_HOURS = 30;
 const DEMO_STEP_MS = 7500;
+const OPERATOR_STATE_PREFIX = "xbot-dashboard-operator-protocol:";
 const DEMO_STEPS = [
   { id: "story", target: "#expo-story", labelKey: "demo_story" },
   { id: "signal", target: "#overview", labelKey: "demo_signal" },
@@ -2314,6 +2327,63 @@ function missionOperatorProtocol(mission, ops, index = 0) {
     ],
     writeback: "Growth maintenance refreshes metrics and updates source/format/topic weights.",
   };
+}
+
+function operatorStepId(step, index) {
+  const raw = String(step?.id || step?.label || `step-${index + 1}`);
+  return raw.replace(/[^a-z0-9_.:-]+/gi, "_").replace(/^_+|_+$/g, "").slice(0, 64) || `step-${index + 1}`;
+}
+
+function operatorStateKey(mission) {
+  const stableKey = [
+    mission?.id,
+    mission?.routeUrl,
+    mission?.routeLabel || mission?.label,
+    mission?.draftText ? String(mission.draftText).slice(0, 72) : "",
+  ].filter(Boolean).join("|") || "primary";
+  return `${OPERATOR_STATE_PREFIX}${stableKey}`;
+}
+
+function readOperatorStateByKey(key) {
+  if (!key) return { done: [] };
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return { done: [] };
+    const parsed = JSON.parse(raw);
+    return {
+      done: Array.isArray(parsed.done) ? parsed.done.filter(Boolean) : [],
+      updatedAt: parsed.updatedAt || null,
+    };
+  } catch {
+    return { done: [] };
+  }
+}
+
+function writeOperatorStateByKey(key, done) {
+  if (!key) return;
+  try {
+    localStorage.setItem(key, JSON.stringify({ done: [...new Set(done)], updatedAt: new Date().toISOString() }));
+  } catch {
+    // Local execution state is best-effort; dashboard rendering must remain available.
+  }
+}
+
+function toggleOperatorStepState(key, stepId) {
+  const state = readOperatorStateByKey(key);
+  const done = new Set(state.done);
+  if (done.has(stepId)) done.delete(stepId);
+  else done.add(stepId);
+  writeOperatorStateByKey(key, done);
+  return done;
+}
+
+function resetOperatorState(key) {
+  if (!key) return;
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    // Ignore storage errors; the protocol UI can continue as a fresh queue.
+  }
 }
 
 function renderHeader() {
@@ -4267,6 +4337,14 @@ function renderActions() {
   const protocolSteps = Array.isArray(primaryProtocol.steps) ? primaryProtocol.steps : [];
   const stopConditions = Array.isArray(primaryProtocol.stopConditions) ? primaryProtocol.stopConditions : [];
   const primaryCostLabel = primary.costEfficiency?.label || t("dispatch_zero_reads");
+  const protocolKey = operatorStateKey(primary);
+  const protocolDone = new Set(readOperatorStateByKey(protocolKey).done);
+  const visibleProtocolSteps = protocolSteps
+    .slice(0, 4)
+    .map((step, index) => ({ step, index, id: operatorStepId(step, index) }));
+  const doneCount = visibleProtocolSteps.filter(({ id }) => protocolDone.has(id)).length;
+  const totalCount = visibleProtocolSteps.length || 1;
+  const protocolProgress = t("operator_progress", { done: formatNumber(doneCount), total: formatNumber(totalCount) });
   const protocolCopy = [
     primaryProtocol.objective || null,
     ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
@@ -4353,15 +4431,31 @@ function renderActions() {
       <div class="packet-protocol">
         <div class="packet-protocol-head">
           <span>${escapeHtml(t("operator_protocol"))}</span>
-          <strong>${escapeHtml(primaryProtocol.mode || "manual_zero_read_growth_loop")}</strong>
+          <div>
+            <strong>${escapeHtml(primaryProtocol.mode || "manual_zero_read_growth_loop")}</strong>
+            <em class="${doneCount === visibleProtocolSteps.length && visibleProtocolSteps.length ? "complete" : ""}">${escapeHtml(protocolProgress)}</em>
+          </div>
         </div>
         <ol>
-          ${protocolSteps.slice(0, 4).map((step) => `
-            <li>
-              <span>${escapeHtml(step.label || step.id || "-")}</span>
-              <strong>${escapeHtml(step.detail || "-")}</strong>
+          ${visibleProtocolSteps.map(({ step, index, id }) => {
+            const done = protocolDone.has(id);
+            const status = done ? t("operator_step_done") : t("operator_step_pending");
+            return `
+            <li class="${done ? "done" : ""}">
+              <button
+                class="packet-step"
+                type="button"
+                data-protocol-key="${escapeHtml(protocolKey)}"
+                data-protocol-step="${escapeHtml(id)}"
+                aria-pressed="${done ? "true" : "false"}"
+                aria-label="${escapeHtml(`${step.label || step.id || `step ${index + 1}`} ${status}`)}"
+              >
+                <span><i>${String(index + 1).padStart(2, "0")}</i><b>${escapeHtml(step.label || step.id || "-")}</b></span>
+                <strong>${escapeHtml(step.detail || "-")}</strong>
+                <small>${escapeHtml(status)}</small>
+              </button>
             </li>
-          `).join("")}
+          `}).join("")}
         </ol>
         ${stopConditions.length ? `
           <div class="packet-stop">
@@ -4374,6 +4468,7 @@ function renderActions() {
       <div class="row-actions">
         ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
         <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryPacket)}">${t("operator_packet_copy")}</button>
+        <button class="button button-secondary" type="button" data-protocol-reset="${escapeHtml(protocolKey)}">${t("operator_reset")}</button>
       </div>
     </article>
     <article class="action-hero">
@@ -4583,6 +4678,20 @@ function bindPreferenceButtons() {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
 
+    const protocolStep = target.closest("button[data-protocol-step]");
+    if (protocolStep) {
+      toggleOperatorStepState(protocolStep.dataset.protocolKey, protocolStep.dataset.protocolStep);
+      renderActions();
+      showToast(t("operator_step_saved"));
+      return;
+    }
+    const protocolReset = target.closest("button[data-protocol-reset]");
+    if (protocolReset) {
+      resetOperatorState(protocolReset.dataset.protocolReset);
+      renderActions();
+      showToast(t("operator_step_reset"));
+      return;
+    }
     const signalButton = target.closest("button[data-signal-node]");
     if (signalButton) {
       activeSignalNode = signalButton.dataset.signalNode || "rss";

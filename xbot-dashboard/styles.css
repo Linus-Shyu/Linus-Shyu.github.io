@@ -2401,6 +2401,13 @@ h3 {
   gap: 10px;
 }
 
+.packet-protocol-head div {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+  min-width: 0;
+}
+
 .packet-protocol-head span,
 .packet-stop span,
 .packet-writeback span {
@@ -2418,6 +2425,27 @@ h3 {
   font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.packet-protocol-head em {
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line));
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 820;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.packet-protocol-head em.complete {
+  border-color: color-mix(in srgb, var(--ok) 38%, var(--line));
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 11%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ok) 16%, transparent);
 }
 
 .packet-protocol ol {
@@ -2439,7 +2467,31 @@ h3 {
   background: color-mix(in srgb, var(--surface) 66%, transparent);
 }
 
-.packet-protocol li span {
+.packet-step {
+  display: grid;
+  width: 100%;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(120px, 0.34fr) minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.packet-step:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 64%, transparent);
+  outline-offset: 4px;
+}
+
+.packet-step span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   overflow: hidden;
   color: var(--accent);
   font-family: var(--mono);
@@ -2449,12 +2501,72 @@ h3 {
   white-space: nowrap;
 }
 
-.packet-protocol li strong {
+.packet-step i {
+  display: inline-grid;
+  width: 22px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
+  border-radius: 5px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-style: normal;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.packet-step b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.packet-step strong {
   min-width: 0;
   color: var(--body);
   font-size: 11px;
   font-weight: 640;
   line-height: 1.35;
+}
+
+.packet-step small {
+  border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface-soft) 72%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 820;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.packet-protocol li.done {
+  border-color: color-mix(in srgb, var(--ok) 44%, var(--line));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ok) 10%, transparent), transparent 62%),
+    color-mix(in srgb, var(--surface) 70%, transparent);
+  box-shadow:
+    inset 2px 0 0 color-mix(in srgb, var(--ok) 78%, transparent),
+    0 0 18px color-mix(in srgb, var(--ok) 10%, transparent);
+}
+
+.packet-protocol li.done .packet-step span,
+.packet-protocol li.done .packet-step i {
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 42%, var(--line));
+}
+
+.packet-protocol li.done .packet-step small {
+  border-color: color-mix(in srgb, var(--ok) 34%, var(--line));
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+}
+
+.packet-protocol li.done .packet-step strong {
+  color: color-mix(in srgb, var(--ink) 82%, var(--ok));
 }
 
 .packet-stop,
@@ -8207,12 +8319,17 @@ body:not(.demo-mode) .demo-strip {
   }
 
   .packet-protocol-head,
-  .packet-protocol li {
+  .packet-protocol li,
+  .packet-step {
     grid-template-columns: 1fr;
   }
 
   .packet-protocol-head {
     display: grid;
+  }
+
+  .packet-protocol-head div {
+    justify-items: start;
   }
 
   .operator-packet {
