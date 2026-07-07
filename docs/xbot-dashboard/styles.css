@@ -886,6 +886,7 @@ h3 {
   top: 16px;
   right: 16px;
   left: 16px;
+  z-index: 7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -919,6 +920,284 @@ h3 {
   border-radius: 999px;
   background: var(--accent-2);
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-2) 18%, transparent);
+}
+
+.signal-node-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.signal-node-button {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 40px;
+  transform: translate(-50%, -50%);
+  border: 1px solid color-mix(in srgb, var(--line) 72%, var(--accent-line));
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 880;
+  letter-spacing: 0;
+  pointer-events: auto;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  backdrop-filter: blur(14px);
+}
+
+.signal-node-button:hover,
+.signal-node-button:focus-visible,
+.signal-node-button.active {
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+  color: var(--accent);
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent),
+    0 16px 36px rgba(15, 23, 42, 0.08);
+  outline: 0;
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.signal-node-button.rss {
+  left: 14%;
+  top: 25%;
+}
+
+.signal-node-button.draft {
+  left: 30%;
+  top: 74%;
+}
+
+.signal-node-button.score {
+  left: 52%;
+  top: 17%;
+}
+
+.signal-node-button.x {
+  left: 76%;
+  top: 31%;
+}
+
+.signal-node-button.learn {
+  left: 83%;
+  top: 72%;
+}
+
+.signal-detail-panel {
+  position: absolute;
+  right: 14px;
+  bottom: 110px;
+  left: 14px;
+  z-index: 5;
+  max-height: 198px;
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius: 8px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.signal-detail-panel.hidden {
+  display: none;
+}
+
+.signal-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signal-detail-head span {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.signal-detail-head button {
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  padding: 5px 8px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 760;
+}
+
+.signal-detail-panel h3 {
+  margin: 7px 0 9px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.signal-detail-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 10px;
+  overflow-x: auto;
+  padding-bottom: 1px;
+}
+
+.signal-detail-tab {
+  flex: 0 0 auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  padding: 5px 8px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 88%, var(--surface-soft));
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 820;
+}
+
+.signal-detail-tab:hover,
+.signal-detail-tab:focus-visible,
+.signal-detail-tab.active {
+  border-color: var(--accent-line);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 70%, var(--surface));
+  outline: 0;
+}
+
+.signal-detail-body {
+  display: grid;
+  gap: 9px;
+}
+
+.signal-detail-summary {
+  margin: 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.48;
+}
+
+.signal-detail-section {
+  display: grid;
+  gap: 7px;
+}
+
+.signal-detail-section h4 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.signal-detail-row {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--surface-soft));
+}
+
+.signal-detail-row div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 10px;
+}
+
+.signal-detail-row strong,
+.signal-detail-row a {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal-detail-row a:hover {
+  color: var(--accent);
+}
+
+.signal-detail-row span {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 720;
+}
+
+.signal-detail-row p,
+.signal-detail-empty {
+  margin: 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.signal-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.signal-detail-grid div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--surface-soft));
+}
+
+.signal-detail-grid span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.signal-detail-grid strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 880;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal-mini-copy {
+  justify-self: start;
+  border: 1px solid var(--accent-line);
+  border-radius: 7px;
+  padding: 5px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 76%, var(--surface));
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 820;
 }
 
 .signal-metrics {
@@ -1809,6 +2088,10 @@ body[data-demo-step="actions"] .action-hero {
   #signal-canvas {
     min-height: 360px;
   }
+
+  .signal-detail-panel {
+    max-height: 172px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1884,12 +2167,41 @@ body[data-demo-step="actions"] .action-hero {
 
   .signal-stage,
   #signal-canvas {
-    min-height: 320px;
+    min-height: 430px;
   }
 
   body.demo-mode .signal-stage,
   body.demo-mode #signal-canvas {
-    min-height: 320px;
+    min-height: 430px;
+  }
+
+  .signal-node-button {
+    min-width: 44px;
+    min-height: 34px;
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  .signal-detail-panel {
+    right: 10px;
+    bottom: 226px;
+    left: 10px;
+    max-height: 130px;
+    padding: 10px;
+  }
+
+  .signal-detail-panel h3 {
+    font-size: 15px;
+  }
+
+  .signal-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-detail-row div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
   }
 
   .signal-metrics {

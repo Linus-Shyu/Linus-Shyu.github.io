@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-autoplay1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-signal1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -124,6 +124,28 @@ learn(metrics)</code></pre>
                 <span class="signal-live"><i></i><span data-i18n="live">Live</span></span>
                 <strong data-i18n="signal_map">Signal Map</strong>
               </div>
+              <div class="signal-node-layer" aria-label="Signal map nodes">
+                <button class="signal-node-button rss active" type="button" data-signal-node="rss">RSS</button>
+                <button class="signal-node-button draft" type="button" data-signal-node="draft">Draft</button>
+                <button class="signal-node-button score" type="button" data-signal-node="score">Score</button>
+                <button class="signal-node-button x" type="button" data-signal-node="x">X</button>
+                <button class="signal-node-button learn" type="button" data-signal-node="learn">Learn</button>
+              </div>
+              <aside class="signal-detail-panel" id="signal-detail-panel" aria-live="polite">
+                <div class="signal-detail-head">
+                  <span id="signal-detail-kicker">RSS</span>
+                  <button type="button" data-signal-close data-i18n="signal_detail_close">Close</button>
+                </div>
+                <h3 id="signal-detail-title">RSS ingest</h3>
+                <div class="signal-detail-tabs" aria-label="Signal detail tabs">
+                  <button class="signal-detail-tab active" type="button" data-signal-node="rss">RSS</button>
+                  <button class="signal-detail-tab" type="button" data-signal-node="draft">Draft</button>
+                  <button class="signal-detail-tab" type="button" data-signal-node="score">Score</button>
+                  <button class="signal-detail-tab" type="button" data-signal-node="x">X</button>
+                  <button class="signal-detail-tab" type="button" data-signal-node="learn">Learn</button>
+                </div>
+                <div class="signal-detail-body" id="signal-detail-body"></div>
+              </aside>
               <div class="signal-metrics" aria-label="Signal metrics">
                 <div>
                   <span data-i18n="hero_signal_label">Signal score</span>
@@ -341,6 +363,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-autoplay1" defer></script>
+    <script src="./script.js?v=20260707-signal1" defer></script>
   </body>
 </html>

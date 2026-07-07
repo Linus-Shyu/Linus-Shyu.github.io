@@ -153,6 +153,25 @@ const translations = {
     expo_mode: "Expo Mode",
     live: "Live",
     signal_map: "Signal Map",
+    signal_detail_close: "Close",
+    signal_rss_title: "RSS ingest",
+    signal_draft_title: "Draft queue",
+    signal_score_title: "Scoring layer",
+    signal_x_title: "X routing",
+    signal_learn_title: "Learning loop",
+    signal_rss_summary: "Feeds supply the raw tech signal. The map shows which sources are producing posts that actually earned attention.",
+    signal_draft_summary: "The bot converts the strongest angles into paste-ready replies without publishing them automatically.",
+    signal_score_summary: "Every post gets scored by impressions, likes, replies, format, and source so the next run can bias toward what worked.",
+    signal_x_summary: "The low-cost workflow sends you to X web search links. Opening these links does not spend X API budget.",
+    signal_learn_summary: "The learning layer turns measured outcomes into tomorrow's hook, source, and format choices.",
+    signal_sources: "Top RSS sources",
+    signal_latest_posts: "Recent posts",
+    signal_drafts: "Ready drafts",
+    signal_actions: "Manual routes",
+    signal_learning: "Learning notes",
+    signal_metrics: "Live metrics",
+    signal_empty: "No data yet",
+    signal_open: "Open",
     hero_signal_label: "Signal score",
     hero_loop_label: "Today's loop",
     hero_cost_label: "Cost guard",
@@ -295,6 +314,25 @@ const translations = {
     expo_mode: "Expo 模式",
     live: "在线",
     signal_map: "信号地图",
+    signal_detail_close: "关闭",
+    signal_rss_title: "RSS 抓取",
+    signal_draft_title: "草稿队列",
+    signal_score_title: "评分层",
+    signal_x_title: "X 分发入口",
+    signal_learn_title: "学习闭环",
+    signal_rss_summary: "RSS 提供原始科技信号。这里展示哪些来源真正带来了更高互动。",
+    signal_draft_summary: "系统把强角度变成可直接粘贴的回复草稿，但不会自动发布。",
+    signal_score_summary: "每条帖都会按曝光、点赞、回复、格式和来源评分，下一次运行会偏向有效模式。",
+    signal_x_summary: "低成本流程只把你送到 X 网页搜索入口。打开这些链接不会消耗 X API 预算。",
+    signal_learn_summary: "学习层把已测结果转成明天应该尝试的钩子、来源和格式。",
+    signal_sources: "最佳 RSS 来源",
+    signal_latest_posts: "近期帖子",
+    signal_drafts: "待用草稿",
+    signal_actions: "人工分发入口",
+    signal_learning: "学习备注",
+    signal_metrics: "实时指标",
+    signal_empty: "暂无数据",
+    signal_open: "打开",
     hero_signal_label: "信号评分",
     hero_loop_label: "今日流程",
     hero_cost_label: "成本守卫",
@@ -474,6 +512,8 @@ let demoStepIndex = 0;
 let demoTimer = null;
 let signalAnimationFrame = null;
 let signalResizeTimer = null;
+let activeSignalNode = "rss";
+let signalDetailOpen = true;
 
 function t(key, vars = {}) {
   const value = translations[currentLang]?.[key] ?? translations.en[key] ?? key;
@@ -1052,6 +1092,235 @@ function renderLearning() {
     .join("");
 }
 
+function signalSourceRows() {
+  const sources = dashboardData.performance?.sources || fallbackData.performance?.sources || [];
+  if (sources.length) return sources;
+
+  const bySource = new Map();
+  (dashboardData.last7d?.topPosts || fallbackData.last7d.topPosts || []).forEach((post) => {
+    const source = post.source || "unknown";
+    const current = bySource.get(source) || { name: source, totalScore: 0, samples: 0 };
+    current.totalScore += number(post.score);
+    current.samples += 1;
+    bySource.set(source, current);
+  });
+  return [...bySource.values()]
+    .map((source) => ({
+      name: source.name,
+      avgScore: source.samples ? source.totalScore / source.samples : 0,
+      samples: source.samples,
+    }))
+    .sort((a, b) => number(b.avgScore) - number(a.avgScore));
+}
+
+function detailRow({ title, meta, body, href, action }) {
+  const titleHtml = href
+    ? `<a href="${escapeHtml(href)}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>`
+    : `<strong>${escapeHtml(title)}</strong>`;
+  return `
+    <div class="signal-detail-row">
+      <div>
+        ${titleHtml}
+        ${meta ? `<span>${escapeHtml(meta)}</span>` : ""}
+      </div>
+      ${body ? `<p>${escapeHtml(body)}</p>` : ""}
+      ${action || ""}
+    </div>
+  `;
+}
+
+function detailStat(label, value) {
+  return `
+    <div>
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+    </div>
+  `;
+}
+
+function detailSection(title, body) {
+  return `
+    <section class="signal-detail-section">
+      <h4>${escapeHtml(title)}</h4>
+      ${body || `<p class="signal-detail-empty">${escapeHtml(t("signal_empty"))}</p>`}
+    </section>
+  `;
+}
+
+function sourceMeta(source) {
+  const score = Number.isFinite(Number(source.avgScore)) ? number(source.avgScore).toFixed(1) : "-";
+  return `${t("score")} ${score} · n=${number(source.samples)}`;
+}
+
+function signalDetailConfig(nodeId) {
+  const profile = dashboardData.profile || {};
+  const last24h = dashboardData.last24h || {};
+  const last7d = dashboardData.last7d || {};
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const actions = dashboardData.actions || fallbackData.actions || [];
+  const posts = last7d.topPosts || fallbackData.last7d.topPosts || [];
+  const { remaining } = apiBudget();
+  const best = bestPost();
+  const sources = signalSourceRows();
+  const { learning, bestHook, bestSource, worstFormat } = learningData();
+  const experiment = currentLang === "zh"
+    ? learning.nextExperimentZh || learning.nextExperiment || "-"
+    : learning.nextExperiment || "-";
+  const topScores = posts.map((post) => number(post.score));
+  const bestScore = Math.max(number(profile.baselineScore), ...topScores, 0);
+
+  if (nodeId === "draft") {
+    return {
+      kicker: "Draft",
+      title: t("signal_draft_title"),
+      summary: t("signal_draft_summary"),
+      body: detailSection(
+        t("signal_drafts"),
+        drafts
+          .slice(0, 3)
+          .map((draft, index) => {
+            const localized = localizeDraftMeta(draft);
+            const action = `<button class="signal-mini-copy" type="button" data-copy="${encodeURIComponent(draft.text || "")}">${t("copy")}</button>`;
+            return detailRow({
+              title: `${String(index + 1).padStart(2, "0")} / ${localized.title}`,
+              meta: localized.angle,
+              body: localized.text,
+              action,
+            });
+          })
+          .join(""),
+      ),
+    };
+  }
+
+  if (nodeId === "score") {
+    return {
+      kicker: "Score",
+      title: t("signal_score_title"),
+      summary: t("signal_score_summary"),
+      body: `
+        <div class="signal-detail-grid">
+          ${detailStat(t("hero_signal_label"), bestScore ? bestScore.toFixed(1) : "-")}
+          ${detailStat(t("metric_24h_impressions"), formatNumber(last24h.impressions))}
+          ${detailStat(t("metric_7d_signal"), formatNumber(last7d.impressions))}
+          ${detailStat(t("proof_format"), formatTemplate(best.template))}
+        </div>
+        ${detailSection(
+          t("signal_latest_posts"),
+          posts
+            .slice(0, 2)
+            .map((post) =>
+              detailRow({
+                title: post.source || post.template || t("tweet"),
+                meta: `${t("score")} ${number(post.score).toFixed(1)} · ${formatNumber(post.impressions)} ${t("impr")}`,
+                body: post.text,
+                href: post.url,
+              }),
+            )
+            .join(""),
+        )}
+      `,
+    };
+  }
+
+  if (nodeId === "x") {
+    return {
+      kicker: "X",
+      title: t("signal_x_title"),
+      summary: t("signal_x_summary"),
+      body: detailSection(
+        t("signal_actions"),
+        actions
+          .slice(0, 3)
+          .map((action, index) => {
+            const localized = localizeAction(action);
+            const draft = draftFor(action.draftIndex ?? index);
+            return detailRow({
+              title: `${String(action.step || index + 1).padStart(2, "0")} / ${localized.label}`,
+              meta: t("open_search"),
+              body: `${localized.reason} ${draft.text}`,
+              href: action.url,
+            });
+          })
+          .join(""),
+      ),
+    };
+  }
+
+  if (nodeId === "learn") {
+    return {
+      kicker: "Learn",
+      title: t("signal_learn_title"),
+      summary: t("signal_learn_summary"),
+      body: `
+        <div class="signal-detail-grid">
+          ${detailStat(t("best_hook"), learningValue(bestHook))}
+          ${detailStat(t("worst_format"), learningValue(worstFormat))}
+          ${detailStat(t("best_source"), learningValue(bestSource))}
+          ${detailStat(t("api_left"), `$${remaining.toFixed(2)}`)}
+        </div>
+        ${detailSection(t("signal_learning"), detailRow({ title: t("next_experiment"), body: experiment }))}
+      `,
+    };
+  }
+
+  return {
+    kicker: "RSS",
+    title: t("signal_rss_title"),
+    summary: t("signal_rss_summary"),
+    body: `
+      ${detailSection(
+        t("signal_sources"),
+        sources
+          .slice(0, 4)
+          .map((source) =>
+            detailRow({
+              title: source.name,
+              meta: sourceMeta(source),
+              body: currentLang === "zh"
+                ? "该来源近期进入了高分内容池，值得继续抓取和观察。"
+                : "This source has recently entered the high-scoring pool and should stay in rotation.",
+            }),
+          )
+          .join(""),
+      )}
+      ${detailSection(
+        t("signal_latest_posts"),
+        posts
+          .slice(0, 2)
+          .map((post) =>
+            detailRow({
+              title: post.source || post.template || t("tweet"),
+              meta: `${t("score")} ${number(post.score).toFixed(1)} · ${formatDate(post.postedAt)}`,
+              body: post.text,
+              href: post.url,
+            }),
+          )
+          .join(""),
+      )}
+    `,
+  };
+}
+
+function renderSignalDetail() {
+  const panel = $("#signal-detail-panel");
+  if (!panel) return;
+  const config = signalDetailConfig(activeSignalNode);
+  panel.classList.toggle("hidden", !signalDetailOpen);
+  $("#signal-detail-kicker").textContent = config.kicker;
+  $("#signal-detail-title").textContent = config.title;
+  $("#signal-detail-body").innerHTML = `
+    <p class="signal-detail-summary">${escapeHtml(config.summary)}</p>
+    ${config.body || `<p class="signal-detail-empty">${escapeHtml(t("signal_empty"))}</p>`}
+  `;
+  document.querySelectorAll("[data-signal-node]").forEach((button) => {
+    const active = button.dataset.signalNode === activeSignalNode && signalDetailOpen;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+    button.setAttribute("aria-expanded", String(active));
+  });
+}
+
 function endpointHealth(endpoint) {
   const failures = number(endpoint.failures);
   const status = number(endpoint.lastStatus);
@@ -1334,6 +1603,19 @@ function bindPreferenceButtons() {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
 
+    const signalButton = target.closest("button[data-signal-node]");
+    if (signalButton) {
+      activeSignalNode = signalButton.dataset.signalNode || "rss";
+      signalDetailOpen = true;
+      renderSignalDetail();
+      return;
+    }
+    const signalClose = target.closest("button[data-signal-close]");
+    if (signalClose) {
+      signalDetailOpen = false;
+      renderSignalDetail();
+      return;
+    }
     const demoButton = target.closest("button[data-demo-toggle]");
     if (demoButton) {
       setDemoMode(!demoMode);
@@ -1379,6 +1661,7 @@ function render() {
   renderMetrics();
   renderGoal();
   renderLearning();
+  renderSignalDetail();
   renderProof();
   renderServices();
   renderTrend();
