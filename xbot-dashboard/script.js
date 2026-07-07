@@ -91,16 +91,103 @@ const fallbackData = {
   ],
   api: {
     month: "2026-07",
-    spend: 1.33,
+    spend: 1.69,
     cap: 5,
-    endpoints: [
-      { name: "OAUTH_REFRESH", calls: 19, failures: 1, usd: 0, lastStatus: 200 },
-      { name: "CREATE_TWEET", calls: 17, failures: 0, usd: 0.255, lastStatus: 201 },
-      { name: "RECENT_SEARCH", calls: 16, failures: 0, usd: 0, lastStatus: 200 },
-      { name: "USER_ME_LOOKUP", calls: 15, failures: 0, usd: 0.35, lastStatus: 200 },
-      { name: "TWEET_METRICS_LOOKUP", calls: 13, failures: 0, usd: 0.35, lastStatus: 200 },
-      { name: "MEDIA_UPLOAD", calls: 15, failures: 0, usd: 0.375, lastStatus: 200 },
+    safeCap: 4.5,
+    remaining: 3.31,
+    safeRemaining: 2.81,
+    days: [
+      { date: "2026-07-01", label: "07-01", value: 26, calls: 26, failures: 1, usd: 0.42 },
+      { date: "2026-07-02", label: "07-02", value: 18, calls: 18, failures: 0, usd: 0.23 },
+      { date: "2026-07-03", label: "07-03", value: 16, calls: 16, failures: 0, usd: 0.18 },
+      { date: "2026-07-04", label: "07-04", value: 12, calls: 12, failures: 0, usd: 0.14 },
+      { date: "2026-07-05", label: "07-05", value: 11, calls: 11, failures: 0, usd: 0.13 },
+      { date: "2026-07-06", label: "07-06", value: 15, calls: 15, failures: 0, usd: 0.18 },
+      { date: "2026-07-07", label: "07-07", value: 14, calls: 14, failures: 1, usd: 0.18 },
     ],
+    endpoints: [
+      { name: "OAUTH_REFRESH", calls: 23, failures: 1, usd: 0, lastStatus: 200 },
+      { name: "CREATE_TWEET", calls: 20, failures: 0, usd: 0.3, lastStatus: 201 },
+      { name: "USER_ME_LOOKUP", calls: 17, failures: 0, usd: 0.45, lastStatus: 200 },
+      { name: "RECENT_SEARCH", calls: 16, failures: 0, usd: 0, lastStatus: 200 },
+      { name: "TWEET_METRICS_LOOKUP", calls: 15, failures: 0, usd: 0.45, lastStatus: 200 },
+      { name: "MEDIA_INITIALIZE", calls: 6, failures: 0, usd: 0.09, lastStatus: 200 },
+      { name: "MEDIA_APPEND", calls: 6, failures: 0, usd: 0.2, lastStatus: 200 },
+      { name: "MEDIA_FINALIZE", calls: 6, failures: 0, usd: 0.2, lastStatus: 200 },
+      { name: "AUTO_REPLY_SEARCH", calls: 2, failures: 0, usd: 0, lastStatus: 200 },
+      { name: "CREATE_REPLY", calls: 1, failures: 1, usd: 0, lastStatus: 403 },
+    ],
+  },
+  charts: {
+    impressions24h: {
+      label: "24h impressions",
+      unit: "impressions",
+      source: "tweet_metrics",
+      total: 233,
+      current: 5,
+      points: [
+        { label: "16:00", value: 9, posts: 1 },
+        { label: "18:00", value: 219, posts: 1 },
+        { label: "20:00", value: 0, posts: 0 },
+        { label: "22:00", value: 5, posts: 1 },
+        { label: "00:00", value: 0, posts: 0 },
+        { label: "02:00", value: 0, posts: 0 },
+        { label: "04:00", value: 0, posts: 0 },
+      ],
+    },
+    impressions7d: {
+      label: "7d impressions",
+      unit: "impressions",
+      source: "tweet_metrics",
+      total: 621,
+      current: 233,
+      points: [
+        { label: "07-01", value: 88, posts: 3 },
+        { label: "07-02", value: 71, posts: 4 },
+        { label: "07-03", value: 63, posts: 3 },
+        { label: "07-04", value: 49, posts: 3 },
+        { label: "07-05", value: 55, posts: 4 },
+        { label: "07-06", value: 62, posts: 4 },
+        { label: "07-07", value: 233, posts: 3 },
+      ],
+    },
+    xApiCallsDaily: {
+      label: "X API calls",
+      unit: "calls",
+      source: "x_api_usage.days",
+      total: 112,
+      current: 14,
+      points: [
+        { label: "07-01", value: 26 },
+        { label: "07-02", value: 18 },
+        { label: "07-03", value: 16 },
+        { label: "07-04", value: 12 },
+        { label: "07-05", value: 11 },
+        { label: "07-06", value: 15 },
+        { label: "07-07", value: 14 },
+      ],
+    },
+  },
+  automation: {
+    publishMode: "manual_paste",
+    zeroWasteManualMode: true,
+    autoReplyEnabled: false,
+    autoReplyMode: "mentions",
+    hotspotRadarEnabled: false,
+    manualReplyDraftsEnabled: true,
+    manualReplyDraftsReady: 5,
+    manualRoutesReady: 3,
+    extraXReadsForManualReplies: 0,
+    projectedManualReplyUsd: 0,
+    budgetGuard: {
+      capUsd: 5,
+      safeCapUsd: 4.5,
+      trackedSpendUsd: 1.69,
+      trackedSafeRemainingUsd: 2.81,
+      estimatedReadUsd: 0.05,
+      estimatedTextPostUsd: 0.015,
+      estimatedImagePostUsd: 0.03,
+    },
   },
   growthGoal: {
     targetFollowers: 1000,
@@ -683,9 +770,14 @@ function formatDate(value) {
 
 function apiBudget() {
   const api = dashboardData.api || {};
+  const guard = dashboardData.automation?.budgetGuard || {};
   const spend = number(api.spend);
-  const cap = number(api.cap, 5);
-  const remaining = Math.max(0, cap - spend);
+  const cap = number(api.cap, number(guard.capUsd, 5));
+  const remaining = api.remaining != null
+    ? number(api.remaining)
+    : guard.trackedSafeRemainingUsd != null
+      ? number(guard.trackedSafeRemainingUsd)
+      : Math.max(0, cap - spend);
   const ratio = cap > 0 ? Math.min(100, (spend / cap) * 100) : 0;
   return { api, spend, cap, remaining, ratio };
 }
@@ -1141,11 +1233,24 @@ function seriesStats(series, totalOverride = null) {
 }
 
 function endpointCallSeries() {
+  const chart = dashboardData.charts?.xApiCallsDaily;
+  if (Array.isArray(chart?.points) && chart.points.length) {
+    return chart.points.map((point) => number(point.value ?? point.calls));
+  }
+  const days = dashboardData.api?.days || [];
+  if (days.length) return days.map((day) => number(day.value ?? day.calls));
   const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
   return cumulativeSeries(endpoints.map((endpoint) => number(endpoint.calls)));
 }
 
-function impressionSeries(periodData) {
+function chartPointValues(chart) {
+  if (!Array.isArray(chart?.points) || !chart.points.length) return [];
+  return chart.points.map((point) => number(point.value));
+}
+
+function impressionSeries(periodData, chartKey = "impressions24h") {
+  const chartValues = chartPointValues(dashboardData.charts?.[chartKey]);
+  if (chartValues.length) return chartValues;
   const period = periodData || dashboardData.last24h || {};
   const posts = [...(period.topPosts || [])].sort((a, b) => {
     const aTime = new Date(a.postedAt || 0).getTime();
@@ -1165,8 +1270,12 @@ function renderMonitorPanels() {
   const loadChart = $("#monitor-load-chart");
   if (!loadChart) return;
   const last24h = dashboardData.last24h || fallbackData.last24h || {};
-  const impressionStats = seriesStats(impressionSeries(last24h), number(last24h.impressions));
-  $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(impressionStats.current) });
+  const impressionChart = dashboardData.charts?.impressions24h;
+  const impressionStats = seriesStats(
+    impressionSeries(last24h, "impressions24h"),
+    number(impressionChart?.total, number(last24h.impressions)),
+  );
+  $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(impressionStats.total) });
   loadChart.innerHTML = `
     ${chartSvg(impressionStats.values, "primary")}
     <div class="chart-legend">
@@ -1178,8 +1287,9 @@ function renderMonitorPanels() {
   const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
   const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);
   const failures = endpoints.reduce((sum, endpoint) => sum + number(endpoint.failures), 0);
-  const endpointStats = seriesStats(endpointCallSeries(), calls);
-  $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(endpointStats.current) });
+  const endpointChart = dashboardData.charts?.xApiCallsDaily;
+  const endpointStats = seriesStats(endpointCallSeries(), number(endpointChart?.total, calls));
+  $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(endpointStats.total) });
   $("#monitor-request-chart").innerHTML = `
     ${chartSvg(endpointStats.values, "secondary")}
     <div class="chart-legend">
@@ -1782,7 +1892,7 @@ function renderServices() {
 }
 
 function trendSeries() {
-  return impressionSeries(dashboardData.last7d || fallbackData.last7d || {});
+  return impressionSeries(dashboardData.last7d || fallbackData.last7d || {}, "impressions7d");
 }
 
 function renderTrend() {
