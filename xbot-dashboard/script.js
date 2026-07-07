@@ -587,6 +587,11 @@ const fallbackData = {
         ageHours: 2.3,
         echoes: 4,
         reason: "2.3h old · 4 echoes · 5 sources · official source · AI / Agent Stack",
+        routeUrl: "https://x.com/search?q=(AI%20OR%20agent%20OR%20model%20OR%20GitHub)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        routeQuery: "(AI OR agent OR model OR GitHub) -is:retweet lang:en min_faves:5",
+        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
+        replyAngle: "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        zeroExtraXReads: true,
       },
       {
         rank: 2,
@@ -601,6 +606,11 @@ const fallbackData = {
         ageHours: 4.8,
         echoes: 3,
         reason: "4.8h old · 3 echoes · 4 sources · mainstream source · Big Tech Platform",
+        routeUrl: "https://x.com/search?q=(Apple%20OR%20Google%20OR%20Microsoft%20OR%20platform)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        routeQuery: "(Apple OR Google OR Microsoft OR platform) -is:retweet lang:en min_faves:5",
+        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
+        replyAngle: "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        zeroExtraXReads: true,
       },
       {
         rank: 3,
@@ -615,6 +625,11 @@ const fallbackData = {
         ageHours: 1.1,
         echoes: 1,
         reason: "1.1h old · 1 echoes · 2 sources · mainstream source · Consumer Apps",
+        routeUrl: "https://x.com/search?q=(app%20OR%20consumer%20OR%20iPhone%20OR%20Android)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        routeQuery: "(app OR consumer OR iPhone OR Android) -is:retweet lang:en min_faves:5",
+        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
+        replyAngle: "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        zeroExtraXReads: true,
       },
     ],
   },
@@ -1102,6 +1117,8 @@ const translations = {
     velocity_age: "{hours}h",
     velocity_echoes: "{count} echoes",
     velocity_lift: "lift {lift}%",
+    velocity_open_route: "Open route",
+    velocity_copy_angle: "Copy angle",
     velocity_empty: "No trend velocity radar available.",
     matrix_eyebrow: "UTC Angle Matrix",
     matrix_title: "Temporal prompt fire-control",
@@ -1510,6 +1527,8 @@ const translations = {
     velocity_age: "{hours} 小时",
     velocity_echoes: "{count} 次回声",
     velocity_lift: "增益 {lift}%",
+    velocity_open_route: "打开路由",
+    velocity_copy_angle: "复制角度",
     velocity_empty: "暂无趋势速度雷达。",
     matrix_eyebrow: "UTC 角度矩阵",
     matrix_title: "时间 Prompt 火控",
@@ -3533,6 +3552,8 @@ function renderTrendVelocityRadar() {
         const age = item.ageHours === null || item.ageHours === undefined ? "-" : t("velocity_age", { hours: formatNumber(item.ageHours, 1) });
         const liftPct = formatNumber(number(item.velocityLift) * 100, 1);
         const safeLink = /^https?:\/\//i.test(item.link || "") ? item.link : "";
+        const safeRouteUrl = /^https:\/\/x\.com\/search\?/i.test(item.routeUrl || "") ? item.routeUrl : "";
+        const replyAngle = item.replyAngle || item.routeReason || item.reason || "";
         return `
           <article class="velocity-row ${escapeHtml(item.stage || "watch")}" style="--velocity-score:${score.toFixed(1)}%">
             <div class="velocity-rank">${escapeHtml(String(item.rank || "-").padStart(2, "0"))}</div>
@@ -3540,6 +3561,10 @@ function renderTrendVelocityRadar() {
               <span>${escapeHtml(velocityStageLabel(item.stage))} · ${escapeHtml(item.source || "-")} · ${escapeHtml(item.audienceLabel || "-")}</span>
               ${safeLink ? `<a href="${escapeHtml(safeLink)}" target="_blank" rel="noreferrer">${escapeHtml(item.title || "-")}</a>` : `<strong>${escapeHtml(item.title || "-")}</strong>`}
               <small>${escapeHtml(age)} · ${escapeHtml(t("velocity_echoes", { count: formatNumber(item.echoes) }))} · ${escapeHtml(t("velocity_lift", { lift: liftPct }))}</small>
+            </div>
+            <div class="velocity-actions">
+              ${safeRouteUrl ? `<a href="${escapeHtml(safeRouteUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("velocity_open_route"))}</a>` : ""}
+              <button type="button" data-copy="${encodeURIComponent(replyAngle)}">${escapeHtml(t("velocity_copy_angle"))}</button>
             </div>
             <div class="velocity-score">
               <strong>${escapeHtml(formatNumber(score, 1))}</strong>

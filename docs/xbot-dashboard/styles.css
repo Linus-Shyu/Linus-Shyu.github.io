@@ -7373,7 +7373,7 @@ body:not(.demo-mode) .demo-strip {
 .velocity-row {
   position: relative;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 92px;
+  grid-template-columns: 34px minmax(0, 1fr) 108px 92px;
   gap: 9px;
   align-items: center;
   overflow: hidden;
@@ -7454,6 +7454,45 @@ body:not(.demo-mode) .demo-strip {
   gap: 5px;
   justify-items: end;
   min-width: 0;
+}
+
+.velocity-actions {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.velocity-actions a,
+.velocity-actions button {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 5px;
+  padding: 5px 6px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #00f0ff 10%, transparent), transparent),
+    color-mix(in srgb, var(--surface) 62%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.velocity-actions button {
+  cursor: pointer;
+}
+
+.velocity-actions a:hover,
+.velocity-actions button:hover {
+  border-color: color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  color: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.12);
 }
 
 .velocity-score strong {
