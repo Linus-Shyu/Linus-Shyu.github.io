@@ -138,7 +138,7 @@ const fallbackData = {
     remaining: 3.31,
     safeRemaining: 2.81,
     statusTriage: {
-      severity: "warn",
+      severity: "cached",
       totalCalls: 112,
       totalFailures: 2,
       success2xx: 110,
@@ -146,13 +146,18 @@ const fallbackData = {
       backendFault5xx: 0,
       authFault4xx: 1,
       clientFault4xx: 0,
+      activeRateLimit429: 0,
+      activeBackendFault5xx: 0,
+      activeAuthFault4xx: 0,
+      activeClientFault4xx: 0,
       failureRate: 1.79,
       summary: "0 rate-limit, 0 backend, 1 auth, 0 client faults across 112 X API ops.",
-      action: "Check OAuth scopes/tokens before the next publish or live read.",
+      action: "Historical X API failures are recorded, but the latest endpoint states are clear.",
       incidents: [
         {
           endpoint: "CREATE_REPLY",
-          severity: "warn",
+          severity: "cached",
+          active: false,
           calls: 1,
           failures: 1,
           lastStatus: 403,
@@ -163,6 +168,19 @@ const fallbackData = {
           clientFault4xx: 0,
         },
       ],
+    },
+    cooldown: {
+      active: false,
+      reasonCode: "none",
+      severity: "ok",
+      endpoint: null,
+      status: null,
+      since: null,
+      until: null,
+      remainingMinutes: 0,
+      cooldownMinutes: 0,
+      readGate: "cached_only",
+      reason: "No active X API cooldown.",
     },
     days: [
       { date: "2026-07-01", label: "07-01", value: 26, calls: 26, failures: 1, usd: 0.42 },
@@ -459,9 +477,11 @@ const translations = {
     alert_danger_title: "Fallback telemetry active",
     alert_danger_body: "Live dashboard data could not be fetched, so the console is rendering fallback telemetry.",
     triage_state_ok: "HTTP partitions nominal",
+    triage_state_cached: "Historical faults only",
     triage_state_warn: "HTTP status watch",
     triage_state_danger: "HTTP fault active",
     triage_title_ok: "HTTP partitions nominal",
+    triage_title_cached: "Historical X API faults recorded",
     triage_title_warn: "HTTP status triage requires review",
     triage_title_danger: "429 / 5xx fault partition active",
     triage_summary_ok: "0 rate-limit / 5xx faults across {calls} X API ops.",
@@ -768,9 +788,11 @@ const translations = {
     alert_danger_title: "备用遥测启用",
     alert_danger_body: "实时看板数据拉取失败，因此控制台正在渲染备用遥测。",
     triage_state_ok: "HTTP 分区正常",
+    triage_state_cached: "仅有历史故障",
     triage_state_warn: "HTTP 状态观察",
     triage_state_danger: "HTTP 故障激活",
     triage_title_ok: "HTTP 分区全部正常",
+    triage_title_cached: "记录到历史 X API 故障",
     triage_title_warn: "HTTP 状态分诊需要复核",
     triage_title_danger: "429 / 5xx 故障分区激活",
     triage_summary_ok: "{calls} 次 X API 操作中没有 429 / 5xx 故障。",
@@ -1263,20 +1285,24 @@ function controlPlaneData() {
   if (control) return control;
   const cadence = cadenceData();
   const triage = apiStatusTriage();
+  const cooldown = (dashboardData.api || fallbackData.api || {}).cooldown || {};
+  const cooldownActive = Boolean(cooldown.active);
   const { remaining } = apiBudget();
   return {
-    mode: cadence.publishAllowed ? "scale_experiment" : "manual_distribution",
-    severity: triage.severity === "danger" ? "danger" : cadence.publishAllowed ? "ok" : "warn",
-    pressureScore: cadence.publishAllowed ? 72 : 48,
-    decision: cadence.reason || "-",
-    nextAction: cadence.nextAction || "-",
+    mode: cooldownActive ? "cooldown" : cadence.publishAllowed ? "scale_experiment" : "manual_distribution",
+    severity: cooldownActive || triage.severity === "danger" ? "danger" : cadence.publishAllowed ? "ok" : "warn",
+    pressureScore: cooldownActive ? 24 : cadence.publishAllowed ? 72 : 48,
+    decision: cooldownActive ? "Live X read/search gates are closed until the cooldown expires." : cadence.reason || "-",
+    nextAction: cooldownActive ? cooldown.reason || "-" : cadence.nextAction || "-",
     publishGate: cadence.publishAllowed ? "open" : "review",
-    readGate: triage.severity === "danger" ? "closed" : "cached_only",
+    readGate: cooldownActive || triage.severity === "danger" ? "closed" : "cached_only",
     distributionGate: "ready",
     budgetGate: `$${remaining.toFixed(2)}`,
     topRoute: (dashboardData.opportunities || fallbackData.opportunities || [])[0] || null,
     topFormat: (dashboardData.experimentPlan || fallbackData.experimentPlan || {}).recommendedFormats?.[0] || null,
-    pulses: [],
+    pulses: cooldownActive
+      ? [{ id: "read", label: "X read gate", value: `${formatNumber(cooldown.remainingMinutes)} min`, status: "danger", detail: cooldown.reason || "" }]
+      : [],
     safeguards: [],
   };
 }
@@ -1932,6 +1958,10 @@ function deriveApiStatusTriage(api = {}) {
     backendFault5xx: 0,
     authFault4xx: 0,
     clientFault4xx: 0,
+    activeRateLimit429: 0,
+    activeBackendFault5xx: 0,
+    activeAuthFault4xx: 0,
+    activeClientFault4xx: 0,
   };
   const incidents = [];
 
@@ -1944,9 +1974,27 @@ function deriveApiStatusTriage(api = {}) {
       backendFault5xx: 0,
       authFault4xx: 0,
       clientFault4xx: 0,
+      activeRateLimit429: 0,
+      activeBackendFault5xx: 0,
+      activeAuthFault4xx: 0,
+      activeClientFault4xx: 0,
     };
     totals.totalCalls += calls;
     totals.totalFailures += failures;
+    const latestCode = Number.parseInt(String(endpoint.lastStatus ?? ""), 10);
+    if (latestCode === 429) {
+      totals.activeRateLimit429 += 1;
+      local.activeRateLimit429 += 1;
+    } else if (latestCode >= 500) {
+      totals.activeBackendFault5xx += 1;
+      local.activeBackendFault5xx += 1;
+    } else if (latestCode === 401 || latestCode === 403) {
+      totals.activeAuthFault4xx += 1;
+      local.activeAuthFault4xx += 1;
+    } else if (latestCode >= 400) {
+      totals.activeClientFault4xx += 1;
+      local.activeClientFault4xx += 1;
+    }
     Object.entries(statuses).forEach(([status, countValue]) => {
       const code = Number.parseInt(status, 10);
       const count = number(countValue);
@@ -1973,9 +2021,16 @@ function deriveApiStatusTriage(api = {}) {
       local.authFault4xx ||
       local.clientFault4xx
     ) {
+      const active = Boolean(
+        local.activeRateLimit429 ||
+        local.activeBackendFault5xx ||
+        local.activeAuthFault4xx ||
+        local.activeClientFault4xx,
+      );
       incidents.push({
         endpoint: endpoint.name || "-",
-        severity: local.rateLimit429 || local.backendFault5xx ? "danger" : "warn",
+        severity: local.activeRateLimit429 || local.activeBackendFault5xx ? "danger" : active ? "warn" : "cached",
+        active,
         calls,
         failures,
         lastStatus: endpoint.lastStatus || null,
@@ -1986,10 +2041,12 @@ function deriveApiStatusTriage(api = {}) {
   });
 
   const failureRate = totals.totalCalls ? (totals.totalFailures / totals.totalCalls) * 100 : 0;
-  const severity = totals.rateLimit429 || totals.backendFault5xx
+  const severity = totals.activeRateLimit429 || totals.activeBackendFault5xx
     ? "danger"
-    : totals.totalFailures || totals.authFault4xx || totals.clientFault4xx
+    : totals.activeAuthFault4xx || totals.activeClientFault4xx
       ? "warn"
+      : totals.totalFailures
+        ? "cached"
       : "ok";
   return {
     ...totals,
@@ -2043,9 +2100,10 @@ function triageSummary(triage) {
 
 function triageAction(triage) {
   if (!triage || triage.severity === "ok") return t("triage_action_ok");
-  if (number(triage.rateLimit429) > 0) return t("triage_action_rate_limit");
-  if (number(triage.backendFault5xx) > 0) return t("triage_action_backend");
-  if (number(triage.authFault4xx) > 0) return t("triage_action_auth");
+  if (number(triage.activeRateLimit429 ?? triage.rateLimit429) > 0) return t("triage_action_rate_limit");
+  if (number(triage.activeBackendFault5xx ?? triage.backendFault5xx) > 0) return t("triage_action_backend");
+  if (number(triage.activeAuthFault4xx ?? triage.authFault4xx) > 0) return t("triage_action_auth");
+  if (triage.severity === "cached") return t("alert_cached_body");
   return t("triage_action_client");
 }
 
@@ -2144,7 +2202,7 @@ function renderMonitorPanels() {
       : freshness.className === "warn"
         ? "warn"
         : "danger";
-  const triageKey = triage.severity === "danger" ? "danger" : triage.severity === "warn" ? "warn" : "ok";
+  const triageKey = ["danger", "warn", "cached"].includes(triage.severity) ? triage.severity : "ok";
   const alertKey = worseSeverity(freshnessKey, triageKey);
   $("#monitor-alert-state").textContent = triage.severity === "ok" ? t(freshness.key) : t(`triage_state_${triage.severity}`);
   alert.className = `alert-console ${alertKey}`;
