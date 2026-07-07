@@ -1424,15 +1424,17 @@ h3 {
   display: grid;
   left: var(--signal-node-x, 50%);
   top: var(--signal-node-y, 50%);
+  width: 146px;
+  max-width: calc(100% - 28px);
   align-content: center;
   justify-items: start;
-  min-width: 118px;
+  min-width: 0;
   min-height: 58px;
   transform: translate(-50%, -50%);
   gap: 4px;
   border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
   border-radius: 6px;
-  padding: 10px 38px 9px 30px;
+  padding: 10px 34px 9px 30px;
   color: var(--ink);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 54%),
@@ -1474,6 +1476,8 @@ h3 {
   position: absolute;
   top: 8px;
   right: 8px;
+  max-width: 30px;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--ok) 34%, transparent);
   border-radius: 999px;
   padding: 2px 5px;
@@ -1488,7 +1492,8 @@ h3 {
 .signal-node-button .signal-node-label,
 .signal-node-button em {
   display: block;
-  max-width: 112px;
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1518,6 +1523,7 @@ h3 {
 }
 
 .signal-node-button.x {
+  width: 152px;
   border-color: color-mix(in srgb, var(--accent-2) 46%, var(--line));
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 13%, transparent), transparent 58%),
@@ -1536,6 +1542,10 @@ h3 {
 .signal-node-button.draft::before {
   background: var(--accent-3);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-3) 10%, transparent);
+}
+
+.signal-node-button.draft {
+  width: 156px;
 }
 
 .signal-node-button.warn::before {

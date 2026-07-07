@@ -1507,11 +1507,20 @@ function cadenceData() {
 }
 
 const SIGNAL_NODE_COORDS = {
-  rss: { x: 0.18, y: 0.3 },
-  score: { x: 0.5, y: 0.2 },
-  draft: { x: 0.24, y: 0.5 },
-  x: { x: 0.74, y: 0.36 },
-  learn: { x: 0.78, y: 0.5 },
+  rss: { x: 0.2, y: 0.32 },
+  score: { x: 0.5, y: 0.19 },
+  draft: { x: 0.22, y: 0.72 },
+  x: { x: 0.76, y: 0.38 },
+  learn: { x: 0.78, y: 0.72 },
+};
+
+const SIGNAL_NODE_BOUNDS = {
+  default: { minX: 0.14, maxX: 0.86, minY: 0.16, maxY: 0.84 },
+  rss: { minX: 0.16, maxX: 0.4, minY: 0.2, maxY: 0.48 },
+  score: { minX: 0.36, maxX: 0.64, minY: 0.16, maxY: 0.34 },
+  draft: { minX: 0.16, maxX: 0.42, minY: 0.58, maxY: 0.82 },
+  x: { minX: 0.62, maxX: 0.84, minY: 0.28, maxY: 0.5 },
+  learn: { minX: 0.62, maxX: 0.84, minY: 0.58, maxY: 0.82 },
 };
 
 const SIGNAL_NODE_LABELS = {
@@ -1526,7 +1535,7 @@ const SIGNAL_NODE_LABELS = {
     rss: "RSS",
     score: "SCORE",
     draft: "群体输出",
-    x: "X 路由",
+    x: "X_ROUTE",
     learn: "LEARN",
   },
 };
@@ -1620,6 +1629,19 @@ function normalizeSignalMapRoute(route = {}) {
   };
 }
 
+function signalNodeBounds(nodeId) {
+  return SIGNAL_NODE_BOUNDS[nodeId] || SIGNAL_NODE_BOUNDS.default;
+}
+
+function normalizeSignalNodePosition(node = {}) {
+  const defaults = SIGNAL_NODE_COORDS[node.id] || { x: 0.5, y: 0.5 };
+  const bounds = signalNodeBounds(node.id);
+  return {
+    x: clamp(number(node.x, defaults.x), bounds.minX, bounds.maxX),
+    y: clamp(number(node.y, defaults.y), bounds.minY, bounds.maxY),
+  };
+}
+
 function controlPlaneData() {
   const control = dashboardData.controlPlane || fallbackData.controlPlane;
   if (control) return control;
@@ -1664,18 +1686,20 @@ function gateStatus(value, fallback = "ok") {
 function signalMap() {
   const incoming = dashboardData.signalMap || fallbackData.signalMap;
   const map = incoming?.nodes?.length ? incoming : buildDerivedSignalMap();
-  const nodes = (map.nodes || []).map((node) => ({
-    ...normalizeSignalMapNode(node),
-    x: number(node.x, SIGNAL_NODE_COORDS[node.id]?.x ?? 0.5),
-    y: number(node.y, SIGNAL_NODE_COORDS[node.id]?.y ?? 0.5),
-  }));
+  const nodes = (map.nodes || []).map((node) => {
+    const normalized = normalizeSignalMapNode(node);
+    return {
+      ...normalized,
+      ...normalizeSignalNodePosition(normalized),
+    };
+  });
   return {
     ...map,
     core: {
       ...(map.core || {}),
       label: map.core?.label || "CORE",
-      x: number(map.core?.x, 0.46),
-      y: number(map.core?.y, 0.54),
+      x: clamp(number(map.core?.x, 0.48), 0.38, 0.62),
+      y: clamp(number(map.core?.y, 0.5), 0.4, 0.6),
     },
     nodes,
     routes: Array.isArray(map.routes) ? map.routes.map(normalizeSignalMapRoute) : [],
@@ -2711,8 +2735,25 @@ function signalCanvasPalette() {
 
 function signalCanvasPoint(point, width, height) {
   return {
-    x: clamp(point?.x ?? 0.5, 0.08, 0.92) * width,
-    y: clamp(point?.y ?? 0.5, 0.12, 0.88) * height,
+    x: clamp(point?.x ?? 0.5, 0.12, 0.88) * width,
+    y: clamp(point?.y ?? 0.5, 0.14, 0.86) * height,
+  };
+}
+
+function signalCanvasNodeRadius(node, width, height) {
+  const shortSide = Math.min(width, height);
+  if (!node || node.label === "CORE") return Math.max(42, shortSide * 0.078);
+  if (node.id === "draft" || node.id === "x") return Math.max(82, shortSide * 0.14);
+  return Math.max(68, shortSide * 0.12);
+}
+
+function signalCanvasEdgePoint(from, to, radius) {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const distance = Math.hypot(dx, dy) || 1;
+  return {
+    x: from.x + (dx / distance) * radius,
+    y: from.y + (dy / distance) * radius,
   };
 }
 
@@ -2732,11 +2773,13 @@ function drawSignalCanvas(canvas, ctx, time) {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const grid = 44 * dpr;
   const center = signalCanvasPoint(model.core, width, height);
+  const coreRadius = signalCanvasNodeRadius(model.core, width, height);
   const nodePoints = new Map(
     model.nodes.map((node) => [
       node.id,
       {
         ...signalCanvasPoint(node, width, height),
+        radius: signalCanvasNodeRadius(node, width, height),
         node,
       },
     ]),
@@ -2784,9 +2827,11 @@ function drawSignalCanvas(canvas, ctx, time) {
   }
 
   nodePoints.forEach((point, nodeId) => {
+    const from = signalCanvasEdgePoint(center, point, coreRadius * 0.92);
+    const to = signalCanvasEdgePoint(point, center, point.radius * 0.86);
     ctx.beginPath();
-    ctx.moveTo(center.x, center.y);
-    ctx.lineTo(point.x, point.y);
+    ctx.moveTo(from.x, from.y);
+    ctx.lineTo(to.x, to.y);
     ctx.strokeStyle = colorWithAlpha(
       nodeId === "x" || nodeId === "learn" ? palette.ok : palette.accent,
       currentTheme === "dark" ? 0.11 : 0.13,
@@ -2796,12 +2841,14 @@ function drawSignalCanvas(canvas, ctx, time) {
   });
 
   routes.forEach((route) => {
-    const from = route.from;
-    const to = route.to;
+    const rawFrom = route.from;
+    const rawTo = route.to;
+    const from = signalCanvasEdgePoint(rawFrom, rawTo, (rawFrom.radius || coreRadius) * 0.9);
+    const to = signalCanvasEdgePoint(rawTo, rawFrom, (rawTo.radius || coreRadius) * 0.9);
     const normalized = route.value / maxRouteValue;
-    const color = route.to.node?.id === "x" || route.from.node?.id === "x"
+    const color = rawTo.node?.id === "x" || rawFrom.node?.id === "x"
       ? palette.ok
-      : route.to.node?.id === "draft" || route.from.node?.id === "draft"
+      : rawTo.node?.id === "draft" || rawFrom.node?.id === "draft"
         ? palette.accent3
         : palette.accent;
     const bend = ((route.index % 2 ? 32 : -26) + normalized * 18) * dpr;
@@ -2836,7 +2883,6 @@ function drawSignalCanvas(canvas, ctx, time) {
   ctx.stroke();
   ctx.restore();
 
-  const coreRadius = Math.max(34 * dpr, Math.min(width, height) * 0.075);
   ctx.beginPath();
   ctx.arc(center.x, center.y, coreRadius, 0, Math.PI * 2);
   ctx.fillStyle = colorWithAlpha(palette.accent, currentTheme === "dark" ? 0.2 : 0.12);
