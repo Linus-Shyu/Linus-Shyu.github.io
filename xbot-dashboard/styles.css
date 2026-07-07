@@ -5396,13 +5396,15 @@ body:not(.demo-mode) .demo-strip {
 }
 
 .control-plane-panel,
-.control-route-panel {
+.control-route-panel,
+.flywheel-panel {
   position: relative;
   overflow: hidden;
 }
 
 .control-plane-panel::before,
-.control-route-panel::before {
+.control-route-panel::before,
+.flywheel-panel::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -5410,6 +5412,10 @@ body:not(.demo-mode) .demo-strip {
   background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent);
   opacity: 0.72;
   pointer-events: none;
+}
+
+.flywheel-panel {
+  grid-column: 1 / -1;
 }
 
 .control-plane-body {
@@ -5589,6 +5595,153 @@ body:not(.demo-mode) .demo-strip {
   background: var(--accent-2);
 }
 
+.flywheel-body {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.36fr) minmax(0, 1fr) minmax(260px, 0.52fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.flywheel-core,
+.flywheel-stage,
+.flywheel-rules {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 54%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), color-mix(in srgb, var(--surface-soft) 86%, transparent)),
+    var(--surface-soft);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.flywheel-core {
+  padding: 13px;
+}
+
+.flywheel-core span,
+.flywheel-stage span,
+.flywheel-rules span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.flywheel-core strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent-2);
+  font-family: var(--code-font);
+  font-size: 34px;
+  font-weight: 920;
+  line-height: 1;
+  text-shadow: 0 0 22px color-mix(in srgb, var(--accent-2) 24%, transparent);
+}
+
+.flywheel-core p {
+  margin: 10px 0 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.flywheel-stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.flywheel-stage {
+  position: relative;
+  padding: 10px;
+}
+
+.flywheel-stage::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent-2);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-2) 12%, transparent);
+}
+
+.flywheel-stage.warn::before {
+  background: var(--warn);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--warn) 13%, transparent);
+}
+
+.flywheel-stage.danger::before {
+  background: var(--danger);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--danger) 13%, transparent);
+}
+
+.flywheel-stage strong {
+  display: block;
+  margin-top: 8px;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flywheel-stage small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: 30px;
+  overflow: hidden;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.flywheel-rules {
+  padding: 12px;
+}
+
+.flywheel-rules ul {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flywheel-rules li {
+  position: relative;
+  overflow: hidden;
+  padding-left: 13px;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flywheel-rules li::before {
+  content: "";
+  position: absolute;
+  top: 0.56em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
 .pill-warn {
   border-color: color-mix(in srgb, var(--warn) 36%, var(--line));
   color: var(--warn);
@@ -5702,7 +5855,9 @@ body:not(.demo-mode) .demo-strip {
   .control-plane-grid,
   .control-plane-body,
   .control-gates,
-  .control-pulses {
+  .control-pulses,
+  .flywheel-body,
+  .flywheel-stages {
     grid-template-columns: 1fr;
   }
 }

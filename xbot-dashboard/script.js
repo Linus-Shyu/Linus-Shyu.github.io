@@ -319,6 +319,40 @@ const fallbackData = {
       "Manual web routes spend 0 X API read budget.",
     ],
   },
+  viralFlywheel: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "reply_burst",
+    zeroExtraXReads: true,
+    velocityScore: 68.4,
+    expectedLiftPct: 84.6,
+    baselineScore: 3.9,
+    safeBudgetLeftUsd: 2.81,
+    nextBurst: {
+      label: "decision rule replies",
+      routeLabel: "Target Accounts",
+      routeUrl: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama)%20(AI%20OR%20tech)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      draftText: "Launch rule for AI products: demo quality matters less than failure shape. If users can’t predict when it will be wrong, support cost becomes the real roadmap.",
+      targetReplies: 3,
+      expectedLiftPct: 84.6,
+    },
+    stages: [
+      { id: "ingress", label: "signal ingress", value: "17 pkts", status: "ok", detail: "307 L7 events in 7d telemetry" },
+      { id: "ranker", label: "ranker lift", value: "+84.6%", status: "ok", detail: "decision rule replies over baseline 3.9" },
+      { id: "swarm", label: "swarm output", value: "5 drafts", status: "ok", detail: "primary rule decision_rule" },
+      { id: "route", label: "route queue", value: "2/2", status: "ok", detail: "manual web actions spend 0 X read ops" },
+      { id: "writeback", label: "learning writeback", value: "120 posts", status: "ok", detail: "8 L7 events in 24h feedback window" },
+    ],
+    constraints: [
+      { id: "read", label: "X read partition", value: "cached_only", status: "ok" },
+      { id: "publish", label: "publish partition", value: "review", status: "warn" },
+      { id: "budget", label: "safe budget", value: "$2.81", status: "ok" },
+    ],
+    rules: [
+      "Reuse the current winning format and paste it under active high-signal tech conversations.",
+      "Lead with decision_rule: turn the story into a concrete rule.",
+      "Keep discovery, drafting, routing, and learning online without adding X search/read spend.",
+    ],
+  },
   distributionOps: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "manual_distribution",
@@ -744,6 +778,15 @@ const translations = {
     control_mode_auth_repair: "auth repair",
     control_mode_queue_starved: "queue starved",
     control_zero_reads: "0 extra X reads",
+    flywheel_eyebrow: "Viral Flywheel Matrix",
+    flywheel_title: "Zero-read growth loop routing",
+    flywheel_velocity: "Velocity score",
+    flywheel_rules: "Execution rules",
+    flywheel_burst: "{replies} replies · +{lift}% expected lift · {route}",
+    flywheel_mode_reply_burst: "reply burst",
+    flywheel_mode_manual_distribution: "manual distribution",
+    flywheel_mode_cooldown_cache_only: "cache-only cooldown",
+    flywheel_mode_queue_build: "queue build",
     proof_eyebrow: "Proof of Work",
     proof_title: "Highest-throughput packet this week",
     score_label: "Score {score}",
@@ -1074,6 +1117,15 @@ const translations = {
     control_mode_auth_repair: "授权修复",
     control_mode_queue_starved: "队列不足",
     control_zero_reads: "0 额外 X 读取",
+    flywheel_eyebrow: "病毒飞轮矩阵",
+    flywheel_title: "零读取增长闭环路由",
+    flywheel_velocity: "速度评分",
+    flywheel_rules: "执行规则",
+    flywheel_burst: "{replies} 条回复 · 预期提升 +{lift}% · {route}",
+    flywheel_mode_reply_burst: "回复爆发",
+    flywheel_mode_manual_distribution: "人工分发",
+    flywheel_mode_cooldown_cache_only: "缓存冷却",
+    flywheel_mode_queue_build: "队列构建",
     proof_eyebrow: "真实证明",
     proof_title: "本周最高吞吐数据包",
     score_label: "评分 {score}",
@@ -2852,6 +2904,55 @@ function renderExperimentPlan() {
   `;
 }
 
+function viralFlywheelData() {
+  return dashboardData.viralFlywheel || fallbackData.viralFlywheel || {};
+}
+
+function flywheelModeLabel(mode) {
+  const key = `flywheel_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function renderViralFlywheel() {
+  const flywheel = viralFlywheelData();
+  const mode = flywheel.mode || "queue_build";
+  const modeNode = $("#flywheel-mode");
+  if (!modeNode) return;
+  const velocity = Math.max(0, Math.min(100, number(flywheel.velocityScore)));
+  const nextBurst = flywheel.nextBurst || {};
+  const routeLabel = nextBurst.routeLabel || nextBurst.label || "-";
+  modeNode.textContent = flywheelModeLabel(mode);
+  modeNode.className = `pill ${mode === "cooldown_cache_only" ? "pill-danger" : mode === "queue_build" ? "pill-warn" : "pill-good"}`;
+  $("#flywheel-velocity").textContent = `${formatNumber(velocity, 1)}%`;
+  $("#flywheel-burst").textContent = t("flywheel_burst", {
+    replies: formatNumber(number(nextBurst.targetReplies)),
+    lift: formatNumber(number(nextBurst.expectedLiftPct), 1),
+    route: routeLabel,
+  });
+
+  const stages = Array.isArray(flywheel.stages) ? flywheel.stages : [];
+  $("#flywheel-stages").innerHTML = stages
+    .slice(0, 5)
+    .map((stage, index) => `
+      <article class="flywheel-stage ${escapeHtml(stage.status || "ok")}">
+        <span>${String(index + 1).padStart(2, "0")} / ${escapeHtml(stage.label || stage.id || "-")}</span>
+        <strong>${escapeHtml(String(stage.value || "-"))}</strong>
+        <small>${escapeHtml(stage.detail || "")}</small>
+      </article>
+    `)
+    .join("");
+
+  const rules = [
+    ...(Array.isArray(flywheel.constraints) ? flywheel.constraints.map((item) => `${item.label}: ${item.value}`) : []),
+    ...(Array.isArray(flywheel.rules) ? flywheel.rules : []),
+  ];
+  $("#flywheel-rules").innerHTML = rules
+    .slice(0, 5)
+    .map((rule) => `<li>${escapeHtml(rule)}</li>`)
+    .join("");
+}
+
 function renderControlPlane() {
   const control = controlPlaneData();
   const severity = control.severity || "ok";
@@ -2904,6 +3005,7 @@ function renderControlPlane() {
     .slice(0, 4)
     .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join("");
+  renderViralFlywheel();
 }
 
 function signalSourceRows() {

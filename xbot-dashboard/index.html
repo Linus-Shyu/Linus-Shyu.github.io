@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260708-topology1" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-flywheel1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -432,6 +432,28 @@ learn(metrics)</code></pre>
               </div>
             </div>
           </article>
+
+          <article class="panel flywheel-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="flywheel_eyebrow">Viral Flywheel Matrix</p>
+                <h2 data-i18n="flywheel_title">Zero-read growth loop routing</h2>
+              </div>
+              <span class="pill pill-good" id="flywheel-mode">-</span>
+            </div>
+            <div class="flywheel-body">
+              <div class="flywheel-core">
+                <span data-i18n="flywheel_velocity">Velocity score</span>
+                <strong id="flywheel-velocity">-</strong>
+                <p id="flywheel-burst">-</p>
+              </div>
+              <div class="flywheel-stages" id="flywheel-stages"></div>
+              <div class="flywheel-rules">
+                <span data-i18n="flywheel_rules">Execution rules</span>
+                <ul id="flywheel-rules"></ul>
+              </div>
+            </div>
+          </article>
         </section>
 
         <section class="proof-grid" id="proof">
@@ -586,6 +608,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260708-topology1" defer></script>
+    <script src="./script.js?v=20260708-flywheel1" defer></script>
   </body>
 </html>
