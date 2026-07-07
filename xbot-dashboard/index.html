@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-expo6" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-control1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -387,6 +387,52 @@ learn(metrics)</code></pre>
           </article>
         </section>
 
+        <section class="control-plane-grid" id="control-plane" aria-label="Growth control plane">
+          <article class="panel control-plane-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="control_eyebrow">Growth Control Plane</p>
+                <h2 data-i18n="control_title">Next operating mode</h2>
+              </div>
+              <span class="pill" id="control-plane-state">-</span>
+            </div>
+            <div class="control-plane-body">
+              <div class="control-core">
+                <span data-i18n="control_pressure">Growth pressure</span>
+                <strong id="control-pressure">-</strong>
+                <div class="control-pressure-meter"><span id="control-pressure-bar"></span></div>
+                <p id="control-decision">-</p>
+              </div>
+              <div class="control-gates" id="control-gates"></div>
+            </div>
+            <div class="control-pulses" id="control-pulses"></div>
+          </article>
+
+          <article class="panel control-route-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="control_top_route">Top route</p>
+                <h2 id="control-route-title">-</h2>
+              </div>
+              <span class="pill pill-neutral" data-i18n="control_zero_reads">0 extra X reads</span>
+            </div>
+            <div class="control-route-body">
+              <div>
+                <span data-i18n="control_top_format">Top format</span>
+                <strong id="control-format">-</strong>
+              </div>
+              <div>
+                <span data-i18n="control_next_action">Next action</span>
+                <p id="control-next-action">-</p>
+              </div>
+              <div>
+                <span data-i18n="control_safeguards">Safeguards</span>
+                <ul id="control-safeguards"></ul>
+              </div>
+            </div>
+          </article>
+        </section>
+
         <section class="proof-grid" id="proof">
           <article class="panel proof-panel">
             <div class="panel-heading">
@@ -539,6 +585,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-expo6" defer></script>
+    <script src="./script.js?v=20260708-control1" defer></script>
   </body>
 </html>

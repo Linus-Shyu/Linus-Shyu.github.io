@@ -257,6 +257,50 @@ const fallbackData = {
       estimatedImagePostUsd: 0.03,
     },
   },
+  controlPlane: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "auth_repair",
+    severity: "warn",
+    pressureScore: 46.8,
+    decision: "Keep manual web routing online, but repair OAuth before enabling automated write paths.",
+    nextAction: "Check OAuth scopes/tokens before the next publish or live read.",
+    publishGate: "review",
+    readGate: "cached_only",
+    distributionGate: "ready",
+    budgetGate: "187 safe text slots",
+    zeroExtraXReads: true,
+    queueDepth: {
+      drafts: 5,
+      routes: 3,
+      experimentSlots: 3,
+      postsLast24h: 3,
+    },
+    topRoute: {
+      label: "Target Accounts",
+      score: 7.2,
+      reason: "Reuse the current winning format under active high-signal tech conversations.",
+    },
+    topFormat: {
+      id: "decision_rule",
+      label: "Decision Rule",
+      action: "exploit",
+      avgScore: 2.8,
+      samples: 10,
+    },
+    topDraft: "Launch rule for AI products: demo quality matters less than failure shape.",
+    pulses: [
+      { id: "publish", label: "publish gate", value: "review", status: "warn", detail: "OAuth review before automated writes." },
+      { id: "read", label: "X read gate", value: "cached_only", status: "ok", detail: "0 rate-limit / 0 backend faults" },
+      { id: "budget", label: "budget partition", value: "$2.81", status: "ok", detail: "187 safe text slots" },
+      { id: "distribution", label: "manual route queue", value: "5/3", status: "ok", detail: "drafts/routes ready; 0 extra X reads" },
+      { id: "learning", label: "learning load", value: "8", status: "ok", detail: "307 impressions in 7d feedback window" },
+    ],
+    safeguards: [
+      "No automated replies outside mention/engagement policy.",
+      "No live X search/read when 429 or 5xx faults are active.",
+      "Manual web routes spend 0 X API read budget.",
+    ],
+  },
   growthGoal: {
     targetFollowers: 1000,
     nextMilestone: 100,
@@ -557,6 +601,25 @@ const translations = {
     experiment_empty: "No experiment allocation yet.",
     experiment_hold: "Hold",
     experiment_slot: "slot {slot}",
+    control_eyebrow: "Growth Control Plane",
+    control_title: "Next operating mode",
+    control_pressure: "growth pressure",
+    control_decision: "Decision",
+    control_next_action: "Next action",
+    control_top_route: "Top route",
+    control_top_format: "Top format",
+    control_safeguards: "Safeguards",
+    control_publish_gate: "Publish",
+    control_read_gate: "Read",
+    control_distribution_gate: "Distribution",
+    control_budget_gate: "Budget",
+    control_mode_scale_experiment: "scale experiment",
+    control_mode_manual_distribution: "manual distribution",
+    control_mode_budget_guard: "budget guard",
+    control_mode_cooldown: "cooldown",
+    control_mode_auth_repair: "auth repair",
+    control_mode_queue_starved: "queue starved",
+    control_zero_reads: "0 extra X reads",
     proof_eyebrow: "Proof of Work",
     proof_title: "Highest-throughput packet this week",
     score_label: "Score {score}",
@@ -847,6 +910,25 @@ const translations = {
     experiment_empty: "暂无实验配额。",
     experiment_hold: "暂停",
     experiment_slot: "槽位 {slot}",
+    control_eyebrow: "增长控制平面",
+    control_title: "下一轮运行模式",
+    control_pressure: "增长压力",
+    control_decision: "决策",
+    control_next_action: "下一步",
+    control_top_route: "最高优先路由",
+    control_top_format: "最高优先格式",
+    control_safeguards: "安全边界",
+    control_publish_gate: "发布",
+    control_read_gate: "读取",
+    control_distribution_gate: "分发",
+    control_budget_gate: "预算",
+    control_mode_scale_experiment: "放大发帖实验",
+    control_mode_manual_distribution: "人工分发",
+    control_mode_budget_guard: "预算守卫",
+    control_mode_cooldown: "冷却退避",
+    control_mode_auth_repair: "授权修复",
+    control_mode_queue_starved: "队列不足",
+    control_zero_reads: "0 额外 X 读取",
     proof_eyebrow: "真实证明",
     proof_title: "本周最高吞吐数据包",
     score_label: "评分 {score}",
@@ -1174,6 +1256,43 @@ function normalizeSignalMapRoute(route = {}) {
     unit: route.unit === "routes" ? "web routes" : route.unit,
     label: (route.label || "").replace(/\bX\b/g, "X_ROUTE"),
   };
+}
+
+function controlPlaneData() {
+  const control = dashboardData.controlPlane || fallbackData.controlPlane;
+  if (control) return control;
+  const cadence = cadenceData();
+  const triage = apiStatusTriage();
+  const { remaining } = apiBudget();
+  return {
+    mode: cadence.publishAllowed ? "scale_experiment" : "manual_distribution",
+    severity: triage.severity === "danger" ? "danger" : cadence.publishAllowed ? "ok" : "warn",
+    pressureScore: cadence.publishAllowed ? 72 : 48,
+    decision: cadence.reason || "-",
+    nextAction: cadence.nextAction || "-",
+    publishGate: cadence.publishAllowed ? "open" : "review",
+    readGate: triage.severity === "danger" ? "closed" : "cached_only",
+    distributionGate: "ready",
+    budgetGate: `$${remaining.toFixed(2)}`,
+    topRoute: (dashboardData.opportunities || fallbackData.opportunities || [])[0] || null,
+    topFormat: (dashboardData.experimentPlan || fallbackData.experimentPlan || {}).recommendedFormats?.[0] || null,
+    pulses: [],
+    safeguards: [],
+  };
+}
+
+function controlModeLabel(mode) {
+  const key = `control_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function gateStatus(value, fallback = "ok") {
+  const text = String(value || "").toLowerCase();
+  if (/(closed|blocked|danger|fault|cooldown)/.test(text)) return "danger";
+  if (/(review|guard|cached|starved|warn|repair)/.test(text)) return "warn";
+  if (/(open|ready|ok|safe|unlimited)/.test(text)) return "ok";
+  return fallback;
 }
 
 function signalMap() {
@@ -2464,6 +2583,60 @@ function renderExperimentPlan() {
   `;
 }
 
+function renderControlPlane() {
+  const control = controlPlaneData();
+  const severity = control.severity || "ok";
+  const pressure = Math.max(0, Math.min(100, number(control.pressureScore)));
+  const modeLabel = controlModeLabel(control.mode);
+  const state = $("#control-plane-state");
+  if (!state) return;
+  state.textContent = modeLabel;
+  state.className = `pill ${severity === "ok" ? "pill-good" : severity === "danger" ? "pill-danger" : "pill-warn"}`;
+  $("#control-pressure").textContent = `${formatNumber(pressure, 1)}%`;
+  $("#control-pressure-bar").style.width = `${pressure}%`;
+  $("#control-decision").innerHTML = `<span>${escapeHtml(t("control_decision"))}</span>${escapeHtml(control.decision || "-")}`;
+
+  const gates = [
+    { label: t("control_publish_gate"), value: control.publishGate },
+    { label: t("control_read_gate"), value: control.readGate },
+    { label: t("control_distribution_gate"), value: control.distributionGate },
+    { label: t("control_budget_gate"), value: control.budgetGate },
+  ];
+  $("#control-gates").innerHTML = gates
+    .map((gate) => `
+      <div class="${escapeHtml(gateStatus(gate.value))}">
+        <span>${escapeHtml(gate.label)}</span>
+        <strong>${escapeHtml(String(gate.value || "-").replace(/_/g, " "))}</strong>
+      </div>
+    `)
+    .join("");
+
+  const pulses = Array.isArray(control.pulses) ? control.pulses : [];
+  $("#control-pulses").innerHTML = pulses
+    .slice(0, 5)
+    .map((pulse) => `
+      <article class="${escapeHtml(pulse.status || gateStatus(pulse.value))}">
+        <span>${escapeHtml(pulse.label || pulse.id || "-")}</span>
+        <strong>${escapeHtml(String(pulse.value || "-"))}</strong>
+        <small>${escapeHtml(pulse.detail || "")}</small>
+      </article>
+    `)
+    .join("");
+
+  const route = control.topRoute || {};
+  const format = control.topFormat || {};
+  $("#control-route-title").textContent = route.label || "-";
+  $("#control-format").textContent = format.label
+    ? `${format.label} · ${format.action || "test"} · n=${formatNumber(format.samples)}`
+    : "-";
+  $("#control-next-action").textContent = control.nextAction || route.reason || "-";
+  const safeguards = Array.isArray(control.safeguards) ? control.safeguards : [];
+  $("#control-safeguards").innerHTML = safeguards
+    .slice(0, 4)
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .join("");
+}
+
 function signalSourceRows() {
   const sources = dashboardData.performance?.sources || fallbackData.performance?.sources || [];
   if (sources.length) return sources;
@@ -3101,6 +3274,7 @@ function render() {
   renderMetrics();
   renderGoal();
   renderLearning();
+  renderControlPlane();
   renderSignalNodes();
   renderSignalDetail();
   renderProof();
