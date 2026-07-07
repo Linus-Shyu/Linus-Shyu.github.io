@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260708-writeback1" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-rail9" />
   </head>
   <body>
     <div class="ops-shell">
@@ -382,6 +382,26 @@ learn(metrics)</code></pre>
             <div class="goal-stats" id="goal-stats"></div>
           </article>
 
+          <article class="panel growth-kinetics-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="kinetics_eyebrow">Growth Kinetics</p>
+                <h2 data-i18n="kinetics_title">Viral load controller</h2>
+              </div>
+              <span class="pill" id="kinetics-state">-</span>
+            </div>
+            <div class="kinetics-core">
+              <div class="kinetics-score">
+                <span data-i18n="kinetics_score">Kinetic score</span>
+                <strong id="kinetics-score">-</strong>
+                <div><span id="kinetics-score-bar"></span></div>
+              </div>
+              <div class="kinetics-next" id="kinetics-next">-</div>
+            </div>
+            <div class="kinetics-cells" id="kinetics-cells"></div>
+            <div class="kinetics-lanes" id="kinetics-lanes"></div>
+          </article>
+
           <article class="panel learning-panel">
             <div class="panel-heading compact-heading">
               <div>
@@ -634,6 +654,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260708-writeback1" defer></script>
+    <script src="./script.js?v=20260708-rail9" defer></script>
   </body>
 </html>

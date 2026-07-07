@@ -620,6 +620,199 @@ h3 {
     var(--surface);
 }
 
+.growth-kinetics-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, #00ff66 12%, transparent), transparent 36%),
+    linear-gradient(135deg, color-mix(in srgb, #00f0ff 8%, transparent), transparent 58%),
+    var(--surface);
+}
+
+.growth-kinetics-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--accent) 7%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.18;
+}
+
+.learning-panel {
+  grid-row: span 2;
+}
+
+.kinetics-core {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(140px, 0.72fr) minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.kinetics-score,
+.kinetics-next,
+.kinetics-cells div,
+.kinetics-lanes article {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 78%, transparent), color-mix(in srgb, var(--surface-soft) 90%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent),
+    0 0 14px color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+.kinetics-score {
+  padding: 10px;
+}
+
+.kinetics-score span,
+.kinetics-cells span,
+.kinetics-lanes span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.kinetics-score strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--ok) 38%, transparent);
+}
+
+.kinetics-score div,
+.kinetics-lane-bar {
+  height: 7px;
+  overflow: hidden;
+  margin-top: 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 78%, transparent);
+}
+
+.kinetics-score div span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 18px color-mix(in srgb, #00ff66 36%, transparent);
+}
+
+.kinetics-next {
+  display: flex;
+  align-items: center;
+  min-height: 86px;
+  padding: 11px;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.kinetics-cells {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.kinetics-cells div {
+  padding: 9px;
+}
+
+.kinetics-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kinetics-cells .ok strong,
+.kinetics-lanes article.ok strong {
+  color: var(--ok);
+}
+
+.kinetics-cells .warn strong,
+.kinetics-lanes article.warn strong {
+  color: #ff9f1c;
+}
+
+.kinetics-cells .danger strong,
+.kinetics-lanes article.danger strong {
+  color: var(--danger);
+}
+
+.kinetics-lanes {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.kinetics-lanes article {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(90px, 0.52fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 8px 9px;
+}
+
+.kinetics-lanes strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kinetics-lane-bar {
+  margin-top: 0;
+}
+
+.kinetics-lane-bar span {
+  display: block;
+  width: var(--lane-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--ok));
+}
+
+.kinetics-lanes small {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .goal-progress {
   margin-top: 16px;
 }
@@ -10271,4 +10464,154 @@ body:not(.demo-mode) .demo-strip {
 
 :root[data-theme="light"] .rail-budget {
   border-color: var(--nav-rail-line-boundary) !important;
+}
+
+/* Light UI rail v9: white canvas gets a dark, legible command rail. */
+:root[data-theme="light"] {
+  --nav-rail-bg: #0b111b;
+  --nav-rail-bg-mid: #101928;
+  --nav-rail-bg-soft: #162236;
+  --nav-rail-panel: #121c2b;
+  --nav-rail-panel-strong: #1a2940;
+  --nav-rail-line: rgba(203, 213, 225, 0.22);
+  --nav-rail-line-hot: rgba(59, 130, 246, 0.62);
+  --nav-rail-line-boundary: rgba(249, 115, 22, 0.58);
+  --nav-rail-text: #f4f7fb;
+  --nav-rail-muted: #9fb0c4;
+  --nav-rail-hot: #60a5fa;
+  --nav-rail-boundary: #ffb020;
+  --nav-rail-green: #6ee787;
+  --nav-rail-glow: rgba(96, 165, 250, 0.24);
+  --nav-rail-boundary-glow: rgba(255, 176, 32, 0.24);
+}
+
+:root[data-theme="light"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: rgba(203, 213, 225, 0.2) !important;
+  background-color: var(--nav-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -8%, rgba(96, 165, 250, 0.22), transparent 32%),
+    radial-gradient(circle at 0 84%, rgba(255, 176, 32, 0.11), transparent 31%),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.08), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 46px),
+    linear-gradient(180deg, var(--nav-rail-bg-soft) 0%, var(--nav-rail-bg-mid) 46%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    18px 0 38px rgba(15, 23, 42, 0.16),
+    inset -1px 0 0 rgba(255, 255, 255, 0.09),
+    inset 1px 0 0 rgba(255, 255, 255, 0.045) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .env-card,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="light"] .rail-budget {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.07), transparent 62%) !important;
+  box-shadow:
+    0 12px 26px rgba(2, 6, 23, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="light"] .env-line strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="light"] .rail-nav a::after {
+  color: var(--nav-rail-text) !important;
+  font-weight: 860 !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.28) !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="light"] .env-card > span,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+  font-weight: 760 !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .brand-mark {
+  color: #07111f !important;
+  background: linear-gradient(135deg, #e8f5ff 0%, var(--nav-rail-hot) 54%, #7cf7a1 100%) !important;
+  box-shadow:
+    0 12px 24px var(--nav-rail-glow),
+    0 0 0 1px rgba(255, 255, 255, 0.36) inset !important;
+}
+
+:root[data-theme="light"] .env-line .status-dot,
+:root[data-theme="light"] .rack-mini span {
+  background: var(--nav-rail-green) !important;
+  box-shadow: 0 0 0 4px rgba(110, 231, 135, 0.16) !important;
+}
+
+:root[data-theme="light"] .rail-nav a {
+  color: var(--nav-rail-text) !important;
+  border-color: rgba(203, 213, 225, 0.16) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)) !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .rail-nav a::before {
+  background: rgba(159, 176, 196, 0.72) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a:focus-visible,
+:root[data-theme="light"] .rail-nav a.active {
+  color: #eff8ff !important;
+  border-color: var(--nav-rail-line-hot) !important;
+  background:
+    radial-gradient(circle at 17% 50%, rgba(96, 165, 250, 0.28), transparent 44%),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.22), rgba(110, 231, 135, 0.06)),
+    rgba(255, 255, 255, 0.055) !important;
+  box-shadow:
+    0 14px 28px rgba(2, 6, 23, 0.24),
+    0 0 0 1px rgba(96, 165, 250, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::after,
+:root[data-theme="light"] .rail-nav a:focus-visible::after,
+:root[data-theme="light"] .rail-nav a.active::after {
+  color: #eff8ff !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::before,
+:root[data-theme="light"] .rail-nav a:focus-visible::before,
+:root[data-theme="light"] .rail-nav a.active::before {
+  background: var(--nav-rail-hot) !important;
+  box-shadow: 0 0 0 4px var(--nav-rail-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget {
+  border-color: var(--nav-rail-line-boundary) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 176, 32, 0.2), transparent 62%),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.06), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)) !important;
+  box-shadow:
+    0 14px 28px rgba(2, 6, 23, 0.28),
+    0 0 22px var(--nav-rail-boundary-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+:root[data-theme="light"] .rail-budget strong {
+  color: var(--nav-rail-boundary) !important;
+  text-shadow: 0 0 18px var(--nav-rail-boundary-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter {
+  background: rgba(148, 163, 184, 0.22) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
+  box-shadow: 0 0 14px rgba(255, 176, 32, 0.22) !important;
 }

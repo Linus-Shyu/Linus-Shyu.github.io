@@ -1206,6 +1206,15 @@ const translations = {
     goal_next: "Next milestone",
     goal_daily: "Daily target",
     daily_target_value: "{replies} route ops + {posts} packet",
+    kinetics_eyebrow: "Growth Kinetics",
+    kinetics_title: "Viral load controller",
+    kinetics_score: "Kinetic score",
+    kinetics_zero_reads: "0 X read ops",
+    kinetics_mode_starved: "starved",
+    kinetics_mode_ignition: "ignition",
+    kinetics_mode_acceleration: "acceleration",
+    kinetics_mode_compounding: "compounding",
+    kinetics_empty: "No growth kinetics telemetry available.",
     learning_eyebrow: "Feedback Layer",
     learning_title: "Next inference rule to deploy",
     autopilot_eyebrow: "Model Inference Stream",
@@ -1705,6 +1714,15 @@ const translations = {
     goal_next: "下一里程碑",
     goal_daily: "每日目标",
     daily_target_value: "{replies} 次路由操作 + {posts} 个数据包",
+    kinetics_eyebrow: "增长动力学",
+    kinetics_title: "病毒负载控制器",
+    kinetics_score: "动能评分",
+    kinetics_zero_reads: "0 次 X 读取",
+    kinetics_mode_starved: "缺流量",
+    kinetics_mode_ignition: "点火",
+    kinetics_mode_acceleration: "加速",
+    kinetics_mode_compounding: "复利",
+    kinetics_empty: "暂无增长动力学遥测。",
     learning_eyebrow: "反馈层",
     learning_title: "下一条要部署的推理规则",
     autopilot_eyebrow: "模型推理流",
@@ -3902,6 +3920,125 @@ function renderGoal() {
     .join("");
 }
 
+function growthKineticsData() {
+  const incoming = dashboardData.growthKinetics || fallbackData.growthKinetics;
+  if (incoming) return incoming;
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const last7d = dashboardData.last7d || fallbackData.last7d || {};
+  const goal = goalData();
+  const ops = distributionOpsData();
+  const flywheel = viralFlywheelData();
+  const impressions24h = number(last24h.impressions);
+  const impressions7d = number(last7d.impressions);
+  const engagements24h = number(last24h.likes) + number(last24h.reposts) + number(last24h.replies);
+  const engagements7d = number(last7d.likes) + number(last7d.reposts) + number(last7d.replies);
+  const engagementRate24h = impressions24h > 0 ? (engagements24h / impressions24h) * 100 : 0;
+  const readyMissions = number(ops.readyMissions);
+  const targetReplies = Math.max(1, number(goal.dailyReplies, 3));
+  const routeReadinessPct = targetReplies > 0 ? (readyMissions / targetReplies) * 100 : 0;
+  const followerDelta = number(profile.followerDelta);
+  const conversionPer1k = impressions7d > 0 && followerDelta > 0 ? (followerDelta / impressions7d) * 1000 : 0.8;
+  const score = clamp(
+    8 +
+      Math.min(22, impressions24h / 12) +
+      Math.min(18, engagementRate24h * 2.2) +
+      Math.min(18, routeReadinessPct * 0.18) +
+      Math.min(14, number(flywheel.velocityScore) * 0.14) +
+      (followerDelta > 0 ? Math.min(10, followerDelta * 4) : followerDelta < 0 ? -10 : 0),
+    0,
+    100,
+  );
+  const mode = score >= 78 ? "compounding" : score >= 58 ? "acceleration" : score >= 34 ? "ignition" : "starved";
+  const status = score >= 58 ? "ok" : score >= 34 ? "warn" : "danger";
+  const dailyThroughput = impressions7d > 0 ? impressions7d / 7 : impressions24h;
+  const remainingToMilestone = Math.max(0, goal.nextMilestone - goal.current);
+  const projectedDaysToMilestone = dailyThroughput > 0 && conversionPer1k > 0
+    ? (remainingToMilestone / conversionPer1k * 1000) / dailyThroughput
+    : null;
+  return {
+    source: "derived cached telemetry",
+    zeroExtraXReads: true,
+    mode,
+    status,
+    score,
+    currentFollowers: goal.current,
+    followerDelta,
+    nextMilestone: goal.nextMilestone,
+    remainingToMilestone,
+    impressions24h,
+    impressions7d,
+    engagements24h,
+    engagements7d,
+    engagementRate24h,
+    effectiveConversionPer1k: conversionPer1k,
+    projectedDaysToMilestone,
+    nextAction: routeReadinessPct < 50
+      ? `Arm ${formatNumber(Math.max(1, targetReplies - readyMissions))} manual reply lane(s) before the next standalone post.`
+      : "Keep the current route loop hot and let maintenance write conversion data back.",
+    cells: [
+      { id: "throughput", label: "L7 throughput", value: impressions24h, status: impressions24h > 100 ? "ok" : impressions24h > 20 ? "warn" : "danger" },
+      { id: "engagement", label: "ACK rate", value: `${formatNumber(engagementRate24h, 1)}%`, status: engagementRate24h >= 4 ? "ok" : engagementRate24h >= 1.5 ? "warn" : "danger" },
+      { id: "conversion", label: "conn / 1k events", value: formatNumber(conversionPer1k, 2), status: followerDelta > 0 ? "ok" : "warn" },
+      { id: "runway", label: "milestone runway", value: projectedDaysToMilestone == null ? "collect samples" : `${formatNumber(projectedDaysToMilestone, projectedDaysToMilestone > 30 ? 0 : 1)}d`, status: projectedDaysToMilestone == null ? "warn" : projectedDaysToMilestone <= 14 ? "ok" : projectedDaysToMilestone <= 45 ? "warn" : "danger" },
+    ],
+    lanes: [
+      { id: "ingress", label: "ingress throughput", value: impressions24h, score: clamp(impressions24h / Math.max(1, dailyThroughput || 1) * 50, 0, 100), status: impressions24h > 100 ? "ok" : impressions24h > 20 ? "warn" : "danger", detail: `${formatNumber(impressions7d)} L7 events over 7d` },
+      { id: "ack", label: "ACK reactor", value: `${formatNumber(engagementRate24h, 1)}%`, score: clamp(engagementRate24h * 12, 0, 100), status: engagementRate24h >= 4 ? "ok" : engagementRate24h >= 1.5 ? "warn" : "danger", detail: `${formatNumber(engagements24h)} ACKs in 24h` },
+      { id: "conversion", label: "conn conversion", value: `${formatNumber(conversionPer1k, 2)}/1k`, score: clamp(conversionPer1k * 30, 0, 100), status: followerDelta > 0 ? "ok" : "warn", detail: followerDelta > 0 ? `${formatNumber(followerDelta)} active conn delta` : "using fallback conversion prior" },
+      { id: "route", label: "route amplifier", value: `${formatNumber(readyMissions)}/${formatNumber(targetReplies)}`, score: clamp(routeReadinessPct, 0, 100), status: routeReadinessPct >= 100 ? "ok" : routeReadinessPct >= 50 ? "warn" : "danger", detail: "manual lanes preserve 0 X read ops" },
+    ],
+  };
+}
+
+function kineticModeLabel(mode) {
+  const key = `kinetics_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function renderGrowthKinetics() {
+  const kinetics = growthKineticsData();
+  const state = $("#kinetics-state");
+  if (!state) return;
+  if (!kinetics) {
+    $(".growth-kinetics-panel").innerHTML = `<p class="empty-state">${escapeHtml(t("kinetics_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(kinetics.score), 0, 100);
+  const status = ["ok", "warn", "danger"].includes(kinetics.status) ? kinetics.status : score >= 58 ? "ok" : score >= 34 ? "warn" : "danger";
+  state.textContent = kineticModeLabel(kinetics.mode);
+  state.className = `pill ${status === "ok" ? "pill-good" : status === "danger" ? "pill-danger" : "pill-warn"}`;
+  $("#kinetics-score").textContent = `${formatNumber(score, 1)}%`;
+  $("#kinetics-score-bar").style.width = `${score}%`;
+  $("#kinetics-next").textContent = kinetics.nextAction || "-";
+  $("#kinetics-cells").innerHTML = (kinetics.cells || [])
+    .slice(0, 4)
+    .map((cell) => `
+      <div class="${escapeHtml(cell.status || "neutral")}">
+        <span>${escapeHtml(cell.label || cell.id || "-")}</span>
+        <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+      </div>
+    `)
+    .join("");
+  $("#kinetics-lanes").innerHTML = (kinetics.lanes || [])
+    .slice(0, 4)
+    .map((lane) => {
+      const laneScore = clamp(number(lane.score), 0, 100);
+      return `
+        <article class="${escapeHtml(lane.status || "neutral")}" style="--lane-score:${laneScore.toFixed(1)}%">
+          <div>
+            <span>${escapeHtml(lane.label || lane.id || "-")}</span>
+            <strong>${escapeHtml(gateLabel(lane.value))}</strong>
+          </div>
+          <div class="kinetics-lane-bar"><span></span></div>
+          <small>${escapeHtml(lane.detail || "")}</small>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function learningData() {
   const learning = dashboardData.learning || fallbackData.learning || {};
   const performance = dashboardData.performance || {};
@@ -5628,6 +5765,7 @@ function render() {
   renderMonitorPanels();
   renderMetrics();
   renderGoal();
+  renderGrowthKinetics();
   renderLearning();
   renderControlPlane();
   renderSignalNodes();
