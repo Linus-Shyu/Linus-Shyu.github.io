@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260707-grafana1" />
+    <link rel="stylesheet" href="./styles.css?v=20260707-expo1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -134,6 +134,42 @@
             <span data-i18n="noc_operator">Operator mode</span>
             <strong data-i18n="noc_operator_value">Manual paste</strong>
           </div>
+        </section>
+
+        <section class="expo-story-grid" id="expo-story" aria-label="Expo story">
+          <article class="outcome-panel">
+            <div class="story-head">
+              <span data-i18n="story_eyebrow">Expo brief</span>
+              <strong data-i18n="story_title">Low-cost growth loop</strong>
+            </div>
+            <div class="outcome-score" id="story-outcome-score">0 X reads</div>
+            <p id="story-outcome-copy">The system turns tech signal into paste-ready replies, then learns from measured outcomes.</p>
+            <div class="outcome-stats" id="outcome-stats"></div>
+          </article>
+
+          <article class="pipeline-panel">
+            <div class="story-head">
+              <span data-i18n="pipeline_eyebrow">Live pipeline</span>
+              <strong data-i18n="pipeline_title">Signal to learning</strong>
+            </div>
+            <div class="pipeline-rail" aria-label="Signal pipeline">
+              <div class="pipeline-flow" aria-hidden="true"></div>
+              <div class="pipeline-node rss"><span>RSS</span><strong data-i18n="pipeline_rss">Ingest</strong></div>
+              <div class="pipeline-node rank"><span>AI</span><strong data-i18n="pipeline_rank">Rank</strong></div>
+              <div class="pipeline-node draft"><span>TXT</span><strong data-i18n="pipeline_draft">Draft</strong></div>
+              <div class="pipeline-node route"><span>X</span><strong data-i18n="pipeline_route">Route</strong></div>
+              <div class="pipeline-node learn"><span>ML</span><strong data-i18n="pipeline_learn">Learn</strong></div>
+            </div>
+            <div class="pipeline-status" id="pipeline-status">5-stage loop active</div>
+          </article>
+
+          <article class="runlog-panel">
+            <div class="story-head">
+              <span data-i18n="runlog_eyebrow">Task log</span>
+              <strong id="runlog-status">operator ready</strong>
+            </div>
+            <div class="runlog-list" id="runlog-list"></div>
+          </article>
         </section>
 
         <section class="gauge-grid" id="gauge-grid" aria-label="Live monitoring gauges"></section>
@@ -488,6 +524,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260707-grafana1" defer></script>
+    <script src="./script.js?v=20260707-expo1" defer></script>
   </body>
 </html>

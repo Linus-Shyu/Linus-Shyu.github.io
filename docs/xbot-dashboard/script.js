@@ -146,9 +146,40 @@ const translations = {
     demo_proof: "Best Signal",
     demo_goal: "Growth Goal",
     demo_actions: "Today Actions",
+    demo_story: "Expo Story",
     open_x: "Open X",
     grafana_title: "1 Node Exporter: X Bot Growth Monitor",
     grafana_window: "Last 24 hours",
+    story_eyebrow: "Expo brief",
+    story_title: "Low-cost growth loop",
+    story_outcome_score: "0 X reads",
+    story_outcome_copy: "The bot does discovery, drafting, routing, and learning while keeping X search/read API spend at zero for the manual reply loop.",
+    outcome_extra_reads: "Extra X reads",
+    outcome_replies_ready: "Replies ready",
+    outcome_api_left: "API left",
+    outcome_best_hook: "Best hook",
+    pipeline_eyebrow: "Live pipeline",
+    pipeline_title: "Signal to learning",
+    pipeline_rss: "Ingest",
+    pipeline_rank: "Rank",
+    pipeline_draft: "Draft",
+    pipeline_route: "Route",
+    pipeline_learn: "Learn",
+    pipeline_status: "{stages}-stage loop active · manual publish only",
+    runlog_eyebrow: "Task log",
+    runlog_ready: "operator ready",
+    runlog_ingest: "rss.ingest",
+    runlog_score: "ranker.score",
+    runlog_queue: "draft.queue",
+    runlog_cost: "cost.guard",
+    runlog_learn: "learning.writeback",
+    runlog_live_data: "live dashboard data",
+    runlog_fallback_data: "fallback telemetry",
+    runlog_stale_data: "stale telemetry",
+    runlog_posts_measured: "{count} posts measured",
+    runlog_drafts_ready: "{count} replies ready",
+    runlog_budget_left: "{amount} budget left",
+    runlog_best_hook: "{hook} currently wins",
     monitor_load: "System average load",
     monitor_alerts: "Alert state",
     monitor_partition: "API partition usage",
@@ -343,9 +374,40 @@ const translations = {
     demo_proof: "最佳信号",
     demo_goal: "增长目标",
     demo_actions: "今日动作",
+    demo_story: "Expo 故事",
     open_x: "打开 X",
     grafana_title: "1 Node Exporter: X Bot 增长监控",
     grafana_window: "最近 24 小时",
+    story_eyebrow: "Expo 简报",
+    story_title: "低成本增长闭环",
+    story_outcome_score: "0 次 X 读取",
+    story_outcome_copy: "系统负责发现、草稿、分发入口和学习反馈，同时让人工回复流程的 X 搜索/读取 API 开销保持为零。",
+    outcome_extra_reads: "额外 X 读取",
+    outcome_replies_ready: "可用回复",
+    outcome_api_left: "API 剩余",
+    outcome_best_hook: "最佳钩子",
+    pipeline_eyebrow: "实时流水线",
+    pipeline_title: "信号到学习",
+    pipeline_rss: "抓取",
+    pipeline_rank: "排序",
+    pipeline_draft: "草稿",
+    pipeline_route: "分发",
+    pipeline_learn: "学习",
+    pipeline_status: "{stages} 阶段闭环在线 · 仅人工发布",
+    runlog_eyebrow: "任务日志",
+    runlog_ready: "操作者就绪",
+    runlog_ingest: "rss.ingest",
+    runlog_score: "ranker.score",
+    runlog_queue: "draft.queue",
+    runlog_cost: "cost.guard",
+    runlog_learn: "learning.writeback",
+    runlog_live_data: "实时看板数据",
+    runlog_fallback_data: "备用遥测",
+    runlog_stale_data: "过期遥测",
+    runlog_posts_measured: "已测量 {count} 条帖子",
+    runlog_drafts_ready: "{count} 条回复就绪",
+    runlog_budget_left: "预算剩余 {amount}",
+    runlog_best_hook: "当前胜出：{hook}",
     monitor_load: "系统平均负载",
     monitor_alerts: "告警状态",
     monitor_partition: "API 分区用量",
@@ -568,6 +630,7 @@ const formatNumber = (value, digits = 0) =>
 const FRESH_DATA_MAX_AGE_HOURS = 30;
 const DEMO_STEP_MS = 7500;
 const DEMO_STEPS = [
+  { id: "story", target: "#expo-story", labelKey: "demo_story" },
   { id: "signal", target: "#overview", labelKey: "demo_signal" },
   { id: "proof", target: "#proof", labelKey: "demo_proof" },
   { id: "goal", target: "#goal", labelKey: "demo_goal" },
@@ -843,6 +906,64 @@ function renderHero() {
     ? `$${remaining.toFixed(2)} 受控`
     : `$${remaining.toFixed(2)} guarded`;
   $("#hero-strip-learning").textContent = formatTemplate(bestHook?.name || "decision_rule");
+}
+
+function renderExpoStory() {
+  const storyPanel = $("#expo-story");
+  if (!storyPanel) return;
+  const profile = dashboardData.profile || {};
+  const last7d = dashboardData.last7d || {};
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const { remaining } = apiBudget();
+  const freshness = dataFreshness();
+  const { bestHook } = learningData();
+  const bestHookName = formatTemplate(bestHook?.name || bestPost()?.template || "decision_rule");
+  const measuredPosts = number(profile.measuredPosts, number(profile.trackedPosts, number(last7d.posts)));
+
+  $("#story-outcome-score").textContent = t("story_outcome_score");
+  $("#story-outcome-copy").textContent = t("story_outcome_copy");
+  $("#pipeline-status").textContent = t("pipeline_status", { stages: 5 });
+  $("#runlog-status").textContent = t("runlog_ready");
+
+  const outcomeStats = [
+    { label: t("outcome_extra_reads"), value: "0" },
+    { label: t("outcome_replies_ready"), value: formatNumber(drafts.length) },
+    { label: t("outcome_api_left"), value: `$${remaining.toFixed(2)}` },
+    { label: t("outcome_best_hook"), value: bestHookName },
+  ];
+  $("#outcome-stats").innerHTML = outcomeStats
+    .map(
+      (item) => `
+        <div>
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${escapeHtml(item.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
+
+  const freshnessText = freshness.className === "ok"
+    ? t("runlog_live_data")
+    : freshness.className === "warn"
+      ? t("runlog_stale_data")
+      : t("runlog_fallback_data");
+  const runlog = [
+    { label: t("runlog_ingest"), value: freshnessText, status: freshness.className },
+    { label: t("runlog_score"), value: t("runlog_posts_measured", { count: formatNumber(measuredPosts) }), status: "ok" },
+    { label: t("runlog_queue"), value: t("runlog_drafts_ready", { count: formatNumber(drafts.length) }), status: drafts.length ? "ok" : "warn" },
+    { label: t("runlog_cost"), value: t("runlog_budget_left", { amount: `$${remaining.toFixed(2)}` }), status: remaining > 1 ? "ok" : "warn" },
+    { label: t("runlog_learn"), value: t("runlog_best_hook", { hook: bestHookName }), status: "ok" },
+  ];
+  $("#runlog-list").innerHTML = runlog
+    .map(
+      (item) => `
+        <div class="runlog-row ${escapeHtml(item.status)}">
+          <span>${escapeHtml(item.label)}</span>
+          <strong>${escapeHtml(item.value)}</strong>
+        </div>
+      `,
+    )
+    .join("");
 }
 
 function dataAgeMinutes() {
@@ -1944,6 +2065,7 @@ function render() {
   applyChromeText();
   renderHeader();
   renderHero();
+  renderExpoStory();
   renderGauges();
   renderMonitorPanels();
   renderMetrics();

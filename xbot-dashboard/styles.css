@@ -3023,6 +3023,7 @@ body[data-demo-step="actions"] .action-hero {
   --accent: #ff9830;
   --accent-2: #73bf69;
   --accent-3: #f2cc0c;
+  --blue: #5794f2;
   --accent-soft: rgba(255, 152, 48, 0.12);
   --accent-line: rgba(255, 152, 48, 0.28);
   --rail: #16191f;
@@ -3030,6 +3031,13 @@ body[data-demo-step="actions"] .action-hero {
   --ok: #73bf69;
   --warn: #f2cc0c;
   --danger: #e02f44;
+  --panel-head: #f6f8fb;
+  --panel-head-strong: #eef2f7;
+  --panel-code: #eef2f7;
+  --gauge-track: #d8dee8;
+  --chart-grid: rgba(17, 24, 39, 0.1);
+  --rail-text: #c9d0dc;
+  --on-accent: #111217;
   --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
@@ -3047,12 +3055,20 @@ body[data-demo-step="actions"] .action-hero {
   --accent: #ff9830;
   --accent-2: #73bf69;
   --accent-3: #f2cc0c;
+  --blue: #5794f2;
   --accent-soft: rgba(255, 152, 48, 0.12);
   --accent-line: rgba(255, 152, 48, 0.32);
   --stage-line: rgba(115, 191, 105, 0.24);
   --stage-scan: rgba(255, 152, 48, 0.18);
   --rail: #0b0d10;
   --rail-soft: #15181d;
+  --panel-head: #15181d;
+  --panel-head-strong: #1d2128;
+  --panel-code: #0b0d10;
+  --gauge-track: #2a2f37;
+  --chart-grid: rgba(184, 192, 204, 0.12);
+  --rail-text: #c9d0dc;
+  --on-accent: #111217;
   --shadow: none;
   --shadow-strong: none;
   --panel-shadow: none;
@@ -3176,7 +3192,7 @@ body,
 }
 
 .rail-nav a::after {
-  color: #c9d0dc;
+  color: var(--rail-text);
   font-size: 11px;
   font-weight: 850;
 }
@@ -3229,6 +3245,9 @@ body,
 .topbar,
 .grafana-toolbar,
 .noc-strip div,
+.outcome-panel,
+.pipeline-panel,
+.runlog-panel,
 .gauge-card,
 .monitor-panel,
 .command-card,
@@ -3274,12 +3293,13 @@ body,
 }
 
 .button-primary {
-  color: #111217;
+  color: var(--on-accent);
   background: var(--accent);
 }
 
 .button-secondary,
 .segmented {
+  color: var(--ink);
   border-color: var(--line);
   background: var(--surface-soft);
 }
@@ -3290,7 +3310,7 @@ body,
 }
 
 .segmented button.active {
-  color: #111217;
+  color: var(--on-accent);
   background: var(--accent);
 }
 
@@ -3367,7 +3387,7 @@ body,
 
 .variable-strip span {
   color: var(--muted);
-  background: color-mix(in srgb, var(--surface-soft) 74%, #000000);
+  background: var(--panel-head);
 }
 
 .variable-strip strong {
@@ -3410,6 +3430,241 @@ body,
   margin-top: 4px;
   font-size: 12px;
   font-weight: 720;
+}
+
+.expo-story-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(420px, 1fr) minmax(300px, 0.78fr);
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.outcome-panel,
+.pipeline-panel,
+.runlog-panel {
+  min-height: 154px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.story-head {
+  display: flex;
+  min-height: 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.story-head span,
+.runlog-row span {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.story-head strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.outcome-score {
+  color: var(--ok);
+  font-size: 42px;
+  font-weight: 820;
+  line-height: 0.95;
+}
+
+.outcome-panel p {
+  max-width: 560px;
+  margin: 8px 0 10px;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.outcome-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.outcome-stats div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 6px;
+  background: var(--surface-soft);
+}
+
+.outcome-stats span,
+.outcome-stats strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.outcome-stats span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.outcome-stats strong {
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 780;
+}
+
+.pipeline-rail {
+  position: relative;
+  display: grid;
+  min-height: 84px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 12px;
+  background:
+    linear-gradient(90deg, transparent 0 8%, color-mix(in srgb, var(--ok) 10%, transparent) 50%, transparent 92%),
+    var(--surface-soft);
+}
+
+.pipeline-rail::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  left: 24px;
+  height: 2px;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+
+.pipeline-flow {
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  width: 120px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--ok), transparent);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 48%, transparent));
+  transform: translateY(-50%);
+  animation: pipelineFlow 3.8s linear infinite;
+}
+
+.pipeline-node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.pipeline-node span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ok) 42%, var(--line));
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--ok) 10%, transparent),
+    0 0 18px color-mix(in srgb, var(--ok) 14%, transparent);
+  font-size: 11px;
+  font-weight: 840;
+}
+
+.pipeline-node strong {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--body);
+  font-size: 11px;
+  font-weight: 720;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pipeline-status {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 680;
+}
+
+.runlog-list {
+  display: grid;
+  gap: 5px;
+}
+
+.runlog-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(96px, 0.42fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 22px;
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 4px 7px 4px 20px;
+  background: var(--surface-soft);
+}
+
+.runlog-row::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--ok);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--ok) 52%, transparent);
+}
+
+.runlog-row.warn::before {
+  background: var(--warn);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--warn) 52%, transparent);
+}
+
+.runlog-row.danger::before {
+  background: var(--danger);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--danger) 52%, transparent);
+}
+
+.runlog-row strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes pipelineFlow {
+  0% {
+    transform: translate(-150%, -50%);
+  }
+
+  100% {
+    transform: translate(calc(100vw + 120px), -50%);
+  }
 }
 
 .gauge-grid {
@@ -3462,7 +3717,7 @@ body,
   overflow: hidden;
   border-radius: 120px 120px 0 0;
   background:
-    conic-gradient(from 270deg at 50% 100%, var(--gauge-color) 0deg var(--gauge-deg), #2a2f37 var(--gauge-deg) 180deg, transparent 180deg 360deg);
+    conic-gradient(from 270deg at 50% 100%, var(--gauge-color) 0deg var(--gauge-deg), var(--gauge-track) var(--gauge-deg) 180deg, transparent 180deg 360deg);
 }
 
 .gauge-arc::after {
@@ -3521,7 +3776,7 @@ body,
   gap: 8px;
   border-bottom: 1px solid var(--line);
   padding: 0 8px;
-  background: color-mix(in srgb, var(--surface-soft) 88%, #000000);
+  background: var(--panel-head);
 }
 
 .monitor-head strong,
@@ -3559,11 +3814,11 @@ body,
 }
 
 .line-chart.secondary {
-  color: #5794f2;
+  color: var(--blue);
 }
 
 .chart-grid line {
-  stroke: color-mix(in srgb, var(--line) 72%, transparent);
+  stroke: var(--chart-grid);
   stroke-width: 1;
 }
 
@@ -3635,7 +3890,7 @@ body,
   border-radius: 3px;
   padding: 3px 6px;
   color: var(--ink);
-  background: color-mix(in srgb, var(--surface) 72%, #000000);
+  background: var(--panel-code);
   font-size: 11px;
 }
 
@@ -3687,7 +3942,7 @@ body,
   top: 0;
   z-index: 1;
   color: var(--muted);
-  background: var(--surface);
+  background: var(--panel-head);
   font-weight: 760;
 }
 
@@ -3706,7 +3961,7 @@ body,
   border-radius: 2px;
   padding: 3px 4px;
   color: #111217;
-  background: #5794f2;
+  background: var(--blue);
   font-size: 10px;
   font-weight: 760;
 }
@@ -3872,7 +4127,7 @@ body:not(.demo-mode) .demo-strip {
   border-bottom: 1px solid var(--line);
   margin: -12px -12px 12px;
   padding: 8px 10px;
-  background: color-mix(in srgb, var(--surface-soft) 88%, #000000);
+  background: var(--panel-head);
 }
 
 .panel-heading h2 {
@@ -3900,8 +4155,13 @@ body:not(.demo-mode) .demo-strip {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .expo-story-grid,
   .monitor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pipeline-panel {
+    grid-column: span 2;
   }
 }
 
@@ -3926,8 +4186,13 @@ body:not(.demo-mode) .demo-strip {
   .gauge-grid,
   .noc-strip,
   .metric-grid,
+  .expo-story-grid,
   .monitor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pipeline-panel {
+    grid-column: span 2;
   }
 
   .command-card,
@@ -3950,8 +4215,35 @@ body:not(.demo-mode) .demo-strip {
   .gauge-grid,
   .noc-strip,
   .metric-grid,
+  .expo-story-grid,
   .monitor-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pipeline-panel {
+    grid-column: auto;
+  }
+
+  .pipeline-rail {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .pipeline-rail::before,
+  .pipeline-flow {
+    display: none;
+  }
+
+  .pipeline-node {
+    grid-template-columns: auto minmax(0, 1fr);
+    justify-items: stretch;
+    text-align: left;
+  }
+
+  .pipeline-node span {
+    width: 34px;
+    height: 34px;
   }
 
   .monitor-panel,
@@ -3976,6 +4268,14 @@ body:not(.demo-mode) .demo-strip {
 @media (min-width: 1081px) {
   .gauge-grid {
     grid-template-columns: repeat(7, minmax(112px, 1fr));
+  }
+
+  .expo-story-grid {
+    grid-template-columns: minmax(260px, 0.7fr) minmax(420px, 1fr) minmax(300px, 0.78fr);
+  }
+
+  .pipeline-panel {
+    grid-column: auto;
   }
 
   .monitor-grid {
