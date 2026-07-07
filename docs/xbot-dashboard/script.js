@@ -245,6 +245,49 @@ const fallbackData = {
     nextExperiment: "Double down on decision-rule posts for operator-heavy AI and platform news; avoid broad predictions unless the payoff is specific.",
     nextExperimentZh: "继续加码 decision-rule：把 AI 和平台新闻写成可执行判断规则；除非结论非常具体，否则少用宽泛预测。",
   },
+  experimentPlan: {
+    slots: 3,
+    budgetSafeSlots: 3,
+    exploreSlots: 1,
+    exploitSlots: 2,
+    textPostCostUsd: 0.015,
+    safeRemainingUsd: 2.81,
+    baselineScore: 3.9,
+    minSamples: 2,
+    decision: "Run 3 post experiment(s): decision_rule, playbook, second_order.",
+    recommendedFormats: [
+      {
+        slot: 1,
+        id: "decision_rule",
+        label: "Decision Rule",
+        action: "exploit",
+        avgScore: 2.8,
+        samples: 10,
+        reason: "Above baseline with enough samples.",
+      },
+      {
+        slot: 2,
+        id: "playbook",
+        label: "Playbook",
+        action: "test",
+        avgScore: 2.7,
+        samples: 2,
+        reason: "Near baseline; keep in controlled rotation.",
+      },
+      {
+        slot: 3,
+        id: "second_order",
+        label: "Second Order",
+        action: "explore",
+        avgScore: 0,
+        samples: 0,
+        reason: "Needs samples before the bot trusts it.",
+      },
+    ],
+    holdFormats: [
+      { id: "prediction", label: "Near-term Prediction", avgScore: 2.1, samples: 2 },
+    ],
+  },
 };
 
 const translations = {
@@ -453,6 +496,11 @@ const translations = {
     worst_format: "Weakest format",
     best_source: "Best source",
     next_experiment: "Next experiment",
+    experiment_plan: "Experiment allocation",
+    experiment_budget: "{safe}/{total} budget-safe slots",
+    experiment_empty: "No experiment allocation yet.",
+    experiment_hold: "Hold",
+    experiment_slot: "slot {slot}",
     proof_eyebrow: "Proof of Work",
     proof_title: "Best signal this week",
     score_label: "Score {score}",
@@ -709,6 +757,11 @@ const translations = {
     worst_format: "最弱格式",
     best_source: "最佳来源",
     next_experiment: "下一轮实验",
+    experiment_plan: "实验配额",
+    experiment_budget: "{safe}/{total} 个预算安全槽位",
+    experiment_empty: "暂无实验配额。",
+    experiment_hold: "暂停",
+    experiment_slot: "槽位 {slot}",
     proof_eyebrow: "真实证明",
     proof_title: "本周最强信号",
     score_label: "评分 {score}",
@@ -1817,6 +1870,45 @@ function renderLearning() {
       `,
     )
     .join("");
+  renderExperimentPlan();
+}
+
+function renderExperimentPlan() {
+  const plan = dashboardData.experimentPlan || fallbackData.experimentPlan || {};
+  const container = $("#experiment-plan");
+  if (!container) return;
+  const formats = Array.isArray(plan.recommendedFormats) ? plan.recommendedFormats : [];
+  if (!formats.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("experiment_empty"))}</p>`;
+    return;
+  }
+  const hold = Array.isArray(plan.holdFormats) ? plan.holdFormats : [];
+  container.innerHTML = `
+    <div class="experiment-head">
+      <div>
+        <span>${escapeHtml(t("experiment_plan"))}</span>
+        <strong>${escapeHtml(plan.decision || "-")}</strong>
+      </div>
+      <em>${escapeHtml(t("experiment_budget", { safe: formatNumber(plan.budgetSafeSlots), total: formatNumber(plan.slots) }))}</em>
+    </div>
+    <div class="experiment-slots">
+      ${formats
+        .slice(0, 4)
+        .map((item) => `
+          <article class="experiment-slot ${escapeHtml(item.action || "test")}">
+            <span>${escapeHtml(t("experiment_slot", { slot: item.slot || "-" }))}</span>
+            <strong>${escapeHtml(item.label || formatTemplate(item.id))}</strong>
+            <small>${escapeHtml(item.action || "test")} · avg ${escapeHtml(formatNumber(item.avgScore, 1))} · n=${escapeHtml(formatNumber(item.samples))}</small>
+          </article>
+        `)
+        .join("")}
+    </div>
+    ${
+      hold.length
+        ? `<div class="experiment-hold"><span>${escapeHtml(t("experiment_hold"))}</span><strong>${escapeHtml(hold.map((item) => item.label || formatTemplate(item.id)).join(", "))}</strong></div>`
+        : ""
+    }
+  `;
 }
 
 function signalSourceRows() {
