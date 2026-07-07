@@ -1123,43 +1123,71 @@ function chartSvg(series, className = "primary") {
   `;
 }
 
-function expandedSeries(seedSeries, length = 18) {
-  const series = seedSeries.length ? seedSeries.map((value) => Math.max(0, number(value))) : [1];
-  while (series.length < length) {
-    const seed = series[series.length - 1] || 1;
-    series.push(Math.max(0.4, Math.round((seed * (0.58 + (series.length % 5) * 0.11) + (series.length % 3)) * 10) / 10));
-  }
-  return series.slice(0, length);
+function cumulativeSeries(values) {
+  let total = 0;
+  return values.map((value) => {
+    total += Math.max(0, number(value));
+    return total;
+  });
+}
+
+function seriesStats(series, totalOverride = null) {
+  const values = series.map((value) => Math.max(0, number(value)));
+  return {
+    values,
+    current: values[values.length - 1] || 0,
+    total: totalOverride == null ? values.reduce((sum, value) => sum + value, 0) : number(totalOverride),
+  };
+}
+
+function endpointCallSeries() {
+  const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
+  return cumulativeSeries(endpoints.map((endpoint) => number(endpoint.calls)));
+}
+
+function impressionSeries(periodData) {
+  const period = periodData || dashboardData.last24h || {};
+  const posts = [...(period.topPosts || [])].sort((a, b) => {
+    const aTime = new Date(a.postedAt || 0).getTime();
+    const bTime = new Date(b.postedAt || 0).getTime();
+    return aTime - bTime;
+  });
+  const values = posts.map((post) => Math.max(0, number(post.impressions)));
+  const expectedTotal = number(period.impressions);
+  const currentTotal = values.reduce((sum, value) => sum + value, 0);
+  const delta = Math.max(0, expectedTotal - currentTotal);
+  if (delta > 0) values.push(delta);
+  if (!values.length && expectedTotal > 0) values.push(expectedTotal);
+  return cumulativeSeries(values);
 }
 
 function renderMonitorPanels() {
   const loadChart = $("#monitor-load-chart");
   if (!loadChart) return;
-  const trend = expandedSeries(trendSeries(), 18);
-  const currentLoad = trend[trend.length - 1] || 0;
-  $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(currentLoad, 1) });
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const impressionStats = seriesStats(impressionSeries(last24h), number(last24h.impressions));
+  $("#monitor-load-current").textContent = t("current_value", { value: formatNumber(impressionStats.current) });
   loadChart.innerHTML = `
-    ${chartSvg(trend, "primary")}
+    ${chartSvg(impressionStats.values, "primary")}
     <div class="chart-legend">
       <span><i></i> impressions.load</span>
-      <strong>${formatNumber(number(dashboardData.last7d?.impressions))} total</strong>
+      <strong>${formatNumber(impressionStats.total)} 24h total</strong>
     </div>
   `;
 
   const endpoints = dashboardData.api?.endpoints || fallbackData.api.endpoints || [];
-  const endpointSeries = expandedSeries(endpoints.map((endpoint) => number(endpoint.calls)), 18);
-  const currentRequests = endpointSeries[endpointSeries.length - 1] || 0;
-  $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(currentRequests, 1) });
+  const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);
+  const failures = endpoints.reduce((sum, endpoint) => sum + number(endpoint.failures), 0);
+  const endpointStats = seriesStats(endpointCallSeries(), calls);
+  $("#monitor-request-current").textContent = t("current_value", { value: formatNumber(endpointStats.current) });
   $("#monitor-request-chart").innerHTML = `
-    ${chartSvg(endpointSeries, "secondary")}
+    ${chartSvg(endpointStats.values, "secondary")}
     <div class="chart-legend">
       <span><i></i> x_api.calls</span>
-      <strong>${money(apiBudget().spend)} month</strong>
+      <strong>${formatNumber(endpointStats.total)} calls · ${money(apiBudget().spend)} month</strong>
     </div>
   `;
 
-  const calls = endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0);
-  const failures = endpoints.reduce((sum, endpoint) => sum + number(endpoint.failures), 0);
   $("#monitor-api-summary").textContent = t("monitor_calls_summary", { calls: formatNumber(calls), failures: formatNumber(failures) });
   const maxCalls = Math.max(...endpoints.map((endpoint) => number(endpoint.calls)), 1);
   $("#monitor-endpoints").innerHTML = endpoints
@@ -1788,13 +1816,7 @@ function renderServices() {
 }
 
 function trendSeries() {
-  const posts = dashboardData.last7d?.topPosts || fallbackData.last7d.topPosts || [];
-  const base = posts.map((post) => Math.max(1, number(post.impressions) + number(post.likes) * 6 + number(post.replies) * 10));
-  while (base.length < 12) {
-    const seed = base[base.length - 1] || number(dashboardData.last24h?.impressions, 8);
-    base.push(Math.max(1, Math.round(seed * (0.62 + (base.length % 4) * 0.13))));
-  }
-  return base.slice(0, 12);
+  return impressionSeries(dashboardData.last7d || fallbackData.last7d || {});
 }
 
 function renderTrend() {
