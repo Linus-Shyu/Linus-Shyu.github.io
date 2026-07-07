@@ -316,6 +316,33 @@ const fallbackData = {
       estimatedImagePostUsd: 0.03,
     },
   },
+  mediaRoiGate: {
+    enabled: true,
+    decision: "hold",
+    attachImageAllowed: false,
+    zeroExtraXReads: true,
+    confidence: "low_samples",
+    reason: "Need more measured media posts before spending on image uploads.",
+    nextAction: "Keep image upload partition closed until cached outcomes prove lift.",
+    mediaAvgScore: 2.1,
+    textAvgScore: 4.2,
+    baselineScore: 3.9,
+    mediaSamples: 1,
+    textSamples: 119,
+    minSamples: 3,
+    mediaLiftPct: -50,
+    minLiftPct: 18,
+    textPostCostUsd: 0.015,
+    imagePostCostUsd: 0.03,
+    incrementalImageCostUsd: 0.015,
+    safeRemainingUsd: 2.81,
+    checks: [
+      { id: "samples", ok: false, label: "cached sample floor", value: "1/3 media · 119/3 text" },
+      { id: "lift", ok: false, label: "media lift", value: "-50.0%" },
+      { id: "budget", ok: true, label: "safe budget reserve", value: "$2.810 left" },
+      { id: "x_reads", ok: true, label: "extra X reads", value: "0" },
+    ],
+  },
   controlPlane: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "auth_repair",
@@ -887,6 +914,16 @@ const translations = {
     runbook: "Runbook",
     operator_notes: "Runbook notes",
     cost_note: "Dashboard sync uses GitHub API only. It does not add X API search/read calls.",
+    media_firewall: "Media upload firewall",
+    media_firewall_hold: "partition closed",
+    media_firewall_allow: "partition armed",
+    media_firewall_lift: "Media lift",
+    media_firewall_samples: "Samples",
+    media_firewall_delta: "Upload delta",
+    media_firewall_reads: "X reads",
+    media_firewall_threshold: "threshold {value}%",
+    media_firewall_unknown: "unknown",
+    media_firewall_evidence: "ROI evidence",
     reply_queue: "Reply Queue",
     copy_ready_drafts: "Copy-ready drafts",
     cost_guard: "Cost Boundary",
@@ -1263,6 +1300,16 @@ const translations = {
     runbook: "运行手册",
     operator_notes: "运行手册备注",
     cost_note: "看板同步只使用 GitHub API，不增加 X API 搜索/读取调用。",
+    media_firewall: "媒体上传防火墙",
+    media_firewall_hold: "分区关闭",
+    media_firewall_allow: "分区待命",
+    media_firewall_lift: "媒体增益",
+    media_firewall_samples: "样本",
+    media_firewall_delta: "上传增量",
+    media_firewall_reads: "X 读取",
+    media_firewall_threshold: "阈值 {value}%",
+    media_firewall_unknown: "未知",
+    media_firewall_evidence: "ROI 证据",
     reply_queue: "回复队列",
     copy_ready_drafts: "可复制草稿",
     cost_guard: "成本边界",
@@ -1542,6 +1589,16 @@ function apiBudget() {
       : Math.max(0, cap - spend);
   const ratio = cap > 0 ? Math.min(100, (spend / cap) * 100) : 0;
   return { api, spend, cap, remaining, ratio };
+}
+
+function mediaRoiGateData() {
+  return (
+    dashboardData.mediaRoiGate ||
+    dashboardData.automation?.mediaRoiGate ||
+    fallbackData.mediaRoiGate ||
+    fallbackData.automation?.mediaRoiGate ||
+    {}
+  );
 }
 
 function formatCadenceMode(mode, { compact = false } = {}) {
@@ -4036,11 +4093,71 @@ function renderPosts() {
     .join("");
 }
 
+function renderMediaRoiGate() {
+  const target = $("#media-roi-gate");
+  if (!target) return;
+  const gate = mediaRoiGateData();
+  const allowed = Boolean(gate.attachImageAllowed);
+  const stateClass = allowed ? "good" : "warn";
+  const stateLabel = allowed ? t("media_firewall_allow") : t("media_firewall_hold");
+  const lift = gate.mediaLiftPct == null
+    ? t("media_firewall_unknown")
+    : `${formatNumber(number(gate.mediaLiftPct), 1)}%`;
+  const samples = `${formatNumber(gate.mediaSamples)}/${formatNumber(gate.minSamples)} media · ${formatNumber(gate.textSamples)}/${formatNumber(gate.minSamples)} text`;
+  const checks = (gate.checks || []).slice(0, 4);
+  target.innerHTML = `
+    <div class="media-firewall-head">
+      <div>
+        <span class="eyebrow">${escapeHtml(t("media_firewall_evidence"))}</span>
+        <strong>${escapeHtml(t("media_firewall"))}</strong>
+      </div>
+      <em class="${stateClass}">${escapeHtml(stateLabel)}</em>
+    </div>
+    <div class="media-firewall-grid">
+      <span>
+        <small>${escapeHtml(t("media_firewall_lift"))}</small>
+        <strong>${escapeHtml(lift)}</strong>
+        <em>${escapeHtml(t("media_firewall_threshold", { value: formatNumber(number(gate.minLiftPct), 1) }))}</em>
+      </span>
+      <span>
+        <small>${escapeHtml(t("media_firewall_samples"))}</small>
+        <strong>${escapeHtml(samples)}</strong>
+        <em>${escapeHtml(gate.confidence || "-")}</em>
+      </span>
+      <span>
+        <small>${escapeHtml(t("media_firewall_delta"))}</small>
+        <strong>${escapeHtml(money(gate.incrementalImageCostUsd || 0))}</strong>
+        <em>${escapeHtml(`${money(gate.imagePostCostUsd || 0)} image`)}</em>
+      </span>
+      <span>
+        <small>${escapeHtml(t("media_firewall_reads"))}</small>
+        <strong>${gate.zeroExtraXReads ? "0" : "-"}</strong>
+        <em>${escapeHtml(gate.decision || "-")}</em>
+      </span>
+    </div>
+    <p>${escapeHtml(gate.reason || "")}</p>
+    <div class="media-firewall-checks">
+      ${checks
+        .map(
+          (check) => `
+            <span class="${check.ok ? "ok" : "hold"}">
+              <i></i>
+              <strong>${escapeHtml(check.label || check.id || "-")}</strong>
+              <em>${escapeHtml(check.value || "-")}</em>
+            </span>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderApi() {
   const { api, spend, cap, ratio } = apiBudget();
   $("#api-spend-label").textContent = currentLang === "zh" ? `已花 ${money(spend)}` : `${money(spend)} spent`;
   $("#api-cap-label").textContent = currentLang === "zh" ? `上限 $${cap.toFixed(2)}` : `$${cap.toFixed(2)} cap`;
   $("#api-meter").style.width = `${ratio}%`;
+  renderMediaRoiGate();
   $("#api-usage").innerHTML = (api.endpoints || [])
     .map((endpoint) => {
       const health = endpointHealth(endpoint);
