@@ -331,6 +331,7 @@ const diagnosisTranslations = {
 const $ = (selector) => document.querySelector(selector);
 const number = (value, fallback = 0) => (Number.isFinite(Number(value)) ? Number(value) : fallback);
 const money = (value) => `$${number(value).toFixed(3)}`;
+const FRESH_DATA_MAX_AGE_HOURS = 30;
 
 let dashboardData = fallbackData;
 let currentLang = document.documentElement.dataset.lang === "zh" ? "zh" : "en";
@@ -456,7 +457,7 @@ function dataFreshness() {
   const updated = new Date(dashboardData.updatedAt);
   if (Number.isNaN(updated.getTime())) return { key: "data_stale", className: "warn" };
   const ageHours = (Date.now() - updated.getTime()) / 36e5;
-  if (ageHours > 12) return { key: "data_stale", className: "warn" };
+  if (ageHours > FRESH_DATA_MAX_AGE_HOURS) return { key: "data_stale", className: "warn" };
   return { key: "live_data", className: "ok" };
 }
 
