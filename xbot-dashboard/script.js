@@ -1026,6 +1026,9 @@ const translations = {
     operator_packet_lift: "Lift model",
     operator_packet_budget: "Cost mode",
     operator_packet_copy: "Copy packet",
+    operator_protocol: "Execution protocol",
+    operator_stop: "Stop conditions",
+    operator_writeback: "Writeback",
     runbook: "Runbook",
     operator_notes: "Runbook notes",
     cost_note: "Dashboard sync uses GitHub API only. It does not add X API search/read calls.",
@@ -1445,6 +1448,9 @@ const translations = {
     operator_packet_lift: "增益模型",
     operator_packet_budget: "成本模式",
     operator_packet_copy: "复制数据包",
+    operator_protocol: "执行协议",
+    operator_stop: "停止条件",
+    operator_writeback: "写回",
     runbook: "运行手册",
     operator_notes: "运行手册备注",
     cost_note: "看板同步只使用 GitHub API，不增加 X API 搜索/读取调用。",
@@ -2283,6 +2289,30 @@ function distributionOpsData() {
     ],
     runbook: [],
     missions,
+  };
+}
+
+function missionOperatorProtocol(mission, ops, index = 0) {
+  if (mission?.operatorProtocol?.steps?.length) return mission.operatorProtocol;
+  const targetReplies = number(mission?.targetReplies, Math.max(1, number(ops?.manualReplyTarget, 3)));
+  const sla = formatNumber(mission?.operatorSlaMinutes || 10 + index * 10);
+  const route = mission?.routeLabel || mission?.label || `Route ${index + 1}`;
+  return {
+    mode: "manual_zero_read_growth_loop",
+    zeroExtraXReads: true,
+    objective: `Borrow live distribution from ${route} without X search/read API spend.`,
+    steps: [
+      { id: "open", label: "open.route", detail: "Open the X web route and use live recency." },
+      { id: "filter", label: "filter.thread", detail: "Pick a technical conversation with active replies and clear topic fit." },
+      { id: "paste", label: "paste.reply", detail: `Paste ${formatNumber(targetReplies)} useful reply/replies within ${sla} minutes.` },
+      { id: "observe", label: "observe.feedback", detail: "Stop at target count; let the next metrics run update scoring." },
+    ],
+    stopConditions: [
+      "Skip politics, giveaways, ragebait, ads, and weak topic fit.",
+      "Skip if the reply would require an unsupported factual claim.",
+      "Stop after the target replies; do not chase every adjacent thread.",
+    ],
+    writeback: "Growth maintenance refreshes metrics and updates source/format/topic weights.",
   };
 }
 
@@ -4233,6 +4263,18 @@ function renderActions() {
   const primary = missions[0];
   const localizedPrimary = localizeAction({ label: primary.routeLabel || primary.label, reason: primary.routeReason });
   const primaryDraft = primary.draftText || draftFor(0).text || "";
+  const primaryProtocol = missionOperatorProtocol(primary, ops, 0);
+  const protocolSteps = Array.isArray(primaryProtocol.steps) ? primaryProtocol.steps : [];
+  const stopConditions = Array.isArray(primaryProtocol.stopConditions) ? primaryProtocol.stopConditions : [];
+  const protocolCopy = [
+    primaryProtocol.objective || null,
+    ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
+    stopConditions.length ? "" : null,
+    stopConditions.length ? `${t("operator_stop")}:` : null,
+    ...stopConditions.map((item) => `- ${item}`),
+    primaryProtocol.writeback ? "" : null,
+    primaryProtocol.writeback ? `${t("operator_writeback")}: ${primaryProtocol.writeback}` : null,
+  ].filter((line) => line != null).join("\n");
   const primaryPacket = [
     `${t("operator_packet_route")}: ${localizedPrimary.label || primary.label || "-"}`,
     `${t("operator_packet_sla")}: ${t("dispatch_sla", { minutes: formatNumber(primary.operatorSlaMinutes || 10) })}`,
@@ -4240,6 +4282,8 @@ function renderActions() {
     `${t("operator_packet_lift")}: ${t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) })}`,
     `${t("operator_packet_budget")}: ${t("dispatch_zero_reads")}`,
     primary.evidence ? `Evidence: ${primary.evidence}` : null,
+    protocolCopy ? "" : null,
+    protocolCopy,
     "",
     primaryDraft,
   ].filter((line) => line != null).join("\n");
@@ -4305,6 +4349,27 @@ function renderActions() {
         <div><span>${escapeHtml(t("operator_packet_lift"))}</span><strong>${escapeHtml(t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) }))}</strong></div>
       </div>
       <pre class="packet-copy"><code>${escapeHtml(primaryDraft)}</code></pre>
+      <div class="packet-protocol">
+        <div class="packet-protocol-head">
+          <span>${escapeHtml(t("operator_protocol"))}</span>
+          <strong>${escapeHtml(primaryProtocol.mode || "manual_zero_read_growth_loop")}</strong>
+        </div>
+        <ol>
+          ${protocolSteps.slice(0, 4).map((step) => `
+            <li>
+              <span>${escapeHtml(step.label || step.id || "-")}</span>
+              <strong>${escapeHtml(step.detail || "-")}</strong>
+            </li>
+          `).join("")}
+        </ol>
+        ${stopConditions.length ? `
+          <div class="packet-stop">
+            <span>${escapeHtml(t("operator_stop"))}</span>
+            <p>${escapeHtml(stopConditions.slice(0, 2).join(" · "))}</p>
+          </div>
+        ` : ""}
+        ${primaryProtocol.writeback ? `<p class="packet-writeback"><span>${escapeHtml(t("operator_writeback"))}</span>${escapeHtml(primaryProtocol.writeback)}</p>` : ""}
+      </div>
       <div class="row-actions">
         ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
         <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryPacket)}">${t("operator_packet_copy")}</button>

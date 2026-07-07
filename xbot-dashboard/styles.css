@@ -2383,6 +2383,103 @@ h3 {
   white-space: pre-wrap;
 }
 
+.packet-protocol {
+  display: grid;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 48%),
+    color-mix(in srgb, var(--surface-soft) 82%, transparent);
+}
+
+.packet-protocol-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.packet-protocol-head span,
+.packet-stop span,
+.packet-writeback span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.packet-protocol-head strong {
+  overflow: hidden;
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.packet-protocol ol {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.packet-protocol li {
+  display: grid;
+  grid-template-columns: minmax(82px, 0.32fr) minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 78%, transparent);
+  border-radius: 6px;
+  padding: 7px 8px;
+  background: color-mix(in srgb, var(--surface) 66%, transparent);
+}
+
+.packet-protocol li span {
+  overflow: hidden;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 840;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.packet-protocol li strong {
+  min-width: 0;
+  color: var(--body);
+  font-size: 11px;
+  font-weight: 640;
+  line-height: 1.35;
+}
+
+.packet-stop,
+.packet-writeback {
+  margin: 0;
+  border-left: 2px solid color-mix(in srgb, var(--warn) 72%, transparent);
+  padding-left: 9px;
+}
+
+.packet-stop p,
+.packet-writeback {
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.42;
+}
+
+.packet-stop p {
+  margin: 3px 0 0;
+}
+
+.packet-writeback span {
+  display: block;
+  margin-bottom: 3px;
+}
+
 .action-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.68fr);
@@ -8107,6 +8204,15 @@ body:not(.demo-mode) .demo-strip {
 @media (max-width: 620px) {
   .packet-grid {
     grid-template-columns: 1fr;
+  }
+
+  .packet-protocol-head,
+  .packet-protocol li {
+    grid-template-columns: 1fr;
+  }
+
+  .packet-protocol-head {
+    display: grid;
   }
 
   .operator-packet {
