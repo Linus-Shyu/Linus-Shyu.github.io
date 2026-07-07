@@ -560,6 +560,64 @@ const fallbackData = {
       },
     ],
   },
+  trendVelocityRadar: {
+    updatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "rss_velocity",
+    zeroExtraXReads: true,
+    summary: {
+      items: 5,
+      breakoutCount: 2,
+      avgVelocity: 72.6,
+      primaryStage: "breakout",
+      primaryTitle: "AI coding agents move from demo to workflow control",
+      primarySource: "github.blog",
+      nextAction: "Route breakout story from github.blog into the next post angle.",
+    },
+    items: [
+      {
+        rank: 1,
+        title: "AI coding agents move from demo to workflow control",
+        link: "https://github.blog/",
+        source: "github.blog",
+        sourceTier: "official",
+        audienceLabel: "AI / Agent Stack",
+        velocityScore: 86.4,
+        velocityLift: 0.213,
+        stage: "breakout",
+        ageHours: 2.3,
+        echoes: 4,
+        reason: "2.3h old · 4 echoes · 5 sources · official source · AI / Agent Stack",
+      },
+      {
+        rank: 2,
+        title: "Big Tech bundles AI defaults into the operating system layer",
+        link: "https://www.theverge.com/",
+        source: "theverge.com",
+        sourceTier: "mainstream",
+        audienceLabel: "Big Tech Platform",
+        velocityScore: 78.1,
+        velocityLift: 0.169,
+        stage: "rising",
+        ageHours: 4.8,
+        echoes: 3,
+        reason: "4.8h old · 3 echoes · 4 sources · mainstream source · Big Tech Platform",
+      },
+      {
+        rank: 3,
+        title: "Consumer app distribution shifts toward embedded AI surfaces",
+        link: "https://techcrunch.com/",
+        source: "techcrunch.com",
+        sourceTier: "mainstream",
+        audienceLabel: "Consumer Apps",
+        velocityScore: 67.5,
+        velocityLift: 0.113,
+        stage: "early",
+        ageHours: 1.1,
+        echoes: 1,
+        reason: "1.1h old · 1 echoes · 2 sources · mainstream source · Consumer Apps",
+      },
+    ],
+  },
   distributionOps: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "manual_distribution",
@@ -1034,6 +1092,17 @@ const translations = {
     audience_lift: "lift {lift}%",
     audience_score: "score {score}",
     audience_empty: "No audience route data available.",
+    velocity_eyebrow: "Trend Velocity Radar",
+    velocity_title: "RSS breakout detector",
+    velocity_zero_reads: "0 X read ops",
+    velocity_primary: "Primary packet",
+    velocity_average: "Avg velocity",
+    velocity_breakouts: "Breakouts",
+    velocity_next: "Routing directive",
+    velocity_age: "{hours}h",
+    velocity_echoes: "{count} echoes",
+    velocity_lift: "lift {lift}%",
+    velocity_empty: "No trend velocity radar available.",
     matrix_eyebrow: "UTC Angle Matrix",
     matrix_title: "Temporal prompt fire-control",
     matrix_zero_reads: "cached analytics",
@@ -1431,6 +1500,17 @@ const translations = {
     audience_lift: "增益 {lift}%",
     audience_score: "评分 {score}",
     audience_empty: "暂无受众路由数据。",
+    velocity_eyebrow: "趋势速度雷达",
+    velocity_title: "RSS 爆发检测器",
+    velocity_zero_reads: "0 次 X 读取",
+    velocity_primary: "主数据包",
+    velocity_average: "平均速度",
+    velocity_breakouts: "爆发主题",
+    velocity_next: "路由指令",
+    velocity_age: "{hours} 小时",
+    velocity_echoes: "{count} 次回声",
+    velocity_lift: "增益 {lift}%",
+    velocity_empty: "暂无趋势速度雷达。",
     matrix_eyebrow: "UTC 角度矩阵",
     matrix_title: "时间 Prompt 火控",
     matrix_zero_reads: "缓存分析",
@@ -3414,6 +3494,68 @@ function renderAudienceRouter() {
   `;
 }
 
+function trendVelocityRadarData() {
+  return dashboardData.trendVelocityRadar || fallbackData.trendVelocityRadar || {};
+}
+
+function velocityStageLabel(stage) {
+  const normalized = String(stage || "watch").replace(/_/g, " ");
+  return normalized.toUpperCase();
+}
+
+function renderTrendVelocityRadar() {
+  const radar = trendVelocityRadarData();
+  const container = $("#trend-velocity-radar");
+  if (!container) return;
+  const items = Array.isArray(radar.items) ? radar.items : [];
+  if (!items.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("velocity_empty"))}</p>`;
+    return;
+  }
+  const summary = radar.summary || {};
+  const primary = items[0] || {};
+  container.innerHTML = `
+    <div class="velocity-head">
+      <div>
+        <span>${escapeHtml(t("velocity_eyebrow"))}</span>
+        <strong>${escapeHtml(t("velocity_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("velocity_zero_reads"))}</em>
+    </div>
+    <div class="velocity-meta">
+      <div><span>${escapeHtml(t("velocity_primary"))}</span><strong>${escapeHtml(summary.primarySource || primary.source || "-")}</strong></div>
+      <div><span>${escapeHtml(t("velocity_average"))}</span><strong>${escapeHtml(formatNumber(summary.avgVelocity ?? primary.velocityScore, 1))}</strong></div>
+      <div><span>${escapeHtml(t("velocity_breakouts"))}</span><strong>${escapeHtml(formatNumber(summary.breakoutCount || items.filter((item) => ["breakout", "rising"].includes(item.stage)).length))}</strong></div>
+    </div>
+    <div class="velocity-list">
+      ${items.slice(0, 6).map((item) => {
+        const score = clamp(number(item.velocityScore), 0, 100);
+        const age = item.ageHours === null || item.ageHours === undefined ? "-" : t("velocity_age", { hours: formatNumber(item.ageHours, 1) });
+        const liftPct = formatNumber(number(item.velocityLift) * 100, 1);
+        const safeLink = /^https?:\/\//i.test(item.link || "") ? item.link : "";
+        return `
+          <article class="velocity-row ${escapeHtml(item.stage || "watch")}" style="--velocity-score:${score.toFixed(1)}%">
+            <div class="velocity-rank">${escapeHtml(String(item.rank || "-").padStart(2, "0"))}</div>
+            <div class="velocity-topic">
+              <span>${escapeHtml(velocityStageLabel(item.stage))} · ${escapeHtml(item.source || "-")} · ${escapeHtml(item.audienceLabel || "-")}</span>
+              ${safeLink ? `<a href="${escapeHtml(safeLink)}" target="_blank" rel="noreferrer">${escapeHtml(item.title || "-")}</a>` : `<strong>${escapeHtml(item.title || "-")}</strong>`}
+              <small>${escapeHtml(age)} · ${escapeHtml(t("velocity_echoes", { count: formatNumber(item.echoes) }))} · ${escapeHtml(t("velocity_lift", { lift: liftPct }))}</small>
+            </div>
+            <div class="velocity-score">
+              <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+              <div><span></span></div>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="velocity-directive">
+      <span>${escapeHtml(t("velocity_next"))}</span>
+      <code>${escapeHtml(summary.nextAction || primary.reason || "-")}</code>
+    </div>
+  `;
+}
+
 function temporalAngleMatrixData() {
   return dashboardData.temporalAngleMatrix || fallbackData.temporalAngleMatrix || {};
 }
@@ -3497,6 +3639,7 @@ function renderLearning() {
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
   renderAudienceRouter();
+  renderTrendVelocityRadar();
   renderTemporalAngleMatrix();
   renderExperimentPlan();
 }
