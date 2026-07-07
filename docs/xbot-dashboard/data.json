@@ -1,57 +1,70 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T15:50:43.434Z",
+  "updatedAt": "2026-07-07T01:09:59.115Z",
   "mode": {
     "label": "Zero extra X API",
     "description": "Web search links + manual paste replies."
   },
   "profile": {
     "followers": 65,
-    "followerDelta": -1,
-    "followerCheckedAt": "2026-07-06T15:50:33.163Z",
-    "trackedPosts": 120,
-    "measuredPosts": 120,
+    "followerDelta": 0,
+    "followerCheckedAt": "2026-07-07T01:09:50.396Z",
+    "trackedPosts": 123,
+    "measuredPosts": 123,
     "baselineScore": 3.9
   },
   "last24h": {
-    "posts": 2,
-    "impressions": 12,
-    "likes": 1,
+    "posts": 3,
+    "impressions": 233,
+    "likes": 0,
     "reposts": 0,
     "replies": 0,
     "topPosts": [
       {
-        "id": "2073904896760512550",
-        "text": "Printer buying rule: if it needs a cloud account, proprietary ink, or a mystery driver, don't buy it. Pay more for repair docs, standard parts, and open firmware. Cheap printers are just financing plans with paper trays. #OpenSource #Hardware",
-        "url": "https://x.com/i/web/status/2073904896760512550",
-        "score": 2,
-        "impressions": 3,
-        "likes": 1,
+        "id": "2074204226402554088",
+        "text": "Decision rule for iOS 27 beta 3: if your app depends on search, shortcuts, support, or reminders, test Siri paths now. If Siri can complete the task, your app UI just became the fallback. #AI #ConsumerTech",
+        "url": "https://x.com/i/web/status/2074204226402554088",
+        "score": 2.2,
+        "impressions": 219,
+        "likes": 0,
         "reposts": 0,
         "replies": 0,
         "template": "decision_rule",
-        "source": "news.ycombinator.com",
-        "postedAt": "2026-07-05T23:00:33.472Z"
+        "source": "9to5mac.com",
+        "postedAt": "2026-07-06T18:49:59.250Z"
       },
       {
-        "id": "2073828007999914189",
-        "text": "Google’s AI-Declaration ad exposes the real operator pain: AI makes first drafts cheap, but taste becomes the bottleneck. Someone still has to know what must not sound like Google Docs. #AI #BigTech",
-        "url": "https://x.com/i/web/status/2073828007999914189",
+        "id": "2074174879658594740",
+        "text": "Decision rule for human-labeling stacks: if Mechanical Turk is in the critical path, migrate now. If a marketplace can stop new demand quietly, it is not infrastructure; it is leftover capacity. #AI #BigTech",
+        "url": "https://x.com/i/web/status/2074174879658594740",
         "score": 0.1,
         "impressions": 9,
         "likes": 0,
         "reposts": 0,
         "replies": 0,
-        "template": "operator_pain",
+        "template": "decision_rule",
         "source": "techcrunch.com",
-        "postedAt": "2026-07-05T17:55:01.763Z"
+        "postedAt": "2026-07-06T16:53:22.607Z"
+      },
+      {
+        "id": "2074268555013460474",
+        "text": "Siri’s new setting is not cosmetic; it is UX surface area. If users can tune pace and expressivity, who owns the experience: Apple, the app, or the assistant layer between them? #AI #BigTech",
+        "url": "https://x.com/i/web/status/2074268555013460474",
+        "score": 0.1,
+        "impressions": 5,
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "template": "sharp_question",
+        "source": "techcrunch.com",
+        "postedAt": "2026-07-06T23:05:36.361Z"
       }
     ]
   },
   "last7d": {
-    "posts": 21,
-    "impressions": 381,
-    "likes": 19,
+    "posts": 24,
+    "impressions": 621,
+    "likes": 20,
     "reposts": 0,
     "replies": 2,
     "topPosts": [
@@ -208,34 +221,34 @@
   ],
   "drafts": [
     {
-      "title": "AI product launch posts, model demos, agent announcements",
-      "text": "Decision rule for AI launches: judge the demo by what happens on day 30. If users still need a human to verify every output, the product sold speed but not trust.",
-      "angle": "trust over demo speed",
-      "createdAt": "2026-07-06T15:50:43.414Z"
+      "title": "AI product launches or agent demos",
+      "text": "Launch rule for AI products: the demo can be magical, but the test is whether the user can recover when it is wrong. No undo path means it is still a toy workflow.",
+      "angle": "user impact",
+      "createdAt": "2026-07-07T01:09:59.093Z"
     },
     {
-      "title": "Big Tech policy changes, app store rules, search/social algorithm shifts",
-      "text": "Platform shift rule: when Big Tech changes defaults, treat it like a tax change. The winners are teams that already know their dependency map and can move distribution fast.",
-      "angle": "dependency risk",
-      "createdAt": "2026-07-06T15:50:43.414Z"
+      "title": "Big Tech OS, search, assistant, or app platform changes",
+      "text": "When a platform shifts the default surface, distribution changes before revenue does. If users can finish the job inside the OS layer, your app needs a reason to be opened.",
+      "angle": "business impact",
+      "createdAt": "2026-07-07T01:09:59.093Z"
     },
     {
-      "title": "consumer app launches, growth posts, app strategy discussions",
-      "text": "Consumer app lesson: distribution is now a product feature. If onboarding, sharing, and switching costs are not designed together, a better app still loses to the default.",
-      "angle": "distribution over features",
-      "createdAt": "2026-07-06T15:50:43.414Z"
+      "title": "posts about consumer apps, virality, App Store changes, or social growth",
+      "text": "Consumer app rule: growth from a feed, store, or notification channel is rented until you own habit or identity. Distribution is not durability.",
+      "angle": "contrarian tradeoff",
+      "createdAt": "2026-07-07T01:09:59.094Z"
     },
     {
-      "title": "cloud pricing, dev platforms, serverless, infrastructure debates",
-      "text": "Cloud decision rule: cheap compute is only cheap if exit is possible. Track proprietary APIs, data gravity, and rollback paths before the invoice becomes the architecture.",
-      "angle": "lock-in cost",
-      "createdAt": "2026-07-06T15:50:43.415Z"
+      "title": "cloud, dev platform, database, hosting, or infrastructure debates",
+      "text": "Cloud decision rule: if the managed service saves a week now but traps your data, auth, or deploy path, price the exit before you price the bill.",
+      "angle": "hidden cost",
+      "createdAt": "2026-07-07T01:09:59.094Z"
     },
     {
-      "title": "cybersecurity, privacy, AI agents, SaaS integration posts",
-      "text": "Security rule for AI and SaaS tools: if it can read repos, inboxes, tickets, or customer data, it is not a plugin. It is production access with a nicer UI.",
-      "angle": "access control",
-      "createdAt": "2026-07-06T15:50:43.415Z"
+      "title": "cybersecurity, privacy, AI coding tools, SaaS access, or startup ops posts",
+      "text": "Security rule for AI tools: if it can read repos, tickets, email, or customer data, treat it like an employee with production access. Approve, log, scope, and revoke.",
+      "angle": "decision rule",
+      "createdAt": "2026-07-07T01:09:59.094Z"
     }
   ],
   "performance": {
@@ -247,16 +260,16 @@
       },
       {
         "name": "decision_rule",
-        "avgScore": 3.3,
-        "samples": 8
-      },
-      {
-        "name": "sharp_question",
-        "avgScore": 2.7,
-        "samples": 2
+        "avgScore": 2.8,
+        "samples": 10
       },
       {
         "name": "contrarian_cost",
+        "avgScore": 2.2,
+        "samples": 2
+      },
+      {
+        "name": "operator_pain",
         "avgScore": 2.2,
         "samples": 2
       },
@@ -278,11 +291,6 @@
         "samples": 4
       },
       {
-        "name": "techcrunch.com",
-        "avgScore": 5.4,
-        "samples": 6
-      },
-      {
         "name": "sspai.com",
         "avgScore": 5.4,
         "samples": 3
@@ -291,6 +299,11 @@
         "name": "venturebeat.com",
         "avgScore": 5.1,
         "samples": 8
+      },
+      {
+        "name": "oschina.net",
+        "avgScore": 4.8,
+        "samples": 2
       }
     ],
     "hashtags": [
@@ -320,14 +333,14 @@
         "samples": 6
       },
       {
-        "name": "ai",
-        "avgScore": 4,
-        "samples": 97
-      },
-      {
         "name": "apple",
         "avgScore": 4,
         "samples": 5
+      },
+      {
+        "name": "ai",
+        "avgScore": 3.9,
+        "samples": 100
       },
       {
         "name": "steammachine",
@@ -338,34 +351,34 @@
   },
   "diagnosis": [
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 24 小时记录到 2 条推文、12 次曝光；瓶颈是分发入口，不是发帖数量。",
+    "最近 24 小时记录到 3 条推文、233 次曝光；瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制回复，避免增加 X search/read API。",
     "回复优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
   "api": {
     "month": "2026-07",
-    "spend": 1.43,
+    "spend": 1.69,
     "cap": 5,
     "endpoints": [
       {
         "name": "OAUTH_REFRESH",
-        "calls": 20,
+        "calls": 23,
         "failures": 1,
         "usd": 0,
         "lastStatus": 200
       },
       {
         "name": "CREATE_TWEET",
-        "calls": 17,
+        "calls": 20,
         "failures": 0,
-        "usd": 0.255,
+        "usd": 0.3,
         "lastStatus": 201
       },
       {
         "name": "USER_ME_LOOKUP",
-        "calls": 16,
+        "calls": 17,
         "failures": 0,
-        "usd": 0.4,
+        "usd": 0.45,
         "lastStatus": 200
       },
       {
@@ -377,30 +390,30 @@
       },
       {
         "name": "TWEET_METRICS_LOOKUP",
-        "calls": 14,
+        "calls": 15,
         "failures": 0,
-        "usd": 0.4,
+        "usd": 0.45,
         "lastStatus": 200
       },
       {
         "name": "MEDIA_INITIALIZE",
-        "calls": 5,
+        "calls": 6,
         "failures": 0,
-        "usd": 0.075,
+        "usd": 0.09,
         "lastStatus": 200
       },
       {
         "name": "MEDIA_APPEND",
-        "calls": 5,
+        "calls": 6,
         "failures": 0,
-        "usd": 0.15,
+        "usd": 0.2,
         "lastStatus": 200
       },
       {
         "name": "MEDIA_FINALIZE",
-        "calls": 5,
+        "calls": 6,
         "failures": 0,
-        "usd": 0.15,
+        "usd": 0.2,
         "lastStatus": 200
       },
       {
