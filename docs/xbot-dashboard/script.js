@@ -1146,6 +1146,13 @@ const translations = {
     dispatch_manifest_copy: "Copy full manifest",
     dispatch_manifest_packets: "Route packets",
     dispatch_manifest_checks: "Guard checks",
+    route_amp_eyebrow: "Route Amplifier",
+    route_amp_title: "Cached distribution leverage",
+    route_amp_ready: "Ready lanes",
+    route_amp_score: "Amp score",
+    route_amp_top: "Top route",
+    route_amp_formula: "Scoring formula",
+    route_amp_zero_reads: "0 X reads",
     operator_protocol: "Execution protocol",
     operator_progress: "{done}/{total} steps armed",
     operator_step_done: "done",
@@ -1678,6 +1685,13 @@ const translations = {
     dispatch_manifest_copy: "复制完整清单",
     dispatch_manifest_packets: "路由数据包",
     dispatch_manifest_checks: "守卫检查",
+    route_amp_eyebrow: "路由放大器",
+    route_amp_title: "缓存分发杠杆",
+    route_amp_ready: "就绪通道",
+    route_amp_score: "放大评分",
+    route_amp_top: "最高路由",
+    route_amp_formula: "评分公式",
+    route_amp_zero_reads: "0 次 X 读取",
     operator_protocol: "执行协议",
     operator_progress: "{done}/{total} 步已完成",
     operator_step_done: "完成",
@@ -2788,6 +2802,92 @@ function operatorDispatchPacketData(ops = distributionOpsData()) {
       { id: "queue", label: "route queue", value: `${readyPackets}/${packets.length}`, status: severity, detail: "Route URL and reply text are present." },
     ],
     packets,
+  };
+}
+
+function routeConfidenceWeight(confidence) {
+  const text = String(confidence || "").toLowerCase();
+  if (text === "high") return 16;
+  if (text === "medium") return 10;
+  if (text === "low") return 5;
+  return 7;
+}
+
+function routeAmplifierData(packet = operatorDispatchPacketData(), ops = distributionOpsData()) {
+  const incoming = dashboardData.routeAmplifier || fallbackData.routeAmplifier;
+  if (incoming?.lanes?.length) return incoming;
+  const packets = Array.isArray(packet?.packets) ? packet.packets : [];
+  const baseline = Math.max(1, number(dashboardData.profile?.baselineScore, fallbackData.profile.baselineScore));
+  const flywheel = number((dashboardData.viralFlywheel || fallbackData.viralFlywheel || {}).velocityScore, 0);
+  const readyPct = number((dashboardData.growthKinetics || fallbackData.growthKinetics || {}).routeReadinessPct, 0);
+  const api = apiBudget();
+  const budgetComponent = api.remaining > 1 ? 14 : api.remaining > 0 ? 8 : -18;
+  const lanes = packets.slice(0, 5).map((item, index) => {
+    const expectedLift = number(item.expectedLiftPct, 0);
+    const targetReplies = Math.max(1, number(item.targetReplies, 1));
+    const sla = Math.max(5, number(item.operatorSlaMinutes, 10 + index * 10));
+    const ready = item.ready !== false && Boolean(item.routeUrl && item.draftText);
+    const score = clamp(
+      16 +
+        Math.min(24, (number(item.score, baseline) / baseline) * 10) +
+        Math.min(18, expectedLift / 3) +
+        Math.min(14, targetReplies * 4) +
+        Math.max(0, 14 - sla / 4) +
+        routeConfidenceWeight(item.confidence) +
+        Math.min(12, flywheel * 0.12) +
+        Math.min(8, readyPct * 0.08) +
+        budgetComponent -
+        (ready ? 0 : 22),
+      0,
+      100,
+    );
+    const status = !ready ? "danger" : score >= 72 ? "ok" : score >= 48 ? "warn" : "danger";
+    return {
+      id: item.id || `route_amp:${index + 1}`,
+      rank: item.priority || index + 1,
+      label: item.routeLabel || item.label || `Route ${index + 1}`,
+      routeUrl: item.routeUrl || null,
+      status,
+      ready,
+      score,
+      expectedLiftPct: expectedLift,
+      targetReplies,
+      operatorSlaMinutes: sla,
+      confidence: item.confidence || "low",
+      xReadOps: 0,
+      incrementalXApiUsd: 0,
+      action: !ready
+        ? "Repair missing route URL or reply output before opening X."
+        : score >= 72
+          ? "Execute first; this route has the strongest distribution leverage."
+          : score >= 48
+            ? "Use after the top route or when the live thread quality is better."
+            : "Hold unless the top routes are stale.",
+      reason: item.evidence || item.reason || "cached reply readiness, expected lift, SLA, and budget guard",
+    };
+  });
+  const readyLanes = lanes.filter((lane) => lane.ready).length;
+  const avgScore = lanes.length ? lanes.reduce((sum, lane) => sum + number(lane.score, 0), 0) / lanes.length : 0;
+  const severity = readyLanes >= Math.min(2, lanes.length || 1) && avgScore >= 48 ? "ok" : readyLanes ? "warn" : "danger";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "cached_route_amplifier",
+    zeroExtraXReads: true,
+    severity,
+    avgScore,
+    readyLanes,
+    totalLanes: lanes.length,
+    topRouteLabel: lanes[0]?.label || null,
+    topRouteScore: lanes[0]?.score || 0,
+    nextAction: lanes[0]?.action || "Build at least one ready route packet before dispatch.",
+    formula: "readiness + historical score + expected lift + SLA pressure + flywheel velocity + budget guard",
+    cells: [
+      { id: "ready", label: "route readiness", value: `${readyLanes}/${lanes.length}`, status: severity },
+      { id: "score", label: "amplifier score", value: formatNumber(avgScore, 1), status: avgScore >= 72 ? "ok" : avgScore >= 48 ? "warn" : "danger" },
+      { id: "x_reads", label: "X read ops", value: "0", status: "ok" },
+      { id: "budget", label: "safe budget", value: money(api.remaining), status: api.remaining > 0 ? "ok" : "danger" },
+    ],
+    lanes,
   };
 }
 
@@ -5456,6 +5556,7 @@ function renderActions() {
     `)
     .join("");
   const dispatchPacket = operatorDispatchPacketData(ops);
+  const routeAmplifier = routeAmplifierData(dispatchPacket, ops);
   const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
   const manifestPackets = (dispatchPacket.packets || [])
     .slice(0, 5)
@@ -5487,6 +5588,38 @@ function renderActions() {
         <em>${escapeHtml(sreText(check.detail || ""))}</em>
       </div>
     `)
+    .join("");
+  const amplifierCells = (routeAmplifier.cells || [])
+    .slice(0, 4)
+    .map((cell) => `
+      <div class="amp-cell ${escapeHtml(cell.status || "ok")}">
+        <span>${escapeHtml(sreLabel(cell.label || cell.id || "-"))}</span>
+        <strong>${escapeHtml(sreText(cell.value || "-"))}</strong>
+      </div>
+    `)
+    .join("");
+  const amplifierMax = Math.max(1, ...(routeAmplifier.lanes || []).map((lane) => number(lane.score, 0)));
+  const amplifierLanes = (routeAmplifier.lanes || [])
+    .slice(0, 5)
+    .map((lane) => {
+      const pct = Math.max(8, Math.min(100, (number(lane.score, 0) / amplifierMax) * 100));
+      return `
+        <div class="amp-lane ${escapeHtml(lane.status || "ok")}" style="--amp-score:${pct}%">
+          <div>
+            <span>${String(lane.rank || 1).padStart(2, "0")}</span>
+            <strong>${escapeHtml(lane.label || "-")}</strong>
+            <em>${escapeHtml(lane.confidence || "low")} · ${escapeHtml(formatNumber(lane.operatorSlaMinutes || 0))}m SLA · ${escapeHtml(t("route_amp_zero_reads"))}</em>
+          </div>
+          <div class="amp-bar"><i></i></div>
+          <dl>
+            <div><dt>${escapeHtml(t("route_amp_score"))}</dt><dd>${escapeHtml(formatNumber(lane.score || 0, 1))}</dd></div>
+            <div><dt>${escapeHtml(t("operator_slo_target"))}</dt><dd>${escapeHtml(formatNumber(lane.targetReplies || 0))}</dd></div>
+            <div><dt>${escapeHtml(t("operator_slo_lift"))}</dt><dd>${escapeHtml(`+${formatNumber(lane.expectedLiftPct || 0, 1)}%`)}</dd></div>
+          </dl>
+          <p>${escapeHtml(lane.action || lane.reason || "-")}</p>
+        </div>
+      `;
+    })
     .join("");
   const missionCards = missions
     .slice(0, 3)
@@ -5543,6 +5676,22 @@ function renderActions() {
       <div class="manifest-command">
         <span>${escapeHtml(t("dispatch_manifest_next"))}</span>
         <strong>${escapeHtml(dispatchPacket.nextAction || "-")}</strong>
+      </div>
+      <div class="route-amplifier ${escapeHtml(routeAmplifier.severity || "ok")}">
+        <div class="amp-head">
+          <div>
+            <span class="eyebrow">${escapeHtml(t("route_amp_eyebrow"))}</span>
+            <strong>${escapeHtml(t("route_amp_title"))}</strong>
+          </div>
+          <em>${escapeHtml(routeAmplifier.mode || "cached_route_amplifier")}</em>
+        </div>
+        <div class="amp-cells">${amplifierCells}</div>
+        <div class="amp-next">
+          <span>${escapeHtml(t("route_amp_top"))}</span>
+          <strong>${escapeHtml(routeAmplifier.topRouteLabel || "-")} · ${escapeHtml(formatNumber(routeAmplifier.topRouteScore || 0, 1))}</strong>
+        </div>
+        <div class="amp-lanes">${amplifierLanes}</div>
+        <p class="amp-formula"><span>${escapeHtml(t("route_amp_formula"))}</span>${escapeHtml(routeAmplifier.formula || "-")}</p>
       </div>
       <div class="manifest-body">
         <section>
