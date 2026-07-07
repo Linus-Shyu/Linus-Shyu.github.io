@@ -660,6 +660,39 @@ const fallbackData = {
       "Reserve one candidate for second_order sample discovery.",
     ],
   },
+  audienceExpansionRouter: {
+    enabled: true,
+    mode: "wide_tech_router",
+    confidence: "medium",
+    sampleCount: 120,
+    baselineScore: 3.9,
+    zeroExtraXReads: true,
+    source: "cached tweet analytics + RSS classifier",
+    nextAction: "expand Consumer Apps: translate the story into a consumer behavior or distribution habit change.",
+    primarySegment: {
+      id: "consumer_apps",
+      label: "Consumer Apps",
+      action: "expand",
+      score: 6.8,
+      avgScore: 3.2,
+      samples: 8,
+      sharePct: 6.7,
+      targetSharePct: 18,
+      audienceLiftPct: 14.6,
+      directive: "Translate the story into a consumer behavior or distribution habit change.",
+    },
+    segments: [
+      { id: "consumer_apps", label: "Consumer Apps", action: "expand", score: 6.8, avgScore: 3.2, samples: 8, sharePct: 6.7, targetSharePct: 18, audienceLiftPct: 14.6, reason: "Below target share.", directive: "Translate the story into a consumer behavior or distribution habit change." },
+      { id: "big_tech_platform", label: "Big Tech Platform", action: "expand", score: 6.2, avgScore: 3.6, samples: 12, sharePct: 10, targetSharePct: 22, audienceLiftPct: 12.1, reason: "Below target share.", directive: "Frame the platform shift as distribution, margin, privacy, or default-control leverage." },
+      { id: "ai_platform", label: "AI / Agent Stack", action: "exploit", score: 5.9, avgScore: 4.8, samples: 42, sharePct: 35, targetSharePct: 30, audienceLiftPct: 18.3, reason: "Measured winner.", directive: "Tie the story to model adoption, workflow lock-in, or operator cost." },
+      { id: "security_cloud", label: "Security / Cloud", action: "probe", score: 4.2, avgScore: 0, samples: 1, sharePct: 0.8, targetSharePct: 9, audienceLiftPct: 13.8, reason: "Needs more samples.", directive: "Lead with risk transfer, trust boundaries, or incident-response consequences." },
+    ],
+    promptDirectives: [
+      "EXPAND Consumer Apps: translate the story into a consumer behavior or distribution habit change.",
+      "EXPAND Big Tech Platform: frame the platform shift as distribution, margin, privacy, or default-control leverage.",
+      "EXPLOIT AI / Agent Stack: tie the story to model adoption, workflow lock-in, or operator cost.",
+    ],
+  },
   experimentPlan: {
     slots: 3,
     budgetSafeSlots: 3,
@@ -990,6 +1023,17 @@ const translations = {
     angle_mode_recovery_route: "recovery route",
     angle_mode_sample_discovery: "sample discovery",
     angle_mode_controlled_rotation: "controlled rotation",
+    audience_eyebrow: "Audience Mesh",
+    audience_title: "Wide tech route balancer",
+    audience_zero_reads: "0 X read ops",
+    audience_primary: "Primary segment",
+    audience_confidence: "Confidence",
+    audience_samples: "Samples",
+    audience_next: "Next route",
+    audience_share: "share {share}% / target {target}%",
+    audience_lift: "lift {lift}%",
+    audience_score: "score {score}",
+    audience_empty: "No audience route data available.",
     matrix_eyebrow: "UTC Angle Matrix",
     matrix_title: "Temporal prompt fire-control",
     matrix_zero_reads: "cached analytics",
@@ -1376,6 +1420,17 @@ const translations = {
     angle_mode_recovery_route: "恢复路由",
     angle_mode_sample_discovery: "样本探索",
     angle_mode_controlled_rotation: "受控轮换",
+    audience_eyebrow: "受众网格",
+    audience_title: "广域科技路由均衡器",
+    audience_zero_reads: "0 次 X 读取",
+    audience_primary: "主受众分区",
+    audience_confidence: "置信度",
+    audience_samples: "样本",
+    audience_next: "下一条路由",
+    audience_share: "占比 {share}% / 目标 {target}%",
+    audience_lift: "增益 {lift}%",
+    audience_score: "评分 {score}",
+    audience_empty: "暂无受众路由数据。",
     matrix_eyebrow: "UTC 角度矩阵",
     matrix_title: "时间 Prompt 火控",
     matrix_zero_reads: "缓存分析",
@@ -3311,6 +3366,54 @@ function renderAdaptiveAngleScheduler() {
   `;
 }
 
+function audienceRouterData() {
+  return dashboardData.audienceExpansionRouter || fallbackData.audienceExpansionRouter || {};
+}
+
+function renderAudienceRouter() {
+  const router = audienceRouterData();
+  const container = $("#audience-router");
+  if (!container) return;
+  const segments = Array.isArray(router.segments) ? router.segments : [];
+  if (!segments.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("audience_empty"))}</p>`;
+    return;
+  }
+  const primary = router.primarySegment || segments[0] || {};
+  container.innerHTML = `
+    <div class="audience-head">
+      <div>
+        <span>${escapeHtml(t("audience_eyebrow"))}</span>
+        <strong>${escapeHtml(t("audience_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("audience_zero_reads"))}</em>
+    </div>
+    <div class="audience-meta">
+      <div><span>${escapeHtml(t("audience_primary"))}</span><strong>${escapeHtml(primary.label || "-")}</strong></div>
+      <div><span>${escapeHtml(t("audience_confidence"))}</span><strong>${escapeHtml(router.confidence || "-")}</strong></div>
+      <div><span>${escapeHtml(t("audience_samples"))}</span><strong>${escapeHtml(formatNumber(router.sampleCount))}</strong></div>
+    </div>
+    <div class="audience-segments">
+      ${segments.slice(0, 6).map((segment) => `
+        <article class="audience-segment ${escapeHtml(segment.action || "probe")}">
+          <div>
+            <span>${escapeHtml(segment.action || "probe")}</span>
+            <strong>${escapeHtml(segment.label || segment.id || "-")}</strong>
+          </div>
+          <em>${escapeHtml(t("audience_score", { score: formatNumber(segment.score, 1) }))}</em>
+          <div class="audience-bar" style="--audience-share:${clamp(number(segment.sharePct), 0, 100).toFixed(1)}%; --audience-target:${clamp(number(segment.targetSharePct), 0, 100).toFixed(1)}%"><span></span><i></i></div>
+          <small>${escapeHtml(t("audience_share", { share: formatNumber(segment.sharePct, 1), target: formatNumber(segment.targetSharePct, 1) }))} · ${escapeHtml(t("audience_lift", { lift: formatNumber(segment.audienceLiftPct, 1) }))}</small>
+          <p>${escapeHtml(segment.directive || segment.reason || "-")}</p>
+        </article>
+      `).join("")}
+    </div>
+    <div class="audience-directive">
+      <span>${escapeHtml(t("audience_next"))}</span>
+      <code>${escapeHtml(router.nextAction || "-")}</code>
+    </div>
+  `;
+}
+
 function temporalAngleMatrixData() {
   return dashboardData.temporalAngleMatrix || fallbackData.temporalAngleMatrix || {};
 }
@@ -3393,6 +3496,7 @@ function renderLearning() {
     .join("");
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
+  renderAudienceRouter();
   renderTemporalAngleMatrix();
   renderExperimentPlan();
 }
