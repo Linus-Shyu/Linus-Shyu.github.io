@@ -4227,6 +4227,82 @@ body,
   line-height: 1.45;
 }
 
+.triage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.triage-grid span,
+.triage-incidents span {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 86%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+}
+
+.triage-grid span {
+  display: grid;
+  gap: 2px;
+  padding: 7px 8px;
+}
+
+.triage-grid em,
+.triage-incidents em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triage-grid strong {
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.triage-incidents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.triage-incidents span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+}
+
+.triage-incidents span.warn {
+  border-color: color-mix(in srgb, var(--warn) 48%, var(--line));
+}
+
+.triage-incidents span.danger {
+  border-color: color-mix(in srgb, var(--danger) 54%, var(--line));
+}
+
+.triage-incidents strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triage-action {
+  font-size: 12px;
+}
+
 .alert-console code {
   width: fit-content;
   border-radius: 5px;

@@ -137,6 +137,33 @@ const fallbackData = {
     safeCap: 4.5,
     remaining: 3.31,
     safeRemaining: 2.81,
+    statusTriage: {
+      severity: "warn",
+      totalCalls: 112,
+      totalFailures: 2,
+      success2xx: 110,
+      rateLimit429: 0,
+      backendFault5xx: 0,
+      authFault4xx: 1,
+      clientFault4xx: 0,
+      failureRate: 1.79,
+      summary: "0 rate-limit, 0 backend, 1 auth, 0 client faults across 112 X API ops.",
+      action: "Check OAuth scopes/tokens before the next publish or live read.",
+      incidents: [
+        {
+          endpoint: "CREATE_REPLY",
+          severity: "warn",
+          calls: 1,
+          failures: 1,
+          lastStatus: 403,
+          statuses: { "403": 1 },
+          rateLimit429: 0,
+          backendFault5xx: 0,
+          authFault4xx: 1,
+          clientFault4xx: 0,
+        },
+      ],
+    },
     days: [
       { date: "2026-07-01", label: "07-01", value: 26, calls: 26, failures: 1, usd: 0.42 },
       { date: "2026-07-02", label: "07-02", value: 18, calls: 18, failures: 0, usd: 0.23 },
@@ -161,8 +188,8 @@ const fallbackData = {
   },
   charts: {
     impressions24h: {
-      label: "24h L7 traffic load",
-      unit: "requests",
+      label: "24h impression load",
+      unit: "impressions",
       source: "tweet_metrics",
       total: 233,
       current: 5,
@@ -177,8 +204,8 @@ const fallbackData = {
       ],
     },
     impressions7d: {
-      label: "7d ingestion throughput",
-      unit: "requests",
+      label: "7d impression throughput",
+      unit: "impressions",
       source: "tweet_metrics",
       total: 621,
       current: 233,
@@ -193,8 +220,8 @@ const fallbackData = {
       ],
     },
     xApiCallsDaily: {
-      label: "X API calls",
-      unit: "calls",
+      label: "X API ops",
+      unit: "ops",
       source: "x_api_usage.days",
       total: 112,
       current: 14,
@@ -362,13 +389,13 @@ const translations = {
     runlog_drafts_ready: "{count} outputs queued",
     runlog_budget_left: "{amount} budget left",
     runlog_best_hook: "{hook} rule wins",
-    monitor_load: "L7 throughput load",
+    monitor_load: "Impression throughput",
     monitor_alerts: "HTTP status triage",
     monitor_partition: "API partition usage",
     monitor_requests: "X API operations per run",
     gauge_data_age: "Data age",
     gauge_followers: "Ingress node strength",
-    gauge_24h_impr: "L7 traffic load",
+    gauge_24h_impr: "Impression load",
     gauge_signal_score: "Ranker score",
     gauge_reply_queue: "Swarm output queue",
     gauge_api_left: "API left",
@@ -387,6 +414,24 @@ const translations = {
     alert_warn_body: "The dashboard is using older telemetry. Run maintenance before dispatching the next route batch.",
     alert_danger_title: "Fallback telemetry active",
     alert_danger_body: "Live dashboard data could not be fetched, so the console is rendering fallback telemetry.",
+    triage_state_ok: "HTTP partitions nominal",
+    triage_state_warn: "HTTP status watch",
+    triage_state_danger: "HTTP fault active",
+    triage_title_ok: "HTTP partitions nominal",
+    triage_title_warn: "HTTP status triage requires review",
+    triage_title_danger: "429 / 5xx fault partition active",
+    triage_summary_ok: "0 rate-limit / 5xx faults across {calls} X API ops.",
+    triage_summary_fault: "{rateLimit} rate-limit · {backend} backend · {auth} auth · {client} client faults across {calls} X API ops.",
+    triage_action_ok: "No 429 or 503-class faults. Cost guard remains the limiting partition.",
+    triage_action_rate_limit: "Hold live search/read jobs and let cadence backoff drain before more X reads.",
+    triage_action_backend: "Retry later with exponential backoff; keep manual drafts and cached telemetry active.",
+    triage_action_auth: "Check OAuth scopes/tokens before the next publish or live read.",
+    triage_action_client: "Inspect endpoint payloads and keep cached telemetry fallback active.",
+    triage_429: "429 rate-limit",
+    triage_5xx: "5xx backend",
+    triage_auth: "401/403 auth",
+    triage_client: "4xx client",
+    triage_failure_rate: "{rate}% failure rate",
     mission_eyebrow: "NOC Console",
     mission_title: "Live server-matrix growth operations.",
     mission_copy: "Monitor feed ingress, model inference, route queues, feedback loops, and API cost boundaries from one command surface.",
@@ -424,7 +469,7 @@ const translations = {
     signal_learn_title: "Feedback loop",
     signal_rss_summary: "Feeds supply raw tech packets. The topology shows which sources produce measurable attention.",
     signal_draft_summary: "The swarm converts high-scoring angles into paste-ready outputs without auto-publishing.",
-    signal_score_summary: "Every post is ranked by L7 traffic, likes, replies, format, and source so the next run can bias toward what worked.",
+    signal_score_summary: "Every post is ranked by impressions, likes, replies, format, and source so the next run can bias toward what worked.",
     signal_x_summary: "The route gateway opens X web targets. Opening these links spends no X API read budget.",
     signal_learn_summary: "The feedback loop converts measured outcomes into tomorrow's hook, source, and format routing rules.",
     signal_sources: "RSS ingress sources",
@@ -449,13 +494,13 @@ const translations = {
     copy_top_three: "Copy top 3 drafts",
     deployment: "Deployment",
     followers: "active conns",
-    impressions_24h_short: "24h L7",
+    impressions_24h_short: "24h Impr.",
     api_left: "API Left",
     next_reply: "Next reply draft",
     server_health: "Server Health",
     runtime_services: "Runtime services",
     no_extra_x_reads: "No extra X reads",
-    traffic: "L7 Traffic",
+    traffic: "Impressions",
     signal_shape: "7d traffic waveform",
     posting_pipeline: "Inference Pipeline",
     today_workflow: "Today workflow",
@@ -471,7 +516,7 @@ const translations = {
     recent_winners: "Recent winners",
     last_7_days: "Last 7 days",
     score: "Score",
-    impr: "L7",
+    impr: "Impr.",
     likes: "Likes",
     format: "Format",
     tweet: "Tweet",
@@ -485,11 +530,11 @@ const translations = {
     posts_replies: "{posts} posts · {replies} replies",
     spent_month: "{spend} spent in {month}",
     metric_followers: "Ingress node strength",
-    metric_24h_impressions: "L7 traffic load",
+    metric_24h_impressions: "Impression load",
     metric_7d_signal: "7d ingestion throughput",
     metric_api_remaining: "API remaining",
     meta_audience: "active conns",
-    meta_traffic: "L7 traffic",
+    meta_traffic: "impressions",
     meta_observability: "observability",
     meta_budget: "budget",
     goal_eyebrow: "Ingress Target",
@@ -517,7 +562,7 @@ const translations = {
     score_label: "Score {score}",
     why_it_worked: "Why it worked",
     open_winner: "Open winner",
-    proof_impressions: "L7 traffic",
+    proof_impressions: "impressions",
     proof_likes: "Likes",
     proof_replies: "Replies",
     proof_format: "Format",
@@ -549,7 +594,7 @@ const translations = {
     health_idle: "idle",
     calls: "{count} calls",
     failures: "{count} failures",
-    tracked_impressions: "Tracked L7 throughput",
+    tracked_impressions: "Tracked impressions",
     low_cost_mode: "Low-cost mode",
     posts_7d: "{posts} posts / 7d",
     queued_for_operator: "queued for operator paste",
@@ -634,13 +679,13 @@ const translations = {
     runlog_drafts_ready: "{count} 条输出入队",
     runlog_budget_left: "预算剩余 {amount}",
     runlog_best_hook: "胜出规则：{hook}",
-    monitor_load: "L7 吞吐负载",
+    monitor_load: "曝光吞吐",
     monitor_alerts: "HTTP 状态分诊",
     monitor_partition: "API 分区用量",
     monitor_requests: "每轮 X API 操作",
     gauge_data_age: "数据年龄",
     gauge_followers: "入口节点强度",
-    gauge_24h_impr: "L7 流量负载",
+    gauge_24h_impr: "曝光负载",
     gauge_signal_score: "排序器评分",
     gauge_reply_queue: "群体输出队列",
     gauge_api_left: "API 剩余",
@@ -659,6 +704,24 @@ const translations = {
     alert_warn_body: "看板正在使用较旧遥测。派发下一批路由前，先跑一次 maintenance。",
     alert_danger_title: "备用遥测启用",
     alert_danger_body: "实时看板数据拉取失败，因此控制台正在渲染备用遥测。",
+    triage_state_ok: "HTTP 分区正常",
+    triage_state_warn: "HTTP 状态观察",
+    triage_state_danger: "HTTP 故障激活",
+    triage_title_ok: "HTTP 分区全部正常",
+    triage_title_warn: "HTTP 状态分诊需要复核",
+    triage_title_danger: "429 / 5xx 故障分区激活",
+    triage_summary_ok: "{calls} 次 X API 操作中没有 429 / 5xx 故障。",
+    triage_summary_fault: "{calls} 次 X API 操作中：{rateLimit} 个限流 · {backend} 个后端 · {auth} 个授权 · {client} 个客户端故障。",
+    triage_action_ok: "没有 429 或 503 类故障；当前主要限制仍是成本边界。",
+    triage_action_rate_limit: "暂停实时搜索/读取任务，等待 cadence backoff 冷却后再读 X。",
+    triage_action_backend: "稍后按指数退避重试；保持人工草稿和缓存遥测路径在线。",
+    triage_action_auth: "下次发布或实时读取前检查 OAuth scope/token。",
+    triage_action_client: "检查 endpoint payload，并保持缓存遥测兜底。",
+    triage_429: "429 限流",
+    triage_5xx: "5xx 后端",
+    triage_auth: "401/403 授权",
+    triage_client: "4xx 客户端",
+    triage_failure_rate: "{rate}% 失败率",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时服务器矩阵增长运维。",
     mission_copy: "在一个指挥界面里监控 feed 入口、模型推理、路由队列、反馈闭环和 API 成本边界。",
@@ -696,7 +759,7 @@ const translations = {
     signal_learn_title: "反馈闭环",
     signal_rss_summary: "RSS 提供原始科技数据包。拓扑展示哪些来源真的带来可测流量。",
     signal_draft_summary: "系统把高分角度转换成可粘贴输出，但不会自动发布。",
-    signal_score_summary: "每条帖按 L7 流量、点赞、回复、格式和来源排序，下一轮偏向有效模式。",
+    signal_score_summary: "每条帖按曝光、点赞、回复、格式和来源排序，下一轮偏向有效模式。",
     signal_x_summary: "路由网关只打开 X 网页目标。打开这些链接不会消耗 X API 读取预算。",
     signal_learn_summary: "反馈闭环把已测结果转成明天的钩子、来源和格式路由规则。",
     signal_sources: "RSS 入口来源",
@@ -721,13 +784,13 @@ const translations = {
     copy_top_three: "复制前 3 条草稿",
     deployment: "部署",
     followers: "活跃连接",
-    impressions_24h_short: "24h L7",
+    impressions_24h_short: "24h 曝光",
     api_left: "API 剩余",
     next_reply: "下一条回复草稿",
     server_health: "服务健康",
     runtime_services: "运行服务",
     no_extra_x_reads: "不增加 X 读取",
-    traffic: "L7 流量",
+    traffic: "曝光",
     signal_shape: "7 日流量波形",
     posting_pipeline: "推理流水线",
     today_workflow: "今日流程",
@@ -743,7 +806,7 @@ const translations = {
     recent_winners: "近期表现最好",
     last_7_days: "最近 7 天",
     score: "评分",
-    impr: "L7",
+    impr: "曝光",
     likes: "点赞",
     format: "格式",
     tweet: "推文",
@@ -757,11 +820,11 @@ const translations = {
     posts_replies: "{posts} 条帖 · {replies} 条回复",
     spent_month: "{month} 已花 {spend}",
     metric_followers: "入口节点强度",
-    metric_24h_impressions: "L7 流量负载",
+    metric_24h_impressions: "曝光负载",
     metric_7d_signal: "7 日入口吞吐",
     metric_api_remaining: "API 剩余",
     meta_audience: "活跃连接",
-    meta_traffic: "L7 流量",
+    meta_traffic: "曝光",
     meta_observability: "观测",
     meta_budget: "预算",
     goal_eyebrow: "入口目标",
@@ -789,7 +852,7 @@ const translations = {
     score_label: "评分 {score}",
     why_it_worked: "为什么有效",
     open_winner: "打开赢家",
-    proof_impressions: "L7 流量",
+    proof_impressions: "曝光",
     proof_likes: "点赞",
     proof_replies: "回复",
     proof_format: "格式",
@@ -821,7 +884,7 @@ const translations = {
     health_idle: "空闲",
     calls: "{count} 次调用",
     failures: "{count} 次失败",
-    tracked_impressions: "跟踪 L7 吞吐",
+    tracked_impressions: "跟踪曝光",
     low_cost_mode: "低成本模式",
     posts_7d: "7 日 {posts} 条帖",
     queued_for_operator: "等待人工粘贴",
@@ -1024,6 +1087,19 @@ const SIGNAL_NODE_LABELS = {
   },
 };
 
+const SIGNAL_UNIT_LABELS = {
+  en: {},
+  zh: {
+    packets: "个包",
+    outputs: "个输出",
+    rank: "评分",
+    best: "最佳",
+    posts: "条帖子",
+    ready: "就绪",
+    "web routes": "条网页路由",
+  },
+};
+
 function sumEndpointTotals(api = {}) {
   return (api.endpoints || []).reduce(
     (totals, endpoint) => ({
@@ -1077,11 +1153,34 @@ function buildDerivedSignalMap() {
   };
 }
 
+function normalizeSignalMapNode(node = {}) {
+  if (node.id !== "x") return node;
+  const routeValue = number(node.value);
+  return {
+    ...node,
+    label: "X_ROUTE",
+    unit: node.unit && node.unit !== "routes" ? node.unit : "web routes",
+    detail: /0\s+X\s+read/i.test(node.detail || "")
+      ? node.detail
+      : `${routeValue ? formatNumber(routeValue) : "0"} web routes; 0 X read ops`,
+    health: node.health || (routeValue ? "ok" : "warn"),
+  };
+}
+
+function normalizeSignalMapRoute(route = {}) {
+  if (route.from !== "x" && route.to !== "x") return route;
+  return {
+    ...route,
+    unit: route.unit === "routes" ? "web routes" : route.unit,
+    label: (route.label || "").replace(/\bX\b/g, "X_ROUTE"),
+  };
+}
+
 function signalMap() {
   const incoming = dashboardData.signalMap || fallbackData.signalMap;
   const map = incoming?.nodes?.length ? incoming : buildDerivedSignalMap();
   const nodes = (map.nodes || []).map((node) => ({
-    ...node,
+    ...normalizeSignalMapNode(node),
     x: number(node.x, SIGNAL_NODE_COORDS[node.id]?.x ?? 0.5),
     y: number(node.y, SIGNAL_NODE_COORDS[node.id]?.y ?? 0.5),
   }));
@@ -1094,7 +1193,7 @@ function signalMap() {
       y: number(map.core?.y, 0.54),
     },
     nodes,
-    routes: Array.isArray(map.routes) ? map.routes : [],
+    routes: Array.isArray(map.routes) ? map.routes.map(normalizeSignalMapRoute) : [],
   };
 }
 
@@ -1107,10 +1206,25 @@ function signalNodeLabel(node) {
   return SIGNAL_NODE_LABELS[currentLang]?.[node.id] || node.label || node.id || "-";
 }
 
+function signalUnitLabel(unit) {
+  return SIGNAL_UNIT_LABELS[currentLang]?.[unit] || unit;
+}
+
 function formatSignalNodeValue(node) {
   if (!node) return "-";
   const value = Number.isFinite(Number(node.value)) ? formatNumber(node.value, String(node.value).includes(".") ? 1 : 0) : String(node.value ?? "-");
-  return node.unit ? `${value} ${node.unit}` : value;
+  return node.unit ? `${value} ${signalUnitLabel(node.unit)}` : value;
+}
+
+function signalNodeDetail(node, fallback = "") {
+  if (!node) return fallback;
+  if (node.id === "x") {
+    const routeValue = Number.isFinite(Number(node.value)) ? formatNumber(node.value) : "0";
+    return currentLang === "zh"
+      ? `${routeValue} 条网页路由；0 次 X 读取操作`
+      : `${routeValue} web routes; 0 X read ops`;
+  }
+  return node.detail || fallback;
 }
 
 function clamp(value, min = 0, max = 100) {
@@ -1673,6 +1787,149 @@ function endpointCallSeries() {
   return cumulativeSeries(endpoints.map((endpoint) => number(endpoint.calls)));
 }
 
+function statusCountMap(endpoint = {}) {
+  const counts = {};
+  Object.entries(endpoint.statuses || {}).forEach(([status, count]) => {
+    const code = Number.parseInt(status, 10);
+    if (!Number.isFinite(code)) return;
+    counts[String(code)] = (counts[String(code)] || 0) + number(count);
+  });
+  if (!Object.keys(counts).length && endpoint.lastStatus != null) {
+    const code = Number.parseInt(String(endpoint.lastStatus), 10);
+    if (Number.isFinite(code)) {
+      counts[String(code)] = code >= 400 ? Math.max(1, number(endpoint.failures)) : Math.max(1, number(endpoint.calls));
+    }
+  }
+  return counts;
+}
+
+function deriveApiStatusTriage(api = {}) {
+  const endpoints = api.endpoints || [];
+  const totals = {
+    totalCalls: 0,
+    totalFailures: 0,
+    success2xx: 0,
+    rateLimit429: 0,
+    backendFault5xx: 0,
+    authFault4xx: 0,
+    clientFault4xx: 0,
+  };
+  const incidents = [];
+
+  endpoints.forEach((endpoint) => {
+    const calls = number(endpoint.calls);
+    const failures = number(endpoint.failures);
+    const statuses = statusCountMap(endpoint);
+    const local = {
+      rateLimit429: 0,
+      backendFault5xx: 0,
+      authFault4xx: 0,
+      clientFault4xx: 0,
+    };
+    totals.totalCalls += calls;
+    totals.totalFailures += failures;
+    Object.entries(statuses).forEach(([status, countValue]) => {
+      const code = Number.parseInt(status, 10);
+      const count = number(countValue);
+      if (!Number.isFinite(code) || count <= 0) return;
+      if (code >= 200 && code < 300) totals.success2xx += count;
+      if (code === 429) {
+        totals.rateLimit429 += count;
+        local.rateLimit429 += count;
+      } else if (code >= 500) {
+        totals.backendFault5xx += count;
+        local.backendFault5xx += count;
+      } else if (code === 401 || code === 403) {
+        totals.authFault4xx += count;
+        local.authFault4xx += count;
+      } else if (code >= 400) {
+        totals.clientFault4xx += count;
+        local.clientFault4xx += count;
+      }
+    });
+    if (
+      failures ||
+      local.rateLimit429 ||
+      local.backendFault5xx ||
+      local.authFault4xx ||
+      local.clientFault4xx
+    ) {
+      incidents.push({
+        endpoint: endpoint.name || "-",
+        severity: local.rateLimit429 || local.backendFault5xx ? "danger" : "warn",
+        calls,
+        failures,
+        lastStatus: endpoint.lastStatus || null,
+        statuses,
+        ...local,
+      });
+    }
+  });
+
+  const failureRate = totals.totalCalls ? (totals.totalFailures / totals.totalCalls) * 100 : 0;
+  const severity = totals.rateLimit429 || totals.backendFault5xx
+    ? "danger"
+    : totals.totalFailures || totals.authFault4xx || totals.clientFault4xx
+      ? "warn"
+      : "ok";
+  return {
+    ...totals,
+    severity,
+    failureRate: Number(failureRate.toFixed(2)),
+    incidents: incidents
+      .sort((left, right) => {
+        const severityDelta = (right.severity === "danger" ? 2 : 1) - (left.severity === "danger" ? 2 : 1);
+        if (severityDelta) return severityDelta;
+        return right.failures - left.failures;
+      })
+      .slice(0, 6),
+  };
+}
+
+function apiStatusTriage() {
+  const api = dashboardData.api || fallbackData.api || {};
+  const triage = api.statusTriage || deriveApiStatusTriage(api);
+  const derived = deriveApiStatusTriage(api);
+  return {
+    ...derived,
+    ...triage,
+    severity: triage.severity || derived.severity,
+    incidents: Array.isArray(triage.incidents) ? triage.incidents : derived.incidents,
+  };
+}
+
+function triageSeverityRank(severity) {
+  if (severity === "danger") return 3;
+  if (severity === "warn") return 2;
+  if (severity === "cached") return 1;
+  return 0;
+}
+
+function worseSeverity(left, right) {
+  return triageSeverityRank(left) >= triageSeverityRank(right) ? left : right;
+}
+
+function triageSummary(triage) {
+  if (!triage || triage.severity === "ok") {
+    return t("triage_summary_ok", { calls: formatNumber(triage?.totalCalls || 0) });
+  }
+  return t("triage_summary_fault", {
+    calls: formatNumber(triage.totalCalls),
+    rateLimit: formatNumber(triage.rateLimit429),
+    backend: formatNumber(triage.backendFault5xx),
+    auth: formatNumber(triage.authFault4xx),
+    client: formatNumber(triage.clientFault4xx),
+  });
+}
+
+function triageAction(triage) {
+  if (!triage || triage.severity === "ok") return t("triage_action_ok");
+  if (number(triage.rateLimit429) > 0) return t("triage_action_rate_limit");
+  if (number(triage.backendFault5xx) > 0) return t("triage_action_backend");
+  if (number(triage.authFault4xx) > 0) return t("triage_action_auth");
+  return t("triage_action_client");
+}
+
 function chartPointValues(chart) {
   if (!Array.isArray(chart?.points) || !chart.points.length) return [];
   return chart.points.map((point) => number(point.value));
@@ -1759,21 +2016,46 @@ function renderMonitorPanels() {
     .join("");
 
   const freshness = dataFreshness();
+  const triage = apiStatusTriage();
   const alert = $("#monitor-alert");
-  const alertKey = freshness.className === "ok"
+  const freshnessKey = freshness.className === "ok"
     ? "ok"
     : freshness.className === "cached"
       ? "cached"
       : freshness.className === "warn"
         ? "warn"
         : "danger";
-  $("#monitor-alert-state").textContent = t(freshness.key);
+  const triageKey = triage.severity === "danger" ? "danger" : triage.severity === "warn" ? "warn" : "ok";
+  const alertKey = worseSeverity(freshnessKey, triageKey);
+  $("#monitor-alert-state").textContent = triage.severity === "ok" ? t(freshness.key) : t(`triage_state_${triage.severity}`);
   alert.className = `alert-console ${alertKey}`;
   const telemetryTime = dashboardData.telemetry?.checkedAt || dashboardData.profile?.followerCheckedAt || dashboardData.updatedAt;
+  const title = triage.severity === "ok" ? t(`alert_${alertKey}_title`) : t(`triage_title_${triage.severity}`);
+  const body = triage.severity === "ok" && freshnessKey !== "ok"
+    ? `${t(`alert_${alertKey}_body`)} ${triageSummary(triage)}`
+    : triageSummary(triage);
+  const incidents = (triage.incidents || []).slice(0, 2);
   alert.innerHTML = `
-    <strong>${escapeHtml(t(`alert_${alertKey}_title`))}</strong>
-    <p>${escapeHtml(t(`alert_${alertKey}_body`))}</p>
-    <code>${escapeHtml(formatDate(telemetryTime))}</code>
+    <strong>${escapeHtml(title)}</strong>
+    <p>${escapeHtml(body)}</p>
+    <div class="triage-grid" aria-label="HTTP status triage counters">
+      <span><em>${escapeHtml(t("triage_429"))}</em><strong>${formatNumber(triage.rateLimit429)}</strong></span>
+      <span><em>${escapeHtml(t("triage_5xx"))}</em><strong>${formatNumber(triage.backendFault5xx)}</strong></span>
+      <span><em>${escapeHtml(t("triage_auth"))}</em><strong>${formatNumber(triage.authFault4xx)}</strong></span>
+      <span><em>${escapeHtml(t("triage_client"))}</em><strong>${formatNumber(triage.clientFault4xx)}</strong></span>
+    </div>
+    ${incidents.length ? `
+      <div class="triage-incidents">
+        ${incidents.map((incident) => `
+          <span class="${escapeHtml(incident.severity || "warn")}">
+            <strong>${escapeHtml(incident.endpoint || "-")}</strong>
+            <em>${escapeHtml(String(incident.lastStatus || "-"))}</em>
+          </span>
+        `).join("")}
+      </div>
+    ` : ""}
+    <p class="triage-action">${escapeHtml(triageAction(triage))}</p>
+    <code>${escapeHtml(t("triage_failure_rate", { rate: formatNumber(triage.failureRate, 2) }))} · ${escapeHtml(formatDate(telemetryTime))}</code>
   `;
 }
 
@@ -1995,7 +2277,7 @@ function renderSignalNodes() {
     button.classList.toggle("warn", node.health === "warn");
     button.classList.toggle("danger", node.health === "danger");
     button.classList.toggle("ok", !node.health || node.health === "ok");
-    button.setAttribute("aria-label", `${label}: ${formatSignalNodeValue(node)}. ${node.detail || ""}`.trim());
+    button.setAttribute("aria-label", `${label}: ${formatSignalNodeValue(node)}. ${signalNodeDetail(node)}`.trim());
     button.innerHTML = `
       <span class="signal-node-label">${escapeHtml(label)}</span>
       <em>${escapeHtml(formatSignalNodeValue(node))}</em>
@@ -2242,7 +2524,7 @@ function signalNodeSnapshot(nodeId) {
       ${detailStat(t("signal_node_source"), model.source || "dashboard")}
     </div>
     <p class="signal-detail-summary signal-node-note">
-      ${escapeHtml(node.detail || strongestRoute?.label || model.core?.detail || "")}
+      ${escapeHtml(signalNodeDetail(node, strongestRoute?.label || model.core?.detail || ""))}
     </p>
   `;
 }
