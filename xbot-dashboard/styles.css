@@ -3995,15 +3995,25 @@ body,
 }
 
 .gauge-title {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
-  justify-content: space-between;
-  gap: 8px;
+  align-items: start;
+  gap: 2px;
 }
 
-.gauge-title span,
+.gauge-title span {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: 24px;
+  white-space: normal;
+}
+
 .gauge-title em {
   overflow: hidden;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -4672,12 +4682,31 @@ body:not(.demo-mode) .demo-strip {
   --contract-glow: rgba(26, 86, 219, 0.1);
   --panel-highlight: rgba(255, 255, 255, 0.82);
   --panel-depth: rgba(15, 23, 42, 0.055);
+  --neon-cyan: #00d9ff;
+  --neon-green: #6ee771;
+  --neon-magenta: #ff3d9a;
+  --matrix-amber: #ff9f2f;
+  --code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 :root[data-theme="dark"] {
-  --contract-glow: rgba(242, 162, 58, 0.13);
-  --panel-highlight: rgba(255, 255, 255, 0.055);
-  --panel-depth: rgba(0, 0, 0, 0.38);
+  --bg: #090d14;
+  --surface: #11161f;
+  --surface-soft: #0d121a;
+  --surface-tint: #101b25;
+  --line: #242d39;
+  --line-soft: #1a222d;
+  --accent: var(--neon-cyan);
+  --accent-2: var(--neon-green);
+  --accent-3: var(--matrix-amber);
+  --danger: var(--neon-magenta);
+  --accent-soft: rgba(0, 217, 255, 0.09);
+  --accent-line: rgba(0, 217, 255, 0.26);
+  --stage-line: rgba(0, 217, 255, 0.2);
+  --stage-scan: rgba(0, 217, 255, 0.16);
+  --contract-glow: rgba(0, 217, 255, 0.09);
+  --panel-highlight: rgba(255, 255, 255, 0.035);
+  --panel-depth: rgba(0, 0, 0, 0.44);
 }
 
 .telemetry-contract {
@@ -4692,7 +4721,7 @@ body:not(.demo-mode) .demo-strip {
   min-width: 0;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
-  border-radius: 7px;
+  border-radius: 6px;
   padding: 8px 10px 9px 26px;
   background:
     linear-gradient(135deg, var(--contract-glow), transparent 38%),
@@ -4731,7 +4760,7 @@ body:not(.demo-mode) .demo-strip {
   display: block;
   overflow: hidden;
   color: var(--muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: var(--code-font);
   font-size: 10px;
   font-weight: 760;
   text-overflow: ellipsis;
@@ -4763,7 +4792,7 @@ body:not(.demo-mode) .demo-strip {
   border-top: 1px solid var(--line-soft);
   padding-top: 6px;
   color: var(--muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: var(--code-font);
   font-size: 10px;
   font-weight: 720;
 }
@@ -4790,6 +4819,7 @@ body:not(.demo-mode) .demo-strip {
 .signal-node-button {
   min-width: clamp(82px, 8vw, 116px);
   min-height: 52px;
+  border-radius: 6px;
   box-shadow:
     0 16px 36px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 color-mix(in srgb, var(--surface) 82%, white 10%);
@@ -4920,6 +4950,113 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .contract-card,
 :root[data-theme="dark"] .chart-provenance {
   border-color: rgba(148, 163, 184, 0.13);
+}
+
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .grafana-toolbar,
+:root[data-theme="dark"] .noc-strip div,
+:root[data-theme="dark"] .outcome-panel,
+:root[data-theme="dark"] .pipeline-panel,
+:root[data-theme="dark"] .runlog-panel,
+:root[data-theme="dark"] .gauge-card,
+:root[data-theme="dark"] .monitor-panel,
+:root[data-theme="dark"] .command-card,
+:root[data-theme="dark"] .server-card,
+:root[data-theme="dark"] .metric,
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .signal-detail-panel,
+:root[data-theme="dark"] .signal-stage {
+  border-color: color-mix(in srgb, var(--accent) 12%, var(--line));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 54%),
+    radial-gradient(circle at 0 0, rgba(0, 217, 255, 0.055), transparent 38%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(0, 217, 255, 0.018),
+    0 18px 46px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+:root[data-theme="dark"] .signal-stage {
+  background:
+    linear-gradient(135deg, rgba(0, 217, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 72% 38%, rgba(110, 231, 113, 0.065), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 46%),
+    var(--surface-soft);
+}
+
+:root[data-theme="dark"] .signal-node-button {
+  border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    rgba(12, 18, 26, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(0, 217, 255, 0.035),
+    0 18px 38px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme="dark"] .signal-node-button.x {
+  border-color: color-mix(in srgb, var(--neon-green) 42%, var(--line));
+  box-shadow:
+    0 0 0 1px rgba(110, 231, 113, 0.08),
+    0 0 30px rgba(110, 231, 113, 0.07),
+    0 18px 38px rgba(0, 0, 0, 0.42);
+}
+
+:root[data-theme="dark"] .signal-node-button:hover,
+:root[data-theme="dark"] .signal-node-button:focus-visible,
+:root[data-theme="dark"] .signal-node-button.active {
+  border-color: color-mix(in srgb, var(--accent) 72%, white 8%);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 13%, transparent),
+    0 0 34px color-mix(in srgb, var(--accent) 11%, transparent),
+    0 20px 46px rgba(0, 0, 0, 0.46);
+}
+
+.metric strong,
+.gauge-visual strong,
+.runlog-row strong,
+.api-row em,
+.contract-card strong,
+.signal-node-button em,
+.pipeline-metrics strong,
+.outcome-stats strong,
+.service-meta span,
+.spark-total strong,
+.spark-footer strong,
+.proof-metrics strong {
+  font-family: var(--code-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.topbar,
+.grafana-toolbar,
+.noc-strip div,
+.outcome-panel,
+.pipeline-panel,
+.runlog-panel,
+.gauge-card,
+.monitor-panel,
+.command-card,
+.server-card,
+.metric,
+.panel,
+.service-card,
+.api-row,
+.action-card,
+.draft-card,
+.opportunity-card,
+.signal-stage,
+.signal-detail-panel {
+  border-radius: 6px;
+}
+
+:root[data-theme="dark"] .monitor-head,
+:root[data-theme="dark"] .story-head,
+:root[data-theme="dark"] .signal-head strong,
+:root[data-theme="dark"] .signal-live {
+  color: color-mix(in srgb, var(--ink) 92%, var(--accent));
 }
 
 @media (max-width: 1080px) {
