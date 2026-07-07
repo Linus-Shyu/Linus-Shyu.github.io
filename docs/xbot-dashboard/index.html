@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CODEX Growth Command Center</title>
+    <title>CODEX SRE Growth Command Center</title>
     <meta
       name="description"
-      content="A cyberpunk SRE command center for X growth telemetry, inference queues, service health, and API spend."
+      content="A cyberpunk SRE command center for CODEX ingress telemetry, swarm inference queues, service health, and API cost boundaries."
     />
     <script>
       (() => {
@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260708-opslo1" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-railv5" />
   </head>
   <body>
     <div class="ops-shell">
@@ -27,7 +27,7 @@
           <span class="brand-mark">LS</span>
           <span>
             <strong>CODEX</strong>
-            <small data-i18n="brand_subtitle">Growth Ops</small>
+            <small data-i18n="brand_subtitle">SRE Matrix Core</small>
           </span>
         </a>
 
@@ -41,7 +41,7 @@
 
         <div class="rack-mini" aria-label="Runtime nodes">
           <div><span></span><strong>RSS</strong><em>ingest</em></div>
-          <div><span></span><strong>AI</strong><em>draft</em></div>
+          <div><span></span><strong>AI</strong><em>infer</em></div>
           <div><span></span><strong>X</strong><em>route</em></div>
           <div><span></span><strong>OPS</strong><em>learn</em></div>
         </div>
@@ -50,9 +50,9 @@
           <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
           <a href="#services" data-i18n="nav_services">Services</a>
           <a href="#today" data-i18n="nav_workflow">Workflow</a>
-          <a href="#drafts" data-i18n="nav_queue">Reply Queue</a>
+          <a href="#drafts" data-i18n="nav_queue">Swarm Queue</a>
           <a href="#performance" data-i18n="nav_signals">Signals</a>
-          <a href="#cost" data-i18n="nav_cost">Cost</a>
+          <a href="#cost" data-i18n="nav_cost">Cost Boundary</a>
         </nav>
 
         <div class="rail-budget">
@@ -66,8 +66,8 @@
       <main class="ops-main">
         <header class="topbar">
           <div>
-            <p class="eyebrow" data-i18n="top_eyebrow">X Bot / Production Console</p>
-            <h1 data-i18n="title">X Bot Command Center</h1>
+            <p class="eyebrow" data-i18n="top_eyebrow">CODEX / Production Console</p>
+            <h1 data-i18n="title">CODEX Command Center</h1>
           </div>
           <div class="top-actions">
             <span class="live-pill"><span></span><strong id="mode-label">Zero extra X API</strong></span>
@@ -344,11 +344,11 @@ learn(metrics)</code></pre>
               <div class="pulse-ring">
                 <span></span>
                 <strong id="hero-followers">-</strong>
-                <small data-i18n="followers">followers</small>
+                <small data-i18n="followers">active conns</small>
               </div>
               <div class="server-stats">
                 <div>
-                  <span data-i18n="impressions_24h_short">24h Impr.</span>
+                  <span data-i18n="impressions_24h_short">24h L7</span>
                   <strong id="hero-impressions">-</strong>
                 </div>
                 <div>
@@ -358,8 +358,8 @@ learn(metrics)</code></pre>
               </div>
             </div>
             <div class="next-reply">
-              <span data-i18n="next_reply">Next reply draft</span>
-              <p id="hero-draft">Loading latest reply draft...</p>
+              <span data-i18n="next_reply">Next swarm output</span>
+              <p id="hero-draft">Loading latest swarm output...</p>
             </div>
           </aside>
         </section>
@@ -370,8 +370,8 @@ learn(metrics)</code></pre>
           <article class="panel goal-panel">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow" data-i18n="goal_eyebrow">Growth Goal</p>
-                <h2 data-i18n="goal_title">1,000 followers is the operating target.</h2>
+                <p class="eyebrow" data-i18n="goal_eyebrow">Ingress Target</p>
+                <h2 data-i18n="goal_title">1,000 active conns is the ingress SLO.</h2>
               </div>
               <span class="pill" id="goal-remaining">-</span>
             </div>
@@ -562,8 +562,8 @@ learn(metrics)</code></pre>
           <article class="panel panel-wide" id="drafts">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow" data-i18n="reply_queue">Reply Queue</p>
-                <h2 data-i18n="copy_ready_drafts">Copy-ready drafts</h2>
+                <p class="eyebrow" data-i18n="reply_queue">Swarm Output Queue</p>
+                <h2 data-i18n="copy_ready_drafts">Paste-ready inference outputs</h2>
               </div>
             </div>
             <div class="draft-list" id="draft-list"></div>
@@ -602,11 +602,11 @@ learn(metrics)</code></pre>
             <table>
               <thead>
                 <tr>
-                  <th data-i18n="score">Score</th>
-                  <th data-i18n="impr">Impr.</th>
-                  <th data-i18n="likes">Likes</th>
+                  <th data-i18n="score">Ranker</th>
+                  <th data-i18n="impr">L7 events</th>
+                  <th data-i18n="likes">ACKs</th>
                   <th data-i18n="format">Format</th>
-                  <th data-i18n="tweet">Tweet</th>
+                  <th data-i18n="tweet">Packet</th>
                 </tr>
               </thead>
               <tbody id="top-posts"></tbody>
@@ -621,6 +621,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260708-opslo1" defer></script>
+    <script src="./script.js?v=20260708-railv5" defer></script>
   </body>
 </html>

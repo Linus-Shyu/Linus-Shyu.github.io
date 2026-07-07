@@ -9035,24 +9035,24 @@ body:not(.demo-mode) .demo-strip {
   background: linear-gradient(90deg, #f6a13a, #ffd84d) !important;
 }
 
-/* Rail contrast lock v4: light mode keeps the same dark NOC rail as the main ops surface. */
+/* Rail contrast lock v5: light and dark modes share the same high-contrast SRE rail. */
 :root[data-theme="light"],
 :root[data-theme="dark"] {
-  --rail: #070b11;
-  --rail-soft: #101823;
-  --rail-text: #eef4fb;
-  --nav-rail-bg: #070b11;
-  --nav-rail-bg-mid: #0b111a;
-  --nav-rail-bg-soft: #101823;
-  --nav-rail-panel: #121b28;
-  --nav-rail-panel-strong: #182436;
-  --nav-rail-line: rgba(153, 166, 186, 0.34);
-  --nav-rail-line-hot: rgba(246, 161, 58, 0.58);
-  --nav-rail-text: #eef4fb;
-  --nav-rail-muted: #aeb9c8;
-  --nav-rail-hot: #f6a13a;
-  --nav-rail-green: #6ec86f;
-  --nav-rail-glow: rgba(246, 161, 58, 0.3);
+  --rail: #05080d;
+  --rail-soft: #121b28;
+  --rail-text: #f3f7ff;
+  --nav-rail-bg: #05080d;
+  --nav-rail-bg-mid: #0b1018;
+  --nav-rail-bg-soft: #121b28;
+  --nav-rail-panel: #111a26;
+  --nav-rail-panel-strong: #192638;
+  --nav-rail-line: rgba(166, 180, 201, 0.38);
+  --nav-rail-line-hot: rgba(255, 180, 66, 0.68);
+  --nav-rail-text: #f3f7ff;
+  --nav-rail-muted: #b4c0cf;
+  --nav-rail-hot: #ffad32;
+  --nav-rail-green: #70d26f;
+  --nav-rail-glow: rgba(255, 173, 50, 0.32);
 }
 
 :root[data-theme="light"] .side-rail,
@@ -9061,12 +9061,14 @@ body:not(.demo-mode) .demo-strip {
   border-color: var(--nav-rail-line) !important;
   background-color: var(--nav-rail-bg) !important;
   background-image:
-    radial-gradient(circle at 50% -8%, rgba(246, 161, 58, 0.24), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.015) 150px, transparent 320px),
-    linear-gradient(180deg, #151f2c 0%, var(--nav-rail-bg-soft) 34%, var(--nav-rail-bg-mid) 66%, var(--nav-rail-bg) 100%) !important;
+    radial-gradient(circle at 50% -10%, rgba(255, 173, 50, 0.28), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02) 150px, transparent 330px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 44px),
+    linear-gradient(180deg, #172232 0%, var(--nav-rail-bg-soft) 30%, var(--nav-rail-bg-mid) 64%, var(--nav-rail-bg) 100%) !important;
   box-shadow:
-    inset -1px 0 0 rgba(255, 255, 255, 0.1),
-    18px 0 36px rgba(8, 13, 20, 0.24) !important;
+    inset -1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    18px 0 36px rgba(8, 13, 20, 0.28) !important;
 }
 
 :root[data-theme="light"] .brand,
@@ -9081,11 +9083,11 @@ body:not(.demo-mode) .demo-strip {
   border-color: var(--nav-rail-line) !important;
   background-color: var(--nav-rail-panel) !important;
   background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.018)),
-    linear-gradient(135deg, rgba(246, 161, 58, 0.035), transparent 48%) !important;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.022)),
+    linear-gradient(135deg, rgba(255, 173, 50, 0.055), transparent 52%) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 12px 24px rgba(0, 0, 0, 0.2) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 14px 28px rgba(0, 0, 0, 0.24) !important;
 }
 
 :root[data-theme="light"] .brand:hover,
@@ -9117,6 +9119,7 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] .rail-nav a::after,
 :root[data-theme="dark"] .rail-nav a::after {
   color: var(--nav-rail-text) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.34) !important;
 }
 
 :root[data-theme="light"] .brand small,
@@ -9142,8 +9145,9 @@ body:not(.demo-mode) .demo-strip {
 
 :root[data-theme="light"] .rail-nav a,
 :root[data-theme="dark"] .rail-nav a {
-  border-color: transparent !important;
-  background: transparent !important;
+  border-color: rgba(166, 180, 201, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.012)) !important;
 }
 
 :root[data-theme="light"] .rail-nav a:hover,
@@ -9155,11 +9159,13 @@ body:not(.demo-mode) .demo-strip {
   color: #fff7ed !important;
   border-color: var(--nav-rail-line-hot) !important;
   background:
-    linear-gradient(135deg, rgba(246, 161, 58, 0.3), rgba(246, 161, 58, 0.085)),
-    rgba(255, 255, 255, 0.05) !important;
+    radial-gradient(circle at 18% 50%, rgba(255, 173, 50, 0.34), transparent 42%),
+    linear-gradient(135deg, rgba(255, 173, 50, 0.3), rgba(255, 173, 50, 0.08)),
+    rgba(255, 255, 255, 0.055) !important;
   box-shadow:
-    0 14px 26px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    0 14px 28px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 173, 50, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
 }
 
 :root[data-theme="light"] .rail-nav a:hover::after,
@@ -9175,14 +9181,14 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .rail-budget {
   border-color: rgba(246, 161, 58, 0.5) !important;
   background-image:
-    radial-gradient(circle at 50% 0, rgba(246, 161, 58, 0.22), transparent 64%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02)) !important;
+    radial-gradient(circle at 50% 0, rgba(255, 173, 50, 0.26), transparent 64%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.022)) !important;
 }
 
 :root[data-theme="light"] .rail-budget strong,
 :root[data-theme="dark"] .rail-budget strong {
-  color: #ffd84d !important;
-  text-shadow: 0 0 18px rgba(255, 216, 77, 0.3) !important;
+  color: #ffdf62 !important;
+  text-shadow: 0 0 20px rgba(255, 223, 98, 0.34) !important;
 }
 
 :root[data-theme="light"] .rail-budget .meter,
