@@ -2264,6 +2264,125 @@ h3 {
   border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
 }
 
+.operator-packet {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
+  border-radius: 7px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 8% 0, color-mix(in srgb, var(--accent) 18%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 78%, transparent), transparent 62%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent),
+    0 0 32px color-mix(in srgb, var(--accent) 12%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.operator-packet::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--ok), transparent);
+  opacity: 0.78;
+}
+
+.operator-packet.trend {
+  border-color: color-mix(in srgb, var(--warn) 48%, var(--accent));
+  background:
+    radial-gradient(circle at 8% 0, color-mix(in srgb, var(--warn) 22%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 72%, transparent), transparent 62%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warn) 16%, transparent),
+    0 0 32px color-mix(in srgb, var(--warn) 13%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.packet-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.packet-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.packet-head em {
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--ok) 34%, var(--line));
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.packet-grid {
+  display: grid;
+  grid-template-columns: minmax(210px, 1.2fr) repeat(3, minmax(110px, 0.65fr));
+  gap: 8px;
+}
+
+.packet-grid div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: color-mix(in srgb, var(--surface-soft) 78%, transparent);
+}
+
+.packet-grid span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.packet-grid strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.packet-copy {
+  max-height: 92px;
+  overflow: auto;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  padding: 12px;
+  color: var(--body);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06), transparent),
+    color-mix(in srgb, var(--surface-soft) 84%, transparent);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
 .action-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(320px, 0.68fr);
@@ -2320,6 +2439,24 @@ h3 {
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent),
     0 0 20px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.mission-card.trend,
+.opportunity-card.trend {
+  border-color: color-mix(in srgb, var(--warn) 46%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--warn) 12%, transparent), transparent 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--surface-soft);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warn) 11%, transparent),
+    0 0 22px color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.mission-card.trend .step,
+.opportunity-card.trend .opportunity-rank {
+  color: #171006;
+  background: var(--warn);
 }
 
 .mission-meta {
@@ -7951,4 +8088,28 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] .rail-budget .meter,
 :root[data-theme="dark"] .rail-budget .meter {
   background: rgba(148, 163, 184, 0.22) !important;
+}
+
+@media (max-width: 920px) {
+  .packet-head {
+    display: grid;
+  }
+
+  .packet-head em {
+    justify-self: start;
+  }
+
+  .packet-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .packet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .operator-packet {
+    padding: 12px;
+  }
 }

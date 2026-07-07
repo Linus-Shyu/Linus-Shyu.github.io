@@ -1017,6 +1017,15 @@ const translations = {
     dispatch_zero_reads: "0 X read ops",
     dispatch_runbook: "Operator runbook",
     dispatch_empty: "No dispatch missions queued.",
+    operator_packet_eyebrow: "Operator Packet",
+    operator_packet_title: "Execute this route first",
+    operator_packet_armed: "armed",
+    operator_packet_route: "Route",
+    operator_packet_sla: "SLA",
+    operator_packet_replies: "Reply target",
+    operator_packet_lift: "Lift model",
+    operator_packet_budget: "Cost mode",
+    operator_packet_copy: "Copy packet",
     runbook: "Runbook",
     operator_notes: "Runbook notes",
     cost_note: "Dashboard sync uses GitHub API only. It does not add X API search/read calls.",
@@ -1427,6 +1436,15 @@ const translations = {
     dispatch_zero_reads: "0 次 X 读取",
     dispatch_runbook: "操作手册",
     dispatch_empty: "暂无派发任务。",
+    operator_packet_eyebrow: "操作员数据包",
+    operator_packet_title: "先执行这条路由",
+    operator_packet_armed: "已装载",
+    operator_packet_route: "路由",
+    operator_packet_sla: "SLA",
+    operator_packet_replies: "回复目标",
+    operator_packet_lift: "增益模型",
+    operator_packet_budget: "成本模式",
+    operator_packet_copy: "复制数据包",
     runbook: "运行手册",
     operator_notes: "运行手册备注",
     cost_note: "看板同步只使用 GitHub API，不增加 X API 搜索/读取调用。",
@@ -4214,6 +4232,17 @@ function renderActions() {
   }
   const primary = missions[0];
   const localizedPrimary = localizeAction({ label: primary.routeLabel || primary.label, reason: primary.routeReason });
+  const primaryDraft = primary.draftText || draftFor(0).text || "";
+  const primaryPacket = [
+    `${t("operator_packet_route")}: ${localizedPrimary.label || primary.label || "-"}`,
+    `${t("operator_packet_sla")}: ${t("dispatch_sla", { minutes: formatNumber(primary.operatorSlaMinutes || 10) })}`,
+    `${t("operator_packet_replies")}: ${t("dispatch_replies", { count: formatNumber(primary.targetReplies || 1) })}`,
+    `${t("operator_packet_lift")}: ${t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) })}`,
+    `${t("operator_packet_budget")}: ${t("dispatch_zero_reads")}`,
+    primary.evidence ? `Evidence: ${primary.evidence}` : null,
+    "",
+    primaryDraft,
+  ].filter((line) => line != null).join("\n");
   const metricCards = (ops.opsMetrics || [])
     .slice(0, 4)
     .map((metric) => `
@@ -4261,6 +4290,26 @@ function renderActions() {
       </div>
       ${metricCards}
     </div>
+    <article class="operator-packet ${escapeHtml(primary.kind || "route")}">
+      <div class="packet-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("operator_packet_eyebrow"))}</span>
+          <strong>${escapeHtml(t("operator_packet_title"))}</strong>
+        </div>
+        <em>${escapeHtml(t("operator_packet_armed"))} · ${escapeHtml(t("dispatch_zero_reads"))}</em>
+      </div>
+      <div class="packet-grid">
+        <div><span>${escapeHtml(t("operator_packet_route"))}</span><strong>${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong></div>
+        <div><span>${escapeHtml(t("operator_packet_sla"))}</span><strong>${escapeHtml(t("dispatch_sla", { minutes: formatNumber(primary.operatorSlaMinutes || 10) }))}</strong></div>
+        <div><span>${escapeHtml(t("operator_packet_replies"))}</span><strong>${escapeHtml(t("dispatch_replies", { count: formatNumber(primary.targetReplies || 1) }))}</strong></div>
+        <div><span>${escapeHtml(t("operator_packet_lift"))}</span><strong>${escapeHtml(t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) }))}</strong></div>
+      </div>
+      <pre class="packet-copy"><code>${escapeHtml(primaryDraft)}</code></pre>
+      <div class="row-actions">
+        ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryPacket)}">${t("operator_packet_copy")}</button>
+      </div>
+    </article>
     <article class="action-hero">
       <div>
         <span class="pill pill-neutral">${t("zero_api_action")}</span>
@@ -4268,10 +4317,10 @@ function renderActions() {
         <p><strong>${escapeHtml(t("dispatch_primary"))}: ${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong> · ${escapeHtml(localizedPrimary.reason || primary.evidence || t("daily_action_copy"))}</p>
         <div class="row-actions">
           ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
-          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primary.draftText || "")}">${t("copy_first_reply")}</button>
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryDraft)}">${t("copy_first_reply")}</button>
         </div>
       </div>
-      <blockquote>${escapeHtml(primary.draftText || "")}</blockquote>
+      <blockquote>${escapeHtml(primaryDraft)}</blockquote>
     </article>
     <div class="action-list">
       ${missionCards}
