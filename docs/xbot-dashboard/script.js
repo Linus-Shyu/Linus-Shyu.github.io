@@ -76,6 +76,38 @@ const fallbackData = {
       draftIndex: 2,
     },
   ],
+  opportunities: [
+    {
+      priority: 1,
+      label: "decision rule replies",
+      kind: "format",
+      score: 7.2,
+      confidence: "medium",
+      routeLabel: "Target Accounts",
+      routeUrl: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      draftIndex: 0,
+      draftText: "Launch rule for AI products: demo quality matters less than failure shape. If users can’t predict when it will be wrong, support cost becomes the real roadmap.",
+      draftAngle: "hidden cost",
+      reason: "Reuse the current winning format and paste it under active high-signal tech conversations.",
+      evidence: "format: avg 2.8, n=10",
+      zeroExtraXReads: true,
+    },
+    {
+      priority: 2,
+      label: "Source watch: techcrunch.com",
+      kind: "source",
+      score: 5.4,
+      confidence: "medium",
+      routeLabel: "AI / DevTools",
+      routeUrl: "https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      draftIndex: 1,
+      draftText: "Platform shift rule: if a Big Tech change can rewrite your margin, roadmap, or distribution overnight, it is not a partnership. It is rented ground with APIs.",
+      draftAngle: "business impact",
+      reason: "Stories from this source have outperformed baseline; look for fresh related discussions before posting more standalone takes.",
+      evidence: "source: avg 5.4, n=6",
+      zeroExtraXReads: true,
+    },
+  ],
   drafts: [
     {
       title: "AI product launches",
@@ -444,6 +476,13 @@ const translations = {
     daily_action_copy: "Open the first target, paste the prepared reply, then repeat the next two. No extra X API reads.",
     copy_first_reply: "Copy first reply",
     zero_api_action: "Zero extra API",
+    opportunity_eyebrow: "Opportunity Router",
+    opportunity_title: "Highest leverage moves",
+    opportunity_score: "score {score}",
+    opportunity_confidence: "{confidence} confidence",
+    opportunity_empty: "No opportunity queue yet.",
+    opportunity_open: "Open route",
+    opportunity_copy: "Copy paired draft",
     svc_news_ingest: "NEWS INGEST",
     svc_draft_queue: "DRAFT QUEUE",
     health_watch: "watch",
@@ -693,6 +732,13 @@ const translations = {
     daily_action_copy: "先打开第一个目标入口，粘贴准备好的回复，再重复后两项。不增加 X API 读取。",
     copy_first_reply: "复制第一条回复",
     zero_api_action: "零额外 API",
+    opportunity_eyebrow: "机会路由",
+    opportunity_title: "最高杠杆动作",
+    opportunity_score: "评分 {score}",
+    opportunity_confidence: "{confidence} 置信度",
+    opportunity_empty: "暂无机会队列。",
+    opportunity_open: "打开入口",
+    opportunity_copy: "复制配套草稿",
     svc_news_ingest: "新闻抓取",
     svc_draft_queue: "草稿队列",
     health_watch: "关注",
@@ -2196,6 +2242,43 @@ function renderActions() {
   `;
 }
 
+function renderOpportunities() {
+  const opportunities = dashboardData.opportunities?.length ? dashboardData.opportunities : fallbackData.opportunities || [];
+  const container = $("#opportunity-list");
+  if (!container) return;
+  if (!opportunities.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("opportunity_empty"))}</p>`;
+    return;
+  }
+  container.innerHTML = opportunities
+    .slice(0, 4)
+    .map((item, index) => {
+      const draft = item.draftText || draftFor(item.draftIndex ?? index).text;
+      return `
+        <article class="opportunity-card ${escapeHtml(item.kind || "route")}">
+          <div class="opportunity-top">
+            <span class="opportunity-rank">${String(item.priority || index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>${escapeHtml(item.label || "-")}</h3>
+              <p>${escapeHtml(item.reason || item.evidence || "-")}</p>
+            </div>
+          </div>
+          <div class="opportunity-meta">
+            <span>${escapeHtml(t("opportunity_score", { score: formatNumber(item.score, 1) }))}</span>
+            <span>${escapeHtml(t("opportunity_confidence", { confidence: item.confidence || "-" }))}</span>
+            <span>${escapeHtml(item.evidence || "")}</span>
+          </div>
+          <div class="draft-preview">${escapeHtml(draft)}</div>
+          <div class="row-actions">
+            ${item.routeUrl ? `<a class="button button-primary" href="${escapeHtml(item.routeUrl)}" target="_blank" rel="noreferrer">${t("opportunity_open")}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(draft)}">${t("opportunity_copy")}</button>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function renderDrafts() {
   const drafts = dashboardData.drafts || fallbackData.drafts;
   $("#draft-list").innerHTML = drafts
@@ -2354,6 +2437,7 @@ function render() {
   renderProof();
   renderServices();
   renderTrend();
+  renderOpportunities();
   renderActions();
   renderDrafts();
   renderDiagnosis();

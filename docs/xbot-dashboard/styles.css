@@ -4636,6 +4636,103 @@ body:not(.demo-mode) .demo-strip {
   isolation: isolate;
 }
 
+.opportunity-list {
+  display: grid;
+  gap: 8px;
+}
+
+.opportunity-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    var(--surface-soft);
+}
+
+.opportunity-top {
+  display: flex;
+  min-width: 0;
+  gap: 10px;
+}
+
+.opportunity-rank {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border-radius: 7px;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.opportunity-card h3 {
+  overflow: hidden;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opportunity-card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.opportunity-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.opportunity-meta span {
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-size: 10px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opportunity-card .draft-preview {
+  max-height: 92px;
+  overflow: auto;
+  font-size: 12px;
+}
+
+.opportunity-card .row-actions {
+  gap: 6px;
+}
+
+.empty-state {
+  margin: 0;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+  padding: 14px;
+  color: var(--muted);
+  background: var(--surface-soft);
+}
+
 :root[data-theme="light"] .topbar,
 :root[data-theme="light"] .grafana-toolbar,
 :root[data-theme="light"] .noc-strip div,
