@@ -11312,6 +11312,420 @@ body:not(.demo-mode) .demo-strip {
   }
 }
 
+.active-conn-optimizer {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00ff66 24%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, #00ff66 11%, transparent), transparent 34%),
+    radial-gradient(circle at 92% 18%, color-mix(in srgb, #00f0ff 11%, transparent), transparent 35%),
+    linear-gradient(135deg, color-mix(in srgb, #ff9f1c 6%, transparent), transparent 62%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 24px color-mix(in srgb, #00ff66 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 42%, transparent);
+}
+
+.conn-head,
+.conn-core,
+.conn-metrics,
+.conn-lanes article,
+.conn-footer-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.conn-head,
+.conn-section-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.conn-head span,
+.conn-score span,
+.conn-primary span,
+.conn-next span,
+.conn-metrics em,
+.conn-section-title span,
+.conn-lane-body dt,
+.conn-gates span,
+.conn-directives span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.conn-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.conn-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, #00ff66 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+.conn-core {
+  grid-template-columns: 0.72fr 0.94fr 1.34fr;
+}
+
+.conn-score,
+.conn-primary,
+.conn-next,
+.conn-metrics span,
+.conn-lanes article,
+.conn-gates,
+.conn-directives {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.conn-score,
+.conn-primary,
+.conn-next,
+.conn-metrics span {
+  padding: 9px;
+}
+
+.conn-score strong,
+.conn-primary strong,
+.conn-metrics strong,
+.conn-section-title strong,
+.conn-lane-body strong,
+.conn-lane-body dd {
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+.conn-score strong {
+  display: block;
+  margin-top: 5px;
+  color: #00a844;
+  font-size: 30px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+:root[data-theme="dark"] .conn-score strong {
+  color: #00ff66;
+  text-shadow: 0 0 18px rgba(0, 255, 102, 0.2);
+}
+
+.conn-score div,
+.conn-lane-body i {
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.conn-score div {
+  margin-top: 8px;
+}
+
+.conn-score i,
+.conn-lane-body i::before {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #ff9f1c, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.22);
+}
+
+.conn-score i {
+  width: var(--conn-score, 0%);
+}
+
+.conn-primary strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1.18;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.conn-primary small {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conn-next code {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.conn-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.conn-metrics strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conn-section-title {
+  margin-top: 2px;
+}
+
+.conn-section-title strong {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.conn-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.conn-lanes article {
+  position: relative;
+  grid-template-columns: 32px minmax(0, 1fr);
+  overflow: hidden;
+  padding: 8px;
+}
+
+.conn-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  opacity: 0.78;
+}
+
+.conn-lanes article.exploit::before {
+  background: #00ff66;
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.28);
+}
+
+.conn-lanes article.probe::before {
+  background: #ff9f1c;
+  box-shadow: 0 0 14px rgba(255, 159, 28, 0.24);
+}
+
+.conn-lanes article.hold::before {
+  background: #ff007a;
+  box-shadow: 0 0 14px rgba(255, 0, 122, 0.22);
+}
+
+.conn-rank {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.conn-lane-body {
+  position: relative;
+  min-width: 0;
+  padding-bottom: 9px;
+}
+
+.conn-lane-body > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.conn-lane-body strong,
+.conn-lane-body em {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conn-lane-body strong {
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.conn-lane-body em {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+}
+
+.conn-lane-body dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 6px;
+}
+
+.conn-lane-body dt,
+.conn-lane-body dd {
+  margin: 0;
+}
+
+.conn-lane-body dd {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.conn-lane-body p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0 0 7px;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.conn-lane-body i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.conn-lane-body i::before {
+  content: "";
+  width: var(--conn-lane-score, 0%);
+}
+
+.conn-footer-grid {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+.conn-gates,
+.conn-directives {
+  padding: 9px;
+}
+
+.conn-gates code,
+.conn-directives code {
+  display: block;
+  overflow: hidden;
+  margin-top: 6px;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 84%, transparent);
+  border-radius: 5px;
+  padding: 5px 6px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conn-gates code.ok {
+  border-color: color-mix(in srgb, #00ff66 38%, var(--line-soft));
+  color: #009f40;
+}
+
+:root[data-theme="dark"] .conn-gates code.ok {
+  color: #b8ffcc;
+}
+
+.conn-gates code.warn {
+  border-color: color-mix(in srgb, #ff9f1c 42%, var(--line-soft));
+  color: #b76b00;
+}
+
+.conn-gates code.danger {
+  border-color: color-mix(in srgb, #ff007a 48%, var(--line-soft));
+  color: #c6005f;
+}
+
+@media (max-width: 1180px) {
+  .conn-core,
+  .conn-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .conn-lanes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .conn-head,
+  .conn-section-title,
+  .conn-metrics,
+  .conn-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .conn-lane-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .angle-mutation-reactor {
   display: grid;
   gap: 10px;

@@ -1547,6 +1547,21 @@ const translations = {
     settlement_recent_title: "Recent reward settlements",
     settlement_matched: "matched",
     settlement_empty: "No bandit reward settlement output available.",
+    conn_eyebrow: "Active Conn Optimizer",
+    conn_title: "Follower conversion fire-control",
+    conn_zero_reads: "0 X read ops",
+    conn_score: "Conversion score",
+    conn_primary: "Primary lane",
+    conn_next: "Next route bias",
+    conn_conn1k: "conn / 1k",
+    conn_profile_proxy: "profile proxy",
+    conn_delta: "conn delta",
+    conn_lanes: "Conversion lanes",
+    conn_gates: "Control gates",
+    conn_directives: "Prompt directives",
+    conn_samples: "{count} samples",
+    conn_kind: "kind",
+    conn_empty: "No active-conn conversion optimizer output available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -2324,6 +2339,21 @@ const translations = {
     settlement_recent_title: "近期收益结算",
     settlement_matched: "命中",
     settlement_empty: "暂无 Bandit 收益结算输出。",
+    conn_eyebrow: "活跃连接优化器",
+    conn_title: "关注转化火控",
+    conn_zero_reads: "0 次 X 读取",
+    conn_score: "转化评分",
+    conn_primary: "主通道",
+    conn_next: "下一轮路由偏置",
+    conn_conn1k: "每千次连接",
+    conn_profile_proxy: "主页点击代理",
+    conn_delta: "连接增量",
+    conn_lanes: "转化通道",
+    conn_gates: "控制闸门",
+    conn_directives: "Prompt 指令",
+    conn_samples: "{count} 个样本",
+    conn_kind: "类型",
+    conn_empty: "暂无活跃连接转化优化器输出。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -6569,6 +6599,241 @@ function banditRewardSettlementData() {
   return dashboardData.contentBanditSettlement || fallbackData.contentBanditSettlement || derivedBanditRewardSettlement();
 }
 
+function connLaneTone(status) {
+  if (status === "exploit") return "exploit";
+  if (status === "probe") return "probe";
+  if (status === "hold") return "hold";
+  return "watch";
+}
+
+function derivedActiveConnConversionOptimizer() {
+  const posts = banditSettlementPosts();
+  const allocator = contentBanditAllocatorData();
+  const audience = audienceRouterData();
+  const kinetics = growthKineticsData();
+  const goal = goalData();
+  const followerDelta = number((dashboardData.profile || fallbackData.profile || {}).followerDelta, number(kinetics.followerDelta));
+  const totalImpressions = posts.reduce((sum, post) => sum + number(post.impressions), 0);
+  const observedConversionPer1k = totalImpressions > 0 && followerDelta > 0 ? (followerDelta / totalImpressions) * 1000 : 0;
+  const fallbackConversionPer1k = number(kinetics.effectiveConversionPer1k, 0.8);
+  const groups = new Map();
+  const addLane = (kind, id, label, post = null, scoreBoost = 0) => {
+    if (!id) return;
+    const key = `${kind}:${id}`;
+    const lane = groups.get(key) || {
+      id: key,
+      bucketId: id,
+      kind,
+      label: label || formatTemplate(id),
+      samples: 0,
+      impressions: 0,
+      engagements: 0,
+      profileClicks: 0,
+      totalScore: 0,
+      examples: [],
+      boost: 0,
+    };
+    lane.boost += scoreBoost;
+    if (post) {
+      lane.samples += 1;
+      lane.impressions += number(post.impressions);
+      lane.engagements += number(post.likes) + number(post.reposts) + number(post.retweets) + number(post.replies) + number(post.quotes);
+      lane.totalScore += number(post.score);
+      if (lane.examples.length < 2) {
+        lane.examples.push({
+          id: post.id || null,
+          text: firstPostLine(post.text || ""),
+          url: post.url || null,
+          score: number(post.score),
+        });
+      }
+    }
+    groups.set(key, lane);
+  };
+  posts.forEach((post) => {
+    const formatId = post.template || post.templateId || post.formatId || "unknown";
+    addLane("format", formatId, formatTemplate(formatId), post);
+    const sourceId = post.source || post.newsSource || post.sourceTier || "";
+    if (sourceId) addLane("source", sourceId, sourceId, post);
+  });
+  (allocator.lanes || []).forEach((lane) => addLane("format", lane.id, lane.label || formatTemplate(lane.id), null, number(lane.allocationPct) * 0.12));
+  (audience.segments || []).forEach((segment) => addLane("audience", segment.id, segment.label || segment.id, null, number(segment.score) * 0.9));
+  const rawLanes = [...groups.values()].map((lane) => {
+    const avgScore = lane.samples ? lane.totalScore / lane.samples : number((allocator.lanes || []).find((item) => item.id === lane.bucketId)?.avgScore);
+    const engagementRate = lane.impressions > 0 ? (lane.engagements / lane.impressions) * 100 : 0;
+    const conversionScore = clamp(
+      18 +
+        Math.min(30, avgScore * 4.8) +
+        Math.min(20, engagementRate * 3.2) +
+        Math.min(18, lane.samples * 2.4) +
+        Math.min(14, lane.boost),
+      0,
+      100,
+    );
+    const expectedConnPer1k = (observedConversionPer1k || fallbackConversionPer1k) * (0.64 + conversionScore / 92);
+    const status = lane.samples >= 2 && conversionScore >= 70
+      ? "exploit"
+      : conversionScore >= 52
+        ? "probe"
+        : conversionScore >= 36
+          ? "watch"
+          : "hold";
+    return {
+      ...lane,
+      status,
+      sampleConfidence: lane.samples >= 6 ? "high" : lane.samples >= 2 ? "medium" : "low",
+      avgScore,
+      engagementRate,
+      profileClickPer1k: 0,
+      expectedConnPer1k,
+      conversionScore,
+      nextAction: status === "exploit"
+        ? `Exploit ${lane.label}; it currently has the strongest active-conn proxy.`
+        : status === "probe"
+          ? `Probe ${lane.label} once more before scaling.`
+          : status === "watch"
+            ? `Use ${lane.label} only when story-fit is strong.`
+            : `Hold ${lane.label} until measured conversion improves.`,
+    };
+  }).sort((left, right) => {
+    const rank = { exploit: 4, probe: 3, watch: 2, hold: 1 };
+    return (rank[right.status] || 0) - (rank[left.status] || 0) || right.conversionScore - left.conversionScore;
+  });
+  const primaryLane = rawLanes.find((lane) => lane.status === "exploit") || rawLanes.find((lane) => lane.status === "probe") || rawLanes[0] || null;
+  const score = clamp(
+    14 +
+      Math.min(36, number(primaryLane?.conversionScore) * 0.46) +
+      Math.min(20, posts.length * 1.2) +
+      (followerDelta > 0 ? Math.min(14, followerDelta * 5) : followerDelta < 0 ? -10 : 0),
+    0,
+    100,
+  );
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: score >= 64 ? "derived_conversion_exploit" : score >= 38 ? "derived_conversion_probe" : "derived_conversion_starved",
+    severity: score >= 64 ? "ok" : score >= 38 ? "warn" : "danger",
+    zeroExtraXReads: true,
+    source: "derived cached dashboard telemetry",
+    conversionScore: score,
+    observedConversionPer1k,
+    fallbackConversionPer1k,
+    activeConnDelta: followerDelta,
+    sampleCount: posts.length || number(goal.current),
+    profileClicks: 0,
+    profileClickPer1k: 0,
+    primaryLaneId: primaryLane?.id || null,
+    primaryLane,
+    nextAction: primaryLane
+      ? `${primaryLane.status === "hold" ? "Do not force" : "Bias next packet toward"} ${primaryLane.label}; expected ${formatNumber(primaryLane.expectedConnPer1k, 2)} active conns / 1k L7 events.`
+      : "Collect more measured packets before trusting conversion allocation.",
+    promptDirectives: [
+      primaryLane ? `Lead with ${primaryLane.label}; optimize for follow-worthy utility, not raw impressions.` : null,
+      allocator.recommendedLane?.label ? `Keep format aligned with ${allocator.recommendedLane.label}.` : null,
+      audience.nextAction || null,
+      "Make the first line a reusable rule, cost, or prediction a tech-curious reader would follow for.",
+    ].filter(Boolean).slice(0, 4),
+    gates: [
+      { id: "x_reads", label: "X read ops", value: "0", status: "ok" },
+      { id: "samples", label: "conversion samples", value: formatNumber(posts.length), status: posts.length >= 12 ? "ok" : "warn" },
+      { id: "profile_clicks", label: "profile-click proxy", value: "0", status: "warn" },
+      { id: "active_delta", label: "active conn delta", value: `${followerDelta >= 0 ? "+" : ""}${formatNumber(followerDelta)}`, status: followerDelta > 0 ? "ok" : followerDelta < 0 ? "danger" : "warn" },
+    ],
+    lanes: rawLanes.slice(0, 9),
+  };
+}
+
+function activeConnConversionOptimizerData() {
+  const incoming = dashboardData.activeConnConversionOptimizer || fallbackData.activeConnConversionOptimizer;
+  if (incoming?.lanes?.length) return incoming;
+  return derivedActiveConnConversionOptimizer();
+}
+
+function renderActiveConnConversionOptimizer() {
+  const optimizer = activeConnConversionOptimizerData();
+  const container = $("#active-conn-optimizer");
+  if (!container) return;
+  const lanes = Array.isArray(optimizer.lanes) ? optimizer.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("conn_empty"))}</p>`;
+    return;
+  }
+  const primary = optimizer.primaryLane || lanes.find((lane) => lane.id === optimizer.primaryLaneId) || lanes[0] || {};
+  const score = clamp(number(optimizer.conversionScore), 0, 100);
+  const gates = Array.isArray(optimizer.gates) ? optimizer.gates : [];
+  const directives = Array.isArray(optimizer.promptDirectives) ? optimizer.promptDirectives : [];
+  container.innerHTML = `
+    <div class="conn-head">
+      <div>
+        <span>${escapeHtml(t("conn_eyebrow"))}</span>
+        <strong>${escapeHtml(t("conn_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("conn_zero_reads"))}</em>
+    </div>
+    <div class="conn-core ${escapeHtml(optimizer.severity || "warn")}">
+      <div class="conn-score" style="--conn-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("conn_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="conn-primary">
+        <span>${escapeHtml(t("conn_primary"))}</span>
+        <strong>${escapeHtml(primary.label || primary.id || "-")}</strong>
+        <small>${escapeHtml(primary.kind || "-")} · ${escapeHtml(primary.status || "-")} · ${escapeHtml(t("conn_samples", { count: formatNumber(primary.samples) }))}</small>
+      </div>
+      <div class="conn-next">
+        <span>${escapeHtml(t("conn_next"))}</span>
+        <code>${escapeHtml(optimizer.nextAction || primary.nextAction || "-")}</code>
+      </div>
+    </div>
+    <div class="conn-metrics">
+      <span><em>${escapeHtml(t("conn_conn1k"))}</em><strong>${escapeHtml(formatNumber(primary.expectedConnPer1k ?? optimizer.observedConversionPer1k ?? optimizer.fallbackConversionPer1k, 2))}</strong></span>
+      <span><em>${escapeHtml(t("conn_profile_proxy"))}</em><strong>${escapeHtml(formatNumber(optimizer.profileClickPer1k, 2))}/1k</strong></span>
+      <span><em>${escapeHtml(t("conn_delta"))}</em><strong>${escapeHtml(`${number(optimizer.activeConnDelta) >= 0 ? "+" : ""}${formatNumber(optimizer.activeConnDelta)}`)}</strong></span>
+      <span><em>${escapeHtml(t("conn_samples", { count: "" }).trim())}</em><strong>${escapeHtml(formatNumber(optimizer.sampleCount))}</strong></span>
+    </div>
+    <div class="conn-section-title">
+      <span>${escapeHtml(t("conn_lanes"))}</span>
+      <strong>${escapeHtml(optimizer.mode || "-")}</strong>
+    </div>
+    <div class="conn-lanes">
+      ${lanes.slice(0, 9).map((lane, index) => {
+        const laneScore = clamp(number(lane.conversionScore), 0, 100);
+        return `
+          <article class="${escapeHtml(connLaneTone(lane.status))}" style="--conn-lane-score:${laneScore.toFixed(1)}%">
+            <div class="conn-rank">${escapeHtml(String(index + 1).padStart(2, "0"))}</div>
+            <div class="conn-lane-body">
+              <div>
+                <strong>${escapeHtml(lane.label || lane.id || "-")}</strong>
+                <em>${escapeHtml(t("conn_kind"))}: ${escapeHtml(lane.kind || "-")} · ${escapeHtml(lane.status || "-")}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("conn_score"))}</dt><dd>${escapeHtml(formatNumber(laneScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("conn_conn1k"))}</dt><dd>${escapeHtml(formatNumber(lane.expectedConnPer1k, 2))}</dd></div>
+                <div><dt>ACK %</dt><dd>${escapeHtml(formatNumber(lane.engagementRate, 2))}</dd></div>
+                <div><dt>${escapeHtml(t("bandit_samples_short"))}</dt><dd>${escapeHtml(formatNumber(lane.samples))}</dd></div>
+              </dl>
+              <p>${escapeHtml(lane.nextAction || "-")}</p>
+              <i></i>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="conn-footer-grid">
+      <div class="conn-gates">
+        <span>${escapeHtml(t("conn_gates"))}</span>
+        ${gates.slice(0, 4).map((gate) => `
+          <code class="${escapeHtml(gate.status || "warn")}">${escapeHtml(gate.label || gate.id || "-")}: ${escapeHtml(gate.value ?? "-")}</code>
+        `).join("")}
+      </div>
+      <div class="conn-directives">
+        <span>${escapeHtml(t("conn_directives"))}</span>
+        ${directives.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderBanditRewardSettlement() {
   const settlement = banditRewardSettlementData();
   const container = $("#bandit-reward-settlement");
@@ -7101,6 +7366,7 @@ function renderLearning() {
   renderHookPatternReactor();
   renderContentBanditAllocator();
   renderBanditRewardSettlement();
+  renderActiveConnConversionOptimizer();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
