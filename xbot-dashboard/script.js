@@ -1562,6 +1562,22 @@ const translations = {
     conn_samples: "{count} samples",
     conn_kind: "kind",
     conn_empty: "No active-conn conversion optimizer output available.",
+    narrative_eyebrow: "Narrative Resonance Controller",
+    narrative_title: "Account-memory fire-control",
+    narrative_zero_reads: "0 X read ops",
+    narrative_score: "Resonance score",
+    narrative_primary: "Primary pillar",
+    narrative_next: "Next memory bias",
+    narrative_promise: "Account promise",
+    narrative_pillars: "Narrative pillars",
+    narrative_share: "share",
+    narrative_target: "target",
+    narrative_avg: "avg",
+    narrative_samples: "n",
+    narrative_ack: "ACK %",
+    narrative_directives: "Prompt directives",
+    narrative_guardrails: "Guardrails",
+    narrative_empty: "No narrative resonance telemetry available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -2354,6 +2370,22 @@ const translations = {
     conn_samples: "{count} 个样本",
     conn_kind: "类型",
     conn_empty: "暂无活跃连接转化优化器输出。",
+    narrative_eyebrow: "叙事共振控制器",
+    narrative_title: "账号记忆火控",
+    narrative_zero_reads: "0 次 X 读取",
+    narrative_score: "共振评分",
+    narrative_primary: "主叙事柱",
+    narrative_next: "下一轮记忆偏置",
+    narrative_promise: "账号承诺",
+    narrative_pillars: "叙事柱",
+    narrative_share: "占比",
+    narrative_target: "目标",
+    narrative_avg: "均值",
+    narrative_samples: "样本",
+    narrative_ack: "ACK %",
+    narrative_directives: "Prompt 指令",
+    narrative_guardrails: "护栏",
+    narrative_empty: "暂无叙事共振遥测。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -6834,6 +6866,329 @@ function renderActiveConnConversionOptimizer() {
   `;
 }
 
+function narrativePillarCatalog() {
+  return [
+    {
+      id: "operator_leverage",
+      label: "Operator Leverage",
+      targetSharePct: 30,
+      broadness: 1.12,
+      pattern: /(workflow|operator|ops|automation|agent|permission|eval|rollback|incident|tooling|developer|devtools|api|sdk|github|cursor|vercel|cloudflare|工程|开发|自动化|工具|权限|回滚)/i,
+      directive: "Translate the story into builder leverage, workflow cost, permissions, or rollback policy.",
+      lexicon: ["workflow", "operator", "permission", "rollback", "tooling", "automation"],
+    },
+    {
+      id: "platform_control",
+      label: "Platform Control",
+      targetSharePct: 24,
+      broadness: 1.18,
+      pattern: /(apple|google|microsoft|meta|amazon|youtube|tiktok|app store|browser|os|platform|default|distribution|policy|privacy|苹果|谷歌|微软|平台|默认|分发|隐私)/i,
+      directive: "Frame it as defaults, distribution, margin, privacy, or platform control.",
+      lexicon: ["default", "distribution", "policy", "privacy", "control", "lock-in"],
+    },
+    {
+      id: "consumer_behavior",
+      label: "Consumer Behavior",
+      targetSharePct: 18,
+      broadness: 1.22,
+      pattern: /(consumer|user|creator|iphone|android|mobile|app\b|apps\b|social|notification|ranking|onboarding|retention|用户|消费者|创作者|手机|应用|通知|留存)/i,
+      directive: "Show how a product or device changes user behavior, habits, or distribution loops.",
+      lexicon: ["users", "creators", "notifications", "onboarding", "retention", "habit"],
+    },
+    {
+      id: "risk_boundary",
+      label: "Risk Boundary",
+      targetSharePct: 14,
+      broadness: 1.02,
+      pattern: /(security|privacy|breach|cve|auth|compliance|encryption|trust|cloud|aws|azure|gcp|incident|安全|隐私|信任|合规|云)/i,
+      directive: "Lead with risk transfer, trust boundaries, compliance cost, or incident response.",
+      lexicon: ["risk", "trust", "auth", "compliance", "incident", "privacy", "security"],
+    },
+    {
+      id: "market_timing",
+      label: "Market Timing",
+      targetSharePct: 14,
+      broadness: 1.08,
+      pattern: /(startup|founder|pricing|revenue|market|funding|launch|saas|ipo|acquisition|open source|创业|融资|商业化|定价|市场)/i,
+      directive: "Convert the signal into timing, pricing, GTM, or business-model leverage.",
+      lexicon: ["pricing", "market", "timing", "distribution", "revenue", "GTM"],
+    },
+  ];
+}
+
+function classifyNarrativePillar(post) {
+  const explicit = post?.narrativePillar;
+  if (explicit?.id) return explicit;
+  const haystack = [
+    post?.text,
+    post?.title,
+    post?.summary,
+    post?.source,
+    post?.template,
+    post?.formatId,
+  ].filter(Boolean).join(" ");
+  const lower = haystack.toLowerCase();
+  const matches = narrativePillarCatalog()
+    .map((pillar) => {
+      if (!pillar.pattern.test(haystack)) return null;
+      const lexiconHits = (pillar.lexicon || []).filter((word) => lower.includes(String(word).toLowerCase())).length;
+      return {
+        ...pillar,
+        matchScore: pillar.broadness + Math.min(0.28, lexiconHits * 0.04),
+      };
+    })
+    .filter(Boolean)
+    .sort((left, right) => right.matchScore - left.matchScore);
+  return matches[0] || {
+    id: "tech_signal",
+    label: "Tech Signal",
+    targetSharePct: 0,
+    directive: "Keep one concrete tech signal and one reusable operating rule.",
+    lexicon: ["signal", "rule", "tradeoff"],
+    matchScore: 0.5,
+  };
+}
+
+function narrativeTone(status) {
+  if (status === "exploit") return "exploit";
+  if (status === "expand") return "expand";
+  if (status === "probe") return "probe";
+  if (status === "hold") return "hold";
+  return "watch";
+}
+
+function derivedNarrativeResonanceController() {
+  const posts = banditSettlementPosts();
+  const baseline = number((dashboardData.profile || fallbackData.profile || {}).baselineScore, 0);
+  const minSamples = posts.length > 10 ? 2 : 1;
+  const catalog = narrativePillarCatalog();
+  const buckets = new Map(catalog.map((pillar) => [pillar.id, {
+    ...pillar,
+    samples: 0,
+    totalScore: 0,
+    impressions: 0,
+    engagements: 0,
+    examples: [],
+  }]));
+
+  for (const post of posts) {
+    const pillar = classifyNarrativePillar(post);
+    const bucket = buckets.get(pillar.id) || {
+      ...pillar,
+      samples: 0,
+      totalScore: 0,
+      impressions: 0,
+      engagements: 0,
+      examples: [],
+    };
+    const score = number(post.score, baseline);
+    const impressions = number(post.impressions);
+    const engagements = number(post.likes) + number(post.reposts) + number(post.replies) + number(post.bookmarks);
+    bucket.samples += 1;
+    bucket.totalScore += score;
+    bucket.impressions += impressions;
+    bucket.engagements += engagements;
+    if (bucket.examples.length < 2) {
+      bucket.examples.push({
+        text: firstPostLine(post.text),
+        score,
+        url: post.url || "",
+      });
+    }
+    buckets.set(pillar.id, bucket);
+  }
+
+  const totalSamples = Math.max(1, posts.length);
+  const pillars = [...buckets.values()].map((bucket) => {
+    const avgScore = bucket.samples ? bucket.totalScore / bucket.samples : 0;
+    const sharePct = bucket.samples / totalSamples * 100;
+    const targetSharePct = number(bucket.targetSharePct);
+    const underTarget = targetSharePct > 0 && sharePct < targetSharePct * 0.72;
+    const liftPct = baseline > 0 && bucket.samples >= minSamples ? ((avgScore - baseline) / baseline) * 100 : null;
+    const engagementRate = bucket.impressions > 0 ? bucket.engagements / bucket.impressions * 100 : 0;
+    const score = clamp(
+      18 +
+        Math.min(30, (avgScore || baseline || 1) * 4.8) +
+        Math.min(18, engagementRate * 3) +
+        Math.min(14, bucket.samples * 1.8) +
+        (underTarget ? 9 * number(bucket.broadness, 1) : 0),
+      0,
+      100,
+    );
+    const status = bucket.samples >= minSamples && liftPct !== null && liftPct > 14
+      ? "exploit"
+      : underTarget
+        ? "expand"
+        : bucket.samples < minSamples
+          ? "probe"
+          : liftPct !== null && liftPct < -22
+            ? "hold"
+            : "watch";
+    return {
+      id: bucket.id,
+      label: bucket.label,
+      status,
+      score,
+      samples: bucket.samples,
+      avgScore,
+      liftPct,
+      sharePct,
+      targetSharePct,
+      impressions: bucket.impressions,
+      engagementRate,
+      directive: bucket.directive,
+      lexicon: bucket.lexicon || [],
+      examples: bucket.examples,
+      nextAction: status === "exploit"
+        ? `Exploit ${bucket.label}; it already reinforces account memory.`
+        : status === "expand"
+          ? `Expand ${bucket.label}; broad enough but below target share.`
+          : status === "hold"
+            ? `Hold ${bucket.label} unless story fit is exceptional.`
+            : `Keep ${bucket.label} in controlled rotation.`,
+    };
+  }).sort((left, right) => {
+    const priority = { exploit: 4, expand: 3, probe: 2, watch: 1, hold: 0 };
+    return (priority[right.status] || 0) - (priority[left.status] || 0) || right.score - left.score;
+  });
+  const activeConn = activeConnConversionOptimizerData();
+  const primaryPillar = pillars.find((pillar) => pillar.status === "exploit") ||
+    pillars.find((pillar) => pillar.status === "expand") ||
+    pillars.find((pillar) => pillar.status === "probe") ||
+    pillars[0] ||
+    null;
+  const resonanceScore = clamp(
+    16 +
+      Math.min(34, number(primaryPillar?.score) * 0.48) +
+      Math.min(18, totalSamples * 0.55) +
+      Math.min(14, pillars.filter((pillar) => pillar.status === "exploit").length * 6) +
+      Math.min(10, pillars.filter((pillar) => pillar.status === "expand").length * 4),
+    0,
+    100,
+  );
+  const severity = resonanceScore >= 66 ? "ok" : resonanceScore >= 42 ? "warn" : "danger";
+  const accountPromise = "Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: severity === "ok" ? "derived_narrative_exploit" : severity === "warn" ? "derived_narrative_tune" : "derived_narrative_starved",
+    severity,
+    zeroExtraXReads: true,
+    source: "derived cached dashboard telemetry",
+    accountPromise,
+    resonanceScore,
+    sampleCount: posts.length,
+    primaryPillarId: primaryPillar?.id || null,
+    primaryPillar,
+    pillars,
+    nextAction: primaryPillar
+      ? `Bias next candidate toward ${primaryPillar.label}; keep ${activeConn.primaryLane?.label || "active-conn"} conversion in view.`
+      : "Collect more measured packets before trusting narrative routing.",
+    promptDirectives: [
+      primaryPillar?.directive || null,
+      `Account promise: ${accountPromise}`,
+      "Every post must reinforce one durable memory: leverage, defaults, behavior, risk, or timing.",
+      "Prefer reusable rules and tradeoffs over standalone news recap.",
+    ].filter(Boolean),
+    guardrails: [
+      "0 X read ops; cached analytics only.",
+      "No ragebait, giveaways, pure recap, or unrelated politics.",
+      "A post must still read like Tech Signals without opening the profile.",
+    ],
+  };
+}
+
+function narrativeResonanceData() {
+  const incoming = dashboardData.narrativeResonanceController || fallbackData.narrativeResonanceController;
+  if (incoming?.pillars?.length) return incoming;
+  return derivedNarrativeResonanceController();
+}
+
+function renderNarrativeResonance() {
+  const controller = narrativeResonanceData();
+  const container = $("#narrative-resonance");
+  if (!container) return;
+  const pillars = Array.isArray(controller.pillars) ? controller.pillars : [];
+  if (!pillars.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("narrative_empty"))}</p>`;
+    return;
+  }
+  const primary = controller.primaryPillar || pillars.find((pillar) => pillar.id === controller.primaryPillarId) || pillars[0] || {};
+  const score = clamp(number(controller.resonanceScore), 0, 100);
+  const directives = Array.isArray(controller.promptDirectives) ? controller.promptDirectives : [];
+  const guardrails = Array.isArray(controller.guardrails) ? controller.guardrails : [];
+  container.innerHTML = `
+    <div class="narrative-head">
+      <div>
+        <span>${escapeHtml(t("narrative_eyebrow"))}</span>
+        <strong>${escapeHtml(t("narrative_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("narrative_zero_reads"))}</em>
+    </div>
+    <div class="narrative-core ${escapeHtml(controller.severity || "warn")}">
+      <div class="narrative-score" style="--narrative-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("narrative_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="narrative-primary">
+        <span>${escapeHtml(t("narrative_primary"))}</span>
+        <strong>${escapeHtml(primary.label || primary.id || "-")}</strong>
+        <small>${escapeHtml(primary.status || "-")} · ${escapeHtml(t("narrative_samples"))} ${escapeHtml(formatNumber(primary.samples))}</small>
+      </div>
+      <div class="narrative-next">
+        <span>${escapeHtml(t("narrative_next"))}</span>
+        <code>${escapeHtml(controller.nextAction || primary.nextAction || "-")}</code>
+      </div>
+    </div>
+    <div class="narrative-promise">
+      <span>${escapeHtml(t("narrative_promise"))}</span>
+      <code>${escapeHtml(controller.accountPromise || "-")}</code>
+      <strong>${escapeHtml(controller.mode || "-")}</strong>
+    </div>
+    <div class="narrative-section-title">
+      <span>${escapeHtml(t("narrative_pillars"))}</span>
+      <strong>${escapeHtml(`${formatNumber(controller.sampleCount)} packets`)}</strong>
+    </div>
+    <div class="narrative-pillars">
+      ${pillars.slice(0, 6).map((pillar, index) => {
+        const pillarScore = clamp(number(pillar.score), 0, 100);
+        const share = clamp(number(pillar.sharePct), 0, 100);
+        const target = clamp(number(pillar.targetSharePct), 0, 100);
+        return `
+          <article class="${escapeHtml(narrativeTone(pillar.status))}" style="--narrative-pillar-score:${pillarScore.toFixed(1)}%; --narrative-share:${share.toFixed(1)}%; --narrative-target:${target.toFixed(1)}%">
+            <div class="narrative-rank">${escapeHtml(String(index + 1).padStart(2, "0"))}</div>
+            <div class="narrative-pillar-body">
+              <div>
+                <strong>${escapeHtml(pillar.label || pillar.id || "-")}</strong>
+                <em>${escapeHtml(pillar.status || "watch")} · ${escapeHtml((pillar.lexicon || []).slice(0, 3).join(" / ") || "signal")}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("narrative_avg"))}</dt><dd>${escapeHtml(formatNumber(pillar.avgScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("narrative_samples"))}</dt><dd>${escapeHtml(formatNumber(pillar.samples))}</dd></div>
+                <div><dt>${escapeHtml(t("narrative_share"))}</dt><dd>${escapeHtml(formatNumber(share, 1))}%</dd></div>
+                <div><dt>${escapeHtml(t("narrative_target"))}</dt><dd>${escapeHtml(formatNumber(target, 1))}%</dd></div>
+                <div><dt>${escapeHtml(t("narrative_ack"))}</dt><dd>${escapeHtml(formatNumber(pillar.engagementRate, 2))}</dd></div>
+              </dl>
+              <p>${escapeHtml(pillar.directive || pillar.nextAction || "-")}</p>
+              <div class="narrative-sharebar"><span></span><i></i></div>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="narrative-footer-grid">
+      <div class="narrative-directives">
+        <span>${escapeHtml(t("narrative_directives"))}</span>
+        ${directives.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+      <div class="narrative-guardrails">
+        <span>${escapeHtml(t("narrative_guardrails"))}</span>
+        ${guardrails.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderBanditRewardSettlement() {
   const settlement = banditRewardSettlementData();
   const container = $("#bandit-reward-settlement");
@@ -7367,6 +7722,7 @@ function renderLearning() {
   renderContentBanditAllocator();
   renderBanditRewardSettlement();
   renderActiveConnConversionOptimizer();
+  renderNarrativeResonance();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
