@@ -9148,6 +9148,280 @@ body:not(.demo-mode) .demo-strip {
   line-height: 1.4;
 }
 
+.bandit-reward-settlement {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00f0ff 28%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 8% 0, color-mix(in srgb, #00f0ff 12%, transparent), transparent 32%),
+    radial-gradient(circle at 96% 18%, color-mix(in srgb, #00ff66 8%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #ff007a 6%, transparent), transparent 62%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 24px color-mix(in srgb, #00f0ff 9%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 42%, transparent);
+}
+
+.settlement-head,
+.settlement-core,
+.settlement-arms article,
+.settlement-recent {
+  display: grid;
+  gap: 8px;
+}
+
+.settlement-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.settlement-head span,
+.settlement-core span,
+.settlement-arms dt,
+.settlement-recent > div span,
+.settlement-recent a span,
+.settlement-recent article span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.settlement-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.settlement-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, #00ff66 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+.settlement-core {
+  grid-template-columns: 1.35fr 0.75fr 0.75fr;
+}
+
+.settlement-core > div,
+.settlement-arms article,
+.settlement-recent {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.settlement-core > div {
+  padding: 9px;
+}
+
+.settlement-core strong,
+.settlement-arms strong,
+.settlement-arms dd,
+.settlement-recent strong {
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+.settlement-core strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.settlement-core small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.settlement-arms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.settlement-arms article {
+  position: relative;
+  overflow: hidden;
+  padding: 9px;
+}
+
+.settlement-arms article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  opacity: 0.8;
+}
+
+.settlement-arms article.winner::before {
+  background: #00ff66;
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.26);
+}
+
+.settlement-arms article.regret::before {
+  background: #ff007a;
+  box-shadow: 0 0 14px rgba(255, 0, 122, 0.22);
+}
+
+.settlement-arms article.over::before,
+.settlement-arms article.under::before {
+  background: var(--accent-3);
+}
+
+.settlement-arms article > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.settlement-arms strong {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.settlement-arms em {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.settlement-arms dl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 12px;
+}
+
+.settlement-arms dt,
+.settlement-arms dd {
+  margin: 0;
+}
+
+.settlement-arms dd {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.settlement-arms i {
+  position: absolute;
+  right: 9px;
+  bottom: 7px;
+  left: 9px;
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.settlement-arms i::before {
+  content: "";
+  display: block;
+  width: var(--settlement-index, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.22);
+}
+
+.settlement-recent {
+  padding: 9px;
+}
+
+.settlement-recent > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settlement-recent a,
+.settlement-recent article {
+  display: grid;
+  gap: 3px;
+  border-top: 1px solid color-mix(in srgb, var(--line-soft) 78%, transparent);
+  padding-top: 7px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.settlement-recent p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+@media (max-width: 1080px) {
+  .settlement-core,
+  .settlement-arms {
+    grid-template-columns: 1fr;
+  }
+
+  .settlement-arms dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .settlement-head,
+  .settlement-arms article > div,
+  .settlement-recent > div {
+    grid-template-columns: 1fr;
+  }
+}
+
 .angle-mutation-reactor {
   display: grid;
   gap: 10px;

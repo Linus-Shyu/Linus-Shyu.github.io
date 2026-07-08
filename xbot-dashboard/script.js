@@ -1369,6 +1369,21 @@ const translations = {
     bandit_prompt_patch: "Bandit patch",
     bandit_copy_patch: "Copy patch",
     bandit_empty: "No content bandit allocator output available.",
+    settlement_eyebrow: "Reward Settlement Ledger",
+    settlement_title: "Allocator reward reconciliation",
+    settlement_zero_reads: "0 X read ops",
+    settlement_best: "Best settled arm",
+    settlement_regret: "Avg recent regret",
+    settlement_regret_short: "regret",
+    settlement_samples: "Samples",
+    settlement_reward: "reward",
+    settlement_recent: "recent",
+    settlement_alloc: "alloc",
+    settlement_actual: "actual",
+    settlement_index: "index",
+    settlement_recent_title: "Recent reward settlements",
+    settlement_matched: "matched",
+    settlement_empty: "No bandit reward settlement output available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -1993,6 +2008,21 @@ const translations = {
     bandit_prompt_patch: "Bandit 补丁",
     bandit_copy_patch: "复制补丁",
     bandit_empty: "暂无内容 Bandit 分配器输出。",
+    settlement_eyebrow: "Reward 结算账本",
+    settlement_title: "分配器收益对账",
+    settlement_zero_reads: "0 次 X 读取",
+    settlement_best: "最佳已结算臂",
+    settlement_regret: "近期平均后悔值",
+    settlement_regret_short: "后悔值",
+    settlement_samples: "样本",
+    settlement_reward: "收益",
+    settlement_recent: "近期",
+    settlement_alloc: "分配",
+    settlement_actual: "实际",
+    settlement_index: "指数",
+    settlement_recent_title: "近期收益结算",
+    settlement_matched: "命中",
+    settlement_empty: "暂无 Bandit 收益结算输出。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -5126,6 +5156,223 @@ function renderContentBanditAllocator() {
   `;
 }
 
+function banditSettlementPosts() {
+  const pools = [
+    ...(Array.isArray(dashboardData.last24h?.topPosts) ? dashboardData.last24h.topPosts : []),
+    ...(Array.isArray(dashboardData.last7d?.topPosts) ? dashboardData.last7d.topPosts : []),
+    ...(Array.isArray(fallbackData.last24h?.topPosts) ? fallbackData.last24h.topPosts : []),
+    ...(Array.isArray(fallbackData.last7d?.topPosts) ? fallbackData.last7d.topPosts : []),
+  ];
+  const seen = new Set();
+  return pools
+    .filter((post) => post?.template || post?.formatId || post?.templateId)
+    .filter((post) => {
+      const key = post.id || post.url || post.text;
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((left, right) => new Date(right.postedAt || 0) - new Date(left.postedAt || 0));
+}
+
+function derivedBanditRewardSettlement() {
+  const allocator = contentBanditAllocatorData();
+  const lanes = Array.isArray(allocator.lanes) ? allocator.lanes : [];
+  const laneById = new Map(lanes.map((lane) => [lane.id, lane]));
+  const posts = banditSettlementPosts();
+  const baseline = number((dashboardData.profile || fallbackData.profile || {}).baselineScore, number(allocator.baselineScore, 0));
+  const minSamples = Math.max(1, Math.min(2, number(allocator.sampleCount, posts.length) > 8 ? 2 : 1));
+  const byArm = new Map();
+  const ensureArm = (id, label) => {
+    const key = id || "unknown";
+    if (!byArm.has(key)) {
+      byArm.set(key, {
+        id: key,
+        label: label || laneById.get(key)?.label || formatTemplate(key),
+        samples: 0,
+        totalReward: 0,
+        recentSamples: 0,
+        recentTotalReward: 0,
+      });
+    }
+    return byArm.get(key);
+  };
+  lanes.forEach((lane) => ensureArm(lane.id, lane.label));
+  posts.forEach((post, index) => {
+    const id = post.template || post.templateId || post.formatId || "unknown";
+    const arm = ensureArm(id, formatTemplate(id));
+    const reward = number(post.score);
+    arm.samples += 1;
+    arm.totalReward += reward;
+    if (index < 10) {
+      arm.recentSamples += 1;
+      arm.recentTotalReward += reward;
+    }
+  });
+  const totalSamples = Math.max(1, [...byArm.values()].reduce((sum, arm) => sum + arm.samples, 0));
+  const bestReward = Math.max(
+    baseline,
+    ...[...byArm.values()].map((arm) => arm.samples >= minSamples ? arm.totalReward / Math.max(1, arm.samples) : 0),
+    0,
+  );
+  const arms = [...byArm.values()].map((arm) => {
+    const lane = laneById.get(arm.id) || {};
+    const avgReward = arm.totalReward / Math.max(1, arm.samples);
+    const recentAvgReward = arm.recentTotalReward / Math.max(1, arm.recentSamples);
+    const rewardIndex = bestReward > 0 ? (avgReward / bestReward) * 100 : 0;
+    const allocationPct = number(lane.allocationPct);
+    const actualSharePct = arm.samples / totalSamples * 100;
+    const baselineLiftPct = baseline > 0 && arm.samples >= minSamples ? ((avgReward - baseline) / baseline) * 100 : null;
+    const overAllocated = allocationPct > 0 && actualSharePct > allocationPct * 1.45;
+    const underAllocated = allocationPct > 0 && actualSharePct < allocationPct * 0.45;
+    const status =
+      arm.samples >= minSamples && rewardIndex >= 92
+        ? "winner"
+        : arm.samples >= minSamples && baselineLiftPct !== null && baselineLiftPct < -18
+          ? "regret"
+          : overAllocated
+            ? "over"
+            : underAllocated
+              ? "under"
+              : "collect";
+    return {
+      id: arm.id,
+      label: arm.label,
+      status,
+      samples: arm.samples,
+      recentSamples: arm.recentSamples,
+      avgReward,
+      recentAvgReward,
+      rewardIndex,
+      regret: Math.max(0, bestReward - avgReward),
+      recentRegret: Math.max(0, bestReward - recentAvgReward),
+      baselineLiftPct,
+      allocationPct,
+      actualSharePct,
+      laneStatus: lane.status || null,
+      nextAction: lane.nextAction || `Keep ${arm.label} in controlled reward settlement.`,
+    };
+  }).sort((left, right) => {
+    const priority = { winner: 4, under: 3, collect: 2, over: 1, regret: 0 };
+    return (priority[right.status] || 0) - (priority[left.status] || 0) || right.rewardIndex - left.rewardIndex;
+  });
+  const bestArm = arms.find((arm) => arm.status === "winner") || [...arms].sort((left, right) => right.rewardIndex - left.rewardIndex)[0] || null;
+  const recentSettlements = posts.slice(0, 10).map((post) => {
+    const formatId = post.template || post.templateId || post.formatId || "-";
+    const predicted = post.generationDecisionTrace?.contentBandit?.recommendedLane?.id || null;
+    const reward = number(post.score);
+    return {
+      id: post.id || null,
+      url: post.url || null,
+      formatId,
+      reward,
+      regret: Math.max(0, bestReward - reward),
+      predictedPrimary: predicted,
+      matchedPrimary: predicted ? predicted === formatId : null,
+      postedAt: post.postedAt || null,
+      text: firstPostLine(post.text),
+    };
+  });
+  const avgRecentRegret = recentSettlements.length
+    ? recentSettlements.reduce((sum, item) => sum + item.regret, 0) / recentSettlements.length
+    : 0;
+  return {
+    mode: "derived_cached_bandit_reward_settlement",
+    zeroExtraXReads: true,
+    confidence: posts.length >= 16 ? "medium" : "low",
+    sampleCount: posts.length,
+    baselineScore: baseline,
+    bestReward,
+    avgRecentRegret,
+    bestArm,
+    regretArms: arms.filter((arm) => arm.status === "regret" || arm.status === "over").slice(0, 3),
+    arms,
+    recentSettlements,
+    nextAction: bestArm ? `Settle reward toward ${bestArm.label}; keep exploration floor active.` : "-",
+  };
+}
+
+function banditRewardSettlementData() {
+  return dashboardData.contentBanditSettlement || fallbackData.contentBanditSettlement || derivedBanditRewardSettlement();
+}
+
+function renderBanditRewardSettlement() {
+  const settlement = banditRewardSettlementData();
+  const container = $("#bandit-reward-settlement");
+  if (!container) return;
+  const arms = Array.isArray(settlement.arms) ? settlement.arms : [];
+  if (!arms.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("settlement_empty"))}</p>`;
+    return;
+  }
+  const best = settlement.bestArm || arms[0] || {};
+  const recent = Array.isArray(settlement.recentSettlements) ? settlement.recentSettlements : [];
+  container.innerHTML = `
+    <div class="settlement-head">
+      <div>
+        <span>${escapeHtml(t("settlement_eyebrow"))}</span>
+        <strong>${escapeHtml(t("settlement_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("settlement_zero_reads"))}</em>
+    </div>
+    <div class="settlement-core">
+      <div class="settlement-best">
+        <span>${escapeHtml(t("settlement_best"))}</span>
+        <strong>${escapeHtml(best.label || best.id || "-")}</strong>
+        <small>${escapeHtml(settlement.nextAction || best.nextAction || "-")}</small>
+      </div>
+      <div>
+        <span>${escapeHtml(t("settlement_regret"))}</span>
+        <strong>${escapeHtml(formatNumber(settlement.avgRecentRegret, 1))}</strong>
+        <small>${escapeHtml(settlement.confidence || "-")}</small>
+      </div>
+      <div>
+        <span>${escapeHtml(t("settlement_samples"))}</span>
+        <strong>${escapeHtml(formatNumber(settlement.sampleCount))}</strong>
+        <small>${escapeHtml(settlement.mode || "-")}</small>
+      </div>
+    </div>
+    <div class="settlement-arms">
+      ${arms.slice(0, 8).map((arm) => {
+        const index = clamp(number(arm.rewardIndex), 0, 100);
+        return `
+          <article class="${escapeHtml(arm.status || "collect")}" style="--settlement-index:${index.toFixed(1)}%">
+            <div>
+              <strong>${escapeHtml(arm.label || arm.id || "-")}</strong>
+              <em>${escapeHtml(arm.status || "collect")} · ${escapeHtml(t("settlement_index"))} ${escapeHtml(formatNumber(index, 1))}</em>
+            </div>
+            <dl>
+              <div><dt>${escapeHtml(t("settlement_reward"))}</dt><dd>${escapeHtml(formatNumber(arm.avgReward, 1))}</dd></div>
+              <div><dt>${escapeHtml(t("settlement_recent"))}</dt><dd>${escapeHtml(formatNumber(arm.recentAvgReward, 1))}</dd></div>
+              <div><dt>${escapeHtml(t("settlement_regret_short"))}</dt><dd>${escapeHtml(formatNumber(arm.regret, 1))}</dd></div>
+              <div><dt>${escapeHtml(t("settlement_alloc"))}</dt><dd>${escapeHtml(formatNumber(arm.allocationPct, 1))}%</dd></div>
+              <div><dt>${escapeHtml(t("settlement_actual"))}</dt><dd>${escapeHtml(formatNumber(arm.actualSharePct, 1))}%</dd></div>
+            </dl>
+            <i></i>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="settlement-recent">
+      <div>
+        <span>${escapeHtml(t("settlement_recent_title"))}</span>
+        <strong>${escapeHtml(formatNumber(recent.length))}</strong>
+      </div>
+      ${recent.slice(0, 5).map((item) => {
+        const matched = item.matchedPrimary === null ? "-" : item.matchedPrimary ? "yes" : "no";
+        const body = `
+          <strong>${escapeHtml(formatTemplate(item.formatId))}</strong>
+          <span>${escapeHtml(t("settlement_reward"))} ${escapeHtml(formatNumber(item.reward, 1))} · ${escapeHtml(t("settlement_regret_short"))} ${escapeHtml(formatNumber(item.regret, 1))} · ${escapeHtml(t("settlement_matched"))} ${escapeHtml(matched)}</span>
+          <p>${escapeHtml(item.text || "-")}</p>
+        `;
+        return item.url
+          ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${body}</a>`
+          : `<article>${body}</article>`;
+      }).join("")}
+    </div>
+  `;
+}
+
 function angleMutationReactorData() {
   const incoming = dashboardData.angleMutationReactor || fallbackData.angleMutationReactor;
   if (incoming) return incoming;
@@ -5485,6 +5732,7 @@ function renderLearning() {
   renderLearningWriteback();
   renderHookPatternReactor();
   renderContentBanditAllocator();
+  renderBanditRewardSettlement();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
