@@ -1730,6 +1730,20 @@ const translations = {
     opportunity_fusion_directives: "Prompt directives",
     opportunity_fusion_guardrails: "Guardrails",
     opportunity_fusion_empty: "No growth opportunity scorer telemetry available.",
+    commander_eyebrow: "Next Window Commander",
+    commander_title: "Zero-read fire-control packet",
+    commander_zero_reads: "0 X read ops",
+    commander_score: "command score",
+    commander_window: "UTC window",
+    commander_angle: "angle",
+    commander_gate: "publish gate",
+    commander_route: "manual route",
+    commander_copy: "Copy command",
+    commander_open: "Open route",
+    commander_gates: "hard gates",
+    commander_lanes: "signal lanes",
+    commander_checklist: "execution checklist",
+    commander_empty: "No next-window commander telemetry available.",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -2641,6 +2655,20 @@ const translations = {
     opportunity_fusion_directives: "Prompt 指令",
     opportunity_fusion_guardrails: "护栏",
     opportunity_fusion_empty: "暂无增长机会评分遥测。",
+    commander_eyebrow: "下一窗口指挥器",
+    commander_title: "零读取火控指令包",
+    commander_zero_reads: "0 次 X 读取",
+    commander_score: "指挥评分",
+    commander_window: "UTC 窗口",
+    commander_angle: "角度",
+    commander_gate: "发布闸门",
+    commander_route: "人工路由",
+    commander_copy: "复制指令",
+    commander_open: "打开路由",
+    commander_gates: "硬闸门",
+    commander_lanes: "信号通道",
+    commander_checklist: "执行清单",
+    commander_empty: "暂无下一窗口指挥遥测。",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -8823,6 +8851,213 @@ function derivedGrowthOpportunityScorer() {
   };
 }
 
+function nextWindowCommanderData() {
+  const incoming = dashboardData.nextWindowAngleCommander || fallbackData.nextWindowAngleCommander;
+  if (incoming?.command || incoming?.activeWindow || incoming?.activeAngle) return incoming;
+  const cadence = cadenceData();
+  const timing = topicTimingRouterData();
+  const opportunity = growthOpportunityScorerData();
+  const angleRouter = angleLoadRouterData();
+  const hourly = dashboardData.hourlyLoadBalancer || fallbackData.hourlyLoadBalancer || {};
+  const dailyConsole = dailyExecutionConsoleData();
+  const activeOpportunity = opportunity.activeOpportunity || (opportunity.lanes || [])[0] || null;
+  const activeTiming = timing.activeLane || (timing.lanes || [])[0] || null;
+  const activeAngleSlot = angleRouter.activeSlot || (angleRouter.lanes || [])[0] || null;
+  const activeWindow = {
+    hour: activeTiming?.hour ?? activeOpportunity?.hour ?? activeAngleSlot?.hour ?? hourly.nextWindow?.hour ?? hourly.currentHour?.hour ?? null,
+    windowLabel:
+      activeTiming?.windowLabel ||
+      activeOpportunity?.windowLabel ||
+      activeAngleSlot?.windowLabel ||
+      hourly.nextWindow?.windowLabel ||
+      hourly.nextWindow?.label ||
+      hourly.currentHour?.label ||
+      "-",
+    hoursFromNow: number(activeTiming?.hoursFromNow ?? activeOpportunity?.hoursFromNow ?? activeAngleSlot?.hoursFromNow ?? hourly.nextWindow?.hoursFromNow, 0),
+    loadScore: number(activeTiming?.loadScore ?? activeAngleSlot?.loadScore ?? hourly.nextWindow?.loadScore ?? hourly.currentHour?.loadScore, 0),
+  };
+  const activeAngle = {
+    formatId: activeOpportunity?.formatId || activeTiming?.formatId || activeAngleSlot?.formatId || "decision_rule",
+    formatLabel: activeOpportunity?.formatLabel || activeTiming?.formatLabel || activeAngleSlot?.label || activeAngleSlot?.formatId || "decision rule",
+    pillarId: activeOpportunity?.pillarId || activeTiming?.pillarId || null,
+    pillarLabel: activeOpportunity?.pillarLabel || activeTiming?.pillarLabel || "Tech Signals",
+    opportunityScore: number(opportunity.opportunityScore, number(activeOpportunity?.score)),
+    timingScore: number(timing.routerScore, number(activeTiming?.score)),
+  };
+  const publishGate = cadence.willBlockPublish
+    ? "blocked"
+    : cadence.publishAllowed
+      ? "open"
+      : "manual_route_only";
+  const commanderScore = clamp(
+    activeAngle.opportunityScore * 0.48 +
+      activeAngle.timingScore * 0.3 +
+      activeWindow.loadScore * 0.18 +
+      (publishGate === "open" ? 8 : publishGate === "blocked" ? -12 : 2),
+    0,
+    100,
+  );
+  const command = publishGate === "open"
+    ? `Publish one ${activeAngle.formatLabel} packet around ${activeWindow.windowLabel} UTC; lead with ${activeAngle.pillarLabel}.`
+    : `Hold standalone publish; run one manual route op and keep ${activeAngle.formatLabel} warm for ${activeWindow.windowLabel} UTC.`;
+  const routeUrl =
+    dailyConsole.routeUrl ||
+    (dailyConsole.routes || [])[0]?.routeUrl ||
+    (dailyConsole.rows || [])[0]?.routeUrl ||
+    (dashboardData.searchLinks || [])[0]?.url ||
+    "#today";
+  const lanes = [
+    activeOpportunity
+      ? {
+          id: "opportunity",
+          label: activeOpportunity.label || "Opportunity lane",
+          score: number(activeOpportunity.score, activeAngle.opportunityScore),
+          status: activeOpportunity.status || "watch",
+          source: (activeOpportunity.sources || []).join(" + ") || "opportunity",
+          detail: (activeOpportunity.evidence || [])[0] || (activeOpportunity.promptDirectives || [])[0] || opportunity.primaryCommand || "-",
+        }
+      : null,
+    activeTiming
+      ? {
+          id: "timing",
+          label: `${activeTiming.windowLabel || "-"} UTC / ${activeTiming.pillarLabel || activeTiming.pillarId || "-"} / ${activeTiming.formatLabel || activeTiming.formatId || "-"}`,
+          score: number(activeTiming.score, activeAngle.timingScore),
+          status: activeTiming.status || "watch",
+          source: "topic_timing",
+          detail: activeTiming.reason || activeTiming.directive || timing.nextAction || "-",
+        }
+      : null,
+    activeAngleSlot
+      ? {
+          id: "angle_load",
+          label: `${activeAngleSlot.windowLabel || "-"} UTC / ${activeAngleSlot.label || activeAngleSlot.formatId || "-"}`,
+          score: number(activeAngleSlot.score),
+          status: activeAngleSlot.status || "probe",
+          source: "angle_load",
+          detail: activeAngleSlot.reason || angleRouter.activeCommand || "-",
+        }
+      : null,
+  ].filter(Boolean);
+  const promptBias = [
+    `Format=${activeAngle.formatId}`,
+    `Pillar=${activeAngle.pillarLabel}`,
+    `Window=${activeWindow.windowLabel} UTC`,
+    "First line must carry a rule, cost, prediction, or sharp question.",
+    "No headline recap.",
+  ];
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: "derived_zero_read_next_window_commander",
+    severity: publishGate === "blocked" ? "danger" : commanderScore >= 72 && publishGate === "open" ? "ok" : commanderScore >= 48 ? "warn" : "danger",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    commanderScore,
+    publishGate,
+    readGate: "cached_only",
+    activeWindow,
+    activeAngle,
+    command,
+    promptBias,
+    routeUrl,
+    gates: [
+      { id: "x_read_partition", label: "X read partition", status: "ok", value: "0 ops", detail: "Cached dashboard telemetry only." },
+      { id: "cadence", label: "Cadence", status: publishGate === "open" ? "ok" : publishGate === "blocked" ? "danger" : "warn", value: publishGate, detail: cadence.reason || cadence.nextAction || "-" },
+      { id: "manual_review", label: "Human loop", status: "ok", value: "armed", detail: "Manual paste route, no auto-reply." },
+    ],
+    lanes,
+    checklist: [
+      publishGate === "open" ? `Post near ${activeWindow.windowLabel} UTC.` : "Use manual route before another standalone post.",
+      `Bias the hook toward ${activeAngle.formatLabel} / ${activeAngle.pillarLabel}.`,
+      "Copy one reply into a relevant high-signal thread.",
+      "Let the next metrics refresh update the command.",
+    ],
+    copyBlock: [
+      "NEXT WINDOW COMMANDER",
+      `Score: ${formatNumber(commanderScore, 1)} / Gate: ${publishGate} / X reads: 0`,
+      `Window: ${activeWindow.windowLabel} UTC`,
+      `Angle: ${activeAngle.formatLabel} / ${activeAngle.pillarLabel}`,
+      `Command: ${command}`,
+      ...promptBias.map((item) => `- ${item}`),
+    ].join("\n"),
+  };
+}
+
+function renderNextWindowCommander() {
+  const container = $("#next-window-commander");
+  if (!container) return;
+  const commander = nextWindowCommanderData();
+  if (!commander?.command) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("commander_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(commander.commanderScore), 0, 100);
+  const window = commander.activeWindow || {};
+  const angle = commander.activeAngle || {};
+  const gates = Array.isArray(commander.gates) ? commander.gates : [];
+  const lanes = Array.isArray(commander.lanes) ? commander.lanes : [];
+  const checklist = Array.isArray(commander.checklist) ? commander.checklist : [];
+  container.innerHTML = `
+    <div class="commander-head">
+      <div>
+        <span>${escapeHtml(t("commander_eyebrow"))}</span>
+        <strong>${escapeHtml(t("commander_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("commander_zero_reads"))}</em>
+    </div>
+    <div class="commander-core ${escapeHtml(commander.severity || "warn")}">
+      <div class="commander-score" style="--commander-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("commander_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="commander-command">
+        <span>${escapeHtml(t("commander_gate"))}: ${escapeHtml(commander.publishGate || "-")}</span>
+        <strong>${escapeHtml(commander.command)}</strong>
+        <small>${escapeHtml(t("commander_window"))}: ${escapeHtml(window.windowLabel || "-")} UTC · ${escapeHtml(t("commander_angle"))}: ${escapeHtml(angle.formatLabel || angle.formatId || "-")} / ${escapeHtml(angle.pillarLabel || angle.pillarId || "-")}</small>
+      </div>
+      <div class="commander-actions">
+        ${commander.routeUrl ? `<a class="button button-primary" href="${escapeHtml(commander.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("commander_open"))}</a>` : ""}
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(commander.copyBlock || commander.command)}">${escapeHtml(t("commander_copy"))}</button>
+      </div>
+    </div>
+    <div class="commander-grid">
+      <section>
+        <div class="commander-section-title"><span>${escapeHtml(t("commander_gates"))}</span><strong>${escapeHtml(commander.readGate || "cached_only")}</strong></div>
+        <div class="commander-gates">
+          ${gates.slice(0, 4).map((gate) => `
+            <article class="${escapeHtml(gate.status || "warn")}">
+              <span>${escapeHtml(gate.label || gate.id || "-")}</span>
+              <strong>${escapeHtml(gate.value || gate.status || "-")}</strong>
+              <p>${escapeHtml(gate.detail || "-")}</p>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+      <section>
+        <div class="commander-section-title"><span>${escapeHtml(t("commander_lanes"))}</span><strong>${escapeHtml(formatNumber(lanes.length))}</strong></div>
+        <div class="commander-lanes">
+          ${lanes.slice(0, 3).map((lane, index) => `
+            <article style="--lane-score:${clamp(number(lane.score), 0, 100).toFixed(1)}%">
+              <b>${escapeHtml(String(index + 1).padStart(2, "0"))}</b>
+              <div>
+                <strong>${escapeHtml(lane.label || "-")}</strong>
+                <span>${escapeHtml(lane.source || "-")} · ${escapeHtml(lane.status || "-")} · ${escapeHtml(formatNumber(lane.score, 1))}</span>
+                <p>${escapeHtml(lane.detail || "-")}</p>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+      <section>
+        <div class="commander-section-title"><span>${escapeHtml(t("commander_checklist"))}</span><strong>${escapeHtml(commander.mode || "-")}</strong></div>
+        <ol class="commander-checklist">
+          ${checklist.slice(0, 4).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ol>
+      </section>
+    </div>
+  `;
+}
+
 function renderGrowthOpportunityScorer() {
   const scorer = growthOpportunityScorerData();
   const container = $("#growth-opportunity-scorer");
@@ -8987,6 +9222,7 @@ function renderLearning() {
   renderNarrativeResonance();
   renderTopicTimingRouter();
   renderGrowthOpportunityScorer();
+  renderNextWindowCommander();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();

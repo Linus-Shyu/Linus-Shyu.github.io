@@ -14092,6 +14092,297 @@ body:not(.demo-mode) .demo-strip {
   white-space: nowrap;
 }
 
+.next-window-commander {
+  display: grid;
+  gap: 9px;
+  border: 1px solid color-mix(in srgb, #00f0ff 34%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 14%, transparent), transparent 32%),
+    radial-gradient(circle at 100% 14%, color-mix(in srgb, #00ff66 10%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 18px color-mix(in srgb, #00f0ff 11%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 54%, transparent);
+}
+
+.commander-head,
+.commander-core,
+.commander-section-title,
+.commander-lanes article,
+.commander-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.commander-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.commander-head span,
+.commander-score span,
+.commander-command span,
+.commander-section-title span,
+.commander-gates span,
+.commander-lanes span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.commander-head strong,
+.commander-command strong,
+.commander-section-title strong,
+.commander-gates strong,
+.commander-lanes strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+}
+
+.commander-head strong {
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.commander-head em {
+  border: 1px solid color-mix(in srgb, #00f0ff 52%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00f0ff;
+  background: color-mix(in srgb, #00f0ff 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.commander-core {
+  grid-template-columns: 0.5fr minmax(0, 1.4fr) auto;
+  align-items: stretch;
+}
+
+.commander-score,
+.commander-command,
+.commander-actions,
+.commander-grid section,
+.commander-gates article,
+.commander-lanes article {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.commander-score,
+.commander-command,
+.commander-actions {
+  padding: 8px;
+}
+
+.commander-score strong {
+  display: block;
+  margin-top: 4px;
+  color: #00f0ff;
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1;
+  text-shadow: 0 0 16px color-mix(in srgb, #00f0ff 30%, transparent);
+}
+
+.commander-score div {
+  height: 6px;
+  overflow: hidden;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line-soft) 82%, transparent);
+}
+
+.commander-score i {
+  display: block;
+  width: var(--commander-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 14px color-mix(in srgb, #00f0ff 32%, transparent);
+}
+
+.commander-command {
+  align-content: start;
+}
+
+.commander-command strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.24;
+  white-space: normal;
+}
+
+.commander-command small {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.commander-actions {
+  align-content: center;
+  min-width: 138px;
+}
+
+.commander-actions .button {
+  width: 100%;
+  min-height: 34px;
+  font-size: 11px;
+}
+
+.commander-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.25fr 0.9fr;
+  gap: 8px;
+}
+
+.commander-grid section {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+}
+
+.commander-section-title {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.commander-section-title strong {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.commander-gates,
+.commander-lanes,
+.commander-checklist {
+  display: grid;
+  gap: 7px;
+}
+
+.commander-gates article {
+  padding: 7px;
+}
+
+.commander-gates strong {
+  margin-top: 4px;
+  color: #00ff66;
+  font-size: 12px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.commander-gates article.warn strong {
+  color: #ff9f1c;
+}
+
+.commander-gates article.danger strong {
+  color: #ff007a;
+}
+
+.commander-gates p,
+.commander-lanes p,
+.commander-checklist li {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.28;
+}
+
+.commander-lanes article {
+  position: relative;
+  grid-template-columns: 30px minmax(0, 1fr);
+  padding: 7px;
+  overflow: hidden;
+}
+
+.commander-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, #00f0ff var(--lane-score), #ff9f1c);
+  box-shadow: 0 0 14px color-mix(in srgb, #00f0ff 26%, transparent);
+}
+
+.commander-lanes b {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #00f0ff 40%, var(--line-soft));
+  border-radius: 6px;
+  color: #00f0ff;
+  background: color-mix(in srgb, #00f0ff 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.commander-lanes strong {
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.commander-checklist {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.commander-checklist li {
+  margin-top: 0;
+  padding-left: 2px;
+}
+
+@media (max-width: 1180px) {
+  .commander-core,
+  .commander-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .commander-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .growth-opportunity-scorer {
   display: grid;
   gap: 9px;
