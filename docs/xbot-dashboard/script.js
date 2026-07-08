@@ -1343,6 +1343,17 @@ const translations = {
     mutation_guardrails: "Guardrails",
     mutation_copy_patch: "Copy patch",
     mutation_empty: "No angle mutation reactor output available.",
+    hook_eyebrow: "Hook Pattern Reactor",
+    hook_title: "First-line fire-control",
+    hook_zero_reads: "0 X read ops",
+    hook_recommended: "Recommended hook",
+    hook_score: "Hook score",
+    hook_samples: "n={count}",
+    hook_avoid: "Avoid",
+    hook_lift: "lift {lift}%",
+    hook_prompt_patch: "Prompt patch",
+    hook_copy_patch: "Copy patch",
+    hook_empty: "No hook pattern reactor output available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -1941,6 +1952,17 @@ const translations = {
     mutation_guardrails: "护栏",
     mutation_copy_patch: "复制补丁",
     mutation_empty: "暂无角度变异反应堆输出。",
+    hook_eyebrow: "Hook 模式反应堆",
+    hook_title: "首句火控",
+    hook_zero_reads: "0 次 X 读取",
+    hook_recommended: "推荐开头",
+    hook_score: "Hook 评分",
+    hook_samples: "样本 {count}",
+    hook_avoid: "避免",
+    hook_lift: "增益 {lift}%",
+    hook_prompt_patch: "Prompt 补丁",
+    hook_copy_patch: "复制补丁",
+    hook_empty: "暂无 Hook 模式反应堆输出。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -4739,6 +4761,211 @@ function renderLearningWriteback() {
   `;
 }
 
+function hookPatternDefinitions() {
+  return [
+    {
+      id: "decision_rule",
+      label: "Decision Rule",
+      detector: /\b(if|when|rule|playbook|checklist|should|must|default|standard|decision)\b|判断标准|如果|当.*就|先看|该做|别急/i,
+      directive: "Open with a rule the reader can apply today.",
+      nextHook: "If the default changes, the winner is the team that owns the new route.",
+    },
+    {
+      id: "contrast_reframe",
+      label: "Contrast Reframe",
+      detector: /not .+ but |isn['’]?t .+ it['’]?s |instead of|不是.+而是|与其.+不如|真正的/i,
+      directive: "Start with a clean not-X-but-Y reframe.",
+      nextHook: "The story is not the launch. The story is who loses distribution when this becomes default.",
+    },
+    {
+      id: "operator_pain",
+      label: "Operator Pain",
+      detector: /\b(teams?|developers?|operators?|engineers?|platform teams?|workflow|rollback|permissions?|evals?|logs?|incident|migration)\b|团队|开发者|工程师|迁移|权限|回滚|工作流/i,
+      directive: "Translate the news into a workflow tax.",
+      nextHook: "Every model jump creates a second job: prompts, evals, permissions, rollback.",
+    },
+    {
+      id: "cost_tradeoff",
+      label: "Cost Tradeoff",
+      detector: /\b(hidden cost|cost|budget|tradeoff|risk|margin|pricing|lock-?in|churn|tax|support burden)\b|成本|代价|预算|风险|锁定|取舍/i,
+      directive: "Lead with the hidden cost or margin transfer.",
+      nextHook: "The hidden cost is not the subscription. It is the migration work before the gain appears.",
+    },
+    {
+      id: "prediction",
+      label: "Near-Term Prediction",
+      detector: /\b(will|next|becomes|turns into|default|standard|within|2026|2027|months?)\b|接下来|未来|会变成|默认|标配|半年|一年/i,
+      directive: "Make a concrete near-term prediction.",
+      nextHook: "This moves from feature to default, then everyone else pays the distribution tax.",
+    },
+    {
+      id: "weak_recap",
+      label: "Weak News Recap",
+      hold: true,
+      detector: /^(today|according to|breaking|news|reportedly|new:|近日|据报道|消息|新闻)\b|值得关注|不容错过|重磅|exciting news/i,
+      directive: "Do not recap the headline.",
+      nextHook: "Skip the recap. Start with the consequence.",
+    },
+  ];
+}
+
+function firstPostLine(text) {
+  return String(text || "")
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .find((line) => line && !/^#[\p{L}\p{N}_]+/u.test(line)) || "";
+}
+
+function classifyDashboardHook(text) {
+  const firstLine = firstPostLine(text);
+  const haystack = `${firstLine} ${String(text || "")}`.trim();
+  const matches = hookPatternDefinitions().filter((definition) => definition.detector.test(haystack));
+  const weak = matches.find((definition) => definition.hold && definition.detector.test(firstLine));
+  const selected = weak || matches.find((definition) => !definition.hold) || hookPatternDefinitions()[0];
+  return {
+    primaryId: selected.id,
+    primaryLabel: selected.label,
+    patternIds: matches.length ? [...new Set(matches.map((definition) => definition.id))] : [selected.id],
+    firstLine,
+  };
+}
+
+function derivedHookPatternReactor() {
+  const posts = [
+    ...((dashboardData.last7d || fallbackData.last7d || {}).topPosts || []),
+    ...((dashboardData.last24h || fallbackData.last24h || {}).topPosts || []),
+  ].filter((post, index, rows) => post?.text && rows.findIndex((item) => item.id === post.id) === index);
+  const baseline = number((dashboardData.profile || fallbackData.profile || {}).baselineScore, 0);
+  const definitions = hookPatternDefinitions();
+  const buckets = Object.fromEntries(definitions.map((definition) => [definition.id, { count: 0, total: 0, examples: [] }]));
+  for (const post of posts) {
+    const hook = classifyDashboardHook(post.text);
+    const score = number(post.score, baseline);
+    for (const id of hook.patternIds) {
+      const bucket = buckets[id];
+      if (!bucket) continue;
+      bucket.count += 1;
+      bucket.total += score;
+      bucket.examples.push({ text: hook.firstLine, score, url: post.url || "" });
+    }
+  }
+  const patterns = definitions.map((definition) => {
+    const bucket = buckets[definition.id] || { count: 0, total: 0, examples: [] };
+    const avgScore = bucket.count ? bucket.total / bucket.count : 0;
+    const liftPct = baseline > 0 && bucket.count >= 2 ? ((avgScore - baseline) / baseline) * 100 : null;
+    const status = definition.hold ? "hold" : bucket.count >= 2 && liftPct > 12 ? "exploit" : bucket.count >= 2 && liftPct < -16 ? "hold" : "probe";
+    return {
+      id: definition.id,
+      label: definition.label,
+      status,
+      score: Math.max(0, avgScore || baseline || 1),
+      avgScore,
+      samples: bucket.count,
+      liftPct,
+      directive: definition.directive,
+      nextHook: definition.nextHook,
+      examples: bucket.examples.sort((left, right) => right.score - left.score).slice(0, 2),
+    };
+  }).sort((left, right) => {
+    const priority = { exploit: 3, probe: 2, hold: 0 };
+    return (priority[right.status] || 0) - (priority[left.status] || 0) || right.score - left.score;
+  });
+  const recommendedPattern = patterns.find((pattern) => pattern.status !== "hold") || patterns[0] || null;
+  const avoidPatterns = patterns.filter((pattern) => pattern.status === "hold" || pattern.id === "weak_recap").slice(0, 3);
+  const promptPatch = recommendedPattern
+    ? `First line hook pattern: ${recommendedPattern.label}. ${recommendedPattern.directive} Example shape: ${recommendedPattern.nextHook}`
+    : "First line hook pattern: Decision Rule.";
+  return {
+    mode: "derived_hook_pattern_reactor",
+    confidence: posts.length >= 8 ? "medium" : "low",
+    zeroExtraXReads: true,
+    sampleCount: posts.length,
+    baselineScore: baseline,
+    recommendedPattern,
+    avoidPatterns,
+    patterns,
+    promptPatch,
+    nextAction: recommendedPattern ? `Apply ${recommendedPattern.label}: ${recommendedPattern.directive}` : "-",
+    guardrails: ["No headline recap.", "First line creates a rule, cost, or reframe.", "0 X read ops."],
+  };
+}
+
+function hookPatternReactorData() {
+  return dashboardData.hookPatternReactor || fallbackData.hookPatternReactor || derivedHookPatternReactor();
+}
+
+function renderHookPatternReactor() {
+  const reactor = hookPatternReactorData();
+  const container = $("#hook-pattern-reactor");
+  if (!container) return;
+  const patterns = Array.isArray(reactor.patterns) ? reactor.patterns : [];
+  if (!patterns.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("hook_empty"))}</p>`;
+    return;
+  }
+  const recommended = reactor.recommendedPattern || patterns.find((pattern) => pattern.status !== "hold") || patterns[0] || {};
+  const avoid = Array.isArray(reactor.avoidPatterns) ? reactor.avoidPatterns : patterns.filter((pattern) => pattern.status === "hold");
+  const promptPatch = reactor.promptPatch || recommended.nextHook || "";
+  container.innerHTML = `
+    <div class="hook-head">
+      <div>
+        <span>${escapeHtml(t("hook_eyebrow"))}</span>
+        <strong>${escapeHtml(t("hook_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("hook_zero_reads"))}</em>
+    </div>
+    <div class="hook-core">
+      <div class="hook-prime">
+        <span>${escapeHtml(t("hook_recommended"))}</span>
+        <strong>${escapeHtml(recommended.label || recommended.id || "-")}</strong>
+        <small>${escapeHtml(recommended.directive || reactor.nextAction || "-")}</small>
+      </div>
+      <div class="hook-score">
+        <span>${escapeHtml(t("hook_score"))}</span>
+        <strong>${escapeHtml(formatNumber(recommended.avgScore || recommended.score, 1))}</strong>
+        <small>${escapeHtml(t("hook_samples", { count: formatNumber(recommended.samples) }))}</small>
+      </div>
+      <div class="hook-avoid">
+        <span>${escapeHtml(t("hook_avoid"))}</span>
+        <strong>${escapeHtml(avoid.map((pattern) => pattern.label || pattern.id).join(" / ") || "-")}</strong>
+        <small>${escapeHtml(reactor.confidence || "-")}</small>
+      </div>
+    </div>
+    <div class="hook-patterns">
+      ${patterns.slice(0, 6).map((pattern) => {
+        const score = clamp(number(pattern.avgScore || pattern.score), 0, Math.max(20, number(reactor.baselineScore, 10) * 2));
+        const baseline = Math.max(1, number(reactor.baselineScore, 10) * 2);
+        const width = clamp((score / baseline) * 100, 4, 100);
+        return `
+          <article class="${escapeHtml(pattern.status || "probe")}" style="--hook-score:${width.toFixed(1)}%">
+            <div>
+              <strong>${escapeHtml(pattern.label || pattern.id || "-")}</strong>
+              <em>${escapeHtml(pattern.status || "probe")} · ${escapeHtml(t("hook_samples", { count: formatNumber(pattern.samples) }))}</em>
+            </div>
+            <span>${escapeHtml(pattern.liftPct == null ? "-" : t("hook_lift", { lift: formatNumber(pattern.liftPct, 1) }))}</span>
+            <i></i>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="hook-patch">
+      <div>
+        <span>${escapeHtml(t("hook_prompt_patch"))}</span>
+        <button type="button" data-copy="${encodeURIComponent(promptPatch)}">${escapeHtml(t("hook_copy_patch"))}</button>
+      </div>
+      <pre><code>${escapeHtml(promptPatch)}</code></pre>
+    </div>
+    <div class="hook-examples">
+      ${(recommended.examples || []).slice(0, 2).map((example) => `
+        <blockquote>
+          <p>${escapeHtml(example.text || "-")}</p>
+          <cite>${escapeHtml(t("hook_score"))} ${escapeHtml(formatNumber(example.score, 1))}</cite>
+        </blockquote>
+      `).join("")}
+    </div>
+  `;
+}
+
 function angleMutationReactorData() {
   const incoming = dashboardData.angleMutationReactor || fallbackData.angleMutationReactor;
   if (incoming) return incoming;
@@ -5096,6 +5323,7 @@ function renderLearning() {
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
   renderLearningWriteback();
+  renderHookPatternReactor();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();

@@ -8562,6 +8562,298 @@ body:not(.demo-mode) .demo-strip {
   white-space: nowrap;
 }
 
+.hook-pattern-reactor {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00f0ff 28%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 92% 0, color-mix(in srgb, #00f0ff 12%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #00ff66 6%, transparent), transparent 58%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 22px color-mix(in srgb, #00f0ff 9%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.hook-head,
+.hook-core,
+.hook-patterns,
+.hook-patch,
+.hook-examples {
+  display: grid;
+  gap: 8px;
+}
+
+.hook-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.hook-head span,
+.hook-prime span,
+.hook-score span,
+.hook-avoid span,
+.hook-patch span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hook-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hook-head em {
+  border: 1px solid color-mix(in srgb, #00f0ff 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00b8d4;
+  background: color-mix(in srgb, #00f0ff 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .hook-head em {
+  color: #99fbff;
+}
+
+.hook-core {
+  grid-template-columns: 1.35fr 0.65fr 1fr;
+}
+
+.hook-prime,
+.hook-score,
+.hook-avoid,
+.hook-patterns article,
+.hook-patch,
+.hook-examples blockquote {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.hook-prime,
+.hook-score,
+.hook-avoid {
+  padding: 9px;
+}
+
+.hook-prime strong,
+.hook-score strong,
+.hook-avoid strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.22;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hook-score strong {
+  color: #00b8d4;
+  font-size: 28px;
+  line-height: 1;
+}
+
+:root[data-theme="dark"] .hook-score strong {
+  color: #00f0ff;
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.2);
+}
+
+.hook-prime small,
+.hook-score small,
+.hook-avoid small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.hook-patterns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hook-patterns article {
+  position: relative;
+  overflow: hidden;
+  padding: 8px 9px 12px;
+}
+
+.hook-patterns article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  opacity: 0.76;
+}
+
+.hook-patterns article.exploit::before {
+  background: #00ff66;
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.28);
+}
+
+.hook-patterns article.hold::before {
+  background: var(--danger);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--danger) 36%, transparent);
+}
+
+.hook-patterns article > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hook-patterns strong,
+.hook-patterns em,
+.hook-patterns span {
+  overflow: hidden;
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hook-patterns strong {
+  color: var(--ink);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.hook-patterns em,
+.hook-patterns span {
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 780;
+}
+
+.hook-patterns i {
+  position: absolute;
+  right: 9px;
+  bottom: 6px;
+  left: 9px;
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.hook-patterns i::before {
+  content: "";
+  display: block;
+  width: var(--hook-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.24);
+}
+
+.hook-patch {
+  padding: 9px;
+}
+
+.hook-patch > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.hook-patch button {
+  border: 1px solid color-mix(in srgb, #00f0ff 36%, var(--line-soft));
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: #008fa3;
+  background: color-mix(in srgb, #00f0ff 9%, var(--surface));
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+:root[data-theme="dark"] .hook-patch button {
+  color: #b8fdff;
+}
+
+.hook-patch pre {
+  max-height: 112px;
+  margin: 8px 0 0;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.hook-patch code {
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.hook-examples {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hook-examples blockquote {
+  margin: 0;
+  padding: 9px;
+}
+
+.hook-examples p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.hook-examples cite {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 780;
+}
+
 .angle-mutation-reactor {
   display: grid;
   gap: 10px;
@@ -8900,6 +9192,9 @@ body:not(.demo-mode) .demo-strip {
 }
 
 @media (max-width: 1080px) {
+  .hook-core,
+  .hook-patterns,
+  .hook-examples,
   .mutation-core,
   .mutation-cells,
   .mutation-ledger article,
@@ -9126,6 +9421,10 @@ body:not(.demo-mode) .demo-strip {
   .angle-head,
   .angle-metrics,
   .angle-slots,
+  .hook-head,
+  .hook-core,
+  .hook-patterns,
+  .hook-examples,
   .writeback-head,
   .writeback-meta,
   .writeback-cells,
