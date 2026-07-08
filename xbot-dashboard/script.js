@@ -1682,6 +1682,24 @@ const translations = {
     angle_router_directive: "command packet",
     angle_router_empty: "No angle load router telemetry available.",
     angle_router_mode_cached_angle_load_router: "cached angle router",
+    opportunity_fusion_eyebrow: "Opportunity Fusion Reactor",
+    opportunity_fusion_title: "Next-best growth fire-control",
+    opportunity_fusion_zero_reads: "0 X read ops",
+    opportunity_fusion_score: "opportunity score",
+    opportunity_fusion_active: "active opportunity",
+    opportunity_fusion_command: "primary command",
+    opportunity_fusion_lanes: "fusion lanes",
+    opportunity_fusion_sources: "sources",
+    opportunity_fusion_format: "format",
+    opportunity_fusion_pillar: "pillar",
+    opportunity_fusion_window: "UTC",
+    opportunity_fusion_samples: "n",
+    opportunity_fusion_confidence: "confidence",
+    opportunity_fusion_read_gate: "read gate",
+    opportunity_fusion_publish_gate: "publish gate",
+    opportunity_fusion_directives: "Prompt directives",
+    opportunity_fusion_guardrails: "Guardrails",
+    opportunity_fusion_empty: "No growth opportunity scorer telemetry available.",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -2545,6 +2563,24 @@ const translations = {
     angle_router_directive: "指令包",
     angle_router_empty: "暂无角度负载路由遥测。",
     angle_router_mode_cached_angle_load_router: "缓存角度路由",
+    opportunity_fusion_eyebrow: "机会融合反应堆",
+    opportunity_fusion_title: "下一最佳增长火控",
+    opportunity_fusion_zero_reads: "0 次 X 读取",
+    opportunity_fusion_score: "机会评分",
+    opportunity_fusion_active: "活动机会",
+    opportunity_fusion_command: "主指令",
+    opportunity_fusion_lanes: "融合通道",
+    opportunity_fusion_sources: "来源",
+    opportunity_fusion_format: "格式",
+    opportunity_fusion_pillar: "叙事",
+    opportunity_fusion_window: "UTC",
+    opportunity_fusion_samples: "样本",
+    opportunity_fusion_confidence: "置信度",
+    opportunity_fusion_read_gate: "读取闸门",
+    opportunity_fusion_publish_gate: "发布闸门",
+    opportunity_fusion_directives: "Prompt 指令",
+    opportunity_fusion_guardrails: "护栏",
+    opportunity_fusion_empty: "暂无增长机会评分遥测。",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -8239,6 +8275,347 @@ function renderAngleLoadRouter() {
   `;
 }
 
+function growthOpportunityScorerData() {
+  const incoming = dashboardData.growthOpportunityScorer || fallbackData.growthOpportunityScorer;
+  if (incoming?.lanes?.length) return incoming;
+  return derivedGrowthOpportunityScorer();
+}
+
+function derivedGrowthOpportunityScorer() {
+  const timing = topicTimingRouterData();
+  const bandit = contentBanditAllocatorData();
+  const angleRouter = angleLoadRouterData();
+  const narrative = narrativeResonanceData();
+  const scheduler = angleSchedulerData();
+  const hourly = hourlyLoadData();
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const buckets = new Map();
+  const addLane = ({
+    source,
+    weight = 1,
+    score = 0,
+    status = "watch",
+    formatId = null,
+    formatLabel = null,
+    pillarId = null,
+    pillarLabel = null,
+    hour = null,
+    windowLabel = null,
+    action = "route",
+    reason = "",
+    directive = "",
+    samples = 0,
+    active = false,
+  } = {}) => {
+    if (!source) return;
+    const key = `${hour == null ? "any" : hour}:${pillarId || "any"}:${formatId || "any"}`;
+    const lane = buckets.get(key) || {
+      id: key,
+      formatId,
+      formatLabel,
+      pillarId,
+      pillarLabel,
+      hour,
+      windowLabel,
+      action,
+      status,
+      sources: [],
+      evidence: [],
+      promptDirectives: [],
+      weightedScore: 0,
+      totalWeight: 0,
+      samples: 0,
+      activeSignals: 0,
+    };
+    lane.formatId ||= formatId;
+    lane.formatLabel ||= formatLabel || (formatId ? formatTemplate(formatId) : null);
+    lane.pillarId ||= pillarId;
+    lane.pillarLabel ||= pillarLabel || pillarId;
+    lane.hour ??= hour;
+    lane.windowLabel ||= windowLabel || (Number.isFinite(number(hour, NaN)) ? `${String(number(hour)).padStart(2, "0")}:00` : null);
+    lane.action ||= action;
+    lane.status = ["hot", "exploit"].includes(lane.status) ? lane.status : status || lane.status;
+    lane.weightedScore += clamp(number(score), 0, 100) * Math.max(0.1, number(weight, 1));
+    lane.totalWeight += Math.max(0.1, number(weight, 1));
+    lane.samples += number(samples);
+    if (active) lane.activeSignals += 1;
+    if (!lane.sources.includes(source)) lane.sources.push(source);
+    if (reason) lane.evidence.push(reason);
+    if (directive) lane.promptDirectives.push(directive);
+    buckets.set(key, lane);
+  };
+
+  (timing.lanes || []).slice(0, 8).forEach((lane) => {
+    addLane({
+      source: "topic_timing",
+      weight: lane === timing.activeLane ? 1.55 : 1.2,
+      score: number(lane.score) * 0.82 + number(timing.routerScore) * 0.18,
+      status: lane.status || "watch",
+      formatId: lane.formatId,
+      formatLabel: lane.formatLabel,
+      pillarId: lane.pillarId,
+      pillarLabel: lane.pillarLabel,
+      hour: lane.hour,
+      windowLabel: lane.windowLabel,
+      action: lane.status === "hot" ? "exploit" : "route",
+      reason: lane.reason || lane.directive || "",
+      directive: lane.directive || "",
+      samples: lane.samples,
+      active: lane === timing.activeLane,
+    });
+  });
+
+  (bandit.lanes || []).slice(0, 8).forEach((lane) => {
+    const statusBoost = lane.status === "exploit" ? 20 : lane.status === "explore" ? 11 : lane.status === "hold" ? -18 : 5;
+    addLane({
+      source: "content_bandit",
+      weight: lane === bandit.recommendedLane ? 1.25 : 0.85,
+      score: Math.min(100, number(lane.allocationPct) * 0.45 + number(lane.avgScore) * 7 + statusBoost),
+      status: lane.status || "test",
+      formatId: lane.id,
+      formatLabel: lane.label,
+      action: lane.status === "exploit" ? "exploit" : lane.status === "hold" ? "hold" : "rotate",
+      reason: lane.reason || lane.nextAction || "",
+      directive: lane.nextAction || "",
+      samples: lane.samples,
+      active: lane === bandit.recommendedLane,
+    });
+  });
+
+  if (angleRouter.activeSlot) {
+    const slot = angleRouter.activeSlot;
+    addLane({
+      source: "angle_load",
+      weight: 1.2,
+      score: number(slot.score) * 0.74 + number(slot.loadScore) * 0.26,
+      status: slot.status || "watch",
+      formatId: slot.formatId,
+      formatLabel: slot.label,
+      hour: slot.hour,
+      windowLabel: slot.windowLabel,
+      action: slot.action || "route",
+      reason: slot.reason || angleRouter.activeCommand || "",
+      directive: angleRouter.activeCommand || "",
+      active: true,
+    });
+  }
+  (angleRouter.lanes || []).slice(0, 6).forEach((lane) => {
+    addLane({
+      source: "angle_load",
+      weight: 0.75,
+      score: number(lane.score) * 0.7 + number(lane.loadScore) * 0.3,
+      status: lane.status || "probe",
+      formatId: lane.formatId || lane.id,
+      formatLabel: lane.label,
+      hour: lane.hour,
+      windowLabel: lane.windowLabel,
+      action: lane.action || "route",
+      reason: lane.reason || "",
+      directive: lane.angle || "",
+      samples: lane.samples,
+    });
+  });
+
+  (narrative.pillars || []).slice(0, 6).forEach((pillar) => {
+    addLane({
+      source: "narrative_resonance",
+      weight: pillar === narrative.primaryPillar ? 1.05 : 0.7,
+      score: number(pillar.score),
+      status: pillar.status || "watch",
+      pillarId: pillar.id,
+      pillarLabel: pillar.label,
+      action: pillar.status === "exploit" ? "exploit" : "route",
+      reason: pillar.reason || pillar.directive || "",
+      directive: pillar.directive || "",
+      samples: pillar.samples,
+      active: pillar === narrative.primaryPillar,
+    });
+  });
+
+  (scheduler.nextAngles || []).slice(0, 4).forEach((angle) => {
+    addLane({
+      source: "adaptive_scheduler",
+      weight: 0.8,
+      score: number(angle.weight, number(angle.score)),
+      status: angle.action || "watch",
+      formatId: angle.formatId,
+      formatLabel: angle.label,
+      hour: angle.hour,
+      windowLabel: angle.windowLabel,
+      action: angle.action || "route",
+      reason: angle.reason || "",
+      directive: angle.angle || "",
+      samples: angle.samples,
+    });
+  });
+
+  const nextWindow = hourly.nextWindow || hourly.currentHour || null;
+  if (nextWindow) {
+    addLane({
+      source: "hourly_load",
+      weight: 0.55,
+      score: number(nextWindow.loadScore),
+      status: nextWindow.status || "watch",
+      hour: nextWindow.hour,
+      windowLabel: nextWindow.windowLabel || nextWindow.label,
+      action: "schedule",
+      reason: hourly.nextAction || "",
+      directive: `Prefer ${nextWindow.windowLabel || nextWindow.label || "-"} UTC if cadence allows.`,
+      samples: nextWindow.posts || nextWindow.samples,
+    });
+  }
+
+  const sampleCount = number(profile.measuredPosts, number(timing.sampleCount, number(bandit.sampleCount)));
+  const lanes = [...buckets.values()]
+    .map((lane) => {
+      const sourceBoost = Math.min(18, Math.max(0, lane.sources.length - 1) * 4.5);
+      const sampleBoost = Math.min(8, Math.log1p(Math.max(0, lane.samples)) * 1.7);
+      const activeBoost = Math.min(12, lane.activeSignals * 5);
+      const rawScore = lane.totalWeight ? lane.weightedScore / lane.totalWeight : 0;
+      const score = clamp(rawScore + sourceBoost + sampleBoost + activeBoost, 0, 100);
+      const label = [
+        lane.windowLabel ? `${lane.windowLabel} UTC` : null,
+        lane.pillarLabel,
+        lane.formatLabel,
+      ].filter(Boolean).join(" / ") || "cached growth lane";
+      return {
+        id: lane.id,
+        label,
+        formatId: lane.formatId || null,
+        formatLabel: lane.formatLabel || null,
+        pillarId: lane.pillarId || null,
+        pillarLabel: lane.pillarLabel || null,
+        hour: lane.hour == null ? null : number(lane.hour),
+        windowLabel: lane.windowLabel || null,
+        action: lane.action || "route",
+        status: score >= 76 ? "hot" : score >= 58 ? "watch" : lane.status || "probe",
+        score,
+        confidence: lane.sources.length >= 3 && sampleCount >= 24 ? "high" : lane.sources.length >= 2 ? "medium" : "low",
+        sources: lane.sources,
+        samples: lane.samples,
+        evidence: lane.evidence.slice(0, 4),
+        promptDirectives: lane.promptDirectives.filter(Boolean).slice(0, 4),
+      };
+    })
+    .sort((left, right) => number(right.score) - number(left.score) || (right.sources || []).length - (left.sources || []).length)
+    .slice(0, 10);
+  const activeOpportunity = lanes[0] || null;
+  const opportunityScore = number(activeOpportunity?.score);
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: lanes.length ? "derived_cached_growth_opportunity_scorer" : "growth_opportunity_warmup",
+    severity: opportunityScore >= 76 ? "ok" : opportunityScore >= 52 ? "warn" : "danger",
+    confidence: activeOpportunity?.confidence || "low",
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    sampleCount,
+    opportunityScore,
+    readGate: "cached_only",
+    publishGate: "review",
+    primaryCommand: activeOpportunity
+      ? `Bias the next packet toward ${activeOpportunity.label}; use cached signals only.`
+      : "Collect more measured packets before trusting opportunity scoring.",
+    activeOpportunity,
+    lanes,
+    promptDirectives: [
+      activeOpportunity?.formatId ? `Primary format: ${activeOpportunity.formatId}.` : null,
+      activeOpportunity?.pillarLabel ? `Primary narrative: ${activeOpportunity.pillarLabel}.` : null,
+      activeOpportunity?.windowLabel ? `Preferred UTC window: ${activeOpportunity.windowLabel}.` : null,
+      activeOpportunity?.promptDirectives?.[0] || null,
+      "No live X search/read calls are required for this opportunity score.",
+    ].filter(Boolean),
+    guardrails: [
+      "Cached analytics only.",
+      "Do not override cadence, OAuth, budget, or rate-limit gates.",
+      "Manual distribution routes remain human-in-the-loop.",
+    ],
+  };
+}
+
+function renderGrowthOpportunityScorer() {
+  const scorer = growthOpportunityScorerData();
+  const container = $("#growth-opportunity-scorer");
+  if (!container) return;
+  const lanes = Array.isArray(scorer.lanes) ? scorer.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("opportunity_fusion_empty"))}</p>`;
+    return;
+  }
+  const active = scorer.activeOpportunity || lanes[0] || {};
+  const score = clamp(number(scorer.opportunityScore, number(active.score)), 0, 100);
+  const directives = Array.isArray(scorer.promptDirectives) ? scorer.promptDirectives : [];
+  const guardrails = Array.isArray(scorer.guardrails) ? scorer.guardrails : [];
+  container.innerHTML = `
+    <div class="opportunity-fusion-head">
+      <div>
+        <span>${escapeHtml(t("opportunity_fusion_eyebrow"))}</span>
+        <strong>${escapeHtml(t("opportunity_fusion_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("opportunity_fusion_zero_reads"))}</em>
+    </div>
+    <div class="opportunity-fusion-core ${escapeHtml(scorer.severity || "warn")}">
+      <div class="opportunity-fusion-score" style="--opportunity-fusion-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("opportunity_fusion_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="opportunity-fusion-active">
+        <span>${escapeHtml(t("opportunity_fusion_active"))}</span>
+        <strong>${escapeHtml(active.label || "-")}</strong>
+        <small>${escapeHtml(t("opportunity_fusion_confidence"))}: ${escapeHtml(scorer.confidence || active.confidence || "-")} · ${escapeHtml(t("opportunity_fusion_samples"))}=${escapeHtml(formatNumber(scorer.sampleCount))}</small>
+      </div>
+      <div class="opportunity-fusion-command">
+        <span>${escapeHtml(t("opportunity_fusion_command"))}</span>
+        <code>${escapeHtml(scorer.primaryCommand || "-")}</code>
+      </div>
+    </div>
+    <div class="opportunity-fusion-gates">
+      <span class="ok"><em>${escapeHtml(t("opportunity_fusion_read_gate"))}</em><strong>${escapeHtml(scorer.readGate || "cached_only")}</strong></span>
+      <span class="${escapeHtml(scorer.publishGate === "open" ? "ok" : "warn")}"><em>${escapeHtml(t("opportunity_fusion_publish_gate"))}</em><strong>${escapeHtml(scorer.publishGate || "review")}</strong></span>
+      <span class="ok"><em>${escapeHtml(t("opportunity_fusion_sources"))}</em><strong>${escapeHtml((active.sources || []).join("+") || "-")}</strong></span>
+    </div>
+    <div class="opportunity-fusion-section-title">
+      <span>${escapeHtml(t("opportunity_fusion_lanes"))}</span>
+      <strong>${escapeHtml(scorer.mode || "-")}</strong>
+    </div>
+    <div class="opportunity-fusion-lanes">
+      ${lanes.slice(0, 8).map((lane, index) => {
+        const laneScore = clamp(number(lane.score), 0, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "watch")}" style="--opportunity-lane-score:${laneScore.toFixed(1)}%">
+            <div class="opportunity-fusion-rank">${escapeHtml(String(index + 1).padStart(2, "0"))}</div>
+            <div class="opportunity-fusion-lane-body">
+              <div>
+                <strong>${escapeHtml(lane.label || "-")}</strong>
+                <em>${escapeHtml(lane.status || "watch")} · ${escapeHtml((lane.sources || []).join(" + ") || "-")}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("opportunity_fusion_format"))}</dt><dd>${escapeHtml(lane.formatLabel || lane.formatId || "-")}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_pillar"))}</dt><dd>${escapeHtml(lane.pillarLabel || lane.pillarId || "-")}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_window"))}</dt><dd>${escapeHtml(lane.windowLabel || "-")}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_samples"))}</dt><dd>${escapeHtml(formatNumber(lane.samples))}</dd></div>
+              </dl>
+              <p>${escapeHtml((lane.evidence || [])[0] || (lane.promptDirectives || [])[0] || "-")}</p>
+              <div class="opportunity-fusion-bar"><span></span></div>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="opportunity-fusion-footer-grid">
+      <div class="opportunity-fusion-directives">
+        <span>${escapeHtml(t("opportunity_fusion_directives"))}</span>
+        ${directives.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+      <div class="opportunity-fusion-guardrails">
+        <span>${escapeHtml(t("opportunity_fusion_guardrails"))}</span>
+        ${guardrails.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderTemporalAngleMatrix() {
   const matrix = temporalAngleMatrixData();
   const container = $("#temporal-angle-matrix");
@@ -8319,6 +8696,7 @@ function renderLearning() {
   renderActiveConnConversionOptimizer();
   renderNarrativeResonance();
   renderTopicTimingRouter();
+  renderGrowthOpportunityScorer();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
@@ -9072,12 +9450,15 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
     hookPatternScore: number(candidate?.hookPatternScore),
     contentBanditScore: number(candidate?.contentBanditScore),
     angleLoadRouterScore: number(candidate?.angleLoadRouterScore),
+    growthOpportunityScore: number(candidate?.growthOpportunityScore),
+    growthOpportunityLane: candidate?.growthOpportunityLane || null,
     reason: candidate?.reason || "",
     diagnostics: Array.isArray(candidate?.diagnostics) ? candidate.diagnostics : [],
     angleMutationDiagnostics: Array.isArray(candidate?.angleMutationDiagnostics) ? candidate.angleMutationDiagnostics : [],
     hookPatternDiagnostics: Array.isArray(candidate?.hookPatternDiagnostics) ? candidate.hookPatternDiagnostics : [],
     contentBanditDiagnostics: Array.isArray(candidate?.contentBanditDiagnostics) ? candidate.contentBanditDiagnostics : [],
     angleLoadRouterDiagnostics: Array.isArray(candidate?.angleLoadRouterDiagnostics) ? candidate.angleLoadRouterDiagnostics : [],
+    growthOpportunityDiagnostics: Array.isArray(candidate?.growthOpportunityDiagnostics) ? candidate.growthOpportunityDiagnostics : [],
     qualityIssues: Array.isArray(candidate?.qualityIssues) ? candidate.qualityIssues : [],
     aiQualityVerdict: candidate?.aiQualityVerdict || null,
     characterCount: number(candidate?.characterCount, String(text).length),
@@ -9109,6 +9490,7 @@ function derivedGenerationDecisionTrace() {
     angleMutationScore: mutationScore,
     angleLoadRouterScore: routerScore,
     contentBanditScore: number(post.contentBanditScore),
+    growthOpportunityScore: number(post.growthOpportunityScore),
     hookPatternScore: number(post.hookPatternScore),
     reason: post.candidateReason || proofReason(post),
     diagnostics,
@@ -9116,6 +9498,7 @@ function derivedGenerationDecisionTrace() {
     angleLoadRouterDiagnostics: routedLane
       ? [`route:${routedLane.formatId || routedLane.id}`, `slot:${routedLane.windowLabel || "-"}`, `load:${formatNumber(routedLane.loadScore || 0, 1)}`]
       : [],
+    growthOpportunityDiagnostics: post.growthOpportunityDiagnostics || [],
     qualityIssues: [],
     characterCount: String(post.text || "").length,
     text: post.text || "",
@@ -9184,6 +9567,7 @@ function candidateDiagnosticText(candidate) {
     ...candidate.diagnostics,
     ...candidate.angleMutationDiagnostics,
     ...candidate.angleLoadRouterDiagnostics,
+    ...candidate.growthOpportunityDiagnostics,
     ...candidate.contentBanditDiagnostics,
     ...candidate.hookPatternDiagnostics,
     ...candidate.qualityIssues.map((issue) => `gate:${issue}`),
@@ -9395,7 +9779,7 @@ function renderGenerationDecisionTrace() {
             <div class="trace-candidate-body">
               <div>
                 <strong>${escapeHtml(formatTemplate(candidate.templateId))}</strong>
-                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
+                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · opportunity ${escapeHtml(formatNumber(candidate.growthOpportunityScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
               </div>
               <p>${escapeHtml(candidate.reason || candidateDiagnosticText(candidate))}</p>
               <i></i>

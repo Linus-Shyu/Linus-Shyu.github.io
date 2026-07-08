@@ -13711,6 +13711,338 @@ body:not(.demo-mode) .demo-strip {
   white-space: nowrap;
 }
 
+.growth-opportunity-scorer {
+  display: grid;
+  gap: 9px;
+  border: 1px solid color-mix(in srgb, #ff9f1c 32%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 10% 0, color-mix(in srgb, #ff9f1c 16%, transparent), transparent 30%),
+    radial-gradient(circle at 100% 18%, color-mix(in srgb, #00f0ff 12%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 18px color-mix(in srgb, #ff9f1c 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 54%, transparent);
+}
+
+.opportunity-fusion-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.opportunity-fusion-head span,
+.opportunity-fusion-score span,
+.opportunity-fusion-active span,
+.opportunity-fusion-command span,
+.opportunity-fusion-gates em,
+.opportunity-fusion-section-title span,
+.opportunity-fusion-lane-body dt,
+.opportunity-fusion-lane-body em,
+.opportunity-fusion-directives span,
+.opportunity-fusion-guardrails span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.opportunity-fusion-head strong,
+.opportunity-fusion-active strong,
+.opportunity-fusion-gates strong,
+.opportunity-fusion-section-title strong,
+.opportunity-fusion-lane-body strong,
+.opportunity-fusion-lane-body dd {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opportunity-fusion-head strong {
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.opportunity-fusion-head em {
+  border: 1px solid color-mix(in srgb, #ff9f1c 48%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #ff9f1c;
+  background: color-mix(in srgb, #ff9f1c 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.opportunity-fusion-core {
+  display: grid;
+  grid-template-columns: 0.58fr minmax(0, 1fr) minmax(0, 1.18fr);
+  gap: 8px;
+}
+
+.opportunity-fusion-score,
+.opportunity-fusion-active,
+.opportunity-fusion-command,
+.opportunity-fusion-gates span,
+.opportunity-fusion-lanes article,
+.opportunity-fusion-directives,
+.opportunity-fusion-guardrails {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.opportunity-fusion-score,
+.opportunity-fusion-active,
+.opportunity-fusion-command,
+.opportunity-fusion-gates span {
+  padding: 8px;
+}
+
+.opportunity-fusion-score strong {
+  display: block;
+  margin-top: 4px;
+  color: #ff9f1c;
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1;
+  text-shadow: 0 0 16px color-mix(in srgb, #ff9f1c 28%, transparent);
+}
+
+.opportunity-fusion-score div,
+.opportunity-fusion-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line-soft) 82%, transparent);
+}
+
+.opportunity-fusion-score div {
+  margin-top: 8px;
+}
+
+.opportunity-fusion-score i,
+.opportunity-fusion-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9f1c, #00f0ff, #00ff66);
+  box-shadow: 0 0 14px color-mix(in srgb, #00f0ff 30%, transparent);
+}
+
+.opportunity-fusion-score i {
+  width: var(--opportunity-fusion-score, 0%);
+}
+
+.opportunity-fusion-active strong {
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.18;
+}
+
+.opportunity-fusion-active small {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opportunity-fusion-command {
+  display: grid;
+  gap: 6px;
+}
+
+.opportunity-fusion-command code,
+.opportunity-fusion-directives code,
+.opportunity-fusion-guardrails code {
+  display: block;
+  overflow: hidden;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opportunity-fusion-gates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.opportunity-fusion-gates .ok strong {
+  color: #00ff66;
+}
+
+.opportunity-fusion-gates .warn strong {
+  color: #ff9f1c;
+}
+
+.opportunity-fusion-gates .danger strong {
+  color: #ff007a;
+}
+
+.opportunity-fusion-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.opportunity-fusion-section-title strong {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.opportunity-fusion-lanes {
+  display: grid;
+  gap: 8px;
+}
+
+.opportunity-fusion-lanes article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 9px;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.opportunity-fusion-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, #00f0ff var(--opportunity-lane-score), #ff9f1c);
+  box-shadow: 0 0 14px color-mix(in srgb, #00f0ff 24%, transparent);
+}
+
+.opportunity-fusion-lanes article.hot::before {
+  background: #00ff66;
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.34);
+}
+
+.opportunity-fusion-lanes article.hold::before,
+.opportunity-fusion-lanes article.danger::before {
+  background: #ff007a;
+  box-shadow: 0 0 16px rgba(255, 0, 122, 0.28);
+}
+
+.opportunity-fusion-rank {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #ff9f1c 38%, var(--line-soft));
+  border-radius: 6px;
+  color: #ff9f1c;
+  background: color-mix(in srgb, #ff9f1c 10%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.opportunity-fusion-lane-body {
+  min-width: 0;
+}
+
+.opportunity-fusion-lane-body > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.opportunity-fusion-lane-body strong {
+  font-size: 12px;
+}
+
+.opportunity-fusion-lane-body dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.opportunity-fusion-lane-body dt,
+.opportunity-fusion-lane-body dd {
+  margin: 0;
+}
+
+.opportunity-fusion-lane-body dd {
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 820;
+}
+
+.opportunity-fusion-lane-body p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 30px;
+  margin: 0 0 8px;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.opportunity-fusion-bar span {
+  width: var(--opportunity-lane-score, 0%);
+}
+
+.opportunity-fusion-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.opportunity-fusion-directives,
+.opportunity-fusion-guardrails {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+}
+
+@media (max-width: 1180px) {
+  .opportunity-fusion-core,
+  .opportunity-fusion-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-fusion-gates,
+  .opportunity-fusion-lane-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .temporal-angle-matrix {
   border: 1px solid color-mix(in srgb, var(--accent-3) 24%, var(--line-soft));
   border-radius: 6px;
@@ -21647,4 +21979,175 @@ html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-b
 
 html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
   color: #ffd166 !important;
+}
+
+/* Sidebar production lock: both light and dark UI use the same readable ops rack. */
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail {
+  --sidebar-rack-bg: #080d14;
+  --sidebar-rack-top: #121a26;
+  --sidebar-rack-mid: #0e151f;
+  --sidebar-rack-panel: rgba(16, 24, 35, 0.96);
+  --sidebar-rack-panel-hot: rgba(41, 29, 13, 0.97);
+  --sidebar-rack-line: rgba(148, 163, 184, 0.28);
+  --sidebar-rack-line-hot: rgba(255, 159, 28, 0.68);
+  --sidebar-rack-text: #fbfdff;
+  --sidebar-rack-body: #dbe6f3;
+  --sidebar-rack-muted: #a7b4c6;
+  --sidebar-rack-hot: #ff9f1c;
+  --sidebar-rack-green: #78d86f;
+  --sidebar-rack-blue: #5b9dff;
+  position: sticky !important;
+  isolation: isolate !important;
+  color-scheme: dark !important;
+  color: var(--sidebar-rack-body) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  background-color: var(--sidebar-rack-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -14%, rgba(255, 159, 28, 0.34), transparent 34%),
+    radial-gradient(circle at -12% 72%, rgba(120, 216, 111, 0.17), transparent 38%),
+    radial-gradient(circle at 112% 34%, rgba(91, 157, 255, 0.16), transparent 32%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.065), transparent 48%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, var(--sidebar-rack-top) 0%, var(--sidebar-rack-mid) 48%, var(--sidebar-rack-bg) 100%) !important;
+  box-shadow:
+    26px 0 58px rgba(7, 11, 18, 0.3),
+    inset -1px 0 0 rgba(255, 159, 28, 0.24),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+  scrollbar-color: rgba(255, 159, 28, 0.72) rgba(8, 13, 20, 0.92) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail::before,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail::before {
+  z-index: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 24%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 34px) !important;
+  opacity: 0.78 !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail::after {
+  z-index: 0 !important;
+  inset: 1px 0 auto 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.82), transparent) !important;
+  box-shadow: 0 0 22px rgba(255, 159, 28, 0.34) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--sidebar-rack-body) !important;
+  border-color: var(--sidebar-rack-line) !important;
+  background-color: var(--sidebar-rack-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.016)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.08), transparent 64%) !important;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--sidebar-rack-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--sidebar-rack-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  color: #09111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--sidebar-rack-hot) 50%, var(--sidebar-rack-green) 100%) !important;
+  box-shadow:
+    0 16px 32px rgba(255, 159, 28, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.38) inset !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-line .status-dot,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+  background: var(--sidebar-rack-green) !important;
+  box-shadow:
+    0 0 0 4px rgba(120, 216, 111, 0.14),
+    0 0 16px rgba(120, 216, 111, 0.24) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  border: 1px solid rgba(148, 163, 184, 0.17) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  border-color: rgba(174, 185, 200, 0.34) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--sidebar-rack-line-hot) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  background-image:
+    radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.44), transparent 44%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.3), rgba(120, 216, 111, 0.1)) !important;
+  box-shadow:
+    0 18px 32px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 159, 28, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover::after,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible::after,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active::after {
+  color: #111827 !important;
+  border-color: rgba(255, 209, 102, 0.9) !important;
+  background: linear-gradient(135deg, #ffd166, var(--sidebar-rack-hot)) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.68) !important;
+  background-color: var(--sidebar-rack-panel-hot) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.25), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.16), transparent 62%) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #ffd166 !important;
+  text-shadow: 0 0 18px rgba(255, 209, 102, 0.32) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget .meter {
+  background: rgba(148, 163, 184, 0.24) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--sidebar-rack-hot), var(--sidebar-rack-green)) !important;
+  box-shadow: 0 0 16px rgba(255, 159, 28, 0.24) !important;
 }
