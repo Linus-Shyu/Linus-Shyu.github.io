@@ -1337,6 +1337,23 @@ const translations = {
     kinetics_mode_acceleration: "acceleration",
     kinetics_mode_compounding: "compounding",
     kinetics_empty: "No traffic kinetics telemetry available.",
+    runway_eyebrow: "Runway Simulator",
+    runway_title: "Milestone compression model",
+    runway_zero_reads: "0 X read ops",
+    runway_recommended: "recommended lane",
+    runway_baseline: "baseline",
+    runway_projected: "simulated",
+    runway_saved: "compressed",
+    runway_lanes: "runway lanes",
+    runway_confidence: "confidence",
+    runway_lift: "lift",
+    runway_cost: "cost",
+    runway_empty: "No runway simulation telemetry available.",
+    runway_mode_sample_starved: "sample-starved",
+    runway_mode_route_acceleration: "route acceleration",
+    runway_mode_cadence_acceleration: "cadence acceleration",
+    runway_mode_roi_guarded_surge: "ROI guarded",
+    runway_mode_budget_containment: "budget containment",
     learning_eyebrow: "Feedback Layer",
     learning_title: "Next inference rule to deploy",
     autopilot_eyebrow: "Model Inference Stream",
@@ -2029,6 +2046,23 @@ const translations = {
     kinetics_mode_acceleration: "加速",
     kinetics_mode_compounding: "复利",
     kinetics_empty: "暂无流量动力学遥测。",
+    runway_eyebrow: "续航模拟器",
+    runway_title: "里程碑压缩模型",
+    runway_zero_reads: "0 次 X 读取",
+    runway_recommended: "推荐通道",
+    runway_baseline: "基线",
+    runway_projected: "模拟后",
+    runway_saved: "压缩",
+    runway_lanes: "续航通道",
+    runway_confidence: "置信度",
+    runway_lift: "提升",
+    runway_cost: "成本",
+    runway_empty: "暂无续航模拟遥测。",
+    runway_mode_sample_starved: "样本不足",
+    runway_mode_route_acceleration: "路由加速",
+    runway_mode_cadence_acceleration: "节奏加速",
+    runway_mode_roi_guarded_surge: "ROI 受控",
+    runway_mode_budget_containment: "预算收敛",
     learning_eyebrow: "反馈层",
     learning_title: "下一条要部署的推理规则",
     autopilot_eyebrow: "模型推理流",
@@ -4709,6 +4743,184 @@ function renderGrowthKinetics() {
       `;
     })
     .join("");
+}
+
+function runwayModeLabel(mode) {
+  const key = `runway_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function formatRunwayDays(value) {
+  const days = Number(value);
+  if (!Number.isFinite(days)) return currentLang === "zh" ? "采样中" : "collect samples";
+  return `${formatNumber(days, days > 30 ? 0 : 1)}d`;
+}
+
+function growthRunwaySimulatorData() {
+  const incoming = dashboardData.growthRunwaySimulator || fallbackData.growthRunwaySimulator;
+  if (incoming?.lanes?.length) return incoming;
+  const goal = goalData();
+  const kinetics = growthKineticsData();
+  const optimizer = budgetAllocationData();
+  const lanes = Array.isArray(optimizer.lanes) ? optimizer.lanes : [];
+  const rawBaseDays = Number(kinetics.projectedDaysToMilestone);
+  const baseDays = Number.isFinite(rawBaseDays) && rawBaseDays >= 0 ? rawBaseDays : null;
+  const ranked = [...lanes]
+    .map((lane, index) => {
+      const gate = lane.gate || "open";
+      const status = ["ok", "warn", "danger"].includes(lane.status) ? lane.status : "warn";
+      const xReadOps = number(lane.xReadOps);
+      const blocked = status === "danger" || gate === "closed" || gate === "sealed" || xReadOps > 0;
+      const expectedLiftPct = blocked ? 0 : Math.max(0, number(lane.expectedLiftPct));
+      const projectedDays = baseDays == null ? null : blocked ? baseDays : baseDays / (1 + expectedLiftPct / 100);
+      const savedDays = baseDays == null || projectedDays == null ? 0 : Math.max(0, baseDays - projectedDays);
+      const confidenceScore = clamp(
+        24 +
+          (status === "ok" ? 22 : status === "warn" ? 10 : -8) +
+          Math.min(24, number(lane.efficiencyScore) * 0.24) +
+          Math.min(18, expectedLiftPct * 0.28) +
+          (xReadOps === 0 ? 6 : -16),
+        0,
+        100,
+      );
+      return {
+        id: lane.id || `derived_runway:${index + 1}`,
+        label: lane.label || lane.id || `lane ${index + 1}`,
+        gate,
+        status,
+        blocked,
+        zeroExtraXReads: xReadOps === 0,
+        xReadOps,
+        costUsd: number(lane.costUsd),
+        safeSlots: lane.safeSlots == null ? null : number(lane.safeSlots),
+        expectedLiftPct,
+        efficiencyScore: number(lane.efficiencyScore),
+        confidence: confidenceScore >= 72 ? "high" : confidenceScore >= 48 ? "medium" : "low",
+        confidenceScore,
+        projectedDays,
+        savedDays,
+        detail: lane.detail || "",
+        nextAction: lane.nextAction || "",
+      };
+    })
+    .sort((left, right) => {
+      const leftBlocked = left.blocked ? 1 : 0;
+      const rightBlocked = right.blocked ? 1 : 0;
+      return leftBlocked - rightBlocked || right.savedDays - left.savedDays || right.efficiencyScore - left.efficiencyScore;
+    });
+  const recommended = ranked.find((lane) => !lane.blocked && lane.xReadOps === 0) || ranked[0] || null;
+  const projectedDays = recommended?.projectedDays ?? baseDays;
+  const savedDays = baseDays == null || projectedDays == null ? 0 : Math.max(0, baseDays - projectedDays);
+  const severity = baseDays == null ? "warn" : recommended?.status || "warn";
+  return {
+    generatedAt: new Date().toISOString(),
+    mode: baseDays == null ? "sample_starved" : recommended?.id === "manual_route_burst" ? "route_acceleration" : "budget_containment",
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    severity,
+    currentFollowers: goal.current,
+    nextMilestone: goal.nextMilestone,
+    remainingToMilestone: Math.max(0, goal.nextMilestone - goal.current),
+    recommendedLaneId: recommended?.id || null,
+    recommendedAction: recommended?.nextAction || "Route through the best cached manual lane before spending on live reads.",
+    projectedLiftPct: number(recommended?.expectedLiftPct),
+    projectedDaysToMilestone: projectedDays,
+    savedDays,
+    confidence: recommended?.confidence || "low",
+    deckScore: clamp(number(recommended?.efficiencyScore) * 0.62 + number(recommended?.confidenceScore) * 0.38, 0, 100),
+    cells: [
+      { id: "baseline_days", label: t("runway_baseline"), value: formatRunwayDays(baseDays), status: baseDays == null ? "warn" : baseDays <= 14 ? "ok" : baseDays <= 45 ? "warn" : "danger" },
+      { id: "projected_days", label: t("runway_projected"), value: formatRunwayDays(projectedDays), status: severity },
+      { id: "saved_days", label: t("runway_saved"), value: baseDays == null ? "-" : formatRunwayDays(savedDays), status: savedDays > 0 ? "ok" : "warn" },
+      { id: "x_reads", label: "X read ops", value: "0", status: "ok" },
+    ],
+    lanes: ranked,
+    rankedLaneIds: ranked.map((lane) => lane.id),
+    runbook: [
+      "Keep live X search/read partitions sealed.",
+      recommended?.nextAction || "Use cached manual routes first.",
+    ],
+  };
+}
+
+function renderGrowthRunwaySimulator() {
+  const target = $("#runway-simulator");
+  const state = $("#runway-state");
+  if (!target || !state) return;
+  const sim = growthRunwaySimulatorData();
+  const lanes = Array.isArray(sim?.lanes) ? sim.lanes : [];
+  if (!sim || !lanes.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("runway_empty"))}</p>`;
+    state.textContent = "-";
+    return;
+  }
+  const severity = ["ok", "warn", "danger"].includes(sim.severity) ? sim.severity : "warn";
+  state.textContent = runwayModeLabel(sim.mode);
+  state.className = `pill ${severity === "ok" ? "pill-good" : severity === "danger" ? "pill-danger" : "pill-warn"}`;
+  const rankedIds = Array.isArray(sim.rankedLaneIds) && sim.rankedLaneIds.length ? sim.rankedLaneIds : lanes.map((lane) => lane.id);
+  const ranked = rankedIds.map((id) => lanes.find((lane) => lane.id === id)).filter(Boolean);
+  const recommended = lanes.find((lane) => lane.id === sim.recommendedLaneId) || ranked[0] || lanes[0];
+  const deckScore = clamp(number(sim.deckScore), 0, 100);
+  const cells = Array.isArray(sim.cells) ? sim.cells : [];
+  const runbook = Array.isArray(sim.runbook) ? sim.runbook : [sim.recommendedAction].filter(Boolean);
+  const maxSaved = Math.max(1, ...ranked.map((lane) => number(lane.savedDays)));
+
+  target.innerHTML = `
+    <div class="runway-core ${escapeHtml(severity)}">
+      <div class="runway-orbit" style="--runway-score:${deckScore}%">
+        <span></span>
+        <strong>${escapeHtml(formatNumber(deckScore, 1))}</strong>
+        <em>deck</em>
+      </div>
+      <div class="runway-reco">
+        <span>${escapeHtml(t("runway_recommended"))}</span>
+        <strong>${escapeHtml(allocationLaneLabel(recommended))}</strong>
+        <p>${escapeHtml(sim.recommendedAction || recommended.nextAction || "-")}</p>
+        <small>${escapeHtml(t("runway_zero_reads"))} · ${escapeHtml(t("runway_lift"))} ${escapeHtml(formatNumber(sim.projectedLiftPct, 1))}%</small>
+      </div>
+    </div>
+    <div class="runway-cells">
+      ${cells.map((cell) => `
+        <span class="${escapeHtml(cell.status || "ok")}">
+          <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+          <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="runway-lane-title">
+      <span>${escapeHtml(t("runway_lanes"))}</span>
+      <strong>${escapeHtml(t("runway_saved"))}</strong>
+    </div>
+    <div class="runway-lanes">
+      ${ranked.slice(0, 5).map((lane, index) => {
+        const savedPct = clamp((number(lane.savedDays) / maxSaved) * 100, lane.savedDays > 0 ? 8 : 2, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "warn")}" style="--runway-lane-score:${savedPct}%">
+            <div class="runway-rank">${String(index + 1).padStart(2, "0")}</div>
+            <div class="runway-lane-body">
+              <div>
+                <strong>${escapeHtml(allocationLaneLabel(lane))}</strong>
+                <em>${escapeHtml(allocationGateLabel(lane.gate))}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("runway_cost"))}</dt><dd>${escapeHtml(money(lane.costUsd))}</dd></div>
+                <div><dt>${escapeHtml(t("runway_lift"))}</dt><dd>${escapeHtml(`${formatNumber(lane.expectedLiftPct, 1)}%`)}</dd></div>
+                <div><dt>${escapeHtml(t("runway_confidence"))}</dt><dd>${escapeHtml(lane.confidence || "-")}</dd></div>
+              </dl>
+              <i><span></span></i>
+            </div>
+            <strong>${escapeHtml(formatRunwayDays(lane.savedDays))}</strong>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="runway-runbook">
+      ${runbook.slice(0, 3).map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
+    </div>
+  `;
 }
 
 function missionControlData() {
@@ -8421,6 +8633,7 @@ function render() {
   renderGrowthMissionControl();
   renderGoal();
   renderGrowthKinetics();
+  renderGrowthRunwaySimulator();
   renderLearning();
   renderControlPlane();
   renderTelemetryEventStream();
