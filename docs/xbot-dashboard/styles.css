@@ -465,6 +465,10 @@ h3 {
   margin-bottom: 16px;
 }
 
+.mission-control-spine {
+  margin-bottom: 16px;
+}
+
 .command-card,
 .server-card,
 .metric,
@@ -811,6 +815,303 @@ h3 {
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.mission-control-panel {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 7% 18%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 30%),
+    radial-gradient(circle at 78% 12%, color-mix(in srgb, var(--ok) 10%, transparent), transparent 26%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 5%, transparent),
+    0 0 22px color-mix(in srgb, var(--accent) 9%, transparent),
+    var(--shadow);
+}
+
+.mission-control-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--accent) 7%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.16;
+}
+
+.mission-control-panel.warn {
+  border-color: color-mix(in srgb, var(--warn) 32%, var(--line-soft));
+}
+
+.mission-control-panel.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line-soft));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--danger) 9%, transparent),
+    0 0 24px color-mix(in srgb, var(--danger) 12%, transparent),
+    var(--shadow);
+}
+
+.mission-control-head,
+.mission-control-body,
+.mission-cell-grid,
+.mission-lane-grid,
+.mission-runbook {
+  position: relative;
+}
+
+.mission-control-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--line-soft);
+  padding: 0 0 9px;
+}
+
+.mission-control-head span,
+.mission-score-core span,
+.mission-north-star span,
+.mission-top-route span,
+.mission-next-action span,
+.mission-cell-grid em,
+.mission-lane-grid em {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mission-control-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.mission-control-head em {
+  overflow: hidden;
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  text-align: right;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mission-control-panel.warn .mission-control-head em {
+  color: var(--warn);
+}
+
+.mission-control-panel.danger .mission-control-head em {
+  color: var(--danger);
+}
+
+.mission-control-body {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.36fr) minmax(190px, 0.48fr) minmax(220px, 0.56fr) minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.mission-score-core,
+.mission-north-star,
+.mission-top-route,
+.mission-next-action,
+.mission-cell-grid span,
+.mission-lane-grid span {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 76%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent),
+    0 0 12px color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.mission-score-core,
+.mission-north-star,
+.mission-top-route,
+.mission-next-action {
+  padding: 10px;
+}
+
+.mission-score-core strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 31px;
+  font-weight: 930;
+  line-height: 1;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--ok) 36%, transparent);
+}
+
+.mission-score-core div {
+  height: 7px;
+  overflow: hidden;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+.mission-score-core i {
+  display: block;
+  width: var(--mission-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--ok));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.mission-control-panel.warn .mission-score-core strong {
+  color: var(--warn);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--warn) 28%, transparent);
+}
+
+.mission-control-panel.danger .mission-score-core strong {
+  color: var(--danger);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--danger) 32%, transparent);
+}
+
+.mission-north-star strong,
+.mission-top-route strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mission-north-star p,
+.mission-top-route p,
+.mission-next-action p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 6px 0 0;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.mission-cell-grid,
+.mission-lane-grid {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.mission-cell-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.mission-lane-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.mission-cell-grid span,
+.mission-lane-grid span {
+  padding: 8px 9px;
+}
+
+.mission-cell-grid strong,
+.mission-lane-grid strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mission-cell-grid .ok strong,
+.mission-lane-grid .ok strong {
+  color: var(--ok);
+}
+
+.mission-cell-grid .warn strong,
+.mission-lane-grid .warn strong {
+  color: var(--warn);
+}
+
+.mission-cell-grid .danger strong,
+.mission-lane-grid .danger strong {
+  color: var(--danger);
+}
+
+.mission-runbook {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.mission-runbook code {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line-soft));
+  border-radius: 5px;
+  padding: 5px 7px;
+  color: color-mix(in srgb, var(--ink) 88%, var(--accent));
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .mission-control-body,
+  .mission-cell-grid,
+  .mission-lane-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .mission-control-head,
+  .mission-control-body,
+  .mission-cell-grid,
+  .mission-lane-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-control-head {
+    display: grid;
+  }
+
+  .mission-control-head em {
+    text-align: left;
+  }
 }
 
 .goal-progress {

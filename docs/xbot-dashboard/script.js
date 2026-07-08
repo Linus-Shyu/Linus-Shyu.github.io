@@ -935,6 +935,18 @@ const translations = {
     runlog_queue: "swarm.output",
     runlog_cost: "cost.guard",
     runlog_learn: "learning.writeback",
+    mission_control_eyebrow: "Mission Control Spine",
+    mission_control_title: "North-star growth SLO",
+    mission_control_nominal: "mission nominal",
+    mission_control_watch: "mission watch",
+    mission_control_fault: "mission fault",
+    mission_control_score: "mission score",
+    mission_control_milestone: "active conn milestone",
+    mission_control_remaining: "{count} remaining",
+    mission_control_projected: "{days} projected",
+    mission_control_next: "next operator action",
+    mission_control_zero_reads: "0 X read ops",
+    mission_control_no_route: "route lane pending",
     event_stream_eyebrow: "Telemetry Event Stream",
     event_stream_title: "NOC event bus",
     event_stream_nominal: "event bus nominal",
@@ -1599,6 +1611,18 @@ const translations = {
     runlog_queue: "swarm.output",
     runlog_cost: "cost.guard",
     runlog_learn: "learning.writeback",
+    mission_control_eyebrow: "任务控制脊柱",
+    mission_control_title: "北极星增长 SLO",
+    mission_control_nominal: "任务正常",
+    mission_control_watch: "任务观察",
+    mission_control_fault: "任务故障",
+    mission_control_score: "任务评分",
+    mission_control_milestone: "活跃连接里程碑",
+    mission_control_remaining: "剩余 {count}",
+    mission_control_projected: "预计 {days}",
+    mission_control_next: "下一步操作",
+    mission_control_zero_reads: "0 次 X 读取操作",
+    mission_control_no_route: "路由通道待命",
     event_stream_eyebrow: "遥测事件流",
     event_stream_title: "NOC 事件总线",
     event_stream_nominal: "事件总线正常",
@@ -4653,6 +4677,164 @@ function renderGrowthKinetics() {
       `;
     })
     .join("");
+}
+
+function missionControlData() {
+  const incoming = dashboardData.growthMissionControl || fallbackData.growthMissionControl;
+  if (incoming) return incoming;
+  const goal = goalData();
+  const kinetics = growthKineticsData();
+  const ops = distributionOpsData();
+  const operatorSlo = operatorSloData(ops);
+  const routeAmplifier = routeAmplifierData(operatorDispatchPacketData(ops), ops);
+  const budget = budgetBurnData();
+  const runway = runwayGuardData();
+  const control = controlPlaneData();
+  const learning = learningWritebackData();
+  const flywheel = viralFlywheelData();
+  const kineticScore = clamp(number(kinetics.score), 0, 100);
+  const velocityScore = clamp(number(flywheel.velocityScore), 0, 100);
+  const routeReadiness = clamp(number(kinetics.routeReadinessPct, number(operatorSlo.readyMissions) * 33), 0, 100);
+  const safeRemaining = runway?.safeRemainingUsd ?? budget.safeRemainingUsd;
+  const safeCap = runway?.safeCapUsd ?? budget.safeCapUsd;
+  const safePct = safeCap > 0 ? clamp((number(safeRemaining) / number(safeCap)) * 100, 0, 100) : 100;
+  const readGate = control.readGate || "cached_only";
+  const publishGate = control.publishGate || "review";
+  const sampleCount = number(learning.sampleCount, number((dashboardData.profile || fallbackData.profile || {}).measuredPosts));
+  const missionScore = clamp((kineticScore * 0.42) + (velocityScore * 0.22) + (routeReadiness * 0.2) + (safePct * 0.1) + (sampleCount > 10 ? 6 : 0), 0, 100);
+  const severity = safePct <= 0 || readGate === "closed" || readGate === "sealed"
+    ? "danger"
+    : missionScore >= 62 && safePct >= 22
+      ? "ok"
+      : "warn";
+  const rawProjectedDays = kinetics.projectedDaysToMilestone;
+  const projectedDays = rawProjectedDays == null || rawProjectedDays === "" ? null : number(rawProjectedDays, null);
+  const projectedLabel = projectedDays == null || Number.isNaN(projectedDays)
+    ? "collect samples"
+    : `${formatNumber(projectedDays, projectedDays > 30 ? 0 : 1)}d`;
+  const topRoute = (routeAmplifier.lanes || [])[0] || (operatorSlo.lanes || [])[0] || null;
+  return {
+    mode: severity === "danger" ? "containment" : missionScore >= 78 ? "scale_loop" : missionScore >= 52 ? "ignition_loop" : "route_repair",
+    severity,
+    zeroExtraXReads: true,
+    source: "derived dashboard telemetry",
+    missionScore,
+    northStar: {
+      label: "active conn milestone",
+      current: goal.current,
+      target: goal.nextMilestone,
+      remaining: Math.max(0, goal.nextMilestone - goal.current),
+      projectedDays: projectedDays == null || Number.isNaN(projectedDays) ? null : projectedDays,
+    },
+    gates: {
+      read: readGate,
+      publish: publishGate,
+      budget: safePct <= 0 ? "sealed" : safePct < 22 ? "guarded" : "open",
+      learning: sampleCount > 10 ? "online" : "sample-starved",
+    },
+    nextAction: routeReadiness < 50
+      ? "Arm more manual route lanes before the next standalone post."
+      : routeAmplifier.nextAction || kinetics.nextAction || "Keep the current route loop hot and let maintenance write outcomes back.",
+    topRoute: topRoute
+      ? {
+          label: topRoute.routeLabel || topRoute.label || "-",
+          score: number(topRoute.score, number(topRoute.efficiencyScore)),
+          expectedLiftPct: number(topRoute.expectedLiftPct),
+          status: topRoute.status || "ok",
+        }
+      : null,
+    cells: [
+      { id: "mission_score", label: "mission score", value: `${formatNumber(missionScore, 1)}%`, status: severity },
+      { id: "milestone", label: "milestone runway", value: projectedLabel, status: projectedDays != null && projectedDays <= 45 ? "ok" : "warn" },
+      { id: "route", label: "route coverage", value: `${formatNumber(routeReadiness, 0)}%`, status: routeReadiness >= 75 ? "ok" : routeReadiness >= 35 ? "warn" : "danger" },
+      { id: "budget", label: "safe budget", value: safeRemaining == null ? "∞" : money(safeRemaining), status: safePct > 22 ? "ok" : safePct > 0 ? "warn" : "danger" },
+      { id: "learning", label: "learning samples", value: formatNumber(sampleCount), status: sampleCount > 10 ? "ok" : "warn" },
+    ],
+    lanes: [
+      { id: "ingress", label: "ingress load", value: `${formatNumber(kineticScore, 1)}%`, status: kineticScore >= 58 ? "ok" : kineticScore >= 34 ? "warn" : "danger" },
+      { id: "flywheel", label: "flywheel velocity", value: `${formatNumber(velocityScore, 1)}%`, status: velocityScore >= 58 ? "ok" : velocityScore >= 34 ? "warn" : "danger" },
+      { id: "route", label: "route amplifier", value: `${formatNumber(routeReadiness, 0)}%`, status: routeReadiness >= 75 ? "ok" : routeReadiness >= 35 ? "warn" : "danger" },
+      { id: "cost", label: "cost boundary", value: `${formatNumber(safePct, 0)}%`, status: safePct > 22 ? "ok" : safePct > 0 ? "warn" : "danger" },
+    ],
+    runbook: [
+      "Do not auto-search, auto-like, or auto-reply.",
+      "Use cached telemetry, browser route links, and manual route outputs.",
+    ],
+  };
+}
+
+function missionControlStateLabel(severity) {
+  if (severity === "danger") return t("mission_control_fault");
+  if (severity === "warn") return t("mission_control_watch");
+  return t("mission_control_nominal");
+}
+
+function renderGrowthMissionControl() {
+  const target = $("#mission-control-spine");
+  if (!target) return;
+  const mission = missionControlData();
+  const severity = ["ok", "warn", "danger"].includes(mission.severity) ? mission.severity : "warn";
+  const score = clamp(number(mission.missionScore), 0, 100);
+  const north = mission.northStar || {};
+  const projected = north.projectedDays == null
+    ? "collect samples"
+    : `${formatNumber(north.projectedDays, north.projectedDays > 30 ? 0 : 1)}d`;
+  const topRoute = mission.topRoute || {};
+  const cells = Array.isArray(mission.cells) ? mission.cells : [];
+  const lanes = Array.isArray(mission.lanes) ? mission.lanes : [];
+  const runbook = Array.isArray(mission.runbook) ? mission.runbook : [];
+
+  target.innerHTML = `
+    <article class="mission-control-panel ${escapeHtml(severity)}">
+      <div class="mission-control-head">
+        <div>
+          <span>${escapeHtml(t("mission_control_eyebrow"))}</span>
+          <strong>${escapeHtml(t("mission_control_title"))}</strong>
+        </div>
+        <em>${escapeHtml(missionControlStateLabel(severity))} · ${escapeHtml(t("mission_control_zero_reads"))}</em>
+      </div>
+      <div class="mission-control-body">
+        <div class="mission-score-core" style="--mission-score:${score.toFixed(1)}%">
+          <span>${escapeHtml(t("mission_control_score"))}</span>
+          <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+          <div><i></i></div>
+        </div>
+        <div class="mission-north-star">
+          <span>${escapeHtml(t("mission_control_milestone"))}</span>
+          <strong>${escapeHtml(`${formatNumber(north.current)} / ${formatNumber(north.target)}`)}</strong>
+          <p>${escapeHtml(t("mission_control_remaining", { count: formatNumber(north.remaining) }))} · ${escapeHtml(t("mission_control_projected", { days: projected }))}</p>
+        </div>
+        <div class="mission-top-route">
+          <span>${escapeHtml(t("control_top_route"))}</span>
+          <strong>${escapeHtml(topRoute.label || t("mission_control_no_route"))}</strong>
+          <p>${escapeHtml(topRoute.label ? `score ${formatNumber(topRoute.score, 1)} · +${formatNumber(topRoute.expectedLiftPct, 1)}% lift` : mission.nextAction || "-")}</p>
+        </div>
+        <div class="mission-next-action">
+          <span>${escapeHtml(t("mission_control_next"))}</span>
+          <p>${escapeHtml(mission.nextAction || "-")}</p>
+        </div>
+      </div>
+      <div class="mission-cell-grid">
+        ${cells.slice(0, 5).map((cell) => `
+          <span class="${escapeHtml(cell.status || "neutral")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+          </span>
+        `).join("")}
+      </div>
+      <div class="mission-lane-grid">
+        ${lanes.slice(0, 4).map((lane) => `
+          <span class="${escapeHtml(lane.status || "neutral")}">
+            <em>${escapeHtml(lane.label || lane.id || "-")}</em>
+            <strong>${escapeHtml(gateLabel(lane.value))}</strong>
+          </span>
+        `).join("")}
+      </div>
+      <div class="mission-runbook">
+        ${runbook.slice(0, 3).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </article>
+  `;
 }
 
 function learningData() {
@@ -7965,6 +8147,7 @@ function render() {
   renderGauges();
   renderMonitorPanels();
   renderMetrics();
+  renderGrowthMissionControl();
   renderGoal();
   renderGrowthKinetics();
   renderLearning();
