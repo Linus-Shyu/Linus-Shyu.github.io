@@ -22987,3 +22987,104 @@ html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-bud
     overflow: visible !important;
   }
 }
+
+/* Sidebar contrast lock: light mode keeps the main canvas light, but the nav stays a readable ops rack. */
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail {
+  --sidebar-bg: #071018;
+  --sidebar-bg-2: #101923;
+  --sidebar-panel: rgba(14, 22, 32, 0.98);
+  --sidebar-panel-strong: rgba(20, 30, 42, 0.99);
+  --sidebar-border: rgba(173, 188, 208, 0.2);
+  --sidebar-border-hot: rgba(255, 170, 55, 0.7);
+  --sidebar-text: #f7fbff;
+  --sidebar-body: #d8e3f0;
+  --sidebar-muted: #a7b5c7;
+  --sidebar-accent: #ff9f1c;
+  --sidebar-ok: #74d66d;
+  color-scheme: dark !important;
+  color: var(--sidebar-body) !important;
+  background:
+    radial-gradient(circle at 52% -16%, rgba(255, 159, 28, 0.34), transparent 36%),
+    radial-gradient(circle at -10% 66%, rgba(116, 214, 109, 0.17), transparent 38%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, var(--sidebar-bg-2) 0%, var(--sidebar-bg) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    22px 0 54px rgba(4, 9, 16, 0.34),
+    inset -1px 0 0 rgba(255, 159, 28, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail * {
+  text-shadow: none;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--sidebar-body) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    var(--sidebar-panel) !important;
+  border-color: var(--sidebar-border) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--sidebar-text) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--sidebar-muted) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  color: #08121c !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--sidebar-accent) 52%, var(--sidebar-ok) 100%) !important;
+  box-shadow:
+    0 14px 28px rgba(255, 159, 28, 0.26),
+    0 0 0 1px rgba(255, 255, 255, 0.42) inset !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .status-dot,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a::before {
+  background: var(--sidebar-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(116, 214, 109, 0.15),
+    0 0 18px rgba(116, 214, 109, 0.28) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a:hover,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a:focus-visible,
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 159, 28, 0.45), transparent 46%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.28), rgba(116, 214, 109, 0.1)),
+    var(--sidebar-panel-strong) !important;
+  border-color: var(--sidebar-border-hot) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.23), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.16), transparent 62%),
+    rgba(39, 28, 13, 0.98) !important;
+  border-color: var(--sidebar-border-hot) !important;
+}
+
+html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #ffd166 !important;
+}
