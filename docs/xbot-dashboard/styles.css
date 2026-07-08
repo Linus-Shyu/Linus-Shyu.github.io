@@ -22477,3 +22477,132 @@ html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-bud
   background: linear-gradient(90deg, var(--sidebar-rack-hot), var(--sidebar-rack-green)) !important;
   box-shadow: 0 0 16px rgba(255, 159, 28, 0.24) !important;
 }
+
+/* Readable rail lock: keep the ops-rack style, but show real navigation labels. */
+@media (min-width: 1081px) {
+  html[data-theme] body > .ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell {
+    grid-template-columns: 220px minmax(0, 1fr) !important;
+    gap: 16px !important;
+    padding: 14px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail {
+    top: 14px !important;
+    width: 220px !important;
+    height: calc(100vh - 28px) !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    border-width: 1px !important;
+    border-radius: 8px !important;
+    padding: 14px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand {
+    min-height: 58px !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 8px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand > span:not(.brand-mark),
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .env-card {
+    display: block !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+    width: 40px !important;
+    height: 40px !important;
+    flex-basis: 40px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div {
+    min-height: 52px !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    justify-items: start !important;
+    gap: 6px 8px !important;
+    padding: 8px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong {
+    max-width: none !important;
+    font-size: 11px !important;
+    text-align: left !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em {
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav {
+    gap: 7px !important;
+    margin: 16px 0 !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+    min-height: 42px !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding: 0 11px !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+    display: inline-block !important;
+    width: 8px !important;
+    height: 8px !important;
+    flex: 0 0 8px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+    display: none !important;
+    content: "" !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+    padding: 13px !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    white-space: normal !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+    font-size: 24px !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  html[data-theme] body > .ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-theme] body .ops-shell.ops-shell > aside.side-rail.side-rail {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+}
