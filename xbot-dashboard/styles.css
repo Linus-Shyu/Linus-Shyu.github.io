@@ -20107,6 +20107,332 @@ body .side-rail .rail-budget strong {
   }
 }
 
+.reactor-hud {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.44fr) minmax(470px, 1.05fr) minmax(280px, 0.72fr);
+  gap: 9px;
+  margin: 10px 0;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.24);
+  border-radius: 6px;
+  padding: 9px;
+  color: #dce6f3;
+  background:
+    radial-gradient(circle at 8% 0, rgba(0, 240, 255, 0.14), transparent 32%),
+    radial-gradient(circle at 58% -10%, rgba(0, 255, 102, 0.12), transparent 28%),
+    radial-gradient(circle at 100% 30%, rgba(255, 0, 122, 0.1), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.052) 0 1px, transparent 1px 30px),
+    linear-gradient(180deg, rgba(13, 20, 31, 0.98), rgba(7, 10, 16, 0.98));
+  box-shadow:
+    0 0 26px rgba(0, 240, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.reactor-hud.warn {
+  border-color: rgba(255, 159, 28, 0.48);
+  box-shadow:
+    0 0 26px rgba(255, 159, 28, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.reactor-hud.danger {
+  border-color: rgba(255, 0, 122, 0.56);
+  box-shadow:
+    0 0 30px rgba(255, 0, 122, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.reactor-hud-head,
+.reactor-hud-core,
+.reactor-lanes,
+.reactor-footer {
+  min-width: 0;
+}
+
+.reactor-hud-head {
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  border: 1px solid rgba(156, 174, 197, 0.2);
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.018)),
+    rgba(11, 17, 27, 0.88);
+}
+
+.reactor-hud-head span,
+.reactor-pressure span,
+.reactor-command span,
+.reactor-scope em,
+.reactor-lanes span,
+.reactor-footer span {
+  display: block;
+  overflow: hidden;
+  color: #9eacc0;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.reactor-hud-head strong {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 14px;
+  font-weight: 930;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.reactor-hud-head em {
+  width: fit-content;
+  border: 1px solid rgba(0, 255, 102, 0.34);
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.075);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.reactor-hud-core {
+  display: grid;
+  grid-template-columns: 84px minmax(170px, 1fr) minmax(176px, 0.72fr);
+  gap: 7px;
+}
+
+.reactor-pressure,
+.reactor-command,
+.reactor-scope span,
+.reactor-lanes article,
+.reactor-footer > div {
+  min-width: 0;
+  border: 1px solid rgba(156, 174, 197, 0.2);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.068), rgba(255, 255, 255, 0.018)),
+    rgba(11, 17, 27, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.reactor-pressure {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 9px;
+}
+
+.reactor-pressure strong {
+  color: #00f0ff;
+  font-family: var(--code-font);
+  font-size: 24px;
+  font-weight: 930;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(0, 240, 255, 0.28);
+}
+
+.reactor-pressure i,
+.reactor-lanes i {
+  display: block;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.reactor-pressure i::before {
+  content: "";
+  display: block;
+  width: var(--reactor-pressure, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9f1c, #00f0ff, #00ff66);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+.reactor-command {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 9px;
+}
+
+.reactor-command code {
+  display: block;
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 11px;
+  font-weight: 760;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.reactor-scope {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.reactor-scope span {
+  display: grid;
+  gap: 5px;
+  padding: 8px;
+}
+
+.reactor-scope strong,
+.reactor-lanes strong {
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 12px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reactor-scope .ok strong,
+.reactor-lanes .ok strong {
+  color: #00ff66;
+}
+
+.reactor-scope .warn strong,
+.reactor-lanes .warn strong {
+  color: #ff9f1c;
+}
+
+.reactor-scope .danger strong,
+.reactor-lanes .danger strong {
+  color: #ff007a;
+}
+
+.reactor-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.reactor-lanes article {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+}
+
+.reactor-lanes .ok {
+  border-color: rgba(0, 255, 102, 0.3);
+}
+
+.reactor-lanes .warn {
+  border-color: rgba(255, 159, 28, 0.38);
+}
+
+.reactor-lanes .danger {
+  border-color: rgba(255, 0, 122, 0.48);
+}
+
+.reactor-lanes b {
+  display: block;
+  width: var(--lane, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+}
+
+.reactor-lanes .warn b {
+  background: linear-gradient(90deg, #ff9f1c, #00f0ff);
+}
+
+.reactor-lanes .danger b {
+  background: linear-gradient(90deg, #ff007a, #ff9f1c);
+}
+
+.reactor-footer {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+  gap: 7px;
+}
+
+.reactor-footer > div {
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+}
+
+.reactor-trace {
+  display: flex;
+  height: 48px;
+  align-items: end;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.reactor-trace i {
+  display: block;
+  width: 100%;
+  min-width: 4px;
+  height: var(--h, 10%);
+  border-radius: 999px 999px 2px 2px;
+  background: linear-gradient(180deg, #00f0ff, rgba(0, 240, 255, 0.18));
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.18);
+}
+
+.reactor-safeguards {
+  display: grid;
+  gap: 5px;
+}
+
+.reactor-safeguards code {
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 102, 0.16);
+  border-radius: 5px;
+  padding: 4px 6px;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.055);
+  font-family: var(--code-font);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+  .reactor-hud,
+  .reactor-hud-core,
+  .reactor-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .reactor-footer {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .reactor-lanes,
+  .reactor-scope {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reactor-command code {
+    white-space: normal;
+  }
+}
+
 /* Rail contrast seal: keep the left command rail readable in light and dark UI. */
 html[data-theme="light"] body > .ops-shell > aside.side-rail,
 html[data-theme="dark"] body > .ops-shell > aside.side-rail,

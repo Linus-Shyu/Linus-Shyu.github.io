@@ -1046,6 +1046,24 @@ const translations = {
     http_triage_read_cached: "cached_only",
     http_triage_read_closed: "sealed",
     http_triage_read_review: "review",
+    reactor_hud_eyebrow: "Reactor HUD",
+    reactor_hud_title: "Growth fire-control bus",
+    reactor_hud_zero_reads: "0 live X reads",
+    reactor_hud_core_score: "pressure",
+    reactor_hud_primary_command: "primary command",
+    reactor_hud_safeguards: "safeguards",
+    reactor_hud_ingress: "L7 ingress",
+    reactor_hud_ack_rate: "ACK rate",
+    reactor_hud_outputs: "outputs",
+    reactor_hud_route_ops: "route ops",
+    reactor_hud_learning: "learning n",
+    reactor_hud_cost: "cost left",
+    reactor_hud_read_gate: "read",
+    reactor_hud_publish_gate: "publish",
+    reactor_hud_format: "format",
+    reactor_hud_hook: "hook",
+    reactor_hud_signal_trace: "signal trace",
+    reactor_hud_safe_loop: "safe loop",
     runlog_live_data: "live dashboard data",
     runlog_fallback_data: "fallback telemetry",
     runlog_stale_data: "stale telemetry",
@@ -1927,6 +1945,24 @@ const translations = {
     http_triage_read_cached: "仅缓存",
     http_triage_read_closed: "封闭",
     http_triage_read_review: "复核",
+    reactor_hud_eyebrow: "反应堆 HUD",
+    reactor_hud_title: "增长火控总线",
+    reactor_hud_zero_reads: "0 次实时 X 读取",
+    reactor_hud_core_score: "压力",
+    reactor_hud_primary_command: "主指令",
+    reactor_hud_safeguards: "安全护栏",
+    reactor_hud_ingress: "L7 入口",
+    reactor_hud_ack_rate: "ACK 率",
+    reactor_hud_outputs: "输出",
+    reactor_hud_route_ops: "路由操作",
+    reactor_hud_learning: "学习样本",
+    reactor_hud_cost: "成本剩余",
+    reactor_hud_read_gate: "读取",
+    reactor_hud_publish_gate: "发布",
+    reactor_hud_format: "格式",
+    reactor_hud_hook: "钩子",
+    reactor_hud_signal_trace: "信号轨迹",
+    reactor_hud_safe_loop: "安全闭环",
     runlog_live_data: "实时看板数据",
     runlog_fallback_data: "备用遥测",
     runlog_stale_data: "过期遥测",
@@ -4850,6 +4886,148 @@ function renderHttpTriageStrip() {
       <span>${escapeHtml(t("http_triage_runbook"))}</span>
       <p>${escapeHtml(triageAction(triage))}</p>
       <code>${escapeHtml(triageSummary(triage))}</code>
+    </div>
+  `;
+}
+
+function reactorHudData() {
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const last7d = dashboardData.last7d || fallbackData.last7d || {};
+  const actions = dashboardData.actions || fallbackData.actions || [];
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const { remaining, ratio } = apiBudget();
+  const cadence = cadenceData();
+  const triage = apiStatusTriage();
+  const { bestHook } = learningData();
+  const opportunity = growthOpportunityScorerData();
+  const topPosts = [...(last24h.topPosts || []), ...(last7d.topPosts || [])];
+  const bestScore = Math.max(number(profile.baselineScore), ...topPosts.map((post) => number(post.score)), 0);
+  const impressions24h = number(last24h.impressions);
+  const engagements24h = number(last24h.likes) + number(last24h.reposts) + number(last24h.replies);
+  const ackRate = impressions24h > 0 ? (engagements24h / impressions24h) * 100 : 0;
+  const measuredPosts = number(profile.measuredPosts, number(profile.trackedPosts, number(last7d.posts)));
+  const opportunityScore = number(opportunity?.opportunityScore);
+  const routeOps = actions.length;
+  const outputCount = drafts.length;
+  const faultPenalty = triage.severity === "danger" ? 22 : triage.severity === "warn" ? 10 : 0;
+  const pressure = clamp(
+    10 +
+      Math.min(24, impressions24h / 12) +
+      Math.min(18, ackRate * 4.5) +
+      Math.min(16, outputCount * 3.4) +
+      Math.min(16, routeOps * 4.2) +
+      Math.min(16, bestScore * 2.2) +
+      Math.min(14, opportunityScore * 0.14) -
+      faultPenalty,
+    0,
+    100,
+  );
+  const severity = triage.severity === "danger"
+    ? "danger"
+    : pressure >= 62 && remaining > 0
+      ? "ok"
+      : pressure >= 36
+        ? "warn"
+        : "danger";
+  const chartValues = chartPointValues(dashboardData.charts?.impressions24h);
+  const traceValues = (chartValues.length ? chartValues : (last24h.topPosts || []).map((post) => number(post.impressions)))
+    .filter((value) => Number.isFinite(value))
+    .slice(-18);
+  const maxTrace = Math.max(1, ...traceValues);
+  const readGate = httpTriageReadGate(triage);
+  const publishGate = cadence.publishAllowed && !cadence.willBlockPublish ? "open" : "review";
+  const primaryCommand =
+    opportunity?.primaryCommand ||
+    cadence.nextAction ||
+    (routeOps ? "Route through prepared X web targets; keep read partitions sealed." : "Generate manual route output before the next standalone packet.");
+  const format = opportunity?.activeOpportunity?.formatId || cadence.topicTimingWindow?.activeLane?.formatId || bestHook?.name || "decision_rule";
+  const hook = bestHook?.name || opportunity?.activeOpportunity?.pillarId || "decision_rule";
+  const lanes = [
+    { id: "ingress", label: t("reactor_hud_ingress"), value: formatNumber(impressions24h), score: clamp(impressions24h / 4, 0, 100), status: impressions24h >= 180 ? "ok" : impressions24h >= 40 ? "warn" : "danger" },
+    { id: "ack", label: t("reactor_hud_ack_rate"), value: `${formatNumber(ackRate, 1)}%`, score: clamp(ackRate * 18, 0, 100), status: ackRate >= 4 ? "ok" : ackRate >= 1 ? "warn" : "danger" },
+    { id: "outputs", label: t("reactor_hud_outputs"), value: formatNumber(outputCount), score: clamp(outputCount * 18, 0, 100), status: outputCount >= 5 ? "ok" : outputCount >= 2 ? "warn" : "danger" },
+    { id: "routes", label: t("reactor_hud_route_ops"), value: formatNumber(routeOps), score: clamp(routeOps * 22, 0, 100), status: routeOps >= 3 ? "ok" : routeOps >= 1 ? "warn" : "danger" },
+    { id: "learning", label: t("reactor_hud_learning"), value: formatNumber(measuredPosts), score: clamp(measuredPosts / 1.2, 0, 100), status: measuredPosts >= 80 ? "ok" : measuredPosts >= 20 ? "warn" : "danger" },
+    { id: "cost", label: t("reactor_hud_cost"), value: `$${remaining.toFixed(2)}`, score: clamp(100 - ratio, 0, 100), status: remaining >= 1 ? "ok" : remaining > 0 ? "warn" : "danger" },
+  ];
+  const safeguards = [
+    readGate.key ? t(readGate.key) : "cached_only",
+    cadence.reasonCode || "cadence_guard",
+    opportunity?.zeroExtraXReads === false ? "review reads" : t("reactor_hud_zero_reads"),
+  ];
+  return {
+    severity,
+    pressure,
+    primaryCommand,
+    zeroExtraXReads: opportunity?.zeroExtraXReads !== false,
+    readGate: readGate.key ? t(readGate.key) : "cached_only",
+    readGateSeverity: readGate.severity,
+    publishGate,
+    publishSeverity: publishGate === "open" ? "ok" : "warn",
+    format,
+    hook,
+    lanes,
+    traceValues,
+    maxTrace,
+    safeguards,
+  };
+}
+
+function renderReactorHud() {
+  const target = $("#reactor-hud");
+  if (!target) return;
+  const hud = reactorHudData();
+  const pressure = clamp(number(hud.pressure), 0, 100);
+  const trace = hud.traceValues.length ? hud.traceValues : [0, 0, 0, 0, 0, 0];
+  target.className = `reactor-hud ${escapeHtml(hud.severity)}`;
+  target.innerHTML = `
+    <div class="reactor-hud-head">
+      <div>
+        <span>${escapeHtml(t("reactor_hud_eyebrow"))}</span>
+        <strong>${escapeHtml(t("reactor_hud_title"))}</strong>
+      </div>
+      <em>${escapeHtml(hud.zeroExtraXReads ? t("reactor_hud_zero_reads") : "X read review")}</em>
+    </div>
+    <div class="reactor-hud-core" style="--reactor-pressure:${pressure.toFixed(1)}%">
+      <div class="reactor-pressure">
+        <span>${escapeHtml(t("reactor_hud_core_score"))}</span>
+        <strong>${escapeHtml(formatNumber(pressure, 1))}</strong>
+        <i></i>
+      </div>
+      <div class="reactor-command">
+        <span>${escapeHtml(t("reactor_hud_primary_command"))}</span>
+        <code>${escapeHtml(sreText(hud.primaryCommand))}</code>
+      </div>
+      <div class="reactor-scope">
+        <span class="${escapeHtml(hud.readGateSeverity)}"><em>${escapeHtml(t("reactor_hud_read_gate"))}</em><strong>${escapeHtml(hud.readGate)}</strong></span>
+        <span class="${escapeHtml(hud.publishSeverity)}"><em>${escapeHtml(t("reactor_hud_publish_gate"))}</em><strong>${escapeHtml(hud.publishGate)}</strong></span>
+        <span><em>${escapeHtml(t("reactor_hud_format"))}</em><strong>${escapeHtml(formatTemplate(hud.format))}</strong></span>
+        <span><em>${escapeHtml(t("reactor_hud_hook"))}</em><strong>${escapeHtml(formatTemplate(hud.hook))}</strong></span>
+      </div>
+    </div>
+    <div class="reactor-lanes">
+      ${hud.lanes.map((lane) => `
+        <article class="${escapeHtml(lane.status)}" style="--lane:${clamp(number(lane.score), 0, 100).toFixed(1)}%">
+          <span>${escapeHtml(lane.label)}</span>
+          <strong>${escapeHtml(gateLabel(lane.value))}</strong>
+          <i><b></b></i>
+        </article>
+      `).join("")}
+    </div>
+    <div class="reactor-footer">
+      <div>
+        <span>${escapeHtml(t("reactor_hud_signal_trace"))}</span>
+        <div class="reactor-trace">
+          ${trace.map((value) => `<i style="--h:${clamp((number(value) / hud.maxTrace) * 100, 5, 100).toFixed(1)}%"></i>`).join("")}
+        </div>
+      </div>
+      <div>
+        <span>${escapeHtml(t("reactor_hud_safeguards"))}</span>
+        <div class="reactor-safeguards">
+          ${hud.safeguards.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+        </div>
+      </div>
     </div>
   `;
 }
@@ -11178,6 +11356,7 @@ function render() {
   renderHeader();
   renderHero();
   renderHttpTriageStrip();
+  renderReactorHud();
   renderTelemetryContract();
   renderExpoStory();
   renderAutopilotCommandStrip();
