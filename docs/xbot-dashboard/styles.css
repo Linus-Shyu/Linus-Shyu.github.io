@@ -14389,3 +14389,148 @@ body:not(.demo-mode) .demo-strip {
     margin: 12px 0 9px !important;
   }
 }
+
+/* Light rail EOF override: keep the rail dark and readable in light UI. */
+:root[data-theme="light"] {
+  --nav-rail-bg: #080d14;
+  --nav-rail-bg-mid: #0d1520;
+  --nav-rail-bg-soft: #172231;
+  --nav-rail-panel: rgba(18, 27, 39, 0.96);
+  --nav-rail-panel-strong: rgba(35, 32, 22, 0.98);
+  --nav-rail-line: rgba(148, 163, 184, 0.26);
+  --nav-rail-line-hot: rgba(255, 159, 28, 0.64);
+  --nav-rail-line-boundary: rgba(255, 209, 102, 0.58);
+  --nav-rail-text: #eef5ff;
+  --nav-rail-muted: #a8b5c7;
+  --nav-rail-hot: #ff9f1c;
+  --nav-rail-boundary: #ffd166;
+  --nav-rail-green: #74d66b;
+  --nav-rail-glow: rgba(255, 159, 28, 0.22);
+  --nav-rail-boundary-glow: rgba(255, 209, 102, 0.2);
+}
+
+:root[data-theme="light"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: rgba(148, 163, 184, 0.28) !important;
+  background-color: var(--nav-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(255, 159, 28, 0.16), transparent 34%),
+    radial-gradient(circle at 8% 72%, rgba(116, 214, 107, 0.1), transparent 28%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 44%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 44px),
+    linear-gradient(180deg, var(--nav-rail-bg-soft) 0%, var(--nav-rail-bg-mid) 42%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    18px 0 34px rgba(8, 13, 20, 0.22),
+    inset -1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 1px 0 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .env-card,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="light"] .rail-budget {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.055), transparent 64%) !important;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.085) !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="light"] .env-line strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="light"] .rail-nav a::after {
+  color: var(--nav-rail-text) !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.28) !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="light"] .env-card > span,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .brand-mark {
+  color: #111827 !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--nav-rail-hot) 56%, #86efac 100%) !important;
+  box-shadow:
+    0 14px 28px var(--nav-rail-glow),
+    0 0 0 1px rgba(255, 255, 255, 0.28) inset !important;
+}
+
+:root[data-theme="light"] .env-line .status-dot,
+:root[data-theme="light"] .rack-mini span {
+  background: var(--nav-rail-green) !important;
+  box-shadow: 0 0 0 4px rgba(116, 214, 107, 0.16) !important;
+}
+
+:root[data-theme="light"] .rail-nav a {
+  color: var(--nav-rail-text) !important;
+  border-color: rgba(148, 163, 184, 0.2) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    rgba(18, 27, 39, 0.78) !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .rail-nav a::before {
+  background: rgba(168, 181, 199, 0.78) !important;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.08) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a:focus-visible,
+:root[data-theme="light"] .rail-nav a.active {
+  color: #fff8e9 !important;
+  border-color: var(--nav-rail-line-hot) !important;
+  background:
+    radial-gradient(circle at 17% 50%, rgba(255, 159, 28, 0.24), transparent 42%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.18), rgba(116, 214, 107, 0.055)),
+    rgba(255, 255, 255, 0.05) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(255, 159, 28, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::before,
+:root[data-theme="light"] .rail-nav a:focus-visible::before,
+:root[data-theme="light"] .rail-nav a.active::before {
+  background: var(--nav-rail-hot) !important;
+  box-shadow: 0 0 0 4px var(--nav-rail-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget {
+  border-color: var(--nav-rail-line-boundary) !important;
+  background-color: var(--nav-rail-panel-strong) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.18), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.11), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02)) !important;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.28),
+    0 0 22px var(--nav-rail-boundary-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+:root[data-theme="light"] .rail-budget strong {
+  color: var(--nav-rail-boundary) !important;
+  text-shadow: 0 0 18px var(--nav-rail-boundary-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter {
+  background: rgba(148, 163, 184, 0.24) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.22) !important;
+}

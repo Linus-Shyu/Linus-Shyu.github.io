@@ -2417,6 +2417,14 @@ function sreText(value) {
   const raw = String(value ?? "");
   if (!raw) return raw;
   const enText = raw
+    .replace(/\bfollowers\b/gi, "active conns")
+    .replace(/\bfollower\b/gi, "active conn")
+    .replace(/\bmanual replies\b/gi, "manual route ops")
+    .replace(/\buseful replies\b/gi, "high-signal route ops")
+    .replace(/\bcopy-ready replies\b/gi, "queued swarm outputs")
+    .replace(/\breply-ready\b/gi, "route-ready")
+    .replace(/\breply text\b/gi, "output payload")
+    .replace(/\breply output\b/gi, "route output")
     .replace(/\bposts\b/gi, "packets")
     .replace(/\bpost\b/gi, "packet")
     .replace(/\bimpressions\b/gi, "L7 events")
@@ -2425,6 +2433,15 @@ function sreText(value) {
     .replace(/\blike\b/gi, "ACK")
     .replace(/\breplies\b/gi, "route ops")
     .replace(/\breply\b/gi, "route op")
+    .replace(/\bfollows\b/gi, "follow mutations")
+    .replace(/\bfollow\b(?!-)/gi, "follow mutation")
+    .replace(/\bconversations\b/gi, "thread lanes")
+    .replace(/\bconversation\b/gi, "thread lane")
+    .replace(/\bthreads\b/gi, "thread lanes")
+    .replace(/\bthread\b/gi, "thread lane")
+    .replace(/\bsearch\/read budget\b/gi, "read partition budget")
+    .replace(/\bsearch\/read API\b/gi, "read partition")
+    .replace(/\bsearch\/read\b/gi, "read partition")
     .replace(/\bdrafts\b/gi, "outputs")
     .replace(/\bdraft\b/gi, "output");
   if (currentLang !== "zh") return enText;
@@ -2432,8 +2449,12 @@ function sreText(value) {
     .replace(/条帖子|条帖/g, "个数据包")
     .replace(/帖子/g, "数据包")
     .replace(/曝光/g, "L7 事件")
+    .replace(/粉丝/g, "活跃连接")
     .replace(/点赞|赞/g, "ACK")
     .replace(/回复/g, "路由操作")
+    .replace(/对话/g, "线程通道")
+    .replace(/线程/g, "线程通道")
+    .replace(/搜索\/读取/g, "读取分区")
     .replace(/草稿/g, "输出");
 }
 
@@ -6630,15 +6651,15 @@ function renderActions() {
       `;
     })
     .join("");
-  const sloRules = (operatorSlo.rules || []).slice(0, 3).map((rule) => `<li>${escapeHtml(rule)}</li>`).join("");
+  const sloRules = (operatorSlo.rules || []).slice(0, 3).map((rule) => `<li>${escapeHtml(sreText(rule))}</li>`).join("");
   const protocolCopy = [
-    primaryProtocol.objective || null,
-    ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${step.detail || ""}`),
+    primaryProtocol.objective ? sreText(primaryProtocol.objective) : null,
+    ...protocolSteps.map((step, index) => `${index + 1}. ${step.label || step.id}: ${sreText(step.detail || "")}`),
     stopConditions.length ? "" : null,
     stopConditions.length ? `${t("operator_stop")}:` : null,
-    ...stopConditions.map((item) => `- ${item}`),
+    ...stopConditions.map((item) => `- ${sreText(item)}`),
     primaryProtocol.writeback ? "" : null,
-    primaryProtocol.writeback ? `${t("operator_writeback")}: ${primaryProtocol.writeback}` : null,
+    primaryProtocol.writeback ? `${t("operator_writeback")}: ${sreText(primaryProtocol.writeback)}` : null,
   ].filter((line) => line != null).join("\n");
   const primaryPacket = [
     `${t("operator_packet_route")}: ${localizedPrimary.label || primary.label || "-"}`,
@@ -6646,7 +6667,7 @@ function renderActions() {
     `${t("operator_packet_replies")}: ${t("dispatch_replies", { count: formatNumber(primary.targetReplies || 1) })}`,
     `${t("operator_packet_lift")}: ${t("dispatch_expected", { lift: formatNumber(primary.expectedLiftPct || 0, 1) })}`,
     `${t("operator_packet_budget")}: ${primaryCostLabel}`,
-    primary.evidence ? `Evidence: ${primary.evidence}` : null,
+    primary.evidence ? `Evidence: ${sreText(primary.evidence)}` : null,
     protocolCopy ? "" : null,
     protocolCopy,
     "",
@@ -6675,7 +6696,7 @@ function renderActions() {
             <strong>${escapeHtml(packet.routeLabel || packet.label || "-")}</strong>
             <em>${escapeHtml(packet.confidence || "low")} · ${escapeHtml(formatNumber(packet.operatorSlaMinutes || 0))}m SLA</em>
           </div>
-          <p>${escapeHtml(packet.reason || packet.evidence || packet.draftAngle || "-")}</p>
+          <p>${escapeHtml(sreText(packet.reason || packet.evidence || packet.draftAngle || "-"))}</p>
           <blockquote>${escapeHtml(packet.draftText || "-")}</blockquote>
           <div class="manifest-packet-actions">
             ${packet.routeUrl ? `<a class="button button-primary" href="${escapeHtml(packet.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("open_search"))}</a>` : ""}
@@ -6722,7 +6743,7 @@ function renderActions() {
             <div><dt>${escapeHtml(t("operator_slo_target"))}</dt><dd>${escapeHtml(formatNumber(lane.targetReplies || 0))}</dd></div>
             <div><dt>${escapeHtml(t("operator_slo_lift"))}</dt><dd>${escapeHtml(`+${formatNumber(lane.expectedLiftPct || 0, 1)}%`)}</dd></div>
           </dl>
-          <p>${escapeHtml(lane.action || lane.reason || "-")}</p>
+          <p>${escapeHtml(sreText(lane.action || lane.reason || "-"))}</p>
         </div>
       `;
     })
@@ -6738,7 +6759,7 @@ function renderActions() {
             <span class="step">${String(mission.priority || index + 1).padStart(2, "0")}</span>
             <div>
               <h3>${escapeHtml(mission.label || localizedRoute.label)}</h3>
-              <p>${escapeHtml(localizedRoute.reason || mission.evidence || "-")}</p>
+              <p>${escapeHtml(sreText(localizedRoute.reason || mission.evidence || "-"))}</p>
             </div>
           </div>
           <div class="mission-meta">
@@ -6781,7 +6802,7 @@ function renderActions() {
       </div>
       <div class="manifest-command">
         <span>${escapeHtml(t("dispatch_manifest_next"))}</span>
-        <strong>${escapeHtml(dispatchPacket.nextAction || "-")}</strong>
+        <strong>${escapeHtml(sreText(dispatchPacket.nextAction || "-"))}</strong>
       </div>
       <div class="route-amplifier ${escapeHtml(routeAmplifier.severity || "ok")}">
         <div class="amp-head">
@@ -6807,8 +6828,8 @@ function renderActions() {
         <aside>
           <div class="manifest-section-title"><span>${escapeHtml(t("dispatch_manifest_checks"))}</span><strong>${escapeHtml(manifestStatus)}</strong></div>
           <div class="manifest-checks">${manifestChecks}</div>
-          <pre class="manifest-copy"><code>${escapeHtml(dispatchPacket.copyBlock || "")}</code></pre>
-          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(dispatchPacket.copyBlock || "")}">${escapeHtml(t("dispatch_manifest_copy"))}</button>
+          <pre class="manifest-copy"><code>${escapeHtml(sreText(dispatchPacket.copyBlock || ""))}</code></pre>
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(dispatchPacket.copyBlock || ""))}">${escapeHtml(t("dispatch_manifest_copy"))}</button>
         </aside>
       </div>
     </article>
@@ -6852,7 +6873,7 @@ function renderActions() {
                 aria-label="${escapeHtml(`${step.label || step.id || `step ${index + 1}`} ${status}`)}"
               >
                 <span><i>${String(index + 1).padStart(2, "0")}</i><b>${escapeHtml(step.label || step.id || "-")}</b></span>
-                <strong>${escapeHtml(step.detail || "-")}</strong>
+                <strong>${escapeHtml(sreText(step.detail || "-"))}</strong>
                 <small>${escapeHtml(status)}</small>
               </button>
             </li>
@@ -6861,10 +6882,10 @@ function renderActions() {
         ${stopConditions.length ? `
           <div class="packet-stop">
             <span>${escapeHtml(t("operator_stop"))}</span>
-            <p>${escapeHtml(stopConditions.slice(0, 2).join(" · "))}</p>
+            <p>${escapeHtml(sreText(stopConditions.slice(0, 2).join(" · ")))}</p>
           </div>
         ` : ""}
-        ${primaryProtocol.writeback ? `<p class="packet-writeback"><span>${escapeHtml(t("operator_writeback"))}</span>${escapeHtml(primaryProtocol.writeback)}</p>` : ""}
+        ${primaryProtocol.writeback ? `<p class="packet-writeback"><span>${escapeHtml(t("operator_writeback"))}</span>${escapeHtml(sreText(primaryProtocol.writeback))}</p>` : ""}
       </div>
       <div class="row-actions">
         ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
@@ -6932,7 +6953,7 @@ function renderActions() {
       <div>
         <span class="pill pill-neutral">${t("zero_api_action")}</span>
         <h3>${escapeHtml(t("dispatch_title"))}</h3>
-        <p><strong>${escapeHtml(t("dispatch_primary"))}: ${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong> · ${escapeHtml(localizedPrimary.reason || primary.evidence || t("daily_action_copy"))}</p>
+        <p><strong>${escapeHtml(t("dispatch_primary"))}: ${escapeHtml(localizedPrimary.label || primary.label || "-")}</strong> · ${escapeHtml(sreText(localizedPrimary.reason || primary.evidence || t("daily_action_copy")))}</p>
         <div class="row-actions">
           ${primary.routeUrl ? `<a class="button button-primary" href="${escapeHtml(primary.routeUrl)}" target="_blank" rel="noreferrer">${t("open_search")}: ${escapeHtml(localizedPrimary.label)}</a>` : ""}
           <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(primaryDraft)}">${t("copy_first_reply")}</button>
