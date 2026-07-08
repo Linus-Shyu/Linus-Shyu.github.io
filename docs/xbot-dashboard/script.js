@@ -1036,6 +1036,16 @@ const translations = {
     decision_trace_selected_packet: "Selected packet",
     decision_trace_candidate_pool: "Candidate pool",
     decision_trace_mutation_bus: "Angle mutation bus",
+    decision_trace_router_bus: "Angle load router",
+    decision_trace_router_active: "active slot",
+    decision_trace_router_ranked: "ranked formats",
+    decision_trace_router_score: "router score",
+    decision_trace_router_load: "L7 load",
+    decision_trace_router_lanes: "route lanes",
+    decision_trace_router_mode: "mode",
+    decision_trace_router_empty: "Router trace not recorded yet.",
+    decision_trace_bandit: "bandit",
+    decision_trace_hook: "hook",
     decision_trace_gate_state: "Gate state",
     decision_trace_empty: "No generation decision trace recorded yet.",
     decision_trace_rank: "rank {rank}/{total}",
@@ -1787,6 +1797,16 @@ const translations = {
     decision_trace_selected_packet: "选中数据包",
     decision_trace_candidate_pool: "候选池",
     decision_trace_mutation_bus: "角度变异总线",
+    decision_trace_router_bus: "角度负载路由器",
+    decision_trace_router_active: "活动时隙",
+    decision_trace_router_ranked: "排序格式",
+    decision_trace_router_score: "路由评分",
+    decision_trace_router_load: "L7 负载",
+    decision_trace_router_lanes: "路由通道",
+    decision_trace_router_mode: "模式",
+    decision_trace_router_empty: "还没有记录路由器 trace。",
+    decision_trace_bandit: "老虎机",
+    decision_trace_hook: "钩子",
     decision_trace_gate_state: "闸门状态",
     decision_trace_empty: "还没有记录生成决策 trace。",
     decision_trace_rank: "排名 {rank}/{total}",
@@ -7669,9 +7689,15 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
     templateId: candidate?.templateId || candidate?.template || "-",
     score: number(candidate?.score),
     angleMutationScore: number(candidate?.angleMutationScore),
+    hookPatternScore: number(candidate?.hookPatternScore),
+    contentBanditScore: number(candidate?.contentBanditScore),
+    angleLoadRouterScore: number(candidate?.angleLoadRouterScore),
     reason: candidate?.reason || "",
     diagnostics: Array.isArray(candidate?.diagnostics) ? candidate.diagnostics : [],
     angleMutationDiagnostics: Array.isArray(candidate?.angleMutationDiagnostics) ? candidate.angleMutationDiagnostics : [],
+    hookPatternDiagnostics: Array.isArray(candidate?.hookPatternDiagnostics) ? candidate.hookPatternDiagnostics : [],
+    contentBanditDiagnostics: Array.isArray(candidate?.contentBanditDiagnostics) ? candidate.contentBanditDiagnostics : [],
+    angleLoadRouterDiagnostics: Array.isArray(candidate?.angleLoadRouterDiagnostics) ? candidate.angleLoadRouterDiagnostics : [],
     qualityIssues: Array.isArray(candidate?.qualityIssues) ? candidate.qualityIssues : [],
     aiQualityVerdict: candidate?.aiQualityVerdict || null,
     characterCount: number(candidate?.characterCount, String(text).length),
@@ -7683,8 +7709,12 @@ function derivedGenerationDecisionTrace() {
   const post = bestPost();
   if (!post?.text) return null;
   const reactor = angleMutationReactorData();
+  const router = angleLoadRouterData();
   const score = number(post.candidateScore, number(post.score));
   const mutationScore = number(post.angleMutationScore, number(reactor.mutationScore));
+  const routerLanes = Array.isArray(router?.lanes) ? router.lanes : [];
+  const routedLane = routerLanes.find((lane) => lane.formatId === post.template || lane.id === post.template) || router?.activeSlot || null;
+  const routerScore = routedLane ? Math.min(10, number(routedLane.score) / 10) : 0;
   const diagnostics = [
     post.source ? `source:${post.source}` : null,
     post.impressions != null ? `l7:${formatNumber(post.impressions)}` : null,
@@ -7697,9 +7727,15 @@ function derivedGenerationDecisionTrace() {
     templateId: post.template || "decision_rule",
     score,
     angleMutationScore: mutationScore,
+    angleLoadRouterScore: routerScore,
+    contentBanditScore: number(post.contentBanditScore),
+    hookPatternScore: number(post.hookPatternScore),
     reason: post.candidateReason || proofReason(post),
     diagnostics,
     angleMutationDiagnostics: post.angleMutationDiagnostics || [`bias:${reactor.primaryMutation?.after || post.template || "decision_rule"}`],
+    angleLoadRouterDiagnostics: routedLane
+      ? [`route:${routedLane.formatId || routedLane.id}`, `slot:${routedLane.windowLabel || "-"}`, `load:${formatNumber(routedLane.loadScore || 0, 1)}`]
+      : [],
     qualityIssues: [],
     characterCount: String(post.text || "").length,
     text: post.text || "",
@@ -7719,6 +7755,18 @@ function derivedGenerationDecisionTrace() {
       severity: reactor.severity || "warn",
       mutationScore,
       nextPromptBias: reactor.nextPromptBias || "-",
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+    },
+    angleLoadRouter: {
+      mode: router?.mode || "derived_cached_angle_load_router",
+      derived: true,
+      severity: router?.severity || "warn",
+      activeSlot: router?.activeSlot || null,
+      activeCommand: router?.activeCommand || "",
+      rankedFormatIds: routerLanes.map((lane) => lane.formatId || lane.id).filter(Boolean),
+      lanes: routerLanes,
+      gates: Array.isArray(router?.gates) ? router.gates : [],
       zeroExtraXReads: true,
       estimatedXReadOps: 0,
     },
@@ -7755,9 +7803,133 @@ function candidateDiagnosticText(candidate) {
   return [
     ...candidate.diagnostics,
     ...candidate.angleMutationDiagnostics,
+    ...candidate.angleLoadRouterDiagnostics,
+    ...candidate.contentBanditDiagnostics,
+    ...candidate.hookPatternDiagnostics,
     ...candidate.qualityIssues.map((issue) => `gate:${issue}`),
     ...verdict,
   ].filter(Boolean).slice(0, 9).join(" · ") || "-";
+}
+
+function normalizeRouterLane(lane, index = 0) {
+  return {
+    id: lane?.id || lane?.formatId || `lane_${index + 1}`,
+    label: lane?.label || formatTemplate(lane?.formatId || lane?.id),
+    formatId: lane?.formatId || lane?.id || "",
+    windowLabel: lane?.windowLabel || lane?.hour || "-",
+    action: lane?.action || lane?.status || "watch",
+    status: lane?.status || lane?.action || "watch",
+    angle: lane?.angle || lane?.reason || "",
+    score: number(lane?.score),
+    loadScore: number(lane?.loadScore),
+    samples: number(lane?.samples),
+    reason: lane?.reason || "",
+  };
+}
+
+function traceAngleLoadRouterData(trace, candidates, selected) {
+  const recorded = trace?.angleLoadRouter || null;
+  const fallback = angleLoadRouterData();
+  const source = recorded || fallback || {};
+  const sourceLanes = Array.isArray(source.lanes) ? source.lanes : [];
+  const lanes = sourceLanes.map((lane, index) => normalizeRouterLane(lane, index));
+  const activeSlot = source.activeSlot
+    ? normalizeRouterLane(source.activeSlot, 0)
+    : lanes[0] || null;
+  const rankedFormatIds = Array.isArray(source.rankedFormatIds) && source.rankedFormatIds.length
+    ? source.rankedFormatIds
+    : lanes.map((lane) => lane.formatId || lane.id).filter(Boolean);
+  const selectedFormat = selected?.templateId || trace?.selectedTemplateId || "";
+  const selectedLane = lanes.find((lane) => lane.formatId === selectedFormat || lane.id === selectedFormat) || null;
+  const candidateFormats = candidates
+    .map((candidate) => candidate.templateId)
+    .filter(Boolean)
+    .slice(0, 5);
+  return {
+    mode: source.mode || "derived_cached_angle_load_router",
+    derived: !recorded || Boolean(source.derived),
+    severity: source.severity || activeSlot?.status || "warn",
+    activeSlot,
+    selectedLane,
+    activeCommand: source.activeCommand || source.directives?.[0] || activeSlot?.reason || "",
+    rankedFormatIds: rankedFormatIds.length ? rankedFormatIds : candidateFormats,
+    lanes,
+    gates: Array.isArray(source.gates) ? source.gates : [],
+    zeroExtraXReads: source.zeroExtraXReads !== false,
+    estimatedXReadOps: number(source.estimatedXReadOps),
+  };
+}
+
+function routerGatePill(gate) {
+  const status = gate?.status || "warn";
+  return `
+    <span class="${escapeHtml(status)}">
+      <em>${escapeHtml(gate?.label || gate?.id || t("angle_router_gate"))}</em>
+      <strong>${escapeHtml(gate?.value || "-")}</strong>
+    </span>
+  `;
+}
+
+function renderDecisionRouterBus(trace, candidates, selected) {
+  const router = traceAngleLoadRouterData(trace, candidates, selected);
+  if (!router.activeSlot && !router.lanes.length && !router.rankedFormatIds.length) {
+    return `<p class="trace-router-empty">${escapeHtml(t("decision_trace_router_empty"))}</p>`;
+  }
+  const active = router.activeSlot || {};
+  const laneSource = router.lanes.length ? router.lanes : router.rankedFormatIds.map((formatId, index) => normalizeRouterLane({ formatId, id: formatId }, index));
+  const gateHtml = router.gates.length
+    ? router.gates.slice(0, 4).map((gate) => routerGatePill(gate)).join("")
+    : routerGatePill({ label: "X_READ_PARTITION", value: router.zeroExtraXReads ? "cached_only" : "live", status: router.zeroExtraXReads ? "ok" : "warn" });
+  const mode = angleRouterModeLabel(router.mode);
+  const modeMeta = `${router.derived ? t("decision_trace_derived") : t("decision_trace_real")} · ${router.zeroExtraXReads ? t("decision_trace_zero_reads") : `${formatNumber(router.estimatedXReadOps)} ${t("decision_trace_x_reads")}`}`;
+  return `
+    <section class="trace-router-bus ${escapeHtml(router.severity || "warn")}">
+      <div class="trace-router-head">
+        <div>
+          <span>${escapeHtml(t("decision_trace_router_bus"))}</span>
+          <strong>${escapeHtml(t("decision_trace_router_mode"))}: ${escapeHtml(mode)}</strong>
+        </div>
+        <em>${escapeHtml(modeMeta)}</em>
+      </div>
+      <div class="trace-router-core">
+        <article>
+          <span>${escapeHtml(t("decision_trace_router_active"))}</span>
+          <strong>${escapeHtml(active.label || formatTemplate(active.formatId) || "-")}</strong>
+          <small>${escapeHtml(active.windowLabel || "-")} UTC · ${escapeHtml(active.action || active.status || "watch")}</small>
+        </article>
+        <article>
+          <span>${escapeHtml(t("decision_trace_router_score"))}</span>
+          <strong>${escapeHtml(formatNumber(active.score || router.selectedLane?.score || 0, 1))}</strong>
+          <div style="--router-meter:${clamp(number(active.score || router.selectedLane?.score), 0, 100).toFixed(1)}%"><i></i></div>
+        </article>
+        <article>
+          <span>${escapeHtml(t("decision_trace_router_load"))}</span>
+          <strong>${escapeHtml(formatNumber(active.loadScore || router.selectedLane?.loadScore || 0, 1))}</strong>
+          <div style="--router-meter:${clamp(number(active.loadScore || router.selectedLane?.loadScore), 0, 100).toFixed(1)}%"><i></i></div>
+        </article>
+      </div>
+      <div class="trace-router-gates">${gateHtml}</div>
+      <div class="trace-router-lanes" aria-label="${escapeHtml(t("decision_trace_router_lanes"))}">
+        ${laneSource.slice(0, 5).map((lane) => `
+          <article class="${escapeHtml(lane.status || "watch")} ${selected.templateId === lane.formatId ? "selected" : ""}" style="--lane-meter:${clamp(number(lane.score), 0, 100).toFixed(1)}%">
+            <div>
+              <span>${escapeHtml(lane.windowLabel || "-")} UTC · ${escapeHtml(lane.action || "watch")}</span>
+              <strong>${escapeHtml(lane.label || formatTemplate(lane.formatId))}</strong>
+            </div>
+            <em>${escapeHtml(formatNumber(lane.score || 0, 1))}</em>
+            <i></i>
+          </article>
+        `).join("")}
+      </div>
+      <div class="trace-router-ranked">
+        <span>${escapeHtml(t("decision_trace_router_ranked"))}</span>
+        <div>
+          ${router.rankedFormatIds.slice(0, 6).map((formatId) => `<b>${escapeHtml(formatTemplate(formatId))}</b>`).join("")}
+        </div>
+        <code>${escapeHtml(router.activeCommand || active.reason || active.angle || "-")}</code>
+      </div>
+    </section>
+  `;
 }
 
 function renderGenerationDecisionTrace() {
@@ -7779,6 +7951,7 @@ function renderGenerationDecisionTrace() {
   const maxScore = Math.max(1, ...candidates.map((candidate) => number(candidate.score)));
   const total = number(trace.candidateCount, candidates.length);
   const mutation = trace.angleMutation || {};
+  const routerPanel = renderDecisionRouterBus(trace, candidates, selected);
   const selectedPacket = [
     `${t("decision_trace_rank", { rank: formatNumber(trace.selectedRank || selected.rank), total: formatNumber(total) })}`,
     `${t("decision_trace_score", { score: formatNumber(trace.selectedScore ?? selected.score, 1) })}`,
@@ -7825,6 +7998,7 @@ function renderGenerationDecisionTrace() {
         </div>
       </aside>
     </div>
+    ${routerPanel}
     <div class="trace-section-title pool">
       <span>${escapeHtml(t("decision_trace_candidate_pool"))}</span>
       <strong>${escapeHtml(`${formatNumber(candidates.length)}/${formatNumber(total)}`)}</strong>
@@ -7841,7 +8015,7 @@ function renderGenerationDecisionTrace() {
             <div class="trace-candidate-body">
               <div>
                 <strong>${escapeHtml(formatTemplate(candidate.templateId))}</strong>
-                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))}</small>
+                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
               </div>
               <p>${escapeHtml(candidate.reason || candidateDiagnosticText(candidate))}</p>
               <i></i>
