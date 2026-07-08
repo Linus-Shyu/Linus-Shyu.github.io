@@ -17137,3 +17137,252 @@ body .side-rail .rail-budget strong {
 :root[data-theme="dark"] body .ops-shell .side-rail .rail-budget strong {
   color: #ffd166 !important;
 }
+
+.http-triage-strip {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+  gap: 10px;
+  margin: 10px 0;
+  border: 1px solid color-mix(in srgb, #00f0ff 26%, var(--line));
+  border-radius: 6px;
+  padding: 10px;
+  color: #dce6f3;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0, 240, 255, 0.13), transparent 32%),
+    radial-gradient(circle at 100% 0%, rgba(255, 0, 122, 0.11), transparent 36%),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.055) 0 1px, transparent 1px 34px),
+    linear-gradient(180deg, rgba(13, 20, 31, 0.98), rgba(7, 10, 16, 0.98));
+  box-shadow:
+    0 0 24px rgba(0, 240, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.http-triage-strip.warn,
+.http-triage-strip.cached {
+  border-color: color-mix(in srgb, #ff9f1c 46%, var(--line));
+  box-shadow:
+    0 0 24px rgba(255, 159, 28, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.http-triage-strip.danger {
+  border-color: color-mix(in srgb, #ff007a 58%, var(--line));
+  box-shadow:
+    0 0 28px rgba(255, 0, 122, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.http-triage-core {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  min-width: 0;
+}
+
+.http-triage-title {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.http-triage-title p,
+.http-triage-buses > div > span,
+.http-triage-runbook span,
+.http-triage-kpis em,
+.http-triage-counters em,
+.http-triage-counters small,
+.http-triage-buses em {
+  margin: 0;
+  overflow: hidden;
+  color: #9eacc0;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 780;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.http-triage-title strong {
+  display: block;
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.http-triage-kpis,
+.http-triage-counters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.http-triage-kpis span,
+.http-triage-counters span,
+.http-triage-buses > div,
+.http-triage-runbook {
+  min-width: 0;
+  border: 1px solid rgba(156, 174, 197, 0.2);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(11, 17, 27, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.http-triage-kpis span,
+.http-triage-counters span {
+  display: grid;
+  gap: 5px;
+  padding: 9px;
+}
+
+.http-triage-kpis strong,
+.http-triage-counters strong {
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.http-triage-kpis span.ok strong,
+.http-triage-counters span.ok strong {
+  color: #00ff66;
+  text-shadow: 0 0 15px rgba(0, 255, 102, 0.22);
+}
+
+.http-triage-kpis span.warn strong,
+.http-triage-counters span.warn strong {
+  color: #ff9f1c;
+  text-shadow: 0 0 15px rgba(255, 159, 28, 0.22);
+}
+
+.http-triage-kpis span.danger strong,
+.http-triage-counters span.danger strong {
+  color: #ff007a;
+  text-shadow: 0 0 16px rgba(255, 0, 122, 0.32);
+}
+
+.http-triage-counters span.ok {
+  border-color: rgba(0, 255, 102, 0.28);
+}
+
+.http-triage-counters span.warn {
+  border-color: rgba(255, 159, 28, 0.38);
+}
+
+.http-triage-counters span.danger {
+  border-color: rgba(255, 0, 122, 0.52);
+}
+
+.http-triage-buses {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 8px;
+}
+
+.http-triage-buses > div,
+.http-triage-runbook {
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+}
+
+.http-triage-buses > div > div {
+  display: flex;
+  min-width: 0;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.http-triage-buses > div > div span {
+  display: grid;
+  min-width: 112px;
+  flex: 1 1 0;
+  gap: 4px;
+  border: 1px solid rgba(156, 174, 197, 0.18);
+  border-radius: 6px;
+  padding: 7px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.http-triage-buses strong {
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 11px;
+  font-weight: 860;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.http-triage-buses code,
+.http-triage-runbook code {
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.16);
+  border-radius: 5px;
+  padding: 3px 6px;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.06);
+  font-family: var(--code-font);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.http-triage-buses span.ok {
+  border-color: rgba(0, 255, 102, 0.3);
+}
+
+.http-triage-buses span.warn,
+.http-triage-buses span.cached {
+  border-color: rgba(255, 159, 28, 0.38);
+}
+
+.http-triage-buses span.danger {
+  border-color: rgba(255, 0, 122, 0.52);
+}
+
+.http-triage-runbook {
+  grid-column: 1 / -1;
+  border-color: rgba(0, 240, 255, 0.18);
+}
+
+.http-triage-runbook p {
+  margin: 0;
+  color: #dce6f3;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+@media (max-width: 1180px) {
+  .http-triage-strip,
+  .http-triage-buses {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .http-triage-kpis,
+  .http-triage-counters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .http-triage-title strong {
+    white-space: normal;
+  }
+}

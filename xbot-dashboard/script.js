@@ -1008,6 +1008,21 @@ const translations = {
     event_queue_detail: "{missions} route ops · {drafts} outputs · zero-read lane",
     event_learning_detail: "{posts} packets measured · baseline {score}",
     event_l7_detail: "{impressions} L7 events / 24h · kinetic {score}",
+    http_triage_eyebrow: "HTTP Status Triage",
+    http_triage_title: "429 / 503 / auth partition firewall",
+    http_triage_success: "success ratio",
+    http_triage_active_faults: "active faults",
+    http_triage_read_gate: "read gate",
+    http_triage_zero_reads: "0 live X reads",
+    http_triage_fault_bus: "fault bus",
+    http_triage_endpoint_bus: "endpoint bus",
+    http_triage_no_faults: "No active fault partitions. Cached routing remains safe.",
+    http_triage_last_status: "last HTTP {status}",
+    http_triage_calls: "{count} calls",
+    http_triage_runbook: "runbook",
+    http_triage_read_cached: "cached_only",
+    http_triage_read_closed: "sealed",
+    http_triage_read_review: "review",
     runlog_live_data: "live dashboard data",
     runlog_fallback_data: "fallback telemetry",
     runlog_stale_data: "stale telemetry",
@@ -1744,6 +1759,21 @@ const translations = {
     event_queue_detail: "{missions} 个路由动作 · {drafts} 条输出 · 零读取通道",
     event_learning_detail: "已测量 {posts} 个数据包 · 基线 {score}",
     event_l7_detail: "24h {impressions} 个 L7 事件 · 动能 {score}",
+    http_triage_eyebrow: "HTTP 状态分诊",
+    http_triage_title: "429 / 503 / 授权分区防火墙",
+    http_triage_success: "成功率",
+    http_triage_active_faults: "活跃故障",
+    http_triage_read_gate: "读取闸门",
+    http_triage_zero_reads: "0 次实时 X 读取",
+    http_triage_fault_bus: "故障总线",
+    http_triage_endpoint_bus: "端点总线",
+    http_triage_no_faults: "无活跃故障分区。缓存路由保持安全。",
+    http_triage_last_status: "最后 HTTP {status}",
+    http_triage_calls: "{count} 次调用",
+    http_triage_runbook: "运行手册",
+    http_triage_read_cached: "仅缓存",
+    http_triage_read_closed: "封闭",
+    http_triage_read_review: "复核",
     runlog_live_data: "实时看板数据",
     runlog_fallback_data: "备用遥测",
     runlog_stale_data: "过期遥测",
@@ -4089,7 +4119,9 @@ function deriveApiStatusTriage(api = {}) {
     failureRate: Number(failureRate.toFixed(2)),
     incidents: incidents
       .sort((left, right) => {
-        const severityDelta = (right.severity === "danger" ? 2 : 1) - (left.severity === "danger" ? 2 : 1);
+        const activeDelta = Number(Boolean(right.active)) - Number(Boolean(left.active));
+        if (activeDelta) return activeDelta;
+        const severityDelta = triageSeverityRank(right.severity) - triageSeverityRank(left.severity);
         if (severityDelta) return severityDelta;
         return right.failures - left.failures;
       })
@@ -4173,6 +4205,133 @@ function triageIncidentRow(incident) {
       <strong>${escapeHtml(incident.endpoint || "-")}</strong>
       <em>HTTP ${escapeHtml(String(status))}</em>
     </span>
+  `;
+}
+
+function endpointStatusSeverity(endpoint = {}) {
+  const status = Number.parseInt(String(endpoint.lastStatus ?? ""), 10);
+  if (status === 429 || status >= 500) return "danger";
+  if (status === 401 || status === 403 || status >= 400 || number(endpoint.failures) > 0) return "warn";
+  return "ok";
+}
+
+function endpointActiveFaultWeight(endpoint = {}) {
+  const status = Number.parseInt(String(endpoint.lastStatus ?? ""), 10);
+  if (status === 429 || status >= 500) return 3;
+  if (status === 401 || status === 403) return 2;
+  if (status >= 400) return 1;
+  return 0;
+}
+
+function httpTriageReadGate(triage = apiStatusTriage()) {
+  if (number(triage.activeRateLimit429) || number(triage.activeBackendFault5xx)) {
+    return { key: "http_triage_read_closed", severity: "danger" };
+  }
+  if (number(triage.activeAuthFault4xx) || number(triage.activeClientFault4xx)) {
+    return { key: "http_triage_read_review", severity: "warn" };
+  }
+  return { key: "http_triage_read_cached", severity: "ok" };
+}
+
+function renderHttpTriageStrip() {
+  const root = $("#http-triage-strip");
+  if (!root) return;
+  const api = dashboardData.api || fallbackData.api || {};
+  const endpoints = Array.isArray(api.endpoints) ? api.endpoints : [];
+  const triage = apiStatusTriage();
+  const readGate = httpTriageReadGate(triage);
+  const successRatio = triage.totalCalls
+    ? clamp(((number(triage.totalCalls) - number(triage.totalFailures)) / number(triage.totalCalls)) * 100, 0, 100)
+    : 100;
+  const activeFaults =
+    number(triage.activeRateLimit429) +
+    number(triage.activeBackendFault5xx) +
+    number(triage.activeAuthFault4xx) +
+    number(triage.activeClientFault4xx);
+  const incidents = Array.isArray(triage.incidents) ? triage.incidents : [];
+  const incidentBus = incidents.length
+    ? incidents.slice(0, 4).map((incident) => {
+      const severity = incident.active ? (incident.severity || "warn") : "cached";
+      return `
+        <span class="${escapeHtml(severity)}">
+          <strong>${escapeHtml(incident.endpoint || "-")}</strong>
+          <em>${escapeHtml(t("http_triage_last_status", { status: incident.lastStatus || "-" }))}</em>
+        </span>
+      `;
+    }).join("")
+    : `<span class="ok"><strong>${escapeHtml(t("triage_no_incidents"))}</strong><em>HTTP 2xx</em></span>`;
+  const endpointBus = endpoints
+    .slice()
+    .sort((left, right) => {
+      const severityDelta = triageSeverityRank(endpointStatusSeverity(right)) - triageSeverityRank(endpointStatusSeverity(left));
+      if (severityDelta) return severityDelta;
+      const activeDelta = endpointActiveFaultWeight(right) - endpointActiveFaultWeight(left);
+      if (activeDelta) return activeDelta;
+      return number(right.calls) - number(left.calls);
+    })
+    .slice(0, 5)
+    .map((endpoint) => {
+      const severity = endpointStatusSeverity(endpoint);
+      return `
+        <span class="${escapeHtml(severity)}">
+          <strong>${escapeHtml(endpoint.name || "-")}</strong>
+          <em>${escapeHtml(t("http_triage_calls", { count: formatNumber(endpoint.calls) }))}</em>
+          <code>HTTP ${escapeHtml(String(endpoint.lastStatus || "-"))}</code>
+        </span>
+      `;
+    })
+    .join("");
+
+  root.className = `http-triage-strip ${escapeHtml(triage.severity || "ok")}`;
+  root.innerHTML = `
+    <div class="http-triage-core">
+      <div class="http-triage-title">
+        <span class="triage-led ${escapeHtml(triage.severity || "ok")}"></span>
+        <div>
+          <p>${escapeHtml(t("http_triage_eyebrow"))}</p>
+          <strong>${escapeHtml(t("http_triage_title"))}</strong>
+        </div>
+      </div>
+      <div class="http-triage-kpis">
+        <span>
+          <em>${escapeHtml(t("http_triage_success"))}</em>
+          <strong>${escapeHtml(formatNumber(successRatio, 1))}%</strong>
+        </span>
+        <span class="${escapeHtml(activeFaults ? "warn" : "ok")}">
+          <em>${escapeHtml(t("http_triage_active_faults"))}</em>
+          <strong>${escapeHtml(formatNumber(activeFaults))}</strong>
+        </span>
+        <span class="${escapeHtml(readGate.severity)}">
+          <em>${escapeHtml(t("http_triage_read_gate"))}</em>
+          <strong>${escapeHtml(t(readGate.key))}</strong>
+        </span>
+        <span class="ok">
+          <em>${escapeHtml(t("http_triage_zero_reads"))}</em>
+          <strong>0</strong>
+        </span>
+      </div>
+    </div>
+    <div class="http-triage-counters">
+      ${triageCounter("triage_429", triage.rateLimit429, triage.activeRateLimit429, true)}
+      ${triageCounter("triage_5xx", triage.backendFault5xx, triage.activeBackendFault5xx, true)}
+      ${triageCounter("triage_auth", triage.authFault4xx, triage.activeAuthFault4xx)}
+      ${triageCounter("triage_client", triage.clientFault4xx, triage.activeClientFault4xx)}
+    </div>
+    <div class="http-triage-buses">
+      <div>
+        <span>${escapeHtml(t("http_triage_fault_bus"))}</span>
+        <div>${incidentBus}</div>
+      </div>
+      <div>
+        <span>${escapeHtml(t("http_triage_endpoint_bus"))}</span>
+        <div>${endpointBus}</div>
+      </div>
+    </div>
+    <div class="http-triage-runbook">
+      <span>${escapeHtml(t("http_triage_runbook"))}</span>
+      <p>${escapeHtml(triageAction(triage))}</p>
+      <code>${escapeHtml(triageSummary(triage))}</code>
+    </div>
   `;
 }
 
@@ -9007,6 +9166,7 @@ function render() {
   applyChromeText();
   renderHeader();
   renderHero();
+  renderHttpTriageStrip();
   renderTelemetryContract();
   renderExpoStory();
   renderAutopilotCommandStrip();
