@@ -1284,6 +1284,18 @@ const translations = {
     writeback_mutations: "Mutations",
     writeback_directives: "Committed directives",
     writeback_empty: "No learning writeback ledger available.",
+    mutation_eyebrow: "Angle Mutation Reactor",
+    mutation_title: "Next prompt bias kernel",
+    mutation_zero_reads: "0 X read ops",
+    mutation_score: "Mutation score",
+    mutation_bias: "Next bias",
+    mutation_primary: "Primary mutation",
+    mutation_cells: "Control cells",
+    mutation_ledger: "Mutation ledger",
+    mutation_patch: "Prompt patch",
+    mutation_guardrails: "Guardrails",
+    mutation_copy_patch: "Copy patch",
+    mutation_empty: "No angle mutation reactor output available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -1823,6 +1835,18 @@ const translations = {
     writeback_mutations: "变更",
     writeback_directives: "已提交指令",
     writeback_empty: "暂无学习写回账本。",
+    mutation_eyebrow: "角度变异反应堆",
+    mutation_title: "下一轮 Prompt 偏置内核",
+    mutation_zero_reads: "0 次 X 读取",
+    mutation_score: "变异评分",
+    mutation_bias: "下一轮偏置",
+    mutation_primary: "主变异",
+    mutation_cells: "控制单元",
+    mutation_ledger: "变异账本",
+    mutation_patch: "Prompt 补丁",
+    mutation_guardrails: "护栏",
+    mutation_copy_patch: "复制补丁",
+    mutation_empty: "暂无角度变异反应堆输出。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -4621,6 +4645,164 @@ function renderLearningWriteback() {
   `;
 }
 
+function angleMutationReactorData() {
+  const incoming = dashboardData.angleMutationReactor || fallbackData.angleMutationReactor;
+  if (incoming) return incoming;
+  const ledger = learningWritebackData();
+  const scheduler = angleSchedulerData();
+  const matrix = temporalAngleMatrixData();
+  const route = routeAmplifierData();
+  const active = ledger.activeRule || (scheduler.nextAngles || [])[0] || {};
+  const temporal = (matrix.slots || [])[0] || {};
+  const routeLane = (route.lanes || [])[0] || {};
+  const sampleCount = number(ledger.sampleCount, number(scheduler.sampleCount));
+  const baseline = Math.max(1, number(ledger.baselineScore, number(scheduler.baselineScore, 1)));
+  const primaryLabel = active.label || formatTemplate(active.formatId || active.id || "decision_rule");
+  const temporalBias = temporal.windowLabel
+    ? `${temporal.windowLabel} UTC / ${temporal.label || formatTemplate(temporal.formatId)}`
+    : "next learned peak window";
+  const routeLabel = routeLane.label || "manual high-signal X web route";
+  const mutationScore = clamp(
+    18 +
+      Math.min(24, number(active.weight, number(active.score, number(active.avgScore, baseline))) * 0.32) +
+      Math.min(18, number(temporal.score) * 0.2) +
+      Math.min(18, number(route.avgScore, number(routeLane.score)) * 0.2) +
+      Math.min(16, sampleCount * 0.7),
+    0,
+    100,
+  );
+  const severity = mutationScore >= 72 ? "ok" : mutationScore >= 48 ? "warn" : "danger";
+  const nextPromptBias = `Exploit ${primaryLabel}; window=${temporalBias}; route=${routeLabel}.`;
+  const guardrails = [
+    "No automatic replies, likes, follows, or unsolicited bulk actions.",
+    "No X search/read API calls for manual route selection.",
+    "Use cached telemetry and normal backoff only.",
+    "Skip headline recap, unsupported claims, ragebait, giveaways, and politics bait.",
+  ];
+  const promptPatch = [
+    "CODEX ANGLE MUTATION PATCH",
+    "mode: cached_angle_mutation_reactor",
+    "zero_extra_x_reads: true",
+    `mutation_score: ${formatNumber(mutationScore, 1)}`,
+    `primary_rule: ${primaryLabel} (${active.action || "test"})`,
+    `temporal_window: ${temporalBias}`,
+    `route_bias: ${routeLabel}`,
+    "",
+    "DO:",
+    `- Lead with a concrete ${primaryLabel} operating rule.`,
+    "- Name the real company/product and translate the story into cost, leverage, or workflow impact.",
+    "- End with a sharp question or decision rule that invites a technical reply.",
+    "",
+    "AVOID:",
+    "- Headline recap, generic optimism, unsupported claims, outrage bait, and extra X read/search API calls.",
+  ].join("\n");
+  const mutations = [
+    { id: "prompt_rule", label: "prompt rule", before: "baseline rotation", after: active.formatId || active.id || "decision_rule", status: severity, score: mutationScore, reason: active.reason || "Derived from cached learning writeback and adaptive schedule." },
+    { id: "temporal_bias", label: "UTC fire-control", before: "flat cadence", after: temporalBias, status: temporal.status || "warn", score: number(temporal.score), reason: temporal.reason || matrix.nextAction || "Cached hourly throughput selects the next timing bias." },
+    { id: "route_bias", label: "manual route amplifier", before: "random browsing", after: routeLabel, status: routeLane.status || "warn", score: number(routeLane.score, number(route.avgScore)), reason: routeLane.reason || route.nextAction || "Manual route scoring uses cached packet readiness." },
+    ...(ledger.mutations || []).filter((mutation) => ["hold_gate", "cost_gate"].includes(mutation.id)).slice(0, 2),
+  ];
+  return {
+    generatedAt: ledger.generatedAt || scheduler.generatedAt || dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_cached_angle_mutation_reactor",
+    source: "derived cached telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    severity,
+    confidence: ledger.confidence || scheduler.confidence || "low",
+    mutationScore,
+    baselineScore: baseline,
+    sampleCount,
+    primaryMutation: mutations[0],
+    nextPromptBias,
+    promptPatch,
+    cells: [
+      { id: "score", label: "mutation score", value: formatNumber(mutationScore, 1), status: severity },
+      { id: "samples", label: "sample base", value: formatNumber(sampleCount), status: sampleCount >= 10 ? "ok" : "warn" },
+      { id: "route", label: "route bias", value: routeLabel, status: routeLane.status || "warn" },
+      { id: "window", label: "UTC window", value: temporalBias, status: temporal.status || "warn" },
+      { id: "x_reads", label: "X read ops", value: "0", status: "ok" },
+    ],
+    mutations,
+    guardrails,
+  };
+}
+
+function renderAngleMutationReactor() {
+  const reactor = angleMutationReactorData();
+  const container = $("#angle-mutation-reactor");
+  if (!container) return;
+  const mutations = Array.isArray(reactor.mutations) ? reactor.mutations : [];
+  const cells = Array.isArray(reactor.cells) ? reactor.cells : [];
+  const guardrails = Array.isArray(reactor.guardrails) ? reactor.guardrails.slice(0, 4) : [];
+  const promptPatch = reactor.promptPatch || "";
+  if (!mutations.length && !cells.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("mutation_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(reactor.mutationScore), 0, 100);
+  const primary = reactor.primaryMutation || mutations[0] || {};
+  container.innerHTML = `
+    <div class="mutation-head">
+      <div>
+        <span>${escapeHtml(t("mutation_eyebrow"))}</span>
+        <strong>${escapeHtml(t("mutation_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("mutation_zero_reads"))}</em>
+    </div>
+    <div class="mutation-core">
+      <div class="mutation-score" style="--mutation-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("mutation_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="mutation-bias">
+        <span>${escapeHtml(t("mutation_bias"))}</span>
+        <code>${escapeHtml(reactor.nextPromptBias || "-")}</code>
+      </div>
+      <div class="mutation-primary">
+        <span>${escapeHtml(t("mutation_primary"))}</span>
+        <strong>${escapeHtml(primary.label || primary.id || "-")}</strong>
+        <small>${escapeHtml(gateLabel(primary.before))} -> ${escapeHtml(gateLabel(primary.after))}</small>
+      </div>
+    </div>
+    <div class="mutation-section-label">${escapeHtml(t("mutation_cells"))}</div>
+    <div class="mutation-cells">
+      ${cells.slice(0, 6).map((cell) => `
+        <span class="${escapeHtml(mutationTone(cell.status))}">
+          <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+          <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="mutation-section-label">${escapeHtml(t("mutation_ledger"))}</div>
+    <div class="mutation-ledger">
+      ${mutations.slice(0, 5).map((mutation) => `
+        <article class="${escapeHtml(mutationTone(mutation.status))}">
+          <div>
+            <strong>${escapeHtml(mutation.label || mutation.id || "-")}</strong>
+            <em>${escapeHtml(gateLabel(mutation.before))} -> ${escapeHtml(gateLabel(mutation.after))}</em>
+          </div>
+          <small>${escapeHtml(formatNumber(mutation.score, 1))}</small>
+          <p>${escapeHtml(mutation.reason || "-")}</p>
+        </article>
+      `).join("")}
+    </div>
+    <div class="mutation-patch">
+      <div>
+        <span>${escapeHtml(t("mutation_patch"))}</span>
+        <button type="button" data-copy="${encodeURIComponent(promptPatch)}">${escapeHtml(t("mutation_copy_patch"))}</button>
+      </div>
+      <pre><code>${escapeHtml(promptPatch)}</code></pre>
+    </div>
+    <div class="mutation-guardrails">
+      <span>${escapeHtml(t("mutation_guardrails"))}</span>
+      ${guardrails.map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+    </div>
+  `;
+}
+
 function audienceRouterData() {
   return dashboardData.audienceExpansionRouter || fallbackData.audienceExpansionRouter || {};
 }
@@ -4820,6 +5002,7 @@ function renderLearning() {
   renderLearningAutopilot();
   renderAdaptiveAngleScheduler();
   renderLearningWriteback();
+  renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
   renderTemporalAngleMatrix();
