@@ -7670,6 +7670,141 @@ body:not(.demo-mode) .demo-strip {
   background: var(--accent);
 }
 
+.telemetry-event-panel {
+  grid-column: 1 / -1;
+}
+
+.telemetry-event-stream {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.telemetry-event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) minmax(96px, 0.32fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--line-soft));
+  border-radius: 6px;
+  padding: 9px 10px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), color-mix(in srgb, var(--surface-soft) 90%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 16px color-mix(in srgb, var(--accent) 6%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 72%, white 6%);
+}
+
+.telemetry-event::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--accent-2);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent-2) 46%, transparent);
+}
+
+.telemetry-event.warn::before {
+  background: var(--warn);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--warn) 48%, transparent);
+}
+
+.telemetry-event.danger::before {
+  background: var(--danger);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--danger) 52%, transparent);
+}
+
+.event-time,
+.telemetry-event code,
+.event-core em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.event-time {
+  color: color-mix(in srgb, var(--accent) 74%, var(--ink));
+}
+
+.event-core {
+  min-width: 0;
+}
+
+.event-core > div {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.event-core strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 880;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-core p {
+  overflow: hidden;
+  margin: 4px 0 0;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.telemetry-event code {
+  justify-self: end;
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line-soft));
+  border-radius: 5px;
+  padding: 5px 7px;
+  color: color-mix(in srgb, var(--ink) 88%, var(--accent));
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.telemetry-event.warn code {
+  border-color: color-mix(in srgb, var(--warn) 34%, var(--line-soft));
+  color: var(--warn);
+}
+
+.telemetry-event.danger code {
+  border-color: color-mix(in srgb, var(--danger) 38%, var(--line-soft));
+  color: var(--danger);
+}
+
+@media (max-width: 1080px) {
+  .telemetry-event-stream {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .telemetry-event {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .telemetry-event code {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
 .pill-warn {
   border-color: color-mix(in srgb, var(--warn) 36%, var(--line));
   color: var(--warn);

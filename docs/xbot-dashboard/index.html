@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260709-runway-rail2" />
+    <link rel="stylesheet" href="./styles.css?v=20260709-eventbus1" />
   </head>
   <body>
     <div class="ops-shell">
@@ -491,6 +491,17 @@ learn(metrics)</code></pre>
               </div>
             </div>
           </article>
+
+          <article class="panel telemetry-event-panel">
+            <div class="panel-heading compact-heading">
+              <div>
+                <p class="eyebrow" data-i18n="event_stream_eyebrow">Telemetry Event Stream</p>
+                <h2 data-i18n="event_stream_title">NOC event bus</h2>
+              </div>
+              <span class="pill pill-good" id="event-stream-state">-</span>
+            </div>
+            <div class="telemetry-event-stream" id="telemetry-event-stream"></div>
+          </article>
         </section>
 
         <section class="proof-grid" id="proof">
@@ -661,6 +672,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260709-runway-rail2" defer></script>
+    <script src="./script.js?v=20260709-eventbus1" defer></script>
   </body>
 </html>

@@ -935,6 +935,24 @@ const translations = {
     runlog_queue: "swarm.output",
     runlog_cost: "cost.guard",
     runlog_learn: "learning.writeback",
+    event_stream_eyebrow: "Telemetry Event Stream",
+    event_stream_title: "NOC event bus",
+    event_stream_nominal: "event bus nominal",
+    event_stream_watch: "boundary watch",
+    event_stream_fault: "fault partition",
+    event_stream_zero_reads: "0 X read ops",
+    event_http_title: "HTTP Status Triage",
+    event_cost_title: "Cost Boundary Reactor",
+    event_control_title: "Growth Control Plane",
+    event_queue_title: "Swarm Output Queue",
+    event_learning_title: "Learning Writeback",
+    event_l7_title: "L7 Traffic Load",
+    event_http_detail: "{calls} calls · {failures} faults · {rate}% failure",
+    event_cost_detail: "{left} safe left · {runway} runway · month-end {monthEnd}",
+    event_control_detail: "{readGate} read · {publishGate} post · pressure {pressure}%",
+    event_queue_detail: "{missions} route ops · {drafts} outputs · zero-read lane",
+    event_learning_detail: "{posts} packets measured · baseline {score}",
+    event_l7_detail: "{impressions} L7 events / 24h · kinetic {score}",
     runlog_live_data: "live dashboard data",
     runlog_fallback_data: "fallback telemetry",
     runlog_stale_data: "stale telemetry",
@@ -1581,6 +1599,24 @@ const translations = {
     runlog_queue: "swarm.output",
     runlog_cost: "cost.guard",
     runlog_learn: "learning.writeback",
+    event_stream_eyebrow: "遥测事件流",
+    event_stream_title: "NOC 事件总线",
+    event_stream_nominal: "事件总线正常",
+    event_stream_watch: "边界观察",
+    event_stream_fault: "故障分区",
+    event_stream_zero_reads: "0 次 X 读取操作",
+    event_http_title: "HTTP 状态分诊",
+    event_cost_title: "成本边界反应堆",
+    event_control_title: "增长控制平面",
+    event_queue_title: "群体智能输出队列",
+    event_learning_title: "学习写回",
+    event_l7_title: "L7 流量负载",
+    event_http_detail: "{calls} 次调用 · {failures} 次故障 · 失败率 {rate}%",
+    event_cost_detail: "安全剩余 {left} · 续航 {runway} · 月底 {monthEnd}",
+    event_control_detail: "读取 {readGate} · 发帖 {publishGate} · 压力 {pressure}%",
+    event_queue_detail: "{missions} 个路由动作 · {drafts} 条输出 · 零读取通道",
+    event_learning_detail: "已测量 {posts} 个数据包 · 基线 {score}",
+    event_l7_detail: "24h {impressions} 个 L7 事件 · 动能 {score}",
     runlog_live_data: "实时看板数据",
     runlog_fallback_data: "备用遥测",
     runlog_stale_data: "过期遥测",
@@ -5917,6 +5953,150 @@ function renderControlPlane() {
   renderViralFlywheel();
 }
 
+function telemetryEventSeverity(events) {
+  if (events.some((event) => event.severity === "danger")) return "danger";
+  if (events.some((event) => event.severity === "warn")) return "warn";
+  return "ok";
+}
+
+function telemetryEventStateLabel(severity) {
+  if (severity === "danger") return t("event_stream_fault");
+  if (severity === "warn") return t("event_stream_watch");
+  return t("event_stream_nominal");
+}
+
+function telemetryEventStreamData() {
+  const triage = apiStatusTriage();
+  const budget = budgetBurnData();
+  const runway = runwayGuardData();
+  const control = controlPlaneData();
+  const ops = distributionOpsData();
+  const kinetics = growthKineticsData();
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const missions = Array.isArray(ops.missions) ? ops.missions : [];
+  const learning = learningWritebackData();
+  const safeLeft = runway?.safeRemainingUsd ?? budget.safeRemainingUsd;
+  const runwayDays = runway?.runwayDays ?? budget.runwayDays;
+  const monthEnd = runway?.monthEndProjectedSpendUsd ?? budget.monthEndProjectedSpendUsd ?? budget.spendUsd;
+  const readGate = control.readGate || "cached_only";
+  const publishGate = control.publishGate || "review";
+  const pressure = clamp(number(control.pressureScore), 0, 100);
+  const triageSeverity = triage.severity === "danger"
+    ? "danger"
+    : triage.severity === "warn" || triage.severity === "cached"
+      ? "warn"
+      : "ok";
+  const costSeverity = budget.severity === "danger"
+    ? "danger"
+    : runway?.active || budget.severity === "warn"
+      ? "warn"
+      : "ok";
+  const controlSeverity = control.severity === "danger"
+    ? "danger"
+    : control.severity === "warn" || readGate !== "cached_only" || publishGate !== "open"
+      ? "warn"
+      : "ok";
+  const queueSeverity = missions.length || drafts.length ? "ok" : "warn";
+  const learningPosts = number(learning.sampleCount, number(profile.measuredPosts, profile.trackedPosts));
+  const learningSeverity = learningPosts > 0 ? "ok" : "warn";
+  const l7Impressions = number(last24h.impressions);
+  const kineticScore = number(kinetics.kineticScore);
+  const trafficSeverity = kineticScore >= 60 ? "ok" : kineticScore >= 35 || l7Impressions >= 50 ? "warn" : "danger";
+
+  return [
+    {
+      service: "http.status",
+      title: t("event_http_title"),
+      detail: t("event_http_detail", {
+        calls: formatNumber(triage.totalCalls),
+        failures: formatNumber(triage.totalFailures),
+        rate: formatNumber(triage.failureRate, 1),
+      }),
+      metric: triage.activeRateLimit429 || triage.activeBackendFault5xx ? "active fault" : "clear",
+      severity: triageSeverity,
+    },
+    {
+      service: "cost.boundary",
+      title: t("event_cost_title"),
+      detail: t("event_cost_detail", {
+        left: safeLeft == null ? "∞" : money(safeLeft),
+        runway: runwayDays == null ? "∞" : `${formatNumber(runwayDays, runwayDays > 30 ? 0 : 1)}d`,
+        monthEnd: monthEnd == null ? "-" : money(monthEnd),
+      }),
+      metric: runway?.active ? "cached-only" : "inside envelope",
+      severity: costSeverity,
+    },
+    {
+      service: "growth.control",
+      title: t("event_control_title"),
+      detail: t("event_control_detail", {
+        readGate: gateLabel(readGate),
+        publishGate: gateLabel(publishGate),
+        pressure: formatNumber(pressure, 1),
+      }),
+      metric: controlModeLabel(control.mode),
+      severity: controlSeverity,
+    },
+    {
+      service: "swarm.queue",
+      title: t("event_queue_title"),
+      detail: t("event_queue_detail", {
+        missions: formatNumber(missions.length),
+        drafts: formatNumber(drafts.length),
+      }),
+      metric: t("event_stream_zero_reads"),
+      severity: queueSeverity,
+    },
+    {
+      service: "learning.writeback",
+      title: t("event_learning_title"),
+      detail: t("event_learning_detail", {
+        posts: formatNumber(learningPosts),
+        score: formatNumber(learning.baselineScore ?? profile.baselineScore, 1),
+      }),
+      metric: learning.nextPromptBias || learning.recommendedAction || "ranker online",
+      severity: learningSeverity,
+    },
+    {
+      service: "l7.ingress",
+      title: t("event_l7_title"),
+      detail: t("event_l7_detail", {
+        impressions: formatNumber(l7Impressions),
+        score: formatNumber(kineticScore, 1),
+      }),
+      metric: kinetics.mode || "load watch",
+      severity: trafficSeverity,
+    },
+  ];
+}
+
+function renderTelemetryEventStream() {
+  const target = $("#telemetry-event-stream");
+  const state = $("#event-stream-state");
+  if (!target || !state) return;
+  const events = telemetryEventStreamData();
+  const severity = telemetryEventSeverity(events);
+  state.textContent = telemetryEventStateLabel(severity);
+  state.className = `pill ${severity === "ok" ? "pill-good" : severity === "danger" ? "pill-danger" : "pill-warn"}`;
+  target.innerHTML = events
+    .map((event, index) => `
+      <article class="telemetry-event ${escapeHtml(event.severity || "ok")}">
+        <span class="event-time">T-${String(index * 3).padStart(2, "0")}m</span>
+        <div class="event-core">
+          <div>
+            <strong>${escapeHtml(event.title || "-")}</strong>
+            <em>${escapeHtml(event.service || "-")}</em>
+          </div>
+          <p>${escapeHtml(event.detail || "-")}</p>
+        </div>
+        <code>${escapeHtml(event.metric || "-")}</code>
+      </article>
+    `)
+    .join("");
+}
+
 function signalSourceRows() {
   const sources = dashboardData.performance?.sources || fallbackData.performance?.sources || [];
   if (sources.length) return sources;
@@ -7789,6 +7969,7 @@ function render() {
   renderGrowthKinetics();
   renderLearning();
   renderControlPlane();
+  renderTelemetryEventStream();
   renderSignalNodes();
   renderSignalDetail();
   renderProof();
