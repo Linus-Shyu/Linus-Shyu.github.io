@@ -7504,6 +7504,223 @@ body,
   font-weight: 720;
 }
 
+.window-command-strip {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1.55fr) minmax(260px, 0.72fr) auto;
+  gap: 7px;
+  align-items: stretch;
+  margin: 0 0 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  border-radius: 6px;
+  padding: 7px;
+  color: #dce6f3;
+  background:
+    radial-gradient(circle at 0 0, rgba(0, 240, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 64% -18%, rgba(0, 255, 102, 0.11), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.046) 0 1px, transparent 1px 28px),
+    linear-gradient(180deg, rgba(13, 20, 31, 0.985), rgba(7, 10, 16, 0.985));
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.window-command-strip.warn {
+  border-color: rgba(255, 159, 28, 0.46);
+  box-shadow:
+    0 0 20px rgba(255, 159, 28, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.window-command-strip.danger {
+  border-color: rgba(255, 0, 122, 0.56);
+  box-shadow:
+    0 0 22px rgba(255, 0, 122, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.window-command-radar,
+.window-command-body,
+.window-command-gates,
+.window-command-actions,
+.window-command-metrics span,
+.window-command-gates span {
+  min-width: 0;
+  border: 1px solid rgba(156, 174, 197, 0.18);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(15, 23, 35, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.window-command-radar {
+  position: relative;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 3px;
+  overflow: hidden;
+  padding: 7px;
+}
+
+.window-command-radar::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 999px;
+  background:
+    conic-gradient(#00f0ff 0 var(--window-command-score, 0%), rgba(148, 163, 184, 0.2) var(--window-command-score, 0%) 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  opacity: 0.82;
+}
+
+.window-command-radar span,
+.window-command-head span,
+.window-command-metrics em,
+.window-command-gates em {
+  display: block;
+  overflow: hidden;
+  color: #9aa8ba;
+  font-family: var(--code-font);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.window-command-radar strong {
+  position: relative;
+  z-index: 1;
+  color: #00f0ff;
+  font-family: var(--code-font);
+  font-size: 27px;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.34);
+}
+
+.window-command-radar i {
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.window-command-radar i::before {
+  content: "";
+  display: block;
+  width: var(--window-command-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+}
+
+.window-command-body {
+  display: grid;
+  gap: 7px;
+  padding: 8px;
+}
+
+.window-command-head strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 3px;
+  color: #f7fbff;
+  font-size: 13px;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.window-command-metrics,
+.window-command-gates {
+  display: grid;
+  gap: 5px;
+}
+
+.window-command-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.window-command-metrics span,
+.window-command-gates span {
+  display: grid;
+  gap: 3px;
+  padding: 6px 7px;
+}
+
+.window-command-metrics strong,
+.window-command-gates strong {
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 11px;
+  font-weight: 860;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-command-gates {
+  align-content: stretch;
+}
+
+.window-command-gates span.ok strong {
+  color: #00ff66;
+}
+
+.window-command-gates span.warn strong,
+.window-command-gates span.cached strong {
+  color: #ff9f1c;
+}
+
+.window-command-gates span.danger strong {
+  color: #ff007a;
+}
+
+.window-command-actions {
+  display: grid;
+  min-width: 126px;
+  align-content: center;
+  gap: 6px;
+  padding: 7px;
+}
+
+.window-command-actions .button {
+  min-height: 30px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1080px) {
+  .window-command-strip {
+    grid-template-columns: 104px minmax(0, 1fr);
+  }
+
+  .window-command-gates,
+  .window-command-actions {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .window-command-strip,
+  .window-command-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .window-command-radar {
+    min-height: 82px;
+  }
+}
+
 .expo-story-grid {
   display: grid;
   grid-template-columns: minmax(320px, 0.8fr) minmax(460px, 1.08fr) minmax(320px, 0.82fr);

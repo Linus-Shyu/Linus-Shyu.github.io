@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260709-sidebar-contrast" />
+    <link rel="stylesheet" href="./styles.css?v=20260709-window-strip" />
   </head>
   <body>
     <div class="ops-shell">
@@ -135,6 +135,8 @@
             <strong data-i18n="noc_operator_value">Manual paste</strong>
           </div>
         </section>
+
+        <section class="window-command-strip" id="window-command-strip" aria-label="Next window commander"></section>
 
         <section class="http-triage-strip" id="http-triage-strip" aria-label="HTTP status triage"></section>
 
@@ -702,6 +704,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260709-window-commander" defer></script>
+    <script src="./script.js?v=20260709-window-strip" defer></script>
   </body>
 </html>

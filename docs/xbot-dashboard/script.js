@@ -9058,6 +9058,50 @@ function renderNextWindowCommander() {
   `;
 }
 
+function renderWindowCommandStrip() {
+  const container = $("#window-command-strip");
+  if (!container) return;
+  const commander = nextWindowCommanderData();
+  if (!commander?.command) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("commander_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(commander.commanderScore), 0, 100);
+  const window = commander.activeWindow || {};
+  const angle = commander.activeAngle || {};
+  const gates = Array.isArray(commander.gates) ? commander.gates : [];
+  const primaryGate = gates.find((gate) => gate.id === "cadence") || gates[0] || {};
+  const readGate = gates.find((gate) => gate.id === "x_read_partition") || {};
+  container.className = `window-command-strip ${escapeHtml(commander.severity || "warn")}`;
+  container.innerHTML = `
+    <div class="window-command-radar" style="--window-command-score:${score.toFixed(1)}%">
+      <span>${escapeHtml(t("commander_score"))}</span>
+      <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+      <i></i>
+    </div>
+    <div class="window-command-body">
+      <div class="window-command-head">
+        <span>${escapeHtml(t("commander_eyebrow"))}</span>
+        <strong>${escapeHtml(commander.command)}</strong>
+      </div>
+      <div class="window-command-metrics">
+        <span><em>${escapeHtml(t("commander_window"))}</em><strong>${escapeHtml(window.windowLabel || "-")} UTC</strong></span>
+        <span><em>${escapeHtml(t("commander_angle"))}</em><strong>${escapeHtml(angle.formatLabel || angle.formatId || "-")}</strong></span>
+        <span><em>${escapeHtml(t("opportunity_fusion_pillar"))}</em><strong>${escapeHtml(angle.pillarLabel || angle.pillarId || "-")}</strong></span>
+        <span><em>${escapeHtml(t("commander_gate"))}</em><strong>${escapeHtml(commander.publishGate || "-")}</strong></span>
+      </div>
+    </div>
+    <div class="window-command-gates">
+      <span class="${escapeHtml(readGate.status || "ok")}"><em>${escapeHtml(readGate.label || "X read partition")}</em><strong>${escapeHtml(readGate.value || "0 ops")}</strong></span>
+      <span class="${escapeHtml(primaryGate.status || "warn")}"><em>${escapeHtml(primaryGate.label || "Cadence")}</em><strong>${escapeHtml(primaryGate.value || commander.publishGate || "-")}</strong></span>
+    </div>
+    <div class="window-command-actions">
+      ${commander.routeUrl ? `<a class="button button-primary" href="${escapeHtml(commander.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("commander_open"))}</a>` : ""}
+      <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(commander.copyBlock || commander.command)}">${escapeHtml(t("commander_copy"))}</button>
+    </div>
+  `;
+}
+
 function renderGrowthOpportunityScorer() {
   const scorer = growthOpportunityScorerData();
   const container = $("#growth-opportunity-scorer");
@@ -11782,6 +11826,7 @@ function render() {
   applyChromeText();
   renderHeader();
   renderHero();
+  renderWindowCommandStrip();
   renderHttpTriageStrip();
   renderReactorHud();
   renderTelemetryContract();
