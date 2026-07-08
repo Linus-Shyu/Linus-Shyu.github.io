@@ -15760,3 +15760,105 @@ body:not(.demo-mode) .demo-strip {
     inset -1px 0 0 rgba(255, 255, 255, 0.075),
     inset 1px 0 0 rgba(255, 255, 255, 0.04) !important;
 }
+
+/* Light theme rail lock: keep navigation visually tied to the ops console, not the pale canvas. */
+:root[data-theme="light"] body .side-rail {
+  --rail-lock-bg: #070a10;
+  --rail-lock-mid: #0b111b;
+  --rail-lock-card: rgba(13, 20, 31, 0.98);
+  --rail-lock-card-soft: rgba(17, 26, 39, 0.94);
+  --rail-lock-border: rgba(145, 162, 186, 0.3);
+  --rail-lock-text: #f5f8ff;
+  --rail-lock-body: #d6dfec;
+  --rail-lock-muted: #98a8bd;
+  --rail-lock-accent: #ff9f1c;
+  --rail-lock-green: #74d66b;
+  color-scheme: dark;
+  color: var(--rail-lock-body) !important;
+  border-color: rgba(6, 10, 16, 0.94) !important;
+  background-color: var(--rail-lock-bg) !important;
+  background-image:
+    radial-gradient(circle at 42% -12%, rgba(255, 159, 28, 0.28), transparent 34%),
+    radial-gradient(circle at 0% 72%, rgba(116, 214, 107, 0.16), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, #121c2b 0%, var(--rail-lock-mid) 44%, var(--rail-lock-bg) 100%) !important;
+  box-shadow:
+    20px 0 42px rgba(7, 10, 16, 0.34),
+    inset -1px 0 0 rgba(255, 159, 28, 0.18),
+    inset 1px 0 0 rgba(255, 255, 255, 0.055) !important;
+}
+
+:root[data-theme="light"] body .side-rail .brand,
+:root[data-theme="light"] body .side-rail .env-card,
+:root[data-theme="light"] body .side-rail .rack-mini div,
+:root[data-theme="light"] body .side-rail .rail-nav a,
+:root[data-theme="light"] body .side-rail .rail-budget {
+  color: var(--rail-lock-body) !important;
+  border-color: var(--rail-lock-border) !important;
+  background-color: var(--rail-lock-card-soft) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.07), transparent 58%) !important;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075) !important;
+}
+
+:root[data-theme="light"] body .side-rail .brand strong,
+:root[data-theme="light"] body .side-rail .env-line strong,
+:root[data-theme="light"] body .side-rail .rack-mini strong,
+:root[data-theme="light"] body .side-rail .rail-nav a,
+:root[data-theme="light"] body .side-rail .rail-nav a::after,
+:root[data-theme="light"] body .side-rail .rail-budget strong {
+  color: var(--rail-lock-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+:root[data-theme="light"] body .side-rail .brand small,
+:root[data-theme="light"] body .side-rail .env-card > span,
+:root[data-theme="light"] body .side-rail .rack-mini em,
+:root[data-theme="light"] body .side-rail .rail-budget span,
+:root[data-theme="light"] body .side-rail .rail-budget small {
+  color: var(--rail-lock-muted) !important;
+}
+
+:root[data-theme="light"] body .side-rail .brand-mark {
+  color: #09111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--rail-lock-accent) 54%, var(--rail-lock-green) 100%) !important;
+  box-shadow:
+    0 16px 34px rgba(255, 159, 28, 0.26),
+    0 0 0 1px rgba(255, 255, 255, 0.42) inset !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-nav a {
+  background-color: transparent !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-nav a:hover,
+:root[data-theme="light"] body .side-rail .rail-nav a:focus-visible,
+:root[data-theme="light"] body .side-rail .rail-nav a.active {
+  color: #fff7e6 !important;
+  border-color: rgba(255, 159, 28, 0.74) !important;
+  background:
+    radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.3), transparent 45%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.24), rgba(116, 214, 107, 0.07)),
+    rgba(255, 255, 255, 0.055) !important;
+}
+
+:root[data-theme="light"] body .side-rail .env-line .status-dot,
+:root[data-theme="light"] body .side-rail .rack-mini span {
+  background: var(--rail-lock-green) !important;
+  box-shadow:
+    0 0 0 4px rgba(116, 214, 107, 0.16),
+    0 0 18px rgba(116, 214, 107, 0.36) !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.66) !important;
+  background-color: rgba(39, 29, 16, 0.98) !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-budget strong {
+  color: #ffd166 !important;
+}
