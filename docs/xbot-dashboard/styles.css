@@ -12231,3 +12231,147 @@ body:not(.demo-mode) .demo-strip {
   background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
   box-shadow: 0 0 14px rgba(255, 209, 102, 0.2) !important;
 }
+
+/* Light theme rail v12: match the white ops canvas with clear, expanded navigation. */
+:root[data-theme="light"] {
+  --nav-rail-bg: #eef3f8;
+  --nav-rail-bg-mid: #f6f8fb;
+  --nav-rail-bg-soft: #ffffff;
+  --nav-rail-panel: #ffffff;
+  --nav-rail-panel-strong: #fff8eb;
+  --nav-rail-line: rgba(17, 24, 39, 0.14);
+  --nav-rail-line-hot: rgba(26, 86, 219, 0.46);
+  --nav-rail-line-boundary: rgba(217, 119, 6, 0.42);
+  --nav-rail-text: #111827;
+  --nav-rail-muted: #5f6b7a;
+  --nav-rail-hot: #1a56db;
+  --nav-rail-boundary: #b45309;
+  --nav-rail-green: #16a34a;
+  --nav-rail-glow: rgba(26, 86, 219, 0.16);
+  --nav-rail-boundary-glow: rgba(217, 119, 6, 0.14);
+}
+
+:root[data-theme="light"] .side-rail {
+  color: var(--nav-rail-text) !important;
+  border-color: #cfd8e3 !important;
+  background-color: var(--nav-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -12%, rgba(26, 86, 219, 0.11), transparent 34%),
+    linear-gradient(90deg, rgba(26, 86, 219, 0.035), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.028) 0 1px, transparent 1px 46px),
+    linear-gradient(180deg, var(--nav-rail-bg-soft) 0%, var(--nav-rail-bg-mid) 46%, var(--nav-rail-bg) 100%) !important;
+  box-shadow:
+    18px 0 34px rgba(15, 23, 42, 0.07),
+    inset -1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .env-card,
+:root[data-theme="light"] .rack-mini div,
+:root[data-theme="light"] .rail-budget {
+  color: var(--nav-rail-text) !important;
+  border-color: var(--nav-rail-line) !important;
+  background-color: var(--nav-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.74)),
+    linear-gradient(135deg, rgba(26, 86, 219, 0.035), transparent 62%) !important;
+  box-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.055),
+    0 1px 2px rgba(15, 23, 42, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94) !important;
+}
+
+:root[data-theme="light"] .brand strong,
+:root[data-theme="light"] .env-line strong,
+:root[data-theme="light"] .rack-mini strong,
+:root[data-theme="light"] .rail-nav a,
+:root[data-theme="light"] .rail-nav a::after {
+  color: var(--nav-rail-text) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .brand small,
+:root[data-theme="light"] .env-card > span,
+:root[data-theme="light"] .rack-mini em,
+:root[data-theme="light"] .rail-budget span,
+:root[data-theme="light"] .rail-budget small {
+  color: var(--nav-rail-muted) !important;
+}
+
+:root[data-theme="light"] .brand-mark {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #111827 0%, var(--nav-rail-hot) 58%, #16a34a 100%) !important;
+  box-shadow:
+    0 12px 24px rgba(26, 86, 219, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.72) inset !important;
+}
+
+:root[data-theme="light"] .env-line .status-dot,
+:root[data-theme="light"] .rack-mini span {
+  background: var(--nav-rail-green) !important;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12) !important;
+}
+
+:root[data-theme="light"] .rail-nav a {
+  color: var(--nav-rail-text) !important;
+  border-color: rgba(17, 24, 39, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86)),
+    #ffffff !important;
+  box-shadow:
+    0 7px 16px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+:root[data-theme="light"] .rail-nav a::before {
+  background: rgba(95, 107, 122, 0.7) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover,
+:root[data-theme="light"] .rail-nav a:focus-visible,
+:root[data-theme="light"] .rail-nav a.active {
+  color: var(--nav-rail-hot) !important;
+  border-color: var(--nav-rail-line-hot) !important;
+  background:
+    radial-gradient(circle at 14% 50%, rgba(26, 86, 219, 0.14), transparent 40%),
+    linear-gradient(135deg, rgba(26, 86, 219, 0.12), rgba(22, 163, 74, 0.035)),
+    #ffffff !important;
+  box-shadow:
+    0 12px 24px rgba(26, 86, 219, 0.105),
+    0 0 0 1px rgba(26, 86, 219, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+}
+
+:root[data-theme="light"] .rail-nav a:hover::before,
+:root[data-theme="light"] .rail-nav a:focus-visible::before,
+:root[data-theme="light"] .rail-nav a.active::before {
+  background: var(--nav-rail-hot) !important;
+  box-shadow: 0 0 0 4px var(--nav-rail-glow) !important;
+}
+
+:root[data-theme="light"] .rail-budget {
+  border-color: var(--nav-rail-line-boundary) !important;
+  background-color: var(--nav-rail-panel-strong) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(217, 119, 6, 0.13), transparent 58%),
+    linear-gradient(135deg, rgba(217, 119, 6, 0.08), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 235, 0.82)) !important;
+  box-shadow:
+    0 12px 24px rgba(180, 83, 9, 0.09),
+    0 0 18px var(--nav-rail-boundary-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+:root[data-theme="light"] .rail-budget strong {
+  color: var(--nav-rail-boundary) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter {
+  background: rgba(180, 83, 9, 0.16) !important;
+}
+
+:root[data-theme="light"] .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--nav-rail-boundary), #f59e0b) !important;
+  box-shadow: 0 0 12px rgba(217, 119, 6, 0.14) !important;
+}
