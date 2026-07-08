@@ -18517,3 +18517,147 @@ body > .ops-shell > aside.side-rail .rail-budget .meter div {
     background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.5), transparent) !important;
   }
 }
+
+/* Final rail parity seal: the command rail stays dark in light mode so it reads as the same NOC surface as the dashboard. */
+:root[data-theme="light"] body > .ops-shell > aside.side-rail {
+  --rail-ui-bg: #070a10 !important;
+  --rail-ui-top: #121a27 !important;
+  --rail-ui-mid: #0c131d !important;
+  --rail-ui-panel: rgba(15, 23, 35, 0.98) !important;
+  --rail-ui-panel-strong: rgba(41, 31, 18, 0.98) !important;
+  --rail-ui-border: rgba(146, 164, 190, 0.28) !important;
+  --rail-ui-border-hot: rgba(255, 159, 28, 0.72) !important;
+  --rail-ui-text: #f7fbff !important;
+  --rail-ui-body: #d9e4f2 !important;
+  --rail-ui-muted: #aab7c9 !important;
+  --rail-ui-accent: #ff9f1c !important;
+  --rail-ui-yellow: #ffd166 !important;
+  --rail-ui-green: #74d66b !important;
+  color-scheme: dark !important;
+  color: var(--rail-ui-body) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background-color: var(--rail-ui-bg) !important;
+  background-image:
+    radial-gradient(circle at 48% -8%, rgba(255, 159, 28, 0.28), transparent 34%),
+    radial-gradient(circle at -8% 76%, rgba(116, 214, 107, 0.15), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.065), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.042) 0 1px, transparent 1px 40px),
+    linear-gradient(180deg, var(--rail-ui-top) 0%, var(--rail-ui-mid) 44%, var(--rail-ui-bg) 100%) !important;
+  box-shadow:
+    22px 0 44px rgba(2, 6, 12, 0.42),
+    inset -1px 0 0 rgba(255, 159, 28, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail::after {
+  background: linear-gradient(180deg, transparent, rgba(255, 159, 28, 0.62), transparent) !important;
+  opacity: 0.72 !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .brand,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .env-card,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  color: var(--rail-ui-body) !important;
+  border-color: var(--rail-ui-border) !important;
+  background-color: var(--rail-ui-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.075), transparent 62%) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .brand strong,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .env-line strong,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--rail-ui-text) !important;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.52) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .brand small,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .env-card > span,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget span,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget small {
+  color: var(--rail-ui-muted) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .brand-mark {
+  color: #08111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--rail-ui-accent) 55%, var(--rail-ui-green) 100%) !important;
+  box-shadow:
+    0 16px 32px rgba(255, 159, 28, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.38) inset !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a {
+  color: var(--rail-ui-body) !important;
+  border-color: transparent !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    rgba(15, 23, 35, 0.42) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after {
+  color: var(--rail-ui-text) !important;
+  border-color: rgba(170, 183, 201, 0.22) !important;
+  background: rgba(255, 255, 255, 0.055) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--rail-ui-border-hot) !important;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 159, 28, 0.34), transparent 44%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.26), rgba(116, 214, 107, 0.08)),
+    rgba(255, 255, 255, 0.07) !important;
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 159, 28, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover::after,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible::after,
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active::after {
+  color: #101827 !important;
+  border-color: rgba(255, 209, 102, 0.8) !important;
+  background: linear-gradient(135deg, var(--rail-ui-yellow), var(--rail-ui-accent)) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.7) !important;
+  background-color: var(--rail-ui-panel-strong) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.23), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.018)) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--rail-ui-yellow) !important;
+  text-shadow: 0 0 18px rgba(255, 209, 102, 0.28) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter {
+  background: rgba(170, 183, 201, 0.23) !important;
+}
+
+:root[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--rail-ui-yellow), var(--rail-ui-accent)) !important;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.3) !important;
+}
+
+@media (max-width: 860px) {
+  :root[data-theme="light"] body > .ops-shell > aside.side-rail::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.62), transparent) !important;
+  }
+}
