@@ -1097,6 +1097,20 @@ const translations = {
     monitor_alerts: "HTTP Status Triage (429 Rate-Limit / 503 Backend Faults)",
     monitor_partition: "API partition usage",
     monitor_requests: "X API operations per run",
+    monitor_firewall: "X API circuit breaker",
+    firewall_zero_reads: "0 live X reads",
+    firewall_read_gate: "read gate",
+    firewall_publish_gate: "publish gate",
+    firewall_runway: "runway",
+    firewall_safe_left: "safe left",
+    firewall_faults: "faults",
+    firewall_sealed: "sealed partitions",
+    firewall_state_open: "circuit nominal",
+    firewall_state_review: "operator review",
+    firewall_state_sealed: "read partition sealed",
+    firewall_runbook_ok: "Cached telemetry is enough for the next operator loop.",
+    firewall_runbook_warn: "Keep optional reads sealed and spend the next loop on manual route lanes.",
+    firewall_runbook_danger: "Do not run live search/read jobs until cooldown and auth partitions clear.",
     gauge_data_age: "Telemetry freshness",
     gauge_followers: "Ingress Node Strength (Active Conns)",
     gauge_24h_impr: "L7 traffic load",
@@ -1945,6 +1959,20 @@ const translations = {
     monitor_alerts: "HTTP 状态分诊（429 限流 / 503 后端故障）",
     monitor_partition: "API 分区用量",
     monitor_requests: "每轮 X API 操作",
+    monitor_firewall: "X API 断路器",
+    firewall_zero_reads: "0 次实时 X 读取",
+    firewall_read_gate: "读取闸门",
+    firewall_publish_gate: "发帖闸门",
+    firewall_runway: "续航",
+    firewall_safe_left: "安全剩余",
+    firewall_faults: "故障",
+    firewall_sealed: "封闭分区",
+    firewall_state_open: "断路器正常",
+    firewall_state_review: "人工复核",
+    firewall_state_sealed: "读取分区封闭",
+    firewall_runbook_ok: "缓存遥测足够支撑下一轮人工路由。",
+    firewall_runbook_warn: "保持可选读取封闭，把下一轮动作投到人工路由通道。",
+    firewall_runbook_danger: "冷却和授权分区清除前，不要运行实时搜索/读取任务。",
     gauge_data_age: "遥测新鲜度",
     gauge_followers: "入口节点强度（活跃连接）",
     gauge_24h_impr: "L7 流量负载",
@@ -4863,6 +4891,114 @@ function renderHourlyLoadBalancer() {
   `;
 }
 
+function monitorCostFirewallData() {
+  const { api, spend, cap, remaining, ratio } = apiBudget();
+  const governor = governorData();
+  const control = controlPlaneData();
+  const cadence = cadenceData();
+  const triage = apiStatusTriage();
+  const runway = runwayGuardData(governor);
+  const guard = dashboardData.automation?.budgetGuard || fallbackData.automation?.budgetGuard || {};
+  const safeCap = number(api.safeCap, number(guard.safeCapUsd, cap * 0.9));
+  const safeLeft = number(api.safeRemaining, number(guard.trackedSafeRemainingUsd, Math.max(0, safeCap - spend)));
+  const activeFaults = number(triage.activeRateLimit429) + number(triage.activeBackendFault5xx) + number(triage.activeAuthFault4xx);
+  const cooldown = governor?.cooldown || api.cooldown || {};
+  const cooldownActive = Boolean(cooldown.active);
+  const readGate = governor?.gates?.read || control.readGate || (cooldownActive || activeFaults ? "cached_only" : "cached_only");
+  const publishGate = governor?.gates?.publish || control.publishGate || (cadence.publishAllowed ? "open" : "review");
+  const runwayDays = runway?.runwayDays == null
+    ? (safeLeft > 0 ? null : 0)
+    : number(runway.runwayDays);
+  const sealedPartitions = [
+    readGate !== "open" ? "x_read" : null,
+    cooldownActive ? "cooldown" : null,
+    activeFaults ? "fault_bus" : null,
+    safeLeft <= 0 ? "safe_budget" : null,
+  ].filter(Boolean);
+  const severity = activeFaults || cooldownActive || readGate === "closed"
+    ? "danger"
+    : safeLeft <= 0 || publishGate !== "open" || cadence.willBlockPublish || runway?.active
+      ? "warn"
+      : "ok";
+  const stateKey = severity === "danger"
+    ? "firewall_state_sealed"
+    : severity === "warn"
+      ? "firewall_state_review"
+      : "firewall_state_open";
+  const runbookKey = severity === "danger"
+    ? "firewall_runbook_danger"
+    : severity === "warn"
+      ? "firewall_runbook_warn"
+      : "firewall_runbook_ok";
+  return {
+    severity,
+    stateKey,
+    runbookKey,
+    spend,
+    cap,
+    remaining,
+    ratio,
+    safeLeft,
+    safeCap,
+    readGate,
+    publishGate,
+    activeFaults,
+    sealedPartitions,
+    runwayDays,
+    zeroExtraXReads: true,
+  };
+}
+
+function formatFirewallGate(value) {
+  const raw = String(value || "-").replace(/_/g, " ");
+  return raw === "cached only" ? "cached" : raw;
+}
+
+function renderMonitorCostFirewall() {
+  const target = $("#monitor-cost-firewall");
+  if (!target) return;
+  const firewall = monitorCostFirewallData();
+  const runway = firewall.runwayDays == null
+    ? "∞"
+    : `${formatNumber(firewall.runwayDays, firewall.runwayDays > 30 ? 0 : 1)}d`;
+  const sealed = firewall.sealedPartitions.length
+    ? firewall.sealedPartitions.map((item) => item.replace(/_/g, ".")).join(" / ")
+    : "none";
+  const cells = [
+    { label: t("firewall_read_gate"), value: formatFirewallGate(firewall.readGate), tone: firewall.readGate === "open" ? "ok" : "warn" },
+    { label: t("firewall_publish_gate"), value: formatFirewallGate(firewall.publishGate), tone: firewall.publishGate === "open" ? "ok" : "warn" },
+    { label: t("firewall_runway"), value: runway, tone: firewall.runwayDays === 0 ? "danger" : firewall.runwayDays != null && firewall.runwayDays < 3 ? "warn" : "ok" },
+    { label: t("firewall_safe_left"), value: money(firewall.safeLeft), tone: firewall.safeLeft > 0.5 ? "ok" : firewall.safeLeft > 0 ? "warn" : "danger" },
+    { label: t("firewall_faults"), value: formatNumber(firewall.activeFaults), tone: firewall.activeFaults ? "danger" : "ok" },
+    { label: t("firewall_sealed"), value: sealed, tone: firewall.sealedPartitions.length ? "warn" : "ok" },
+  ];
+  target.innerHTML = `
+    <div class="cost-firewall-head ${escapeHtml(firewall.severity)}">
+      <div>
+        <span>${escapeHtml(t("monitor_firewall"))}</span>
+        <strong>${escapeHtml(t(firewall.stateKey))}</strong>
+      </div>
+      <em>${escapeHtml(t("firewall_zero_reads"))}</em>
+    </div>
+    <div class="cost-firewall-core">
+      <div class="firewall-rings ${escapeHtml(firewall.severity)}" style="--firewall-fill:${clamp(100 - firewall.ratio, 0, 100).toFixed(1)}%">
+        <span></span>
+        <strong>${escapeHtml(money(firewall.remaining))}</strong>
+        <small>${escapeHtml(t("api_left"))}</small>
+      </div>
+      <div class="firewall-cells">
+        ${cells.map((cell) => `
+          <span class="${escapeHtml(cell.tone)}">
+            <em>${escapeHtml(cell.label)}</em>
+            <strong>${escapeHtml(cell.value)}</strong>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+    <p>${escapeHtml(t(firewall.runbookKey))}</p>
+  `;
+}
+
 function renderMonitorPanels() {
   const loadChart = $("#monitor-load-chart");
   if (!loadChart) return;
@@ -4925,6 +5061,7 @@ function renderMonitorPanels() {
       `;
     })
     .join("");
+  renderMonitorCostFirewall();
 
   const freshness = dataFreshness();
   const triage = apiStatusTriage();

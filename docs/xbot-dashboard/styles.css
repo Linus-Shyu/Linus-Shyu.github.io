@@ -8273,6 +8273,11 @@ body,
   background: var(--surface-soft);
 }
 
+.monitor-table-panel .monitor-table-wrap {
+  max-height: 92px;
+  margin-bottom: 6px;
+}
+
 .monitor-table {
   width: 100%;
   min-width: 0;
@@ -8340,6 +8345,211 @@ body,
 .usage-pill.idle {
   color: var(--ink);
   background: var(--surface-tint);
+}
+
+.monitor-cost-firewall {
+  display: grid;
+  gap: 7px;
+  margin: 0 8px 8px;
+  border: 1px solid color-mix(in srgb, #00f0ff 28%, var(--line-soft));
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 12%, transparent), transparent 38%),
+    radial-gradient(circle at 100% 0, color-mix(in srgb, #ff007a 8%, transparent), transparent 40%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 94%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 56%, transparent),
+    0 0 14px color-mix(in srgb, #00f0ff 7%, transparent);
+}
+
+.cost-firewall-head,
+.cost-firewall-core {
+  display: grid;
+  gap: 8px;
+}
+
+.cost-firewall-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.cost-firewall-head span,
+.firewall-cells em,
+.firewall-rings small,
+.monitor-cost-firewall p {
+  overflow: hidden;
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+}
+
+.cost-firewall-head span,
+.firewall-cells em,
+.firewall-rings small {
+  color: var(--muted);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cost-firewall-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cost-firewall-head em {
+  border: 1px solid color-mix(in srgb, var(--ok) 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 3px 6px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 9%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 860;
+  white-space: nowrap;
+}
+
+.cost-firewall-head.warn em {
+  border-color: color-mix(in srgb, var(--warn) 50%, var(--line-soft));
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.cost-firewall-head.danger em {
+  border-color: color-mix(in srgb, var(--danger) 52%, var(--line-soft));
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+}
+
+.cost-firewall-core {
+  grid-template-columns: 74px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.firewall-rings {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 74px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ok) 32%, var(--line-soft));
+  border-radius: 6px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--ok) 16%, transparent) 0 28%, transparent 29%),
+    conic-gradient(var(--ok) 0 var(--firewall-fill, 0%), color-mix(in srgb, var(--line) 70%, transparent) var(--firewall-fill, 0%) 100%);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--ok) 9%, transparent);
+}
+
+.firewall-rings.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line-soft));
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--warn) 13%, transparent) 0 28%, transparent 29%),
+    conic-gradient(var(--warn) 0 var(--firewall-fill, 0%), color-mix(in srgb, var(--line) 70%, transparent) var(--firewall-fill, 0%) 100%);
+}
+
+.firewall-rings.danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line-soft));
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--danger) 14%, transparent) 0 28%, transparent 29%),
+    conic-gradient(var(--danger) 0 var(--firewall-fill, 0%), color-mix(in srgb, var(--line) 70%, transparent) var(--firewall-fill, 0%) 100%);
+}
+
+.firewall-rings span {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+
+.firewall-rings strong,
+.firewall-rings small {
+  position: relative;
+  z-index: 1;
+  display: block;
+  max-width: 58px;
+  text-align: center;
+}
+
+.firewall-rings strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 950;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.firewall-rings small {
+  margin-top: 3px;
+  font-size: 8px;
+}
+
+.firewall-cells {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+}
+
+.firewall-cells span {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  padding: 5px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.firewall-cells span.ok {
+  border-color: color-mix(in srgb, var(--ok) 30%, var(--line-soft));
+}
+
+.firewall-cells span.warn {
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line-soft));
+}
+
+.firewall-cells span.danger {
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line-soft));
+}
+
+.firewall-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.monitor-cost-firewall p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0;
+  color: var(--body);
+  font-size: 10px;
+  line-height: 1.25;
 }
 
 .overview-grid,
