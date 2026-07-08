@@ -1351,6 +1351,18 @@ const translations = {
     dispatch_zero_reads: "0 X read ops",
     dispatch_runbook: "Operator runbook",
     dispatch_empty: "No dispatch missions queued.",
+    daily_console_eyebrow: "Daily Execution Console",
+    daily_console_title: "Zero-read operator fire-control",
+    daily_console_ready: "ready lanes",
+    daily_console_target: "route ops",
+    daily_console_reads: "X read ops",
+    daily_console_sla: "SLA",
+    daily_console_primary: "primary command",
+    daily_console_payload: "paste payload",
+    daily_console_guardrails: "guardrails",
+    daily_console_copy: "Copy console",
+    daily_console_copy_payload: "Copy payload",
+    daily_console_open: "Open route",
     operator_packet_eyebrow: "Operator Packet",
     operator_packet_title: "Execute this route first",
     operator_packet_armed: "armed",
@@ -2250,6 +2262,18 @@ const translations = {
     dispatch_zero_reads: "0 次 X 读取",
     dispatch_runbook: "操作手册",
     dispatch_empty: "暂无派发任务。",
+    daily_console_eyebrow: "每日执行控制台",
+    daily_console_title: "零读取人工火控",
+    daily_console_ready: "就绪通道",
+    daily_console_target: "路由操作",
+    daily_console_reads: "X 读取操作",
+    daily_console_sla: "SLA",
+    daily_console_primary: "主指令",
+    daily_console_payload: "粘贴载荷",
+    daily_console_guardrails: "护栏",
+    daily_console_copy: "复制控制台",
+    daily_console_copy_payload: "复制载荷",
+    daily_console_open: "打开路由",
     operator_packet_eyebrow: "操作员数据包",
     operator_packet_title: "先执行这条路由",
     operator_packet_armed: "已装载",
@@ -3708,6 +3732,94 @@ function operatorDispatchPacketData(ops = distributionOpsData()) {
       { id: "queue", label: "route queue", value: `${readyPackets}/${packets.length}`, status: severity, detail: "Route URL and output payload are present." },
     ],
     packets,
+  };
+}
+
+function dailyExecutionConsoleData(
+  packet = operatorDispatchPacketData(),
+  routeAmplifier = routeAmplifierData(packet),
+  manualTargetAtlas = manualReplyTargetAtlasData(packet, routeAmplifier),
+  ops = distributionOpsData(),
+) {
+  const incoming = dashboardData.dailyExecutionConsole || fallbackData.dailyExecutionConsole;
+  if (incoming?.rows?.length) return incoming;
+  const packets = Array.isArray(packet?.packets) ? packet.packets : [];
+  const atlasTargets = Array.isArray(manualTargetAtlas?.targets) ? manualTargetAtlas.targets : [];
+  const missions = Array.isArray(ops?.missions) ? ops.missions : [];
+  const lanes = Array.isArray(routeAmplifier?.lanes) ? routeAmplifier.lanes : [];
+  const source = packets.length ? packets : atlasTargets.length ? atlasTargets : missions;
+  const targetReplies = number(packet?.targetReplies, number(manualTargetAtlas?.totalTargetReplies, number(ops?.manualReplyTarget, 3)));
+  const rows = source.slice(0, 5).map((item, index) => {
+    const matchingLane =
+      lanes.find((lane) => lane.id === item.id || lane.routeUrl === item.routeUrl || lane.label === item.routeLabel) ||
+      lanes[index] ||
+      null;
+    const routeLabel = item.routeLabel || item.label || matchingLane?.label || `Route ${index + 1}`;
+    const routeUrl = item.routeUrl || matchingLane?.routeUrl || null;
+    const replyText = item.replyText || item.draftText || "";
+    const ready = Boolean(routeUrl && replyText);
+    return {
+      id: item.id || `daily:${index + 1}`,
+      priority: number(item.priority, number(item.rank, index + 1)),
+      status: ready ? (matchingLane?.status || item.status || "ok") : "warn",
+      ready,
+      routeLabel,
+      routeUrl,
+      replyText,
+      replyAngle: item.replyAngle || item.draftAngle || item.angle || "",
+      reason: item.reason || item.evidence || matchingLane?.reason || "",
+      targetReplies: Math.max(1, number(item.targetReplies, number(matchingLane?.targetReplies, 1))),
+      operatorSlaMinutes: Math.max(5, number(item.operatorSlaMinutes, number(matchingLane?.operatorSlaMinutes, 10 + index * 10))),
+      expectedLiftPct: number(item.expectedLiftPct, number(matchingLane?.expectedLiftPct, 0)),
+      score: number(item.score, number(matchingLane?.score, 0)),
+      stopCondition: item.stopCondition || "Stop after one useful route op unless the thread is already producing signal.",
+    };
+  });
+  const readyRows = rows.filter((row) => row.ready);
+  const severity = readyRows.length >= Math.min(3, rows.length || 1) ? "ok" : readyRows.length ? "warn" : "danger";
+  const primary = readyRows[0] || rows[0] || null;
+  const nextAction =
+    packet?.nextAction ||
+    routeAmplifier?.nextAction ||
+    manualTargetAtlas?.nextAction ||
+    "Open the top route, paste one useful payload, then stop at the target count.";
+  const copyBlock = [
+    "CODEX DAILY EXECUTION CONSOLE",
+    `Generated: ${dashboardData.updatedAt || fallbackData.updatedAt}`,
+    `Mode: ${packet?.mode || ops?.mode || "manual_zero_read_dispatch"}`,
+    `Target: ${formatNumber(targetReplies)} manual route ops`,
+    "X API: 0 live search/read ops; browser-only execution",
+    "",
+    "Do this now:",
+    ...rows.slice(0, 3).flatMap((row) => [
+      `${formatNumber(row.priority)}. OPEN: ${row.routeLabel}${row.routeUrl ? ` - ${row.routeUrl}` : ""}`,
+      `   PASTE: ${row.replyText || "missing output; use the next ready payload"}`,
+      `   SLA: ${formatNumber(row.operatorSlaMinutes)}m · target ${formatNumber(row.targetReplies)} · lift +${formatNumber(row.expectedLiftPct, 1)}%`,
+    ]),
+    "",
+    `Primary command: ${nextAction}`,
+    "Stop: skip politics, giveaways, ragebait, weak tech fit, and stale threads.",
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "zero_read_daily_execution_console",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    targetReplies,
+    readyRows: readyRows.length,
+    totalRows: rows.length,
+    primaryRouteLabel: primary?.routeLabel || null,
+    primaryRouteUrl: primary?.routeUrl || null,
+    primaryReplyText: primary?.replyText || null,
+    nextAction,
+    guardrails: [
+      "Manual browser execution only; no auto-search, auto-like, auto-follow, or auto-reply.",
+      "No X search/read API calls for route selection.",
+      "Stop at target count and let maintenance write results back.",
+    ],
+    rows,
+    copyBlock,
   };
 }
 
@@ -10173,6 +10285,83 @@ function manualReplyTargetAtlasHtml(atlas) {
   `;
 }
 
+function dailyExecutionConsoleHtml(consoleData) {
+  if (!consoleData?.rows?.length) return "";
+  const severity = ["ok", "warn", "danger"].includes(consoleData.severity) ? consoleData.severity : "warn";
+  const rows = consoleData.rows.slice(0, 5);
+  const primary = rows.find((row) => row.ready) || rows[0] || {};
+  const maxScore = Math.max(1, ...rows.map((row) => number(row.score, 0)));
+  const rowHtml = rows.map((row) => {
+    const status = row.ready ? "ok" : "warn";
+    const scorePct = Math.max(8, Math.min(100, (number(row.score, 0) / maxScore) * 100));
+    return `
+      <article class="daily-console-row ${escapeHtml(status)}" style="--daily-score:${scorePct}%">
+        <div class="daily-row-route">
+          <span>${String(row.priority || 1).padStart(2, "0")}</span>
+          <div>
+            <strong>${escapeHtml(row.routeLabel || "-")}</strong>
+            <em>${escapeHtml(row.replyAngle || row.reason || "route_payload")}</em>
+          </div>
+        </div>
+        <div class="daily-row-meter"><i></i></div>
+        <dl>
+          <div><dt>${escapeHtml(t("daily_console_sla"))}</dt><dd>${escapeHtml(`${formatNumber(row.operatorSlaMinutes || 0)}m`)}</dd></div>
+          <div><dt>${escapeHtml(t("daily_console_target"))}</dt><dd>${escapeHtml(formatNumber(row.targetReplies || 0))}</dd></div>
+          <div><dt>${escapeHtml(t("dispatch_manifest_lift"))}</dt><dd>${escapeHtml(`+${formatNumber(row.expectedLiftPct || 0, 1)}%`)}</dd></div>
+        </dl>
+        <blockquote>${escapeHtml(sreText(row.replyText || "-"))}</blockquote>
+        <div class="daily-row-actions">
+          ${row.routeUrl ? `<a class="button button-primary" href="${escapeHtml(row.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("daily_console_open"))}</a>` : ""}
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(row.replyText || ""))}">${escapeHtml(t("daily_console_copy_payload"))}</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+  const guards = (consoleData.guardrails || [])
+    .slice(0, 4)
+    .map((guard) => `<code>${escapeHtml(sreText(guard))}</code>`)
+    .join("");
+  return `
+    <article class="daily-execution-console ${escapeHtml(severity)}">
+      <div class="daily-console-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("daily_console_eyebrow"))}</span>
+          <strong>${escapeHtml(t("daily_console_title"))}</strong>
+        </div>
+        <em>${escapeHtml(t("dispatch_zero_reads"))}</em>
+      </div>
+      <div class="daily-console-core">
+        <section class="daily-console-primary">
+          <span>${escapeHtml(t("daily_console_primary"))}</span>
+          <strong>${escapeHtml(sreText(consoleData.nextAction || "-"))}</strong>
+          <p>${escapeHtml(sreText(primary.replyText || consoleData.primaryReplyText || "-"))}</p>
+          <div class="daily-console-actions">
+            ${consoleData.primaryRouteUrl ? `<a class="button button-primary" href="${escapeHtml(consoleData.primaryRouteUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("daily_console_open"))}: ${escapeHtml(consoleData.primaryRouteLabel || "-")}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(consoleData.copyBlock || ""))}">${escapeHtml(t("daily_console_copy"))}</button>
+          </div>
+        </section>
+        <section class="daily-console-kpis">
+          <div><span>${escapeHtml(t("daily_console_ready"))}</span><strong>${escapeHtml(`${formatNumber(consoleData.readyRows || 0)}/${formatNumber(consoleData.totalRows || 0)}`)}</strong></div>
+          <div><span>${escapeHtml(t("daily_console_target"))}</span><strong>${escapeHtml(formatNumber(consoleData.targetReplies || 0))}</strong></div>
+          <div><span>${escapeHtml(t("daily_console_reads"))}</span><strong>${escapeHtml(formatNumber(consoleData.estimatedXReadOps || 0))}</strong></div>
+          <div><span>${escapeHtml(t("daily_console_sla"))}</span><strong>${escapeHtml(`${formatNumber(primary.operatorSlaMinutes || 0)}m`)}</strong></div>
+        </section>
+      </div>
+      <div class="daily-console-body">
+        <section>
+          <div class="manifest-section-title"><span>${escapeHtml(t("daily_console_payload"))}</span><strong>${escapeHtml(`${formatNumber(rows.length)} lanes`)}</strong></div>
+          <div class="daily-console-rows">${rowHtml}</div>
+        </section>
+        <aside>
+          <div class="manifest-section-title"><span>${escapeHtml(t("daily_console_guardrails"))}</span><strong>${escapeHtml(severity)}</strong></div>
+          <div class="daily-console-guards">${guards}</div>
+          <pre class="daily-console-copy"><code>${escapeHtml(sreText(consoleData.copyBlock || ""))}</code></pre>
+        </aside>
+      </div>
+    </article>
+  `;
+}
+
 function renderActions() {
   const ops = distributionOpsData();
   const missions = Array.isArray(ops.missions) ? ops.missions : [];
@@ -10270,6 +10459,7 @@ function renderActions() {
   const dispatchPacket = operatorDispatchPacketData(ops);
   const routeAmplifier = routeAmplifierData(dispatchPacket, ops);
   const manualTargetAtlas = manualReplyTargetAtlasData(dispatchPacket, routeAmplifier, ops);
+  const dailyExecutionConsole = dailyExecutionConsoleData(dispatchPacket, routeAmplifier, manualTargetAtlas, ops);
   const flightDeck = operatorFlightDeckData(ops, dispatchPacket, routeAmplifier);
   const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
   const manifestPackets = (dispatchPacket.packets || [])
@@ -10366,6 +10556,7 @@ function renderActions() {
     .join("");
 
   $("#action-board").innerHTML = `
+    ${dailyExecutionConsoleHtml(dailyExecutionConsole)}
     ${flightDeckHtml(flightDeck)}
     <div class="dispatch-strip">
       <div>

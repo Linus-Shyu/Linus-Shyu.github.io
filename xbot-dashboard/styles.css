@@ -3835,6 +3835,387 @@ h3 {
   border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
 }
 
+.daily-execution-console {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00ff66 38%, var(--line));
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00ff66 14%, transparent), transparent 34%),
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, #00f0ff 13%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 90%, transparent), transparent 66%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #00ff66 10%, transparent),
+    0 0 28px color-mix(in srgb, #00ff66 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.daily-execution-console::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, #00ff66 7%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, #00f0ff 6%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.16;
+}
+
+.daily-execution-console.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line));
+}
+
+.daily-execution-console.danger {
+  border-color: color-mix(in srgb, var(--danger) 52%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--danger) 12%, transparent),
+    0 0 30px color-mix(in srgb, var(--danger) 15%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.daily-console-head,
+.daily-console-core,
+.daily-console-body,
+.daily-console-row,
+.daily-row-route,
+.daily-row-actions,
+.daily-console-actions,
+.daily-console-kpis {
+  position: relative;
+  z-index: 1;
+}
+
+.daily-console-head,
+.daily-row-route,
+.daily-row-actions,
+.daily-console-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.daily-console-head strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.daily-console-head em {
+  border: 1px solid color-mix(in srgb, var(--ok) 44%, var(--line));
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 880;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.daily-console-core {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(360px, 0.82fr);
+  gap: 9px;
+}
+
+.daily-console-primary,
+.daily-console-kpis div,
+.daily-console-row,
+.daily-console-body > section,
+.daily-console-body > aside {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent),
+    0 0 14px color-mix(in srgb, #00ff66 6%, transparent);
+}
+
+.daily-console-primary {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 11px;
+}
+
+.daily-console-primary span,
+.daily-console-kpis span,
+.daily-row-route em,
+.daily-console-row dt,
+.daily-console-guards code {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.daily-console-primary strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.28;
+}
+
+.daily-console-primary p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.34;
+}
+
+.daily-console-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.daily-console-actions .button,
+.daily-row-actions .button {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.daily-console-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.daily-console-kpis div {
+  padding: 9px;
+}
+
+.daily-console-kpis strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 18px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.daily-console-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.62fr);
+  gap: 9px;
+}
+
+.daily-console-body > section,
+.daily-console-body > aside {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 9px;
+}
+
+.daily-console-rows,
+.daily-console-guards {
+  display: grid;
+  gap: 7px;
+}
+
+.daily-console-row {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.82fr) minmax(90px, 0.32fr) minmax(190px, 0.66fr) minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+}
+
+.daily-console-row.ok {
+  border-color: color-mix(in srgb, var(--ok) 38%, var(--line-soft));
+}
+
+.daily-console-row.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line-soft));
+}
+
+.daily-row-route {
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.daily-row-route > span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #00ff66 34%, var(--line-soft));
+  border-radius: 6px;
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.daily-row-route div {
+  min-width: 0;
+}
+
+.daily-row-route strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.daily-row-route em {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.daily-row-meter {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 66%, transparent);
+}
+
+.daily-row-meter i {
+  display: block;
+  width: var(--daily-score);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ok), var(--accent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ok) 28%, transparent);
+}
+
+.daily-console-row dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+}
+
+.daily-console-row dt,
+.daily-console-row dd {
+  margin: 0;
+}
+
+.daily-console-row dd {
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.daily-console-row blockquote {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.daily-row-actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.daily-console-guards code {
+  display: block;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--surface-soft) 78%, transparent);
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.daily-console-copy {
+  max-height: 210px;
+  overflow: auto;
+  margin: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 9px;
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.36;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 1380px) {
+  .daily-console-row {
+    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1fr);
+  }
+
+  .daily-row-meter,
+  .daily-console-row dl,
+  .daily-row-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1080px) {
+  .daily-console-core,
+  .daily-console-body,
+  .daily-console-row {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-console-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .daily-console-head,
+  .daily-row-actions,
+  .daily-console-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .daily-console-kpis,
+  .daily-console-row dl {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dispatch-manifest {
   position: relative;
   display: grid;
