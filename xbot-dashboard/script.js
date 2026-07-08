@@ -942,6 +942,30 @@ const translations = {
     runlog_drafts_ready: "{count} outputs queued",
     runlog_budget_left: "{amount} budget left",
     runlog_best_hook: "{hook} rule wins",
+    decision_trace_eyebrow: "Generation Decision Trace",
+    decision_trace_title: "Candidate ranker blackbox",
+    decision_trace_zero_reads: "0 X read ops",
+    decision_trace_selected_packet: "Selected packet",
+    decision_trace_candidate_pool: "Candidate pool",
+    decision_trace_mutation_bus: "Angle mutation bus",
+    decision_trace_gate_state: "Gate state",
+    decision_trace_empty: "No generation decision trace recorded yet.",
+    decision_trace_rank: "rank {rank}/{total}",
+    decision_trace_score: "score {score}",
+    decision_trace_format: "format",
+    decision_trace_chars: "{count} chars",
+    decision_trace_copy: "Copy selected",
+    decision_trace_reason: "selection reason",
+    decision_trace_diagnostics: "diagnostics",
+    decision_trace_quality_gate: "quality gate",
+    decision_trace_ai_gate: "AI gate",
+    decision_trace_strict_gate: "strict gate",
+    decision_trace_x_reads: "X reads",
+    decision_trace_selected: "selected",
+    decision_trace_real: "recorded trace",
+    decision_trace_derived: "derived trace",
+    decision_trace_online: "online",
+    decision_trace_offline: "offline",
     monitor_load: "Total ingestion throughput / L7 traffic load",
     monitor_hourly: "UTC load balancer",
     hourly_current: "current {hour} · score {score}",
@@ -1493,6 +1517,30 @@ const translations = {
     runlog_drafts_ready: "{count} 条输出入队",
     runlog_budget_left: "预算剩余 {amount}",
     runlog_best_hook: "胜出规则：{hook}",
+    decision_trace_eyebrow: "生成决策追踪",
+    decision_trace_title: "候选排序黑盒",
+    decision_trace_zero_reads: "0 次 X 读取操作",
+    decision_trace_selected_packet: "选中数据包",
+    decision_trace_candidate_pool: "候选池",
+    decision_trace_mutation_bus: "角度变异总线",
+    decision_trace_gate_state: "闸门状态",
+    decision_trace_empty: "还没有记录生成决策 trace。",
+    decision_trace_rank: "排名 {rank}/{total}",
+    decision_trace_score: "分数 {score}",
+    decision_trace_format: "格式",
+    decision_trace_chars: "{count} 字符",
+    decision_trace_copy: "复制选中内容",
+    decision_trace_reason: "选择原因",
+    decision_trace_diagnostics: "诊断",
+    decision_trace_quality_gate: "质量闸门",
+    decision_trace_ai_gate: "AI 闸门",
+    decision_trace_strict_gate: "严格闸门",
+    decision_trace_x_reads: "X 读取",
+    decision_trace_selected: "已选中",
+    decision_trace_real: "真实记录",
+    decision_trace_derived: "派生记录",
+    decision_trace_online: "在线",
+    decision_trace_offline: "关闭",
     monitor_load: "总入口吞吐 / L7 流量负载",
     monitor_hourly: "UTC 负载均衡器",
     hourly_current: "当前 {hour} · 评分 {score}",
@@ -5599,6 +5647,198 @@ function proofReason(post) {
   return "It is specific, takes a clear position, and avoids headline recap, making it easier to reply to and share.";
 }
 
+function normalizeTraceCandidate(candidate, index, selectedText = "") {
+  const text = candidate?.text || "";
+  return {
+    rank: number(candidate?.rank, index + 1),
+    selected: Boolean(candidate?.selected || (selectedText && text === selectedText)),
+    templateId: candidate?.templateId || candidate?.template || "-",
+    score: number(candidate?.score),
+    angleMutationScore: number(candidate?.angleMutationScore),
+    reason: candidate?.reason || "",
+    diagnostics: Array.isArray(candidate?.diagnostics) ? candidate.diagnostics : [],
+    angleMutationDiagnostics: Array.isArray(candidate?.angleMutationDiagnostics) ? candidate.angleMutationDiagnostics : [],
+    qualityIssues: Array.isArray(candidate?.qualityIssues) ? candidate.qualityIssues : [],
+    aiQualityVerdict: candidate?.aiQualityVerdict || null,
+    characterCount: number(candidate?.characterCount, String(text).length),
+    text,
+  };
+}
+
+function derivedGenerationDecisionTrace() {
+  const post = bestPost();
+  if (!post?.text) return null;
+  const reactor = angleMutationReactorData();
+  const score = number(post.candidateScore, number(post.score));
+  const mutationScore = number(post.angleMutationScore, number(reactor.mutationScore));
+  const diagnostics = [
+    post.source ? `source:${post.source}` : null,
+    post.impressions != null ? `l7:${formatNumber(post.impressions)}` : null,
+    post.likes != null ? `acks:${formatNumber(post.likes)}` : null,
+    post.replies != null ? `thread_acks:${formatNumber(post.replies)}` : null,
+  ].filter(Boolean);
+  const selectedCandidate = {
+    rank: 1,
+    selected: true,
+    templateId: post.template || "decision_rule",
+    score,
+    angleMutationScore: mutationScore,
+    reason: post.candidateReason || proofReason(post),
+    diagnostics,
+    angleMutationDiagnostics: post.angleMutationDiagnostics || [`bias:${reactor.primaryMutation?.after || post.template || "decision_rule"}`],
+    qualityIssues: [],
+    characterCount: String(post.text || "").length,
+    text: post.text || "",
+  };
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_candidate_ranker_trace",
+    derived: true,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    selectedRank: 1,
+    selectedTemplateId: selectedCandidate.templateId,
+    selectedScore: score,
+    selectedReason: selectedCandidate.reason,
+    candidateCount: 1,
+    angleMutation: {
+      severity: reactor.severity || "warn",
+      mutationScore,
+      nextPromptBias: reactor.nextPromptBias || "-",
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+    },
+    selectedCandidate,
+    candidates: [selectedCandidate],
+    gates: {
+      qualityGateEnabled: true,
+      aiQualityGateEnabled: false,
+      strictQualityGate: false,
+    },
+  };
+}
+
+function generationDecisionTraceData() {
+  const incoming = dashboardData.generationDecisionTrace || fallbackData.generationDecisionTrace;
+  if (incoming?.candidates?.length || incoming?.selectedCandidate?.text) return incoming;
+  return derivedGenerationDecisionTrace();
+}
+
+function traceGateCell(labelKey, enabled, value = null) {
+  const online = Boolean(enabled);
+  return `
+    <span class="${online ? "ok" : "muted"}">
+      <em>${escapeHtml(t(labelKey))}</em>
+      <strong>${escapeHtml(value ?? t(online ? "decision_trace_online" : "decision_trace_offline"))}</strong>
+    </span>
+  `;
+}
+
+function candidateDiagnosticText(candidate) {
+  const verdict = candidate.aiQualityVerdict
+    ? [`ai:${candidate.aiQualityVerdict.allow ? "allow" : "hold"}`, candidate.aiQualityVerdict.risk || null, candidate.aiQualityVerdict.reason || null]
+    : [];
+  return [
+    ...candidate.diagnostics,
+    ...candidate.angleMutationDiagnostics,
+    ...candidate.qualityIssues.map((issue) => `gate:${issue}`),
+    ...verdict,
+  ].filter(Boolean).slice(0, 9).join(" · ") || "-";
+}
+
+function renderGenerationDecisionTrace() {
+  const container = $("#generation-decision-trace");
+  if (!container) return;
+  const trace = generationDecisionTraceData();
+  const candidates = (trace?.candidates || [])
+    .map((candidate, index) => normalizeTraceCandidate(candidate, index, trace?.selectedCandidate?.text || ""))
+    .filter((candidate) => candidate.text || candidate.templateId);
+  const selected = normalizeTraceCandidate(
+    trace?.selectedCandidate || candidates.find((candidate) => candidate.selected) || candidates[0],
+    Math.max(0, number(trace?.selectedRank, 1) - 1),
+  );
+  if (!trace || !candidates.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("decision_trace_empty"))}</p>`;
+    return;
+  }
+
+  const maxScore = Math.max(1, ...candidates.map((candidate) => number(candidate.score)));
+  const total = number(trace.candidateCount, candidates.length);
+  const mutation = trace.angleMutation || {};
+  const selectedPacket = [
+    `${t("decision_trace_rank", { rank: formatNumber(trace.selectedRank || selected.rank), total: formatNumber(total) })}`,
+    `${t("decision_trace_score", { score: formatNumber(trace.selectedScore ?? selected.score, 1) })}`,
+    `${t("decision_trace_format")}: ${formatTemplate(trace.selectedTemplateId || selected.templateId)}`,
+    t("decision_trace_chars", { count: formatNumber(selected.characterCount) }),
+  ].join(" · ");
+  const gateCells = [
+    traceGateCell("decision_trace_quality_gate", trace.gates?.qualityGateEnabled),
+    traceGateCell("decision_trace_ai_gate", trace.gates?.aiQualityGateEnabled),
+    traceGateCell("decision_trace_strict_gate", trace.gates?.strictQualityGate),
+    traceGateCell("decision_trace_x_reads", true, formatNumber(trace.estimatedXReadOps || 0)),
+  ].join("");
+
+  container.innerHTML = `
+    <div class="trace-head">
+      <div>
+        <span class="eyebrow">${escapeHtml(t("decision_trace_eyebrow"))}</span>
+        <strong>${escapeHtml(t("decision_trace_title"))}</strong>
+      </div>
+      <em>${escapeHtml(trace.derived ? t("decision_trace_derived") : t("decision_trace_real"))} · ${escapeHtml(t("decision_trace_zero_reads"))}</em>
+    </div>
+    <div class="trace-grid">
+      <article class="trace-selected">
+        <div class="trace-section-title">
+          <span>${escapeHtml(t("decision_trace_selected_packet"))}</span>
+          <strong>${escapeHtml(selectedPacket)}</strong>
+        </div>
+        <blockquote>${escapeHtml(selected.text || "-")}</blockquote>
+        <dl>
+          <div><dt>${escapeHtml(t("decision_trace_reason"))}</dt><dd>${escapeHtml(trace.selectedReason || selected.reason || "-")}</dd></div>
+          <div><dt>${escapeHtml(t("decision_trace_diagnostics"))}</dt><dd>${escapeHtml(candidateDiagnosticText(selected))}</dd></div>
+        </dl>
+        <button class="trace-copy" type="button" data-copy="${encodeURIComponent(selected.text || "")}">${escapeHtml(t("decision_trace_copy"))}</button>
+      </article>
+      <aside class="trace-side">
+        <div class="trace-mutation">
+          <span>${escapeHtml(t("decision_trace_mutation_bus"))}</span>
+          <strong>${escapeHtml(`${formatNumber(mutation.mutationScore || selected.angleMutationScore, 1)} · ${mutation.severity || "-"}`)}</strong>
+          <code>${escapeHtml(mutation.nextPromptBias || "-")}</code>
+        </div>
+        <div class="trace-gates">
+          <span>${escapeHtml(t("decision_trace_gate_state"))}</span>
+          <div>${gateCells}</div>
+        </div>
+      </aside>
+    </div>
+    <div class="trace-section-title pool">
+      <span>${escapeHtml(t("decision_trace_candidate_pool"))}</span>
+      <strong>${escapeHtml(`${formatNumber(candidates.length)}/${formatNumber(total)}`)}</strong>
+    </div>
+    <div class="trace-candidates">
+      ${candidates.map((candidate) => {
+        const pct = clamp((number(candidate.score) / maxScore) * 100, 4, 100);
+        return `
+          <article class="${candidate.selected ? "selected" : ""}" style="--trace-score:${pct.toFixed(1)}%">
+            <div class="trace-candidate-rank">
+              <span>${String(candidate.rank).padStart(2, "0")}</span>
+              ${candidate.selected ? `<em>${escapeHtml(t("decision_trace_selected"))}</em>` : ""}
+            </div>
+            <div class="trace-candidate-body">
+              <div>
+                <strong>${escapeHtml(formatTemplate(candidate.templateId))}</strong>
+                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))}</small>
+              </div>
+              <p>${escapeHtml(candidate.reason || candidateDiagnosticText(candidate))}</p>
+              <i></i>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
 function renderProof() {
   const post = bestPost();
   const score = number(post.score);
@@ -6569,6 +6809,7 @@ function render() {
   renderActions();
   renderDrafts();
   renderDiagnosis();
+  renderGenerationDecisionTrace();
   renderPosts();
   renderApi();
   setupSignalCanvas();
