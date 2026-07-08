@@ -20197,3 +20197,325 @@ body > .ops-shell > aside.side-rail .rail-budget strong {
     min-height: 40px !important;
   }
 }
+
+/* Light rail finish: make the white UI sidebar read like part of the main ops surface. */
+html[data-theme="light"] body > .ops-shell {
+  --rail-clarity-width: 184px;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail,
+html[data-theme="light"] body.demo-mode > .ops-shell > aside.side-rail {
+  --light-rail-bg: #eef2f7;
+  --light-rail-panel: rgba(255, 255, 255, 0.92);
+  --light-rail-panel-strong: #fffaf0;
+  --light-rail-line: rgba(148, 163, 184, 0.34);
+  --light-rail-line-strong: rgba(217, 119, 6, 0.36);
+  --light-rail-text: #111827;
+  --light-rail-body: #334155;
+  --light-rail-muted: #64748b;
+  --light-rail-hot: #f59e0b;
+  --light-rail-blue: #2563eb;
+  width: var(--rail-clarity-width) !important;
+  padding: 12px !important;
+  color-scheme: light !important;
+  color: var(--light-rail-body) !important;
+  border-color: var(--light-rail-line) !important;
+  background-color: var(--light-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 28% -8%, rgba(245, 158, 11, 0.18), transparent 34%),
+    radial-gradient(circle at 0 72%, rgba(37, 99, 235, 0.1), transparent 36%),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.035) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, #fbfcff 0%, #f1f5f9 48%, #e9eef5 100%) !important;
+  box-shadow:
+    18px 0 42px rgba(15, 23, 42, 0.08),
+    inset -1px 0 0 rgba(148, 163, 184, 0.24),
+    inset 1px 0 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  color: var(--light-rail-body) !important;
+  border-color: var(--light-rail-line) !important;
+  background-color: var(--light-rail-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86)),
+    linear-gradient(135deg, rgba(37, 99, 235, 0.045), transparent 58%) !important;
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand {
+  min-height: 56px !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  padding: 8px 10px !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand > span:not(.brand-mark),
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card {
+  display: block !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand-mark {
+  width: 38px !important;
+  height: 38px !important;
+  flex: 0 0 38px !important;
+  color: #ffffff !important;
+  background:
+    linear-gradient(135deg, #111827 0%, var(--light-rail-blue) 54%, var(--light-rail-hot) 100%) !important;
+  box-shadow:
+    0 12px 24px rgba(37, 99, 235, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.82) inset !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-line strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--light-rail-text) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand small,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card > span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget small {
+  color: var(--light-rail-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 14px !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div {
+  min-height: 52px !important;
+  justify-items: start !important;
+  padding: 8px !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini span {
+  background: #22c55e !important;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong {
+  max-width: none !important;
+  font-size: 11px !important;
+  text-align: left !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em {
+  display: block !important;
+  font-size: 9px !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav {
+  gap: 7px !important;
+  margin: 16px 0 !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a {
+  min-height: 40px !important;
+  justify-content: flex-start !important;
+  gap: 9px !important;
+  border-color: transparent !important;
+  padding: 0 10px !important;
+  color: var(--light-rail-body) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(248, 250, 252, 0.62)),
+    rgba(255, 255, 255, 0.62) !important;
+  font-size: 12px !important;
+  line-height: 1.1 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::before {
+  content: "" !important;
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  flex: 0 0 8px !important;
+  border-radius: 999px !important;
+  background: #94a3b8 !important;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.12) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active {
+  color: var(--light-rail-text) !important;
+  border-color: var(--light-rail-line-strong) !important;
+  background:
+    radial-gradient(circle at 14% 50%, rgba(245, 158, 11, 0.2), transparent 44%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(37, 99, 235, 0.06)),
+    #fff7ed !important;
+  box-shadow:
+    0 12px 24px rgba(217, 119, 6, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover::before,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible::before,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active::before {
+  background: var(--light-rail-hot) !important;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  border-color: var(--light-rail-line-strong) !important;
+  background-color: var(--light-rail-panel-strong) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.18), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 237, 0.86)) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: #b45309 !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter {
+  background: #e2e8f0 !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--light-rail-hot), var(--light-rail-blue)) !important;
+  box-shadow: none !important;
+}
+
+/* Final light-mode cascade seal. Earlier NOC rail rules use broad dark shorthands. */
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail,
+html[data-theme="light"] body.demo-mode > .ops-shell > aside.side-rail.side-rail {
+  --light-rail-bg: #eef2f7;
+  --light-rail-panel: rgba(255, 255, 255, 0.94);
+  --light-rail-panel-strong: #fffaf0;
+  --light-rail-line: rgba(148, 163, 184, 0.36);
+  --light-rail-line-strong: rgba(217, 119, 6, 0.38);
+  --light-rail-text: #111827;
+  --light-rail-body: #334155;
+  --light-rail-muted: #64748b;
+  --light-rail-hot: #f59e0b;
+  --light-rail-blue: #2563eb;
+  color-scheme: light !important;
+  color: var(--light-rail-body) !important;
+  border-color: var(--light-rail-line) !important;
+  background:
+    radial-gradient(circle at 28% -8%, rgba(245, 158, 11, 0.18), transparent 34%),
+    radial-gradient(circle at 0 72%, rgba(37, 99, 235, 0.1), transparent 36%),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.035) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, #fbfcff 0%, #f1f5f9 48%, var(--light-rail-bg) 100%) !important;
+  box-shadow:
+    18px 0 42px rgba(15, 23, 42, 0.08),
+    inset -1px 0 0 rgba(148, 163, 184, 0.24),
+    inset 1px 0 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--light-rail-body) !important;
+  border-color: var(--light-rail-line) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.9)),
+    linear-gradient(135deg, rgba(37, 99, 235, 0.05), transparent 58%),
+    var(--light-rail-panel) !important;
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  color: var(--light-rail-body) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(248, 250, 252, 0.64)),
+    rgba(255, 255, 255, 0.66) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(1)::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(2)::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(3)::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(4)::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(5)::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:nth-child(6)::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: var(--light-rail-text) !important;
+  border-color: var(--light-rail-line-strong) !important;
+  background:
+    radial-gradient(circle at 14% 50%, rgba(245, 158, 11, 0.2), transparent 44%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(37, 99, 235, 0.06)),
+    #fff7ed !important;
+  box-shadow:
+    0 12px 24px rgba(217, 119, 6, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: var(--light-rail-line-strong) !important;
+  background:
+    radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.18), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 237, 0.86)),
+    var(--light-rail-panel-strong) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--light-rail-text) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--light-rail-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #b45309 !important;
+}
+
+@media (min-width: 1081px) {
+  html[data-theme="light"] body > .ops-shell.ops-shell,
+  html[data-theme="light"] body.demo-mode > .ops-shell.ops-shell {
+    grid-template-columns: 184px minmax(0, 1fr) !important;
+    gap: 18px !important;
+    padding: 14px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme="light"] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+    top: 14px !important;
+    width: 184px !important;
+    height: calc(100vh - 28px) !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    border-width: 1px !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+  }
+}
