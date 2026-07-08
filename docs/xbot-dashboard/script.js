@@ -1354,6 +1354,21 @@ const translations = {
     hook_prompt_patch: "Prompt patch",
     hook_copy_patch: "Copy patch",
     hook_empty: "No hook pattern reactor output available.",
+    bandit_eyebrow: "Swarm Bandit Allocator",
+    bandit_title: "Exploit / explore format router",
+    bandit_zero_reads: "0 X read ops",
+    bandit_primary: "Primary arm",
+    bandit_explore: "Explore arm",
+    bandit_confidence: "Confidence",
+    bandit_explore_floor: "floor {pct}%",
+    bandit_samples: "{count} samples",
+    bandit_avg: "avg",
+    bandit_samples_short: "n",
+    bandit_ucb: "ucb",
+    bandit_lift: "lift",
+    bandit_prompt_patch: "Bandit patch",
+    bandit_copy_patch: "Copy patch",
+    bandit_empty: "No content bandit allocator output available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -1963,6 +1978,21 @@ const translations = {
     hook_prompt_patch: "Prompt 补丁",
     hook_copy_patch: "复制补丁",
     hook_empty: "暂无 Hook 模式反应堆输出。",
+    bandit_eyebrow: "群体 Bandit 分配器",
+    bandit_title: "利用 / 探索格式路由",
+    bandit_zero_reads: "0 次 X 读取",
+    bandit_primary: "主臂",
+    bandit_explore: "探索臂",
+    bandit_confidence: "置信度",
+    bandit_explore_floor: "下限 {pct}%",
+    bandit_samples: "{count} 个样本",
+    bandit_avg: "均值",
+    bandit_samples_short: "样本",
+    bandit_ucb: "UCB",
+    bandit_lift: "增益",
+    bandit_prompt_patch: "Bandit 补丁",
+    bandit_copy_patch: "复制补丁",
+    bandit_empty: "暂无内容 Bandit 分配器输出。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -4966,6 +4996,136 @@ function renderHookPatternReactor() {
   `;
 }
 
+function derivedContentBanditAllocator() {
+  const plan = dashboardData.experimentPlan || fallbackData.experimentPlan || {};
+  const rows = [
+    ...(Array.isArray(plan.recommendedFormats) ? plan.recommendedFormats : []),
+    ...(Array.isArray(plan.holdFormats) ? plan.holdFormats : []),
+  ].filter((row, index, all) => row?.id && all.findIndex((item) => item.id === row.id) === index);
+  const baseline = number((dashboardData.profile || fallbackData.profile || {}).baselineScore, 0);
+  const hook = hookPatternReactorData();
+  const total = Math.max(1, rows.reduce((sum, row) => sum + Math.max(1, number(row.priorityScore, number(row.avgScore, baseline))), 0));
+  const lanes = rows.map((row, index) => {
+    const rawScore = Math.max(1, number(row.priorityScore, number(row.avgScore, baseline)));
+    const status = row.action === "hold" ? "hold" : row.action === "explore" ? "explore" : row.action === "exploit" ? "exploit" : "test";
+    return {
+      id: row.id,
+      label: row.label || formatTemplate(row.id),
+      status,
+      action: row.action || status,
+      rank: index + 1,
+      allocationScore: rawScore,
+      allocationPct: status === "hold" ? 0 : (rawScore / total) * 100,
+      avgScore: number(row.avgScore, baseline),
+      samples: number(row.samples),
+      liftPct: Number.isFinite(Number(row.lift)) ? Number(row.lift) * 100 : null,
+      uncertainty: 1 / Math.sqrt(number(row.samples, 0) + 1),
+      nextAction: row.reason || `Keep ${formatTemplate(row.id)} in controlled rotation.`,
+    };
+  }).sort((left, right) => {
+    const priority = { exploit: 3, explore: 2, test: 1, hold: 0 };
+    return (priority[right.status] || 0) - (priority[left.status] || 0) || right.allocationScore - left.allocationScore;
+  }).map((lane, index) => ({ ...lane, rank: index + 1 }));
+  const recommendedLane = lanes.find((lane) => lane.status === "exploit") || lanes.find((lane) => lane.status !== "hold") || lanes[0] || null;
+  const exploreLane = lanes.find((lane) => lane.status === "explore") || null;
+  return {
+    mode: "derived_cached_ucb_allocator",
+    confidence: (dashboardData.learningAutopilot || fallbackData.learningAutopilot || {}).confidence || "low",
+    zeroExtraXReads: true,
+    source: "derived dashboard experiment plan",
+    sampleCount: number((dashboardData.profile || fallbackData.profile || {}).measuredPosts),
+    baselineScore: baseline,
+    exploreFloorPct: 16,
+    recommendedLane,
+    exploreLane,
+    rankedFormatIds: lanes.filter((lane) => lane.status !== "hold").map((lane) => lane.id),
+    lanes,
+    promptPatch: [
+      "CODEX CONTENT BANDIT PATCH",
+      "mode: derived_cached_ucb_allocator",
+      "zero_extra_x_reads: true",
+      `primary_format: ${recommendedLane?.id || "-"}`,
+      exploreLane ? `exploration_lane: ${exploreLane.id}` : null,
+      `hook_bias: ${hook.recommendedPattern?.label || "first-line fire-control"}`,
+    ].filter(Boolean).join("\n"),
+    nextAction: recommendedLane ? `Allocate next candidates toward ${recommendedLane.label}.` : "-",
+  };
+}
+
+function contentBanditAllocatorData() {
+  return dashboardData.contentBanditAllocator || fallbackData.contentBanditAllocator || derivedContentBanditAllocator();
+}
+
+function renderContentBanditAllocator() {
+  const allocator = contentBanditAllocatorData();
+  const container = $("#content-bandit-allocator");
+  if (!container) return;
+  const lanes = Array.isArray(allocator.lanes) ? allocator.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("bandit_empty"))}</p>`;
+    return;
+  }
+  const primary = allocator.recommendedLane || lanes.find((lane) => lane.status !== "hold") || lanes[0] || {};
+  const explore = allocator.exploreLane || lanes.find((lane) => lane.status === "explore") || {};
+  const promptPatch = allocator.promptPatch || "";
+  container.innerHTML = `
+    <div class="bandit-head">
+      <div>
+        <span>${escapeHtml(t("bandit_eyebrow"))}</span>
+        <strong>${escapeHtml(t("bandit_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("bandit_zero_reads"))}</em>
+    </div>
+    <div class="bandit-core">
+      <div class="bandit-primary">
+        <span>${escapeHtml(t("bandit_primary"))}</span>
+        <strong>${escapeHtml(primary.label || primary.id || "-")}</strong>
+        <small>${escapeHtml(primary.nextAction || allocator.nextAction || "-")}</small>
+      </div>
+      <div class="bandit-explore">
+        <span>${escapeHtml(t("bandit_explore"))}</span>
+        <strong>${escapeHtml(explore.label || explore.id || "-")}</strong>
+        <small>${escapeHtml(t("bandit_explore_floor", { pct: formatNumber(allocator.exploreFloorPct, 1) }))}</small>
+      </div>
+      <div class="bandit-confidence">
+        <span>${escapeHtml(t("bandit_confidence"))}</span>
+        <strong>${escapeHtml(allocator.confidence || "-")}</strong>
+        <small>${escapeHtml(t("bandit_samples", { count: formatNumber(allocator.sampleCount) }))}</small>
+      </div>
+    </div>
+    <div class="bandit-lanes">
+      ${lanes.slice(0, 8).map((lane) => {
+        const pct = clamp(number(lane.allocationPct), 0, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "test")}" style="--bandit-pct:${pct.toFixed(1)}%">
+            <div class="bandit-rank">${escapeHtml(String(lane.rank || "-").padStart(2, "0"))}</div>
+            <div class="bandit-body">
+              <div>
+                <strong>${escapeHtml(lane.label || lane.id || "-")}</strong>
+                <em>${escapeHtml(lane.status || "test")} · ${escapeHtml(formatNumber(pct, 1))}%</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("bandit_avg"))}</dt><dd>${escapeHtml(formatNumber(lane.avgScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("bandit_samples_short"))}</dt><dd>${escapeHtml(formatNumber(lane.samples))}</dd></div>
+                <div><dt>${escapeHtml(t("bandit_ucb"))}</dt><dd>${escapeHtml(formatNumber(lane.uncertainty, 2))}</dd></div>
+                <div><dt>${escapeHtml(t("bandit_lift"))}</dt><dd>${escapeHtml(lane.liftPct == null ? "-" : `${formatNumber(lane.liftPct, 1)}%`)}</dd></div>
+              </dl>
+              <i></i>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="bandit-patch">
+      <div>
+        <span>${escapeHtml(t("bandit_prompt_patch"))}</span>
+        <button type="button" data-copy="${encodeURIComponent(promptPatch)}">${escapeHtml(t("bandit_copy_patch"))}</button>
+      </div>
+      <pre><code>${escapeHtml(promptPatch)}</code></pre>
+    </div>
+  `;
+}
+
 function angleMutationReactorData() {
   const incoming = dashboardData.angleMutationReactor || fallbackData.angleMutationReactor;
   if (incoming) return incoming;
@@ -5324,6 +5484,7 @@ function renderLearning() {
   renderAdaptiveAngleScheduler();
   renderLearningWriteback();
   renderHookPatternReactor();
+  renderContentBanditAllocator();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();

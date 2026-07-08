@@ -8854,6 +8854,300 @@ body:not(.demo-mode) .demo-strip {
   font-weight: 780;
 }
 
+.content-bandit-allocator {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #ff007a 24%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 92% 0, color-mix(in srgb, #ff007a 10%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #00f0ff 7%, transparent), transparent 58%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 22px color-mix(in srgb, #ff007a 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.bandit-head,
+.bandit-core,
+.bandit-lanes article,
+.bandit-patch {
+  display: grid;
+  gap: 8px;
+}
+
+.bandit-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.bandit-head span,
+.bandit-primary span,
+.bandit-explore span,
+.bandit-confidence span,
+.bandit-body dt,
+.bandit-patch span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bandit-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bandit-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, #00ff66 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+.bandit-core {
+  grid-template-columns: 1.15fr 1fr 0.78fr;
+}
+
+.bandit-primary,
+.bandit-explore,
+.bandit-confidence,
+.bandit-lanes article,
+.bandit-patch {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.bandit-primary,
+.bandit-explore,
+.bandit-confidence {
+  padding: 9px;
+}
+
+.bandit-primary strong,
+.bandit-explore strong,
+.bandit-confidence strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.22;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bandit-primary small,
+.bandit-explore small,
+.bandit-confidence small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.bandit-lanes {
+  display: grid;
+  gap: 7px;
+}
+
+.bandit-lanes article {
+  position: relative;
+  grid-template-columns: 42px minmax(0, 1fr);
+  overflow: hidden;
+  padding: 8px;
+}
+
+.bandit-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  opacity: 0.78;
+}
+
+.bandit-lanes article.exploit::before {
+  background: #00ff66;
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.26);
+}
+
+.bandit-lanes article.explore::before {
+  background: #ff007a;
+  box-shadow: 0 0 14px rgba(255, 0, 122, 0.22);
+}
+
+.bandit-lanes article.hold::before {
+  background: var(--danger);
+}
+
+.bandit-rank {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.bandit-body {
+  position: relative;
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+.bandit-body > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.bandit-body strong,
+.bandit-body em,
+.bandit-body dd {
+  font-family: var(--mono);
+}
+
+.bandit-body strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bandit-body em {
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.bandit-body dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 8px 0 0;
+}
+
+.bandit-body dt,
+.bandit-body dd {
+  margin: 0;
+}
+
+.bandit-body dd {
+  margin-top: 2px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.bandit-body i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.bandit-body i::before {
+  content: "";
+  display: block;
+  width: var(--bandit-pct, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.22);
+}
+
+.bandit-patch {
+  padding: 9px;
+}
+
+.bandit-patch > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.bandit-patch button {
+  border: 1px solid color-mix(in srgb, #ff007a 34%, var(--line-soft));
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: #bf005b;
+  background: color-mix(in srgb, #ff007a 8%, var(--surface));
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+:root[data-theme="dark"] .bandit-patch button {
+  color: #ff9ac6;
+}
+
+.bandit-patch pre {
+  max-height: 108px;
+  margin: 8px 0 0;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.bandit-patch code {
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .angle-mutation-reactor {
   display: grid;
   gap: 10px;
@@ -9195,6 +9489,9 @@ body:not(.demo-mode) .demo-strip {
   .hook-core,
   .hook-patterns,
   .hook-examples,
+  .bandit-core,
+  .bandit-lanes article,
+  .bandit-body dl,
   .mutation-core,
   .mutation-cells,
   .mutation-ledger article,
@@ -9425,6 +9722,10 @@ body:not(.demo-mode) .demo-strip {
   .hook-core,
   .hook-patterns,
   .hook-examples,
+  .bandit-head,
+  .bandit-core,
+  .bandit-lanes article,
+  .bandit-body dl,
   .writeback-head,
   .writeback-meta,
   .writeback-cells,
