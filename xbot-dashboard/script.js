@@ -1321,6 +1321,22 @@ const translations = {
     route_amp_top: "Top route",
     route_amp_formula: "Scoring formula",
     route_amp_zero_reads: "0 X reads",
+    target_atlas_eyebrow: "Manual Target Atlas",
+    target_atlas_title: "Zero-read route map",
+    target_atlas_ready: "Targets ready",
+    target_atlas_reply_target: "Route target",
+    target_atlas_x_reads: "X read ops",
+    target_atlas_cost: "Incremental X API",
+    target_atlas_top: "Primary route",
+    target_atlas_policy: "Read policy",
+    target_atlas_targets: "Target routes",
+    target_atlas_guardrails: "Guardrails",
+    target_atlas_score: "score",
+    target_atlas_sla: "SLA",
+    target_atlas_freshness: "fresh",
+    target_atlas_copy: "Copy atlas",
+    target_atlas_copy_route: "Copy route",
+    target_atlas_empty: "No manual target atlas available.",
     operator_protocol: "Execution protocol",
     operator_progress: "{done}/{total} steps armed",
     operator_step_done: "done",
@@ -2082,6 +2098,22 @@ const translations = {
     route_amp_top: "最高路由",
     route_amp_formula: "评分公式",
     route_amp_zero_reads: "0 次 X 读取",
+    target_atlas_eyebrow: "人工目标星图",
+    target_atlas_title: "零读取路由地图",
+    target_atlas_ready: "就绪目标",
+    target_atlas_reply_target: "路由目标",
+    target_atlas_x_reads: "X 读取操作",
+    target_atlas_cost: "增量 X API",
+    target_atlas_top: "主路由",
+    target_atlas_policy: "读取策略",
+    target_atlas_targets: "目标路由",
+    target_atlas_guardrails: "护栏",
+    target_atlas_score: "评分",
+    target_atlas_sla: "SLA",
+    target_atlas_freshness: "新鲜度",
+    target_atlas_copy: "复制星图",
+    target_atlas_copy_route: "复制路由",
+    target_atlas_empty: "暂无人工目标星图。",
     operator_protocol: "执行协议",
     operator_progress: "{done}/{total} 步已完成",
     operator_step_done: "完成",
@@ -3389,6 +3421,136 @@ function routeAmplifierData(packet = operatorDispatchPacketData(), ops = distrib
       { id: "budget", label: "safe budget", value: money(api.remaining), status: api.remaining > 0 ? "ok" : "danger" },
     ],
     lanes,
+  };
+}
+
+function routeAtlasQueryClass(routeUrl = "") {
+  let decoded = String(routeUrl || "");
+  try {
+    decoded = decodeURIComponent(decoded);
+  } catch {
+    // Keep the raw route when X or copied URLs contain malformed percent escapes.
+  }
+  if (/from:/i.test(decoded)) return "target_account_mesh";
+  if (/OpenAI|Anthropic|Cursor|Gemini|Nvidia|AI coding|agents/i.test(decoded)) return "ai_platform_load";
+  if (/Apple|Google|Microsoft|Meta|Amazon|Tesla/i.test(decoded)) return "big_tech_load";
+  if (/startup|founder|SaaS|developer tools|cloud|GitHub|Vercel|Cloudflare/i.test(decoded)) return "operator_builder_load";
+  return "broad_tech_load";
+}
+
+function manualReplyTargetAtlasData(packet = operatorDispatchPacketData(), routeAmplifier = routeAmplifierData(packet), ops = distributionOpsData()) {
+  const incoming = dashboardData.manualReplyTargetAtlas || fallbackData.manualReplyTargetAtlas;
+  if (incoming?.targets?.length) return incoming;
+  const packets = Array.isArray(packet?.packets) ? packet.packets : [];
+  const missions = Array.isArray(ops?.missions) ? ops.missions : [];
+  const lanes = Array.isArray(routeAmplifier?.lanes) ? routeAmplifier.lanes : [];
+  const source = packets.length ? packets : missions;
+  const laneByRoute = new Map();
+  lanes.forEach((lane) => {
+    if (lane?.routeUrl) laneByRoute.set(lane.routeUrl, lane);
+    if (lane?.label) laneByRoute.set(lane.label, lane);
+  });
+  const targets = source.slice(0, 6).map((item, index) => {
+    const label = item.routeLabel || item.label || `Route ${index + 1}`;
+    const routeUrl = item.routeUrl || item.url || null;
+    const lane = laneByRoute.get(routeUrl) || laneByRoute.get(label) || lanes[index] || {};
+    const draftText = item.draftText || draftFor(item.draftIndex ?? index).text || "";
+    const targetReplies = Math.max(1, number(item.targetReplies, 1));
+    const operatorSlaMinutes = Math.max(5, number(item.operatorSlaMinutes, 10 + index * 10));
+    const score = number(lane.score, number(item.score, number(dashboardData.profile?.baselineScore, fallbackData.profile.baselineScore)));
+    const ready = Boolean(routeUrl && draftText);
+    const queryClass = routeAtlasQueryClass(routeUrl);
+    const status = !ready ? "danger" : score >= 72 ? "ok" : score >= 48 ? "warn" : "probe";
+    const freshnessWindowMinutes = Math.max(15, Math.min(120, operatorSlaMinutes * 3));
+    const evidence = item.evidence || item.reason || item.routeReason || lane.reason || "";
+    const copyBlock = [
+      `ROUTE ${index + 1}: ${label}`,
+      `Class: ${queryClass} · target ${formatNumber(targetReplies)} · SLA ${formatNumber(operatorSlaMinutes)}m · X reads 0`,
+      routeUrl ? `Open: ${routeUrl}` : "Open: missing route URL",
+      evidence ? `Why: ${evidence}` : null,
+      "",
+      draftText,
+    ].filter((line) => line != null).join("\n");
+    return {
+      id: item.id || `target:${index + 1}`,
+      rank: number(item.priority, index + 1),
+      label,
+      queryClass,
+      routeUrl,
+      status,
+      ready,
+      score,
+      confidence: item.confidence || lane.confidence || "low",
+      targetReplies,
+      operatorSlaMinutes,
+      freshnessWindowMinutes,
+      expectedLiftPct: number(item.expectedLiftPct, number(lane.expectedLiftPct)),
+      xReadOps: 0,
+      incrementalXApiUsd: 0,
+      draftText,
+      draftAngle: item.draftAngle || "",
+      evidence,
+      useWhen: [
+        "post is fresh",
+        "thread has real technical exchange",
+        "route output adds a decision rule or cost angle",
+      ],
+      skipWhen: [
+        "giveaway, politics, or ragebait",
+        "no visible technical argument",
+        "output would require unsupported claims",
+      ],
+      copyBlock,
+    };
+  });
+  const readyTargets = targets.filter((target) => target.ready).length;
+  const totalTargetReplies = targets.reduce((sum, target) => sum + number(target.targetReplies, 0), 0) ||
+    number(packet?.targetReplies, number(ops?.manualReplyTarget));
+  const topTarget = targets.find((target) => target.ready) || targets[0] || null;
+  const severity = readyTargets >= Math.min(2, targets.length || 1) ? "ok" : readyTargets ? "warn" : "danger";
+  const copyBlock = [
+    "CODEX MANUAL REPLY TARGET ATLAS",
+    `Generated: ${dashboardData.updatedAt || fallbackData.updatedAt}`,
+    "Mode: zero_read_web_targeting · X search/read API: 0",
+    `Ready targets: ${formatNumber(readyTargets)}/${formatNumber(targets.length)} · route target ${formatNumber(totalTargetReplies)}`,
+    "",
+    "Protocol:",
+    "1. Open the top route in X web.",
+    "2. Choose a fresh technical thread with real replies.",
+    "3. Paste the paired output, edit nouns/context only, then move on.",
+    "4. Stop at the target count and let metrics write back later.",
+    "",
+    ...targets.slice(0, 5).flatMap((target) => [
+      `${target.rank}. ${target.label} · ${target.queryClass} · score ${formatNumber(target.score, 1)} · target ${formatNumber(target.targetReplies)}`,
+      target.routeUrl ? `Open: ${target.routeUrl}` : "Open: missing route URL",
+      `Output: ${target.draftText || "-"}`,
+      "",
+    ]),
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_web_target_atlas",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    readyTargets,
+    totalTargets: targets.length,
+    totalTargetReplies,
+    topRouteLabel: topTarget?.label || null,
+    topQueryClass: topTarget?.queryClass || null,
+    nextAction: topTarget
+      ? `Open ${topTarget.label}, paste the paired output under ${formatNumber(topTarget.targetReplies)} fresh high-signal thread lane(s), then stop.`
+      : "Refresh daily route outputs before manual distribution.",
+    queryPolicy: "Use X web links manually; no recent_search/read API calls for this atlas.",
+    guardrails: [
+      "No auto-replies, auto-likes, or auto-follows.",
+      "Skip politics, giveaways, ragebait, and unsupported claims.",
+      "Prefer fresh technical threads with visible exchange.",
+      "Stop at the target count; learning writes back on maintenance.",
+    ],
+    copyBlock,
+    targets,
   };
 }
 
@@ -8160,6 +8322,77 @@ function flightDeckHtml(deck) {
   `;
 }
 
+function manualReplyTargetAtlasHtml(atlas) {
+  if (!atlas?.targets?.length) return "";
+  const severity = ["ok", "warn", "danger"].includes(atlas.severity) ? atlas.severity : "warn";
+  const targets = Array.isArray(atlas.targets) ? atlas.targets.slice(0, 6) : [];
+  const scoreMax = Math.max(1, ...targets.map((target) => number(target.score)));
+  const guardrails = Array.isArray(atlas.guardrails) ? atlas.guardrails.slice(0, 4) : [];
+  const targetCards = targets.map((target) => {
+    const status = ["ok", "warn", "danger", "probe"].includes(target.status) ? target.status : "warn";
+    const pct = Math.max(8, Math.min(100, (number(target.score) / scoreMax) * 100));
+    return `
+      <article class="atlas-target ${escapeHtml(status)}" style="--atlas-score:${pct}%">
+        <div class="atlas-target-head">
+          <span>${String(target.rank || 1).padStart(2, "0")}</span>
+          <div>
+            <strong>${escapeHtml(target.label || "-")}</strong>
+            <em>${escapeHtml(target.queryClass || "broad_tech_load")} · ${escapeHtml(target.confidence || "low")}</em>
+          </div>
+        </div>
+        <div class="atlas-bar"><i></i></div>
+        <dl>
+          <div><dt>${escapeHtml(t("target_atlas_score"))}</dt><dd>${escapeHtml(formatNumber(target.score || 0, 1))}</dd></div>
+          <div><dt>${escapeHtml(t("target_atlas_reply_target"))}</dt><dd>${escapeHtml(formatNumber(target.targetReplies || 0))}</dd></div>
+          <div><dt>${escapeHtml(t("target_atlas_sla"))}</dt><dd>${escapeHtml(`${formatNumber(target.operatorSlaMinutes || 0)}m`)}</dd></div>
+          <div><dt>${escapeHtml(t("target_atlas_freshness"))}</dt><dd>${escapeHtml(`${formatNumber(target.freshnessWindowMinutes || 0)}m`)}</dd></div>
+        </dl>
+        <p>${escapeHtml(sreText(target.evidence || target.draftAngle || target.draftText || "-"))}</p>
+        <blockquote>${escapeHtml(sreText(target.draftText || "-"))}</blockquote>
+        <div class="atlas-actions">
+          ${target.routeUrl ? `<a class="button button-primary" href="${escapeHtml(target.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("open_search"))}</a>` : ""}
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(target.copyBlock || target.draftText || ""))}">${escapeHtml(t("target_atlas_copy_route"))}</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+  return `
+    <div class="target-atlas ${escapeHtml(severity)}">
+      <div class="atlas-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("target_atlas_eyebrow"))}</span>
+          <strong>${escapeHtml(t("target_atlas_title"))}</strong>
+        </div>
+        <em>${escapeHtml(atlas.mode || "zero_read_web_target_atlas")}</em>
+      </div>
+      <div class="atlas-matrix">
+        <div><span>${escapeHtml(t("target_atlas_ready"))}</span><strong>${escapeHtml(`${formatNumber(atlas.readyTargets || 0)}/${formatNumber(atlas.totalTargets || targets.length)}`)}</strong></div>
+        <div><span>${escapeHtml(t("target_atlas_reply_target"))}</span><strong>${escapeHtml(formatNumber(atlas.totalTargetReplies || 0))}</strong></div>
+        <div><span>${escapeHtml(t("target_atlas_x_reads"))}</span><strong>${escapeHtml(formatNumber(atlas.estimatedXReadOps || 0))}</strong></div>
+        <div><span>${escapeHtml(t("target_atlas_cost"))}</span><strong>${escapeHtml(money(atlas.estimatedIncrementalXApiUsd || 0))}</strong></div>
+      </div>
+      <div class="atlas-command">
+        <div><span>${escapeHtml(t("target_atlas_top"))}</span><strong>${escapeHtml(atlas.topRouteLabel || "-")}</strong></div>
+        <div><span>${escapeHtml(t("target_atlas_policy"))}</span><strong>${escapeHtml(sreText(atlas.queryPolicy || "-"))}</strong></div>
+      </div>
+      <div class="atlas-grid">
+        <section>
+          <div class="manifest-section-title"><span>${escapeHtml(t("target_atlas_targets"))}</span><strong>${escapeHtml(t("dispatch_zero_reads"))}</strong></div>
+          <div class="atlas-targets">${targetCards}</div>
+        </section>
+        <aside>
+          <div class="manifest-section-title"><span>${escapeHtml(t("target_atlas_guardrails"))}</span><strong>${escapeHtml(severity)}</strong></div>
+          <div class="atlas-guards">
+            ${guardrails.map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+          </div>
+          <pre class="atlas-copy"><code>${escapeHtml(sreText(atlas.copyBlock || ""))}</code></pre>
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(atlas.copyBlock || ""))}">${escapeHtml(t("target_atlas_copy"))}</button>
+        </aside>
+      </div>
+    </div>
+  `;
+}
+
 function renderActions() {
   const ops = distributionOpsData();
   const missions = Array.isArray(ops.missions) ? ops.missions : [];
@@ -8256,6 +8489,7 @@ function renderActions() {
     .join("");
   const dispatchPacket = operatorDispatchPacketData(ops);
   const routeAmplifier = routeAmplifierData(dispatchPacket, ops);
+  const manualTargetAtlas = manualReplyTargetAtlasData(dispatchPacket, routeAmplifier, ops);
   const flightDeck = operatorFlightDeckData(ops, dispatchPacket, routeAmplifier);
   const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
   const manifestPackets = (dispatchPacket.packets || [])
@@ -8394,6 +8628,7 @@ function renderActions() {
         <div class="amp-lanes">${amplifierLanes}</div>
         <p class="amp-formula"><span>${escapeHtml(t("route_amp_formula"))}</span>${escapeHtml(routeAmplifier.formula || "-")}</p>
       </div>
+      ${manualReplyTargetAtlasHtml(manualTargetAtlas)}
       <div class="manifest-body">
         <section>
           <div class="manifest-section-title"><span>${escapeHtml(t("dispatch_manifest_packets"))}</span><strong>${escapeHtml(t("dispatch_zero_reads"))}</strong></div>
