@@ -21375,3 +21375,153 @@ html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail
     border-radius: 8px !important;
   }
 }
+
+/* Dark-mode cyber NOC finish: matte reactor canvas, neon ops borders, dense telemetry text. */
+:root[data-theme="dark"] {
+  --bg: #0b0f19;
+  --surface: #111827;
+  --surface-soft: #0c1321;
+  --surface-tint: #0e1f2b;
+  --ink: #f8fafc;
+  --body: #c9d4e3;
+  --muted: #8d9aac;
+  --line: rgba(148, 163, 184, 0.22);
+  --line-soft: rgba(148, 163, 184, 0.13);
+  --accent: #00f0ff;
+  --accent-2: #00ff66;
+  --accent-3: #ff007a;
+  --accent-soft: rgba(0, 240, 255, 0.11);
+  --accent-line: rgba(0, 240, 255, 0.32);
+  --stage-line: rgba(0, 240, 255, 0.26);
+  --stage-scan: rgba(0, 255, 102, 0.18);
+  --ok: #00ff66;
+  --warn: #ffd166;
+  --danger: #ff007a;
+  --shadow: 0 14px 42px rgba(0, 0, 0, 0.34), 0 0 10px rgba(0, 240, 255, 0.08);
+  --shadow-strong: 0 28px 90px rgba(0, 0, 0, 0.46), 0 0 30px rgba(0, 240, 255, 0.08);
+}
+
+html[data-theme="dark"] body {
+  background-color: #0b0f19 !important;
+  background-image:
+    radial-gradient(circle at 18% -8%, rgba(0, 240, 255, 0.12), transparent 32%),
+    radial-gradient(circle at 94% 4%, rgba(255, 0, 122, 0.08), transparent 30%),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 255, 102, 0.032) 1px, transparent 1px),
+    linear-gradient(180deg, #0b0f19 0%, #080c14 100%) !important;
+  background-size: auto, auto, 88px 88px, 88px 88px, auto !important;
+}
+
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .grafana-toolbar,
+html[data-theme="dark"] .noc-strip div,
+html[data-theme="dark"] .monitor-panel,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .command-card,
+html[data-theme="dark"] .server-card,
+html[data-theme="dark"] .trend-velocity-radar,
+html[data-theme="dark"] .mission-control-spine,
+html[data-theme="dark"] .command-strip-shell,
+html[data-theme="dark"] .service-card,
+html[data-theme="dark"] .action-hero,
+html[data-theme="dark"] .proof-panel,
+html[data-theme="dark"] .goal-panel,
+html[data-theme="dark"] .learning-panel {
+  border-color: rgba(0, 240, 255, 0.24) !important;
+  border-radius: 6px !important;
+  background-color: rgba(13, 20, 32, 0.92) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    radial-gradient(circle at 8% 0%, rgba(0, 240, 255, 0.09), transparent 34%),
+    linear-gradient(135deg, rgba(0, 255, 102, 0.035), transparent 54%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 0 0 1px rgba(0, 240, 255, 0.045),
+    0 0 10px rgba(0, 240, 255, 0.1),
+    0 18px 54px rgba(0, 0, 0, 0.26) !important;
+}
+
+html[data-theme="dark"] .monitor-panel:hover,
+html[data-theme="dark"] .metric:hover,
+html[data-theme="dark"] .panel:hover,
+html[data-theme="dark"] .command-card:hover,
+html[data-theme="dark"] .trend-velocity-radar:hover,
+html[data-theme="dark"] .mission-control-spine:hover {
+  border-color: rgba(0, 240, 255, 0.44) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(0, 240, 255, 0.08),
+    0 0 18px rgba(0, 240, 255, 0.13),
+    0 22px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+html[data-theme="dark"] .monitor-panel strong,
+html[data-theme="dark"] .metric strong,
+html[data-theme="dark"] .gauge-value,
+html[data-theme="dark"] .chart-legend strong,
+html[data-theme="dark"] .rail-budget strong,
+html[data-theme="dark"] .server-stat strong,
+html[data-theme="dark"] .firewall-cells strong,
+html[data-theme="dark"] .velocity-score strong,
+html[data-theme="dark"] .command-strip-score strong {
+  font-family: var(--mono, "SFMono-Regular", "Fira Code", ui-monospace, monospace) !important;
+  color: #f8fafc !important;
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.18) !important;
+}
+
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .panel-heading span,
+html[data-theme="dark"] .monitor-panel em,
+html[data-theme="dark"] .metric span,
+html[data-theme="dark"] .chart-provenance,
+html[data-theme="dark"] .rail-budget span,
+html[data-theme="dark"] .rail-budget small,
+html[data-theme="dark"] .velocity-meta,
+html[data-theme="dark"] .task-log code,
+html[data-theme="dark"] .alert-console code {
+  font-family: var(--mono, "SFMono-Regular", "Fira Code", ui-monospace, monospace) !important;
+  color: rgba(201, 212, 227, 0.74) !important;
+  letter-spacing: 0.02em !important;
+}
+
+html[data-theme="dark"] .status-dot,
+html[data-theme="dark"] .live-pill span,
+html[data-theme="dark"] .rail-nav a::before,
+html[data-theme="dark"] .rack-mini span {
+  background: #00ff66 !important;
+  box-shadow:
+    0 0 0 4px rgba(0, 255, 102, 0.12),
+    0 0 16px rgba(0, 255, 102, 0.34) !important;
+}
+
+html[data-theme="dark"] .monitor-alert,
+html[data-theme="dark"] .danger,
+html[data-theme="dark"] .fault,
+html[data-theme="dark"] [class*="danger"],
+html[data-theme="dark"] [class*="fault"] {
+  border-color: rgba(255, 0, 122, 0.38) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(255, 0, 122, 0.05),
+    0 0 14px rgba(255, 0, 122, 0.12),
+    0 18px 54px rgba(0, 0, 0, 0.26) !important;
+}
+
+html[data-theme="dark"] .button-primary,
+html[data-theme="dark"] .segmented button.active,
+html[data-theme="dark"] .toolbar-group button.active {
+  color: #061017 !important;
+  background: linear-gradient(135deg, #00f0ff, #00ff66) !important;
+  border-color: rgba(0, 240, 255, 0.62) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16) inset,
+    0 0 18px rgba(0, 240, 255, 0.2) !important;
+}
+
+html[data-theme="dark"] .topbar::after,
+html[data-theme="dark"] .grafana-toolbar::after,
+html[data-theme="dark"] .monitor-panel::after,
+html[data-theme="dark"] .panel::after {
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.18), transparent) !important;
+}
