@@ -12,7 +12,7 @@ const fallbackData = {
   },
   mode: {
     label: "Zero extra X API",
-    description: "Web search links + manual paste replies.",
+    description: "Web search links + manual route outputs.",
   },
   profile: {
     followers: 66,
@@ -79,7 +79,7 @@ const fallbackData = {
   opportunities: [
     {
       priority: 1,
-      label: "decision rule replies",
+      label: "decision rule route ops",
       kind: "format",
       score: 7.2,
       confidence: "medium",
@@ -128,7 +128,7 @@ const fallbackData = {
   diagnosis: [
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
     "瓶颈是分发入口，不是发帖数量。",
-    "当前低成本路线是人工点网页搜索、复制回复，避免增加 X search/read API。",
+    "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
   ],
   api: {
     month: "2026-07",
@@ -382,21 +382,21 @@ const fallbackData = {
       { id: "learning", label: "learning load", value: "8", status: "ok", detail: "307 L7 events in 7d feedback window" },
     ],
     safeguards: [
-      "No automated replies outside mention/engagement policy.",
+      "No automated outbound route ops outside mention/engagement policy.",
       "No live X search/read when 429 or 5xx faults are active.",
       "Manual web routes spend 0 X API read budget.",
     ],
   },
   viralFlywheel: {
     generatedAt: "2026-07-07T01:09:59.105Z",
-    mode: "reply_burst",
+    mode: "route_burst",
     zeroExtraXReads: true,
     velocityScore: 68.4,
     expectedLiftPct: 84.6,
     baselineScore: 3.9,
     safeBudgetLeftUsd: 2.81,
     nextBurst: {
-      label: "decision rule replies",
+      label: "decision rule route ops",
       routeLabel: "Target Accounts",
       routeUrl: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama)%20(AI%20OR%20tech)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
       draftText: "Launch rule for AI products: demo quality matters less than failure shape. If users can’t predict when it will be wrong, support cost becomes the real roadmap.",
@@ -405,7 +405,7 @@ const fallbackData = {
     },
     stages: [
       { id: "ingress", label: "signal ingress", value: "17 pkts", status: "ok", detail: "307 L7 events in 7d telemetry" },
-      { id: "ranker", label: "ranker lift", value: "+84.6%", status: "ok", detail: "decision rule replies over baseline 3.9" },
+      { id: "ranker", label: "ranker lift", value: "+84.6%", status: "ok", detail: "decision rule route ops over baseline 3.9" },
       { id: "swarm", label: "swarm output", value: "5 drafts", status: "ok", detail: "primary rule decision_rule" },
       { id: "route", label: "route queue", value: "2/2", status: "ok", detail: "manual web actions spend 0 X read ops" },
       { id: "writeback", label: "learning writeback", value: "120 posts", status: "ok", detail: "8 L7 events in 24h feedback window" },
@@ -488,7 +488,7 @@ const fallbackData = {
     ],
     promptDirectives: [
       "Next angle slot: decision_rule; turn the story into one concrete operating rule.",
-      "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
+      "Traffic load is soft; write a useful route-ready angle that earns manual distribution.",
       "Do not use held formats unless the story is a perfect fit: prediction.",
     ],
     scoringBias: {
@@ -589,8 +589,8 @@ const fallbackData = {
         reason: "2.3h old · 4 echoes · 5 sources · official source · AI / Agent Stack",
         routeUrl: "https://x.com/search?q=(AI%20OR%20agent%20OR%20model%20OR%20GitHub)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         routeQuery: "(AI OR agent OR model OR GitHub) -is:retweet lang:en min_faves:5",
-        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
-        replyAngle: "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        routeReason: "Open live X web search and route manually under active high-throughput conversations.",
+        replyAngle: "Route angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         zeroExtraXReads: true,
       },
       {
@@ -608,8 +608,8 @@ const fallbackData = {
         reason: "4.8h old · 3 echoes · 4 sources · mainstream source · Big Tech Platform",
         routeUrl: "https://x.com/search?q=(Apple%20OR%20Google%20OR%20Microsoft%20OR%20platform)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         routeQuery: "(Apple OR Google OR Microsoft OR platform) -is:retweet lang:en min_faves:5",
-        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
-        replyAngle: "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        routeReason: "Open live X web search and route manually under active high-throughput conversations.",
+        replyAngle: "Route angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         zeroExtraXReads: true,
       },
       {
@@ -627,8 +627,8 @@ const fallbackData = {
         reason: "1.1h old · 1 echoes · 2 sources · mainstream source · Consumer Apps",
         routeUrl: "https://x.com/search?q=(app%20OR%20consumer%20OR%20iPhone%20OR%20Android)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         routeQuery: "(app OR consumer OR iPhone OR Android) -is:retweet lang:en min_faves:5",
-        routeReason: "Open live X web search and reply manually under active high-throughput conversations.",
-        replyAngle: "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        routeReason: "Open live X web search and route manually under active high-throughput conversations.",
+        replyAngle: "Route angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap.\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         zeroExtraXReads: true,
       },
     ],
@@ -648,14 +648,14 @@ const fallbackData = {
       confidence: "medium",
     },
     opsMetrics: [
-      { id: "target", label: "reply target", value: "3/day", status: "ok" },
+      { id: "target", label: "route target", value: "3/day", status: "ok" },
       { id: "queue", label: "mission queue", value: "2/2", status: "ok" },
       { id: "budget", label: "X read budget", value: "0 reads", status: "ok" },
       { id: "learning", label: "writeback", value: "120 posts", status: "ok" },
     ],
     runbook: [
       "Open the top route in X web.",
-      "Paste 3 useful replies under fresh, high-signal conversations.",
+      "Paste 3 useful route ops under fresh, high-signal conversations.",
       "Prefer posts less than 2 hours old with active technical debate.",
       "Let the next maintenance run write engagement back into the learning layer.",
     ],
@@ -663,7 +663,7 @@ const fallbackData = {
       {
         id: "template:decision_rule",
         priority: 1,
-        label: "decision rule replies",
+        label: "decision rule route ops",
         kind: "format",
         routeLabel: "Target Accounts",
         routeUrl: "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
@@ -722,7 +722,7 @@ const fallbackData = {
     lanes: [
       {
         id: "template:decision_rule",
-        label: "decision rule replies",
+        label: "decision rule route ops",
         routeLabel: "Target Accounts",
         priority: 1,
         status: "ok",
@@ -753,7 +753,7 @@ const fallbackData = {
     ],
     rules: [
       "Open routes in X web; do not call recent_search for manual route ops.",
-      "Paste only useful replies under active technical threads; stop at target count.",
+      "Paste only useful route ops under active technical threads; stop at target count.",
       "Metrics write back on the next maintenance run and rebalance route weights.",
     ],
   },
@@ -1153,7 +1153,7 @@ const translations = {
     inference_failures: "faults",
     inference_no_calls: "No tracked model calls yet; rendering cached outputs from the swarm queue.",
     inference_model_fallback: "cached-output-router",
-    inference_purpose_fallback: "manual_reply_drafts",
+    inference_purpose_fallback: "manual_route_outputs",
     inference_status_ok: "model stream nominal",
     inference_status_watch: "model stream watch",
     inference_model_calls: "{count} calls",
@@ -1454,8 +1454,8 @@ const translations = {
     flywheel_title: "Zero-read route control loop",
     flywheel_velocity: "Velocity score",
     flywheel_rules: "Execution rules",
-    flywheel_burst: "{replies} replies · +{lift}% expected lift · {route}",
-    flywheel_mode_reply_burst: "reply burst",
+    flywheel_burst: "{replies} route ops · +{lift}% expected lift · {route}",
+    flywheel_mode_reply_burst: "route burst",
     flywheel_mode_manual_distribution: "manual distribution",
     flywheel_mode_cooldown_cache_only: "cache-only cooldown",
     flywheel_mode_queue_build: "queue build",
@@ -1479,7 +1479,7 @@ const translations = {
     loop_learn: "Learn",
     loop_learn_detail: "Feed metrics back into tomorrow's style choices.",
     daily_action_title: "Today: 3 operator route ops",
-    daily_action_copy: "Open the first target, paste the prepared reply, then repeat the next two. No extra X API reads.",
+    daily_action_copy: "Open the first target, paste the prepared output, then repeat the next two. No extra X API reads.",
     copy_first_reply: "Copy first output",
     zero_api_action: "Zero extra API",
     opportunity_eyebrow: "Opportunity Router",
@@ -1792,7 +1792,7 @@ const translations = {
     inference_failures: "故障",
     inference_no_calls: "暂未追踪到模型调用；正在从群体输出队列渲染缓存流。",
     inference_model_fallback: "缓存输出路由器",
-    inference_purpose_fallback: "人工回复输出",
+    inference_purpose_fallback: "人工路由输出",
     inference_status_ok: "模型流正常",
     inference_status_watch: "模型流观察",
     inference_model_calls: "{count} 次调用",
@@ -2093,8 +2093,8 @@ const translations = {
     flywheel_title: "零读取路由控制闭环",
     flywheel_velocity: "速度评分",
     flywheel_rules: "执行规则",
-    flywheel_burst: "{replies} 条回复 · 预期提升 +{lift}% · {route}",
-    flywheel_mode_reply_burst: "回复爆发",
+    flywheel_burst: "{replies} 次路由操作 · 预期提升 +{lift}% · {route}",
+    flywheel_mode_reply_burst: "路由爆发",
     flywheel_mode_manual_distribution: "人工分发",
     flywheel_mode_cooldown_cache_only: "缓存冷却",
     flywheel_mode_queue_build: "队列构建",
@@ -2118,7 +2118,7 @@ const translations = {
     loop_learn: "学习",
     loop_learn_detail: "把数据反馈到明天的风格选择。",
     daily_action_title: "今日：3 次操作员路由",
-    daily_action_copy: "先打开第一个目标入口，粘贴准备好的回复，再重复后两项。不增加 X API 读取。",
+    daily_action_copy: "先打开第一个目标入口，粘贴准备好的输出，再重复后两项。不增加 X API 读取。",
     copy_first_reply: "复制第一条输出",
     zero_api_action: "零额外 API",
     opportunity_eyebrow: "机会路由",
@@ -2183,12 +2183,12 @@ const diagnosisTranslations = {
   en: [
     "The core posts are not the main problem. At small-account scale, distribution starts only after early interaction.",
     "The bottleneck is entry into conversations, not posting volume.",
-    "The current low-cost path is manual search links plus copied replies, avoiding extra X search/read API spend.",
+    "The current low-cost path is manual search links plus copied route outputs, avoiding extra X search/read API spend.",
   ],
   zh: [
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
     "瓶颈是分发入口，不是发帖数量。",
-    "当前低成本路线是人工点网页搜索、复制回复，避免增加 X search/read API。",
+    "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
   ],
 };
 
@@ -2321,7 +2321,7 @@ function cadenceData() {
       : "Derived cadence prefers manual distribution before another post.",
     nextAction: publishAllowed
       ? "Proceed with the next post candidate."
-      : "Use manual reply routes and keep X API spend flat.",
+      : "Use manual route lanes and keep X API spend flat.",
     postsLast24h: posts,
     dailyPostTarget: target,
     safeTextPostsLeft: remaining > 0 ? Math.floor(remaining / 0.015) : 0,
@@ -2873,7 +2873,7 @@ function distributionOpsData() {
     missionCount: missions.length,
     primaryRoute: missions[0] ? { label: missions[0].routeLabel, url: missions[0].routeUrl, score: missions[0].score } : null,
     opsMetrics: [
-      { id: "target", label: "reply target", value: `${missions.length}/day`, status: "ok" },
+      { id: "target", label: "route target", value: `${missions.length}/day`, status: "ok" },
       { id: "queue", label: "mission queue", value: `${missions.length}/${missions.length}`, status: missions.length ? "ok" : "warn" },
       { id: "budget", label: "X read budget", value: "0 reads", status: "ok" },
     ],
@@ -2939,7 +2939,7 @@ function operatorSloData(ops = distributionOpsData()) {
     })),
     rules: [
       "Open routes in X web; do not call recent_search for manual route ops.",
-      "Paste only useful replies under active technical threads; stop at target count.",
+      "Paste only useful route ops under active technical threads; stop at target count.",
       "Metrics write back on the next maintenance run and rebalance route weights.",
     ],
   };
@@ -2985,8 +2985,8 @@ function operatorDispatchPacketData(ops = distributionOpsData()) {
     "",
     "Protocol:",
     "1. Open the top X web route; use live recency in the browser only.",
-    "2. Pick technical conversations with active replies and clear topic fit.",
-    "3. Paste one useful reply, lightly edit for context, then move to the next route.",
+    "2. Pick technical conversations with active exchange and clear topic fit.",
+    "3. Paste one useful route op, lightly edit for context, then move to the next route.",
     "4. Stop at the target count; metrics write back on the next maintenance run.",
     "",
     "Packets:",
@@ -2994,7 +2994,7 @@ function operatorDispatchPacketData(ops = distributionOpsData()) {
       `${packet.priority}. ${packet.routeLabel} · SLA ${formatNumber(packet.operatorSlaMinutes)}m · target ${formatNumber(packet.targetReplies)} · ${packet.ready ? "READY" : "MISSING_ROUTE_OR_DRAFT"}`,
       packet.reason ? `Why: ${packet.reason}` : null,
       packet.routeUrl ? `Route: ${packet.routeUrl}` : null,
-      packet.draftText ? `Reply: ${packet.draftText}` : null,
+      packet.draftText ? `Output: ${packet.draftText}` : null,
       "",
     ].filter(Boolean)),
     "Stop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
@@ -3014,13 +3014,13 @@ function operatorDispatchPacketData(ops = distributionOpsData()) {
     expectedLiftPct,
     bestRouteLabel: packets[0]?.routeLabel || null,
     nextAction: packets[0]?.routeLabel
-      ? `Open ${packets[0].routeLabel} in X web, paste the first ready reply, then stop at ${formatNumber(targetReplies)} useful route ops.`
-      : "Generate or refresh manual reply drafts before dispatching.",
+      ? `Open ${packets[0].routeLabel} in X web, paste the first ready output, then stop at ${formatNumber(targetReplies)} useful route ops.`
+      : "Generate or refresh manual route outputs before dispatching.",
     copyBlock,
     checks: [
       { id: "x_reads", label: "X read partition", value: "0 ops", status: "ok", detail: "Manual web routes do not call recent_search." },
       { id: "budget", label: "cost boundary", value: money(api.remaining), status: api.remaining > 0 ? "ok" : "danger", detail: "No incremental X API cost for the dispatch packet." },
-      { id: "queue", label: "route queue", value: `${readyPackets}/${packets.length}`, status: severity, detail: "Route URL and reply text are present." },
+      { id: "queue", label: "route queue", value: `${readyPackets}/${packets.length}`, status: severity, detail: "Route URL and output payload are present." },
     ],
     packets,
   };
@@ -3078,13 +3078,13 @@ function routeAmplifierData(packet = operatorDispatchPacketData(), ops = distrib
       xReadOps: 0,
       incrementalXApiUsd: 0,
       action: !ready
-        ? "Repair missing route URL or reply output before opening X."
+        ? "Repair missing route URL or route output before opening X."
         : score >= 72
           ? "Execute first; this route has the strongest distribution leverage."
           : score >= 48
             ? "Use after the top route or when the live thread quality is better."
             : "Hold unless the top routes are stale.",
-      reason: item.evidence || item.reason || "cached reply readiness, expected lift, SLA, and budget guard",
+      reason: item.evidence || item.reason || "cached route readiness, expected lift, SLA, and budget guard",
     };
   });
   const readyLanes = lanes.filter((lane) => lane.ready).length;
@@ -3123,14 +3123,14 @@ function missionOperatorProtocol(mission, ops, index = 0) {
     objective: `Borrow live distribution from ${route} without X search/read API spend.`,
     steps: [
       { id: "open", label: "open.route", detail: "Open the X web route and use live recency." },
-      { id: "filter", label: "filter.thread", detail: "Pick a technical conversation with active replies and clear topic fit." },
-      { id: "paste", label: "paste.reply", detail: `Paste ${formatNumber(targetReplies)} useful reply/replies within ${sla} minutes.` },
+      { id: "filter", label: "filter.thread", detail: "Pick a technical conversation with active exchange and clear topic fit." },
+      { id: "paste", label: "paste.output", detail: `Paste ${formatNumber(targetReplies)} useful route op(s) within ${sla} minutes.` },
       { id: "observe", label: "observe.feedback", detail: "Stop at target count; let the next metrics run update scoring." },
     ],
     stopConditions: [
       "Skip politics, giveaways, ragebait, ads, and weak topic fit.",
-      "Skip if the reply would require an unsupported factual claim.",
-      "Stop after the target replies; do not chase every adjacent thread.",
+      "Skip if the output would require an unsupported factual claim.",
+      "Stop after the target route ops; do not chase every adjacent thread.",
     ],
     writeback: "Maintenance refreshes telemetry and updates source/format/topic weights.",
   };
@@ -6343,12 +6343,12 @@ function proofReason(post) {
     if (template.includes("decision")) return "它把新闻变成了明确决策规则，读者能立刻判断自己是否该行动。";
     if (template.includes("question")) return "它不是复述新闻，而是提出尖锐问题，更容易引发同意、反驳和转发。";
     if (template.includes("pain")) return "它点出了真实使用成本，把产品新闻翻译成团队会关心的问题。";
-    return "它具体、有立场，并且不是标题复述，因此更像一个值得回复的观点。";
+    return "它具体、有立场，并且不是标题复述，因此更像一个值得 ACK 和转发的观点。";
   }
   if (template.includes("decision")) return "It turns a news item into a concrete decision rule, so readers can immediately judge whether to act.";
   if (template.includes("question")) return "It does not recap the headline. It asks a sharp question that invites agreement, pushback, and reposts.";
   if (template.includes("pain")) return "It translates product news into an operator pain point, which makes the take useful beyond the launch itself.";
-  return "It is specific, takes a clear position, and avoids headline recap, making it easier to reply to and share.";
+  return "It is specific, takes a clear position, and avoids headline recap, making it easier to ACK and share.";
 }
 
 function normalizeTraceCandidate(candidate, index, selectedText = "") {
@@ -7255,7 +7255,7 @@ function budgetBurnData() {
       { id: "media_slots", label: "safe media slots", value: Math.floor(safeRemaining / 0.03), status: "warn" },
     ],
     partitions: [
-      { id: "manual_routes", label: "manual reply routes", value: "$0.000", status: "ok", detail: "operator paste loop" },
+      { id: "manual_routes", label: "manual route lanes", value: "$0.000", status: "ok", detail: "operator paste loop" },
       { id: "text_publish", label: "text publish", value: "$0.015", status: safeRemaining > 0 ? "ok" : "danger", detail: "budget ledger" },
       { id: "media_publish", label: "media publish", value: "$0.030", status: "warn", detail: "held behind ROI gate" },
       { id: "live_reads", label: "live X reads", value: "0 ops", status: "ok", detail: "cached only" },
