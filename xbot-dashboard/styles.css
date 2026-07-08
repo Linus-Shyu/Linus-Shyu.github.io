@@ -16875,3 +16875,265 @@ body .side-rail .rail-budget .meter div {
     background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.54), transparent);
   }
 }
+
+/* Final sidebar contrast lock: keep the navigation rail aligned with the SRE console in every theme. */
+html[data-theme="light"] body .side-rail,
+html[data-theme="dark"] body .side-rail,
+body .side-rail {
+  --rail-final-bg: #070a10;
+  --rail-final-mid: #0d1420;
+  --rail-final-top: #151f2d;
+  --rail-final-panel: rgba(13, 20, 31, 0.98);
+  --rail-final-panel-soft: rgba(18, 27, 40, 0.96);
+  --rail-final-panel-hot: rgba(42, 31, 16, 0.98);
+  --rail-final-line: rgba(156, 174, 197, 0.28);
+  --rail-final-line-hot: rgba(255, 159, 28, 0.7);
+  --rail-final-text: #f7fbff;
+  --rail-final-body: #dce6f3;
+  --rail-final-muted: #9eacc0;
+  --rail-final-accent: #ff9f1c;
+  --rail-final-green: #74d66b;
+  color-scheme: dark;
+  color: var(--rail-final-body) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 38% -10%, rgba(255, 159, 28, 0.3), transparent 32%),
+    radial-gradient(circle at 0% 70%, rgba(116, 214, 107, 0.15), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 44%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, var(--rail-final-top) 0%, var(--rail-final-mid) 45%, var(--rail-final-bg) 100%) !important;
+  box-shadow:
+    22px 0 46px rgba(2, 6, 12, 0.38),
+    inset -1px 0 0 rgba(255, 159, 28, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="light"] body .side-rail .brand,
+html[data-theme="light"] body .side-rail .env-card,
+html[data-theme="light"] body .side-rail .rack-mini div,
+html[data-theme="light"] body .side-rail .rail-budget,
+html[data-theme="dark"] body .side-rail .brand,
+html[data-theme="dark"] body .side-rail .env-card,
+html[data-theme="dark"] body .side-rail .rack-mini div,
+html[data-theme="dark"] body .side-rail .rail-budget,
+body .side-rail .brand,
+body .side-rail .env-card,
+body .side-rail .rack-mini div,
+body .side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.075), transparent 60%) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.085) !important;
+}
+
+html[data-theme="light"] body .side-rail .brand strong,
+html[data-theme="light"] body .side-rail .env-line strong,
+html[data-theme="light"] body .side-rail .rack-mini strong,
+html[data-theme="light"] body .side-rail .rail-nav a,
+html[data-theme="light"] body .side-rail .rail-nav a::after,
+html[data-theme="light"] body .side-rail .rail-budget strong,
+html[data-theme="dark"] body .side-rail .brand strong,
+html[data-theme="dark"] body .side-rail .env-line strong,
+html[data-theme="dark"] body .side-rail .rack-mini strong,
+html[data-theme="dark"] body .side-rail .rail-nav a,
+html[data-theme="dark"] body .side-rail .rail-nav a::after,
+html[data-theme="dark"] body .side-rail .rail-budget strong,
+body .side-rail .brand strong,
+body .side-rail .env-line strong,
+body .side-rail .rack-mini strong,
+body .side-rail .rail-nav a,
+body .side-rail .rail-nav a::after,
+body .side-rail .rail-budget strong {
+  color: var(--rail-final-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.46) !important;
+}
+
+html[data-theme="light"] body .side-rail .brand small,
+html[data-theme="light"] body .side-rail .env-card > span,
+html[data-theme="light"] body .side-rail .rack-mini em,
+html[data-theme="light"] body .side-rail .rail-budget span,
+html[data-theme="light"] body .side-rail .rail-budget small,
+html[data-theme="dark"] body .side-rail .brand small,
+html[data-theme="dark"] body .side-rail .env-card > span,
+html[data-theme="dark"] body .side-rail .rack-mini em,
+html[data-theme="dark"] body .side-rail .rail-budget span,
+html[data-theme="dark"] body .side-rail .rail-budget small,
+body .side-rail .brand small,
+body .side-rail .env-card > span,
+body .side-rail .rack-mini em,
+body .side-rail .rail-budget span,
+body .side-rail .rail-budget small {
+  color: var(--rail-final-muted) !important;
+}
+
+html[data-theme="light"] body .side-rail .rail-nav a,
+html[data-theme="dark"] body .side-rail .rail-nav a,
+body .side-rail .rail-nav a {
+  min-height: 42px;
+  border: 1px solid transparent !important;
+  color: var(--rail-final-body) !important;
+  background: transparent !important;
+}
+
+html[data-theme="light"] body .side-rail .rail-nav a::after,
+html[data-theme="dark"] body .side-rail .rail-nav a::after,
+body .side-rail .rail-nav a::after {
+  min-width: 22px;
+  border: 1px solid rgba(156, 174, 197, 0.2);
+  border-radius: 6px;
+  padding: 2px 0;
+  color: var(--rail-final-muted) !important;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: center;
+}
+
+html[data-theme="light"] body .side-rail .rail-nav a:hover,
+html[data-theme="light"] body .side-rail .rail-nav a:focus-visible,
+html[data-theme="light"] body .side-rail .rail-nav a.active,
+html[data-theme="dark"] body .side-rail .rail-nav a:hover,
+html[data-theme="dark"] body .side-rail .rail-nav a:focus-visible,
+html[data-theme="dark"] body .side-rail .rail-nav a.active,
+body .side-rail .rail-nav a:hover,
+body .side-rail .rail-nav a:focus-visible,
+body .side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--rail-final-line-hot) !important;
+  background:
+    radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.34), transparent 45%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.26), rgba(116, 214, 107, 0.08)),
+    rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="light"] body .side-rail .rail-nav a:hover::after,
+html[data-theme="light"] body .side-rail .rail-nav a:focus-visible::after,
+html[data-theme="light"] body .side-rail .rail-nav a.active::after,
+html[data-theme="dark"] body .side-rail .rail-nav a:hover::after,
+html[data-theme="dark"] body .side-rail .rail-nav a:focus-visible::after,
+html[data-theme="dark"] body .side-rail .rail-nav a.active::after,
+body .side-rail .rail-nav a:hover::after,
+body .side-rail .rail-nav a:focus-visible::after,
+body .side-rail .rail-nav a.active::after {
+  color: #111827 !important;
+  border-color: rgba(255, 209, 102, 0.72);
+  background: linear-gradient(135deg, #ffd166, var(--rail-final-accent));
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body .side-rail .brand-mark,
+html[data-theme="dark"] body .side-rail .brand-mark,
+body .side-rail .brand-mark {
+  color: #08111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--rail-final-accent) 55%, var(--rail-final-green) 100%) !important;
+}
+
+html[data-theme="light"] body .side-rail .env-line .status-dot,
+html[data-theme="light"] body .side-rail .rack-mini span,
+html[data-theme="dark"] body .side-rail .env-line .status-dot,
+html[data-theme="dark"] body .side-rail .rack-mini span,
+body .side-rail .env-line .status-dot,
+body .side-rail .rack-mini span {
+  background: var(--rail-final-green) !important;
+  box-shadow:
+    0 0 0 4px rgba(116, 214, 107, 0.16),
+    0 0 18px rgba(116, 214, 107, 0.38) !important;
+}
+
+html[data-theme="light"] body .side-rail .rail-budget,
+html[data-theme="dark"] body .side-rail .rail-budget,
+body .side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.68) !important;
+  background-color: var(--rail-final-panel-hot) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.22), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)) !important;
+}
+
+html[data-theme="light"] body .side-rail .rail-budget strong,
+html[data-theme="dark"] body .side-rail .rail-budget strong,
+body .side-rail .rail-budget strong {
+  color: #ffd166 !important;
+}
+
+/* Highest-specificity rail seal for cached light-mode overrides. */
+:root[data-theme="light"] body .ops-shell .side-rail,
+:root[data-theme="dark"] body .ops-shell .side-rail {
+  color: var(--rail-final-body) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 38% -10%, rgba(255, 159, 28, 0.3), transparent 32%),
+    radial-gradient(circle at 0% 70%, rgba(116, 214, 107, 0.15), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 44%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, var(--rail-final-top) 0%, var(--rail-final-mid) 45%, var(--rail-final-bg) 100%) !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .brand,
+:root[data-theme="light"] body .ops-shell .side-rail .env-card,
+:root[data-theme="light"] body .ops-shell .side-rail .rack-mini div,
+:root[data-theme="dark"] body .ops-shell .side-rail .brand,
+:root[data-theme="dark"] body .ops-shell .side-rail .env-card,
+:root[data-theme="dark"] body .ops-shell .side-rail .rack-mini div {
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-panel) !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a {
+  color: var(--rail-final-body) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a:hover,
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a:focus-visible,
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a.active,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a:hover,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a:focus-visible,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--rail-final-line-hot) !important;
+  background:
+    radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.34), transparent 45%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.26), rgba(116, 214, 107, 0.08)),
+    rgba(255, 255, 255, 0.06) !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a::after,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a::after {
+  color: var(--rail-final-muted) !important;
+  border-color: rgba(156, 174, 197, 0.2) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a:hover::after,
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a:focus-visible::after,
+:root[data-theme="light"] body .ops-shell .side-rail .rail-nav a.active::after,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a:hover::after,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a:focus-visible::after,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-nav a.active::after {
+  color: #111827 !important;
+  border-color: rgba(255, 209, 102, 0.72) !important;
+  background: linear-gradient(135deg, #ffd166, var(--rail-final-accent)) !important;
+  text-shadow: none !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-budget,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border-color: rgba(255, 209, 102, 0.68) !important;
+  background-color: var(--rail-final-panel-hot) !important;
+}
+
+:root[data-theme="light"] body .ops-shell .side-rail .rail-budget strong,
+:root[data-theme="dark"] body .ops-shell .side-rail .rail-budget strong {
+  color: #ffd166 !important;
+}
