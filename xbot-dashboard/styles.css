@@ -11390,9 +11390,245 @@ body:not(.demo-mode) .demo-strip {
   }
 }
 
+.angle-load-router,
 .temporal-angle-matrix {
   display: grid;
   gap: 9px;
+}
+
+.angle-load-router {
+  border: 1px solid color-mix(in srgb, #00f0ff 28%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 14%, transparent), transparent 32%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, #ff007a 9%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 18px color-mix(in srgb, #00f0ff 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 56%, transparent);
+}
+
+.angle-router-head,
+.angle-router-core,
+.angle-router-gates,
+.angle-router-lanes,
+.angle-router-directive {
+  min-width: 0;
+}
+
+.angle-router-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.angle-router-head span,
+.angle-router-active span,
+.angle-router-score span,
+.angle-router-gates em,
+.angle-router-lanes span,
+.angle-router-lanes small,
+.angle-router-directive span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.angle-router-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.angle-router-head em {
+  border: 1px solid color-mix(in srgb, #00f0ff 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00f0ff;
+  background: color-mix(in srgb, #00f0ff 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.angle-router-core {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) 0.72fr 0.72fr;
+  gap: 8px;
+}
+
+.angle-router-active,
+.angle-router-score,
+.angle-router-gates span,
+.angle-router-lanes article,
+.angle-router-directive {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 90%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.angle-router-active,
+.angle-router-score,
+.angle-router-gates span {
+  padding: 8px;
+}
+
+.angle-router-active strong,
+.angle-router-score strong,
+.angle-router-gates strong,
+.angle-router-lanes strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.angle-router-active p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 32px;
+  margin: 7px 0 0;
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.34;
+}
+
+.angle-router-score div {
+  height: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line-soft) 82%, transparent);
+}
+
+.angle-router-score i {
+  display: block;
+  width: var(--angle-router-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px color-mix(in srgb, #00f0ff 36%, transparent);
+}
+
+.angle-router-gates {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.angle-router-gates .ok strong {
+  color: #00ff66;
+}
+
+.angle-router-gates .warn strong {
+  color: #ff9f1c;
+}
+
+.angle-router-gates .danger strong {
+  color: #ff007a;
+}
+
+.angle-router-lanes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.angle-router-lanes article {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 7px;
+  overflow: hidden;
+  padding: 8px 9px 8px 12px;
+}
+
+.angle-router-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: color-mix(in srgb, #00f0ff var(--angle-router-lane), #ff9f1c);
+  box-shadow: 0 0 14px color-mix(in srgb, #00f0ff 26%, transparent);
+}
+
+.angle-router-lanes article.hot::before {
+  background: #00ff66;
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.34);
+}
+
+.angle-router-lanes article.hold::before,
+.angle-router-lanes article.danger::before {
+  background: #ff007a;
+  box-shadow: 0 0 16px rgba(255, 0, 122, 0.28);
+}
+
+.angle-router-lanes div {
+  min-width: 0;
+}
+
+.angle-router-lanes em {
+  justify-self: end;
+  color: #00f0ff;
+  font-family: var(--mono);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.angle-router-lanes small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+
+.angle-router-directive {
+  display: grid;
+  gap: 5px;
+  padding: 8px;
+}
+
+.angle-router-directive code {
+  overflow: hidden;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.temporal-angle-matrix {
   border: 1px solid color-mix(in srgb, var(--accent-3) 24%, var(--line-soft));
   border-radius: 6px;
   padding: 10px;
@@ -11589,6 +11825,9 @@ body:not(.demo-mode) .demo-strip {
 }
 
 @media (max-width: 1180px) {
+  .angle-router-core,
+  .angle-router-gates,
+  .angle-router-lanes,
   .angle-metrics,
   .writeback-meta,
   .writeback-cells {
@@ -11616,6 +11855,10 @@ body:not(.demo-mode) .demo-strip {
   .writeback-meta,
   .writeback-cells,
   .writeback-mutations article,
+  .angle-router-head,
+  .angle-router-core,
+  .angle-router-gates,
+  .angle-router-lanes,
   .matrix-head,
   .matrix-meta,
   .matrix-grid,

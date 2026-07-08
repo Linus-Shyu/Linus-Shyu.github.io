@@ -560,6 +560,42 @@ const fallbackData = {
       },
     ],
   },
+  angleLoadRouter: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "cached_angle_load_router",
+    source: "hourly load balancer + temporal angle matrix + adaptive scheduler",
+    zeroExtraXReads: true,
+    severity: "ok",
+    activeCommand: "Route Decision Rule at 13:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments.",
+    activeSlot: {
+      windowLabel: "13:00",
+      hour: 13,
+      formatId: "decision_rule",
+      label: "Decision Rule",
+      angle: "decision rule / what to do next",
+      score: 91.2,
+      loadScore: 88.4,
+      action: "exploit",
+      status: "hot",
+      reason: "Best UTC window with proven reusable-rule format.",
+    },
+    gates: [
+      { id: "read", label: "X_READ_PARTITION", value: "cached_only", status: "ok" },
+      { id: "publish", label: "PUBLISH_GATE", value: "review", status: "warn" },
+      { id: "explore", label: "EXPLORATION_LANE", value: "guarded", status: "warn" },
+      { id: "writeback", label: "WRITEBACK_BUS", value: "medium", status: "ok" },
+    ],
+    lanes: [
+      { id: "decision_rule", slot: 1, windowLabel: "13:00", hoursFromNow: 11, label: "Decision Rule", formatId: "decision_rule", action: "exploit", angle: "decision rule / what to do next", status: "hot", score: 91.2, loadScore: 88.4, samples: 3, avgScore: 7.2, reason: "Best UTC window with proven reusable-rule format." },
+      { id: "operator_pain", slot: 2, windowLabel: "17:00", hoursFromNow: 15, label: "Operator Pain", formatId: "operator_pain", action: "test", angle: "operator pain / hidden workflow tax", status: "watch", score: 79.4, loadScore: 81.6, samples: 2, avgScore: 4.8, reason: "High-load window; pair with practical workflow-tax angle." },
+      { id: "second_order", slot: 3, windowLabel: "22:00", hoursFromNow: 20, label: "Second Order", formatId: "second_order", action: "explore", angle: "second-order distribution or business consequence", status: "probe", score: 67.1, loadScore: 72.8, samples: 0, avgScore: 0, reason: "Exploration slot for downstream platform consequences." },
+    ],
+    directives: [
+      "Route Decision Rule at 13:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments.",
+      "Traffic load is soft; write a useful route-ready angle that earns manual distribution.",
+      "Do not use held formats unless the story is a perfect fit: prediction.",
+    ],
+  },
   trendVelocityRadar: {
     updatedAt: "2026-07-07T01:09:59.105Z",
     mode: "rss_velocity",
@@ -1508,6 +1544,17 @@ const translations = {
     matrix_mode_peak_angle_wait: "peak wait",
     matrix_mode_surge_angle_exploit: "surge exploit",
     matrix_mode_temporal_rotation: "temporal rotation",
+    angle_router_eyebrow: "Angle Load Router",
+    angle_router_title: "Hourly prompt fire-control bus",
+    angle_router_zero_reads: "0 X read ops",
+    angle_router_active: "active route",
+    angle_router_score: "router score",
+    angle_router_load: "L7 load",
+    angle_router_gate: "control gates",
+    angle_router_lanes: "route lanes",
+    angle_router_directive: "command packet",
+    angle_router_empty: "No angle load router telemetry available.",
+    angle_router_mode_cached_angle_load_router: "cached angle router",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -2233,6 +2280,17 @@ const translations = {
     matrix_mode_peak_angle_wait: "等待峰值",
     matrix_mode_surge_angle_exploit: "峰值利用",
     matrix_mode_temporal_rotation: "时间轮换",
+    angle_router_eyebrow: "角度负载路由器",
+    angle_router_title: "小时级 Prompt 火控总线",
+    angle_router_zero_reads: "0 次 X 读取",
+    angle_router_active: "活动路由",
+    angle_router_score: "路由评分",
+    angle_router_load: "L7 负载",
+    angle_router_gate: "控制闸门",
+    angle_router_lanes: "路由通道",
+    angle_router_directive: "指令包",
+    angle_router_empty: "暂无角度负载路由遥测。",
+    angle_router_mode_cached_angle_load_router: "缓存角度路由",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -6525,10 +6583,104 @@ function temporalAngleMatrixData() {
   return dashboardData.temporalAngleMatrix || fallbackData.temporalAngleMatrix || {};
 }
 
+function angleLoadRouterData() {
+  const incoming = dashboardData.angleLoadRouter || fallbackData.angleLoadRouter;
+  if (incoming) return incoming;
+  const matrix = temporalAngleMatrixData();
+  const scheduler = angleSchedulerData();
+  const activeSlot = (matrix.slots || [])[0] || (scheduler.nextAngles || [])[0] || null;
+  return {
+    mode: "derived_cached_angle_load_router",
+    source: "derived dashboard fields",
+    zeroExtraXReads: true,
+    severity: activeSlot?.status === "hot" ? "ok" : activeSlot ? "warn" : "danger",
+    activeCommand: activeSlot
+      ? `Route ${activeSlot.label || formatTemplate(activeSlot.formatId)} at ${activeSlot.windowLabel || "-"} UTC.`
+      : "Collect more cached telemetry before routing an angle.",
+    activeSlot,
+    gates: [
+      { id: "read", label: "X_READ_PARTITION", value: "cached_only", status: "ok" },
+      { id: "publish", label: "PUBLISH_GATE", value: "review", status: "warn" },
+    ],
+    lanes: (matrix.slots || []).slice(0, 4),
+    directives: [matrix.nextAction, ...(scheduler.promptDirectives || [])].filter(Boolean).slice(0, 4),
+  };
+}
+
 function matrixModeLabel(mode) {
   const key = `matrix_mode_${String(mode || "").replace(/-/g, "_")}`;
   const translated = t(key);
   return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function angleRouterModeLabel(mode) {
+  const key = `angle_router_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function renderAngleLoadRouter() {
+  const router = angleLoadRouterData();
+  const container = $("#angle-load-router");
+  if (!container) return;
+  const active = router.activeSlot || null;
+  const lanes = Array.isArray(router.lanes) ? router.lanes : [];
+  const gates = Array.isArray(router.gates) ? router.gates : [];
+  const directives = Array.isArray(router.directives) ? router.directives : [];
+  if (!active && !lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("angle_router_empty"))}</p>`;
+    return;
+  }
+  container.innerHTML = `
+    <div class="angle-router-head">
+      <div>
+        <span>${escapeHtml(t("angle_router_eyebrow"))}</span>
+        <strong>${escapeHtml(t("angle_router_title"))}</strong>
+      </div>
+      <em>${escapeHtml(angleRouterModeLabel(router.mode))} · ${escapeHtml(t("angle_router_zero_reads"))}</em>
+    </div>
+    <div class="angle-router-core ${escapeHtml(router.severity || "warn")}">
+      <div class="angle-router-active">
+        <span>${escapeHtml(t("angle_router_active"))}</span>
+        <strong>${escapeHtml(active?.label || formatTemplate(active?.formatId) || "-")}</strong>
+        <p>${escapeHtml(active?.angle || active?.reason || router.activeCommand || "-")}</p>
+      </div>
+      <div class="angle-router-score">
+        <span>${escapeHtml(t("angle_router_score"))}</span>
+        <strong>${escapeHtml(formatNumber(active?.score || 0, 1))}</strong>
+        <div style="--angle-router-score:${clamp(number(active?.score), 0, 100).toFixed(1)}%"><i></i></div>
+      </div>
+      <div class="angle-router-score">
+        <span>${escapeHtml(t("angle_router_load"))}</span>
+        <strong>${escapeHtml(formatNumber(active?.loadScore || 0, 1))}</strong>
+        <div style="--angle-router-score:${clamp(number(active?.loadScore), 0, 100).toFixed(1)}%"><i></i></div>
+      </div>
+    </div>
+    <div class="angle-router-gates">
+      ${gates.slice(0, 4).map((gate) => `
+        <span class="${escapeHtml(gate.status || "warn")}">
+          <em>${escapeHtml(gate.label || gate.id || t("angle_router_gate"))}</em>
+          <strong>${escapeHtml(gate.value || "-")}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="angle-router-lanes">
+      ${lanes.slice(0, 5).map((lane) => `
+        <article class="${escapeHtml(lane.status || lane.action || "probe")}" style="--angle-router-lane:${clamp(number(lane.score), 0, 100).toFixed(1)}%">
+          <div>
+            <span>${escapeHtml(lane.windowLabel || "-")} UTC · ${escapeHtml(lane.action || "test")}</span>
+            <strong>${escapeHtml(lane.label || formatTemplate(lane.formatId))}</strong>
+          </div>
+          <em>${escapeHtml(formatNumber(lane.score || 0, 1))}</em>
+          <small>${escapeHtml(formatNumber(lane.samples || 0))} n · L7 ${escapeHtml(formatNumber(lane.loadScore || 0, 1))}</small>
+        </article>
+      `).join("")}
+    </div>
+    <div class="angle-router-directive">
+      <span>${escapeHtml(t("angle_router_directive"))}</span>
+      <code>${escapeHtml(directives[0] || router.activeCommand || "-")}</code>
+    </div>
+  `;
 }
 
 function renderTemporalAngleMatrix() {
@@ -6611,6 +6763,7 @@ function renderLearning() {
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
+  renderAngleLoadRouter();
   renderTemporalAngleMatrix();
   renderExperimentPlan();
 }
