@@ -21525,3 +21525,126 @@ html[data-theme="dark"] .monitor-panel::after,
 html[data-theme="dark"] .panel::after {
   background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.18), transparent) !important;
 }
+
+/* Final rail contrast lock: the sidebar is always a dark command rack. */
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-final-bg: #070b12;
+  --rail-final-top: #121b28;
+  --rail-final-mid: #0c131d;
+  --rail-final-card: rgba(14, 21, 31, 0.97);
+  --rail-final-card-hot: rgba(39, 28, 13, 0.98);
+  --rail-final-line: rgba(148, 163, 184, 0.26);
+  --rail-final-hot: #ff9f1c;
+  --rail-final-green: #78d86f;
+  --rail-final-text: #fbfdff;
+  --rail-final-body: #dce6f3;
+  --rail-final-muted: #aeb9c8;
+  color-scheme: dark !important;
+  color: var(--rail-final-body) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 42% -10%, rgba(255, 159, 28, 0.34), transparent 34%),
+    radial-gradient(circle at 0 74%, rgba(120, 216, 111, 0.16), transparent 36%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, var(--rail-final-top) 0%, var(--rail-final-mid) 46%, var(--rail-final-bg) 100%) !important;
+  box-shadow:
+    24px 0 54px rgba(7, 11, 18, 0.34),
+    inset -1px 0 0 rgba(255, 159, 28, 0.26),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-card) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.08), transparent 62%) !important;
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.38) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--rail-final-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  color: #09111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--rail-final-hot) 52%, var(--rail-final-green) 100%) !important;
+  box-shadow:
+    0 16px 32px rgba(255, 159, 28, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.38) inset !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .status-dot,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+  background: var(--rail-final-green) !important;
+  box-shadow:
+    0 0 0 4px rgba(120, 216, 111, 0.14),
+    0 0 16px rgba(120, 216, 111, 0.24) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  color: var(--rail-final-text) !important;
+  border-color: rgba(174, 185, 200, 0.34) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: rgba(255, 159, 28, 0.72) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  background-image:
+    radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.42), transparent 44%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.28), rgba(120, 216, 111, 0.1)) !important;
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 159, 28, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover::after,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible::after,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active::after {
+  color: #111827 !important;
+  border-color: rgba(255, 209, 102, 0.9) !important;
+  background: linear-gradient(135deg, #ffd166, var(--rail-final-hot)) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.68) !important;
+  background-color: var(--rail-final-card-hot) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.24), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.15), transparent 62%) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #ffd166 !important;
+}
