@@ -206,8 +206,8 @@ const fallbackData = {
   },
   charts: {
     impressions24h: {
-      label: "24h impression load",
-      unit: "impressions",
+      label: "24h L7 traffic load",
+      unit: "L7 events",
       source: "tweet_metrics",
       total: 233,
       current: 5,
@@ -222,8 +222,8 @@ const fallbackData = {
       ],
     },
     impressions7d: {
-      label: "7d impression throughput",
-      unit: "impressions",
+      label: "7d L7 ingestion throughput",
+      unit: "L7 events",
       source: "tweet_metrics",
       total: 621,
       current: 233,
@@ -1123,6 +1123,7 @@ const translations = {
     gauge_items: "{count} items",
     gauge_percent: "{value}%",
     current_value: "current {value}",
+    l7_24h_total: "{count} 24h L7 events",
     monitor_calls_summary: "{calls} calls · {failures} faults",
     alert_ok_title: "All traffic partitions nominal",
     alert_ok_body: "Telemetry is fresh, cost guard is active, and human-in-loop routing is ready.",
@@ -1585,13 +1586,13 @@ const translations = {
     settlement_matched: "matched",
     settlement_empty: "No bandit reward settlement output available.",
     conn_eyebrow: "Active Conn Optimizer",
-    conn_title: "Follower conversion fire-control",
+    conn_title: "Active-conn conversion fire-control",
     conn_zero_reads: "0 X read ops",
     conn_score: "Conversion score",
     conn_primary: "Primary lane",
     conn_next: "Next route bias",
     conn_conn1k: "conn / 1k",
-    conn_profile_proxy: "profile proxy",
+    conn_profile_proxy: "intent proxy",
     conn_delta: "conn delta",
     conn_lanes: "Conversion lanes",
     conn_gates: "Control gates",
@@ -1985,6 +1986,7 @@ const translations = {
     gauge_items: "{count} 项",
     gauge_percent: "{value}%",
     current_value: "当前 {value}",
+    l7_24h_total: "24h L7 事件 {count}",
     monitor_calls_summary: "{calls} 次调用 · {failures} 次故障",
     alert_ok_title: "流量分区全部正常",
     alert_ok_body: "遥测新鲜、成本边界开启，人工路由入口已就绪。",
@@ -5015,7 +5017,7 @@ function renderMonitorPanels() {
     ${chartSvg(impressionStats.values, "primary")}
     <div class="chart-legend">
       <span><i></i> l7_traffic.load</span>
-      <strong>${formatNumber(impressionStats.total)} 24h total</strong>
+      <strong>${escapeHtml(t("l7_24h_total", { count: formatNumber(impressionStats.total) }))}</strong>
     </div>
     <div class="chart-provenance">
       <span>${escapeHtml(t("chart_source", { source: impressionSource }))}</span>
@@ -7105,7 +7107,7 @@ function derivedActiveConnConversionOptimizer() {
       ? `${primaryLane.status === "hold" ? "Do not force" : "Bias next packet toward"} ${primaryLane.label}; expected ${formatNumber(primaryLane.expectedConnPer1k, 2)} active conns / 1k L7 events.`
       : "Collect more measured packets before trusting conversion allocation.",
     promptDirectives: [
-      primaryLane ? `Lead with ${primaryLane.label}; optimize for follow-worthy utility, not raw impressions.` : null,
+      primaryLane ? `Lead with ${primaryLane.label}; optimize for active-conn utility, not raw L7 event count.` : null,
       allocator.recommendedLane?.label ? `Keep format aligned with ${allocator.recommendedLane.label}.` : null,
       audience.nextAction || null,
       "Make the first line a reusable rule, cost, or prediction a tech-curious reader would follow for.",
@@ -7113,7 +7115,7 @@ function derivedActiveConnConversionOptimizer() {
     gates: [
       { id: "x_reads", label: "X read ops", value: "0", status: "ok" },
       { id: "samples", label: "conversion samples", value: formatNumber(posts.length), status: posts.length >= 12 ? "ok" : "warn" },
-      { id: "profile_clicks", label: "profile-click proxy", value: "0", status: "warn" },
+      { id: "profile_clicks", label: "intent proxy", value: "0", status: "warn" },
       { id: "active_delta", label: "active conn delta", value: `${followerDelta >= 0 ? "+" : ""}${formatNumber(followerDelta)}`, status: followerDelta > 0 ? "ok" : followerDelta < 0 ? "danger" : "warn" },
     ],
     lanes: rawLanes.slice(0, 9),
