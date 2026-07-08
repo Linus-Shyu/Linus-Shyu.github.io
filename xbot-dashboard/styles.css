@@ -17,8 +17,8 @@
   --accent-line: rgba(26, 86, 219, 0.18);
   --stage-line: rgba(26, 86, 219, 0.22);
   --stage-scan: rgba(26, 86, 219, 0.24);
-  --rail: #ffffff;
-  --rail-soft: #edf2f7;
+  --rail: #080d14;
+  --rail-soft: #172231;
   --ok: #16a34a;
   --warn: #d97706;
   --danger: #dc2626;
@@ -10116,6 +10116,7 @@ body:not(.demo-mode) .demo-strip {
 .governor-head,
 .governor-reactor,
 .governor-cells,
+.governor-runway-grid,
 .governor-runbook {
   display: grid;
   gap: 8px;
@@ -10128,6 +10129,7 @@ body:not(.demo-mode) .demo-strip {
 
 .governor-head span,
 .governor-runbook span,
+.governor-runway-grid em,
 .governor-cells em {
   overflow: hidden;
   color: var(--muted);
@@ -10234,6 +10236,18 @@ body:not(.demo-mode) .demo-strip {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.governor-runway-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid color-mix(in srgb, #00f0ff 18%, var(--line-soft));
+  border-radius: 5px;
+  padding: 7px;
+  background:
+    linear-gradient(90deg, rgba(0, 240, 255, 0.055), transparent 48%, rgba(255, 0, 122, 0.045)),
+    color-mix(in srgb, var(--surface) 54%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.governor-runway-grid span,
 .governor-cells span {
   min-width: 0;
   border: 1px solid var(--line-soft);
@@ -10242,18 +10256,22 @@ body:not(.demo-mode) .demo-strip {
   background: color-mix(in srgb, var(--surface) 62%, transparent);
 }
 
+.governor-runway-grid span.ok,
 .governor-cells span.ok {
   border-color: rgba(0, 255, 102, 0.22);
 }
 
+.governor-runway-grid span.warn,
 .governor-cells span.warn {
   border-color: rgba(255, 159, 28, 0.3);
 }
 
+.governor-runway-grid span.danger,
 .governor-cells span.danger {
   border-color: rgba(255, 0, 122, 0.32);
 }
 
+.governor-runway-grid strong,
 .governor-cells strong {
   display: block;
   overflow: hidden;
@@ -10266,14 +10284,21 @@ body:not(.demo-mode) .demo-strip {
   white-space: nowrap;
 }
 
+.governor-runway-grid strong {
+  font-size: 12px;
+}
+
+.governor-runway-grid .ok strong,
 .governor-cells .ok strong {
   color: #00ff66;
 }
 
+.governor-runway-grid .warn strong,
 .governor-cells .warn strong {
   color: #ff9f1c;
 }
 
+.governor-runway-grid .danger strong,
 .governor-cells .danger strong {
   color: #ff007a;
 }
@@ -10288,6 +10313,12 @@ body:not(.demo-mode) .demo-strip {
   color: var(--body);
   font-size: 12px;
   line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+  .governor-runway-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .budget-burn-reactor {
@@ -14533,4 +14564,55 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] .rail-budget .meter div {
   background: linear-gradient(90deg, var(--nav-rail-boundary), var(--nav-rail-hot)) !important;
   box-shadow: 0 0 14px rgba(255, 209, 102, 0.22) !important;
+}
+
+/* Light rail hard lock: keep the left rack dark even when the main canvas is light. */
+:root[data-theme="light"] {
+  --rail: #080d14 !important;
+  --rail-soft: #172231 !important;
+  --nav-rail-bg: #080d14 !important;
+  --nav-rail-bg-mid: #0d1520 !important;
+  --nav-rail-bg-soft: #172231 !important;
+  --nav-rail-panel: rgba(18, 27, 39, 0.97) !important;
+  --nav-rail-panel-strong: rgba(35, 32, 22, 0.98) !important;
+  --nav-rail-text: #f4f8ff !important;
+  --nav-rail-muted: #aebbd0 !important;
+}
+
+:root[data-theme="light"] body .side-rail {
+  color: var(--nav-rail-text) !important;
+  background-color: #080d14 !important;
+  background-image:
+    radial-gradient(circle at 50% -8%, rgba(255, 159, 28, 0.18), transparent 34%),
+    radial-gradient(circle at 10% 74%, rgba(116, 214, 107, 0.12), transparent 30%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 44px),
+    linear-gradient(180deg, #172231 0%, #0d1520 42%, #080d14 100%) !important;
+}
+
+:root[data-theme="light"] body .brand,
+:root[data-theme="light"] body .env-card,
+:root[data-theme="light"] body .rack-mini div,
+:root[data-theme="light"] body .rail-nav a,
+:root[data-theme="light"] body .rail-budget {
+  color: var(--nav-rail-text) !important;
+  background-color: var(--nav-rail-panel) !important;
+  border-color: rgba(148, 163, 184, 0.28) !important;
+}
+
+:root[data-theme="light"] body .brand strong,
+:root[data-theme="light"] body .env-line strong,
+:root[data-theme="light"] body .rack-mini strong,
+:root[data-theme="light"] body .rail-nav a,
+:root[data-theme="light"] body .rail-nav a::after,
+:root[data-theme="light"] body .rail-budget strong {
+  color: var(--nav-rail-text) !important;
+}
+
+:root[data-theme="light"] body .brand small,
+:root[data-theme="light"] body .env-card > span,
+:root[data-theme="light"] body .rack-mini em,
+:root[data-theme="light"] body .rail-budget span,
+:root[data-theme="light"] body .rail-budget small {
+  color: var(--nav-rail-muted) !important;
 }

@@ -1036,6 +1036,13 @@ const translations = {
     governor_cooldown: "cooldown",
     governor_no_cooldown: "none",
     governor_cooldown_minutes: "{count} min",
+    governor_runway_guard: "Runway Guard",
+    governor_runway_clear: "clear",
+    governor_runway_cached: "cached-only",
+    governor_projected_reads: "projected reads",
+    governor_daily_burn: "daily burn",
+    governor_month_end: "month-end",
+    governor_runway_days: "runway",
     governor_runbook_ok: "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
     governor_runbook_warn: "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
     governor_runbook_danger: "Seal live search/read partitions. Use cached telemetry and manual outputs until cooldown clears.",
@@ -1675,6 +1682,13 @@ const translations = {
     governor_cooldown: "冷却",
     governor_no_cooldown: "无",
     governor_cooldown_minutes: "{count} 分钟",
+    governor_runway_guard: "续航闸门",
+    governor_runway_clear: "清晰",
+    governor_runway_cached: "仅缓存",
+    governor_projected_reads: "预计读取",
+    governor_daily_burn: "日烧钱",
+    governor_month_end: "月底投影",
+    governor_runway_days: "续航",
     governor_runbook_ok: "缓存路由清晰。除非 cadence 闸门明确放行，否则保持实时 X 读取为零。",
     governor_runbook_warn: "暂停可选读取，改走已准备的网页目标，并等待成本边界恢复。",
     governor_runbook_danger: "封闭实时搜索/读取分区。冷却解除前，只使用缓存遥测和人工输出。",
@@ -7125,12 +7139,30 @@ function governorData() {
   return dashboardData.rateLimitGovernor || fallbackData.rateLimitGovernor || null;
 }
 
+function runwayGuardData(governor = governorData()) {
+  const incoming = governor?.runwayGuard || dashboardData.xApiRunwayGuard || fallbackData.xApiRunwayGuard;
+  if (incoming) return incoming;
+  const burn = budgetBurnData();
+  const active = burn?.monthEndSafe === false;
+  return {
+    active,
+    reasonCode: active ? "derived_runway_guard" : "derived_inside_runway",
+    projectedCostUsd: 0,
+    projectedDailyBurnUsd: burn?.projectedDailyBurnUsd ?? null,
+    monthEndProjectedSpendUsd: burn?.monthEndProjectedSpendUsd ?? null,
+    monthEndSafe: burn?.monthEndSafe ?? null,
+    runwayDays: burn?.runwayDays ?? null,
+  };
+}
+
 function governorCellLabel(cell) {
   const labels = {
     read: "governor_read_gate",
     publish: "governor_post_gate",
     rate_limit: "governor_429",
     backend: "governor_503",
+    runway: "governor_runway_guard",
+    month_end: "governor_month_end",
     safe_cap: "governor_safe_cap",
     safe_left: "governor_safe_left",
   };
@@ -7147,6 +7179,7 @@ function renderRateGovernor() {
   const control = controlPlaneData();
   const cadence = cadenceData();
   const cooldown = governor?.cooldown || api.cooldown || {};
+  const runwayGuard = runwayGuardData(governor);
   const active429 = metricNumber(governor?.partitions?.activeRateLimit429, number(triage.activeRateLimit429 ?? triage.rateLimit429));
   const active503 = metricNumber(governor?.partitions?.activeBackendFault5xx, number(triage.activeBackendFault5xx ?? triage.backendFault5xx));
   const cooldownActive = Boolean(cooldown.active);
@@ -7168,6 +7201,42 @@ function renderRateGovernor() {
     : severity === "warn"
       ? t("governor_runbook_warn")
       : t("governor_runbook_ok"));
+  const runwayActive = Boolean(runwayGuard?.active);
+  const runwayLabel = runwayGuard
+    ? runwayActive
+      ? t("governor_runway_cached")
+      : t("governor_runway_clear")
+    : "-";
+  const runwayDays = runwayGuard?.runwayDays == null
+    ? "∞"
+    : `${formatNumber(runwayGuard.runwayDays, runwayGuard.runwayDays > 30 ? 0 : 1)}d`;
+  const runwayCells = [
+    {
+      label: t("governor_runway_guard"),
+      value: runwayLabel,
+      tone: runwayActive ? "warn" : runwayGuard ? "ok" : "neutral",
+    },
+    {
+      label: t("governor_projected_reads"),
+      value: runwayGuard ? money(runwayGuard.projectedCostUsd || 0) : "-",
+      tone: runwayActive ? "warn" : "neutral",
+    },
+    {
+      label: t("governor_daily_burn"),
+      value: runwayGuard ? money(runwayGuard.projectedDailyBurnUsd || 0) : "-",
+      tone: runwayActive ? "warn" : "neutral",
+    },
+    {
+      label: t("governor_month_end"),
+      value: runwayGuard ? money(runwayGuard.monthEndProjectedSpendUsd || 0) : "-",
+      tone: runwayGuard?.monthEndSafe === false ? "warn" : runwayGuard ? "ok" : "neutral",
+    },
+    {
+      label: t("governor_runway_days"),
+      value: runwayGuard ? runwayDays : "-",
+      tone: runwayActive ? "warn" : "ok",
+    },
+  ];
   const boundaryRatio = metricNumber(governor?.reactorFillPct, safeCap > 0 ? clamp((safeLeft / safeCap) * 100, 0, 100) : 100);
   const derivedCells = [
     { label: t("governor_read_gate"), value: gateLabel(readGate), tone: severity === "danger" ? "danger" : "ok" },
@@ -7210,6 +7279,18 @@ function renderRateGovernor() {
           )
           .join("")}
       </div>
+    </div>
+    <div class="governor-runway-grid">
+      ${runwayCells
+        .map(
+          (cell) => `
+            <span class="${escapeHtml(cell.tone)}">
+              <em>${escapeHtml(cell.label)}</em>
+              <strong>${escapeHtml(cell.value)}</strong>
+            </span>
+          `,
+        )
+        .join("")}
     </div>
     <div class="governor-runbook">
       <span>${escapeHtml(t("governor_cooldown"))}: ${escapeHtml(cooldownLabel)}</span>
