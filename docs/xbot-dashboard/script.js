@@ -1341,6 +1341,15 @@ const translations = {
     autopilot_exploit: "Exploit",
     autopilot_explore: "Explore",
     autopilot_hold: "Hold",
+    directive_deck_eyebrow: "Autopilot Directive Deck",
+    directive_deck_title: "Next operator kernel",
+    directive_deck_zero_reads: "0 X read ops",
+    directive_deck_active: "Active directive",
+    directive_deck_score: "deck score",
+    directive_deck_copy: "Copy deck",
+    directive_deck_priority: "P{priority}",
+    directive_deck_x_reads: "X reads {count}",
+    directive_deck_empty: "No autopilot directive deck available.",
     angle_eyebrow: "Angle Scheduler",
     angle_title: "Next prompt routing slots",
     angle_mode: "Mode",
@@ -2017,6 +2026,15 @@ const translations = {
     autopilot_exploit: "利用",
     autopilot_explore: "探索",
     autopilot_hold: "暂停",
+    directive_deck_eyebrow: "自动驾驶指令组",
+    directive_deck_title: "下一轮操作内核",
+    directive_deck_zero_reads: "0 次 X 读取",
+    directive_deck_active: "当前指令",
+    directive_deck_score: "指令组评分",
+    directive_deck_copy: "复制指令组",
+    directive_deck_priority: "P{priority}",
+    directive_deck_x_reads: "X 读取 {count}",
+    directive_deck_empty: "暂无自动驾驶指令组。",
     angle_eyebrow: "角度调度器",
     angle_title: "下一轮 Prompt 路由槽",
     angle_mode: "模式",
@@ -4898,6 +4916,195 @@ function renderLearningAutopilot() {
   `;
 }
 
+function autopilotDirectiveDeckData() {
+  const incoming = dashboardData.autopilotDirectiveDeck || fallbackData.autopilotDirectiveDeck;
+  if (incoming?.cards?.length) return incoming;
+  const autopilot = learningAutopilotData();
+  const scheduler = angleSchedulerData();
+  const ledger = learningWritebackData();
+  const matrix = temporalAngleMatrixData();
+  const mission = missionControlData();
+  const optimizer = budgetAllocationData();
+  const governor = governorData();
+  const active = ledger.activeRule || (scheduler.nextAngles || [])[0] || autopilot.primaryFormat || {};
+  const temporal = (matrix.slots || [])[0] || {};
+  const holdIds = [
+    ...new Set([
+      ...(ledger.holdFormatIds || []),
+      ...(scheduler.scoringBias?.holdFormatIds || []),
+      ...(autopilot.holdFormats || []).map((row) => row.id).filter(Boolean),
+    ]),
+  ];
+  const lanes = Array.isArray(optimizer.lanes) ? optimizer.lanes : [];
+  const preferredLane = lanes.find((lane) => lane.id === optimizer.recommendedLaneId) || lanes[0] || {};
+  const route = mission.topRoute || preferredLane || {};
+  const readGate = mission.gates?.read || governor?.gates?.read || "cached_only";
+  const publishGate = mission.gates?.publish || governor?.gates?.publish || "review";
+  const safeLeft = number(optimizer.safeRemainingUsd, number(governor?.budget?.safeRemainingUsd));
+  const ruleId = active.formatId || active.id || "decision_rule";
+  const ruleLabel = active.label || formatTemplate(ruleId);
+  const temporalLabel = temporal.windowLabel || temporal.label || "next learned window";
+  const temporalAngle = temporal.formatId || temporal.angle || ruleId;
+  const routeLabel = route.label || route.routeLabel || preferredLane.label || "manual route lane";
+  const ruleScore = number(active.weight, number(active.score, number(active.avgScore)));
+  const temporalScore = number(temporal.score, number(temporal.loadScore, ruleScore));
+  const budgetScore = readGate === "closed" || readGate === "sealed" ? 0 : clamp((safeLeft / Math.max(0.01, 5)) * 100, 0, 100);
+  const deckScore = clamp(
+    number(mission.missionScore) * 0.34 +
+      ruleScore * 0.24 +
+      temporalScore * 0.18 +
+      budgetScore * 0.16 +
+      (holdIds.length ? 2 : 8),
+    0,
+    100,
+  );
+  const severity = readGate === "closed" || readGate === "sealed" || safeLeft <= 0
+    ? "danger"
+    : deckScore >= 70
+      ? "ok"
+      : "warn";
+  const cards = [
+    {
+      id: "prompt_rule",
+      label: "Prompt Rule",
+      command: `lead:${ruleId} action:${active.action || "test"}`,
+      detail: active.reason || ledger.nextWriteback || "Use the strongest cached learning rule before exploration.",
+      status: active.action === "hold" ? "danger" : active.action === "exploit" ? "ok" : "warn",
+      source: "learning.writeback",
+      priority: 1,
+      score: ruleScore,
+      xReadOps: 0,
+    },
+    {
+      id: "temporal_slot",
+      label: "UTC Fire-Control",
+      command: `window:${temporalLabel} utc angle:${formatTemplate(temporalAngle)}`,
+      detail: temporal.reason || matrix.nextAction || "Route through the learned hourly load window.",
+      status: temporal.status === "hot" ? "ok" : temporal.status || "warn",
+      source: "temporal.matrix",
+      priority: 2,
+      score: temporalScore,
+      xReadOps: 0,
+    },
+    {
+      id: "route_bias",
+      label: "Route Bias",
+      command: `route:${routeLabel} manual_only`,
+      detail: mission.nextAction || preferredLane.nextAction || "Manual route ops only; no automatic engagement.",
+      status: route.status || preferredLane.status || "ok",
+      source: "mission.control",
+      priority: 3,
+      score: number(route.score, number(preferredLane.efficiencyScore)),
+      xReadOps: 0,
+    },
+    {
+      id: "budget_gate",
+      label: "Budget Gate",
+      command: `read_gate:${readGate} publish_gate:${publishGate}`,
+      detail: `Safe left ${money(safeLeft)}; recommended lane ${allocationLaneLabel(preferredLane)}; normal backoff only.`,
+      status: readGate === "closed" || readGate === "sealed" || safeLeft <= 0 ? "danger" : safeLeft < 0.75 ? "warn" : "ok",
+      source: "cost.governor",
+      priority: 4,
+      score: budgetScore,
+      safeSlots: preferredLane.safeSlots ?? null,
+      xReadOps: 0,
+    },
+    {
+      id: "hold_gate",
+      label: "Hold Gate",
+      command: `suppress:${holdIds.length ? holdIds.join(",") : "none"}`,
+      detail: holdIds.length
+        ? `Keep ${holdIds.join(", ")} out of default generation unless fit is exceptional.`
+        : "No under-baseline format is blocked; keep exploration controlled.",
+      status: holdIds.length ? "warn" : "ok",
+      source: "learning.guardrail",
+      priority: 5,
+      score: holdIds.length,
+      xReadOps: 0,
+    },
+  ];
+  const directives = cards.map((card) => `[P${card.priority}] ${card.command} :: ${card.detail}`);
+  return {
+    generatedAt: ledger.generatedAt || scheduler.generatedAt || dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: severity === "danger" ? "derived_cached_containment_deck" : "derived_ignition_directive_deck",
+    source: "derived cached telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    severity,
+    confidence: ledger.confidence || scheduler.confidence || matrix.confidence || "low",
+    deckScore,
+    activeDirective: directives[0] || "-",
+    primaryRule: { id: ruleId, label: ruleLabel, action: active.action || "test" },
+    gates: { read: readGate, publish: publishGate, budget: cards[3].status, route: cards[2].status },
+    cards,
+    directives,
+    copyBlock: [
+      "CODEX AUTOPILOT DIRECTIVE DECK",
+      `score: ${formatNumber(deckScore, 1)}`,
+      "zero_extra_x_reads: true",
+      "",
+      ...directives.map((directive) => `- ${directive}`),
+      "",
+      "GUARDRAILS:",
+      "- Human-in-loop route ops only.",
+      "- No automatic replies, likes, follows, scraping, or rate-limit circumvention.",
+    ].join("\n"),
+  };
+}
+
+function renderAutopilotDirectiveDeck() {
+  const deck = autopilotDirectiveDeckData();
+  const container = $("#autopilot-directive-deck");
+  if (!container) return;
+  const cards = Array.isArray(deck.cards) ? deck.cards : [];
+  if (!cards.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("directive_deck_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(deck.deckScore), 0, 100);
+  const severity = mutationTone(deck.severity || (score >= 70 ? "ok" : "warn"));
+  const copyBlock = deck.copyBlock || (deck.directives || []).join("\n");
+  container.innerHTML = `
+    <div class="directive-deck-head">
+      <div>
+        <span>${escapeHtml(t("directive_deck_eyebrow"))}</span>
+        <strong>${escapeHtml(t("directive_deck_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("directive_deck_zero_reads"))}</em>
+    </div>
+    <div class="directive-deck-core ${escapeHtml(severity)}" style="--directive-score:${score.toFixed(1)}%">
+      <div>
+        <span>${escapeHtml(t("directive_deck_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i></i>
+      </div>
+      <article>
+        <span>${escapeHtml(t("directive_deck_active"))}</span>
+        <code>${escapeHtml(deck.activeDirective || "-")}</code>
+      </article>
+      <button type="button" data-copy="${encodeURIComponent(copyBlock)}">${escapeHtml(t("directive_deck_copy"))}</button>
+    </div>
+    <div class="directive-deck-cards">
+      ${cards.slice(0, 5).map((card) => `
+        <article class="${escapeHtml(mutationTone(card.status))}">
+          <header>
+            <span>${escapeHtml(t("directive_deck_priority", { priority: card.priority || "-" }))}</span>
+            <strong>${escapeHtml(card.label || card.id || "-")}</strong>
+            <em>${escapeHtml(t("directive_deck_x_reads", { count: formatNumber(card.xReadOps || 0) }))}</em>
+          </header>
+          <code>${escapeHtml(card.command || "-")}</code>
+          <p>${escapeHtml(card.detail || "-")}</p>
+          <footer>
+            <span>${escapeHtml(card.source || "-")}</span>
+            <strong>${escapeHtml(formatNumber(card.score, 1))}</strong>
+          </footer>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
 function angleSchedulerData() {
   return dashboardData.adaptiveAngleScheduler || fallbackData.adaptiveAngleScheduler || {};
 }
@@ -5981,6 +6188,7 @@ function renderLearning() {
     )
     .join("");
   renderLearningAutopilot();
+  renderAutopilotDirectiveDeck();
   renderAdaptiveAngleScheduler();
   renderLearningWriteback();
   renderHookPatternReactor();
