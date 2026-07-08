@@ -1212,6 +1212,22 @@ const translations = {
     dispatch_title: "Operator dispatch queue",
     dispatch_state: "{ready}/{total} missions armed",
     dispatch_primary: "Primary route",
+    flight_eyebrow: "Operator Flight Deck",
+    flight_title: "Zero-read execution chain",
+    flight_zero_reads: "0 X read ops",
+    flight_score: "command score",
+    flight_route: "route",
+    flight_target: "target",
+    flight_runway: "runway",
+    flight_saved: "compressed",
+    flight_copy: "Copy flight deck",
+    flight_open: "Open route",
+    flight_gates: "gates",
+    flight_phases: "phases",
+    flight_packets: "packets",
+    flight_mode_armed_manual_dispatch: "armed",
+    flight_mode_operator_review: "review",
+    flight_mode_route_queue_fault: "route fault",
     dispatch_sla: "SLA {minutes}m",
     dispatch_replies: "{count} route ops",
     dispatch_expected: "+{lift}% expected lift",
@@ -1921,6 +1937,22 @@ const translations = {
     dispatch_title: "操作员派发队列",
     dispatch_state: "{ready}/{total} 个任务就绪",
     dispatch_primary: "主路由",
+    flight_eyebrow: "操作员飞行甲板",
+    flight_title: "零读取执行链",
+    flight_zero_reads: "0 次 X 读取",
+    flight_score: "指挥评分",
+    flight_route: "路由",
+    flight_target: "目标",
+    flight_runway: "续航",
+    flight_saved: "压缩",
+    flight_copy: "复制飞行甲板",
+    flight_open: "打开路由",
+    flight_gates: "闸门",
+    flight_phases: "阶段",
+    flight_packets: "数据包",
+    flight_mode_armed_manual_dispatch: "已装载",
+    flight_mode_operator_review: "待复核",
+    flight_mode_route_queue_fault: "路由故障",
     dispatch_sla: "SLA {minutes} 分钟",
     dispatch_replies: "{count} 次路由操作",
     dispatch_expected: "预期提升 +{lift}%",
@@ -3249,6 +3281,114 @@ function routeAmplifierData(packet = operatorDispatchPacketData(), ops = distrib
       { id: "budget", label: "safe budget", value: money(api.remaining), status: api.remaining > 0 ? "ok" : "danger" },
     ],
     lanes,
+  };
+}
+
+function operatorFlightDeckData(ops = distributionOpsData(), dispatchPacket = operatorDispatchPacketData(ops), routeAmplifier = routeAmplifierData(dispatchPacket, ops)) {
+  const incoming = dashboardData.operatorFlightDeck || fallbackData.operatorFlightDeck;
+  if (incoming?.phases?.length || incoming?.gates?.length) return incoming;
+  const runway = growthRunwaySimulatorData();
+  const governor = governorData();
+  const learning = learningWritebackData();
+  const packets = Array.isArray(dispatchPacket?.packets) ? dispatchPacket.packets : [];
+  const lanes = Array.isArray(routeAmplifier?.lanes) ? routeAmplifier.lanes : [];
+  const firstReadyPacket = packets.find((packet) => packet?.ready && packet?.routeUrl && packet?.draftText) || packets.find((packet) => packet?.routeUrl || packet?.draftText) || packets[0] || null;
+  const topRouteLane = lanes.find((lane) => lane?.ready) || lanes[0] || null;
+  const routeLabel = firstReadyPacket?.routeLabel || topRouteLane?.label || ops?.primaryRoute?.label || "manual route queue";
+  const routeUrl = firstReadyPacket?.routeUrl || topRouteLane?.routeUrl || ops?.primaryRoute?.url || null;
+  const draftText = firstReadyPacket?.draftText || (ops?.missions || []).find((mission) => mission?.draftText)?.draftText || "";
+  const targetReplies = Math.max(1, number(dispatchPacket?.targetReplies, number(ops?.manualReplyTarget, 3)));
+  const readyPackets = number(dispatchPacket?.readyPackets, number(ops?.readyMissions));
+  const totalPackets = number(dispatchPacket?.totalPackets, number(ops?.missionCount, packets.length));
+  const readGate = governor?.gates?.read || "cached_only";
+  const publishGate = governor?.gates?.publish || "review";
+  const safeRemainingUsd = number(dispatchPacket?.safeRemainingUsd, apiBudget().remaining);
+  const routeReadyPct = totalPackets ? (readyPackets / totalPackets) * 100 : readyPackets ? 100 : 0;
+  const runwayLane = (runway?.lanes || []).find((lane) => lane?.id === runway?.recommendedLaneId) || (runway?.lanes || [])[0] || null;
+  const savedDays = number(runway?.savedDays);
+  const expectedLiftPct = number(runwayLane?.expectedLiftPct, number(runway?.projectedLiftPct, number(dispatchPacket?.expectedLiftPct)));
+  const ampScore = number(topRouteLane?.score, number(routeAmplifier?.topRouteScore));
+  const commandScore = clamp(
+    18 +
+      Math.min(24, routeReadyPct * 0.24) +
+      Math.min(20, ampScore * 0.2) +
+      Math.min(18, expectedLiftPct * 0.28) +
+      Math.min(12, savedDays * 0.08) +
+      Math.min(8, number(learning?.sampleCount) * 0.8) +
+      (safeRemainingUsd > 0 ? 8 : -18) +
+      (readGate === "closed" || readGate === "sealed" ? -10 : 6),
+    0,
+    100,
+  );
+  const severity = !routeUrl || !draftText || safeRemainingUsd <= 0 ? readyPackets ? "warn" : "danger" : commandScore >= 62 ? "ok" : "warn";
+  const commandMode = severity === "ok" ? "armed_manual_dispatch" : severity === "warn" ? "operator_review" : "route_queue_fault";
+  const primaryCommand = routeUrl && draftText
+    ? `Open ${routeLabel}, paste the paired output once, then continue until ${formatNumber(targetReplies)} useful route ops are complete.`
+    : "Repair the route URL/output pair before dispatching the manual loop.";
+  const copyBlock = [
+    "CODEX OPERATOR FLIGHT DECK",
+    `Generated: ${dashboardData.updatedAt || fallbackData.updatedAt}`,
+    `Mode: ${commandMode}`,
+    "Cost guard: 0 extra X search/read API ops",
+    `Route: ${routeLabel}`,
+    routeUrl ? `Open: ${routeUrl}` : null,
+    `Target: ${formatNumber(targetReplies)} useful route ops`,
+    "",
+    "Command:",
+    primaryCommand,
+    "",
+    "Output:",
+    draftText || "MISSING_OUTPUT",
+    "",
+    "Stop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+  ].filter(Boolean).join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "zero_read_operator_flight_deck",
+    commandMode,
+    source: "derived operator dispatch packet + route amplifier + runway simulator",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    severity,
+    commandScore,
+    primaryCommand,
+    targetReplies,
+    readyPackets,
+    totalPackets,
+    routeLabel,
+    routeUrl,
+    draftText,
+    copyBlock,
+    runway: {
+      recommendedLaneId: runway?.recommendedLaneId || null,
+      projectedDaysToMilestone: runway?.projectedDaysToMilestone ?? null,
+      savedDays,
+      projectedLiftPct: expectedLiftPct,
+    },
+    gates: [
+      { id: "read", label: "read gate", value: readGate, status: readGate === "closed" || readGate === "sealed" ? "danger" : "ok" },
+      { id: "publish", label: "publish gate", value: publishGate, status: publishGate === "open" ? "ok" : "warn" },
+      { id: "budget", label: "safe budget", value: money(safeRemainingUsd), status: safeRemainingUsd > 0 ? "ok" : "danger" },
+      { id: "writeback", label: "learning samples", value: formatNumber(learning?.sampleCount || 0), status: number(learning?.sampleCount) > 0 ? "ok" : "warn" },
+    ],
+    phases: [
+      { id: "arm", label: "ARM_ROUTE", status: routeUrl ? "ok" : "danger", detail: routeUrl ? routeLabel : "missing route URL" },
+      { id: "paste", label: "PASTE_OUTPUT", status: draftText ? "ok" : "danger", detail: draftText ? "paired output ready" : "missing output payload" },
+      { id: "stop", label: "STOP_AT_TARGET", status: "ok", detail: `${formatNumber(targetReplies)} useful route ops max` },
+      { id: "learn", label: "WRITEBACK", status: "ok", detail: "next maintenance run updates scoring" },
+    ],
+    packets: packets.slice(0, 3).map((packet, index) => ({
+      id: packet.id || `flight:${index + 1}`,
+      priority: packet.priority || index + 1,
+      routeLabel: packet.routeLabel || packet.label || `Route ${index + 1}`,
+      routeUrl: packet.routeUrl || null,
+      ready: Boolean(packet.ready && packet.routeUrl && packet.draftText),
+      confidence: packet.confidence || "low",
+      operatorSlaMinutes: number(packet.operatorSlaMinutes, 10 + index * 10),
+      targetReplies: number(packet.targetReplies, 1),
+      expectedLiftPct: number(packet.expectedLiftPct),
+    })),
   };
 }
 
@@ -7446,6 +7586,94 @@ function renderProof() {
     .join("");
 }
 
+function flightModeLabel(mode) {
+  const key = `flight_mode_${String(mode || "").replace(/[^a-z0-9_]/gi, "_")}`;
+  const translated = t(key);
+  return translated === key ? String(mode || "-").replace(/_/g, " ") : translated;
+}
+
+function flightDeckHtml(deck) {
+  if (!deck) return "";
+  const severity = ["ok", "warn", "danger"].includes(deck.severity) ? deck.severity : "warn";
+  const score = clamp(number(deck.commandScore), 0, 100);
+  const gates = Array.isArray(deck.gates) ? deck.gates : [];
+  const phases = Array.isArray(deck.phases) ? deck.phases : [];
+  const packets = Array.isArray(deck.packets) ? deck.packets : [];
+  const runwayDays = deck.runway?.projectedDaysToMilestone == null
+    ? "samples"
+    : `${formatNumber(deck.runway.projectedDaysToMilestone, deck.runway.projectedDaysToMilestone > 30 ? 0 : 1)}d`;
+  const saved = number(deck.runway?.savedDays);
+  const savedDays = `${formatNumber(saved, saved > 30 ? 0 : 1)}d`;
+  return `
+    <article class="operator-flight-deck ${escapeHtml(severity)}">
+      <div class="flight-deck-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("flight_eyebrow"))}</span>
+          <strong>${escapeHtml(t("flight_title"))}</strong>
+        </div>
+        <em>${escapeHtml(flightModeLabel(deck.commandMode))} · ${escapeHtml(t("flight_zero_reads"))}</em>
+      </div>
+      <div class="flight-deck-core">
+        <div class="flight-score" style="--flight-score:${score}%">
+          <span></span>
+          <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+          <em>${escapeHtml(t("flight_score"))}</em>
+        </div>
+        <div class="flight-command">
+          <span>${escapeHtml(t("dispatch_manifest_next"))}</span>
+          <strong>${escapeHtml(sreText(deck.primaryCommand || "-"))}</strong>
+          <div class="flight-actions">
+            ${deck.routeUrl ? `<a class="button button-primary" href="${escapeHtml(deck.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("flight_open"))}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(deck.copyBlock || ""))}">${escapeHtml(t("flight_copy"))}</button>
+          </div>
+        </div>
+        <div class="flight-kpis">
+          <div><span>${escapeHtml(t("flight_route"))}</span><strong>${escapeHtml(deck.routeLabel || "-")}</strong></div>
+          <div><span>${escapeHtml(t("flight_target"))}</span><strong>${escapeHtml(formatNumber(deck.targetReplies || 0))}</strong></div>
+          <div><span>${escapeHtml(t("flight_runway"))}</span><strong>${escapeHtml(runwayDays)}</strong></div>
+          <div><span>${escapeHtml(t("flight_saved"))}</span><strong>${escapeHtml(savedDays)}</strong></div>
+        </div>
+      </div>
+      <div class="flight-matrix">
+        <section>
+          <div class="flight-section-title"><span>${escapeHtml(t("flight_gates"))}</span><strong>${escapeHtml(formatNumber(deck.estimatedXReadOps || 0))} X</strong></div>
+          <div class="flight-gates">
+            ${gates.slice(0, 4).map((gate) => `
+              <div class="${escapeHtml(gate.status || "ok")}">
+                <span>${escapeHtml(sreLabel(gate.label || gate.id || "-"))}</span>
+                <strong>${escapeHtml(sreText(gate.value || "-"))}</strong>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+        <section>
+          <div class="flight-section-title"><span>${escapeHtml(t("flight_phases"))}</span><strong>${escapeHtml(deck.source || "cached")}</strong></div>
+          <div class="flight-phases">
+            ${phases.slice(0, 5).map((phase) => `
+              <div class="${escapeHtml(phase.status || "ok")}">
+                <span>${escapeHtml(phase.label || phase.id || "-")}</span>
+                <strong>${escapeHtml(sreText(phase.detail || "-"))}</strong>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+        <section>
+          <div class="flight-section-title"><span>${escapeHtml(t("flight_packets"))}</span><strong>${escapeHtml(`${formatNumber(deck.readyPackets || 0)}/${formatNumber(deck.totalPackets || 0)}`)}</strong></div>
+          <div class="flight-packets">
+            ${packets.slice(0, 3).map((packet) => `
+              <div class="${escapeHtml(packet.ready ? "ok" : "warn")}">
+                <span>${String(packet.priority || 1).padStart(2, "0")}</span>
+                <strong>${escapeHtml(packet.routeLabel || "-")}</strong>
+                <em>${escapeHtml(packet.confidence || "low")} · ${escapeHtml(formatNumber(packet.operatorSlaMinutes || 0))}m · +${escapeHtml(formatNumber(packet.expectedLiftPct || 0, 1))}%</em>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+      </div>
+    </article>
+  `;
+}
+
 function renderActions() {
   const ops = distributionOpsData();
   const missions = Array.isArray(ops.missions) ? ops.missions : [];
@@ -7542,6 +7770,7 @@ function renderActions() {
     .join("");
   const dispatchPacket = operatorDispatchPacketData(ops);
   const routeAmplifier = routeAmplifierData(dispatchPacket, ops);
+  const flightDeck = operatorFlightDeckData(ops, dispatchPacket, routeAmplifier);
   const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
   const manifestPackets = (dispatchPacket.packets || [])
     .slice(0, 5)
@@ -7637,6 +7866,7 @@ function renderActions() {
     .join("");
 
   $("#action-board").innerHTML = `
+    ${flightDeckHtml(flightDeck)}
     <div class="dispatch-strip">
       <div>
         <span class="eyebrow">${escapeHtml(t("dispatch_eyebrow"))}</span>

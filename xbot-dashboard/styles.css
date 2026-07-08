@@ -3457,6 +3457,333 @@ h3 {
   margin-top: 16px;
 }
 
+.operator-flight-deck {
+  position: relative;
+  display: grid;
+  gap: 11px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00f0ff 38%, var(--line));
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 3% 0, color-mix(in srgb, #00f0ff 18%, transparent), transparent 34%),
+    radial-gradient(circle at 90% 20%, color-mix(in srgb, #ff007a 10%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 90%, transparent), transparent 68%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #00f0ff 9%, transparent),
+    0 0 28px color-mix(in srgb, #00f0ff 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.operator-flight-deck::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, #00f0ff 8%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, #00ff66 5%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.14;
+}
+
+.operator-flight-deck.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line));
+}
+
+.operator-flight-deck.danger {
+  border-color: color-mix(in srgb, var(--danger) 52%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--danger) 12%, transparent),
+    0 0 28px color-mix(in srgb, var(--danger) 16%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.flight-deck-head,
+.flight-deck-core,
+.flight-section-title,
+.flight-actions,
+.flight-packets div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.flight-deck-head strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.05;
+}
+
+.flight-deck-head em,
+.flight-section-title strong {
+  color: var(--ok);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.operator-flight-deck.warn .flight-deck-head em {
+  color: var(--warn);
+}
+
+.operator-flight-deck.danger .flight-deck-head em {
+  color: var(--danger);
+}
+
+.flight-deck-core {
+  display: grid;
+  grid-template-columns: 118px minmax(260px, 1fr) minmax(300px, 0.9fr);
+  align-items: stretch;
+}
+
+.flight-score,
+.flight-command,
+.flight-kpis div,
+.flight-matrix section,
+.flight-gates div,
+.flight-phases div,
+.flight-packets div {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent),
+    0 0 14px color-mix(in srgb, #00f0ff 6%, transparent);
+}
+
+.flight-score {
+  position: relative;
+  display: grid;
+  min-height: 112px;
+  place-items: center;
+  font-family: var(--mono);
+}
+
+.flight-score span {
+  position: absolute;
+  inset: 14px;
+  border-radius: 999px;
+  background:
+    conic-gradient(#00f0ff 0 var(--flight-score, 0%), color-mix(in srgb, var(--line) 72%, transparent) var(--flight-score, 0%) 100%);
+  filter: drop-shadow(0 0 14px color-mix(in srgb, #00f0ff 32%, transparent));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 7px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 7px));
+}
+
+.flight-score strong {
+  position: relative;
+  z-index: 1;
+  color: var(--ink);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.flight-score em {
+  position: absolute;
+  bottom: 17px;
+  color: var(--muted);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.flight-command {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 11px;
+}
+
+.flight-command span,
+.flight-kpis span,
+.flight-section-title span,
+.flight-gates span,
+.flight-phases span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.flight-command strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.28;
+}
+
+.flight-actions {
+  justify-content: flex-start;
+}
+
+.flight-actions .button {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.flight-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.flight-kpis div {
+  padding: 9px;
+}
+
+.flight-kpis strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-matrix {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(300px, 1.1fr) minmax(260px, 0.82fr);
+  gap: 9px;
+}
+
+.flight-matrix section {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 9px;
+}
+
+.flight-gates,
+.flight-phases,
+.flight-packets {
+  display: grid;
+  gap: 6px;
+}
+
+.flight-gates div,
+.flight-phases div {
+  padding: 8px;
+}
+
+.flight-gates strong,
+.flight-phases strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-gates .ok strong,
+.flight-phases .ok strong,
+.flight-packets .ok strong {
+  color: var(--ok);
+}
+
+.flight-gates .warn strong,
+.flight-phases .warn strong,
+.flight-packets .warn strong {
+  color: var(--warn);
+}
+
+.flight-gates .danger strong,
+.flight-phases .danger strong,
+.flight-packets .danger strong {
+  color: var(--danger);
+}
+
+.flight-packets div {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) minmax(96px, 0.65fr);
+  padding: 8px;
+}
+
+.flight-packets div > span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.flight-packets strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flight-packets em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .flight-deck-core,
+  .flight-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .flight-score {
+    min-height: 96px;
+  }
+}
+
+@media (max-width: 680px) {
+  .flight-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .flight-packets div {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+
+  .flight-packets em {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
 .dispatch-strip {
   display: grid;
   grid-template-columns: minmax(220px, 1.3fr) repeat(4, minmax(120px, 0.7fr));
@@ -16075,17 +16402,22 @@ body:not(.demo-mode) .demo-strip {
     inset 1px 0 0 rgba(255, 255, 255, 0.04) !important;
 }
 
-/* Light theme rail lock: keep navigation visually tied to the ops console, not the pale canvas. */
-:root[data-theme="light"] body .side-rail {
+/* Sidebar rack lock: the left rail stays readable in both light and dark UI. */
+:root[data-theme="light"] body .side-rail,
+:root[data-theme="dark"] body .side-rail,
+body .side-rail {
   --rail-lock-bg: #070a10;
   --rail-lock-mid: #0b111b;
-  --rail-lock-card: rgba(13, 20, 31, 0.98);
-  --rail-lock-card-soft: rgba(17, 26, 39, 0.94);
-  --rail-lock-border: rgba(145, 162, 186, 0.3);
+  --rail-lock-top: #121c2b;
+  --rail-lock-card: rgba(14, 21, 32, 0.96);
+  --rail-lock-card-hot: rgba(38, 28, 16, 0.98);
+  --rail-lock-border: rgba(140, 158, 181, 0.28);
+  --rail-lock-border-hot: rgba(255, 159, 28, 0.64);
   --rail-lock-text: #f5f8ff;
   --rail-lock-body: #d6dfec;
   --rail-lock-muted: #98a8bd;
   --rail-lock-accent: #ff9f1c;
+  --rail-lock-yellow: #ffd166;
   --rail-lock-green: #74d66b;
   color-scheme: dark;
   color: var(--rail-lock-body) !important;
@@ -16096,21 +16428,45 @@ body:not(.demo-mode) .demo-strip {
     radial-gradient(circle at 0% 72%, rgba(116, 214, 107, 0.16), transparent 34%),
     linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 46%),
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 42px),
-    linear-gradient(180deg, #121c2b 0%, var(--rail-lock-mid) 44%, var(--rail-lock-bg) 100%) !important;
+    linear-gradient(180deg, var(--rail-lock-top) 0%, var(--rail-lock-mid) 44%, var(--rail-lock-bg) 100%) !important;
   box-shadow:
     20px 0 42px rgba(7, 10, 16, 0.34),
     inset -1px 0 0 rgba(255, 159, 28, 0.18),
     inset 1px 0 0 rgba(255, 255, 255, 0.055) !important;
 }
 
+:root[data-theme="light"] body .side-rail::after,
+:root[data-theme="dark"] body .side-rail::after,
+body .side-rail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(255, 159, 28, 0.54), transparent);
+  opacity: 0.64;
+}
+
 :root[data-theme="light"] body .side-rail .brand,
 :root[data-theme="light"] body .side-rail .env-card,
 :root[data-theme="light"] body .side-rail .rack-mini div,
 :root[data-theme="light"] body .side-rail .rail-nav a,
-:root[data-theme="light"] body .side-rail .rail-budget {
+:root[data-theme="light"] body .side-rail .rail-budget,
+:root[data-theme="dark"] body .side-rail .brand,
+:root[data-theme="dark"] body .side-rail .env-card,
+:root[data-theme="dark"] body .side-rail .rack-mini div,
+:root[data-theme="dark"] body .side-rail .rail-nav a,
+:root[data-theme="dark"] body .side-rail .rail-budget,
+body .side-rail .brand,
+body .side-rail .env-card,
+body .side-rail .rack-mini div,
+body .side-rail .rail-nav a,
+body .side-rail .rail-budget {
   color: var(--rail-lock-body) !important;
   border-color: var(--rail-lock-border) !important;
-  background-color: var(--rail-lock-card-soft) !important;
+  background-color: var(--rail-lock-card) !important;
   background-image:
     linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.018)),
     linear-gradient(135deg, rgba(255, 159, 28, 0.07), transparent 58%) !important;
@@ -16124,7 +16480,19 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] body .side-rail .rack-mini strong,
 :root[data-theme="light"] body .side-rail .rail-nav a,
 :root[data-theme="light"] body .side-rail .rail-nav a::after,
-:root[data-theme="light"] body .side-rail .rail-budget strong {
+:root[data-theme="light"] body .side-rail .rail-budget strong,
+:root[data-theme="dark"] body .side-rail .brand strong,
+:root[data-theme="dark"] body .side-rail .env-line strong,
+:root[data-theme="dark"] body .side-rail .rack-mini strong,
+:root[data-theme="dark"] body .side-rail .rail-nav a,
+:root[data-theme="dark"] body .side-rail .rail-nav a::after,
+:root[data-theme="dark"] body .side-rail .rail-budget strong,
+body .side-rail .brand strong,
+body .side-rail .env-line strong,
+body .side-rail .rack-mini strong,
+body .side-rail .rail-nav a,
+body .side-rail .rail-nav a::after,
+body .side-rail .rail-budget strong {
   color: var(--rail-lock-text) !important;
   text-shadow: 0 1px 16px rgba(0, 0, 0, 0.4) !important;
 }
@@ -16133,11 +16501,23 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] body .side-rail .env-card > span,
 :root[data-theme="light"] body .side-rail .rack-mini em,
 :root[data-theme="light"] body .side-rail .rail-budget span,
-:root[data-theme="light"] body .side-rail .rail-budget small {
+:root[data-theme="light"] body .side-rail .rail-budget small,
+:root[data-theme="dark"] body .side-rail .brand small,
+:root[data-theme="dark"] body .side-rail .env-card > span,
+:root[data-theme="dark"] body .side-rail .rack-mini em,
+:root[data-theme="dark"] body .side-rail .rail-budget span,
+:root[data-theme="dark"] body .side-rail .rail-budget small,
+body .side-rail .brand small,
+body .side-rail .env-card > span,
+body .side-rail .rack-mini em,
+body .side-rail .rail-budget span,
+body .side-rail .rail-budget small {
   color: var(--rail-lock-muted) !important;
 }
 
-:root[data-theme="light"] body .side-rail .brand-mark {
+:root[data-theme="light"] body .side-rail .brand-mark,
+:root[data-theme="dark"] body .side-rail .brand-mark,
+body .side-rail .brand-mark {
   color: #09111d !important;
   background: linear-gradient(135deg, #ffe08a 0%, var(--rail-lock-accent) 54%, var(--rail-lock-green) 100%) !important;
   box-shadow:
@@ -16145,34 +16525,110 @@ body:not(.demo-mode) .demo-strip {
     0 0 0 1px rgba(255, 255, 255, 0.42) inset !important;
 }
 
-:root[data-theme="light"] body .side-rail .rail-nav a {
+:root[data-theme="light"] body .side-rail .rail-nav a,
+:root[data-theme="dark"] body .side-rail .rail-nav a,
+body .side-rail .rail-nav a {
+  position: relative;
+  border: 1px solid transparent !important;
   background-color: transparent !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-nav a::before,
+:root[data-theme="dark"] body .side-rail .rail-nav a::before,
+body .side-rail .rail-nav a::before {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 999px;
+  margin-right: 10px;
+  background: rgba(152, 168, 189, 0.76) !important;
+  box-shadow: 0 0 0 4px rgba(152, 168, 189, 0.08) !important;
 }
 
 :root[data-theme="light"] body .side-rail .rail-nav a:hover,
 :root[data-theme="light"] body .side-rail .rail-nav a:focus-visible,
-:root[data-theme="light"] body .side-rail .rail-nav a.active {
+:root[data-theme="light"] body .side-rail .rail-nav a.active,
+:root[data-theme="dark"] body .side-rail .rail-nav a:hover,
+:root[data-theme="dark"] body .side-rail .rail-nav a:focus-visible,
+:root[data-theme="dark"] body .side-rail .rail-nav a.active,
+body .side-rail .rail-nav a:hover,
+body .side-rail .rail-nav a:focus-visible,
+body .side-rail .rail-nav a.active {
   color: #fff7e6 !important;
-  border-color: rgba(255, 159, 28, 0.74) !important;
+  border-color: var(--rail-lock-border-hot) !important;
   background:
     radial-gradient(circle at 16% 50%, rgba(255, 159, 28, 0.3), transparent 45%),
     linear-gradient(135deg, rgba(255, 159, 28, 0.24), rgba(116, 214, 107, 0.07)),
     rgba(255, 255, 255, 0.055) !important;
 }
 
+:root[data-theme="light"] body .side-rail .rail-nav a:hover::before,
+:root[data-theme="light"] body .side-rail .rail-nav a:focus-visible::before,
+:root[data-theme="light"] body .side-rail .rail-nav a.active::before,
+:root[data-theme="dark"] body .side-rail .rail-nav a:hover::before,
+:root[data-theme="dark"] body .side-rail .rail-nav a:focus-visible::before,
+:root[data-theme="dark"] body .side-rail .rail-nav a.active::before,
+body .side-rail .rail-nav a:hover::before,
+body .side-rail .rail-nav a:focus-visible::before,
+body .side-rail .rail-nav a.active::before {
+  background: var(--rail-lock-accent) !important;
+  box-shadow: 0 0 0 4px rgba(255, 159, 28, 0.18), 0 0 18px rgba(255, 159, 28, 0.32) !important;
+}
+
 :root[data-theme="light"] body .side-rail .env-line .status-dot,
-:root[data-theme="light"] body .side-rail .rack-mini span {
+:root[data-theme="light"] body .side-rail .rack-mini span,
+:root[data-theme="dark"] body .side-rail .env-line .status-dot,
+:root[data-theme="dark"] body .side-rail .rack-mini span,
+body .side-rail .env-line .status-dot,
+body .side-rail .rack-mini span {
   background: var(--rail-lock-green) !important;
   box-shadow:
     0 0 0 4px rgba(116, 214, 107, 0.16),
     0 0 18px rgba(116, 214, 107, 0.36) !important;
 }
 
-:root[data-theme="light"] body .side-rail .rail-budget {
+:root[data-theme="light"] body .side-rail .rail-budget,
+:root[data-theme="dark"] body .side-rail .rail-budget,
+body .side-rail .rail-budget {
   border-color: rgba(255, 209, 102, 0.66) !important;
-  background-color: rgba(39, 29, 16, 0.98) !important;
+  background-color: var(--rail-lock-card-hot) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.2), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.12), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)) !important;
 }
 
-:root[data-theme="light"] body .side-rail .rail-budget strong {
-  color: #ffd166 !important;
+:root[data-theme="light"] body .side-rail .rail-budget strong,
+:root[data-theme="dark"] body .side-rail .rail-budget strong,
+body .side-rail .rail-budget strong {
+  color: var(--rail-lock-yellow) !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-budget .meter,
+:root[data-theme="dark"] body .side-rail .rail-budget .meter,
+body .side-rail .rail-budget .meter {
+  background: rgba(152, 168, 189, 0.24) !important;
+}
+
+:root[data-theme="light"] body .side-rail .rail-budget .meter div,
+:root[data-theme="dark"] body .side-rail .rail-budget .meter div,
+body .side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--rail-lock-yellow), var(--rail-lock-accent)) !important;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.26) !important;
+}
+
+@media (max-width: 860px) {
+  :root[data-theme="light"] body .side-rail::after,
+  :root[data-theme="dark"] body .side-rail::after,
+  body .side-rail::after {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.54), transparent);
+  }
 }
