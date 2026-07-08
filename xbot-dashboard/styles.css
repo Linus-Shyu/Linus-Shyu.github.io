@@ -19075,3 +19075,80 @@ body > .ops-shell > aside.side-rail .rail-budget .meter div {
     background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.62), transparent) !important;
   }
 }
+
+/* Rail readability lock: light mode keeps the server rail on the same dark surface as the ops canvas. */
+html[data-theme="light"] body > .ops-shell > aside.side-rail,
+html[data-theme="light"] body.demo-mode > .ops-shell > aside.side-rail {
+  --rail-ui-bg: #080b12 !important;
+  --rail-ui-top: #141b28 !important;
+  --rail-ui-mid: #0d131d !important;
+  --rail-ui-panel: rgba(18, 25, 36, 0.98) !important;
+  --rail-ui-panel-strong: rgba(43, 32, 18, 0.98) !important;
+  --rail-ui-border: rgba(151, 166, 190, 0.3) !important;
+  --rail-ui-border-hot: rgba(255, 159, 28, 0.78) !important;
+  --rail-ui-text: #f8fbff !important;
+  --rail-ui-body: #dbe6f4 !important;
+  --rail-ui-muted: #a7b4c8 !important;
+  --rail-ui-accent: #ff9f1c !important;
+  --rail-ui-yellow: #ffd166 !important;
+  --rail-ui-green: #75d46b !important;
+  color-scheme: dark !important;
+  color: var(--rail-ui-body) !important;
+  border-color: rgba(151, 166, 190, 0.14) !important;
+  background-color: var(--rail-ui-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(255, 159, 28, 0.28), transparent 36%),
+    radial-gradient(circle at -12% 74%, rgba(117, 212, 107, 0.14), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 48%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.044) 0 1px, transparent 1px 40px),
+    linear-gradient(180deg, var(--rail-ui-top) 0%, var(--rail-ui-mid) 46%, var(--rail-ui-bg) 100%) !important;
+  box-shadow:
+    24px 0 48px rgba(2, 6, 12, 0.42),
+    inset -1px 0 0 rgba(255, 159, 28, 0.24),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  color: var(--rail-ui-body) !important;
+  border-color: var(--rail-ui-border) !important;
+  background-color: var(--rail-ui-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.07), transparent 62%) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-line strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--rail-ui-text) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand small,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card > span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget small {
+  color: var(--rail-ui-muted) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--rail-ui-border-hot) !important;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 159, 28, 0.36), transparent 46%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.28), rgba(117, 212, 107, 0.08)),
+    rgba(255, 255, 255, 0.07) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget {
+  background-color: var(--rail-ui-panel-strong) !important;
+}
