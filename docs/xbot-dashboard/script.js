@@ -1053,6 +1053,29 @@ const translations = {
     budget_burn_zero_reads: "0 extra X reads",
     budget_burn_safe: "safe",
     budget_burn_over: "over safe cap",
+    budget_alloc_eyebrow: "Allocation Optimizer",
+    budget_alloc_title: "Budget-to-traffic router",
+    budget_alloc_zero_reads: "0 X read ops",
+    budget_alloc_recommended: "recommended",
+    budget_alloc_safe_left: "safe left",
+    budget_alloc_runway: "runway",
+    budget_alloc_lanes: "allocation lanes",
+    budget_alloc_cost: "cost",
+    budget_alloc_slots: "slots",
+    budget_alloc_lift: "lift",
+    budget_alloc_efficiency: "efficiency",
+    budget_alloc_gate: "gate",
+    budget_alloc_runbook: "allocator runbook",
+    budget_alloc_manual: "manual route burst",
+    budget_alloc_text: "text post experiment",
+    budget_alloc_media: "media post surge",
+    budget_alloc_metrics: "metrics refresh",
+    budget_alloc_live: "live X search",
+    budget_alloc_open: "open",
+    budget_alloc_guarded: "guarded",
+    budget_alloc_closed: "closed",
+    budget_alloc_sealed: "sealed",
+    budget_alloc_cached_only: "cached only",
     mission_eyebrow: "NOC Console",
     mission_title: "Live server-matrix growth operations.",
     mission_copy: "Monitor feed ingress, model inference, route queues, feedback loops, and API cost boundaries from one command surface.",
@@ -1628,6 +1651,29 @@ const translations = {
     budget_burn_zero_reads: "0 次额外 X 读取",
     budget_burn_safe: "安全",
     budget_burn_over: "超过安全上限",
+    budget_alloc_eyebrow: "分配优化器",
+    budget_alloc_title: "预算到流量路由器",
+    budget_alloc_zero_reads: "0 次 X 读取操作",
+    budget_alloc_recommended: "推荐",
+    budget_alloc_safe_left: "安全剩余",
+    budget_alloc_runway: "续航",
+    budget_alloc_lanes: "分配通道",
+    budget_alloc_cost: "成本",
+    budget_alloc_slots: "槽位",
+    budget_alloc_lift: "提升",
+    budget_alloc_efficiency: "效率",
+    budget_alloc_gate: "闸门",
+    budget_alloc_runbook: "分配手册",
+    budget_alloc_manual: "人工路由爆发",
+    budget_alloc_text: "文本发帖实验",
+    budget_alloc_media: "媒体发帖加速",
+    budget_alloc_metrics: "指标刷新",
+    budget_alloc_live: "实时 X 搜索",
+    budget_alloc_open: "开放",
+    budget_alloc_guarded: "受控",
+    budget_alloc_closed: "关闭",
+    budget_alloc_sealed: "封闭",
+    budget_alloc_cached_only: "仅缓存",
     mission_eyebrow: "NOC 控制台",
     mission_title: "实时服务器矩阵增长运维。",
     mission_copy: "在一个指挥界面里监控 feed 入口、模型推理、路由队列、反馈闭环和 API 成本边界。",
@@ -6567,6 +6613,128 @@ function budgetBurnData() {
   };
 }
 
+function allocationLaneLabel(lane) {
+  const labels = {
+    manual_route_burst: t("budget_alloc_manual"),
+    text_post_experiment: t("budget_alloc_text"),
+    media_post_surge: t("budget_alloc_media"),
+    metrics_refresh: t("budget_alloc_metrics"),
+    live_x_search: t("budget_alloc_live"),
+  };
+  return labels[lane?.id] || lane?.label || lane?.id || "-";
+}
+
+function allocationGateLabel(gate) {
+  const normalized = String(gate || "").toLowerCase();
+  const key = `budget_alloc_${normalized}`;
+  return translations[currentLang]?.[key] || translations.en[key] || gateLabel(gate);
+}
+
+function derivedBudgetAllocationData() {
+  const burn = budgetBurnData();
+  const media = mediaRoiGateData();
+  const route = routeAmplifierData();
+  const kinetics = growthKineticsData();
+  const safeRemaining = number(burn.safeRemainingUsd);
+  const textCost = number((burn.partitions || []).find((item) => item.id === "text_publish")?.value?.replace?.("$", ""), 0.015);
+  const mediaCost = number((burn.partitions || []).find((item) => item.id === "media_publish")?.value?.replace?.("$", ""), 0.03);
+  const routeLift = Math.max(number(route.topRouteExpectedLiftPct), number(route.expectedLiftPct), number(kinetics.expectedLiftPct), 18);
+  const mediaLift = media.mediaLiftPct == null ? 0 : number(media.mediaLiftPct);
+  const textSlots = burn.safeTextSlots ?? Math.floor(safeRemaining / Math.max(0.001, textCost));
+  const mediaSlots = burn.safeMediaSlots ?? Math.floor(safeRemaining / Math.max(0.001, mediaCost));
+  const lanes = [
+    {
+      id: "manual_route_burst",
+      label: "manual route burst",
+      costUsd: 0,
+      safeSlots: route.readyLanes || route.laneCount || null,
+      expectedLiftPct: routeLift,
+      gate: "open",
+      status: "ok",
+      efficiencyScore: 96,
+      detail: "Prepared web routes spend no X search/read API.",
+      nextAction: route.nextAction || "Execute the top manual route packet first.",
+      xReadOps: 0,
+    },
+    {
+      id: "text_post_experiment",
+      label: "text post experiment",
+      costUsd: textCost,
+      safeSlots: textSlots,
+      expectedLiftPct: Math.max(number(kinetics.expectedLiftPct), routeLift * 0.55),
+      gate: textSlots > 0 ? "open" : "guarded",
+      status: textSlots > 0 ? "ok" : "warn",
+      efficiencyScore: textSlots > 0 ? 72 : 44,
+      detail: "Standalone publish uses cadence and safe budget gates.",
+      nextAction: "Publish only inside the learned cadence boundary.",
+      xReadOps: 0,
+    },
+    {
+      id: "media_post_surge",
+      label: "media post surge",
+      costUsd: mediaCost,
+      safeSlots: mediaSlots,
+      expectedLiftPct: mediaLift,
+      gate: media.attachImageAllowed ? "open" : "guarded",
+      status: media.attachImageAllowed ? "ok" : "warn",
+      efficiencyScore: media.attachImageAllowed ? 58 : 28,
+      detail: media.reason || "Media spend is held behind ROI evidence.",
+      nextAction: media.nextAction || "Keep images behind the media ROI firewall.",
+      xReadOps: 0,
+    },
+    {
+      id: "metrics_refresh",
+      label: "metrics refresh",
+      costUsd: 0.05,
+      safeSlots: Math.floor(safeRemaining / 0.05),
+      expectedLiftPct: 2,
+      gate: "closed",
+      status: "ok",
+      efficiencyScore: 18,
+      detail: "Hold reads unless telemetry is stale enough to affect learning.",
+      nextAction: "Use cached telemetry.",
+      xReadOps: 1,
+    },
+    {
+      id: "live_x_search",
+      label: "live X search",
+      costUsd: 0.05,
+      safeSlots: 0,
+      expectedLiftPct: 0,
+      gate: "sealed",
+      status: "danger",
+      efficiencyScore: 0,
+      detail: "Manual web links replace live X search/read API.",
+      nextAction: "Keep this partition sealed.",
+      xReadOps: 1,
+    },
+  ];
+  return {
+    mode: "derived_zero_read_budget_allocator",
+    zeroExtraXReads: true,
+    severity: "ok",
+    recommendedLaneId: "manual_route_burst",
+    recommendedAction: lanes[0].nextAction,
+    safeRemainingUsd: safeRemaining,
+    monthRunwayDays: burn.runwayDays,
+    lanes,
+    rankedLaneIds: lanes.map((lane) => lane.id),
+    cells: [
+      { id: "recommended", label: "top allocation", value: lanes[0].label, status: "ok" },
+      { id: "safe_left", label: "safe left", value: money(safeRemaining), status: safeRemaining > 0.5 ? "ok" : "warn" },
+      { id: "text_slots", label: "text slots", value: textSlots, status: textSlots > 0 ? "ok" : "danger" },
+      { id: "x_reads", label: "live X reads", value: "sealed", status: "danger" },
+    ],
+    runbook: "Allocate the next growth loop to manual route burst; keep live X reads sealed.",
+  };
+}
+
+function budgetAllocationData() {
+  const incoming = dashboardData.budgetAllocationOptimizer || fallbackData.budgetAllocationOptimizer;
+  if (incoming?.lanes?.length) return incoming;
+  return derivedBudgetAllocationData();
+}
+
 function budgetBurnStatusLabel(severity) {
   return t(`budget_burn_${["ok", "warn", "danger"].includes(severity) ? severity : "ok"}`);
 }
@@ -6663,6 +6831,88 @@ function renderBudgetBurnReactor() {
   `;
 }
 
+function renderBudgetAllocationOptimizer() {
+  const target = $("#budget-allocation-optimizer");
+  if (!target) return;
+  const optimizer = budgetAllocationData();
+  const lanes = Array.isArray(optimizer.lanes) ? optimizer.lanes : [];
+  if (!lanes.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("budget_alloc_runbook"))}: -</p>`;
+    return;
+  }
+  const rankedIds = Array.isArray(optimizer.rankedLaneIds) && optimizer.rankedLaneIds.length
+    ? optimizer.rankedLaneIds
+    : lanes.map((lane) => lane.id);
+  const ranked = rankedIds
+    .map((id) => lanes.find((lane) => lane.id === id))
+    .filter(Boolean);
+  const recommended = lanes.find((lane) => lane.id === optimizer.recommendedLaneId) || ranked[0] || lanes[0];
+  const maxEfficiency = Math.max(1, ...lanes.map((lane) => number(lane.efficiencyScore)));
+  const cells = Array.isArray(optimizer.cells) ? optimizer.cells : [];
+  const safeLeft = optimizer.safeRemainingUsd == null ? "∞" : money(optimizer.safeRemainingUsd);
+  const runway = optimizer.monthRunwayDays == null ? "∞" : `${formatNumber(optimizer.monthRunwayDays, optimizer.monthRunwayDays > 30 ? 0 : 1)}d`;
+
+  target.innerHTML = `
+    <div class="allocator-head ${escapeHtml(optimizer.severity || "ok")}">
+      <div>
+        <span>${escapeHtml(t("budget_alloc_eyebrow"))}</span>
+        <strong>${escapeHtml(t("budget_alloc_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("budget_alloc_zero_reads"))}</em>
+    </div>
+    <div class="allocator-core">
+      <div class="allocator-reco">
+        <span>${escapeHtml(t("budget_alloc_recommended"))}</span>
+        <strong>${escapeHtml(allocationLaneLabel(recommended))}</strong>
+        <p>${escapeHtml(optimizer.recommendedAction || recommended.nextAction || "-")}</p>
+      </div>
+      <div class="allocator-kpis">
+        <div><span>${escapeHtml(t("budget_alloc_safe_left"))}</span><strong>${escapeHtml(safeLeft)}</strong></div>
+        <div><span>${escapeHtml(t("budget_alloc_runway"))}</span><strong>${escapeHtml(runway)}</strong></div>
+      </div>
+    </div>
+    <div class="allocator-cells">
+      ${cells.map((cell) => `
+        <span class="${escapeHtml(cell.status || "ok")}">
+          <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+          <strong>${escapeHtml(gateLabel(cell.value))}</strong>
+        </span>
+      `).join("")}
+    </div>
+    <div class="allocator-lane-title">
+      <span>${escapeHtml(t("budget_alloc_lanes"))}</span>
+      <strong>${escapeHtml(t("budget_alloc_efficiency"))}</strong>
+    </div>
+    <div class="allocator-lanes">
+      ${ranked.map((lane, index) => {
+        const pct = clamp((number(lane.efficiencyScore) / maxEfficiency) * 100, 3, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "ok")}" style="--allocator-score:${pct.toFixed(1)}%">
+            <div class="allocator-rank">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+            </div>
+            <div class="allocator-lane-body">
+              <div>
+                <strong>${escapeHtml(allocationLaneLabel(lane))}</strong>
+                <em>${escapeHtml(allocationGateLabel(lane.gate))}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("budget_alloc_cost"))}</dt><dd>${escapeHtml(money(lane.costUsd))}</dd></div>
+                <div><dt>${escapeHtml(t("budget_alloc_slots"))}</dt><dd>${escapeHtml(lane.safeSlots == null ? "∞" : formatNumber(lane.safeSlots))}</dd></div>
+                <div><dt>${escapeHtml(t("budget_alloc_lift"))}</dt><dd>${escapeHtml(`${formatNumber(lane.expectedLiftPct, 1)}%`)}</dd></div>
+                <div><dt>${escapeHtml(t("budget_alloc_efficiency"))}</dt><dd>${escapeHtml(formatNumber(lane.efficiencyScore, 1))}</dd></div>
+              </dl>
+              <p>${escapeHtml(lane.detail || lane.nextAction || "-")}</p>
+              <i></i>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <p class="allocator-runbook"><span>${escapeHtml(t("budget_alloc_runbook"))}</span>${escapeHtml(optimizer.runbook || "-")}</p>
+  `;
+}
+
 function renderApi() {
   const { api, spend, cap, ratio } = apiBudget();
   $("#api-spend-label").textContent = currentLang === "zh" ? `已花 ${money(spend)}` : `${money(spend)} spent`;
@@ -6670,6 +6920,7 @@ function renderApi() {
   $("#api-meter").style.width = `${ratio}%`;
   renderRateGovernor();
   renderBudgetBurnReactor();
+  renderBudgetAllocationOptimizer();
   renderMediaRoiGate();
   $("#api-usage").innerHTML = (api.endpoints || [])
     .map((endpoint) => {

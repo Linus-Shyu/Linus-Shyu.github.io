@@ -12765,3 +12765,311 @@ body:not(.demo-mode) .demo-strip {
     text-align: left;
   }
 }
+
+/* Budget allocation optimizer: turns remaining API runway into concrete growth lanes. */
+.budget-allocation-optimizer {
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 84% 0, color-mix(in srgb, var(--accent) 12%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--panel-highlight) 68%, transparent), transparent 58%),
+    var(--panel);
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--accent) 8%, transparent),
+    0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.allocator-head,
+.allocator-core,
+.allocator-cells,
+.allocator-lane-title,
+.allocator-lanes article {
+  display: grid;
+  gap: 10px;
+}
+
+.allocator-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.allocator-head span,
+.allocator-reco span,
+.allocator-kpis span,
+.allocator-cells em,
+.allocator-lane-title,
+.allocator-lane-body dt,
+.allocator-runbook span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.allocator-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.allocator-head em {
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  padding: 6px 8px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.allocator-core {
+  grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
+}
+
+.allocator-reco,
+.allocator-kpis div,
+.allocator-cells span,
+.allocator-lanes article,
+.allocator-runbook {
+  border: 1px solid color-mix(in srgb, var(--line) 74%, transparent);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 72%, transparent), transparent),
+    color-mix(in srgb, var(--panel) 82%, transparent);
+}
+
+.allocator-reco {
+  padding: 10px;
+}
+
+.allocator-reco strong {
+  display: block;
+  margin: 5px 0;
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+.allocator-reco p,
+.allocator-lane-body p,
+.allocator-runbook {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.allocator-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.allocator-kpis div,
+.allocator-cells span {
+  padding: 9px;
+}
+
+.allocator-kpis strong,
+.allocator-cells strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 950;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.allocator-cells {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 10px 0;
+}
+
+.allocator-cells span.ok {
+  border-color: color-mix(in srgb, var(--accent-2) 34%, transparent);
+  background: color-mix(in srgb, var(--accent-2) 8%, transparent);
+}
+
+.allocator-cells span.warn {
+  border-color: color-mix(in srgb, var(--accent-3) 34%, transparent);
+  background: color-mix(in srgb, var(--accent-3) 8%, transparent);
+}
+
+.allocator-cells span.danger {
+  border-color: color-mix(in srgb, var(--danger) 38%, transparent);
+  background: color-mix(in srgb, var(--danger) 8%, transparent);
+}
+
+.allocator-lane-title {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin: 10px 0 7px;
+}
+
+.allocator-lanes {
+  display: grid;
+  gap: 7px;
+}
+
+.allocator-lanes article {
+  grid-template-columns: 54px minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.allocator-lanes article.ok {
+  border-color: color-mix(in srgb, var(--accent-2) 30%, var(--line));
+}
+
+.allocator-lanes article.warn {
+  border-color: color-mix(in srgb, var(--accent-3) 32%, var(--line));
+}
+
+.allocator-lanes article.danger {
+  border-color: color-mix(in srgb, var(--danger) 32%, var(--line));
+}
+
+.allocator-rank {
+  display: grid;
+  place-items: center;
+  border-right: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  background: color-mix(in srgb, var(--surface) 58%, transparent);
+}
+
+.allocator-rank span {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.allocator-lane-body {
+  position: relative;
+  min-width: 0;
+  padding: 9px 10px 13px;
+}
+
+.allocator-lane-body > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.allocator-lane-body strong,
+.allocator-lane-body em,
+.allocator-lane-body dd {
+  font-family: var(--mono);
+}
+
+.allocator-lane-body strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.allocator-lane-body em {
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 999px;
+  padding: 3px 6px;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.allocator-lane-body dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.allocator-lane-body dl div {
+  min-width: 0;
+}
+
+.allocator-lane-body dt,
+.allocator-lane-body dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.allocator-lane-body dd {
+  margin-top: 2px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.allocator-lane-body i {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  left: 10px;
+  height: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.allocator-lane-body i::before {
+  content: "";
+  display: block;
+  width: var(--allocator-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.allocator-runbook {
+  margin-top: 10px;
+  padding: 9px;
+}
+
+.allocator-runbook span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+:root[data-theme="light"] .budget-allocation-optimizer {
+  background:
+    radial-gradient(circle at 84% 0, rgba(26, 86, 219, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86)),
+    #ffffff;
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.065),
+    0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+@media (max-width: 1080px) {
+  .allocator-core,
+  .allocator-cells,
+  .allocator-lanes article,
+  .allocator-lane-body dl {
+    grid-template-columns: 1fr;
+  }
+
+  .allocator-head,
+  .allocator-lane-title,
+  .allocator-lane-body > div {
+    grid-template-columns: 1fr;
+  }
+}
