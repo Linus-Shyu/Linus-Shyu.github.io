@@ -17386,3 +17386,422 @@ body .side-rail .rail-budget strong {
     white-space: normal;
   }
 }
+
+/* Rail contrast seal: keep the left command rail readable in light and dark UI. */
+html[data-theme="light"] body > .ops-shell > aside.side-rail,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail,
+body > .ops-shell > aside.side-rail {
+  --rail-ui-bg: #070a10;
+  --rail-ui-top: #121a27;
+  --rail-ui-mid: #0c131d;
+  --rail-ui-panel: rgba(15, 23, 35, 0.98);
+  --rail-ui-panel-strong: rgba(41, 31, 18, 0.98);
+  --rail-ui-border: rgba(146, 164, 190, 0.28);
+  --rail-ui-border-hot: rgba(255, 159, 28, 0.72);
+  --rail-ui-text: #f7fbff;
+  --rail-ui-body: #d9e4f2;
+  --rail-ui-muted: #aab7c9;
+  --rail-ui-accent: #ff9f1c;
+  --rail-ui-yellow: #ffd166;
+  --rail-ui-green: #74d66b;
+  color-scheme: dark !important;
+  color: var(--rail-ui-body) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background-color: var(--rail-ui-bg) !important;
+  background-image:
+    radial-gradient(circle at 48% -8%, rgba(255, 159, 28, 0.28), transparent 34%),
+    radial-gradient(circle at -8% 76%, rgba(116, 214, 107, 0.15), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.065), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.042) 0 1px, transparent 1px 40px),
+    linear-gradient(180deg, var(--rail-ui-top) 0%, var(--rail-ui-mid) 44%, var(--rail-ui-bg) 100%) !important;
+  box-shadow:
+    22px 0 44px rgba(2, 6, 12, 0.42),
+    inset -1px 0 0 rgba(255, 159, 28, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail::after,
+body > .ops-shell > aside.side-rail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(255, 159, 28, 0.62), transparent) !important;
+  opacity: 0.72 !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .env-card,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini div,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget,
+body > .ops-shell > aside.side-rail .brand,
+body > .ops-shell > aside.side-rail .env-card,
+body > .ops-shell > aside.side-rail .rack-mini div,
+body > .ops-shell > aside.side-rail .rail-budget {
+  color: var(--rail-ui-body) !important;
+  border-color: var(--rail-ui-border) !important;
+  background-color: var(--rail-ui-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.075), transparent 62%) !important;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-line strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand strong,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .env-line strong,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini strong,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget strong,
+body > .ops-shell > aside.side-rail .brand strong,
+body > .ops-shell > aside.side-rail .env-line strong,
+body > .ops-shell > aside.side-rail .rack-mini strong,
+body > .ops-shell > aside.side-rail .rail-nav a,
+body > .ops-shell > aside.side-rail .rail-nav a::after,
+body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--rail-ui-text) !important;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.52) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand small,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card > span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget span,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget small,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand small,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .env-card > span,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini em,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget span,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget small,
+body > .ops-shell > aside.side-rail .brand small,
+body > .ops-shell > aside.side-rail .env-card > span,
+body > .ops-shell > aside.side-rail .rack-mini em,
+body > .ops-shell > aside.side-rail .rail-budget span,
+body > .ops-shell > aside.side-rail .rail-budget small {
+  color: var(--rail-ui-muted) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .brand-mark,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand-mark,
+body > .ops-shell > aside.side-rail .brand-mark {
+  color: #08111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, var(--rail-ui-accent) 55%, var(--rail-ui-green) 100%) !important;
+  box-shadow:
+    0 16px 32px rgba(255, 159, 28, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.38) inset !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a,
+body > .ops-shell > aside.side-rail .rail-nav a {
+  border: 1px solid transparent !important;
+  color: var(--rail-ui-body) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    rgba(15, 23, 35, 0.42) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+body > .ops-shell > aside.side-rail .rail-nav a::after {
+  min-width: 22px;
+  border: 1px solid rgba(170, 183, 201, 0.22) !important;
+  border-radius: 6px;
+  padding: 2px 0;
+  color: var(--rail-ui-text) !important;
+  background: rgba(255, 255, 255, 0.055) !important;
+  text-align: center;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:hover,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a.active,
+body > .ops-shell > aside.side-rail .rail-nav a:hover,
+body > .ops-shell > aside.side-rail .rail-nav a:focus-visible,
+body > .ops-shell > aside.side-rail .rail-nav a.active {
+  color: #fff8e8 !important;
+  border-color: var(--rail-ui-border-hot) !important;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 159, 28, 0.34), transparent 44%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.26), rgba(116, 214, 107, 0.08)),
+    rgba(255, 255, 255, 0.07) !important;
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 159, 28, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:hover::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible::after,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a.active::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:hover::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:focus-visible::after,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a.active::after,
+body > .ops-shell > aside.side-rail .rail-nav a:hover::after,
+body > .ops-shell > aside.side-rail .rail-nav a:focus-visible::after,
+body > .ops-shell > aside.side-rail .rail-nav a.active::after {
+  color: #101827 !important;
+  border-color: rgba(255, 209, 102, 0.8) !important;
+  background: linear-gradient(135deg, var(--rail-ui-yellow), var(--rail-ui-accent)) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .env-line .status-dot,
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini span,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .env-line .status-dot,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini span,
+body > .ops-shell > aside.side-rail .env-line .status-dot,
+body > .ops-shell > aside.side-rail .rack-mini span {
+  background: var(--rail-ui-green) !important;
+  box-shadow:
+    0 0 0 4px rgba(116, 214, 107, 0.16),
+    0 0 18px rgba(116, 214, 107, 0.38) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget,
+body > .ops-shell > aside.side-rail .rail-budget {
+  border-color: rgba(255, 209, 102, 0.7) !important;
+  background-color: var(--rail-ui-panel-strong) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.23), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.018)) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget strong,
+body > .ops-shell > aside.side-rail .rail-budget strong {
+  color: var(--rail-ui-yellow) !important;
+  text-shadow: 0 0 18px rgba(255, 209, 102, 0.28) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget .meter,
+body > .ops-shell > aside.side-rail .rail-budget .meter {
+  background: rgba(170, 183, 201, 0.23) !important;
+}
+
+html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget .meter div,
+html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget .meter div,
+body > .ops-shell > aside.side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--rail-ui-yellow), var(--rail-ui-accent)) !important;
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.3) !important;
+}
+
+@media (max-width: 860px) {
+  html[data-theme="light"] body > .ops-shell > aside.side-rail::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail::after,
+  body > .ops-shell > aside.side-rail::after {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.62), transparent) !important;
+  }
+}
+
+@media (min-width: 1081px) {
+  html[data-theme="light"] body > .ops-shell,
+  html[data-theme="dark"] body > .ops-shell,
+  body > .ops-shell,
+  html[data-theme="light"] body.demo-mode > .ops-shell,
+  html[data-theme="dark"] body.demo-mode > .ops-shell,
+  body.demo-mode > .ops-shell {
+    grid-template-columns: 72px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    width: min(1920px, 100%) !important;
+    padding: 10px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail,
+  body > .ops-shell > aside.side-rail,
+  html[data-theme="light"] body.demo-mode > .ops-shell > aside.side-rail,
+  html[data-theme="dark"] body.demo-mode > .ops-shell > aside.side-rail,
+  body.demo-mode > .ops-shell > aside.side-rail {
+    position: sticky !important;
+    top: 0 !important;
+    display: flex !important;
+    width: 72px !important;
+    height: 100vh !important;
+    min-height: 0 !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-width: 0 1px 0 0 !important;
+    border-radius: 0 !important;
+    padding: 8px 7px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .brand,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand,
+  body > .ops-shell > aside.side-rail .brand {
+    min-height: 48px !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    border-radius: 7px !important;
+    padding: 0 !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .brand > span:not(.brand-mark),
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand > span:not(.brand-mark),
+  body > .ops-shell > aside.side-rail .brand > span:not(.brand-mark),
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .env-card,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .env-card,
+  body > .ops-shell > aside.side-rail .env-card {
+    display: none !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .brand-mark,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .brand-mark,
+  body > .ops-shell > aside.side-rail .brand-mark {
+    width: 36px !important;
+    height: 36px !important;
+    flex: 0 0 36px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini,
+  body > .ops-shell > aside.side-rail .rack-mini {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    margin-top: 12px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini div,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini div,
+  body > .ops-shell > aside.side-rail .rack-mini div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    gap: 4px !important;
+    min-height: 42px !important;
+    border-radius: 7px !important;
+    padding: 6px 2px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini strong,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini strong,
+  body > .ops-shell > aside.side-rail .rack-mini strong {
+    max-width: 42px !important;
+    font-size: 10px !important;
+    text-align: center !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rack-mini em,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rack-mini em,
+  body > .ops-shell > aside.side-rail .rack-mini em {
+    display: none !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav,
+  body > .ops-shell > aside.side-rail .rail-nav {
+    display: grid !important;
+    gap: 7px !important;
+    margin: 18px 0 !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a,
+  body > .ops-shell > aside.side-rail .rail-nav a {
+    justify-content: center !important;
+    min-height: 36px !important;
+    border-radius: 7px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::before,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a::before,
+  body > .ops-shell > aside.side-rail .rail-nav a::before {
+    content: "" !important;
+    display: none !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a::after,
+  body > .ops-shell > aside.side-rail .rail-nav a::after {
+    display: block !important;
+    font-size: 11px !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(1)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(1)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(1)::after { content: "O" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(2)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(2)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(2)::after { content: "S" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(3)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(3)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(3)::after { content: "W" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(4)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(4)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(4)::after { content: "Q" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(5)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(5)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(5)::after { content: "P" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(6)::after,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-nav a:nth-child(6)::after,
+  body > .ops-shell > aside.side-rail .rail-nav a:nth-child(6)::after { content: "$" !important; }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget,
+  body > .ops-shell > aside.side-rail .rail-budget {
+    margin-top: auto !important;
+    border-radius: 7px !important;
+    padding: 9px 7px !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget span,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget span,
+  body > .ops-shell > aside.side-rail .rail-budget span,
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget small,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget small,
+  body > .ops-shell > aside.side-rail .rail-budget small {
+    overflow: hidden !important;
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  html[data-theme="light"] body > .ops-shell > aside.side-rail .rail-budget strong,
+  html[data-theme="dark"] body > .ops-shell > aside.side-rail .rail-budget strong,
+  body > .ops-shell > aside.side-rail .rail-budget strong {
+    margin-top: 6px !important;
+    font-size: 17px !important;
+    line-height: 1.05 !important;
+  }
+}
