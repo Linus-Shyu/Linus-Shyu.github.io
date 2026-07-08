@@ -1578,6 +1578,23 @@ const translations = {
     narrative_directives: "Prompt directives",
     narrative_guardrails: "Guardrails",
     narrative_empty: "No narrative resonance telemetry available.",
+    timing_eyebrow: "Topic Timing Router",
+    timing_title: "UTC pillar / format fire-control",
+    timing_zero_reads: "0 X read ops",
+    timing_score: "Router score",
+    timing_active: "Active lane",
+    timing_next: "Next publish bias",
+    timing_lanes: "Timing lanes",
+    timing_window: "UTC",
+    timing_pillar: "pillar",
+    timing_format: "format",
+    timing_load: "L7",
+    timing_samples: "n",
+    timing_avg: "avg",
+    timing_ack: "ACK %",
+    timing_directives: "Prompt directives",
+    timing_guardrails: "Guardrails",
+    timing_empty: "No topic timing router telemetry available.",
     audience_eyebrow: "Audience Mesh",
     audience_title: "Wide tech route balancer",
     audience_zero_reads: "0 X read ops",
@@ -2386,6 +2403,23 @@ const translations = {
     narrative_directives: "Prompt 指令",
     narrative_guardrails: "护栏",
     narrative_empty: "暂无叙事共振遥测。",
+    timing_eyebrow: "主题时间路由器",
+    timing_title: "UTC 叙事 / 格式火控",
+    timing_zero_reads: "0 次 X 读取",
+    timing_score: "路由评分",
+    timing_active: "活动通道",
+    timing_next: "下一轮发布偏置",
+    timing_lanes: "时间通道",
+    timing_window: "UTC",
+    timing_pillar: "叙事",
+    timing_format: "格式",
+    timing_load: "L7",
+    timing_samples: "样本",
+    timing_avg: "均值",
+    timing_ack: "ACK %",
+    timing_directives: "Prompt 指令",
+    timing_guardrails: "护栏",
+    timing_empty: "暂无主题时间路由遥测。",
     audience_eyebrow: "受众网格",
     audience_title: "广域科技路由均衡器",
     audience_zero_reads: "0 次 X 读取",
@@ -7189,6 +7223,253 @@ function renderNarrativeResonance() {
   `;
 }
 
+function topicTimingRouterData() {
+  const incoming = dashboardData.topicTimingRouter || fallbackData.topicTimingRouter;
+  if (incoming?.lanes?.length) return incoming;
+  return derivedTopicTimingRouter();
+}
+
+function derivedTopicTimingRouter() {
+  const hourly = hourlyLoadData();
+  const matrix = temporalAngleMatrixData();
+  const allocator = contentBanditAllocatorData();
+  const narrative = narrativeResonanceData();
+  const baseline = Math.max(1, number((dashboardData.profile || fallbackData.profile || {}).baselineScore, number(allocator.baselineScore, 1)));
+  const windows = [];
+  const seenHours = new Set();
+  [
+    hourly.nextWindow,
+    ...(Array.isArray(hourly.bestHours) ? hourly.bestHours : []),
+    ...(Array.isArray(matrix.slots) ? matrix.slots : []),
+    hourly.currentHour,
+  ].filter(Boolean).forEach((item) => {
+    const hour = number(item.hour, NaN);
+    if (!Number.isFinite(hour) || seenHours.has(hour)) return;
+    seenHours.add(hour);
+    windows.push({
+      hour,
+      windowLabel: item.windowLabel || item.label || `${String(hour).padStart(2, "0")}:00`,
+      hoursFromNow: number(item.hoursFromNow),
+      loadScore: number(item.loadScore, number(item.score)),
+      status: item.status || "watch",
+      impressions: number(item.impressions),
+      posts: number(item.posts, number(item.samples)),
+    });
+  });
+  if (!windows.length) {
+    windows.push({ hour: 0, windowLabel: "00:00", hoursFromNow: 0, loadScore: 0, status: "watch", impressions: 0, posts: 0 });
+  }
+
+  const pillars = (Array.isArray(narrative.pillars) ? narrative.pillars : [])
+    .slice(0, 5)
+    .map((pillar) => ({
+      id: pillar.id || pillar.label || "signal",
+      label: pillar.label || pillar.id || "Signal",
+      status: pillar.status || "watch",
+      score: number(pillar.score, number(pillar.avgScore) * 10),
+      samples: number(pillar.samples),
+      avgScore: number(pillar.avgScore),
+      engagementRate: number(pillar.engagementRate),
+      directive: pillar.directive || pillar.nextAction || "Keep one durable Tech Signals memory.",
+    }));
+  if (!pillars.length) {
+    pillars.push({ id: "operator_leverage", label: "Operator Leverage", status: "watch", score: 36, samples: 0, avgScore: baseline, engagementRate: 0, directive: "Turn the story into one concrete operator rule." });
+  }
+
+  const formatSource = Array.isArray(allocator.lanes) && allocator.lanes.length
+    ? allocator.lanes
+    : Array.isArray(matrix.slots) ? matrix.slots : [];
+  const formats = formatSource.slice(0, 5).map((item) => {
+    const id = item.id || item.formatId || "decision_rule";
+    return {
+      id,
+      label: item.label || formatTemplate(id),
+      status: item.status || item.action || "test",
+      score: number(item.allocationScore, number(item.score, number(item.avgScore) * 10)),
+      samples: number(item.samples),
+      avgScore: number(item.avgScore),
+      allocationPct: number(item.allocationPct),
+    };
+  });
+  if (!formats.length) {
+    formats.push({ id: "decision_rule", label: "Decision Rule", status: "test", score: baseline * 12, samples: 0, avgScore: baseline, allocationPct: 0 });
+  }
+
+  const priority = { exploit: 5, expand: 4, hot: 4, watch: 3, test: 2, probe: 2, explore: 2, seed: 1, hold: -2 };
+  const lanes = [];
+  windows.slice(0, 4).forEach((window) => {
+    pillars.slice(0, 4).forEach((pillar) => {
+      formats.slice(0, 4).forEach((format) => {
+        const observed = Boolean(number(window.posts) && (number(pillar.samples) || number(format.samples)));
+        const avgScore = number(format.avgScore, number(pillar.avgScore));
+        const score = clamp(
+          10 +
+            number(window.loadScore) * 0.3 +
+            number(pillar.score) * 0.34 +
+            number(format.score) * 0.22 +
+            Math.min(10, number(format.allocationPct) * 0.1) +
+            Math.min(10, number(pillar.engagementRate) * 2) +
+            Math.min(10, number(format.samples) + number(pillar.samples) * 0.4) +
+            (priority[pillar.status] || 0) * 2 +
+            (priority[format.status] || 0) * 1.5 +
+            (avgScore > baseline ? Math.min(10, (avgScore - baseline) * 2.4) : 0),
+          0,
+          100,
+        );
+        lanes.push({
+          id: `${window.hour}:${pillar.id}:${format.id}`,
+          hour: window.hour,
+          windowLabel: window.windowLabel,
+          hoursFromNow: window.hoursFromNow,
+          loadScore: number(window.loadScore),
+          pillarId: pillar.id,
+          pillarLabel: pillar.label,
+          pillarStatus: pillar.status,
+          formatId: format.id,
+          formatLabel: format.label,
+          formatStatus: format.status,
+          score,
+          samples: Math.max(number(format.samples), number(pillar.samples), number(window.posts)),
+          avgScore,
+          impressions: number(window.impressions),
+          engagementRate: number(pillar.engagementRate),
+          observed,
+          status: score >= 76 ? "hot" : score >= 58 ? "watch" : observed ? "probe" : "seed",
+          directive: `${pillar.directive} Use ${format.label} around ${window.windowLabel} UTC.`,
+          reason: `Derived from cached L7 load ${formatNumber(window.loadScore, 1)}, ${pillar.label}, and ${format.label}.`,
+        });
+      });
+    });
+  });
+  lanes.sort((left, right) => {
+    const statusDelta = (priority[right.status] || 0) - (priority[left.status] || 0);
+    return statusDelta || number(right.score) - number(left.score) || number(right.samples) - number(left.samples);
+  });
+  const unique = [];
+  const seen = new Set();
+  lanes.forEach((lane) => {
+    const key = `${lane.hour}:${lane.pillarId}:${lane.formatId}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    if (unique.length < 10) unique.push(lane);
+  });
+  const activeLane = unique[0] || null;
+  const routerScore = clamp(
+    14 +
+      number(activeLane?.score) * 0.56 +
+      Math.min(16, unique.filter((lane) => lane.observed).length * 3) +
+      Math.min(12, unique.filter((lane) => lane.status === "hot").length * 4),
+    0,
+    100,
+  );
+  const severity = routerScore >= 68 ? "ok" : routerScore >= 44 ? "warn" : "danger";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: severity === "ok" ? "derived_topic_timing_exploit" : severity === "warn" ? "derived_topic_timing_seed" : "derived_topic_timing_starved",
+    severity,
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    sampleCount: number((dashboardData.profile || fallbackData.profile || {}).measuredPosts),
+    routerScore,
+    activeLane,
+    lanes: unique,
+    nextAction: activeLane
+      ? `Bias next packet toward ${activeLane.windowLabel} UTC / ${activeLane.pillarLabel} / ${activeLane.formatLabel}.`
+      : "Collect more measured packets before trusting topic timing.",
+    promptDirectives: [
+      activeLane ? `Topic timing: ${activeLane.windowLabel} UTC -> ${activeLane.pillarLabel} using ${activeLane.formatLabel}.` : null,
+      activeLane?.directive || null,
+      "If posting outside the selected UTC window, keep the pillar but tighten the hook.",
+      "0 extra X reads; no live trend scraping required for this timing route.",
+    ].filter(Boolean),
+    guardrails: [
+      "Cached analytics only; do not spend X search/read calls to fill the lane.",
+      "Do not override cost gates, auth gates, or cadence hold rules.",
+      "Avoid pure recap; every lane maps to one account-memory pillar.",
+    ],
+  };
+}
+
+function renderTopicTimingRouter() {
+  const router = topicTimingRouterData();
+  const container = $("#topic-timing-router");
+  if (!container) return;
+  const lanes = Array.isArray(router.lanes) ? router.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("timing_empty"))}</p>`;
+    return;
+  }
+  const active = router.activeLane || lanes[0] || {};
+  const score = clamp(number(router.routerScore, number(active.score)), 0, 100);
+  const directives = Array.isArray(router.promptDirectives) ? router.promptDirectives : [];
+  const guardrails = Array.isArray(router.guardrails) ? router.guardrails : [];
+  container.innerHTML = `
+    <div class="timing-head">
+      <div>
+        <span>${escapeHtml(t("timing_eyebrow"))}</span>
+        <strong>${escapeHtml(t("timing_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("timing_zero_reads"))}</em>
+    </div>
+    <div class="timing-core ${escapeHtml(router.severity || "warn")}">
+      <div class="timing-score" style="--timing-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("timing_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <div><i></i></div>
+      </div>
+      <div class="timing-active">
+        <span>${escapeHtml(t("timing_active"))}</span>
+        <strong>${escapeHtml(`${active.windowLabel || "-"} UTC`)}</strong>
+        <small>${escapeHtml(active.pillarLabel || "-")} / ${escapeHtml(active.formatLabel || active.formatId || "-")}</small>
+      </div>
+      <div class="timing-next">
+        <span>${escapeHtml(t("timing_next"))}</span>
+        <code>${escapeHtml(router.nextAction || active.directive || "-")}</code>
+      </div>
+    </div>
+    <div class="timing-section-title">
+      <span>${escapeHtml(t("timing_lanes"))}</span>
+      <strong>${escapeHtml(`${formatNumber(router.sampleCount)} packets · ${router.mode || "-"}`)}</strong>
+    </div>
+    <div class="timing-lanes">
+      ${lanes.slice(0, 8).map((lane, index) => {
+        const laneScore = clamp(number(lane.score), 0, 100);
+        const load = clamp(number(lane.loadScore), 0, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "seed")}" style="--timing-lane-score:${laneScore.toFixed(1)}%; --timing-lane-load:${load.toFixed(1)}%">
+            <div class="timing-rank">${escapeHtml(String(index + 1).padStart(2, "0"))}</div>
+            <div class="timing-lane-body">
+              <div>
+                <strong>${escapeHtml(lane.windowLabel || "-")} UTC</strong>
+                <em>${escapeHtml(lane.status || "seed")} · ${escapeHtml(lane.pillarLabel || "-")}</em>
+              </div>
+              <dl>
+                <div><dt>${escapeHtml(t("timing_format"))}</dt><dd>${escapeHtml(lane.formatLabel || lane.formatId || "-")}</dd></div>
+                <div><dt>${escapeHtml(t("timing_load"))}</dt><dd>${escapeHtml(formatNumber(lane.loadScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("timing_samples"))}</dt><dd>${escapeHtml(formatNumber(lane.samples))}</dd></div>
+                <div><dt>${escapeHtml(t("timing_avg"))}</dt><dd>${escapeHtml(formatNumber(lane.avgScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("timing_ack"))}</dt><dd>${escapeHtml(formatNumber(lane.engagementRate, 2))}</dd></div>
+              </dl>
+              <p>${escapeHtml(lane.directive || lane.reason || "-")}</p>
+              <div class="timing-bars"><span></span><i></i></div>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="timing-footer-grid">
+      <div class="timing-directives">
+        <span>${escapeHtml(t("timing_directives"))}</span>
+        ${directives.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+      <div class="timing-guardrails">
+        <span>${escapeHtml(t("timing_guardrails"))}</span>
+        ${guardrails.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderBanditRewardSettlement() {
   const settlement = banditRewardSettlementData();
   const container = $("#bandit-reward-settlement");
@@ -7723,6 +8004,7 @@ function renderLearning() {
   renderBanditRewardSettlement();
   renderActiveConnConversionOptimizer();
   renderNarrativeResonance();
+  renderTopicTimingRouter();
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();

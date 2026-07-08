@@ -12130,6 +12130,396 @@ body:not(.demo-mode) .demo-strip {
   }
 }
 
+.topic-timing-router {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00f0ff 34%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, #00f0ff 14%, transparent), transparent 34%),
+    radial-gradient(circle at 92% 12%, color-mix(in srgb, #00ff66 10%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #ff007a 6%, transparent), transparent 60%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--line) 18%, transparent) 0 1px, transparent 1px 44px),
+    var(--surface-soft);
+  box-shadow:
+    0 0 26px color-mix(in srgb, #00f0ff 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.timing-head,
+.timing-core,
+.timing-section-title,
+.timing-lanes article,
+.timing-footer-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.timing-head,
+.timing-section-title {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.timing-head span,
+.timing-score span,
+.timing-active span,
+.timing-next span,
+.timing-section-title span,
+.timing-lane-body dt,
+.timing-directives span,
+.timing-guardrails span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.timing-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.timing-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 44%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, #00ff66 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  white-space: nowrap;
+}
+
+.timing-core {
+  grid-template-columns: 0.72fr 0.95fr 1.45fr;
+}
+
+.timing-score,
+.timing-active,
+.timing-next,
+.timing-lanes article,
+.timing-directives,
+.timing-guardrails {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent),
+    0 0 12px color-mix(in srgb, #00f0ff 5%, transparent);
+}
+
+.timing-score,
+.timing-active,
+.timing-next {
+  padding: 9px;
+}
+
+.timing-score strong,
+.timing-active strong,
+.timing-section-title strong,
+.timing-lane-body strong,
+.timing-lane-body dd {
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+.timing-score strong {
+  display: block;
+  margin-top: 5px;
+  color: #007c8a;
+  font-size: 30px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+:root[data-theme="dark"] .timing-score strong {
+  color: #00f0ff;
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.26);
+}
+
+.timing-score div {
+  height: 3px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.timing-score i {
+  display: block;
+  width: var(--timing-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.24);
+}
+
+.timing-active strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: #00a656;
+  font-size: 17px;
+  font-weight: 950;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .timing-active strong {
+  color: #00ff66;
+  text-shadow: 0 0 16px rgba(0, 255, 102, 0.2);
+}
+
+.timing-active small {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timing-next code {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.timing-section-title strong {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.timing-lanes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.timing-lanes article {
+  position: relative;
+  grid-template-columns: 32px minmax(0, 1fr);
+  overflow: hidden;
+  padding: 8px;
+}
+
+.timing-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  opacity: 0.8;
+}
+
+.timing-lanes article.hot::before {
+  background: #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+}
+
+.timing-lanes article.watch::before {
+  background: #00f0ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.27);
+}
+
+.timing-lanes article.probe::before,
+.timing-lanes article.seed::before {
+  background: #ff9f1c;
+  box-shadow: 0 0 15px rgba(255, 159, 28, 0.25);
+}
+
+.timing-rank {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+  border-radius: 6px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.timing-lane-body {
+  min-width: 0;
+}
+
+.timing-lane-body > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.timing-lane-body strong,
+.timing-lane-body em {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timing-lane-body strong {
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.timing-lane-body em {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+}
+
+.timing-lane-body dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 6px;
+}
+
+.timing-lane-body dt,
+.timing-lane-body dd {
+  margin: 0;
+}
+
+.timing-lane-body dd {
+  overflow: hidden;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timing-lane-body p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0 0 7px;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.timing-bars {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 74%, transparent);
+}
+
+.timing-bars span {
+  display: block;
+  width: var(--timing-lane-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.24);
+}
+
+.timing-bars i {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: var(--timing-lane-load, 0%);
+  width: 2px;
+  border-radius: 2px;
+  background: #ff007a;
+  box-shadow: 0 0 10px rgba(255, 0, 122, 0.34);
+}
+
+.timing-footer-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.timing-directives,
+.timing-guardrails {
+  padding: 9px;
+}
+
+.timing-directives code,
+.timing-guardrails code {
+  display: block;
+  overflow: hidden;
+  margin-top: 6px;
+  border: 1px solid color-mix(in srgb, var(--line-soft) 84%, transparent);
+  border-radius: 5px;
+  padding: 5px 6px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .topic-timing-router {
+  box-shadow:
+    0 0 28px rgba(0, 240, 255, 0.12),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 42%, transparent);
+}
+
+@media (max-width: 1180px) {
+  .timing-core,
+  .timing-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .timing-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .timing-lane-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .angle-mutation-reactor {
   display: grid;
   gap: 10px;
