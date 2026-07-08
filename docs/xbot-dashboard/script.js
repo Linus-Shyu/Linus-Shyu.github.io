@@ -963,6 +963,29 @@ const translations = {
     cadence_blocked: "publish blocked",
     cadence_status_publish: "{mode} · main post allowed",
     cadence_status_hold: "{mode} · manual distribution first",
+    arbiter_eyebrow: "Publish Arbiter",
+    arbiter_title: "Fire-control gate for the next packet",
+    arbiter_zero_reads: "0 X read ops",
+    arbiter_status_armed: "armed",
+    arbiter_status_review: "review",
+    arbiter_status_sealed: "sealed",
+    arbiter_publish_gate: "publish gate",
+    arbiter_next_window: "fire window",
+    arbiter_topic_lane: "topic lane",
+    arbiter_next_action: "runbook",
+    arbiter_time_to_fire: "T-minus",
+    arbiter_router_score: "router score",
+    arbiter_no_lane: "no active lane",
+    arbiter_topic_gate: "topic timing",
+    arbiter_budget_gate: "budget",
+    arbiter_interval_gate: "interval",
+    arbiter_hourly_gate: "UTC load",
+    arbiter_telemetry_gate: "telemetry",
+    arbiter_experiment_gate: "experiments",
+    arbiter_gate_ok: "clear",
+    arbiter_gate_watch: "watch",
+    arbiter_mode: "mode",
+    arbiter_enforcement: "enforcement",
     runlog_cadence: "cadence.control",
     runlog_eyebrow: "Task log",
     runlog_ready: "operator ready",
@@ -1788,6 +1811,29 @@ const translations = {
     cadence_blocked: "已拦截发帖",
     cadence_status_publish: "{mode} · 允许主帖",
     cadence_status_hold: "{mode} · 先做人工分发",
+    arbiter_eyebrow: "发布仲裁器",
+    arbiter_title: "下一条数据包的火控闸门",
+    arbiter_zero_reads: "0 次 X 读取",
+    arbiter_status_armed: "已装载",
+    arbiter_status_review: "待复核",
+    arbiter_status_sealed: "已封锁",
+    arbiter_publish_gate: "发布闸门",
+    arbiter_next_window: "发射窗口",
+    arbiter_topic_lane: "题材通道",
+    arbiter_next_action: "运行手册",
+    arbiter_time_to_fire: "倒计时",
+    arbiter_router_score: "路由评分",
+    arbiter_no_lane: "无激活通道",
+    arbiter_topic_gate: "题材时机",
+    arbiter_budget_gate: "预算",
+    arbiter_interval_gate: "间隔",
+    arbiter_hourly_gate: "UTC 负载",
+    arbiter_telemetry_gate: "遥测",
+    arbiter_experiment_gate: "实验槽",
+    arbiter_gate_ok: "放行",
+    arbiter_gate_watch: "观察",
+    arbiter_mode: "模式",
+    arbiter_enforcement: "执行",
     runlog_cadence: "cadence.control",
     runlog_eyebrow: "任务日志",
     runlog_ready: "操作者就绪",
@@ -2734,6 +2780,135 @@ function cadenceData() {
     dailyPostTarget: target,
     safeTextPostsLeft: remaining > 0 ? Math.floor(remaining / 0.015) : 0,
   };
+}
+
+function cadenceCheck(cadence, id) {
+  return (Array.isArray(cadence?.checks) ? cadence.checks : []).find((check) => check?.id === id) || null;
+}
+
+function publishArbiterData() {
+  const cadence = cadenceData();
+  const router = topicTimingRouterData();
+  const topicWindow = cadence.topicTimingWindow || (router
+    ? {
+        mode: router.mode,
+        severity: router.severity,
+        routerScore: router.routerScore,
+        trusted: router.severity !== "danger",
+        hoursFromNow: router.activeLane?.hoursFromNow ?? null,
+        activeLane: router.activeLane || null,
+        nextAction: router.nextAction,
+        zeroExtraXReads: Boolean(router.zeroExtraXReads),
+      }
+    : null);
+  const activeLane = topicWindow?.activeLane || router?.activeLane || null;
+  const severity = cadence.willBlockPublish ? "danger" : cadence.publishAllowed ? "ok" : "warn";
+  const status = cadence.willBlockPublish
+    ? t("arbiter_status_sealed")
+    : cadence.publishAllowed
+      ? t("arbiter_status_armed")
+      : t("arbiter_status_review");
+  const topicCheck = cadenceCheck(cadence, "topic_timing");
+  const gates = [
+    { id: "budget", label: t("arbiter_budget_gate"), check: cadenceCheck(cadence, "budget") },
+    { id: "interval", label: t("arbiter_interval_gate"), check: cadenceCheck(cadence, "interval") },
+    { id: "topic", label: t("arbiter_topic_gate"), check: topicCheck },
+    { id: "hourly", label: t("arbiter_hourly_gate"), check: cadenceCheck(cadence, "hourly_window") },
+    { id: "telemetry", label: t("arbiter_telemetry_gate"), check: cadenceCheck(cadence, "telemetry") },
+    { id: "experiments", label: t("arbiter_experiment_gate"), check: cadenceCheck(cadence, "experiments") },
+  ].map((gate) => ({
+    id: gate.id,
+    label: gate.label,
+    ok: gate.check ? Boolean(gate.check.ok) : true,
+    value: gate.check?.value || (gate.id === "topic" && activeLane ? `${activeLane.windowLabel || "-"} UTC` : "-"),
+    detail: gate.check?.detail || (gate.id === "topic" ? topicWindow?.nextAction || router?.nextAction || "-" : "-"),
+  }));
+  const routerScore = number(topicWindow?.routerScore, number(router?.routerScore, number(activeLane?.score)));
+  const hoursFromNow = topicWindow?.hoursFromNow ?? activeLane?.hoursFromNow ?? null;
+  return {
+    cadence,
+    router,
+    topicWindow,
+    activeLane,
+    severity,
+    status,
+    gates,
+    routerScore,
+    hoursFromNow: Number.isFinite(number(hoursFromNow, NaN)) ? number(hoursFromNow) : null,
+    zeroExtraXReads: topicWindow?.zeroExtraXReads !== false && router?.zeroExtraXReads !== false,
+  };
+}
+
+function renderPublishArbiter() {
+  const container = $("#publish-arbiter");
+  if (!container) return;
+  const data = publishArbiterData();
+  const lane = data.activeLane || {};
+  const score = clamp(number(data.routerScore), 0, 100);
+  const gateOpen = data.cadence.publishAllowed && !data.cadence.willBlockPublish;
+  const tMinus = data.hoursFromNow == null
+    ? "-"
+    : data.hoursFromNow <= 0
+      ? "T+0"
+      : `T-${formatNumber(data.hoursFromNow, 1)}h`;
+  const laneLabel = data.activeLane
+    ? `${lane.windowLabel || "-"} UTC · ${lane.pillarLabel || lane.pillarId || "-"} · ${lane.formatLabel || lane.formatId || "-"}`
+    : t("arbiter_no_lane");
+  container.innerHTML = `
+    <article class="arbiter-panel ${escapeHtml(data.severity)}">
+      <div class="arbiter-head">
+        <div>
+          <span>${escapeHtml(t("arbiter_eyebrow"))}</span>
+          <strong>${escapeHtml(t("arbiter_title"))}</strong>
+        </div>
+        <em>${escapeHtml(data.zeroExtraXReads ? t("arbiter_zero_reads") : "X reads unknown")}</em>
+      </div>
+      <div class="arbiter-body">
+        <div class="arbiter-core">
+          <span>${escapeHtml(t("arbiter_publish_gate"))}</span>
+          <strong>${escapeHtml(data.status)}</strong>
+          <small>${escapeHtml(formatCadenceMode(data.cadence.mode))} · ${escapeHtml(data.cadence.reasonCode || "ok")}</small>
+          <div class="arbiter-armature ${gateOpen ? "open" : "hold"}">
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="arbiter-radar" style="--arbiter-score:${score.toFixed(1)}%; --arbiter-deg:${(score * 1.8).toFixed(1)}deg">
+          <span class="radar-ring one"></span>
+          <span class="radar-ring two"></span>
+          <span class="radar-sweep"></span>
+          <span class="radar-core"></span>
+          <span class="radar-node topic"></span>
+          <span class="radar-node budget"></span>
+          <span class="radar-node cadence"></span>
+          <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+          <em>${escapeHtml(t("arbiter_router_score"))}</em>
+        </div>
+        <div class="arbiter-lane">
+          <div>
+            <span>${escapeHtml(t("arbiter_next_window"))}</span>
+            <strong>${escapeHtml(lane.windowLabel ? `${lane.windowLabel} UTC` : "-")}</strong>
+            <small>${escapeHtml(tMinus)}</small>
+          </div>
+          <div>
+            <span>${escapeHtml(t("arbiter_topic_lane"))}</span>
+            <strong>${escapeHtml(laneLabel)}</strong>
+            <small>${escapeHtml(`${t("arbiter_mode")}: ${data.topicWindow?.mode || data.router?.mode || "-"}`)}</small>
+          </div>
+          <p><span>${escapeHtml(t("arbiter_next_action"))}</span>${escapeHtml(data.cadence.nextAction || data.topicWindow?.nextAction || data.router?.nextAction || "-")}</p>
+        </div>
+      </div>
+      <div class="arbiter-gate-grid">
+        ${data.gates.map((gate) => `
+          <article class="${gate.ok ? "ok" : "warn"}">
+            <span>${escapeHtml(gate.label)}</span>
+            <strong>${escapeHtml(gate.ok ? t("arbiter_gate_ok") : t("arbiter_gate_watch"))}</strong>
+            <em>${escapeHtml(gate.value || "-")}</em>
+            <small>${escapeHtml(gate.detail || "-")}</small>
+          </article>
+        `).join("")}
+      </div>
+    </article>
+  `;
 }
 
 const SIGNAL_NODE_COORDS = {
@@ -10487,6 +10662,7 @@ function render() {
   renderMonitorPanels();
   renderMetrics();
   renderGrowthMissionControl();
+  renderPublishArbiter();
   renderGoal();
   renderGrowthKinetics();
   renderGrowthRunwaySimulator();
