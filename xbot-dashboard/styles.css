@@ -6306,6 +6306,257 @@ body,
   font-weight: 780;
 }
 
+.autopilot-command-strip {
+  margin-bottom: 6px;
+}
+
+.command-strip-shell {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.2fr) minmax(420px, 1.35fr);
+  gap: 8px;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00f0ff 24%, var(--line-soft));
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, #00f0ff 13%, transparent), transparent 30%),
+    radial-gradient(circle at 86% 20%, color-mix(in srgb, #ff007a 7%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 88%, transparent), color-mix(in srgb, var(--bg) 92%, transparent)),
+    var(--surface);
+  box-shadow:
+    0 0 24px color-mix(in srgb, #00f0ff 8%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.command-strip-shell.ok {
+  border-color: color-mix(in srgb, var(--ok) 34%, var(--line-soft));
+}
+
+.command-strip-shell.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line-soft));
+}
+
+.command-strip-shell.danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line-soft));
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--danger) 13%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.command-strip-head,
+.command-strip-core,
+.command-strip-nodes {
+  min-width: 0;
+}
+
+.command-strip-head {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    color-mix(in srgb, var(--surface-soft) 82%, transparent);
+}
+
+.command-strip-head span,
+.command-strip-score span,
+.command-strip-active span,
+.command-strip-nodes span,
+.command-strip-nodes em {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.command-strip-head strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.command-strip-head em {
+  justify-self: start;
+  border: 1px solid color-mix(in srgb, var(--ok) 44%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.command-strip-core {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
+  gap: 7px;
+}
+
+.command-strip-score,
+.command-strip-active,
+.command-strip-core button {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    color-mix(in srgb, var(--surface-soft) 82%, transparent);
+}
+
+.command-strip-score strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.command-strip-score i {
+  display: block;
+  height: 4px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 56%, transparent);
+}
+
+.command-strip-score i::before {
+  content: "";
+  display: block;
+  width: var(--command-score);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ok), var(--accent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.command-strip-active code {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.32;
+}
+
+.command-strip-core button {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line-soft));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, #ff9f1c 12%, transparent)),
+    var(--surface-soft);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.command-strip-nodes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.command-strip-nodes article {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 7px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    color-mix(in srgb, var(--surface-soft) 82%, transparent);
+}
+
+.command-strip-nodes article.ok {
+  border-color: color-mix(in srgb, var(--ok) 38%, var(--line-soft));
+}
+
+.command-strip-nodes article.warn {
+  border-color: color-mix(in srgb, var(--warn) 44%, var(--line-soft));
+}
+
+.command-strip-nodes article.danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line-soft));
+}
+
+.command-strip-nodes strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 4px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.command-strip-nodes small {
+  display: block;
+  overflow: hidden;
+  margin-top: 7px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1420px) {
+  .command-strip-shell {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .command-strip-nodes {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1080px) {
+  .command-strip-shell,
+  .command-strip-core {
+    grid-template-columns: 1fr;
+  }
+
+  .command-strip-nodes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .command-strip-nodes {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pipeline-rail {
   position: relative;
   display: grid;

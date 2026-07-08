@@ -947,6 +947,13 @@ const translations = {
     mission_control_next: "next operator action",
     mission_control_zero_reads: "0 X read ops",
     mission_control_no_route: "route lane pending",
+    command_strip_eyebrow: "Autopilot Command Strip",
+    command_strip_title: "Growth kernel armed",
+    command_strip_zero_reads: "0 X read ops",
+    command_strip_score: "kernel score",
+    command_strip_active: "active route instruction",
+    command_strip_copy: "Copy kernel",
+    command_strip_empty: "Autopilot kernel waiting for telemetry.",
     event_stream_eyebrow: "Telemetry Event Stream",
     event_stream_title: "NOC event bus",
     event_stream_nominal: "event bus nominal",
@@ -1632,6 +1639,13 @@ const translations = {
     mission_control_next: "下一步操作",
     mission_control_zero_reads: "0 次 X 读取操作",
     mission_control_no_route: "路由通道待命",
+    command_strip_eyebrow: "自动驾驶命令条",
+    command_strip_title: "增长内核已装载",
+    command_strip_zero_reads: "0 次 X 读取",
+    command_strip_score: "内核评分",
+    command_strip_active: "当前路由指令",
+    command_strip_copy: "复制内核",
+    command_strip_empty: "自动驾驶内核等待遥测。",
     event_stream_eyebrow: "遥测事件流",
     event_stream_title: "NOC 事件总线",
     event_stream_nominal: "事件总线正常",
@@ -4850,6 +4864,54 @@ function renderGrowthMissionControl() {
       </div>
       <div class="mission-runbook">
         ${runbook.slice(0, 3).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderAutopilotCommandStrip() {
+  const target = $("#autopilot-command-strip");
+  if (!target) return;
+  const deck = autopilotDirectiveDeckData();
+  const cards = Array.isArray(deck.cards) ? deck.cards.slice(0, 5) : [];
+  if (!cards.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("command_strip_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(deck.deckScore), 0, 100);
+  const severity = mutationTone(deck.severity || (score >= 70 ? "ok" : "warn"));
+  const active = deck.activeDirective || cards[0]?.command || "-";
+  const copyBlock = deck.copyBlock || (deck.directives || []).join("\n");
+  target.innerHTML = `
+    <article class="command-strip-shell ${escapeHtml(severity)}" style="--command-score:${score.toFixed(1)}%">
+      <div class="command-strip-head">
+        <div>
+          <span>${escapeHtml(t("command_strip_eyebrow"))}</span>
+          <strong>${escapeHtml(t("command_strip_title"))}</strong>
+        </div>
+        <em>${escapeHtml(t("command_strip_zero_reads"))}</em>
+      </div>
+      <div class="command-strip-core">
+        <div class="command-strip-score">
+          <span>${escapeHtml(t("command_strip_score"))}</span>
+          <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+          <i></i>
+        </div>
+        <div class="command-strip-active">
+          <span>${escapeHtml(t("command_strip_active"))}</span>
+          <code>${escapeHtml(active)}</code>
+        </div>
+        <button type="button" data-copy="${encodeURIComponent(copyBlock)}">${escapeHtml(t("command_strip_copy"))}</button>
+      </div>
+      <div class="command-strip-nodes">
+        ${cards.map((card) => `
+          <article class="${escapeHtml(mutationTone(card.status))}">
+            <span>P${escapeHtml(formatNumber(card.priority))}</span>
+            <strong>${escapeHtml(card.label || card.id || "-")}</strong>
+            <em>${escapeHtml(card.source || "-")}</em>
+            <small>${escapeHtml(formatNumber(card.score, 1))} · X0</small>
+          </article>
+        `).join("")}
       </div>
     </article>
   `;
@@ -8352,6 +8414,7 @@ function render() {
   renderHero();
   renderTelemetryContract();
   renderExpoStory();
+  renderAutopilotCommandStrip();
   renderGauges();
   renderMonitorPanels();
   renderMetrics();
