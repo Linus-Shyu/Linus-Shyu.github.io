@@ -19070,7 +19070,8 @@ body:not(.demo-mode) .demo-strip {
 .trace-side,
 .trace-candidate-body,
 .trace-mutation,
-.trace-gates {
+.trace-gates,
+.trace-policy {
   border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
   border-radius: 6px;
   background:
@@ -19184,12 +19185,14 @@ body:not(.demo-mode) .demo-strip {
 }
 
 .trace-mutation,
-.trace-gates {
+.trace-gates,
+.trace-policy {
   padding: 10px;
 }
 
 .trace-mutation span,
-.trace-gates > span {
+.trace-gates > span,
+.trace-policy > span {
   display: block;
   color: var(--muted);
   font-family: var(--mono);
@@ -19198,7 +19201,8 @@ body:not(.demo-mode) .demo-strip {
   text-transform: uppercase;
 }
 
-.trace-mutation strong {
+.trace-mutation strong,
+.trace-policy > strong {
   display: block;
   margin: 7px 0;
   color: var(--accent-3);
@@ -19217,6 +19221,82 @@ body:not(.demo-mode) .demo-strip {
   font-size: 11px;
   line-height: 1.35;
   white-space: normal;
+}
+
+.trace-policy {
+  display: grid;
+  gap: 8px;
+  border-color: color-mix(in srgb, #00f0ff 28%, var(--line)) !important;
+  background:
+    radial-gradient(circle at 14% 0, rgba(0, 240, 255, 0.12), transparent 32%),
+    radial-gradient(circle at 100% 100%, rgba(255, 159, 28, 0.08), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 72%, transparent), transparent),
+    color-mix(in srgb, var(--panel) 82%, transparent);
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.trace-policy > strong {
+  margin-bottom: 2px;
+  color: #00f0ff;
+  font-size: 16px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.trace-policy div {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 5px;
+  padding: 7px 8px;
+  background: color-mix(in srgb, var(--panel) 42%, transparent);
+}
+
+.trace-policy em,
+.trace-policy small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.trace-policy small {
+  color: #00f0ff;
+}
+
+.trace-policy code {
+  display: block;
+  overflow: hidden;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trace-policy ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trace-policy li {
+  border-left: 2px solid rgba(0, 240, 255, 0.36);
+  padding-left: 8px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 750;
+  line-height: 1.35;
 }
 
 .trace-gates div {

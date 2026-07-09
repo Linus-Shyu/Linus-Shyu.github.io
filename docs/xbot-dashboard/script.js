@@ -439,6 +439,41 @@ const fallbackData = {
       "Keep discovery, drafting, routing, and learning online without adding X search/read spend.",
     ],
   },
+  cachedGenerationPolicy: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "cached_generation_policy",
+    confidence: "medium",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    primaryFormatId: "decision_rule",
+    primaryFormatLabel: "Decision Rule",
+    exploreFormatId: "operator_pain",
+    rankedFormatIds: ["decision_rule", "operator_pain", "second_order", "contrarian_cost"],
+    avoidFormatIds: ["prediction"],
+    hookPattern: {
+      id: "decision_rule",
+      label: "Decision Rule",
+      directive: "Open with a reusable rule the reader can apply today.",
+    },
+    narrativePillar: {
+      id: "operator_leverage",
+      label: "Operator Leverage",
+      directive: "Turn the story into a concrete operator rule.",
+    },
+    opportunity: {
+      id: "13:operator_leverage:decision_rule",
+      label: "13:00 UTC / Operator Leverage / Decision Rule",
+      score: 95.3,
+      sources: ["topic_timing", "content_bandit", "angle_load"],
+    },
+    directives: [
+      "Primary format bias: decision_rule. Use this unless the selected story strongly fits another listed format.",
+      "First-line hook: Decision Rule. Open with a reusable rule the reader can apply today.",
+      "Opportunity lane: 13:00 UTC / Operator Leverage / Decision Rule; sources=topic_timing+content_bandit+angle_load; score=95.3.",
+      "No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap.",
+    ],
+  },
   adaptiveAngleScheduler: {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "recovery_route",
@@ -1112,6 +1147,10 @@ const translations = {
     decision_trace_bandit: "bandit",
     decision_trace_hook: "hook",
     decision_trace_gate_state: "Gate state",
+    decision_trace_policy_bus: "Prompt policy bus",
+    decision_trace_policy_primary: "primary",
+    decision_trace_policy_avoid: "avoid",
+    decision_trace_policy_directives: "directives",
     decision_trace_empty: "No generation decision trace recorded yet.",
     decision_trace_rank: "rank {rank}/{total}",
     decision_trace_score: "score {score}",
@@ -2073,6 +2112,10 @@ const translations = {
     decision_trace_bandit: "老虎机",
     decision_trace_hook: "钩子",
     decision_trace_gate_state: "闸门状态",
+    decision_trace_policy_bus: "Prompt 策略总线",
+    decision_trace_policy_primary: "主格式",
+    decision_trace_policy_avoid: "规避",
+    decision_trace_policy_directives: "指令",
     decision_trace_empty: "还没有记录生成决策 trace。",
     decision_trace_rank: "排名 {rank}/{total}",
     decision_trace_score: "分数 {score}",
@@ -10546,8 +10589,18 @@ function derivedGenerationDecisionTrace() {
 
 function generationDecisionTraceData() {
   const incoming = dashboardData.generationDecisionTrace || fallbackData.generationDecisionTrace;
-  if (incoming?.candidates?.length || incoming?.selectedCandidate?.text) return incoming;
-  return derivedGenerationDecisionTrace();
+  const policy = dashboardData.cachedGenerationPolicy || fallbackData.cachedGenerationPolicy || null;
+  if (incoming?.candidates?.length || incoming?.selectedCandidate?.text) {
+    return {
+      ...incoming,
+      cachedGenerationPolicy: incoming.cachedGenerationPolicy || policy,
+    };
+  }
+  const derived = derivedGenerationDecisionTrace();
+  return {
+    ...derived,
+    cachedGenerationPolicy: derived.cachedGenerationPolicy || policy,
+  };
 }
 
 function traceGateCell(labelKey, enabled, value = null) {
@@ -10574,6 +10627,50 @@ function candidateDiagnosticText(candidate) {
     ...candidate.qualityIssues.map((issue) => `gate:${issue}`),
     ...verdict,
   ].filter(Boolean).slice(0, 9).join(" · ") || "-";
+}
+
+function tracePolicyData(trace) {
+  const policy = trace?.cachedGenerationPolicy || dashboardData.cachedGenerationPolicy || fallbackData.cachedGenerationPolicy || null;
+  if (!policy) return null;
+  const directives = Array.isArray(policy.directives) ? policy.directives.filter(Boolean).slice(0, 4) : [];
+  const ranked = Array.isArray(policy.rankedFormatIds) ? policy.rankedFormatIds.filter(Boolean).slice(0, 5) : [];
+  const avoid = Array.isArray(policy.avoidFormatIds) ? policy.avoidFormatIds.filter(Boolean).slice(0, 4) : [];
+  return {
+    mode: policy.mode || "cached_generation_policy",
+    confidence: policy.confidence || "low",
+    primaryFormatId: policy.primaryFormatId || "",
+    primaryFormatLabel: policy.primaryFormatLabel || formatTemplate(policy.primaryFormatId || ""),
+    exploreFormatId: policy.exploreFormatId || "",
+    rankedFormatIds: ranked,
+    avoidFormatIds: avoid,
+    directives,
+    zeroExtraXReads: policy.zeroExtraXReads !== false,
+  };
+}
+
+function renderTracePolicyBus(trace) {
+  const policy = tracePolicyData(trace);
+  if (!policy) return "";
+  return `
+    <div class="trace-policy">
+      <span>${escapeHtml(t("decision_trace_policy_bus"))}</span>
+      <strong>${escapeHtml(policy.primaryFormatLabel || formatTemplate(policy.primaryFormatId) || "-")}</strong>
+      <div>
+        <em>${escapeHtml(t("decision_trace_policy_primary"))}</em>
+        <code>${escapeHtml(policy.primaryFormatId || "-")}</code>
+      </div>
+      <div>
+        <em>${escapeHtml(t("decision_trace_policy_avoid"))}</em>
+        <code>${escapeHtml(policy.avoidFormatIds.length ? policy.avoidFormatIds.join(", ") : "none")}</code>
+      </div>
+      <small>${escapeHtml(policy.confidence)} · ${escapeHtml(policy.zeroExtraXReads ? t("decision_trace_zero_reads") : `${formatNumber(policy.estimatedXReadOps || 0)} ${t("decision_trace_x_reads")}`)}</small>
+      ${policy.directives.length ? `
+        <ul aria-label="${escapeHtml(t("decision_trace_policy_directives"))}">
+          ${policy.directives.slice(0, 3).map((directive) => `<li>${escapeHtml(directive)}</li>`).join("")}
+        </ul>
+      ` : ""}
+    </div>
+  `;
 }
 
 function normalizeRouterLane(lane, index = 0) {
@@ -10761,6 +10858,7 @@ function renderGenerationDecisionTrace() {
           <span>${escapeHtml(t("decision_trace_gate_state"))}</span>
           <div>${gateCells}</div>
         </div>
+        ${renderTracePolicyBus(trace)}
       </aside>
     </div>
     ${routerPanel}
