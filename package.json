@@ -7,7 +7,8 @@
     "check:xbot-dashboard": "node bin/check-xbot-dashboard-vocabulary.mjs",
     "clean": "hexo clean",
     "prepare:pages": "node bin/prepare-pages.js",
-    "deploy": "npm run build && npm run prepare:pages",
+    "verify:xbot-dashboard": "npm run check:xbot-dashboard && node --check xbot-dashboard/script.js && node --check docs/xbot-dashboard/script.js",
+    "deploy": "npm run build && npm run prepare:pages && npm run verify:xbot-dashboard",
     "server": "hexo server"
   },
   "hexo": {

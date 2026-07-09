@@ -1,0 +1,44 @@
+name: xbot dashboard quality
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/xbot-dashboard-quality.yml"
+      - "bin/check-xbot-dashboard-vocabulary.mjs"
+      - "docs/xbot-dashboard/**"
+      - "package-lock.json"
+      - "package.json"
+      - "xbot-dashboard/**"
+  pull_request:
+    paths:
+      - ".github/workflows/xbot-dashboard-quality.yml"
+      - "bin/check-xbot-dashboard-vocabulary.mjs"
+      - "docs/xbot-dashboard/**"
+      - "package-lock.json"
+      - "package.json"
+      - "xbot-dashboard/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dashboard-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify X bot dashboard
+        run: npm run verify:xbot-dashboard
