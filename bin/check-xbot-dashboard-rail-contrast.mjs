@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
-const requiredCssVersion = "20260709-command-rail-v2";
+const requiredCssVersion = "20260709-command-rail-v3";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
