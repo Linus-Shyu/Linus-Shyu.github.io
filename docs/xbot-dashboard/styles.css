@@ -24931,40 +24931,43 @@ html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-b
   }
 }
 
-/* Final sidebar readability layer. Uses isolated variables so older rail locks cannot leak into light UI. */
+/* Final sidebar readability layer. Keep the rail as a dark NOC surface in both themes. */
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
 html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
   --readable-rail-bg: #0b111c;
   --readable-rail-top: #111a29;
-  --readable-rail-panel: rgba(15, 23, 42, 0.96);
-  --readable-rail-budget: rgba(45, 31, 12, 0.96);
-  --readable-rail-line: rgba(148, 163, 184, 0.26);
-  --readable-rail-hot-line: rgba(255, 159, 28, 0.58);
+  --readable-rail-panel: rgba(13, 20, 31, 0.98);
+  --readable-rail-panel-top: rgba(255, 255, 255, 0.055);
+  --readable-rail-budget: rgba(43, 30, 13, 0.98);
+  --readable-rail-line: rgba(148, 163, 184, 0.24);
+  --readable-rail-hot-line: rgba(255, 159, 28, 0.62);
   --readable-rail-text: #f8fafc;
-  --readable-rail-body: #d6e0ee;
-  --readable-rail-muted: #9ba8bb;
+  --readable-rail-body: #dbe7f5;
+  --readable-rail-muted: #9aa9bd;
   --readable-rail-accent: #ff9f1c;
   --readable-rail-ok: #78d86f;
-  --readable-rail-active-bg: rgba(255, 159, 28, 0.16);
+  --readable-rail-active-bg: rgba(255, 159, 28, 0.18);
   --readable-rail-active-text: #fff8e8;
+  color-scheme: dark !important;
 }
 
 html[data-theme="light"] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
 html[data-theme="light"] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
-  --readable-rail-bg: #eef2f7;
-  --readable-rail-top: #ffffff;
-  --readable-rail-panel: rgba(255, 255, 255, 0.94);
-  --readable-rail-budget: rgba(255, 248, 232, 0.97);
-  --readable-rail-line: #d7deea;
-  --readable-rail-hot-line: rgba(26, 86, 219, 0.34);
-  --readable-rail-text: #111827;
-  --readable-rail-body: #334155;
-  --readable-rail-muted: #64748b;
-  --readable-rail-accent: #1a56db;
-  --readable-rail-ok: #16a34a;
-  --readable-rail-active-bg: rgba(26, 86, 219, 0.12);
-  --readable-rail-active-text: #0f3a9a;
-  color-scheme: light !important;
+  --readable-rail-bg: #0a0f18;
+  --readable-rail-top: #121b29;
+  --readable-rail-panel: rgba(12, 18, 28, 0.985);
+  --readable-rail-panel-top: rgba(255, 255, 255, 0.06);
+  --readable-rail-budget: rgba(42, 27, 8, 0.985);
+  --readable-rail-line: rgba(148, 163, 184, 0.28);
+  --readable-rail-hot-line: rgba(255, 159, 28, 0.66);
+  --readable-rail-text: #fbfdff;
+  --readable-rail-body: #dce8f6;
+  --readable-rail-muted: #a7b4c7;
+  --readable-rail-accent: #ffb020;
+  --readable-rail-ok: #7adf72;
+  --readable-rail-active-bg: rgba(255, 159, 28, 0.2);
+  --readable-rail-active-text: #fff7df;
+  color-scheme: dark !important;
 }
 
 @media (min-width: 1321px) {
@@ -25005,8 +25008,9 @@ html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side
     radial-gradient(circle at -10% 74%, color-mix(in srgb, var(--readable-rail-ok) 10%, transparent), transparent 38%),
     linear-gradient(180deg, var(--readable-rail-top), var(--readable-rail-bg) 76%) !important;
   box-shadow:
-    18px 0 42px color-mix(in srgb, #0f172a 12%, transparent),
-    inset -1px 0 0 color-mix(in srgb, var(--readable-rail-accent) 10%, transparent) !important;
+    18px 0 42px color-mix(in srgb, #0f172a 18%, transparent),
+    inset -1px 0 0 color-mix(in srgb, var(--readable-rail-accent) 16%, transparent),
+    inset 1px 0 0 rgba(255, 255, 255, 0.04) !important;
 }
 
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
@@ -25017,7 +25021,10 @@ html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rai
   color: var(--readable-rail-body) !important;
   border-color: var(--readable-rail-line) !important;
   background-color: var(--readable-rail-panel) !important;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01)) !important;
+  background-image: linear-gradient(180deg, var(--readable-rail-panel-top), rgba(255, 255, 255, 0.01)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 10px 24px rgba(0, 0, 0, 0.16) !important;
 }
 
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
@@ -25041,6 +25048,7 @@ html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rai
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
   min-height: 42px !important;
   font-size: 13px !important;
+  letter-spacing: 0.01em !important;
 }
 
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
@@ -25054,6 +25062,10 @@ html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rai
   color: var(--readable-rail-active-text) !important;
   border-color: var(--readable-rail-hot-line) !important;
   background-color: var(--readable-rail-active-bg) !important;
+  box-shadow:
+    inset 3px 0 0 var(--readable-rail-accent),
+    0 0 0 1px color-mix(in srgb, var(--readable-rail-accent) 18%, transparent),
+    0 12px 26px color-mix(in srgb, var(--readable-rail-accent) 14%, transparent) !important;
 }
 
 html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before,

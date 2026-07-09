@@ -72,7 +72,7 @@ const fallbackData = {
       step: 3,
       label: "Big Tech / Consumer Tech",
       url: "https://x.com/search?q=(Apple%20OR%20Google%20OR%20Microsoft%20OR%20Meta%20OR%20Amazon%20OR%20Tesla)%20(AI%20OR%20app%20OR%20product%20OR%20privacy%20OR%20security%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
-      reason: "Use this for broader tech posts beyond the AI-builder bubble.",
+      reason: "Use this for broader tech packets beyond the AI-builder bubble.",
       draftIndex: 2,
     },
   ],
@@ -103,7 +103,7 @@ const fallbackData = {
       draftIndex: 1,
       draftText: "Platform shift rule: if a Big Tech change can rewrite your margin, roadmap, or distribution overnight, it is not a partnership. It is rented ground with APIs.",
       draftAngle: "business impact",
-      reason: "Stories from this source have outperformed baseline; look for fresh related discussions before posting more standalone takes.",
+      reason: "Stories from this source have outperformed baseline; look for fresh related discussions before dispatching more standalone packets.",
       evidence: "source: avg 5.4, n=6",
       zeroExtraXReads: true,
     },
@@ -660,7 +660,7 @@ const fallbackData = {
       primaryStage: "breakout",
       primaryTitle: "AI coding agents move from demo to workflow control",
       primarySource: "github.blog",
-      nextAction: "Route breakout story from github.blog into the next post angle.",
+      nextAction: "Route breakout story from github.blog into the next packet angle.",
     },
     items: [
       {
@@ -774,7 +774,7 @@ const fallbackData = {
         kind: "source",
         routeLabel: "AI / DevTools",
         routeUrl: "https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
-        routeReason: "Look for fresh related discussions before posting more standalone takes.",
+        routeReason: "Look for fresh related discussions before dispatching more standalone packets.",
         evidence: "source: avg 5.4, n=6",
         score: 5.4,
         expectedLiftPct: 38.5,
@@ -858,7 +858,7 @@ const fallbackData = {
     bestSource: { name: "techcrunch.com", avgScore: 5.4, samples: 6 },
     confidence: "medium",
     confidenceZh: "中等置信度",
-    nextExperiment: "Double down on decision-rule posts for operator-heavy AI and platform news; avoid broad predictions unless the payoff is specific.",
+    nextExperiment: "Double down on decision-rule packets for operator-heavy AI and platform news; avoid broad predictions unless the payoff is specific.",
     nextExperimentZh: "继续加码 decision-rule：把 AI 和平台新闻写成可执行判断规则；除非结论非常具体，否则少用宽泛预测。",
   },
   learningAutopilot: {
@@ -923,7 +923,7 @@ const fallbackData = {
     safeRemainingUsd: 2.81,
     baselineScore: 3.9,
     minSamples: 2,
-    decision: "Run 3 post experiment(s): decision_rule, playbook, second_order.",
+    decision: "Run 3 packet experiment(s): decision_rule, playbook, second_order.",
     recommendedFormats: [
       {
         slot: 1,
@@ -1014,7 +1014,7 @@ const translations = {
     cadence_ready: "publish ready",
     cadence_advisory: "operator review",
     cadence_blocked: "publish blocked",
-    cadence_status_publish: "{mode} · main post allowed",
+    cadence_status_publish: "{mode} · main packet armed",
     cadence_status_hold: "{mode} · manual distribution first",
     arbiter_eyebrow: "Publish Arbiter",
     arbiter_title: "Fire-control gate for the next packet",
@@ -1080,7 +1080,7 @@ const translations = {
     event_l7_title: "L7 Traffic Load",
     event_http_detail: "{calls} calls · {failures} faults · {rate}% failure",
     event_cost_detail: "{left} safe left · {runway} runway · month-end {monthEnd}",
-    event_control_detail: "{readGate} read · {publishGate} post · pressure {pressure}%",
+    event_control_detail: "{readGate} read · {publishGate} packet · pressure {pressure}%",
     event_queue_detail: "{missions} route ops · {drafts} outputs · zero-read lane",
     event_learning_detail: "{posts} packets measured · baseline {score}",
     event_l7_detail: "{impressions} L7 events / 24h · kinetic {score}",
@@ -1247,7 +1247,7 @@ const translations = {
     governor_warn: "boundary watch",
     governor_danger: "read gate sealed",
     governor_read_gate: "read gate",
-    governor_post_gate: "post gate",
+    governor_post_gate: "packet gate",
     governor_safe_cap: "safe cap",
     governor_safe_left: "safe left",
     governor_429: "429 partition",
@@ -1304,8 +1304,8 @@ const translations = {
     budget_alloc_gate: "gate",
     budget_alloc_runbook: "allocator runbook",
     budget_alloc_manual: "manual route burst",
-    budget_alloc_text: "text post experiment",
-    budget_alloc_media: "media post surge",
+    budget_alloc_text: "text packet experiment",
+    budget_alloc_media: "media packet surge",
     budget_alloc_metrics: "metrics refresh",
     budget_alloc_live: "live X search",
     budget_alloc_open: "open",
@@ -1890,7 +1890,7 @@ const translations = {
     loop_scan: "Ingest",
     loop_scan_detail: "Detect tech packets and broad audience hooks.",
     loop_write: "Infer",
-    loop_write_detail: "Generate copy-ready outputs and sharper post formats.",
+    loop_write_detail: "Generate copy-ready outputs and sharper packet formats.",
     loop_route: "Route",
     loop_route_detail: "Send the operator to high-throughput conversations.",
     loop_learn: "Learn",
@@ -1981,7 +1981,7 @@ const translations = {
     cadence_ready: "可以发帖",
     cadence_advisory: "人工复核",
     cadence_blocked: "已拦截发帖",
-    cadence_status_publish: "{mode} · 允许主帖",
+    cadence_status_publish: "{mode} · 主数据包已装载",
     cadence_status_hold: "{mode} · 先做人工分发",
     arbiter_eyebrow: "发布仲裁器",
     arbiter_title: "下一条数据包的火控闸门",
@@ -2047,7 +2047,7 @@ const translations = {
     event_l7_title: "L7 流量负载",
     event_http_detail: "{calls} 次调用 · {failures} 次故障 · 失败率 {rate}%",
     event_cost_detail: "安全剩余 {left} · 续航 {runway} · 月底 {monthEnd}",
-    event_control_detail: "读取 {readGate} · 发帖 {publishGate} · 压力 {pressure}%",
+    event_control_detail: "读取 {readGate} · 数据包 {publishGate} · 压力 {pressure}%",
     event_queue_detail: "{missions} 个路由动作 · {drafts} 条输出 · 零读取通道",
     event_learning_detail: "已测量 {posts} 个数据包 · 基线 {score}",
     event_l7_detail: "24h {impressions} 个 L7 事件 · 动能 {score}",
@@ -2214,7 +2214,7 @@ const translations = {
     governor_warn: "边界观察",
     governor_danger: "读取闸门封闭",
     governor_read_gate: "读取闸门",
-    governor_post_gate: "发帖闸门",
+    governor_post_gate: "数据包闸门",
     governor_safe_cap: "安全上限",
     governor_safe_left: "安全剩余",
     governor_429: "429 分区",
@@ -2271,8 +2271,8 @@ const translations = {
     budget_alloc_gate: "闸门",
     budget_alloc_runbook: "分配手册",
     budget_alloc_manual: "人工路由爆发",
-    budget_alloc_text: "文本发帖实验",
-    budget_alloc_media: "媒体发帖加速",
+    budget_alloc_text: "文本数据包实验",
+    budget_alloc_media: "媒体数据包加速",
     budget_alloc_metrics: "指标刷新",
     budget_alloc_live: "实时 X 搜索",
     budget_alloc_open: "开放",
@@ -2857,7 +2857,7 @@ const translations = {
     loop_scan: "入口",
     loop_scan_detail: "识别科技数据包和更大受众会关心的角度。",
     loop_write: "推理",
-    loop_write_detail: "产出可复制输出和更锋利的发帖格式。",
+    loop_write_detail: "产出可复制输出和更锋利的数据包格式。",
     loop_route: "分发",
     loop_route_detail: "把操作者送到高吞吐对话入口。",
     loop_learn: "学习",
@@ -2927,12 +2927,12 @@ const draftTranslations = {
 const diagnosisTranslations = {
   en: [
     "The core packets are not the main bottleneck. At small-account scale, distribution starts only after early interaction.",
-    "The bottleneck is entry into conversations, not posting volume.",
+    "The bottleneck is entry into conversations, not packet volume.",
     "The current low-cost path is manual search links plus copied route outputs, avoiding extra X search/read API spend.",
   ],
   zh: [
-    "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "瓶颈是分发入口，不是发帖数量。",
+    "核心数据包质量不算差，但小账号阶段缺少初始互动，单独派发很难被系统分发。",
+    "瓶颈是分发入口，不是数据包数量。",
     "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
   ],
 };
@@ -3024,7 +3024,7 @@ function formatCadenceMode(mode, { compact = false } = {}) {
   const normalized = String(mode || "publish_experiment");
   const labels = currentLang === "zh"
     ? {
-        publish_experiment: compact ? "发帖" : "发帖实验",
+        publish_experiment: compact ? "数据包" : "数据包实验",
         manual_distribution_only: compact ? "人工分发" : "仅人工分发",
         refresh_metrics_first: compact ? "刷新" : "先刷新数据",
         manual_override: compact ? "手动" : "手动覆盖",
@@ -3033,7 +3033,7 @@ function formatCadenceMode(mode, { compact = false } = {}) {
         disabled: compact ? "关闭" : "控制器关闭",
       }
     : {
-        publish_experiment: compact ? "publish" : "publish experiment",
+        publish_experiment: compact ? "packet" : "packet experiment",
         manual_distribution_only: compact ? "manual" : "manual distribution",
         refresh_metrics_first: compact ? "refresh" : "refresh metrics first",
         manual_override: compact ? "override" : "manual override",
@@ -3062,10 +3062,10 @@ function cadenceData() {
     reasonCode: publishAllowed ? "ok" : posts >= target ? "daily_target_reached" : "budget_safe_cap",
     severity: publishAllowed ? "ok" : "warn",
     reason: publishAllowed
-      ? "Cadence allows the next post."
-      : "Derived cadence prefers manual distribution before another post.",
+      ? "Cadence allows the next packet dispatch."
+      : "Derived cadence prefers manual distribution before another packet.",
     nextAction: publishAllowed
-      ? "Proceed with the next post candidate."
+      ? "Proceed with the next packet candidate."
       : "Use manual route lanes and keep X API spend flat.",
     postsLast24h: posts,
     dailyPostTarget: target,
@@ -3689,7 +3689,7 @@ function localizeAction(action) {
   };
 }
 
-function localizeDraftMeta(draft, fallbackTitle = "Relevant tech post") {
+function localizeDraftMeta(draft, fallbackTitle = "Relevant tech packet") {
   const dict = draftTranslations[currentLang] || {};
   return {
     title: dict[draft.title] || draft.title || t("draft_relevant"),
