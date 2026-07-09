@@ -208,7 +208,7 @@ const fallbackData = {
     impressions24h: {
       label: "24h L7 traffic load",
       unit: "L7 events",
-      source: "tweet_metrics",
+      source: "packet_l7_metrics",
       total: 233,
       current: 5,
       points: [
@@ -224,7 +224,7 @@ const fallbackData = {
     impressions7d: {
       label: "7d L7 ingestion throughput",
       unit: "L7 events",
-      source: "tweet_metrics",
+      source: "packet_l7_metrics",
       total: 621,
       current: 233,
       points: [
@@ -256,7 +256,7 @@ const fallbackData = {
   },
   hourlyLoadBalancer: {
     generatedAt: "2026-07-07T01:09:59.105Z",
-    source: "tweet_analytics.postedAt + tweet_metrics",
+    source: "packet_telemetry.dispatchedAt + packet_l7_metrics",
     lookbackDays: 30,
     sampleCount: 120,
     minSamples: 2,
@@ -554,7 +554,7 @@ const fallbackData = {
     generatedAt: "2026-07-07T01:09:59.105Z",
     mode: "temporal_rotation",
     confidence: "medium",
-    source: "cached tweet analytics only",
+    source: "cached packet telemetry only",
     zeroExtraXReads: true,
     lookbackDays: 30,
     sampleCount: 120,
@@ -888,7 +888,7 @@ const fallbackData = {
     sampleCount: 120,
     baselineScore: 3.9,
     zeroExtraXReads: true,
-    source: "cached tweet analytics + RSS classifier",
+    source: "cached packet telemetry + RSS classifier",
     nextAction: "expand Consumer Apps: translate the story into a consumer behavior or distribution habit change.",
     primarySegment: {
       id: "consumer_apps",
@@ -4141,7 +4141,7 @@ function manualReplyTargetAtlasData(packet = operatorDispatchPacketData(), route
       draftAngle: item.draftAngle || "",
       evidence,
       useWhen: [
-        "post is fresh",
+        "packet is fresh",
         "thread has real technical exchange",
         "route output adds a decision rule or cost angle",
       ],
@@ -6518,7 +6518,7 @@ function missionControlData() {
       learning: sampleCount > 10 ? "online" : "sample-starved",
     },
     nextAction: routeReadiness < 50
-      ? "Arm more manual route lanes before the next standalone post."
+      ? "Arm more manual route lanes before the next standalone packet."
       : routeAmplifier.nextAction || kinetics.nextAction || "Keep the current route loop hot and let maintenance write outcomes back.",
     topRoute: topRoute
       ? {
@@ -8026,13 +8026,13 @@ function derivedNarrativeResonanceController() {
     promptDirectives: [
       primaryPillar?.directive || null,
       `Account promise: ${accountPromise}`,
-      "Every post must reinforce one durable memory: leverage, defaults, behavior, risk, or timing.",
+      "Every packet must reinforce one durable memory: leverage, defaults, behavior, risk, or timing.",
       "Prefer reusable rules and tradeoffs over standalone news recap.",
     ].filter(Boolean),
     guardrails: [
       "0 X read ops; cached analytics only.",
       "No ragebait, giveaways, pure recap, or unrelated politics.",
-      "A post must still read like Tech Signals without opening the profile.",
+      "Every packet must still read like Tech Signals without opening the profile.",
     ],
   };
 }
@@ -8285,7 +8285,7 @@ function derivedTopicTimingRouter() {
     promptDirectives: [
       activeLane ? `Topic timing: ${activeLane.windowLabel} UTC -> ${activeLane.pillarLabel} using ${activeLane.formatLabel}.` : null,
       activeLane?.directive || null,
-      "If posting outside the selected UTC window, keep the pillar but tighten the hook.",
+      "If dispatching outside the selected UTC window, keep the pillar but tighten the hook.",
       "0 extra X reads; no live trend scraping required for this timing route.",
     ].filter(Boolean),
     guardrails: [
@@ -9243,7 +9243,7 @@ function nextWindowCommanderData() {
     ],
     lanes,
     checklist: [
-      publishGate === "open" ? `Post near ${activeWindow.windowLabel} UTC.` : "Use manual route before another standalone post.",
+      publishGate === "open" ? `Dispatch near ${activeWindow.windowLabel} UTC.` : "Use manual route before another standalone packet.",
       `Bias the hook toward ${activeAngle.formatLabel} / ${activeAngle.pillarLabel}.`,
       "Copy one reply into a relevant high-signal thread.",
       "Let the next metrics refresh update the command.",
@@ -10482,7 +10482,7 @@ function proofReason(post) {
     return "它具体、有立场，并且不是标题复述，因此更像一个值得 ACK 和转发的观点。";
   }
   if (template.includes("decision")) return "It turns a news item into a concrete decision rule, so readers can immediately judge whether to act.";
-  if (template.includes("question")) return "It does not recap the headline. It asks a sharp question that invites agreement, pushback, and reposts.";
+  if (template.includes("question")) return "It does not recap the headline. It asks a sharp question that invites ACKs, pushback, and shares.";
   if (template.includes("pain")) return "It translates product news into an operator pain point, which makes the take useful beyond the launch itself.";
   return "It is specific, takes a clear position, and avoids headline recap, making it easier to ACK and share.";
 }
@@ -12093,7 +12093,7 @@ function derivedBudgetAllocationData() {
     },
     {
       id: "text_post_experiment",
-      label: "text post experiment",
+      label: "text packet experiment",
       costUsd: textCost,
       safeSlots: textSlots,
       expectedLiftPct: Math.max(number(kinetics.expectedLiftPct), routeLift * 0.55),
@@ -12106,7 +12106,7 @@ function derivedBudgetAllocationData() {
     },
     {
       id: "media_post_surge",
-      label: "media post surge",
+      label: "media packet surge",
       costUsd: mediaCost,
       safeSlots: mediaSlots,
       expectedLiftPct: mediaLift,
