@@ -1151,6 +1151,7 @@ const translations = {
     decision_trace_policy_primary: "primary",
     decision_trace_policy_avoid: "avoid",
     decision_trace_policy_directives: "directives",
+    decision_trace_policy_score: "policy",
     decision_trace_empty: "No generation decision trace recorded yet.",
     decision_trace_rank: "rank {rank}/{total}",
     decision_trace_score: "score {score}",
@@ -2116,6 +2117,7 @@ const translations = {
     decision_trace_policy_primary: "主格式",
     decision_trace_policy_avoid: "规避",
     decision_trace_policy_directives: "指令",
+    decision_trace_policy_score: "策略",
     decision_trace_empty: "还没有记录生成决策 trace。",
     decision_trace_rank: "排名 {rank}/{total}",
     decision_trace_score: "分数 {score}",
@@ -10483,6 +10485,18 @@ function proofReason(post) {
   return "It is specific, takes a clear position, and avoids headline recap, making it easier to ACK and share.";
 }
 
+function derivedCandidatePolicyScore(candidate) {
+  const policy = dashboardData.cachedGenerationPolicy || fallbackData.cachedGenerationPolicy || null;
+  if (!policy || !candidate) return 0;
+  const templateId = candidate.templateId || candidate.template || "";
+  let score = 0;
+  if (policy.primaryFormatId && templateId === policy.primaryFormatId) score += 10;
+  else if ((policy.rankedFormatIds || []).includes(templateId)) score += 4;
+  else if (policy.primaryFormatId && templateId) score -= 3;
+  if ((policy.avoidFormatIds || []).includes(templateId)) score -= 16;
+  return score;
+}
+
 function normalizeTraceCandidate(candidate, index, selectedText = "") {
   const text = candidate?.text || "";
   return {
@@ -10495,6 +10509,10 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
     contentBanditScore: number(candidate?.contentBanditScore),
     angleLoadRouterScore: number(candidate?.angleLoadRouterScore),
     growthOpportunityScore: number(candidate?.growthOpportunityScore),
+    cachedGenerationPolicyScore: candidate?.cachedGenerationPolicyScore == null
+      ? derivedCandidatePolicyScore(candidate)
+      : number(candidate?.cachedGenerationPolicyScore),
+    cachedGenerationPolicyHits: candidate?.cachedGenerationPolicyHits || null,
     growthOpportunityLane: candidate?.growthOpportunityLane || null,
     reason: candidate?.reason || "",
     diagnostics: Array.isArray(candidate?.diagnostics) ? candidate.diagnostics : [],
@@ -10503,6 +10521,7 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
     contentBanditDiagnostics: Array.isArray(candidate?.contentBanditDiagnostics) ? candidate.contentBanditDiagnostics : [],
     angleLoadRouterDiagnostics: Array.isArray(candidate?.angleLoadRouterDiagnostics) ? candidate.angleLoadRouterDiagnostics : [],
     growthOpportunityDiagnostics: Array.isArray(candidate?.growthOpportunityDiagnostics) ? candidate.growthOpportunityDiagnostics : [],
+    cachedGenerationPolicyDiagnostics: Array.isArray(candidate?.cachedGenerationPolicyDiagnostics) ? candidate.cachedGenerationPolicyDiagnostics : [],
     qualityIssues: Array.isArray(candidate?.qualityIssues) ? candidate.qualityIssues : [],
     aiQualityVerdict: candidate?.aiQualityVerdict || null,
     characterCount: number(candidate?.characterCount, String(text).length),
@@ -10622,6 +10641,7 @@ function candidateDiagnosticText(candidate) {
     ...candidate.angleMutationDiagnostics,
     ...candidate.angleLoadRouterDiagnostics,
     ...candidate.growthOpportunityDiagnostics,
+    ...candidate.cachedGenerationPolicyDiagnostics,
     ...candidate.contentBanditDiagnostics,
     ...candidate.hookPatternDiagnostics,
     ...candidate.qualityIssues.map((issue) => `gate:${issue}`),
@@ -10878,7 +10898,7 @@ function renderGenerationDecisionTrace() {
             <div class="trace-candidate-body">
               <div>
                 <strong>${escapeHtml(formatTemplate(candidate.templateId))}</strong>
-                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · opportunity ${escapeHtml(formatNumber(candidate.growthOpportunityScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
+                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · ${escapeHtml(t("decision_trace_policy_score"))} ${escapeHtml(formatNumber(candidate.cachedGenerationPolicyScore, 1))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · opportunity ${escapeHtml(formatNumber(candidate.growthOpportunityScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
               </div>
               <p>${escapeHtml(candidate.reason || candidateDiagnosticText(candidate))}</p>
               <i></i>
