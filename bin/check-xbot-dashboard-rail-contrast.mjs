@@ -8,11 +8,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
 const finalGutterMarker = "Highest-specificity rail override v9: keep the light UI sidebar pinned to the SRE command surface.";
-const lightTerminalMarker = "Light rail terminal override v10: align the white UI sidebar with the bright command surface.";
+const lightTerminalMarker = "Light rail terminal override v11: keep light mode on the same dark NOC rail as the command surface.";
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-rail-v10-light-sidebar";
+const requiredCssVersion = "20260709-rail-v11-dark-light-rail";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -150,14 +150,14 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, finalCss, "--rail-frame-width: 228px;", "the compact desktop rail width");
   assertIncludes(cssFile, finalCss, "@media (max-width: 1080px)", "the mobile rail breakpoint");
   assertIncludes(cssFile, finalCss, "background: transparent !important;", "the mobile rail gutter reset");
-  assertIncludes(cssFile, lightTerminalCss, "color-scheme: light !important;", "the light-mode rail color scheme");
-  assertIncludes(cssFile, lightTerminalCss, "color: #334155 !important;", "the readable light-mode rail body text");
-  assertIncludes(cssFile, lightTerminalCss, "color: #111827 !important;", "the readable light-mode rail heading text");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: #eef3f8 !important;", "the light-mode rail surface");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(255, 255, 255, 0.96) !important;", "the light-mode rail card surface");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(248, 250, 252, 0.92) !important;", "the light-mode nav fill");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: #fff7ed !important;", "the light-mode active and budget fill");
-  assertIncludes(cssFile, lightTerminalCss, "text-shadow: none !important;", "the removed light-mode text glow");
+  assertIncludes(cssFile, lightTerminalCss, "color-scheme: dark !important;", "the light-mode dark rail color scheme");
+  assertIncludes(cssFile, lightTerminalCss, "color: #d8e2f0 !important;", "the readable light-mode dark rail body text");
+  assertIncludes(cssFile, lightTerminalCss, "color: #f9fafb !important;", "the readable light-mode dark rail heading text");
+  assertIncludes(cssFile, lightTerminalCss, "background-color: #0b111b !important;", "the light-mode dark rail surface");
+  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(17, 24, 39, 0.985) !important;", "the light-mode dark rail card surface");
+  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(15, 23, 42, 0.88) !important;", "the light-mode dark nav fill");
+  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(24, 34, 52, 0.98) !important;", "the light-mode dark active fill");
+  assertIncludes(cssFile, lightTerminalCss, "text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3) !important;", "the light-mode dark rail text glow");
 
   const requiredValues = {
     bg: "#0b111b",
