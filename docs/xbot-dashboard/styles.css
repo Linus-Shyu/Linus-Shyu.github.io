@@ -26113,3 +26113,144 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     background: transparent !important;
   }
 }
+
+/* Signal topology v3 final geometry: data-aligned NOC nodes over the live canvas. */
+html[data-theme][data-theme] body .ops-main .signal-stage {
+  --signal-node-card-width: 158px;
+  --signal-node-card-height: 58px;
+  --signal-node-route-width: 186px;
+  min-height: 460px !important;
+  border-radius: 6px !important;
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--line)) !important;
+  background-image:
+    radial-gradient(circle at 46% 50%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 33%),
+    radial-gradient(circle at 73% 42%, color-mix(in srgb, var(--ok) 10%, transparent), transparent 27%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 90%, transparent), var(--surface-soft)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 7%, transparent),
+    0 0 10px rgba(0, 240, 255, 0.1),
+    0 22px 58px rgba(0, 0, 0, 0.18) !important;
+}
+
+html[data-theme][data-theme] body .ops-main #signal-canvas {
+  min-height: 460px !important;
+}
+
+html[data-theme][data-theme] body.demo-mode .ops-main .signal-stage,
+html[data-theme][data-theme] body.demo-mode .ops-main #signal-canvas {
+  min-height: 480px !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button {
+  display: grid !important;
+  width: var(--signal-node-card-width) !important;
+  min-width: var(--signal-node-card-width) !important;
+  min-height: var(--signal-node-card-height) !important;
+  align-content: center !important;
+  padding: 10px 44px 9px 31px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  color: var(--ink) !important;
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line)) !important;
+  background-color: color-mix(in srgb, var(--surface) 94%, transparent) !important;
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), transparent 56%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 8%, transparent),
+    0 0 10px rgba(0, 240, 255, 0.1),
+    0 16px 34px rgba(0, 0, 0, 0.2) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button::after {
+  max-width: 42px !important;
+  padding: 3px 6px !important;
+  font-size: 8px !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button .signal-node-label {
+  width: 100% !important;
+  overflow: hidden !important;
+  color: var(--ink) !important;
+  font-size: 13px !important;
+  line-height: 1.08 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button em {
+  overflow: hidden !important;
+  color: var(--muted) !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button.x {
+  width: var(--signal-node-route-width) !important;
+  min-width: var(--signal-node-route-width) !important;
+  border-color: color-mix(in srgb, var(--ok) 54%, var(--line)) !important;
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--ok) 16%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012)) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ok) 12%, transparent),
+    0 0 10px rgba(0, 255, 102, 0.12),
+    0 16px 34px rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button.x .signal-node-label {
+  color: color-mix(in srgb, var(--ink) 82%, var(--ok)) !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-theme][data-theme] body .ops-main .signal-node-button.x em {
+  color: color-mix(in srgb, var(--ok) 76%, var(--muted)) !important;
+}
+
+html[data-theme="dark"][data-theme] body .ops-main .signal-node-button {
+  background-color: rgba(17, 24, 39, 0.88) !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 240, 255, 0.08),
+    0 0 10px rgba(0, 240, 255, 0.1),
+    0 18px 38px rgba(0, 0, 0, 0.34) !important;
+}
+
+html[data-theme="dark"][data-theme] body .ops-main .signal-node-button.x {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+}
+
+html[data-theme="light"][data-theme] body .ops-main .signal-node-button {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 240, 255, 0.08),
+    0 12px 26px rgba(15, 23, 42, 0.12) !important;
+}
+
+@media (max-width: 760px) {
+  html[data-theme][data-theme] body .ops-main .signal-stage {
+    --signal-node-card-width: 132px;
+    --signal-node-card-height: 50px;
+    --signal-node-route-width: 148px;
+    min-height: 430px !important;
+  }
+
+  html[data-theme][data-theme] body .ops-main #signal-canvas {
+    min-height: 430px !important;
+  }
+
+  html[data-theme][data-theme] body .ops-main .signal-node-button {
+    padding: 8px 25px 7px 24px !important;
+  }
+
+  html[data-theme][data-theme] body .ops-main .signal-node-button .signal-node-label {
+    font-size: 11px !important;
+  }
+
+  html[data-theme][data-theme] body .ops-main .signal-node-button em {
+    font-size: 9px !important;
+  }
+}

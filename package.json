@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "hexo generate",
-    "check:xbot-dashboard": "node bin/check-xbot-dashboard-vocabulary.mjs && node bin/check-xbot-dashboard-rail-contrast.mjs && node bin/check-xbot-dashboard-visual-contract.mjs && node bin/check-xbot-dashboard-learning-contract.mjs && node bin/check-xbot-dashboard-commander-contract.mjs && node bin/check-xbot-dashboard-data-consistency.mjs",
+    "check:xbot-dashboard": "node bin/check-xbot-dashboard-vocabulary.mjs && node bin/check-xbot-dashboard-rail-contrast.mjs && node bin/check-xbot-dashboard-visual-contract.mjs && node bin/check-xbot-dashboard-learning-contract.mjs && node bin/check-xbot-dashboard-commander-contract.mjs && node bin/check-xbot-dashboard-signal-topology.mjs && node bin/check-xbot-dashboard-data-consistency.mjs",
     "clean": "hexo clean",
     "prepare:pages": "node bin/prepare-pages.js",
     "verify:xbot-dashboard": "npm run check:xbot-dashboard && node --check xbot-dashboard/script.js && node --check docs/xbot-dashboard/script.js",

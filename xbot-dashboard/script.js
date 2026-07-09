@@ -3270,21 +3270,23 @@ function renderPublishArbiter() {
   `;
 }
 
+const SIGNAL_NODE_ORDER = ["rss", "score", "draft", "x", "learn"];
+
 const SIGNAL_NODE_COORDS = {
-  rss: { x: 0.2, y: 0.32 },
-  score: { x: 0.5, y: 0.19 },
-  draft: { x: 0.22, y: 0.72 },
-  x: { x: 0.76, y: 0.38 },
-  learn: { x: 0.78, y: 0.72 },
+  rss: { x: 0.2, y: 0.34 },
+  score: { x: 0.48, y: 0.22 },
+  draft: { x: 0.22, y: 0.7 },
+  x: { x: 0.72, y: 0.42 },
+  learn: { x: 0.76, y: 0.69 },
 };
 
 const SIGNAL_NODE_BOUNDS = {
   default: { minX: 0.14, maxX: 0.86, minY: 0.16, maxY: 0.84 },
-  rss: { minX: 0.16, maxX: 0.4, minY: 0.2, maxY: 0.48 },
-  score: { minX: 0.36, maxX: 0.64, minY: 0.16, maxY: 0.34 },
-  draft: { minX: 0.16, maxX: 0.42, minY: 0.58, maxY: 0.82 },
-  x: { minX: 0.62, maxX: 0.84, minY: 0.28, maxY: 0.5 },
-  learn: { minX: 0.62, maxX: 0.84, minY: 0.58, maxY: 0.82 },
+  rss: { minX: 0.16, maxX: 0.38, minY: 0.22, maxY: 0.48 },
+  score: { minX: 0.34, maxX: 0.6, minY: 0.17, maxY: 0.34 },
+  draft: { minX: 0.16, maxX: 0.4, minY: 0.58, maxY: 0.8 },
+  x: { minX: 0.62, maxX: 0.78, minY: 0.32, maxY: 0.52 },
+  learn: { minX: 0.64, maxX: 0.82, minY: 0.58, maxY: 0.8 },
 };
 
 const SIGNAL_NODE_LABELS = {
@@ -3489,6 +3491,22 @@ function normalizeSignalNodePosition(node = {}) {
   };
 }
 
+function signalMapNodes(map = {}, derived = buildDerivedSignalMap()) {
+  const fallbackNodes = new Map((derived.nodes || []).map((node) => [node.id, node]));
+  const incomingNodes = new Map((map.nodes || []).map((node) => [node.id, node]));
+  const orderedNodeIds = [
+    ...SIGNAL_NODE_ORDER,
+    ...[...incomingNodes.keys()].filter((nodeId) => !SIGNAL_NODE_ORDER.includes(nodeId)),
+  ];
+  return orderedNodeIds
+    .map((nodeId) => {
+      const fallbackNode = fallbackNodes.get(nodeId) || { id: nodeId };
+      const incomingNode = incomingNodes.get(nodeId) || {};
+      return { ...fallbackNode, ...incomingNode, id: nodeId };
+    })
+    .filter((node) => node.id);
+}
+
 function controlPlaneData() {
   const control = dashboardData.controlPlane || fallbackData.controlPlane;
   if (control) return control;
@@ -3532,8 +3550,9 @@ function gateStatus(value, fallback = "ok") {
 
 function signalMap() {
   const incoming = dashboardData.signalMap || fallbackData.signalMap;
-  const map = incoming?.nodes?.length ? incoming : buildDerivedSignalMap();
-  const nodes = (map.nodes || []).map((node) => {
+  const derived = buildDerivedSignalMap();
+  const map = incoming?.nodes?.length ? incoming : derived;
+  const nodes = signalMapNodes(map, derived).map((node) => {
     const normalized = normalizeSignalMapNode(node);
     return {
       ...normalized,
