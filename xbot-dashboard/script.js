@@ -1881,6 +1881,24 @@ const translations = {
     velocity_open_route: "Open route",
     velocity_copy_angle: "Copy angle",
     velocity_empty: "No trend velocity radar available.",
+    rss_mesh_eyebrow: "RSS Source Mesh",
+    rss_mesh_title: "Cached ingress health map",
+    rss_mesh_zero_reads: "0 X read ops",
+    rss_mesh_primary: "Primary source",
+    rss_mesh_sources: "Sources",
+    rss_mesh_healthy: "Healthy",
+    rss_mesh_watch: "Watch",
+    rss_mesh_cooldown: "Cooldown",
+    rss_mesh_velocity: "Velocity",
+    rss_mesh_breakouts: "Breakouts",
+    rss_mesh_packets: "Packets",
+    rss_mesh_status: "Status",
+    rss_mesh_last: "Last RSS",
+    rss_mesh_route: "Route",
+    rss_mesh_next: "Mesh directive",
+    rss_mesh_empty: "No RSS source mesh available.",
+    rss_mesh_open_story: "Open source",
+    rss_mesh_open_route: "Open route",
     matrix_eyebrow: "UTC Angle Matrix",
     matrix_title: "Temporal prompt fire-control",
     matrix_zero_reads: "cached analytics",
@@ -2934,6 +2952,24 @@ const translations = {
     velocity_open_route: "打开路由",
     velocity_copy_angle: "复制角度",
     velocity_empty: "暂无趋势速度雷达。",
+    rss_mesh_eyebrow: "RSS 来源网格",
+    rss_mesh_title: "缓存入口健康图",
+    rss_mesh_zero_reads: "0 次 X 读取",
+    rss_mesh_primary: "主来源",
+    rss_mesh_sources: "来源",
+    rss_mesh_healthy: "健康",
+    rss_mesh_watch: "观察",
+    rss_mesh_cooldown: "冷却",
+    rss_mesh_velocity: "速度",
+    rss_mesh_breakouts: "爆发",
+    rss_mesh_packets: "数据包",
+    rss_mesh_status: "状态",
+    rss_mesh_last: "最近 RSS",
+    rss_mesh_route: "路由",
+    rss_mesh_next: "网格指令",
+    rss_mesh_empty: "暂无 RSS 来源网格。",
+    rss_mesh_open_story: "打开来源",
+    rss_mesh_open_route: "打开路由",
     matrix_eyebrow: "UTC 角度矩阵",
     matrix_title: "时间 Prompt 火控",
     matrix_zero_reads: "缓存分析",
@@ -9224,12 +9260,207 @@ function renderAudienceRouter() {
 }
 
 function trendVelocityRadarData() {
-  return dashboardData.trendVelocityRadar || fallbackData.trendVelocityRadar || {};
+  const live = dashboardData.trendVelocityRadar;
+  if (live?.items?.length || live?.summary?.items) return live;
+  return fallbackData.trendVelocityRadar || live || {};
+}
+
+function sourceHost(value) {
+  try {
+    return new URL(value).hostname.replace(/^www\./, "");
+  } catch {
+    return String(value || "")
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./, "")
+      .split(/[/?#]/)[0]
+      .trim();
+  }
+}
+
+function derivedRssSourceMesh() {
+  const radar = trendVelocityRadarData();
+  const items = Array.isArray(radar.items) ? radar.items : [];
+  const buckets = new Map();
+  items.forEach((item) => {
+    const source = item.source || sourceHost(item.link);
+    if (!source) return;
+    const current = buckets.get(source) || {
+      source,
+      host: source,
+      trendItems: 0,
+      breakoutCount: 0,
+      velocityTotal: 0,
+      top: null,
+    };
+    const velocity = number(item.velocityScore);
+    current.trendItems += 1;
+    current.velocityTotal += velocity;
+    if (["breakout", "rising", "hot"].includes(String(item.stage || "").toLowerCase())) current.breakoutCount += 1;
+    if (!current.top || velocity > number(current.top.velocityScore)) current.top = item;
+    buckets.set(source, current);
+  });
+  const lanes = [...buckets.values()]
+    .map((bucket, index) => {
+      const avgVelocity = bucket.trendItems ? bucket.velocityTotal / bucket.trendItems : 0;
+      const status = bucket.breakoutCount ? "hot" : avgVelocity >= 60 ? "ok" : "idle";
+      const top = bucket.top || {};
+      return {
+        id: `derived:rss:${bucket.source || index}`,
+        source: bucket.source,
+        host: bucket.host,
+        url: top.link || null,
+        sourceTier: top.sourceTier || "cached",
+        status,
+        healthLabel: status === "hot" ? "velocity hot" : status === "ok" ? "stream healthy" : "cache idle",
+        priorityScore: clamp(avgVelocity + bucket.breakoutCount * 8, 0, 100),
+        totalSuccesses: 0,
+        totalFailures: 0,
+        consecutiveFailures: 0,
+        lastItemCount: bucket.trendItems,
+        lastStatus: "trend_cache_only",
+        trendItems: bucket.trendItems,
+        breakoutCount: bucket.breakoutCount,
+        avgVelocity: Number(avgVelocity.toFixed(1)),
+        topTitle: top.title || null,
+        topLink: top.link || null,
+        routeUrl: top.routeUrl || null,
+        routeQuery: top.routeQuery || null,
+        routeReason: top.routeReason || top.reason || "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
+        zeroExtraXReads: true,
+        estimatedXReadOps: 0,
+      };
+    })
+    .sort((left, right) => number(right.priorityScore) - number(left.priorityScore))
+    .slice(0, 8);
+  const healthySources = lanes.filter((lane) => ["hot", "ok"].includes(lane.status)).length;
+  const watchSources = lanes.filter((lane) => lane.status === "warn").length;
+  const failingSources = lanes.filter((lane) => lane.status === "danger").length;
+  const avgVelocity = lanes.length ? lanes.reduce((sum, lane) => sum + number(lane.avgVelocity), 0) / lanes.length : 0;
+  const breakoutCount = lanes.reduce((sum, lane) => sum + number(lane.breakoutCount), 0);
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    updatedAt: radar.updatedAt || dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_rss_source_mesh",
+    source: "trend_velocity_cache",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    readGate: "cached_only",
+    activeSource: lanes[0] || null,
+    summary: {
+      totalSources: lanes.length,
+      healthySources,
+      watchSources,
+      failingSources,
+      cachedTrendItems: items.length,
+      breakoutCount,
+      avgVelocity: Number(avgVelocity.toFixed(1)),
+      primarySource: lanes[0]?.source || null,
+      nextAction: breakoutCount
+        ? "Route the hottest cached RSS source through manual X web lanes."
+        : "Wait for the next normal RSS refresh and keep X reads sealed.",
+    },
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "sources", label: "RSS_SOURCES", value: String(lanes.length), status: lanes.length ? "ok" : "warn" },
+      { id: "velocity", label: "AVG_VELOCITY", value: formatNumber(avgVelocity, 1), status: avgVelocity >= 70 ? "hot" : avgVelocity > 0 ? "ok" : "warn" },
+      { id: "cooldown", label: "COOLDOWN", value: String(failingSources), status: failingSources ? "danger" : "ok" },
+    ],
+    lanes,
+    guardrails: [
+      "Cached RSS telemetry only.",
+      "No live X search/read API calls.",
+      "Manual route execution stays human-in-loop.",
+    ],
+  };
+}
+
+function rssSourceMeshData() {
+  const live = dashboardData.rssSourceMesh;
+  if (live?.lanes?.length || live?.summary?.totalSources) return live;
+  const fallback = fallbackData.rssSourceMesh;
+  if (fallback?.lanes?.length || fallback?.summary?.totalSources) return fallback;
+  return derivedRssSourceMesh();
 }
 
 function velocityStageLabel(stage) {
   const normalized = String(stage || "watch").replace(/_/g, " ");
   return normalized.toUpperCase();
+}
+
+function renderRssSourceMesh() {
+  const mesh = rssSourceMeshData();
+  const container = $("#rss-source-mesh");
+  if (!container) return;
+  const lanes = Array.isArray(mesh.lanes) ? mesh.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("rss_mesh_empty"))}</p>`;
+    return;
+  }
+  const summary = mesh.summary || {};
+  const primary = mesh.activeSource || lanes[0] || {};
+  const cells = [
+    { label: t("rss_mesh_sources"), value: formatNumber(summary.totalSources ?? lanes.length), status: "ok" },
+    { label: t("rss_mesh_healthy"), value: formatNumber(summary.healthySources), status: "ok" },
+    { label: t("rss_mesh_watch"), value: formatNumber(summary.watchSources), status: summary.watchSources ? "warn" : "ok" },
+    { label: t("rss_mesh_cooldown"), value: formatNumber(summary.failingSources), status: summary.failingSources ? "danger" : "ok" },
+  ];
+  container.innerHTML = `
+    <div class="rss-mesh-head">
+      <div>
+        <span>${escapeHtml(t("rss_mesh_eyebrow"))}</span>
+        <strong>${escapeHtml(t("rss_mesh_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("rss_mesh_zero_reads"))}</em>
+    </div>
+    <div class="rss-mesh-meta">
+      <div><span>${escapeHtml(t("rss_mesh_primary"))}</span><strong>${escapeHtml(primary.source || summary.primarySource || "-")}</strong></div>
+      <div><span>${escapeHtml(t("rss_mesh_velocity"))}</span><strong>${escapeHtml(formatNumber(summary.avgVelocity, 1))}</strong></div>
+      <div><span>${escapeHtml(t("rss_mesh_breakouts"))}</span><strong>${escapeHtml(formatNumber(summary.breakoutCount))}</strong></div>
+    </div>
+    <div class="rss-mesh-cells">
+      ${cells.map((cell) => `
+        <div class="${escapeHtml(cell.status)}">
+          <span>${escapeHtml(cell.label)}</span>
+          <strong>${escapeHtml(cell.value)}</strong>
+        </div>
+      `).join("")}
+    </div>
+    <div class="rss-mesh-lanes">
+      ${lanes.slice(0, 8).map((lane, index) => {
+        const score = clamp(number(lane.priorityScore), 0, 100);
+        const status = lane.status || "idle";
+        const safeTopLink = /^https?:\/\//i.test(lane.topLink || lane.url || "") ? (lane.topLink || lane.url) : "";
+        const safeRouteUrl = /^https:\/\/x\.com\/search\?/i.test(lane.routeUrl || "") ? lane.routeUrl : "";
+        return `
+          <article class="${escapeHtml(status)}" style="--rss-score:${score.toFixed(1)}%">
+            <div class="rss-lane-id">
+              <span>${escapeHtml(String(index + 1).padStart(2, "0"))}</span>
+              <strong>${escapeHtml(lane.source || lane.host || "-")}</strong>
+              <em>${escapeHtml(lane.sourceTier || "cached")} · ${escapeHtml(lane.healthLabel || status)}</em>
+            </div>
+            <div class="rss-lane-topic">
+              <span>${escapeHtml(t("rss_mesh_status"))}: ${escapeHtml(status.toUpperCase())}</span>
+              ${safeTopLink ? `<a href="${escapeHtml(safeTopLink)}" target="_blank" rel="noreferrer">${escapeHtml(lane.topTitle || lane.source || "-")}</a>` : `<strong>${escapeHtml(lane.topTitle || lane.source || "-")}</strong>`}
+              <small>${escapeHtml(t("rss_mesh_packets"))}: ${escapeHtml(formatNumber(lane.lastItemCount || lane.trendItems || 0))} · ${escapeHtml(t("rss_mesh_breakouts"))}: ${escapeHtml(formatNumber(lane.breakoutCount || 0))}</small>
+            </div>
+            <div class="rss-lane-meter">
+              <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+              <div><span></span></div>
+            </div>
+            <div class="rss-lane-actions">
+              ${safeRouteUrl ? `<a href="${escapeHtml(safeRouteUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("rss_mesh_open_route"))}</a>` : ""}
+              ${safeTopLink ? `<a href="${escapeHtml(safeTopLink)}" target="_blank" rel="noreferrer">${escapeHtml(t("rss_mesh_open_story"))}</a>` : ""}
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="rss-mesh-directive">
+      <span>${escapeHtml(t("rss_mesh_next"))}</span>
+      <code>${escapeHtml(sreText(summary.nextAction || primary.routeReason || "-"))}</code>
+    </div>
+  `;
 }
 
 function renderTrendVelocityRadar() {
@@ -10328,6 +10559,7 @@ function renderLearning() {
   renderAngleMutationReactor();
   renderAudienceRouter();
   renderTrendVelocityRadar();
+  renderRssSourceMesh();
   renderAngleLoadRouter();
   renderTemporalAngleMatrix();
   renderExperimentPlan();
@@ -10763,6 +10995,8 @@ function signalDetailConfig(nodeId) {
   const { remaining } = apiBudget();
   const best = bestPost();
   const sources = signalSourceRows();
+  const rssMesh = rssSourceMeshData();
+  const rssLanes = Array.isArray(rssMesh.lanes) ? rssMesh.lanes : [];
   const { learning, bestHook, bestSource, worstFormat } = learningData();
   const experiment = currentLang === "zh"
     ? learning.nextExperimentZh || learning.nextExperiment || "-"
@@ -10870,11 +11104,33 @@ function signalDetailConfig(nodeId) {
     title: t("signal_rss_title"),
     summary: t("signal_rss_summary"),
     body: `
+      <div class="signal-detail-grid">
+        ${detailStat(t("rss_mesh_sources"), formatNumber(rssMesh.summary?.totalSources ?? rssLanes.length))}
+        ${detailStat(t("rss_mesh_healthy"), formatNumber(rssMesh.summary?.healthySources))}
+        ${detailStat(t("rss_mesh_velocity"), formatNumber(rssMesh.summary?.avgVelocity, 1))}
+        ${detailStat(t("rss_mesh_breakouts"), formatNumber(rssMesh.summary?.breakoutCount))}
+        ${detailStat(t("rss_mesh_zero_reads"), "0")}
+      </div>
       ${detailSection(
-        t("signal_sources"),
-        sources
-          .slice(0, 4)
-          .map((source) =>
+        t("rss_mesh_title"),
+        rssLanes.length
+          ? rssLanes
+              .slice(0, 5)
+              .map((lane) =>
+                detailRow({
+                  title: lane.source || lane.host || "-",
+                  meta: `${t("rss_mesh_status")} ${String(lane.status || "-").toUpperCase()} · ${t("rss_mesh_velocity")} ${formatNumber(lane.avgVelocity, 1)} · ${t("rss_mesh_packets")} ${formatNumber(lane.lastItemCount || lane.trendItems || 0)}`,
+                  body: sreText(lane.routeReason || lane.healthLabel || "-"),
+                  href: /^https?:\/\//i.test(lane.topLink || lane.url || "") ? (lane.topLink || lane.url) : "",
+                  action: /^https:\/\/x\.com\/search\?/i.test(lane.routeUrl || "")
+                    ? `<a class="signal-mini-copy" href="${escapeHtml(lane.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("rss_mesh_open_route"))}</a>`
+                    : "",
+                }),
+              )
+              .join("")
+          : sources
+              .slice(0, 4)
+              .map((source) =>
             detailRow({
               title: source.name,
               meta: sourceMeta(source),

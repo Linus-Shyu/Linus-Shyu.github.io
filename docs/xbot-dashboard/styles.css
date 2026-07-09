@@ -17950,6 +17950,317 @@ body:not(.demo-mode) .demo-strip {
     inset 0 1px 0 color-mix(in srgb, var(--surface) 56%, transparent);
 }
 
+.rss-source-mesh {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 8px;
+  border: 1px solid color-mix(in srgb, #00ff66 24%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 92% 0, color-mix(in srgb, #00ff66 12%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #00f0ff 8%, transparent), transparent 58%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 20px color-mix(in srgb, #00ff66 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 56%, transparent);
+}
+
+.rss-mesh-head,
+.rss-mesh-meta,
+.rss-mesh-cells,
+.rss-mesh-lanes article,
+.rss-mesh-directive {
+  min-width: 0;
+}
+
+.rss-mesh-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.rss-mesh-head span,
+.rss-mesh-meta span,
+.rss-mesh-cells span,
+.rss-lane-id em,
+.rss-lane-topic span,
+.rss-lane-topic small,
+.rss-mesh-directive span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rss-mesh-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rss-mesh-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00ff66;
+  background: color-mix(in srgb, #00ff66 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.rss-mesh-meta,
+.rss-mesh-cells {
+  display: grid;
+  gap: 8px;
+}
+
+.rss-mesh-meta {
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
+}
+
+.rss-mesh-cells {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.rss-mesh-meta div,
+.rss-mesh-cells div,
+.rss-mesh-lanes article,
+.rss-mesh-directive {
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 76%, transparent), color-mix(in srgb, var(--surface-soft) 88%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.rss-mesh-meta div,
+.rss-mesh-cells div {
+  min-width: 0;
+  padding: 8px;
+}
+
+.rss-mesh-meta strong,
+.rss-mesh-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rss-mesh-cells .danger strong {
+  color: #ff007a;
+}
+
+.rss-mesh-cells .warn strong {
+  color: #ff9f1c;
+}
+
+.rss-mesh-cells .hot strong,
+.rss-mesh-cells .ok strong {
+  color: #00ff66;
+}
+
+.rss-mesh-lanes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.rss-mesh-lanes article {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 0.75fr) minmax(0, 1.25fr) 76px 92px;
+  gap: 8px;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.rss-mesh-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.28);
+}
+
+.rss-mesh-lanes article.hot::before,
+.rss-mesh-lanes article.ok::before {
+  background: #00ff66;
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.32);
+}
+
+.rss-mesh-lanes article.warn::before {
+  background: #ff9f1c;
+  box-shadow: 0 0 16px rgba(255, 159, 28, 0.28);
+}
+
+.rss-mesh-lanes article.danger::before {
+  background: #ff007a;
+  box-shadow: 0 0 16px rgba(255, 0, 122, 0.3);
+}
+
+.rss-lane-id,
+.rss-lane-topic,
+.rss-lane-meter,
+.rss-lane-actions {
+  min-width: 0;
+}
+
+.rss-lane-id span {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  margin-right: 6px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #00ff66 32%, var(--line-soft));
+  border-radius: 5px;
+  color: var(--ink);
+  background: color-mix(in srgb, #00ff66 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.rss-lane-id strong,
+.rss-lane-topic a,
+.rss-lane-topic strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.2;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rss-lane-id strong {
+  margin-top: 4px;
+}
+
+.rss-lane-topic a:hover {
+  color: #00ff66;
+}
+
+.rss-lane-topic small {
+  margin-top: 4px;
+  color: var(--body);
+  font-weight: 760;
+  text-transform: none;
+}
+
+.rss-lane-meter {
+  display: grid;
+  gap: 5px;
+  justify-items: end;
+}
+
+.rss-lane-meter strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.rss-lane-meter div {
+  position: relative;
+  width: 64px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.rss-lane-meter span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--rss-score);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.24);
+}
+
+.rss-mesh-lanes article.danger .rss-lane-meter span {
+  background: linear-gradient(90deg, #ff9f1c, #ff007a);
+}
+
+.rss-lane-actions {
+  display: grid;
+  gap: 5px;
+}
+
+.rss-lane-actions a {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00ff66 30%, var(--line-soft));
+  border-radius: 5px;
+  padding: 5px 6px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #00ff66 10%, transparent), transparent),
+    color-mix(in srgb, var(--surface) 62%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rss-lane-actions a:hover {
+  border-color: color-mix(in srgb, #00f0ff 42%, var(--line-soft));
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.12);
+}
+
+.rss-mesh-directive {
+  display: grid;
+  gap: 5px;
+  padding: 8px;
+}
+
+.rss-mesh-directive code {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .velocity-head,
 .velocity-meta,
 .velocity-row,
@@ -18240,6 +18551,21 @@ body:not(.demo-mode) .demo-strip {
 }
 
 @media (max-width: 1180px) {
+  .rss-mesh-meta,
+  .rss-mesh-cells,
+  .rss-mesh-lanes,
+  .rss-mesh-lanes article {
+    grid-template-columns: 1fr;
+  }
+
+  .rss-lane-meter {
+    justify-items: stretch;
+  }
+
+  .rss-lane-meter div {
+    width: 100%;
+  }
+
   .velocity-meta,
   .velocity-row,
   .ops-main > .trend-velocity-radar .velocity-row {
@@ -24941,6 +25267,7 @@ html[data-theme="dark"] .panel,
 html[data-theme="dark"] .command-card,
 html[data-theme="dark"] .server-card,
 html[data-theme="dark"] .trend-velocity-radar,
+html[data-theme="dark"] .rss-source-mesh,
 html[data-theme="dark"] .mission-control-spine,
 html[data-theme="dark"] .command-strip-shell,
 html[data-theme="dark"] .service-card,
@@ -24968,6 +25295,7 @@ html[data-theme="dark"] .metric:hover,
 html[data-theme="dark"] .panel:hover,
 html[data-theme="dark"] .command-card:hover,
 html[data-theme="dark"] .trend-velocity-radar:hover,
+html[data-theme="dark"] .rss-source-mesh:hover,
 html[data-theme="dark"] .mission-control-spine:hover,
 html[data-theme="dark"] .hook-gate-firewall:hover {
   border-color: rgba(0, 240, 255, 0.44) !important;
@@ -24986,6 +25314,7 @@ html[data-theme="dark"] .rail-budget strong,
 html[data-theme="dark"] .server-stat strong,
 html[data-theme="dark"] .firewall-cells strong,
 html[data-theme="dark"] .velocity-score strong,
+html[data-theme="dark"] .rss-lane-meter strong,
 html[data-theme="dark"] .command-strip-score strong {
   font-family: var(--mono, "SFMono-Regular", "Fira Code", ui-monospace, monospace) !important;
   color: #f8fafc !important;

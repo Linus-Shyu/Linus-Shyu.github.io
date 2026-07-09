@@ -309,6 +309,53 @@ function assertL7FireWindowRouter(file, data) {
   assertVisibleTextClean(file, "l7FireWindowRouter", router);
 }
 
+function assertRssSourceMesh(file, data) {
+  const mesh = data.rssSourceMesh;
+  if (!mesh) return;
+  if (mesh.mode !== "zero_read_rss_source_mesh" && mesh.mode !== "derived_zero_read_rss_source_mesh") {
+    fail(`${file} rssSourceMesh mode drifted.`, mesh.mode || "<missing>");
+  }
+  if (mesh.zeroExtraXReads !== true || number(mesh.estimatedXReadOps) !== 0 || number(mesh.estimatedIncrementalXApiUsd) !== 0) {
+    fail(`${file} rssSourceMesh must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: mesh.zeroExtraXReads,
+      estimatedXReadOps: mesh.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: mesh.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (mesh.readGate !== "cached_only") {
+    fail(`${file} rssSourceMesh readGate must stay cached_only.`, mesh.readGate || "<missing>");
+  }
+  const lanes = Array.isArray(mesh.lanes) ? mesh.lanes : [];
+  const totalSources = number(mesh.summary?.totalSources, lanes.length);
+  if (totalSources > 0 && !lanes.length) {
+    fail(`${file} rssSourceMesh summary declares sources but lanes are empty.`, JSON.stringify(mesh.summary || {}));
+  }
+  const allowedStatuses = new Set(["hot", "ok", "warn", "danger", "idle"]);
+  for (const lane of lanes) {
+    if (!String(lane.source || lane.host || "").trim()) {
+      fail(`${file} rssSourceMesh lane is missing source.`, JSON.stringify(lane));
+    }
+    if (!allowedStatuses.has(String(lane.status || ""))) {
+      fail(`${file} rssSourceMesh lane has unknown status.`, JSON.stringify(lane));
+    }
+    const score = number(lane.priorityScore, NaN);
+    if (!(score >= 0 && score <= 100)) {
+      fail(`${file} rssSourceMesh lane priorityScore must be 0..100.`, JSON.stringify(lane));
+    }
+    if (lane.zeroExtraXReads !== true || number(lane.estimatedXReadOps) !== 0) {
+      fail(`${file} rssSourceMesh lane must be zero-read.`, JSON.stringify(lane));
+    }
+  }
+  if (mesh.activeSource && lanes.length && !lanes.some((lane) => lane.id === mesh.activeSource.id)) {
+    fail(`${file} rssSourceMesh activeSource must come from lanes.`, JSON.stringify({ activeSource: mesh.activeSource, lanes }));
+  }
+  const xReadCell = (mesh.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} rssSourceMesh must expose a zero X read cell.`, JSON.stringify(mesh.cells || []));
+  }
+  assertVisibleTextClean(file, "rssSourceMesh", mesh);
+}
+
 function assertOperatorPasteQueue(file, data) {
   const queue = data.operatorPasteQueue;
   if (!queue || typeof queue !== "object") {
@@ -534,6 +581,7 @@ function assertDashboardData(file, data) {
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
   assertL7FireWindowRouter(file, data);
+  assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertCostTelemetry(file, data);
 }
