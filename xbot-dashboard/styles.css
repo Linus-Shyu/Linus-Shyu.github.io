@@ -26661,3 +26661,270 @@ html[data-theme][data-theme] body .ops-main .window-command-head strong {
   color: var(--expo-noc-ink) !important;
   font-family: var(--code-font) !important;
 }
+
+/* Highest-specificity rail override v8: keep the white UI sidebar aligned with the command surface. */
+html[data-theme][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  --rail-frame-width: 236px;
+  --rail-frame-gap: 12px;
+  grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;
+  gap: var(--rail-frame-gap) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 11, 18, 0.995) 0,
+      rgba(11, 17, 27, 0.995) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 28px),
+      rgba(11, 17, 27, 0.72) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 50px),
+      rgba(11, 17, 27, 0) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 86px)
+    ) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-final-bg: #0b111b !important;
+  --rail-final-bg-2: #111827 !important;
+  --rail-final-card: rgba(17, 24, 39, 0.985) !important;
+  --rail-final-card-2: rgba(24, 34, 52, 0.98) !important;
+  --rail-final-line: rgba(148, 163, 184, 0.42) !important;
+  --rail-final-line-strong: rgba(245, 158, 11, 0.82) !important;
+  --rail-final-text: #f9fafb !important;
+  --rail-final-body: #d8e2f0 !important;
+  --rail-final-muted: #a8b5c7 !important;
+  --rail-final-accent: #f59e0b !important;
+  --rail-final-ok: #7dd36f !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9 !important;
+  display: flex !important;
+  width: var(--rail-frame-width, 236px) !important;
+  min-width: var(--rail-frame-width, 236px) !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  padding: 14px !important;
+  overflow-y: auto !important;
+  color-scheme: dark !important;
+  color: var(--rail-final-body) !important;
+  border-width: 0 1px 0 0 !important;
+  border-radius: 0 !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 34% -8%, rgba(245, 158, 11, 0.36), transparent 32%),
+    radial-gradient(circle at -12% 74%, rgba(125, 211, 111, 0.18), transparent 36%),
+    radial-gradient(circle at 112% 30%, rgba(0, 240, 255, 0.12), transparent 35%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 1px),
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.052) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, var(--rail-final-bg-2), var(--rail-final-bg) 76%) !important;
+  background-size: auto, auto, auto, 100% 100%, 100% 38px, auto !important;
+  box-shadow:
+    26px 0 58px rgba(2, 6, 23, 0.36),
+    inset -1px 0 0 rgba(245, 158, 11, 0.24),
+    inset 1px 0 0 rgba(255, 255, 255, 0.07) !important;
+  scrollbar-color: var(--rail-final-accent) transparent !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail::before {
+  display: block !important;
+  opacity: 0.2 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.06) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, rgba(245, 158, 11, 0.12), transparent 44%) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border: 1px solid var(--rail-final-line) !important;
+  background-color: var(--rail-final-card) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.012)),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.07), rgba(0, 240, 255, 0.025)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  min-height: 64px !important;
+  padding: 10px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand > span:not(.brand-mark),
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card {
+  display: block !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  width: 42px !important;
+  height: 42px !important;
+  flex: 0 0 42px !important;
+  color: #071018 !important;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.78), transparent 23%),
+    linear-gradient(135deg, #ffd166, var(--rail-final-accent) 58%, #00f0ff) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.44) inset,
+    0 0 26px rgba(245, 158, 11, 0.34) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--rail-final-muted) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini {
+  display: grid !important;
+  gap: 7px !important;
+  margin-top: 12px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  min-height: 38px !important;
+  padding: 0 10px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line .status-dot {
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--rail-final-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 18px rgba(125, 211, 111, 0.3) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong {
+  max-width: none !important;
+  font-size: 12px !important;
+  text-align: left !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em {
+  display: block !important;
+  font-size: 10px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav {
+  display: grid !important;
+  gap: 7px !important;
+  margin: 18px 0 !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  justify-content: flex-start !important;
+  min-height: 44px !important;
+  border: 1px solid transparent !important;
+  padding: 0 12px !important;
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  font-size: 13px !important;
+  line-height: 1.15 !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+  content: "" !important;
+  display: block !important;
+  width: 7px !important;
+  height: 7px !important;
+  flex: 0 0 7px !important;
+  border-radius: 999px !important;
+  margin-right: 10px !important;
+  background: var(--rail-final-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 18px rgba(125, 211, 111, 0.3) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  content: none !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff7df !important;
+  border-color: var(--rail-final-line-strong) !important;
+  background-color: var(--rail-final-card-2) !important;
+  background-image:
+    linear-gradient(90deg, rgba(245, 158, 11, 0.27), transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.014)) !important;
+  box-shadow:
+    inset 3px 0 0 var(--rail-final-accent),
+    0 0 0 1px rgba(245, 158, 11, 0.15),
+    0 12px 30px rgba(245, 158, 11, 0.11) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  display: block !important;
+  margin-top: auto !important;
+  border-color: var(--rail-final-line-strong) !important;
+  background-color: rgba(37, 24, 10, 0.985) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.24), transparent 58%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(0, 240, 255, 0.04)) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-accent) !important;
+}
+
+@media (min-width: 1081px) and (max-width: 1320px) {
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    --rail-frame-width: 228px;
+  }
+
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    --rail-frame-width: 228px;
+  }
+}
+
+@media (max-width: 1080px) {
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+    position: relative !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+  }
+
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    background: transparent !important;
+  }
+}

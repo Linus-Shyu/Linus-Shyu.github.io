@@ -7,11 +7,11 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
-const finalGutterMarker = "Highest-specificity rail override v6 final pass: keep the light UI sidebar in the command surface.";
+const finalGutterMarker = "Highest-specificity rail override v8: keep the white UI sidebar aligned with the command surface.";
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-expo-noc-v7";
+const requiredCssVersion = "20260709-sidebar-v8";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -112,7 +112,7 @@ for (const dir of dashboards) {
     fail(`${cssFile} is missing the prior rail override marker.`, priorRailMarker);
   }
   if (finalGutterIndex !== markerIndex) {
-    fail(`${cssFile} final rail override must be the v6 light-sidebar guard.`, finalGutterMarker);
+    fail(`${cssFile} final rail override must be the v8 light-sidebar guard.`, finalGutterMarker);
   }
   if (priorRailIndex > markerIndex) {
     fail(`${cssFile} has the older v2 rail override after the v4 final pass.`);
@@ -139,7 +139,7 @@ for (const dir of dashboards) {
     "the dark light-mode gutter fill",
   );
   assertIncludes(cssFile, finalCss, "@media (min-width: 1081px) and (max-width: 1320px)", "the compact desktop rail breakpoint");
-  assertIncludes(cssFile, finalCss, "--rail-frame-width: 212px;", "the compact desktop rail width");
+  assertIncludes(cssFile, finalCss, "--rail-frame-width: 228px;", "the compact desktop rail width");
   assertIncludes(cssFile, finalCss, "@media (max-width: 1080px)", "the mobile rail breakpoint");
   assertIncludes(cssFile, finalCss, "background: transparent !important;", "the mobile rail gutter reset");
 
