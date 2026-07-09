@@ -1946,6 +1946,23 @@ const translations = {
     commander_lanes: "signal lanes",
     commander_checklist: "execution checklist",
     commander_empty: "No next-window commander telemetry available.",
+    fire_router_eyebrow: "L7 Fire-Window Router",
+    fire_router_title: "Cached packet launch mesh",
+    fire_router_zero_reads: "0 X read ops",
+    fire_router_score: "router score",
+    fire_router_active: "active lane",
+    fire_router_cells: "gate cells",
+    fire_router_lanes: "candidate lanes",
+    fire_router_guardrails: "hard constraints",
+    fire_router_source: "source",
+    fire_router_next: "next command",
+    fire_router_window: "window",
+    fire_router_format: "format",
+    fire_router_pillar: "pillar",
+    fire_router_l7: "L7 events",
+    fire_router_load: "load",
+    fire_router_samples: "n",
+    fire_router_empty: "No L7 fire-window router telemetry available.",
     best_hook: "Winning rule",
     worst_format: "Weakest format",
     best_source: "Best source",
@@ -2982,6 +2999,23 @@ const translations = {
     commander_lanes: "信号通道",
     commander_checklist: "执行清单",
     commander_empty: "暂无下一窗口指挥遥测。",
+    fire_router_eyebrow: "L7 发射窗口路由器",
+    fire_router_title: "缓存数据包发射网格",
+    fire_router_zero_reads: "0 次 X 读取",
+    fire_router_score: "路由评分",
+    fire_router_active: "活动通道",
+    fire_router_cells: "闸门单元",
+    fire_router_lanes: "候选通道",
+    fire_router_guardrails: "硬约束",
+    fire_router_source: "来源",
+    fire_router_next: "下一条指令",
+    fire_router_window: "窗口",
+    fire_router_format: "格式",
+    fire_router_pillar: "叙事",
+    fire_router_l7: "L7 事件",
+    fire_router_load: "负载",
+    fire_router_samples: "样本",
+    fire_router_empty: "暂无 L7 发射窗口路由遥测。",
     best_hook: "胜出规则",
     worst_format: "最弱格式",
     best_source: "最佳来源",
@@ -9802,6 +9836,114 @@ function commanderWindow(commander) {
   };
 }
 
+function dashboardSafeL7Text(value, fallback = "-") {
+  return String(value || fallback)
+    .replace(/\bfollowers?\b/gi, "active conns")
+    .replace(/\bimpressions?\b/gi, "L7 events")
+    .replace(/\bviews\b/gi, "L7 events")
+    .replace(/\berrors?\b/gi, "HTTP status triage")
+    .replace(/\btweets?\b/gi, "packets")
+    .replace(/\bpost(?:s|ing)?\b/gi, "packets");
+}
+
+function l7FireWindowRouterData() {
+  const incoming = dashboardData.l7FireWindowRouter || fallbackData.l7FireWindowRouter;
+  if (incoming?.activeLane || (Array.isArray(incoming?.lanes) && incoming.lanes.length)) return incoming;
+  const commander = nextWindowCommanderData();
+  const timing = topicTimingRouterData();
+  const angleRouter = angleLoadRouterData();
+  const opportunity = growthOpportunityScorerData();
+  const hourly = dashboardData.hourlyLoadBalancer || fallbackData.hourlyLoadBalancer || hourlyLoadData();
+  const activeWindow = commanderWindow(commander);
+  const activeAngle = commander.activeAngle || {};
+  const lanes = [];
+  const addLane = (source, lane = {}, weight = 0) => {
+    const hour = lane.hour ?? activeWindow.hour;
+    const windowLabel = lane.windowLabel || lane.label || activeWindow.windowLabel || "-";
+    const formatId = lane.formatId || activeAngle.formatId || lane.id || source;
+    const pillarId = lane.pillarId || activeAngle.pillarId || "tech_signals";
+    const score = clamp(
+      number(lane.score ?? lane.routerScore ?? commander.commanderScore) * 0.72 +
+        number(lane.loadScore ?? activeWindow.loadScore) * 0.18 +
+        weight,
+      0,
+      100,
+    );
+    lanes.push({
+      id: `${source}:${windowLabel}:${formatId}:${pillarId}`,
+      source,
+      hour: Number.isFinite(number(hour, NaN)) ? number(hour) : null,
+      windowLabel,
+      hoursFromNow: number(lane.hoursFromNow ?? activeWindow.hoursFromNow),
+      loadScore: number(lane.loadScore ?? activeWindow.loadScore),
+      formatId,
+      formatLabel: dashboardSafeL7Text(lane.formatLabel || lane.label || activeAngle.formatLabel || formatId),
+      pillarId,
+      pillarLabel: dashboardSafeL7Text(lane.pillarLabel || activeAngle.pillarLabel || "Tech Signals"),
+      status: score >= 76 ? "hot" : score >= 58 ? "watch" : lane.status || "seed",
+      score,
+      sampleCount: number(lane.samples ?? lane.sampleCount),
+      l7Events: number(lane.l7Events ?? lane.impressions),
+      directive: dashboardSafeL7Text(lane.directive || lane.reason || commander.command, "Route the next packet through the cached L7 fire window."),
+    });
+  };
+  (timing.lanes || []).slice(0, 4).forEach((lane) => addLane("topic_timing", lane, 8));
+  (angleRouter.lanes || []).slice(0, 4).forEach((lane) => addLane("angle_load", lane, 4));
+  (opportunity.lanes || []).slice(0, 4).forEach((lane) => addLane("opportunity", lane, 5));
+  if (commander.command || activeWindow.windowLabel) {
+    addLane("commander", {
+      ...activeWindow,
+      ...activeAngle,
+      score: commander.commanderScore,
+      directive: commander.command,
+    }, 10);
+  }
+  (hourly.bestHours || hourly.windows || []).slice(0, 3).forEach((lane) => addLane("hourly_load", lane, 1));
+  const deduped = [...new Map(lanes.map((lane) => [lane.id, lane])).values()]
+    .sort((left, right) => number(right.score) - number(left.score) || number(left.hoursFromNow) - number(right.hoursFromNow))
+    .slice(0, 9);
+  const activeLane = deduped[0] || null;
+  const publishGate = commander.publishGate || (cadenceData().publishAllowed ? "open" : "review");
+  const readGate = commander.readGate || "cached_only";
+  const routerScore = clamp(
+    number(activeLane?.score ?? commander.commanderScore) * 0.74 +
+      Math.min(14, deduped.length * 1.6) +
+      (readGate === "cached_only" ? 8 : readGate === "closed" ? -16 : 2) +
+      (publishGate === "open" ? 4 : publishGate === "closed" || publishGate === "blocked" ? -10 : 0),
+    0,
+    100,
+  );
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
+    mode: "derived_zero_read_l7_fire_window_router",
+    firingMode: publishGate === "open" ? "armed_packet_window" : "manual_route_warmup",
+    severity: routerScore >= 70 ? "ok" : routerScore >= 45 ? "warn" : "danger",
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    readGate,
+    publishGate,
+    routerScore,
+    activeLane,
+    lanes: deduped,
+    safeCostLeftUsd: dashboardData.api?.remaining ?? fallbackData.api?.remaining ?? null,
+    nextAction: activeLane
+      ? `Hold ${activeLane.formatLabel} / ${activeLane.pillarLabel} for ${activeLane.windowLabel} UTC; keep live X reads at 0.`
+      : "Collect more cached packet telemetry before trusting fire-window routing.",
+    cells: [
+      { id: "read", label: "X read partition", value: readGate, status: readGate === "closed" ? "danger" : "ok" },
+      { id: "publish", label: "packet gate", value: publishGate, status: publishGate === "open" ? "ok" : publishGate === "closed" || publishGate === "blocked" ? "danger" : "warn" },
+      { id: "window", label: "fire window", value: activeLane?.windowLabel ? `${activeLane.windowLabel} UTC` : "-", status: activeLane?.status || "warn" },
+      { id: "cost", label: "cost boundary", value: dashboardData.api?.remaining != null ? `$${formatNumber(dashboardData.api.remaining, 2)}` : "cached", status: "ok" },
+    ],
+    guardrails: [
+      "Cached telemetry only.",
+      "Do not override cost, auth, cadence, or rate-limit gates.",
+      "Manual route loop stays human-in-the-loop.",
+    ],
+  };
+}
+
 function renderNextWindowCommander() {
   const container = $("#next-window-commander");
   if (!container) return;
@@ -9918,6 +10060,74 @@ function renderWindowCommandStrip() {
     <div class="window-command-actions">
       ${commander.routeUrl ? `<a class="button button-primary" href="${escapeHtml(commander.routeUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("commander_open"))}</a>` : ""}
       <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(commander.copyBlock || commander.command)}">${escapeHtml(t("commander_copy"))}</button>
+    </div>
+  `;
+}
+
+function renderFireWindowRouter() {
+  const container = $("#fire-window-router");
+  if (!container) return;
+  const router = l7FireWindowRouterData();
+  const lanes = Array.isArray(router.lanes) ? router.lanes : [];
+  if (!router?.activeLane && !lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("fire_router_empty"))}</p>`;
+    return;
+  }
+  const active = router.activeLane || lanes[0] || {};
+  const score = clamp(number(router.routerScore ?? active.score), 0, 100);
+  const cells = Array.isArray(router.cells) ? router.cells : [];
+  const guardrails = Array.isArray(router.guardrails) ? router.guardrails : [];
+  container.className = `fire-window-router ${escapeHtml(router.severity || "warn")}`;
+  container.innerHTML = `
+    <div class="fire-router-head">
+      <div>
+        <span>${escapeHtml(t("fire_router_eyebrow"))}</span>
+        <strong>${escapeHtml(t("fire_router_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("fire_router_zero_reads"))}</em>
+    </div>
+    <div class="fire-router-core">
+      <div class="fire-router-score" style="--fire-router-score:${score.toFixed(1)}%">
+        <span>${escapeHtml(t("fire_router_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i></i>
+      </div>
+      <div class="fire-router-active">
+        <span>${escapeHtml(t("fire_router_active"))}</span>
+        <strong>${escapeHtml(active.formatLabel || active.label || "-")} / ${escapeHtml(active.pillarLabel || active.pillarId || "-")}</strong>
+        <small>${escapeHtml(t("fire_router_window"))}: ${escapeHtml(active.windowLabel || "-")} UTC · ${escapeHtml(t("fire_router_source"))}: ${escapeHtml(active.source || router.source || "-")}</small>
+        <code>${escapeHtml(router.nextAction || active.directive || "-")}</code>
+      </div>
+      <div class="fire-router-cells">
+        ${cells.slice(0, 4).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+    <div class="fire-router-lanes">
+      ${lanes.slice(0, 4).map((lane, index) => {
+        const laneScore = clamp(number(lane.score), 0, 100);
+        return `
+          <article class="${escapeHtml(lane.status || "watch")}" style="--fire-lane-score:${laneScore.toFixed(1)}%">
+            <b>${escapeHtml(String(index + 1).padStart(2, "0"))}</b>
+            <div>
+              <strong>${escapeHtml(lane.windowLabel || "-")} UTC · ${escapeHtml(lane.formatLabel || lane.formatId || "-")}</strong>
+              <span>${escapeHtml(lane.source || "-")} · ${escapeHtml(t("fire_router_l7"))} ${escapeHtml(formatNumber(lane.l7Events || 0))} · ${escapeHtml(t("fire_router_samples"))} ${escapeHtml(formatNumber(lane.sampleCount || 0))}</span>
+              <p>${escapeHtml(lane.directive || "-")}</p>
+              <i></i>
+            </div>
+            <em>${escapeHtml(formatNumber(laneScore, 1))}</em>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="fire-router-footer">
+      <span><em>${escapeHtml(t("fire_router_source"))}</em><strong>${escapeHtml(router.source || "-")}</strong></span>
+      <span><em>${escapeHtml(t("fire_router_next"))}</em><strong>${escapeHtml(router.firingMode || router.mode || "-")}</strong></span>
+      <span><em>${escapeHtml(t("fire_router_guardrails"))}</em><strong>${escapeHtml(guardrails.slice(0, 2).join(" · ") || "-")}</strong></span>
     </div>
   `;
 }
@@ -13402,6 +13612,7 @@ function render() {
   renderHeader();
   renderHero();
   renderWindowCommandStrip();
+  renderFireWindowRouter();
   renderHttpTriageStrip();
   renderReactorHud();
   renderTelemetryContract();

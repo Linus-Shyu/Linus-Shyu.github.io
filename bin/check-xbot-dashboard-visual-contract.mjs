@@ -103,14 +103,18 @@ for (const dir of dashboards) {
 
   const requiredExpoSelectors = [
     ".window-command-strip",
+    ".fire-window-router",
     ".http-triage-strip",
     ".reactor-hud",
     ".hook-gate-firewall",
     ".window-command-strip::before",
+    ".fire-window-router::before",
     ".http-triage-strip::before",
     ".reactor-hud::before",
     ".hook-gate-firewall::before",
     ".window-command-radar",
+    ".fire-router-score",
+    ".fire-router-lanes article",
     ".http-triage-status-matrix",
     ".reactor-lanes article",
     ".hook-gate-selected",

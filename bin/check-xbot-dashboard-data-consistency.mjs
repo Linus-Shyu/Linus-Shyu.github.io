@@ -279,6 +279,36 @@ function assertNextWindowCommander(file, data) {
   }
 }
 
+function assertL7FireWindowRouter(file, data) {
+  const router = data.l7FireWindowRouter;
+  if (!router) return;
+  if (router.mode !== "zero_read_l7_fire_window_router" && router.mode !== "derived_zero_read_l7_fire_window_router") {
+    fail(`${file} l7FireWindowRouter mode drifted.`, router.mode || "<missing>");
+  }
+  if (router.zeroExtraXReads !== true || number(router.estimatedXReadOps) !== 0) {
+    fail(`${file} l7FireWindowRouter must be zero-read.`, JSON.stringify({
+      zeroExtraXReads: router.zeroExtraXReads,
+      estimatedXReadOps: router.estimatedXReadOps,
+    }));
+  }
+  if (!["cached_only", "closed"].includes(router.readGate)) {
+    fail(`${file} l7FireWindowRouter readGate must stay cached_only or closed.`, router.readGate || "<missing>");
+  }
+  if (!["open", "review", "closed", "guarded", "manual_route_only", "blocked"].includes(router.publishGate)) {
+    fail(`${file} l7FireWindowRouter publishGate has unknown state.`, router.publishGate || "<missing>");
+  }
+  const lanes = Array.isArray(router.lanes) ? router.lanes : [];
+  if (!lanes.length || !router.activeLane) {
+    fail(`${file} l7FireWindowRouter must expose active lanes.`, JSON.stringify(router));
+  }
+  for (const lane of lanes) {
+    if (!String(lane.windowLabel || "").trim() || !String(lane.formatLabel || lane.formatId || "").trim()) {
+      fail(`${file} l7FireWindowRouter lane is incomplete.`, JSON.stringify(lane));
+    }
+  }
+  assertVisibleTextClean(file, "l7FireWindowRouter", router);
+}
+
 function assertOperatorPasteQueue(file, data) {
   const queue = data.operatorPasteQueue;
   if (!queue || typeof queue !== "object") {
@@ -503,6 +533,7 @@ function assertDashboardData(file, data) {
 
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
+  assertL7FireWindowRouter(file, data);
   assertOperatorPasteQueue(file, data);
   assertCostTelemetry(file, data);
 }
