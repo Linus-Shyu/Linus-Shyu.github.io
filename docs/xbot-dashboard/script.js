@@ -1325,6 +1325,11 @@ const translations = {
     inference_status_watch: "model stream watch",
     inference_model_calls: "{count} calls",
     inference_token_short: "{count} tok",
+    inference_success: "ACK",
+    inference_pipeline: "inference pipeline",
+    inference_purpose_bus: "purpose bus",
+    inference_output_bus: "output bus",
+    inference_zero_calls: "0 new model calls",
     no_extra_x_reads: "No extra X reads",
     traffic: "L7 traffic",
     signal_shape: "7d ingestion waveform",
@@ -2264,6 +2269,11 @@ const translations = {
     inference_status_watch: "模型流观察",
     inference_model_calls: "{count} 次调用",
     inference_token_short: "{count} tok",
+    inference_success: "ACK",
+    inference_pipeline: "推理管线",
+    inference_purpose_bus: "用途总线",
+    inference_output_bus: "输出总线",
+    inference_zero_calls: "0 次新增模型调用",
     no_extra_x_reads: "不增加 X 读取",
     traffic: "L7 流量",
     signal_shape: "7 日入口吞吐波形",
@@ -10056,6 +10066,41 @@ function renderServices() {
 }
 
 function inferenceStreamData() {
+  const incoming = dashboardData.modelInferenceStream || fallbackData.modelInferenceStream;
+  if (incoming?.stages?.length || incoming?.calls != null) {
+    const modelRows = Array.isArray(incoming.modelLanes) && incoming.modelLanes.length
+      ? incoming.modelLanes
+      : Array.isArray(incoming.models)
+        ? incoming.models
+        : incoming.primaryModel
+          ? [incoming.primaryModel]
+          : [];
+    const purposeRows = Array.isArray(incoming.purposeLanes) && incoming.purposeLanes.length
+      ? incoming.purposeLanes
+      : Array.isArray(incoming.purposes)
+        ? incoming.purposes
+        : incoming.primaryPurpose
+          ? [incoming.primaryPurpose]
+          : [];
+    return {
+      mode: String(incoming.mode || "").includes("tracked") ? "live" : "cached",
+      calls: number(incoming.calls),
+      failures: number(incoming.failures),
+      tokens: number(incoming.totalTokens ?? incoming.tokens),
+      inputTokens: number(incoming.inputTokens),
+      outputTokens: number(incoming.outputTokens),
+      spend: number(incoming.spend),
+      successRate: number(incoming.successRate, incoming.calls ? ((number(incoming.calls) - number(incoming.failures)) / Math.max(1, number(incoming.calls))) * 100 : 100),
+      updatedAt: incoming.updatedAt || incoming.generatedAt || dashboardData.updatedAt,
+      models: modelRows,
+      purposes: purposeRows,
+      stages: Array.isArray(incoming.stages) ? incoming.stages : [],
+      outputSamples: Array.isArray(incoming.outputSamples) ? incoming.outputSamples : [],
+      runbook: incoming.runbook || "",
+      status: incoming.status || (number(incoming.failures) ? "warn" : "ok"),
+      zeroExtraOpenAICalls: incoming.zeroExtraOpenAICalls !== false,
+    };
+  }
   const openai = dashboardData.openai || {};
   const purposes = Array.isArray(openai.purposes) ? openai.purposes : [];
   const models = Array.isArray(openai.models) ? openai.models : [];
@@ -10070,11 +10115,18 @@ function inferenceStreamData() {
       calls,
       failures,
       tokens,
+      inputTokens: purposes.reduce((sum, item) => sum + number(item.inputTokens), 0),
+      outputTokens: purposes.reduce((sum, item) => sum + number(item.outputTokens), 0),
       spend,
+      successRate: calls ? ((calls - failures) / Math.max(1, calls)) * 100 : 100,
       updatedAt: openai.updatedAt || dashboardData.updatedAt,
       models,
       purposes,
+      stages: [],
+      outputSamples: [],
+      runbook: "",
       status: failures > 0 ? "warn" : "ok",
+      zeroExtraOpenAICalls: true,
     };
   }
 
@@ -10087,7 +10139,10 @@ function inferenceStreamData() {
     calls: drafts.length,
     failures: 0,
     tokens: estimatedTokens,
+    inputTokens: estimatedTokens,
+    outputTokens: 0,
     spend: 0,
+    successRate: drafts.length ? 100 : 0,
     updatedAt: dashboardData.updatedAt,
     models: [
       {
@@ -10107,8 +10162,29 @@ function inferenceStreamData() {
         lastStatus: 200,
       },
     ],
+    stages: [
+      { id: "prompt_ingress", label: "PROMPT_INGRESS", value: estimatedTokens, unit: "tok", status: drafts.length ? "ok" : "warn", detail: "estimated from cached swarm outputs" },
+      { id: "model_bus", label: "MODEL_BUS", value: drafts.length, unit: "cached", status: drafts.length ? "ok" : "warn", detail: t("inference_zero_calls") },
+      { id: "swarm_output", label: "SWARM_OUT", value: drafts.length, unit: "outputs", status: drafts.length ? "ok" : "warn", detail: "queued for operator paste" },
+      { id: "operator_gate", label: "OPERATOR_GATE", value: "manual", unit: "human", status: "ok", detail: "no auto-publish path" },
+    ],
+    outputSamples: drafts.slice(0, 4).map((draft, index) => ({
+      index: index + 1,
+      title: draft.title || draft.angle || t("draft_relevant"),
+      angle: draft.angle || "",
+      chars: String(draft.text || "").length,
+      text: draft.text || "",
+      createdAt: draft.createdAt || null,
+    })),
+    runbook: t("inference_no_calls"),
     status: drafts.length ? "ok" : "warn",
+    zeroExtraOpenAICalls: true,
   };
+}
+
+function inferenceStageValue(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) && String(value).trim() !== "" ? formatNumber(numeric) : String(value ?? "-");
 }
 
 function renderInferenceStream() {
@@ -10119,6 +10195,23 @@ function renderInferenceStream() {
   $("#inference-mode").className = `pill ${stream.status === "ok" ? "pill-good" : "pill-neutral"}`;
   const primaryModel = stream.models[0] || {};
   const primaryPurpose = stream.purposes[0] || {};
+  const stages = Array.isArray(stream.stages) && stream.stages.length
+    ? stream.stages
+    : [
+        { id: "prompt_ingress", label: "PROMPT_INGRESS", value: stream.inputTokens || stream.tokens, unit: "tok", status: stream.tokens ? "ok" : "warn", detail: "input token load" },
+        { id: "model_bus", label: "MODEL_BUS", value: stream.calls, unit: "calls", status: stream.failures ? "warn" : "ok", detail: primaryModel.name || "model" },
+        { id: "swarm_output", label: "SWARM_OUT", value: (dashboardData.drafts || fallbackData.drafts || []).length, unit: "outputs", status: "ok", detail: "queued outputs" },
+        { id: "operator_gate", label: "OPERATOR_GATE", value: "manual", unit: "human", status: "ok", detail: "manual paste only" },
+      ];
+  const purposeRows = Array.isArray(stream.purposes) ? stream.purposes.slice(0, 4) : [];
+  const outputRows = Array.isArray(stream.outputSamples) && stream.outputSamples.length
+    ? stream.outputSamples.slice(0, 3)
+    : (dashboardData.drafts || fallbackData.drafts || []).slice(0, 3).map((draft, index) => ({
+        index: index + 1,
+        title: draft.title || draft.angle || t("draft_relevant"),
+        chars: String(draft.text || "").length,
+        text: draft.text || "",
+      }));
   const lanes = [
     { label: t("inference_calls"), value: formatNumber(stream.calls), tone: "cyan" },
     { label: t("inference_tokens"), value: formatNumber(stream.tokens), tone: "green" },
@@ -10141,6 +10234,18 @@ function renderInferenceStream() {
         </span>
       `).join("")}
     </div>
+    <div class="inference-stage-rail">
+      <span>${escapeHtml(t("inference_pipeline"))}</span>
+      <div>
+        ${stages.slice(0, 4).map((stage) => `
+          <article class="${escapeHtml(stage.status || "ok")}">
+            <em>${escapeHtml(stage.label || stage.id || "-")}</em>
+            <strong>${escapeHtml(inferenceStageValue(stage.value))}</strong>
+            <small>${escapeHtml(stage.unit || "")} · ${escapeHtml(stage.detail || "-")}</small>
+          </article>
+        `).join("")}
+      </div>
+    </div>
     <div class="inference-model-row">
       <span>${escapeHtml(primaryModel.name || t("inference_model_fallback"))}</span>
       <strong>${escapeHtml(t("inference_model_calls", { count: formatNumber(primaryModel.calls || stream.calls) }))}</strong>
@@ -10150,6 +10255,30 @@ function renderInferenceStream() {
       <span>${escapeHtml(primaryPurpose.name || t("inference_purpose_fallback"))}</span>
       <strong>HTTP ${escapeHtml(String(primaryPurpose.lastStatus || 200))}</strong>
       <em>${escapeHtml(t("inference_token_short", { count: formatNumber(primaryPurpose.totalTokens || stream.tokens) }))}</em>
+    </div>
+    <div class="inference-bus-grid">
+      <section>
+        <span>${escapeHtml(t("inference_purpose_bus"))}</span>
+        ${purposeRows.slice(0, 4).map((purpose) => `
+          <article class="${escapeHtml(number(purpose.failures) ? "warn" : "ok")}">
+            <strong>${escapeHtml(purpose.name || "-")}</strong>
+            <em>${escapeHtml(formatNumber(purpose.calls))} calls · ${escapeHtml(formatNumber(purpose.totalTokens))} tok · ${escapeHtml(formatNumber(purpose.sharePct, 1))}%</em>
+          </article>
+        `).join("")}
+      </section>
+      <section>
+        <span>${escapeHtml(t("inference_output_bus"))}</span>
+        ${outputRows.slice(0, 3).map((output) => `
+          <article>
+            <strong>${escapeHtml(String(output.index || 1).padStart(2, "0"))} · ${escapeHtml(output.title || t("draft_relevant"))}</strong>
+            <em>${escapeHtml(formatNumber(output.chars || String(output.text || "").length))} chars</em>
+          </article>
+        `).join("")}
+      </section>
+    </div>
+    <div class="inference-runbook">
+      <code>${escapeHtml(stream.zeroExtraOpenAICalls ? t("inference_zero_calls") : "model call review")}</code>
+      <span>${escapeHtml(stream.runbook || t("inference_status_ok"))}</span>
     </div>
   `;
 }
