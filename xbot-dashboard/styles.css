@@ -15732,6 +15732,215 @@ body:not(.demo-mode) .demo-strip {
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
 }
 
+.governor-circuit-core {
+  display: grid;
+  grid-template-columns: minmax(138px, 0.36fr) minmax(0, 1fr);
+  gap: 8px;
+}
+
+.governor-pressure,
+.governor-directive,
+.governor-partition-matrix article,
+.governor-timeline article {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, #00f0ff 18%, var(--line-soft));
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 72%, transparent), color-mix(in srgb, var(--surface-soft) 88%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent),
+    0 0 14px color-mix(in srgb, #00f0ff 6%, transparent);
+}
+
+.governor-pressure {
+  display: grid;
+  place-items: center;
+  min-height: 116px;
+  padding: 10px;
+  text-align: center;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--surface) 82%, transparent) 0 42%, transparent 43%),
+    conic-gradient(#00f0ff 0 var(--circuit-pressure, 0%), rgba(148, 163, 184, 0.18) var(--circuit-pressure, 0%) 100%);
+}
+
+.governor-pressure.warn {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--surface) 82%, transparent) 0 42%, transparent 43%),
+    conic-gradient(#ff9f1c 0 var(--circuit-pressure, 0%), rgba(148, 163, 184, 0.18) var(--circuit-pressure, 0%) 100%);
+}
+
+.governor-pressure.danger {
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--surface) 82%, transparent) 0 42%, transparent 43%),
+    conic-gradient(#ff007a 0 var(--circuit-pressure, 0%), rgba(148, 163, 184, 0.18) var(--circuit-pressure, 0%) 100%);
+}
+
+.governor-pressure span,
+.governor-pressure em,
+.governor-directive span,
+.governor-section-title span,
+.governor-partition-matrix span,
+.governor-partition-matrix li,
+.governor-timeline span,
+.governor-timeline em {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.governor-pressure strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.governor-pressure em {
+  max-width: 100%;
+}
+
+.governor-directive {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 116px;
+  padding: 10px;
+}
+
+.governor-directive strong,
+.governor-section-title strong,
+.governor-partition-matrix strong,
+.governor-timeline strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.governor-directive p,
+.governor-partition-matrix p {
+  margin: 0;
+  color: var(--body);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.governor-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.governor-section-title strong {
+  max-width: 58%;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.governor-partition-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 7px;
+}
+
+.governor-partition-matrix article {
+  display: grid;
+  gap: 7px;
+  padding: 8px;
+}
+
+.governor-partition-matrix article.ok {
+  border-color: rgba(0, 255, 102, 0.2);
+}
+
+.governor-partition-matrix article.warn,
+.governor-partition-matrix article.cached {
+  border-color: rgba(255, 159, 28, 0.28);
+}
+
+.governor-partition-matrix article.danger {
+  border-color: rgba(255, 0, 122, 0.34);
+}
+
+.partition-meter {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line-soft) 84%, transparent);
+}
+
+.partition-meter i {
+  display: block;
+  width: var(--partition-pressure, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+}
+
+.governor-partition-matrix article.warn .partition-meter i,
+.governor-partition-matrix article.cached .partition-meter i {
+  background: linear-gradient(90deg, #ff9f1c, #ffd166);
+}
+
+.governor-partition-matrix article.danger .partition-meter i {
+  background: linear-gradient(90deg, #ff007a, #ff9f1c);
+}
+
+.governor-partition-matrix ul {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.governor-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 7px;
+}
+
+.governor-timeline article {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  padding: 8px;
+}
+
+.governor-timeline article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: inherit;
+  background: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.2);
+}
+
+.governor-timeline article.warn::before,
+.governor-timeline article.cached::before {
+  background: #ff9f1c;
+}
+
+.governor-timeline article.danger::before {
+  background: #ff007a;
+}
+
 .governor-runway-grid span,
 .governor-cells span {
   min-width: 0;
@@ -15801,6 +16010,12 @@ body:not(.demo-mode) .demo-strip {
 }
 
 @media (max-width: 760px) {
+  .governor-circuit-core,
+  .governor-partition-matrix,
+  .governor-timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .governor-runway-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -24824,7 +25039,13 @@ html[data-theme] body .ops-main .signal-scan {
 @media (max-width: 1320px) {
   html[data-theme] body .ops-main .growth-opportunity-scorer {
     grid-template-columns: minmax(0, 1fr) !important;
+    max-width: 100% !important;
     overflow: hidden !important;
+  }
+
+  html[data-theme] body .ops-main .growth-opportunity-scorer > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
   }
 
   html[data-theme] body .ops-main .opportunity-fusion-core,
@@ -24837,6 +25058,7 @@ html[data-theme] body .ops-main .signal-scan {
   html[data-theme] body .ops-main .opportunity-fusion-head,
   html[data-theme] body .ops-main .opportunity-fusion-section-title,
   html[data-theme] body .ops-main .opportunity-fusion-lane-body > div {
+    display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
   }
 

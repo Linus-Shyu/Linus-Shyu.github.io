@@ -1221,6 +1221,17 @@ const translations = {
     governor_daily_burn: "daily burn",
     governor_month_end: "month-end",
     governor_runway_days: "runway",
+    governor_pressure: "circuit pressure",
+    governor_mode: "circuit mode",
+    governor_hottest: "hot partition",
+    governor_next_action: "operator directive",
+    governor_partitions: "partition matrix",
+    governor_timeline: "cooldown timeline",
+    governor_calls: "{count} calls",
+    governor_failures: "{count} failures",
+    governor_cost: "{amount} spend",
+    governor_last_status: "last HTTP {status}",
+    governor_no_status: "no status",
     governor_runbook_ok: "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
     governor_runbook_warn: "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
     governor_runbook_danger: "Seal live search/read partitions. Use cached telemetry and manual outputs until cooldown clears.",
@@ -2171,6 +2182,17 @@ const translations = {
     governor_daily_burn: "日烧钱",
     governor_month_end: "月底投影",
     governor_runway_days: "续航",
+    governor_pressure: "电路压力",
+    governor_mode: "电路模式",
+    governor_hottest: "高压分区",
+    governor_next_action: "操作员指令",
+    governor_partitions: "分区矩阵",
+    governor_timeline: "冷却时间线",
+    governor_calls: "{count} 次调用",
+    governor_failures: "{count} 次失败",
+    governor_cost: "{amount} 花费",
+    governor_last_status: "最后 HTTP {status}",
+    governor_no_status: "无状态",
     governor_runbook_ok: "缓存路由清晰。除非 cadence 闸门明确放行，否则保持实时 X 读取为零。",
     governor_runbook_warn: "暂停可选读取，改走已准备的网页目标，并等待成本边界恢复。",
     governor_runbook_danger: "封闭实时搜索/读取分区。冷却解除前，只使用缓存遥测和人工输出。",
@@ -11708,6 +11730,36 @@ function renderRateGovernor() {
         tone: cell.status || "neutral",
       }))
     : derivedCells;
+  const circuitPressure = metricNumber(governor?.circuit?.pressurePct, clamp((100 - boundaryRatio) + (active429 ? 22 : 0) + (active503 ? 18 : 0), 0, 100));
+  const circuitMode = gateLabel(governor?.circuit?.mode || (severity === "danger" ? "circuit_closed" : severity === "warn" ? "guarded_cached_only" : "nominal_cached_first"));
+  const nextAction = governor?.nextAction || runbook;
+  const partitionMatrix = Array.isArray(governor?.partitionMatrix) && governor.partitionMatrix.length
+    ? governor.partitionMatrix
+    : (api.endpoints || []).slice(0, 5).map((endpoint) => ({
+        id: endpoint.name,
+        label: endpoint.name,
+        gate: endpoint.lastStatus && Number(endpoint.lastStatus) >= 400 ? "guarded" : "sampled",
+        status: endpoint.lastStatus && Number(endpoint.lastStatus) >= 500 ? "danger" : endpoint.failures ? "warn" : "ok",
+        calls: endpoint.calls || 0,
+        failures: endpoint.failures || 0,
+        usd: endpoint.usd || 0,
+        lastStatus: endpoint.lastStatus || null,
+        pressurePct: endpoint.calls ? clamp(((endpoint.failures || 0) / endpoint.calls) * 100, 0, 100) : 0,
+        directive: endpoint.failures ? "Inspect recent endpoint failures before spending more calls." : "Endpoint clear under cached-first budget guard.",
+      }));
+  const hottestPartition = gateLabel(
+    governor?.circuit?.hottestPartition ||
+      [...partitionMatrix].sort((left, right) => number(right.pressurePct) - number(left.pressurePct))[0]?.id ||
+      "none",
+  );
+  const cooldownTimeline = Array.isArray(governor?.cooldownTimeline) && governor.cooldownTimeline.length
+    ? governor.cooldownTimeline
+    : [
+        { id: "detect", label: "DETECT", status: cooldownActive ? "danger" : "ok", value: cooldownActive ? cooldown.reasonCode || "fault" : "clear", detail: cooldown.endpoint || "none" },
+        { id: "seal", label: "SEAL", status: readGate === "closed" ? "danger" : "warn", value: readGate, detail: "read/search gate" },
+        { id: "cache", label: "CACHE", status: "ok", value: "manual routes", detail: "zero extra X reads" },
+        { id: "recover", label: "RECOVER", status: cooldownActive ? "warn" : "ok", value: cooldownActive ? cooldownLabel : "now", detail: cooldown.until || "all partitions nominal" },
+      ];
 
   target.innerHTML = `
     <div class="governor-head ${escapeHtml(severity)}">
@@ -11734,6 +11786,63 @@ function renderRateGovernor() {
           )
           .join("")}
       </div>
+    </div>
+    <div class="governor-circuit-core">
+      <div class="governor-pressure ${escapeHtml(severity)}" style="--circuit-pressure:${circuitPressure}%">
+        <span>${escapeHtml(t("governor_pressure"))}</span>
+        <strong>${escapeHtml(formatNumber(circuitPressure, 0))}%</strong>
+        <em>${escapeHtml(circuitMode)}</em>
+      </div>
+      <div class="governor-directive">
+        <span>${escapeHtml(t("governor_next_action"))}</span>
+        <strong>${escapeHtml(hottestPartition)}</strong>
+        <p>${escapeHtml(nextAction)}</p>
+      </div>
+    </div>
+    <div class="governor-section-title">
+      <span>${escapeHtml(t("governor_partitions"))}</span>
+      <strong>${escapeHtml(t("governor_hottest"))}: ${escapeHtml(hottestPartition)}</strong>
+    </div>
+    <div class="governor-partition-matrix">
+      ${partitionMatrix
+        .map((partition) => {
+          const status = ["ok", "warn", "danger", "cached"].includes(partition.status) ? partition.status : "neutral";
+          const lastStatus = partition.lastStatus == null
+            ? t("governor_no_status")
+            : t("governor_last_status", { status: partition.lastStatus });
+          return `
+            <article class="${escapeHtml(status)}" style="--partition-pressure:${clamp(number(partition.pressurePct), 0, 100)}%">
+              <div>
+                <span>${escapeHtml(partition.label || partition.id || "-")}</span>
+                <strong>${escapeHtml(gateLabel(partition.gate))}</strong>
+              </div>
+              <div class="partition-meter"><i></i></div>
+              <ul>
+                <li>${escapeHtml(t("governor_calls", { count: formatNumber(partition.calls || 0) }))}</li>
+                <li>${escapeHtml(t("governor_failures", { count: formatNumber(partition.failures || 0) }))}</li>
+                <li>${escapeHtml(t("governor_cost", { amount: money(partition.usd || 0) }))}</li>
+                <li>${escapeHtml(lastStatus)}</li>
+              </ul>
+              <p>${escapeHtml(partition.directive || "")}</p>
+            </article>
+          `;
+        })
+        .join("")}
+    </div>
+    <div class="governor-section-title">
+      <span>${escapeHtml(t("governor_timeline"))}</span>
+      <strong>${escapeHtml(cooldownLabel)}</strong>
+    </div>
+    <div class="governor-timeline">
+      ${cooldownTimeline
+        .map((step) => `
+          <article class="${escapeHtml(step.status || "neutral")}">
+            <span>${escapeHtml(step.label || step.id || "-")}</span>
+            <strong>${escapeHtml(gateLabel(step.value))}</strong>
+            <em>${escapeHtml(step.detail || "")}</em>
+          </article>
+        `)
+        .join("")}
     </div>
     <div class="governor-runway-grid">
       ${runwayCells
