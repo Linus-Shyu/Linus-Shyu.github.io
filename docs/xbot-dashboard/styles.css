@@ -23754,3 +23754,197 @@ html[data-theme="light"] body .ops-shell.ops-shell > aside.side-rail.side-rail .
   background: linear-gradient(135deg, #fbbf24, #86efac) !important;
   border-color: rgba(245, 158, 11, 0.46) !important;
 }
+
+/* Final telemetry polish: dense reactor-grade data surfaces. */
+:root[data-theme="dark"] {
+  --telemetry-bg: #0b0f19;
+  --telemetry-surface: rgba(13, 20, 32, 0.94);
+  --telemetry-surface-hot: rgba(19, 13, 25, 0.94);
+  --telemetry-cyan: #00f0ff;
+  --telemetry-green: #00ff66;
+  --telemetry-magenta: #ff007a;
+  --telemetry-amber: #ffd166;
+  --telemetry-line: rgba(0, 240, 255, 0.24);
+  --telemetry-line-soft: rgba(0, 240, 255, 0.12);
+  --telemetry-glow: 0 0 10px rgba(0, 240, 255, 0.1);
+  --telemetry-glow-hot: 0 0 14px rgba(255, 0, 122, 0.16);
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .ops-main {
+  background-color: var(--telemetry-bg) !important;
+}
+
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .grafana-toolbar,
+html[data-theme="dark"] .noc-strip div,
+html[data-theme="dark"] .window-command-strip,
+html[data-theme="dark"] .mission-control-spine,
+html[data-theme="dark"] .publish-arbiter,
+html[data-theme="dark"] .reactor-hud,
+html[data-theme="dark"] .event-stream,
+html[data-theme="dark"] .http-triage,
+html[data-theme="dark"] .cost-reactor,
+html[data-theme="dark"] .budget-allocator,
+html[data-theme="dark"] .trend-velocity-radar,
+html[data-theme="dark"] .signal-stage,
+html[data-theme="dark"] .signal-detail-panel,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .monitor-panel,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .gauge-card,
+html[data-theme="dark"] .operator-packet,
+html[data-theme="dark"] .runway-panel,
+html[data-theme="dark"] .flight-deck,
+html[data-theme="dark"] .target-atlas,
+html[data-theme="dark"] .daily-console,
+html[data-theme="dark"] .contract-card,
+html[data-theme="dark"] .service-card,
+html[data-theme="dark"] .command-card,
+html[data-theme="dark"] .server-card {
+  border-radius: 6px !important;
+  border-color: var(--telemetry-line) !important;
+  background-color: var(--telemetry-surface) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 0 0 1px rgba(0, 240, 255, 0.035),
+    var(--telemetry-glow),
+    0 20px 58px rgba(0, 0, 0, 0.28) !important;
+}
+
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .grafana-toolbar,
+html[data-theme="dark"] .window-command-strip,
+html[data-theme="dark"] .signal-stage,
+html[data-theme="dark"] .event-stream {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.046), rgba(255, 255, 255, 0.01)),
+    radial-gradient(circle at 10% 0%, rgba(0, 240, 255, 0.105), transparent 35%),
+    linear-gradient(90deg, rgba(0, 255, 102, 0.035) 1px, transparent 1px) !important;
+  background-size: auto, auto, 42px 42px !important;
+}
+
+html[data-theme="dark"] .metric strong,
+html[data-theme="dark"] .gauge-value,
+html[data-theme="dark"] .gauge-card strong,
+html[data-theme="dark"] .event-row strong,
+html[data-theme="dark"] .event-item strong,
+html[data-theme="dark"] .api-partition-table td,
+html[data-theme="dark"] .api-partition-table th,
+html[data-theme="dark"] .task-log code,
+html[data-theme="dark"] .runlog-panel code,
+html[data-theme="dark"] .packet-copy,
+html[data-theme="dark"] .packet-protocol,
+html[data-theme="dark"] .copy-block,
+html[data-theme="dark"] .command-copy,
+html[data-theme="dark"] pre,
+html[data-theme="dark"] code,
+html[data-theme="dark"] table,
+html[data-theme="dark"] .chart-provenance,
+html[data-theme="dark"] .window-command-grid,
+html[data-theme="dark"] .opportunity-fusion-lanes,
+html[data-theme="dark"] .commander-lanes,
+html[data-theme="dark"] .target-atlas,
+html[data-theme="dark"] .daily-console {
+  font-family: var(--code-font, "SFMono-Regular", "Fira Code", "JetBrains Mono", ui-monospace, monospace) !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-theme="dark"] .event-row,
+html[data-theme="dark"] .event-item,
+html[data-theme="dark"] .task-log li,
+html[data-theme="dark"] .api-partition-table tr,
+html[data-theme="dark"] .packet-step,
+html[data-theme="dark"] .commander-checklist li,
+html[data-theme="dark"] .manifest-line,
+html[data-theme="dark"] .trace-row {
+  border-radius: 5px !important;
+  border-color: rgba(0, 240, 255, 0.14) !important;
+  background: rgba(8, 13, 22, 0.62) !important;
+}
+
+html[data-theme="dark"] .ok,
+html[data-theme="dark"] [class*=" ok"],
+html[data-theme="dark"] [class$="-ok"],
+html[data-theme="dark"] .pill-good {
+  border-color: rgba(0, 255, 102, 0.32) !important;
+}
+
+html[data-theme="dark"] .ok strong,
+html[data-theme="dark"] [class*=" ok"] strong,
+html[data-theme="dark"] .pill-good,
+html[data-theme="dark"] .live-pill strong {
+  color: var(--telemetry-green) !important;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.26) !important;
+}
+
+html[data-theme="dark"] .warn,
+html[data-theme="dark"] [class*=" warn"],
+html[data-theme="dark"] [class$="-warn"] {
+  border-color: rgba(255, 209, 102, 0.34) !important;
+}
+
+html[data-theme="dark"] .warn strong,
+html[data-theme="dark"] [class*=" warn"] strong {
+  color: var(--telemetry-amber) !important;
+  text-shadow: 0 0 12px rgba(255, 209, 102, 0.2) !important;
+}
+
+html[data-theme="dark"] .danger,
+html[data-theme="dark"] [class*=" danger"],
+html[data-theme="dark"] [class*="fault"],
+html[data-theme="dark"] [class*="cost"],
+html[data-theme="dark"] .cost-reactor,
+html[data-theme="dark"] .budget-allocator.over,
+html[data-theme="dark"] .media-firewall-panel.hold {
+  border-color: rgba(255, 0, 122, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(255, 0, 122, 0.06),
+    var(--telemetry-glow-hot),
+    0 20px 58px rgba(0, 0, 0, 0.28) !important;
+}
+
+html[data-theme="dark"] .danger strong,
+html[data-theme="dark"] [class*=" danger"] strong,
+html[data-theme="dark"] [class*="fault"] strong,
+html[data-theme="dark"] [class*="cost"] strong {
+  color: var(--telemetry-magenta) !important;
+  text-shadow: 0 0 14px rgba(255, 0, 122, 0.26) !important;
+}
+
+html[data-theme="dark"] .panel-heading,
+html[data-theme="dark"] .monitor-head,
+html[data-theme="dark"] .story-head,
+html[data-theme="dark"] .metric-head,
+html[data-theme="dark"] .event-stream-head,
+html[data-theme="dark"] .packet-head,
+html[data-theme="dark"] .manifest-section-title {
+  border-bottom-color: rgba(0, 240, 255, 0.14) !important;
+}
+
+html[data-theme="dark"] .panel-heading .eyebrow,
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .monitor-head span,
+html[data-theme="dark"] .event-stream-head span,
+html[data-theme="dark"] .manifest-section-title span {
+  color: rgba(0, 240, 255, 0.78) !important;
+}
+
+html[data-theme="light"] .metric strong,
+html[data-theme="light"] .gauge-value,
+html[data-theme="light"] .gauge-card strong,
+html[data-theme="light"] .event-row strong,
+html[data-theme="light"] .event-item strong,
+html[data-theme="light"] .api-partition-table td,
+html[data-theme="light"] .api-partition-table th,
+html[data-theme="light"] .task-log code,
+html[data-theme="light"] .runlog-panel code,
+html[data-theme="light"] .packet-copy,
+html[data-theme="light"] .packet-protocol,
+html[data-theme="light"] pre,
+html[data-theme="light"] code,
+html[data-theme="light"] table {
+  font-family: var(--code-font, "SFMono-Regular", "Fira Code", "JetBrains Mono", ui-monospace, monospace) !important;
+  letter-spacing: 0 !important;
+}
