@@ -7,11 +7,11 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
-const finalGutterMarker = "Highest-specificity rail override v4 final pass: lock the light UI sidebar to the SRE console.";
+const finalGutterMarker = "Highest-specificity rail override v5 final pass: force the light UI rail into the command surface.";
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-command-rail-v4";
+const requiredCssVersion = "20260709-command-rail-v5";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -112,7 +112,7 @@ for (const dir of dashboards) {
     fail(`${cssFile} is missing the prior rail override marker.`, priorRailMarker);
   }
   if (finalGutterIndex !== markerIndex) {
-    fail(`${cssFile} final rail override must be the v4 light-sidebar guard.`, finalGutterMarker);
+    fail(`${cssFile} final rail override must be the v5 light-sidebar guard.`, finalGutterMarker);
   }
   if (priorRailIndex > markerIndex) {
     fail(`${cssFile} has the older v2 rail override after the v4 final pass.`);
@@ -123,7 +123,10 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, finalCss, finalLightGutterSelector, "the light-mode gutter selector");
   assertIncludes(cssFile, finalCss, "--rail-frame-width: 236px;", "the desktop rail frame width");
   assertIncludes(cssFile, finalCss, "--rail-frame-gap: 12px;", "the rail frame gap");
+  assertIncludes(cssFile, finalCss, "grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;", "the enforced desktop rail column");
   assertIncludes(cssFile, finalCss, "gap: var(--rail-frame-gap) !important;", "the enforced light-mode rail gap");
+  assertIncludes(cssFile, finalCss, "width: var(--rail-frame-width, 236px) !important;", "the enforced readable rail width");
+  assertIncludes(cssFile, finalCss, "font-size: 13px !important;", "the restored readable rail labels");
   assertIncludes(cssFile, finalCss, "color-scheme: dark !important;", "the forced dark rail color scheme");
   assertIncludes(cssFile, finalCss, "background-color: var(--rail-final-bg) !important;", "the forced dark rail background");
   assertIncludes(cssFile, finalCss, "background-color: rgba(15, 23, 42, 0.88) !important;", "the dark light-mode nav button fill");

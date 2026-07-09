@@ -25938,7 +25938,15 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
   }
 }
 
-/* Highest-specificity rail override v4 final pass: lock the light UI sidebar to the SRE console. */
+/* Highest-specificity rail override v5 final pass: force the light UI rail into the command surface. */
+html[data-theme][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  --rail-frame-width: 236px;
+  --rail-frame-gap: 12px;
+  grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;
+  gap: var(--rail-frame-gap) !important;
+}
+
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
 html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
   --rail-final-bg: #0b111b !important;
@@ -25953,6 +25961,9 @@ html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.si
   --rail-final-accent: #f59e0b !important;
   --rail-final-ok: #7dd36f !important;
   color-scheme: dark !important;
+  width: var(--rail-frame-width, 236px) !important;
+  min-width: var(--rail-frame-width, 236px) !important;
+  padding: 14px !important;
   color: var(--rail-final-body) !important;
   border-color: var(--rail-final-line) !important;
   background-color: var(--rail-final-bg) !important;
@@ -25967,6 +25978,7 @@ html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.si
     inset -1px 0 0 rgba(245, 158, 11, 0.22),
     inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
   scrollbar-color: var(--rail-final-accent) transparent !important;
+  overflow-y: auto !important;
 }
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
@@ -26012,8 +26024,21 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
     0 0 24px rgba(245, 158, 11, 0.3) !important;
 }
 
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand > span:not(.brand-mark),
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card {
+  display: block !important;
+}
+
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  justify-content: flex-start !important;
+  min-height: 44px !important;
+  padding: 0 12px !important;
   background-color: rgba(15, 23, 42, 0.88) !important;
+  font-size: 13px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  content: none !important;
 }
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
@@ -26054,9 +26079,6 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
 html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
-  --rail-frame-width: 236px;
-  --rail-frame-gap: 12px;
-  gap: var(--rail-frame-gap) !important;
   background:
     linear-gradient(
       90deg,
@@ -26068,6 +26090,11 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
 }
 
 @media (min-width: 1081px) and (max-width: 1320px) {
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    --rail-frame-width: 212px;
+  }
+
   html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
   html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     --rail-frame-width: 212px;
@@ -26075,6 +26102,12 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
 }
 
 @media (max-width: 1080px) {
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
   html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
   html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     background: transparent !important;
