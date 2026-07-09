@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "hexo generate",
-    "check:xbot-dashboard": "node bin/check-xbot-dashboard-vocabulary.mjs",
+    "check:xbot-dashboard": "node bin/check-xbot-dashboard-vocabulary.mjs && node bin/check-xbot-dashboard-rail-contrast.mjs",
     "clean": "hexo clean",
     "prepare:pages": "node bin/prepare-pages.js",
     "verify:xbot-dashboard": "npm run check:xbot-dashboard && node --check xbot-dashboard/script.js && node --check docs/xbot-dashboard/script.js",
