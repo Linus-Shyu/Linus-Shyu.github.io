@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const darkMarker = "Rail harmonizer terminal pass v13: final sidebar colors for both light and dark modes.";
 const lightMarker = "Main console sidebar lock v18: keep the light UI rail inside the same dark command surface.";
-const requiredCssVersion = "20260709-rail-lock-v18";
+const requiredCssVersion = "20260709-identity-firewall-v1";
 const darkSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const lightSelector = 'html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail';
 

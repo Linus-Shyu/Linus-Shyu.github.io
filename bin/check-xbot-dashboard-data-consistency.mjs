@@ -703,6 +703,88 @@ function assertCommandPacketDock(file, data) {
   assertVisibleTextClean(file, "commandPacketDock", dock);
 }
 
+function assertIdentityConversionFirewall(file, data) {
+  const firewall = data.identityConversionFirewall;
+  if (!firewall || typeof firewall !== "object") {
+    fail(`${file} is missing explicit identityConversionFirewall telemetry.`);
+  }
+  if (
+    firewall.mode !== "zero_read_identity_conversion_firewall" &&
+    firewall.mode !== "derived_zero_read_identity_conversion_firewall"
+  ) {
+    fail(`${file} identityConversionFirewall mode drifted.`, firewall.mode || "<missing>");
+  }
+  if (
+    firewall.zeroExtraXReads !== true ||
+    number(firewall.estimatedXReadOps) !== 0 ||
+    number(firewall.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} identityConversionFirewall must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: firewall.zeroExtraXReads,
+      estimatedXReadOps: firewall.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: firewall.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (firewall.readGate !== "cached_only" || firewall.operatorMode !== "human_in_loop" || firewall.manualOnly !== true) {
+    fail(`${file} identityConversionFirewall must remain cached-only, manual-only, and human-in-loop.`, JSON.stringify({
+      readGate: firewall.readGate,
+      operatorMode: firewall.operatorMode,
+      manualOnly: firewall.manualOnly,
+    }));
+  }
+  const identityScore = number(firewall.identityScore, NaN);
+  if (!(identityScore >= 0 && identityScore <= 100)) {
+    fail(`${file} identityConversionFirewall identityScore must be 0..100.`, String(firewall.identityScore));
+  }
+  const checks = Array.isArray(firewall.checks) ? firewall.checks : [];
+  if (checks.length < 5) fail(`${file} identityConversionFirewall checks are incomplete.`);
+  const allowedStatuses = new Set(["ok", "warn", "danger"]);
+  for (const check of checks) {
+    if (!String(check.id || "").trim() || !String(check.label || "").trim() || !String(check.detail || "").trim()) {
+      fail(`${file} identityConversionFirewall check is incomplete.`, JSON.stringify(check));
+    }
+    if (!allowedStatuses.has(String(check.status || ""))) {
+      fail(`${file} identityConversionFirewall check has unknown status.`, JSON.stringify(check));
+    }
+    const score = number(check.score, NaN);
+    if (!(score >= 0 && score <= 100)) {
+      fail(`${file} identityConversionFirewall check score must be 0..100.`, JSON.stringify(check));
+    }
+    if (
+      check.zeroExtraXReads !== true ||
+      number(check.estimatedXReadOps) !== 0 ||
+      number(check.estimatedIncrementalXApiUsd) !== 0
+    ) {
+      fail(`${file} identityConversionFirewall check must be zero-read and zero incremental cost.`, JSON.stringify(check));
+    }
+    if (!String(check.nextAction || "").trim()) {
+      fail(`${file} identityConversionFirewall check must include an operator action.`, JSON.stringify(check));
+    }
+  }
+  const weakestCheckId = String(firewall.weakestCheckId || "");
+  if (weakestCheckId && !checks.some((check) => check.id === weakestCheckId)) {
+    fail(`${file} identityConversionFirewall weakestCheckId must reference a check.`, JSON.stringify({
+      weakestCheckId: firewall.weakestCheckId,
+      checks: checks.map((check) => check.id),
+    }));
+  }
+  const xReadCell = (firewall.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} identityConversionFirewall must expose a zero X read cell.`, JSON.stringify(firewall.cells || []));
+  }
+  const runbook = Array.isArray(firewall.profileRunbook) ? firewall.profileRunbook : [];
+  if (runbook.length < 3 || runbook.some((item) => !String(item || "").trim())) {
+    fail(`${file} identityConversionFirewall must expose a usable profileRunbook.`, JSON.stringify(runbook));
+  }
+  if (!String(firewall.accountPromise || "").trim() || !String(firewall.nextAction || "").trim()) {
+    fail(`${file} identityConversionFirewall must expose accountPromise and nextAction.`, JSON.stringify({
+      accountPromise: firewall.accountPromise,
+      nextAction: firewall.nextAction,
+    }));
+  }
+  assertVisibleTextClean(file, "identityConversionFirewall", firewall);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -1046,6 +1128,7 @@ function assertDashboardData(file, data) {
   assertL7SurgeSentinel(file, data);
   assertGrowthLeakProfiler(file, data);
   assertCommandPacketDock(file, data);
+  assertIdentityConversionFirewall(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);

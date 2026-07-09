@@ -1196,6 +1196,17 @@ const translations = {
     command_cells: "packet cells",
     command_guardrails: "hard locks",
     command_empty: "No command packet dock telemetry available.",
+    identity_eyebrow: "Identity Conversion Firewall",
+    identity_title: "Account promise control plane",
+    identity_zero_reads: "0 X read ops",
+    identity_score: "identity score",
+    identity_promise: "account memory",
+    identity_weakest: "weakest gate",
+    identity_checks: "conversion gates",
+    identity_runbook: "operator runbook",
+    identity_guardrails: "cost locks",
+    identity_copy: "Copy identity plan",
+    identity_empty: "No identity conversion firewall telemetry available.",
     leak_eyebrow: "Growth Leak Profiler",
     leak_title: "Conversion leak topology",
     leak_zero_reads: "0 X read ops",
@@ -2314,6 +2325,17 @@ const translations = {
     command_cells: "指令单元",
     command_guardrails: "硬锁",
     command_empty: "暂无指令包停靠区遥测。",
+    identity_eyebrow: "身份转化防火墙",
+    identity_title: "账号承诺控制面",
+    identity_zero_reads: "0 次 X 读取",
+    identity_score: "身份评分",
+    identity_promise: "账号记忆",
+    identity_weakest: "最弱闸门",
+    identity_checks: "转化闸门",
+    identity_runbook: "操作员手册",
+    identity_guardrails: "成本锁",
+    identity_copy: "复制身份计划",
+    identity_empty: "暂无身份转化防火墙遥测。",
     leak_eyebrow: "增长漏点诊断",
     leak_title: "转化漏斗拓扑",
     leak_zero_reads: "0 次 X 读取",
@@ -6422,6 +6444,277 @@ function commandPacketDockData() {
     ],
     copyBlock,
   };
+}
+
+function identityConversionFirewallData() {
+  const incoming = dashboardData.identityConversionFirewall || fallbackData.identityConversionFirewall;
+  if (incoming?.checks?.length) return incoming;
+  const narrative = narrativeResonanceData();
+  const optimizer = activeConnConversionOptimizerData();
+  const leak = growthLeakProfilerData();
+  const dock = commandPacketDockData();
+  const kinetics = growthKineticsData();
+  const primaryPillar = narrative.primaryPillar || {};
+  const routeLabel = dock.routeLabel || dock.primaryPacket?.label || "Route lane";
+  const routeReady = dock.primaryPacket?.status === "ready" && Boolean(dock.openUrl || dock.primaryPacket?.openUrl);
+  const accountPromise = String(narrative.accountPromise || "Tech Signals explains how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.").replace(/\s+/g, " ").trim();
+  const resonanceScore = number(narrative.resonanceScore);
+  const commandScore = number(dock.commandScore);
+  const leakScore = number(leak.leakScore);
+  const conversionScore = number(optimizer.conversionScore);
+  const sampleCount = Math.max(0, number(optimizer.sampleCount));
+  const profileClickPer1k = Math.max(0, number(optimizer.profileClickPer1k));
+  const activeConnDelta = number(optimizer.activeConnDelta);
+  const l7Events24h = Math.max(0, number(kinetics.l7Events24h, number(kinetics.impressions24h)));
+  const primaryLeak = leak.primaryLeak || {};
+  const statusFor = (score) => score >= 70 ? "ok" : score >= 42 ? "warn" : "danger";
+  const makeCheck = ({ id, label, value, score, detail, nextAction }) => {
+    const boundedScore = clamp(score, 0, 100);
+    return {
+      id,
+      label,
+      value,
+      score: boundedScore,
+      status: statusFor(boundedScore),
+      detail,
+      nextAction,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+  };
+  const promiseScore = clamp(
+    resonanceScore * 0.74 +
+      (primaryPillar.label ? 12 : -8) +
+      Math.min(10, sampleCount * 0.45) +
+      (accountPromise.length >= 80 ? 4 : -4),
+    0,
+    100,
+  );
+  const activeConnScore = clamp(
+    conversionScore * 0.54 +
+      (activeConnDelta > 0 ? 28 + Math.min(14, activeConnDelta * 4) : activeConnDelta < 0 ? -16 : 6) +
+      Math.min(12, profileClickPer1k * 5),
+    0,
+    100,
+  );
+  const profileProxyScore = clamp(
+    Math.min(36, profileClickPer1k * 20) +
+      Math.min(22, sampleCount * 1.6) +
+      conversionScore * 0.32 +
+      (activeConnDelta >= 0 ? 6 : -10),
+    0,
+    100,
+  );
+  const routeProofScore = clamp(commandScore * 0.82 + (routeReady ? 14 : -18), 0, 100);
+  const leakRepairScore = clamp(leakScore * 0.82 + (primaryLeak.status === "ok" ? 8 : primaryLeak.status === "danger" ? -12 : 0), 0, 100);
+  const costBoundaryScore = dock.zeroExtraXReads === true && number(dock.estimatedXReadOps) === 0 && number(dock.estimatedIncrementalXApiUsd) === 0 ? 100 : 0;
+  const checks = [
+    makeCheck({
+      id: "promise_match",
+      label: "PROMISE_MATCH",
+      value: primaryPillar.label || "unarmed",
+      score: promiseScore,
+      detail: "account memory vs cached narrative lane",
+      nextAction: primaryPillar.label
+        ? `Make the next packet prove ${primaryPillar.label} inside the first line.`
+        : "Select one account memory lane before routing another packet.",
+    }),
+    makeCheck({
+      id: "active_conn",
+      label: "ACTIVE_CONN",
+      value: `${activeConnDelta >= 0 ? "+" : ""}${formatNumber(activeConnDelta)}`,
+      score: activeConnScore,
+      detail: "active conn delta from cached account snapshots",
+      nextAction: activeConnDelta > 0
+        ? "Keep the same promise and route lane; do not widen the topic surface yet."
+        : "Route one proof packet that makes the account promise obvious before asking for attention.",
+    }),
+    makeCheck({
+      id: "profile_proxy",
+      label: "PROFILE_PROXY",
+      value: `${formatNumber(profileClickPer1k, 2)}/1k`,
+      score: profileProxyScore,
+      detail: `${formatNumber(sampleCount)} cached packets in the conversion buffer`,
+      nextAction: "Turn the first sentence into a reason to inspect the operator behind the packet.",
+    }),
+    makeCheck({
+      id: "route_proof",
+      label: "ROUTE_PROOF",
+      value: routeReady ? "armed" : "repair",
+      score: routeProofScore,
+      detail: `${routeLabel} command dock lane`,
+      nextAction: routeReady
+        ? `Open ${routeLabel}, paste one useful payload, then stop at the manual gate.`
+        : "Repair the command dock route before adding another standalone packet.",
+    }),
+    makeCheck({
+      id: "leak_repair",
+      label: "LEAK_REPAIR",
+      value: primaryLeak.label || "scan",
+      score: leakRepairScore,
+      detail: "lowest-scoring cached loop partition",
+      nextAction: primaryLeak.nextAction || "Repair the weakest cached loop partition before widening distribution.",
+    }),
+    makeCheck({
+      id: "cost_boundary",
+      label: "COST_BOUNDARY",
+      value: "0 ops",
+      score: costBoundaryScore,
+      detail: "read partition sealed to cached telemetry",
+      nextAction: "Keep identity tuning inside cached data and manual browser execution.",
+    }),
+  ];
+  const identityScore = clamp(
+    checks.reduce((sum, check) => sum + number(check.score), 0) / Math.max(1, checks.length) +
+      Math.min(7, l7Events24h / 200) +
+      (routeReady ? 3 : -5),
+    0,
+    100,
+  );
+  const weakestCheck = checks.slice().sort((left, right) => number(left.score) - number(right.score))[0] || {};
+  const severity = weakestCheck.status === "danger" || identityScore < 42 ? "danger" : weakestCheck.status === "warn" || identityScore < 70 ? "warn" : "ok";
+  const nextAction = weakestCheck.nextAction || "Keep the identity loop armed with cached telemetry and manual route execution.";
+  const copyBlock = [
+    "CODEX IDENTITY CONVERSION FIREWALL",
+    "Mode: derived_zero_read_identity_conversion_firewall",
+    "Cost guard: 0 X search/read API operations",
+    `Identity score: ${formatNumber(identityScore, 1)}`,
+    `Account promise: ${accountPromise}`,
+    `Primary lane: ${primaryPillar.label || "-"}`,
+    `Route: ${routeLabel}`,
+    `Action: ${nextAction}`,
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_identity_conversion_firewall",
+    severity,
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "cached_only",
+    manualOnly: true,
+    identityScore,
+    accountPromise,
+    primaryPillarId: primaryPillar.id || null,
+    primaryPillarLabel: primaryPillar.label || null,
+    routeLabel,
+    activeConnDelta,
+    profileClickPer1k,
+    weakestCheckId: weakestCheck.id || null,
+    weakestCheckLabel: weakestCheck.label || null,
+    nextAction,
+    checks,
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "identity_score", label: "IDENTITY_SCORE", value: formatNumber(identityScore, 1), status: severity },
+      { id: "promise", label: "PROMISE", value: primaryPillar.label || "repair", status: statusFor(promiseScore) },
+      { id: "active_conn", label: "ACTIVE_CONN_DELTA", value: `${activeConnDelta >= 0 ? "+" : ""}${formatNumber(activeConnDelta)}`, status: activeConnDelta > 0 ? "ok" : activeConnDelta < 0 ? "danger" : "warn" },
+      { id: "route", label: "ROUTE_PROOF", value: routeReady ? "armed" : "repair", status: routeReady ? "ok" : "danger" },
+      { id: "weakest", label: "WEAKEST_GATE", value: weakestCheck.label || "-", status: weakestCheck.status || "warn" },
+    ],
+    profileRunbook: [
+      "Lead every packet with one operator-grade rule before any recap.",
+      `Keep the visible account memory aligned to ${primaryPillar.label || "one durable tech lane"}.`,
+      `Route through ${routeLabel}; stop after the manual ACK gate.`,
+      "Write the outcome back through maintenance before widening the topic surface.",
+    ],
+    guardrails: [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Normal cooldown only; no rate-limit shortcuts.",
+    ],
+    copyBlock,
+  };
+}
+
+function renderIdentityConversionFirewall() {
+  const target = $("#identity-conversion-firewall");
+  if (!target) return;
+  const firewall = identityConversionFirewallData();
+  const checks = Array.isArray(firewall.checks) ? firewall.checks : [];
+  if (!checks.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("identity_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(firewall.identityScore), 0, 100);
+  const cells = Array.isArray(firewall.cells) ? firewall.cells : [];
+  const runbook = Array.isArray(firewall.profileRunbook) ? firewall.profileRunbook : [];
+  const guardrails = Array.isArray(firewall.guardrails) ? firewall.guardrails : [];
+  const weakest = checks.find((check) => check.id === firewall.weakestCheckId) || checks.slice().sort((left, right) => number(left.score) - number(right.score))[0] || {};
+  const copyBlock = firewall.copyBlock || [
+    "CODEX IDENTITY CONVERSION FIREWALL",
+    `Identity score: ${formatNumber(score, 1)}`,
+    `Account memory: ${firewall.primaryPillarLabel || "-"}`,
+    `Route: ${firewall.routeLabel || "-"}`,
+    `Action: ${firewall.nextAction || weakest.nextAction || "-"}`,
+  ].join("\n");
+  target.className = `identity-conversion-firewall ${escapeHtml(firewall.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="identity-head">
+      <div>
+        <span>${escapeHtml(t("identity_eyebrow"))}</span>
+        <strong>${escapeHtml(t("identity_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("identity_zero_reads"))}</em>
+    </div>
+    <div class="identity-core" style="--identity-score:${score.toFixed(1)}%">
+      <article class="identity-score">
+        <span>${escapeHtml(t("identity_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i><b></b></i>
+      </article>
+      <article class="identity-promise">
+        <span>${escapeHtml(t("identity_promise"))}</span>
+        <strong>${escapeHtml(firewall.primaryPillarLabel || "-")}</strong>
+        <p>${escapeHtml(sreText(firewall.accountPromise || "-"))}</p>
+      </article>
+      <article class="identity-weakest ${escapeHtml(weakest.status || firewall.severity || "warn")}">
+        <span>${escapeHtml(t("identity_weakest"))}</span>
+        <strong>${escapeHtml(weakest.label || firewall.weakestCheckLabel || "-")}</strong>
+        <p>${escapeHtml(sreText(firewall.nextAction || weakest.nextAction || "-"))}</p>
+      </article>
+      <div class="identity-cells">
+        ${cells.slice(0, 6).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+    <div class="identity-lower">
+      <div class="identity-checks">
+        <span>${escapeHtml(t("identity_checks"))}</span>
+        ${checks.slice(0, 6).map((check) => {
+          const checkScore = clamp(number(check.score), 0, 100);
+          return `
+            <article class="${escapeHtml(check.status || "warn")}" style="--identity-check:${checkScore.toFixed(1)}%">
+              <header>
+                <strong>${escapeHtml(check.label || check.id || "-")}</strong>
+                <em>${escapeHtml(formatNumber(checkScore, 1))}</em>
+              </header>
+              <div class="identity-meter"><i></i></div>
+              <p>${escapeHtml(sreText(check.nextAction || check.detail || "-"))}</p>
+            </article>
+          `;
+        }).join("")}
+      </div>
+      <div class="identity-runbook">
+        <span>${escapeHtml(t("identity_runbook"))}</span>
+        ${runbook.slice(0, 4).map((item, index) => `
+          <code><em>${String(index + 1).padStart(2, "0")}</em>${escapeHtml(sreText(item))}</code>
+        `).join("")}
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("identity_copy"))}</button>
+      </div>
+      <div class="identity-guards">
+        <span>${escapeHtml(t("identity_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function renderCommandPacketDock() {
@@ -14800,6 +15093,7 @@ function render() {
   renderHttpTriageStrip();
   renderReactorHud();
   renderCommandPacketDock();
+  renderIdentityConversionFirewall();
   renderL7SurgeSentinel();
   renderGrowthLeakProfiler();
   renderTelemetryContract();
