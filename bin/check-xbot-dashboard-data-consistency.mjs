@@ -635,6 +635,74 @@ function assertGrowthLeakProfiler(file, data) {
   assertVisibleTextClean(file, "growthLeakProfiler", profiler);
 }
 
+function assertCommandPacketDock(file, data) {
+  const dock = data.commandPacketDock;
+  if (!dock || typeof dock !== "object") {
+    fail(`${file} is missing explicit commandPacketDock telemetry.`);
+  }
+  if (
+    dock.mode !== "zero_read_command_packet_dock" &&
+    dock.mode !== "derived_zero_read_command_packet_dock"
+  ) {
+    fail(`${file} commandPacketDock mode drifted.`, dock.mode || "<missing>");
+  }
+  if (
+    dock.zeroExtraXReads !== true ||
+    number(dock.estimatedXReadOps) !== 0 ||
+    number(dock.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} commandPacketDock must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: dock.zeroExtraXReads,
+      estimatedXReadOps: dock.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: dock.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (dock.readGate !== "browser_only" || dock.operatorMode !== "human_in_loop" || dock.manualOnly !== true) {
+    fail(`${file} commandPacketDock must remain browser-only, manual-only, and human-in-loop.`, JSON.stringify({
+      readGate: dock.readGate,
+      operatorMode: dock.operatorMode,
+      manualOnly: dock.manualOnly,
+    }));
+  }
+  const commandScore = number(dock.commandScore, NaN);
+  if (!(commandScore >= 0 && commandScore <= 100)) {
+    fail(`${file} commandPacketDock commandScore must be 0..100.`, String(dock.commandScore));
+  }
+  const packet = dock.primaryPacket;
+  if (!packet || typeof packet !== "object") {
+    fail(`${file} commandPacketDock must include a primaryPacket.`);
+  }
+  if (
+    packet.zeroExtraXReads !== true ||
+    number(packet.estimatedXReadOps) !== 0 ||
+    number(packet.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} commandPacketDock primaryPacket must be zero-read and zero incremental cost.`, JSON.stringify(packet));
+  }
+  if (packet.status === "ready" && (!/^https:\/\/x\.com\//i.test(String(packet.openUrl || "")) || !String(packet.pastePayload || "").trim())) {
+    fail(`${file} commandPacketDock ready packet must include an X web route and paste payload.`, JSON.stringify(packet));
+  }
+  if (!String(packet.editRule || "").trim() || !String(packet.skipRule || "").trim() || !String(packet.doneSignal || "").trim()) {
+    fail(`${file} commandPacketDock primaryPacket must include edit/skip/done rules.`, JSON.stringify(packet));
+  }
+  const steps = Array.isArray(dock.steps) ? dock.steps : [];
+  if (steps.length < 4) fail(`${file} commandPacketDock steps are incomplete.`);
+  const allowedStatuses = new Set(["ok", "warn", "danger"]);
+  for (const step of steps) {
+    if (!String(step.id || "").trim() || !String(step.label || "").trim() || !String(step.detail || "").trim()) {
+      fail(`${file} commandPacketDock step is incomplete.`, JSON.stringify(step));
+    }
+    if (!allowedStatuses.has(String(step.status || ""))) {
+      fail(`${file} commandPacketDock step has unknown status.`, JSON.stringify(step));
+    }
+  }
+  const xReadCell = (dock.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} commandPacketDock must expose a zero X read cell.`, JSON.stringify(dock.cells || []));
+  }
+  assertVisibleTextClean(file, "commandPacketDock", dock);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -977,6 +1045,7 @@ function assertDashboardData(file, data) {
   assertL7FireWindowRouter(file, data);
   assertL7SurgeSentinel(file, data);
   assertGrowthLeakProfiler(file, data);
+  assertCommandPacketDock(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);

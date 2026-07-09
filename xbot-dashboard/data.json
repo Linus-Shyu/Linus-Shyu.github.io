@@ -7042,5 +7042,107 @@
       "Manual browser execution only; no automated outbound actions.",
       "Normal backoff only; no rate-limit circumvention."
     ]
+  },
+  "commandPacketDock": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "zero_read_command_packet_dock",
+    "severity": "warn",
+    "source": "cached route matrix + leak profiler + paste queue",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "browser_only",
+    "manualOnly": true,
+    "commandScore": 67.7,
+    "routeLabel": "Target Accounts",
+    "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+    "targetOps": 3,
+    "operatorSlaMinutes": 10,
+    "primaryLeakId": "l7_input",
+    "primaryLeakLabel": "L7_INPUT",
+    "primaryLeakStatus": "danger",
+    "nextAction": "Open Target Accounts, select one fresh technical exchange, paste the payload, then stop after 3 route ops.",
+    "primaryPacket": {
+      "id": "post:2074993668881305897",
+      "label": "Target Accounts",
+      "status": "ready",
+      "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+      "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+      "score": 96,
+      "operatorSlaMinutes": 10,
+      "targetOps": 3,
+      "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+      "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+      "doneSignal": "One useful manual response pasted, or this route skipped for quality.",
+      "zeroExtraXReads": true,
+      "estimatedXReadOps": 0,
+      "estimatedIncrementalXApiUsd": 0
+    },
+    "steps": [
+      {
+        "id": "open_route",
+        "label": "OPEN_ROUTE",
+        "status": "ok",
+        "detail": "Open the X web route from this dock."
+      },
+      {
+        "id": "select_exchange",
+        "label": "SELECT_EXCHANGE",
+        "status": "ok",
+        "detail": "Choose one fresh technical exchange with visible discussion."
+      },
+      {
+        "id": "paste_payload",
+        "label": "PASTE_PAYLOAD",
+        "status": "ok",
+        "detail": "Paste once, edit only context, then leave the lane."
+      },
+      {
+        "id": "stop_gate",
+        "label": "STOP_GATE",
+        "status": "ok",
+        "detail": "Stop after 3 route ops or when quality drops."
+      }
+    ],
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "route",
+        "label": "ROUTE",
+        "value": "Target Accounts",
+        "status": "ok"
+      },
+      {
+        "id": "sla",
+        "label": "OPERATOR_SLA",
+        "value": "10m",
+        "status": "ok"
+      },
+      {
+        "id": "leak",
+        "label": "PRIMARY_LEAK",
+        "value": "L7_INPUT",
+        "status": "danger"
+      },
+      {
+        "id": "payload",
+        "label": "PAYLOAD",
+        "value": "armed",
+        "status": "ok"
+      }
+    ],
+    "guardrails": [
+      "Manual browser execution only; no automated outbound actions.",
+      "Use X web route links; search/read API operations stay at 0.",
+      "No rate-limit circumvention; use normal cooldown and cached telemetry."
+    ],
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-07-09T07:25:00.540Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 67.7\nPrimary route: Target Accounts\nPrimary leak: L7_INPUT\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   }
 }

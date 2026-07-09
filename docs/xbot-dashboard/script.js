@@ -1184,6 +1184,18 @@ const translations = {
     surge_trace: "L7 load trace",
     surge_guardrails: "hard constraints",
     surge_empty: "No L7 surge sentinel telemetry available.",
+    command_eyebrow: "Command Packet Dock",
+    command_title: "One operator route packet",
+    command_zero_reads: "0 X read ops",
+    command_score: "command score",
+    command_route: "route lane",
+    command_open: "Open route",
+    command_copy_payload: "Copy payload",
+    command_copy_packet: "Copy packet",
+    command_protocol: "operator protocol",
+    command_cells: "packet cells",
+    command_guardrails: "hard locks",
+    command_empty: "No command packet dock telemetry available.",
     leak_eyebrow: "Growth Leak Profiler",
     leak_title: "Conversion leak topology",
     leak_zero_reads: "0 X read ops",
@@ -2290,6 +2302,18 @@ const translations = {
     surge_trace: "L7 负载轨迹",
     surge_guardrails: "硬约束",
     surge_empty: "暂无 L7 突增哨兵遥测。",
+    command_eyebrow: "指令包停靠区",
+    command_title: "单次人工路由指令包",
+    command_zero_reads: "0 次 X 读取",
+    command_score: "指令评分",
+    command_route: "路由通道",
+    command_open: "打开路由",
+    command_copy_payload: "复制载荷",
+    command_copy_packet: "复制指令包",
+    command_protocol: "操作协议",
+    command_cells: "指令单元",
+    command_guardrails: "硬锁",
+    command_empty: "暂无指令包停靠区遥测。",
     leak_eyebrow: "增长漏点诊断",
     leak_title: "转化漏斗拓扑",
     leak_zero_reads: "0 次 X 读取",
@@ -6280,6 +6304,204 @@ function growthLeakProfilerData() {
       "Normal backoff only; no rate-limit circumvention.",
     ],
   };
+}
+
+function commandPacketDockData() {
+  const incoming = dashboardData.commandPacketDock || fallbackData.commandPacketDock;
+  if (incoming?.primaryPacket || incoming?.steps?.length) return incoming;
+  const queue = operatorPasteQueueData();
+  const matrix = routeOpportunityMatrixData();
+  const leak = growthLeakProfilerData();
+  const sentinel = l7SurgeSentinelData();
+  const optimizer = activeConnConversionOptimizerData();
+  const lanes = Array.isArray(matrix.lanes) ? matrix.lanes : [];
+  const tasks = Array.isArray(queue.tasks) ? queue.tasks : [];
+  const readyLane =
+    lanes.find((lane) => lane.ready && lane.openUrl && lane.pastePayload) ||
+    tasks.find((task) => task.ready && task.openUrl && task.pastePayload) ||
+    lanes[0] ||
+    tasks[0] ||
+    {};
+  const primaryLeak = leak.primaryLeak || {};
+  const routeLabel = readyLane.routeLabel || readyLane.label || queue.primaryRouteLabel || matrix.topRouteLabel || "Route lane";
+  const openUrl = readyLane.openUrl || queue.primaryOpenUrl || matrix.primaryOpenUrl || null;
+  const pastePayload = readyLane.pastePayload || queue.primaryPastePayload || matrix.primaryPastePayload || "";
+  const targetOps = Math.max(1, number(readyLane.targetReplies, number(queue.targetReplies, 1)));
+  const operatorSlaMinutes = Math.max(5, number(readyLane.operatorSlaMinutes, 10));
+  const routeScore = number(readyLane.score, number(matrix.avgScore));
+  const commandScore = clamp(
+    10 +
+      Math.min(30, routeScore * 0.3) +
+      Math.min(20, number(leak.leakScore) * 0.2) +
+      Math.min(18, number(optimizer.conversionScore) * 0.18) +
+      Math.min(14, number(sentinel.sentinelScore) * 0.14) +
+      (readyLane.ready ? 16 : -18),
+    0,
+    100,
+  );
+  const severity = !readyLane.ready
+    ? "danger"
+    : primaryLeak.status === "danger"
+      ? "warn"
+      : commandScore >= 70
+        ? "ok"
+        : commandScore >= 42
+          ? "warn"
+          : "danger";
+  const nextAction = readyLane.ready
+    ? `Open ${routeLabel}, select one fresh technical exchange, paste the payload, then stop after ${formatNumber(targetOps)} route op${targetOps > 1 ? "s" : ""}.`
+    : "Repair route and payload readiness before opening X web.";
+  const copyBlock = [
+    "CODEX COMMAND PACKET DOCK",
+    `Mode: derived_zero_read_command_packet_dock`,
+    "Cost guard: 0 X search/read API operations",
+    `Command score: ${formatNumber(commandScore, 1)}`,
+    `Primary route: ${routeLabel}`,
+    primaryLeak.label ? `Primary leak: ${primaryLeak.label}` : null,
+    "",
+    openUrl ? `OPEN: ${openUrl}` : "OPEN: repair route link first",
+    pastePayload ? `PASTE: ${pastePayload}` : "PASTE: repair payload first",
+    `EDIT: ${readyLane.editRule || "Edit nouns, timing, and one concrete reference only."}`,
+    `SKIP: ${readyLane.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges."}`,
+    `DONE: ${readyLane.doneSignal || "One useful route op completed or skipped for quality."}`,
+  ].filter(Boolean).join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_command_packet_dock",
+    severity,
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "browser_only",
+    manualOnly: true,
+    commandScore,
+    routeLabel,
+    openUrl,
+    pastePayload,
+    targetOps,
+    operatorSlaMinutes,
+    primaryLeakId: primaryLeak.id || leak.primaryLeakId || null,
+    primaryLeakLabel: primaryLeak.label || null,
+    primaryLeakStatus: primaryLeak.status || null,
+    nextAction,
+    primaryPacket: {
+      id: readyLane.id || null,
+      label: routeLabel,
+      status: readyLane.ready ? "ready" : "repair",
+      openUrl,
+      pastePayload,
+      score: routeScore,
+      operatorSlaMinutes,
+      targetOps,
+      editRule: readyLane.editRule || "Edit nouns, timing, and one concrete reference only.",
+      skipRule: readyLane.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+      doneSignal: readyLane.doneSignal || "One useful route op completed or skipped for quality.",
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    },
+    steps: [
+      { id: "open_route", label: "OPEN_ROUTE", status: openUrl ? "ok" : "danger", detail: "Open the X web route from this dock." },
+      { id: "select_exchange", label: "SELECT_EXCHANGE", status: "ok", detail: "Choose one fresh technical exchange with visible discussion." },
+      { id: "paste_payload", label: "PASTE_PAYLOAD", status: pastePayload ? "ok" : "danger", detail: "Paste once, edit only context, then leave the lane." },
+      { id: "stop_gate", label: "STOP_GATE", status: "ok", detail: `Stop after ${formatNumber(targetOps)} route op${targetOps > 1 ? "s" : ""} or when quality drops.` },
+    ],
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "route", label: "ROUTE", value: routeLabel, status: readyLane.ready ? "ok" : "danger" },
+      { id: "sla", label: "OPERATOR_SLA", value: `${formatNumber(operatorSlaMinutes)}m`, status: operatorSlaMinutes <= 20 ? "ok" : "warn" },
+      { id: "leak", label: "PRIMARY_LEAK", value: primaryLeak.label || "-", status: primaryLeak.status || "warn" },
+      { id: "payload", label: "PAYLOAD", value: pastePayload ? "armed" : "repair", status: pastePayload ? "ok" : "danger" },
+    ],
+    guardrails: [
+      "Manual browser execution only; no automated outbound actions.",
+      "Use X web route links; search/read API operations stay at 0.",
+      "No rate-limit circumvention; use normal cooldown and cached telemetry.",
+    ],
+    copyBlock,
+  };
+}
+
+function renderCommandPacketDock() {
+  const target = $("#command-packet-dock");
+  if (!target) return;
+  const dock = commandPacketDockData();
+  const packet = dock.primaryPacket || {};
+  const steps = Array.isArray(dock.steps) ? dock.steps : [];
+  if (!packet && !steps.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("command_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(dock.commandScore), 0, 100);
+  const cells = Array.isArray(dock.cells) ? dock.cells : [];
+  const guardrails = Array.isArray(dock.guardrails) ? dock.guardrails : [];
+  const copyBlock = dock.copyBlock || [
+    "CODEX COMMAND PACKET DOCK",
+    `Command score: ${formatNumber(score, 1)}`,
+    `Route: ${dock.routeLabel || packet.label || "-"}`,
+    dock.openUrl ? `OPEN: ${dock.openUrl}` : null,
+    dock.pastePayload ? `PASTE: ${dock.pastePayload}` : null,
+    `ACTION: ${dock.nextAction || "-"}`,
+  ].filter(Boolean).join("\n");
+  target.className = `command-packet-dock ${escapeHtml(dock.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="command-head">
+      <div>
+        <span>${escapeHtml(t("command_eyebrow"))}</span>
+        <strong>${escapeHtml(t("command_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("command_zero_reads"))}</em>
+    </div>
+    <div class="command-core" style="--command-score:${score.toFixed(1)}%">
+      <article class="command-score">
+        <span>${escapeHtml(t("command_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i><b></b></i>
+      </article>
+      <article class="command-route">
+        <span>${escapeHtml(t("command_route"))}</span>
+        <strong>${escapeHtml(dock.routeLabel || packet.label || "-")}</strong>
+        <p>${escapeHtml(sreText(dock.nextAction || "-"))}</p>
+      </article>
+      <div class="command-cells" aria-label="${escapeHtml(t("command_cells"))}">
+        ${cells.slice(0, 5).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+      <div class="command-actions">
+        ${dock.openUrl ? `<a class="button button-primary" href="${escapeHtml(dock.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("command_open"))}</a>` : ""}
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(dock.pastePayload || packet.pastePayload || copyBlock))}">${escapeHtml(t("command_copy_payload"))}</button>
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("command_copy_packet"))}</button>
+      </div>
+    </div>
+    <div class="command-lower">
+      <div class="command-steps">
+        <span>${escapeHtml(t("command_protocol"))}</span>
+        ${steps.slice(0, 4).map((step, index) => `
+          <article class="${escapeHtml(step.status || "warn")}">
+            <em>${String(index + 1).padStart(2, "0")}</em>
+            <div>
+              <strong>${escapeHtml(step.label || step.id || "-")}</strong>
+              <small>${escapeHtml(sreText(step.detail || "-"))}</small>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+      <div class="command-payload">
+        <span>PAYLOAD_BUFFER</span>
+        <code>${escapeHtml(sreText(dock.pastePayload || packet.pastePayload || "-"))}</code>
+      </div>
+      <div class="command-guards">
+        <span>${escapeHtml(t("command_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function renderL7SurgeSentinel() {
@@ -14577,6 +14799,7 @@ function render() {
   renderFireWindowRouter();
   renderHttpTriageStrip();
   renderReactorHud();
+  renderCommandPacketDock();
   renderL7SurgeSentinel();
   renderGrowthLeakProfiler();
   renderTelemetryContract();
