@@ -18261,6 +18261,436 @@ body:not(.demo-mode) .demo-strip {
   white-space: nowrap;
 }
 
+.route-opportunity-matrix {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 8px;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 8% 0, color-mix(in srgb, #00f0ff 13%, transparent), transparent 36%),
+    radial-gradient(circle at 96% 10%, color-mix(in srgb, #ff007a 10%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #00ff66 7%, transparent), transparent 58%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 22px color-mix(in srgb, #00f0ff 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 56%, transparent);
+}
+
+.route-matrix-head,
+.route-matrix-core,
+.route-matrix-lanes article,
+.route-matrix-guards {
+  min-width: 0;
+}
+
+.route-matrix-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.route-matrix-head span,
+.route-matrix-score span,
+.route-matrix-directive span,
+.route-matrix-cells span,
+.route-lane-title em,
+.route-lane-body p,
+.route-lane-body dt {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.route-matrix-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.route-matrix-head em {
+  border: 1px solid color-mix(in srgb, #00f0ff 42%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00f0ff;
+  background: color-mix(in srgb, #00f0ff 9%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+.route-matrix-core {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+  gap: 8px;
+}
+
+.route-matrix-command,
+.route-matrix-cells div,
+.route-matrix-lanes article,
+.route-matrix-guards {
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 78%, transparent), color-mix(in srgb, var(--surface-soft) 90%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 52%, transparent);
+}
+
+.route-matrix-command {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 10px;
+  padding: 8px;
+}
+
+.route-matrix-score {
+  position: relative;
+  display: grid;
+  min-height: 96px;
+  align-content: center;
+  justify-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00f0ff 24%, var(--line-soft));
+  border-radius: 6px;
+  background: color-mix(in srgb, #00f0ff 6%, transparent);
+}
+
+.route-matrix-score::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 999px;
+  background:
+    conic-gradient(from 180deg, #00f0ff 0 var(--route-matrix-score), color-mix(in srgb, var(--line) 58%, transparent) 0 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+  opacity: 0.9;
+}
+
+.route-matrix-score strong {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.route-matrix-score span,
+.route-matrix-score i {
+  position: relative;
+}
+
+.route-matrix-score i {
+  width: 28px;
+  height: 3px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.28);
+}
+
+.route-matrix-directive {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  align-content: center;
+}
+
+.route-matrix-directive strong,
+.route-lane-title strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-matrix-directive p,
+.route-lane-body p {
+  margin: 0;
+  color: var(--body);
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.route-matrix-directive p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+
+.route-matrix-directive > div,
+.route-lane-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.route-matrix-cells {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.route-matrix-cells div {
+  min-width: 0;
+  padding: 8px;
+}
+
+.route-matrix-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 920;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-matrix-cells .ok strong,
+.route-matrix-cells .hot strong {
+  color: #00ff66;
+}
+
+.route-matrix-cells .warn strong,
+.route-matrix-cells .watch strong {
+  color: #ff9f1c;
+}
+
+.route-matrix-cells .danger strong {
+  color: #ff007a;
+}
+
+.route-matrix-lanes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.route-matrix-lanes article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 116px;
+  gap: 9px;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.route-matrix-lanes article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #00f0ff;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.28);
+}
+
+.route-matrix-lanes article.hot::before,
+.route-matrix-lanes article.ok::before {
+  background: #00ff66;
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.32);
+}
+
+.route-matrix-lanes article.watch::before,
+.route-matrix-lanes article.warn::before {
+  background: #ff9f1c;
+  box-shadow: 0 0 16px rgba(255, 159, 28, 0.28);
+}
+
+.route-matrix-lanes article.hold::before,
+.route-matrix-lanes article.danger::before {
+  background: #ff007a;
+  box-shadow: 0 0 16px rgba(255, 0, 122, 0.3);
+}
+
+.route-lane-rank {
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+}
+
+.route-lane-rank span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, #00f0ff 34%, var(--line-soft));
+  border-radius: 5px;
+  color: var(--ink);
+  background: color-mix(in srgb, #00f0ff 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.route-lane-rank strong {
+  color: #00f0ff;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 940;
+}
+
+.route-lane-body {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.route-lane-meter {
+  position: relative;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.route-lane-meter span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--route-lane-score);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.route-lane-body dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin: 0;
+}
+
+.route-lane-body div {
+  min-width: 0;
+}
+
+.route-lane-body dt,
+.route-lane-body dd {
+  margin: 0;
+}
+
+.route-lane-body dd {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-lane-actions {
+  display: grid;
+}
+
+.route-lane-actions a,
+.route-lane-actions button {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 5px;
+  padding: 6px 7px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #00f0ff 9%, transparent), transparent),
+    color-mix(in srgb, var(--surface) 62%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.route-lane-actions button {
+  cursor: pointer;
+}
+
+.route-lane-actions a:hover,
+.route-lane-actions button:hover {
+  border-color: color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  color: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.12);
+}
+
+.route-matrix-guards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+}
+
+.route-matrix-guards code {
+  border: 1px solid color-mix(in srgb, #00f0ff 18%, var(--line-soft));
+  border-radius: 5px;
+  padding: 5px 7px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  white-space: normal;
+}
+
+@media (max-width: 1180px) {
+  .route-matrix-core,
+  .route-matrix-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .route-matrix-lanes article {
+    grid-template-columns: 54px minmax(0, 1fr) 128px;
+  }
+}
+
+@media (max-width: 720px) {
+  .route-matrix-head,
+  .route-matrix-command,
+  .route-matrix-lanes article {
+    grid-template-columns: 1fr;
+  }
+
+  .route-matrix-cells,
+  .route-lane-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-lane-rank {
+    justify-items: start;
+  }
+}
+
 .velocity-head,
 .velocity-meta,
 .velocity-row,

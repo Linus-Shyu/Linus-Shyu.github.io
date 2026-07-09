@@ -406,6 +406,73 @@ function assertOperatorPasteQueue(file, data) {
   assertVisibleTextClean(file, "operatorPasteQueue", queue);
 }
 
+function assertRouteOpportunityMatrix(file, data) {
+  const matrix = data.routeOpportunityMatrix;
+  if (!matrix || typeof matrix !== "object") {
+    fail(`${file} is missing explicit routeOpportunityMatrix telemetry.`);
+  }
+  if (matrix.mode !== "zero_read_route_opportunity_matrix" && matrix.mode !== "derived_zero_read_route_opportunity_matrix") {
+    fail(`${file} routeOpportunityMatrix mode drifted.`, matrix.mode || "<missing>");
+  }
+  if (
+    matrix.zeroExtraXReads !== true ||
+    number(matrix.estimatedXReadOps) !== 0 ||
+    number(matrix.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} routeOpportunityMatrix must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: matrix.zeroExtraXReads,
+      estimatedXReadOps: matrix.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: matrix.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (matrix.readGate !== "browser_only" || matrix.operatorMode !== "human_in_loop" || matrix.manualOnly !== true) {
+    fail(`${file} routeOpportunityMatrix must remain browser-only, manual-only, and human-in-loop.`, JSON.stringify({
+      readGate: matrix.readGate,
+      operatorMode: matrix.operatorMode,
+      manualOnly: matrix.manualOnly,
+    }));
+  }
+  const lanes = Array.isArray(matrix.lanes) ? matrix.lanes : [];
+  if (!lanes.length) fail(`${file} routeOpportunityMatrix lanes are empty.`);
+  const readyLanes = lanes.filter((lane) => lane.ready);
+  if (number(matrix.readyLanes) !== readyLanes.length) {
+    fail(`${file} routeOpportunityMatrix readyLanes count drifted.`, JSON.stringify({ declared: matrix.readyLanes, actual: readyLanes.length }));
+  }
+  if (number(matrix.totalLanes) !== lanes.length) {
+    fail(`${file} routeOpportunityMatrix totalLanes count drifted.`, JSON.stringify({ declared: matrix.totalLanes, actual: lanes.length }));
+  }
+  const allowedStatuses = new Set(["hot", "ok", "watch", "hold", "warn", "danger"]);
+  for (const lane of lanes) {
+    if (!allowedStatuses.has(String(lane.status || ""))) {
+      fail(`${file} routeOpportunityMatrix lane has unknown status.`, JSON.stringify(lane));
+    }
+    const score = number(lane.score, NaN);
+    if (!(score >= 0 && score <= 100)) {
+      fail(`${file} routeOpportunityMatrix lane score must be 0..100.`, JSON.stringify(lane));
+    }
+    if (lane.manualOnly !== true || lane.zeroExtraXReads !== true || number(lane.estimatedXReadOps) !== 0 || number(lane.estimatedIncrementalXApiUsd) !== 0) {
+      fail(`${file} routeOpportunityMatrix lane must be manual-only and zero-read.`, JSON.stringify(lane));
+    }
+    if (lane.ready && (!/^https:\/\/x\.com\//i.test(String(lane.openUrl || "")) || !String(lane.pastePayload || "").trim())) {
+      fail(`${file} routeOpportunityMatrix ready lane must include an X web route and paste payload.`, JSON.stringify(lane));
+    }
+    if (!String(lane.skipRule || "").trim() || !String(lane.doneSignal || "").trim() || !String(lane.editRule || "").trim()) {
+      fail(`${file} routeOpportunityMatrix lane must include edit/skip/done operator rules.`, JSON.stringify(lane));
+    }
+  }
+  const xReadCell = (matrix.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} routeOpportunityMatrix must expose a zero X read cell.`, JSON.stringify(matrix.cells || []));
+  }
+  if (readyLanes.length && (!matrix.primaryOpenUrl || !matrix.primaryPastePayload)) {
+    fail(`${file} routeOpportunityMatrix primary ready lane is incomplete.`, JSON.stringify({
+      primaryOpenUrl: matrix.primaryOpenUrl,
+      primaryPastePayload: matrix.primaryPastePayload,
+    }));
+  }
+  assertVisibleTextClean(file, "routeOpportunityMatrix", matrix);
+}
+
 function assertCostTelemetry(file, data) {
   const governor = data.rateLimitGovernor;
   if (!governor || typeof governor !== "object") {
@@ -583,6 +650,7 @@ function assertDashboardData(file, data) {
   assertL7FireWindowRouter(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
+  assertRouteOpportunityMatrix(file, data);
   assertCostTelemetry(file, data);
 }
 

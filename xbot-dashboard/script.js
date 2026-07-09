@@ -1899,6 +1899,19 @@ const translations = {
     rss_mesh_empty: "No RSS source mesh available.",
     rss_mesh_open_story: "Open source",
     rss_mesh_open_route: "Open route",
+    route_matrix_eyebrow: "Route Opportunity Matrix",
+    route_matrix_title: "Zero-read route priority grid",
+    route_matrix_zero_reads: "0 X read ops",
+    route_matrix_top_score: "Top lane score",
+    route_matrix_next: "Matrix directive",
+    route_matrix_open: "Open route",
+    route_matrix_copy: "Copy matrix",
+    route_matrix_copy_payload: "Copy payload",
+    route_matrix_sla: "SLA",
+    route_matrix_target: "Target",
+    route_matrix_lift: "Lift",
+    route_matrix_reads: "Reads",
+    route_matrix_empty: "No route matrix available.",
     matrix_eyebrow: "UTC Angle Matrix",
     matrix_title: "Temporal prompt fire-control",
     matrix_zero_reads: "cached analytics",
@@ -2970,6 +2983,19 @@ const translations = {
     rss_mesh_empty: "暂无 RSS 来源网格。",
     rss_mesh_open_story: "打开来源",
     rss_mesh_open_route: "打开路由",
+    route_matrix_eyebrow: "路由机会矩阵",
+    route_matrix_title: "零读取路由优先级网格",
+    route_matrix_zero_reads: "0 次 X 读取",
+    route_matrix_top_score: "最高线路分",
+    route_matrix_next: "矩阵指令",
+    route_matrix_open: "打开路由",
+    route_matrix_copy: "复制矩阵",
+    route_matrix_copy_payload: "复制载荷",
+    route_matrix_sla: "SLA",
+    route_matrix_target: "目标",
+    route_matrix_lift: "增益",
+    route_matrix_reads: "读取",
+    route_matrix_empty: "暂无路由矩阵。",
     matrix_eyebrow: "UTC 角度矩阵",
     matrix_title: "时间 Prompt 火控",
     matrix_zero_reads: "缓存分析",
@@ -4348,6 +4374,141 @@ function operatorPasteQueueData(
       "Stop at target count and let maintenance write learning back.",
     ],
     tasks,
+    copyBlock,
+  };
+}
+
+function routeOpportunityMatrixData(
+  queue = operatorPasteQueueData(),
+  dailyConsole = dailyExecutionConsoleData(),
+  routeAmplifier = routeAmplifierData(),
+  opportunity = growthOpportunityScorerData(),
+  commander = nextWindowCommanderData(),
+  budgetOptimizer = dashboardData.budgetAllocationOptimizer || fallbackData.budgetAllocationOptimizer || {},
+) {
+  const incoming = dashboardData.routeOpportunityMatrix || fallbackData.routeOpportunityMatrix;
+  if (incoming?.lanes?.length) return incoming;
+  const tasks = Array.isArray(queue?.tasks) ? queue.tasks : [];
+  const rows = Array.isArray(dailyConsole?.rows) ? dailyConsole.rows : [];
+  const routeLanes = Array.isArray(routeAmplifier?.lanes) ? routeAmplifier.lanes : [];
+  const source = tasks.length ? tasks : rows.length ? rows : routeLanes;
+  const activeOpportunity = opportunity?.activeOpportunity || (opportunity?.lanes || [])[0] || {};
+  const budgetLane = (budgetOptimizer?.lanes || []).find((lane) => lane.id === "manual_route_burst") || {};
+  const lanes = source.slice(0, 6).map((item, index) => {
+    const routeLane =
+      routeLanes.find((lane) => lane.id === item.id || lane.routeUrl === (item.openUrl || item.routeUrl) || lane.label === (item.routeLabel || item.label)) ||
+      routeLanes[index] ||
+      {};
+    const openUrl = item.openUrl || item.routeUrl || routeLane.routeUrl || commander.routeUrl || null;
+    const pastePayload = item.pastePayload || item.replyText || item.draftText || "";
+    const ready = Boolean(openUrl && pastePayload);
+    const routeScore = number(item.score, number(routeLane.score, number(routeAmplifier.topRouteScore, routeAmplifier.avgScore)));
+    const opportunityScore = number(activeOpportunity.score, number(opportunity.opportunityScore));
+    const expectedLiftPct = number(item.expectedLiftPct, number(routeLane.expectedLiftPct, number(budgetLane.expectedLiftPct)));
+    const score = clamp(
+      24 +
+        (ready ? 22 : -16) +
+        Math.min(24, routeScore * 0.24) +
+        Math.min(18, opportunityScore * 0.18) +
+        Math.min(14, expectedLiftPct * 0.65) +
+        Math.min(10, number(item.targetReplies, number(routeLane.targetReplies, 1)) * 2.8) +
+        Math.max(0, 12 - number(item.operatorSlaMinutes, number(routeLane.operatorSlaMinutes, 10 + index * 10)) / 5),
+      0,
+      100,
+    );
+    const status = !ready ? "danger" : score >= 76 ? "hot" : score >= 58 ? "ok" : score >= 40 ? "watch" : "hold";
+    return {
+      id: item.id || `route_matrix:${index + 1}`,
+      source: tasks.length ? "paste_queue" : rows.length ? "daily_console" : "route_amplifier",
+      rank: index + 1,
+      label: item.routeLabel || item.label || routeLane.label || `Route ${index + 1}`,
+      routeLabel: item.routeLabel || item.label || routeLane.label || `Route ${index + 1}`,
+      openUrl,
+      pastePayload,
+      status,
+      ready,
+      score: number(score.toFixed(1)),
+      routeScore: number(routeScore.toFixed(1)),
+      opportunityScore: number(opportunityScore.toFixed(1)),
+      expectedLiftPct: number(expectedLiftPct.toFixed(1)),
+      targetReplies: Math.max(1, number(item.targetReplies, number(routeLane.targetReplies, 1))),
+      operatorSlaMinutes: Math.max(5, number(item.operatorSlaMinutes, number(routeLane.operatorSlaMinutes, 10 + index * 10))),
+      confidence: item.confidence || routeLane.confidence || opportunity.confidence || "low",
+      windowLabel: commander.activeWindow?.windowLabel || commander.window?.windowLabel || activeOpportunity.windowLabel || null,
+      formatLabel: activeOpportunity.formatLabel || null,
+      pillarLabel: activeOpportunity.pillarLabel || null,
+      routeReason: item.reason || item.evidence || routeLane.reason || "Use the strongest cached route; choose only a live technical exchange in the browser.",
+      editRule: item.editRule || "Edit nouns, timing, and one concrete reference only.",
+      skipRule: item.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+      doneSignal: item.doneSignal || "One useful route op completed or the lane skipped for quality.",
+      readGate: "browser_only",
+      operatorMode: "human_in_loop",
+      manualOnly: true,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+  }).sort((left, right) => Number(right.ready) - Number(left.ready) || number(right.score) - number(left.score));
+  const readyLanes = lanes.filter((lane) => lane.ready);
+  const avgScore = lanes.length ? lanes.reduce((sum, lane) => sum + number(lane.score), 0) / lanes.length : 0;
+  const expectedLiftPct = lanes.length ? lanes.reduce((sum, lane) => sum + number(lane.expectedLiftPct), 0) / lanes.length : 0;
+  const topLane = readyLanes[0] || lanes[0] || null;
+  const severity = readyLanes.length >= Math.min(2, lanes.length || 1) && avgScore >= 58 ? "ok" : readyLanes.length ? "warn" : "danger";
+  const copyBlock = [
+    "CODEX ROUTE OPPORTUNITY MATRIX",
+    "Mode: zero_read_route_opportunity_matrix",
+    "Cost guard: 0 extra X search/read ops",
+    ...lanes.slice(0, 5).flatMap((lane) => [
+      `${lane.rank}. ${lane.routeLabel} · ${String(lane.status).toUpperCase()} · score ${formatNumber(lane.score, 1)}`,
+      lane.openUrl ? `OPEN: ${lane.openUrl}` : null,
+      lane.pastePayload ? `PASTE: ${lane.pastePayload}` : null,
+      `SKIP: ${lane.skipRule}`,
+      "",
+    ].filter(Boolean)),
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "zero_read_route_opportunity_matrix",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "browser_only",
+    manualOnly: true,
+    readyLanes: readyLanes.length,
+    totalLanes: lanes.length,
+    avgScore: number(avgScore.toFixed(1)),
+    expectedLiftPct: number(expectedLiftPct.toFixed(1)),
+    topRouteLabel: topLane?.routeLabel || null,
+    primaryOpenUrl: topLane?.openUrl || null,
+    primaryPastePayload: topLane?.pastePayload || null,
+    nextAction: topLane?.ready
+      ? `Open ${topLane.routeLabel}, paste one useful payload, then mark the lane done or skipped.`
+      : "Repair the top route payload before opening X web.",
+    summary: {
+      topRouteLabel: topLane?.routeLabel || null,
+      topScore: topLane?.score || 0,
+      topStatus: topLane?.status || "hold",
+      routeBudget: "$0 incremental X API",
+      readOps: 0,
+      manualTarget: number(queue?.targetReplies, number(dailyConsole?.targetReplies, readyLanes.length)),
+      activeWindow: commander.activeWindow?.windowLabel || commander.window?.windowLabel || activeOpportunity.windowLabel || null,
+      activeAngle: activeOpportunity.formatLabel || activeOpportunity.label || null,
+    },
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "ready", label: "READY_LANES", value: `${formatNumber(readyLanes.length)}/${formatNumber(lanes.length)}`, status: severity },
+      { id: "score", label: "ROUTE_SCORE", value: formatNumber(avgScore, 1), status: avgScore >= 76 ? "ok" : avgScore >= 58 ? "warn" : "danger" },
+      { id: "lift", label: "LIFT_MODEL", value: `+${formatNumber(expectedLiftPct, 1)}%`, status: expectedLiftPct > 0 ? "ok" : "warn" },
+    ],
+    lanes,
+    guardrails: [
+      "Manual browser execution only; no automated outbound actions.",
+      "No X search/read API calls for route selection.",
+      "No rate-limit circumvention; use normal backoff and cached telemetry.",
+      "Stop at target count and let maintenance write learning back.",
+    ],
     copyBlock,
   };
 }
@@ -9463,6 +9624,90 @@ function renderRssSourceMesh() {
   `;
 }
 
+function renderRouteOpportunityMatrix() {
+  const matrix = routeOpportunityMatrixData();
+  const container = $("#route-opportunity-matrix");
+  if (!container) return;
+  const lanes = Array.isArray(matrix.lanes) ? matrix.lanes : [];
+  if (!lanes.length) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("route_matrix_empty"))}</p>`;
+    return;
+  }
+  const primary = lanes.find((lane) => lane.ready) || lanes[0] || {};
+  const cells = Array.isArray(matrix.cells) ? matrix.cells : [];
+  const maxScore = Math.max(1, ...lanes.map((lane) => number(lane.score)));
+  container.innerHTML = `
+    <div class="route-matrix-head">
+      <div>
+        <span>${escapeHtml(t("route_matrix_eyebrow"))}</span>
+        <strong>${escapeHtml(t("route_matrix_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("route_matrix_zero_reads"))}</em>
+    </div>
+    <div class="route-matrix-core">
+      <section class="route-matrix-command">
+        <div class="route-matrix-score" style="--route-matrix-score:${clamp(number(primary.score), 0, 100).toFixed(1)}%">
+          <span>${escapeHtml(t("route_matrix_top_score"))}</span>
+          <strong>${escapeHtml(formatNumber(primary.score, 1))}</strong>
+          <i></i>
+        </div>
+        <div class="route-matrix-directive">
+          <span>${escapeHtml(t("route_matrix_next"))}</span>
+          <strong>${escapeHtml(sreText(matrix.nextAction || "-"))}</strong>
+          <p>${escapeHtml(sreText(primary.pastePayload || matrix.primaryPastePayload || "-"))}</p>
+          <div>
+            ${matrix.primaryOpenUrl ? `<a class="button button-primary" href="${escapeHtml(matrix.primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("route_matrix_open"))}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(matrix.copyBlock || ""))}">${escapeHtml(t("route_matrix_copy"))}</button>
+          </div>
+        </div>
+      </section>
+      <section class="route-matrix-cells">
+        ${cells.slice(0, 4).map((cell) => `
+          <div class="${escapeHtml(cell.status || "ok")}">
+            <span>${escapeHtml(sreLabel(cell.label || cell.id || "-"))}</span>
+            <strong>${escapeHtml(sreText(cell.value || "-"))}</strong>
+          </div>
+        `).join("")}
+      </section>
+    </div>
+    <div class="route-matrix-lanes">
+      ${lanes.slice(0, 6).map((lane) => {
+        const scorePct = clamp((number(lane.score) / maxScore) * 100, 5, 100);
+        const status = ["hot", "ok", "watch", "hold", "warn", "danger"].includes(lane.status) ? lane.status : "watch";
+        return `
+          <article class="${escapeHtml(status)}" style="--route-lane-score:${scorePct.toFixed(1)}%">
+            <div class="route-lane-rank">
+              <span>${escapeHtml(String(lane.rank || "-").padStart(2, "0"))}</span>
+              <strong>${escapeHtml(formatNumber(lane.score, 1))}</strong>
+            </div>
+            <div class="route-lane-body">
+              <div class="route-lane-title">
+                <strong>${escapeHtml(lane.routeLabel || lane.label || "-")}</strong>
+                <em>${escapeHtml([lane.windowLabel, lane.formatLabel, lane.pillarLabel].filter(Boolean).join(" · ") || lane.source || "-")}</em>
+              </div>
+              <p>${escapeHtml(sreText(lane.routeReason || "-"))}</p>
+              <div class="route-lane-meter"><span></span></div>
+              <dl>
+                <div><dt>${escapeHtml(t("route_matrix_sla"))}</dt><dd>${escapeHtml(`${formatNumber(lane.operatorSlaMinutes)}m`)}</dd></div>
+                <div><dt>${escapeHtml(t("route_matrix_target"))}</dt><dd>${escapeHtml(formatNumber(lane.targetReplies))}</dd></div>
+                <div><dt>${escapeHtml(t("route_matrix_lift"))}</dt><dd>${escapeHtml(`+${formatNumber(lane.expectedLiftPct, 1)}%`)}</dd></div>
+                <div><dt>${escapeHtml(t("route_matrix_reads"))}</dt><dd>${escapeHtml(formatNumber(lane.estimatedXReadOps || 0))}</dd></div>
+              </dl>
+            </div>
+            <div class="route-lane-actions">
+              ${lane.openUrl ? `<a href="${escapeHtml(lane.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("route_matrix_open"))}</a>` : ""}
+              <button type="button" data-copy="${encodeURIComponent(sreText(lane.pastePayload || ""))}">${escapeHtml(t("route_matrix_copy_payload"))}</button>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    </div>
+    <div class="route-matrix-guards">
+      ${(matrix.guardrails || []).slice(0, 4).map((guard) => `<code>${escapeHtml(sreText(guard))}</code>`).join("")}
+    </div>
+  `;
+}
+
 function renderTrendVelocityRadar() {
   const radar = trendVelocityRadarData();
   const container = $("#trend-velocity-radar");
@@ -10560,6 +10805,7 @@ function renderLearning() {
   renderAudienceRouter();
   renderTrendVelocityRadar();
   renderRssSourceMesh();
+  renderRouteOpportunityMatrix();
   renderAngleLoadRouter();
   renderTemporalAngleMatrix();
   renderExperimentPlan();

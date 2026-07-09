@@ -6665,5 +6665,100 @@
     "updatedAt": null,
     "purposes": [],
     "models": []
+  },
+  "routeOpportunityMatrix": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "zero_read_route_opportunity_matrix",
+    "severity": "ok",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "browser_only",
+    "manualOnly": true,
+    "readyLanes": 1,
+    "totalLanes": 1,
+    "avgScore": 96,
+    "expectedLiftPct": 0,
+    "topRouteLabel": "Target Accounts",
+    "primaryOpenUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "primaryPastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+    "nextAction": "Open Target Accounts, paste one useful payload, then mark the lane done or skipped.",
+    "summary": {
+      "topRouteLabel": "Target Accounts",
+      "topScore": 96,
+      "topStatus": "hot",
+      "routeBudget": "$0 incremental X API",
+      "readOps": 0,
+      "manualTarget": 3,
+      "activeWindow": "07:00",
+      "activeAngle": "Not X But Y"
+    },
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "ready",
+        "label": "READY_LANES",
+        "value": "1/1",
+        "status": "ok"
+      },
+      {
+        "id": "score",
+        "label": "ROUTE_SCORE",
+        "value": "96.0",
+        "status": "ok"
+      },
+      {
+        "id": "lift",
+        "label": "LIFT_MODEL",
+        "value": "+0.0%",
+        "status": "warn"
+      }
+    ],
+    "lanes": [
+      {
+        "id": "post:2074993668881305897",
+        "source": "paste_queue",
+        "rank": 1,
+        "label": "Target Accounts",
+        "routeLabel": "Target Accounts",
+        "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+        "status": "hot",
+        "ready": true,
+        "score": 96,
+        "routeScore": 85.9,
+        "opportunityScore": 60.8,
+        "expectedLiftPct": 0,
+        "targetReplies": 3,
+        "operatorSlaMinutes": 10,
+        "confidence": "low confidence",
+        "windowLabel": "07:00",
+        "formatLabel": "Not X But Y",
+        "pillarLabel": "Consumer Behavior",
+        "routeReason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
+        "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+        "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+        "doneSignal": "One useful manual response pasted, or this route skipped for quality.",
+        "readGate": "browser_only",
+        "operatorMode": "human_in_loop",
+        "manualOnly": true,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      }
+    ],
+    "guardrails": [
+      "Manual browser execution only; no automated outbound actions.",
+      "No X search/read API calls for route selection.",
+      "No rate-limit circumvention; use normal backoff and cached telemetry.",
+      "Stop at target count and let maintenance write learning back."
+    ],
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-07-09T07:25:00.540Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 1/1 · avg score 96.0\n\n1. Target Accounts · HOT · score 96.0 · SLA 10m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   }
 }
