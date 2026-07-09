@@ -24349,3 +24349,508 @@ html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-b
   color: #ffd166 !important;
   text-shadow: 0 0 18px rgba(255, 209, 102, 0.3) !important;
 }
+
+/* Sidebar theme reconciliation: light UI follows the light canvas; dark UI keeps the ops rack. */
+@media (min-width: 1081px) {
+  html[data-theme] body > .ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell {
+    grid-template-columns: 236px minmax(0, 1fr) !important;
+    gap: 18px !important;
+    padding: 16px !important;
+  }
+
+  html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+    width: 236px !important;
+    height: calc(100vh - 32px) !important;
+    min-height: 0 !important;
+    padding: 14px !important;
+    overflow-y: auto !important;
+  }
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-ui-bg: #0b111c;
+  --rail-ui-bg-2: #111a29;
+  --rail-ui-panel: rgba(15, 23, 42, 0.96);
+  --rail-ui-panel-hot: rgba(45, 31, 12, 0.96);
+  --rail-ui-line: rgba(148, 163, 184, 0.26);
+  --rail-ui-hot-line: rgba(255, 159, 28, 0.58);
+  --rail-ui-text: #f8fafc;
+  --rail-ui-body: #d6e0ee;
+  --rail-ui-muted: #9ba8bb;
+  --rail-ui-accent: #ff9f1c;
+  --rail-ui-ok: #78d86f;
+  --rail-ui-active-bg: rgba(255, 159, 28, 0.16);
+  --rail-ui-active-text: #fff8e8;
+  position: sticky !important;
+  top: 16px !important;
+  isolation: isolate !important;
+  color-scheme: dark !important;
+  color: var(--rail-ui-body) !important;
+  border: 1px solid var(--rail-ui-line) !important;
+  border-radius: 8px !important;
+  background-color: var(--rail-ui-bg) !important;
+  background-image:
+    radial-gradient(circle at 50% -18%, rgba(255, 159, 28, 0.28), transparent 34%),
+    radial-gradient(circle at -10% 72%, rgba(120, 216, 111, 0.14), transparent 38%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 42px),
+    linear-gradient(180deg, var(--rail-ui-bg-2), var(--rail-ui-bg) 72%) !important;
+  box-shadow:
+    20px 0 48px rgba(7, 11, 18, 0.28),
+    inset -1px 0 0 rgba(255, 159, 28, 0.18),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+  scrollbar-color: var(--rail-ui-accent) transparent !important;
+}
+
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme="light"] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-ui-bg: #f3f5f8;
+  --rail-ui-bg-2: #ffffff;
+  --rail-ui-panel: rgba(255, 255, 255, 0.96);
+  --rail-ui-panel-hot: rgba(255, 250, 236, 0.98);
+  --rail-ui-line: #d9dee8;
+  --rail-ui-hot-line: rgba(26, 86, 219, 0.34);
+  --rail-ui-text: #111827;
+  --rail-ui-body: #374151;
+  --rail-ui-muted: #6b7280;
+  --rail-ui-accent: #1a56db;
+  --rail-ui-ok: #16a34a;
+  --rail-ui-active-bg: rgba(26, 86, 219, 0.11);
+  --rail-ui-active-text: #0f3a9a;
+  color-scheme: light !important;
+  background-image:
+    radial-gradient(circle at 42% -18%, rgba(26, 86, 219, 0.12), transparent 34%),
+    radial-gradient(circle at -12% 72%, rgba(22, 163, 74, 0.09), transparent 38%),
+    linear-gradient(90deg, rgba(17, 24, 39, 0.035), transparent 52%),
+    linear-gradient(180deg, var(--rail-ui-bg-2), var(--rail-ui-bg) 76%) !important;
+  box-shadow:
+    18px 0 42px rgba(15, 23, 42, 0.08),
+    inset -1px 0 0 rgba(26, 86, 219, 0.1),
+    inset 1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail::before,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail::after {
+  pointer-events: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--rail-ui-body) !important;
+  border: 1px solid var(--rail-ui-line) !important;
+  background-color: var(--rail-ui-panel) !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.012)) !important;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  box-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand {
+  display: flex !important;
+  min-height: 58px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 8px !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand > span:not(.brand-mark),
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card {
+  display: block !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-ui-text) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--rail-ui-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px !important;
+  color: #08111d !important;
+  background: linear-gradient(135deg, #ffe08a 0%, #ff9f1c 52%, #78d86f 100%) !important;
+  box-shadow:
+    0 12px 24px rgba(255, 159, 28, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 14px !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div {
+  display: grid !important;
+  min-height: 52px !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  gap: 6px 8px !important;
+  align-items: center !important;
+  justify-items: start !important;
+  padding: 8px !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em {
+  display: block !important;
+  grid-column: 1 / -1 !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav {
+  display: grid !important;
+  gap: 7px !important;
+  margin: 16px 0 !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  display: flex !important;
+  min-height: 42px !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+  padding: 0 11px !important;
+  color: var(--rail-ui-text) !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  text-indent: 0 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+  display: inline-block !important;
+  width: 8px !important;
+  height: 8px !important;
+  flex: 0 0 8px !important;
+  border-radius: 999px !important;
+  background: var(--rail-ui-ok) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--rail-ui-ok) 18%, transparent),
+    0 0 14px color-mix(in srgb, var(--rail-ui-ok) 24%, transparent) !important;
+  content: "" !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: var(--rail-ui-active-text) !important;
+  border-color: var(--rail-ui-hot-line) !important;
+  background-color: var(--rail-ui-active-bg) !important;
+  background-image: linear-gradient(135deg, var(--rail-ui-active-bg), transparent 72%) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  margin-top: auto !important;
+  padding: 13px !important;
+  border-color: var(--rail-ui-hot-line) !important;
+  background-color: var(--rail-ui-panel-hot) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(255, 209, 102, 0.2), transparent 58%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.1), transparent 62%) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-ui-accent) !important;
+  font-size: 24px !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget .meter {
+  background: color-mix(in srgb, var(--rail-ui-line) 70%, transparent) !important;
+}
+
+html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget .meter div {
+  background: linear-gradient(90deg, var(--rail-ui-accent), var(--rail-ui-ok)) !important;
+}
+
+@media (max-width: 1080px) {
+  html[data-theme] body > .ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 14px !important;
+  }
+
+  html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme] body.demo-mode > .ops-shell.ops-shell > aside.side-rail.side-rail {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  html[data-theme] body > .ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Final sidebar readability layer. Uses isolated variables so older rail locks cannot leak into light UI. */
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  --readable-rail-bg: #0b111c;
+  --readable-rail-top: #111a29;
+  --readable-rail-panel: rgba(15, 23, 42, 0.96);
+  --readable-rail-budget: rgba(45, 31, 12, 0.96);
+  --readable-rail-line: rgba(148, 163, 184, 0.26);
+  --readable-rail-hot-line: rgba(255, 159, 28, 0.58);
+  --readable-rail-text: #f8fafc;
+  --readable-rail-body: #d6e0ee;
+  --readable-rail-muted: #9ba8bb;
+  --readable-rail-accent: #ff9f1c;
+  --readable-rail-ok: #78d86f;
+  --readable-rail-active-bg: rgba(255, 159, 28, 0.16);
+  --readable-rail-active-text: #fff8e8;
+}
+
+html[data-theme="light"] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme="light"] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  --readable-rail-bg: #f3f5f8;
+  --readable-rail-top: #ffffff;
+  --readable-rail-panel: rgba(255, 255, 255, 0.98);
+  --readable-rail-budget: rgba(255, 250, 236, 0.98);
+  --readable-rail-line: #d9dee8;
+  --readable-rail-hot-line: rgba(26, 86, 219, 0.34);
+  --readable-rail-text: #111827;
+  --readable-rail-body: #374151;
+  --readable-rail-muted: #667085;
+  --readable-rail-accent: #1a56db;
+  --readable-rail-ok: #16a34a;
+  --readable-rail-active-bg: rgba(26, 86, 219, 0.11);
+  --readable-rail-active-text: #0f3a9a;
+  color-scheme: light !important;
+}
+
+@media (min-width: 1321px) {
+  html[data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    grid-template-columns: 236px minmax(0, 1fr) !important;
+    gap: 18px !important;
+  }
+
+  html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+    width: 236px !important;
+  }
+}
+
+@media (min-width: 1081px) and (max-width: 1320px) {
+  html[data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    grid-template-columns: 212px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    padding: 12px !important;
+  }
+
+  html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+  html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+    width: 212px !important;
+    padding: 12px !important;
+  }
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  color: var(--readable-rail-body) !important;
+  border-color: var(--readable-rail-line) !important;
+  background-color: var(--readable-rail-bg) !important;
+  background-image:
+    radial-gradient(circle at 44% -16%, color-mix(in srgb, var(--readable-rail-accent) 16%, transparent), transparent 34%),
+    radial-gradient(circle at -10% 74%, color-mix(in srgb, var(--readable-rail-ok) 10%, transparent), transparent 38%),
+    linear-gradient(180deg, var(--readable-rail-top), var(--readable-rail-bg) 76%) !important;
+  box-shadow:
+    18px 0 42px color-mix(in srgb, #0f172a 12%, transparent),
+    inset -1px 0 0 color-mix(in srgb, var(--readable-rail-accent) 10%, transparent) !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--readable-rail-body) !important;
+  border-color: var(--readable-rail-line) !important;
+  background-color: var(--readable-rail-panel) !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01)) !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--readable-rail-text) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--readable-rail-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  min-height: 42px !important;
+  font-size: 13px !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: var(--readable-rail-active-text) !important;
+  border-color: var(--readable-rail-hot-line) !important;
+  background-color: var(--readable-rail-active-bg) !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line .status-dot {
+  background: var(--readable-rail-ok) !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: var(--readable-rail-hot-line) !important;
+  background-color: var(--readable-rail-budget) !important;
+}
+
+html[data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--readable-rail-accent) !important;
+}
+
+/* Keep long generated packets inside their panels instead of widening the page. */
+html[data-theme] body .ops-main pre,
+html[data-theme] body .ops-main .copy-block,
+html[data-theme] body .ops-main .command-copy,
+html[data-theme] body .ops-main .packet-copy,
+html[data-theme] body .ops-main .daily-console-copy {
+  max-width: 100% !important;
+  overflow: auto !important;
+}
+
+html[data-theme] body .ops-main pre > code,
+html[data-theme] body .ops-main .copy-block code,
+html[data-theme] body .ops-main .command-copy code,
+html[data-theme] body .ops-main .packet-copy code,
+html[data-theme] body .ops-main .daily-console-copy code {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+@media (max-width: 1320px) {
+  html[data-theme] body .ops-main .expo-story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  html[data-theme] body .ops-main .pipeline-panel,
+  html[data-theme] body .ops-main .runlog-panel {
+    grid-column: auto !important;
+  }
+}
+
+@media (max-width: 820px) {
+  html[data-theme] body .ops-main .expo-story-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+html[data-theme] body .ops-main .signal-scan {
+  max-width: 100% !important;
+}
+
+@media (max-width: 1320px) {
+  html[data-theme] body .ops-main .growth-opportunity-scorer {
+    grid-template-columns: minmax(0, 1fr) !important;
+    overflow: hidden !important;
+  }
+
+  html[data-theme] body .ops-main .opportunity-fusion-core,
+  html[data-theme] body .ops-main .opportunity-fusion-gates,
+  html[data-theme] body .ops-main .opportunity-fusion-breakdown-grid,
+  html[data-theme] body .ops-main .opportunity-fusion-footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-theme] body .ops-main .opportunity-fusion-head,
+  html[data-theme] body .ops-main .opportunity-fusion-section-title,
+  html[data-theme] body .ops-main .opportunity-fusion-lane-body > div {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-theme] body .ops-main .opportunity-fusion-head em,
+  html[data-theme] body .ops-main .opportunity-fusion-section-title strong {
+    justify-self: start !important;
+  }
+
+  html[data-theme] body .ops-main .opportunity-fusion-command code,
+  html[data-theme] body .ops-main .opportunity-fusion-directives code,
+  html[data-theme] body .ops-main .opportunity-fusion-guardrails code {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
