@@ -21,6 +21,8 @@ const requiredTerms = [
   "Total Ingestion Throughput / L7 Traffic Load",
   "Swarm Intelligence Output / Model Inference Stream",
   "HTTP Status Triage (429 Rate-Limit / 503 Backend Faults)",
+  "X API Cost Partition",
+  "Cost-to-L7 router",
 ];
 
 const files = [
