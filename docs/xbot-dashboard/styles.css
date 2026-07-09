@@ -25937,3 +25937,146 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     background: transparent !important;
   }
 }
+
+/* Highest-specificity rail override v4 final pass: lock the light UI sidebar to the SRE console. */
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-final-bg: #0b111b !important;
+  --rail-final-bg-2: #111827 !important;
+  --rail-final-card: rgba(17, 24, 39, 0.985) !important;
+  --rail-final-card-2: rgba(24, 34, 52, 0.98) !important;
+  --rail-final-line: rgba(148, 163, 184, 0.36) !important;
+  --rail-final-line-strong: rgba(245, 158, 11, 0.78) !important;
+  --rail-final-text: #f9fafb !important;
+  --rail-final-body: #d8e2f0 !important;
+  --rail-final-muted: #a8b5c7 !important;
+  --rail-final-accent: #f59e0b !important;
+  --rail-final-ok: #7dd36f !important;
+  color-scheme: dark !important;
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 46% -14%, rgba(245, 158, 11, 0.3), transparent 33%),
+    radial-gradient(circle at -12% 72%, rgba(125, 211, 111, 0.14), transparent 38%),
+    radial-gradient(circle at 112% 34%, rgba(79, 140, 255, 0.12), transparent 34%),
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.05) 0 1px, transparent 1px 40px),
+    linear-gradient(180deg, var(--rail-final-bg-2), var(--rail-final-bg) 74%) !important;
+  box-shadow:
+    24px 0 56px rgba(2, 6, 23, 0.34),
+    inset -1px 0 0 rgba(245, 158, 11, 0.22),
+    inset 1px 0 0 rgba(255, 255, 255, 0.06) !important;
+  scrollbar-color: var(--rail-final-accent) transparent !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-card) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.012)),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(79, 140, 255, 0.025)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 12px 28px rgba(0, 0, 0, 0.2) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.28) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--rail-final-muted) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  color: #071018 !important;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.75), transparent 23%),
+    linear-gradient(135deg, #ffd166, var(--rail-final-accent) 58%, #00f0ff) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+    0 0 24px rgba(245, 158, 11, 0.3) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  background-color: rgba(15, 23, 42, 0.88) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff7df !important;
+  border-color: var(--rail-final-line-strong) !important;
+  background-color: var(--rail-final-card-2) !important;
+  background-image:
+    linear-gradient(90deg, rgba(245, 158, 11, 0.25), transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.014)) !important;
+  box-shadow:
+    inset 3px 0 0 var(--rail-final-accent),
+    0 0 0 1px rgba(245, 158, 11, 0.14),
+    0 12px 30px rgba(245, 158, 11, 0.1) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line .status-dot {
+  background: var(--rail-final-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 18px rgba(125, 211, 111, 0.28) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: var(--rail-final-line-strong) !important;
+  background-color: rgba(37, 24, 10, 0.985) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.22), transparent 58%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(0, 240, 255, 0.04)) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-accent) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  --rail-frame-width: 236px;
+  --rail-frame-gap: 12px;
+  gap: var(--rail-frame-gap) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 11, 18, 0.995) 0,
+      rgba(11, 17, 27, 0.995) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 28px),
+      rgba(11, 17, 27, 0.72) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 50px),
+      rgba(11, 17, 27, 0) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 86px)
+    ) !important;
+}
+
+@media (min-width: 1081px) and (max-width: 1320px) {
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    --rail-frame-width: 212px;
+  }
+}
+
+@media (max-width: 1080px) {
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    background: transparent !important;
+  }
+}
