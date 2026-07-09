@@ -10209,13 +10209,14 @@ body:not(.demo-mode) .demo-strip {
 
 .flywheel-body {
   display: grid;
-  grid-template-columns: minmax(180px, 0.36fr) minmax(0, 1fr) minmax(260px, 0.52fr);
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr) minmax(260px, 0.5fr);
   gap: 10px;
   margin-top: 14px;
 }
 
 .flywheel-core,
 .flywheel-stage,
+.flywheel-edge-bus,
 .flywheel-rules {
   min-width: 0;
   border: 1px solid var(--line-soft);
@@ -10261,6 +10262,80 @@ body:not(.demo-mode) .demo-strip {
   color: var(--body);
   font-size: 12px;
   line-height: 1.4;
+}
+
+.flywheel-core-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.flywheel-core-metrics article,
+.flywheel-bottleneck {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line-soft));
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.flywheel-core-metrics article {
+  padding: 8px;
+}
+
+.flywheel-core-metrics article.ok {
+  border-color: color-mix(in srgb, var(--ok) 42%, var(--line-soft));
+}
+
+.flywheel-core-metrics article.warn,
+.flywheel-bottleneck.warn {
+  border-color: color-mix(in srgb, var(--warn) 48%, var(--line-soft));
+}
+
+.flywheel-core-metrics article.danger,
+.flywheel-bottleneck.danger {
+  border-color: color-mix(in srgb, var(--danger) 52%, var(--line-soft));
+}
+
+.flywheel-core-metrics strong {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flywheel-bottleneck {
+  margin-top: 8px;
+  padding: 9px;
+}
+
+.flywheel-bottleneck strong {
+  display: block;
+  margin-top: 5px;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 12px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flywheel-bottleneck small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.3;
 }
 
 .flywheel-stages {
@@ -10320,7 +10395,73 @@ body:not(.demo-mode) .demo-strip {
   line-height: 1.35;
 }
 
+.flywheel-edge-bus {
+  grid-column: 2 / 3;
+  padding: 10px;
+}
+
+.flywheel-edge-bus > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.flywheel-edge-bus > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.flywheel-edge-bus article {
+  position: relative;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid color-mix(in srgb, var(--ok) 30%, var(--line-soft));
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ok) 10%, transparent), transparent),
+    rgba(0, 0, 0, 0.1);
+}
+
+.flywheel-edge-bus article.warn {
+  border-color: color-mix(in srgb, var(--warn) 42%, var(--line-soft));
+}
+
+.flywheel-edge-bus article.danger {
+  border-color: color-mix(in srgb, var(--danger) 46%, var(--line-soft));
+}
+
+.flywheel-edge-bus em,
+.flywheel-edge-bus small {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flywheel-edge-bus strong {
+  display: block;
+  margin: 5px 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--code-font);
+  font-size: 12px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .flywheel-rules {
+  grid-column: 3 / 4;
+  grid-row: 1 / span 2;
   padding: 12px;
 }
 
@@ -10604,8 +10745,15 @@ body:not(.demo-mode) .demo-strip {
   .control-gates,
   .control-pulses,
   .flywheel-body,
-  .flywheel-stages {
+  .flywheel-stages,
+  .flywheel-edge-bus > div {
     grid-template-columns: 1fr;
+  }
+
+  .flywheel-edge-bus,
+  .flywheel-rules {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 

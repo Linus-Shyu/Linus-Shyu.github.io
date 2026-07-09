@@ -392,9 +392,20 @@ const fallbackData = {
     mode: "route_burst",
     zeroExtraXReads: true,
     velocityScore: 68.4,
+    loopCoefficient: 1.86,
     expectedLiftPct: 84.6,
     baselineScore: 3.9,
     safeBudgetLeftUsd: 2.81,
+    bottleneck: {
+      id: "none",
+      label: "No hard bottleneck",
+      severity: "ok",
+      action: "Execute the top route burst, then let maintenance write outcomes back.",
+    },
+    ackRate24h: 0.86,
+    ackRate7d: 4.1,
+    routeCoveragePct: 100,
+    swarmCoveragePct: 167,
     nextBurst: {
       label: "decision rule route ops",
       routeLabel: "Target Accounts",
@@ -409,6 +420,13 @@ const fallbackData = {
       { id: "swarm", label: "swarm output", value: "5 drafts", status: "ok", detail: "primary rule decision_rule" },
       { id: "route", label: "route queue", value: "2/2", status: "ok", detail: "manual web actions spend 0 X read ops" },
       { id: "writeback", label: "learning writeback", value: "120 packets", status: "ok", detail: "8 L7 events in 24h feedback window" },
+    ],
+    edges: [
+      { id: "ingress_ranker", from: "INGRESS", to: "RANKER", load: "621 L7", status: "ok", detail: "17 packets scored" },
+      { id: "ranker_swarm", from: "RANKER", to: "SWARM", load: "+84.6%", status: "ok", detail: "baseline 3.9" },
+      { id: "swarm_route", from: "SWARM", to: "ROUTE", load: "5/3", status: "ok", detail: "paste-ready outputs" },
+      { id: "route_writeback", from: "ROUTE", to: "WRITEBACK", load: "100%", status: "ok", detail: "manual route coverage" },
+      { id: "writeback_ingress", from: "WRITEBACK", to: "INGRESS", load: "4.10% ACK", status: "ok", detail: "learning signal density" },
     ],
     constraints: [
       { id: "read", label: "X read partition", value: "cached_only", status: "ok" },
@@ -1796,6 +1814,12 @@ const translations = {
     flywheel_velocity: "Velocity score",
     flywheel_rules: "Execution rules",
     flywheel_burst: "{replies} route ops · +{lift}% expected lift · {route}",
+    flywheel_loop: "loop k",
+    flywheel_ack: "ACK %",
+    flywheel_route: "route %",
+    flywheel_swarm: "swarm %",
+    flywheel_bottleneck: "bottleneck",
+    flywheel_edge_bus: "edge bus",
     flywheel_mode_reply_burst: "route burst",
     flywheel_mode_manual_distribution: "manual distribution",
     flywheel_mode_cooldown_cache_only: "cache-only cooldown",
@@ -2740,6 +2764,12 @@ const translations = {
     flywheel_velocity: "速度评分",
     flywheel_rules: "执行规则",
     flywheel_burst: "{replies} 次路由操作 · 预期提升 +{lift}% · {route}",
+    flywheel_loop: "循环 k",
+    flywheel_ack: "ACK %",
+    flywheel_route: "路由 %",
+    flywheel_swarm: "群体 %",
+    flywheel_bottleneck: "瓶颈",
+    flywheel_edge_bus: "边总线",
     flywheel_mode_reply_burst: "路由爆发",
     flywheel_mode_manual_distribution: "人工分发",
     flywheel_mode_cooldown_cache_only: "缓存冷却",
@@ -9519,7 +9549,18 @@ function renderExperimentPlan() {
 }
 
 function viralFlywheelData() {
-  return dashboardData.viralFlywheel || fallbackData.viralFlywheel || {};
+  const fallback = fallbackData.viralFlywheel || {};
+  const incoming = dashboardData.viralFlywheel || {};
+  return {
+    ...fallback,
+    ...incoming,
+    bottleneck: incoming.bottleneck || fallback.bottleneck,
+    nextBurst: { ...(fallback.nextBurst || {}), ...(incoming.nextBurst || {}) },
+    stages: Array.isArray(incoming.stages) && incoming.stages.length ? incoming.stages : fallback.stages,
+    edges: Array.isArray(incoming.edges) && incoming.edges.length ? incoming.edges : fallback.edges,
+    constraints: Array.isArray(incoming.constraints) && incoming.constraints.length ? incoming.constraints : fallback.constraints,
+    rules: Array.isArray(incoming.rules) && incoming.rules.length ? incoming.rules : fallback.rules,
+  };
 }
 
 function flywheelModeLabel(mode) {
@@ -9544,6 +9585,34 @@ function renderViralFlywheel() {
     lift: formatNumber(number(nextBurst.expectedLiftPct), 1),
     route: routeLabel,
   });
+  const loopCoefficient = Math.max(0, number(flywheel.loopCoefficient, 1 + velocity / 100));
+  const bottleneck = flywheel.bottleneck || {};
+  const coreMetrics = [
+    { label: t("flywheel_loop"), value: `${formatNumber(loopCoefficient, 2)}x`, status: loopCoefficient >= 1.55 ? "ok" : loopCoefficient >= 1.2 ? "warn" : "danger" },
+    { label: t("flywheel_ack"), value: `${formatNumber(number(flywheel.ackRate7d), 2)}%`, status: number(flywheel.ackRate7d) >= 3 ? "ok" : number(flywheel.ackRate7d) > 0 ? "warn" : "danger" },
+    { label: t("flywheel_route"), value: `${formatNumber(number(flywheel.routeCoveragePct), 0)}%`, status: number(flywheel.routeCoveragePct) >= 80 ? "ok" : number(flywheel.routeCoveragePct) > 0 ? "warn" : "danger" },
+    { label: t("flywheel_swarm"), value: `${formatNumber(number(flywheel.swarmCoveragePct), 0)}%`, status: number(flywheel.swarmCoveragePct) >= 100 ? "ok" : number(flywheel.swarmCoveragePct) > 0 ? "warn" : "danger" },
+  ];
+  const coreTarget = $("#flywheel-core-metrics");
+  if (coreTarget) {
+    coreTarget.innerHTML = coreMetrics
+      .map((metric) => `
+        <article class="${escapeHtml(metric.status)}">
+          <span>${escapeHtml(metric.label)}</span>
+          <strong>${escapeHtml(metric.value)}</strong>
+        </article>
+      `)
+      .join("");
+  }
+  const bottleneckTarget = $("#flywheel-bottleneck");
+  if (bottleneckTarget) {
+    bottleneckTarget.className = `flywheel-bottleneck ${escapeHtml(bottleneck.severity || "ok")}`;
+    bottleneckTarget.innerHTML = `
+      <span>${escapeHtml(t("flywheel_bottleneck"))}</span>
+      <strong>${escapeHtml(bottleneck.label || "-")}</strong>
+      <small>${escapeHtml(bottleneck.action || "")}</small>
+    `;
+  }
 
   const stages = Array.isArray(flywheel.stages) ? flywheel.stages : [];
   $("#flywheel-stages").innerHTML = stages
@@ -9556,6 +9625,22 @@ function renderViralFlywheel() {
       </article>
     `)
     .join("");
+  const edges = Array.isArray(flywheel.edges) ? flywheel.edges : [];
+  const edgeTarget = $("#flywheel-edge-bus");
+  if (edgeTarget) {
+    edgeTarget.innerHTML = `
+      <span>${escapeHtml(t("flywheel_edge_bus"))}</span>
+      <div>
+        ${edges.slice(0, 5).map((edge) => `
+          <article class="${escapeHtml(edge.status || "ok")}">
+            <em>${escapeHtml(edge.from || "-")} -> ${escapeHtml(edge.to || "-")}</em>
+            <strong>${escapeHtml(edge.load || "-")}</strong>
+            <small>${escapeHtml(edge.detail || "")}</small>
+          </article>
+        `).join("")}
+      </div>
+    `;
+  }
 
   const rules = [
     ...(Array.isArray(flywheel.constraints) ? flywheel.constraints.map((item) => `${item.label}: ${item.value}`) : []),
