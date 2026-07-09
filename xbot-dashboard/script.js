@@ -9374,7 +9374,7 @@ function derivedGrowthOpportunityScorer() {
 
 function nextWindowCommanderData() {
   const incoming = dashboardData.nextWindowAngleCommander || fallbackData.nextWindowAngleCommander;
-  if (incoming?.command || incoming?.activeWindow || incoming?.activeAngle) return incoming;
+  if (incoming?.command || incoming?.window || incoming?.activeWindow || incoming?.activeAngle) return incoming;
   const cadence = cadenceData();
   const timing = topicTimingRouterData();
   const opportunity = growthOpportunityScorerData();
@@ -9503,6 +9503,19 @@ function nextWindowCommanderData() {
   };
 }
 
+function commanderWindow(commander) {
+  const raw = commander?.window || commander?.activeWindow || {};
+  const windowLabel = raw.windowLabel || raw.label || raw.window || "-";
+  return {
+    ...raw,
+    hour: raw.hour ?? null,
+    label: raw.label || windowLabel,
+    windowLabel,
+    hoursFromNow: number(raw.hoursFromNow),
+    loadScore: number(raw.loadScore),
+  };
+}
+
 function renderNextWindowCommander() {
   const container = $("#next-window-commander");
   if (!container) return;
@@ -9512,7 +9525,7 @@ function renderNextWindowCommander() {
     return;
   }
   const score = clamp(number(commander.commanderScore), 0, 100);
-  const window = commander.activeWindow || {};
+  const window = commanderWindow(commander);
   const angle = commander.activeAngle || {};
   const gates = Array.isArray(commander.gates) ? commander.gates : [];
   const lanes = Array.isArray(commander.lanes) ? commander.lanes : [];
@@ -9588,7 +9601,7 @@ function renderWindowCommandStrip() {
     return;
   }
   const score = clamp(number(commander.commanderScore), 0, 100);
-  const window = commander.activeWindow || {};
+  const window = commanderWindow(commander);
   const angle = commander.activeAngle || {};
   const gates = Array.isArray(commander.gates) ? commander.gates : [];
   const primaryGate = gates.find((gate) => gate.id === "cadence") || gates[0] || {};
