@@ -1488,6 +1488,21 @@ const translations = {
     daily_console_copy: "Copy console",
     daily_console_copy_payload: "Copy payload",
     daily_console_open: "Open route",
+    paste_queue_eyebrow: "Operator Paste Queue",
+    paste_queue_title: "One-click manual route loop",
+    paste_queue_ready: "ready tasks",
+    paste_queue_target: "route ops",
+    paste_queue_reads: "X read ops",
+    paste_queue_mode: "operator mode",
+    paste_queue_next: "next move",
+    paste_queue_tasks: "paste tasks",
+    paste_queue_rules: "operator rules",
+    paste_queue_copy: "Copy queue",
+    paste_queue_copy_payload: "Copy payload",
+    paste_queue_open: "Open route",
+    paste_queue_payload: "payload",
+    paste_queue_skip: "skip",
+    paste_queue_done: "done",
     operator_packet_eyebrow: "Operator Packet",
     operator_packet_title: "Execute this route first",
     operator_packet_armed: "armed",
@@ -2467,6 +2482,21 @@ const translations = {
     daily_console_copy: "复制控制台",
     daily_console_copy_payload: "复制载荷",
     daily_console_open: "打开路由",
+    paste_queue_eyebrow: "操作员粘贴队列",
+    paste_queue_title: "一键人工路由循环",
+    paste_queue_ready: "就绪任务",
+    paste_queue_target: "路由操作",
+    paste_queue_reads: "X 读取操作",
+    paste_queue_mode: "操作员模式",
+    paste_queue_next: "下一步",
+    paste_queue_tasks: "粘贴任务",
+    paste_queue_rules: "操作规则",
+    paste_queue_copy: "复制队列",
+    paste_queue_copy_payload: "复制载荷",
+    paste_queue_open: "打开路由",
+    paste_queue_payload: "载荷",
+    paste_queue_skip: "跳过",
+    paste_queue_done: "完成",
     operator_packet_eyebrow: "操作员数据包",
     operator_packet_title: "先执行这条路由",
     operator_packet_armed: "已装载",
@@ -4071,6 +4101,98 @@ function dailyExecutionConsoleData(
       "Stop at target count and let maintenance write results back.",
     ],
     rows,
+    copyBlock,
+  };
+}
+
+function operatorPasteQueueData(
+  dailyConsole = dailyExecutionConsoleData(),
+  packet = operatorDispatchPacketData(),
+  manualTargetAtlas = manualReplyTargetAtlasData(packet),
+  routeAmplifier = routeAmplifierData(packet),
+  ops = distributionOpsData(),
+) {
+  const incoming = dashboardData.operatorPasteQueue || fallbackData.operatorPasteQueue;
+  if (incoming?.tasks?.length) return incoming;
+  const rows = Array.isArray(dailyConsole?.rows) ? dailyConsole.rows : [];
+  const packets = Array.isArray(packet?.packets) ? packet.packets : [];
+  const targets = Array.isArray(manualTargetAtlas?.targets) ? manualTargetAtlas.targets : [];
+  const lanes = Array.isArray(routeAmplifier?.lanes) ? routeAmplifier.lanes : [];
+  const missions = Array.isArray(ops?.missions) ? ops.missions : [];
+  const source = rows.length ? rows : packets.length ? packets : targets.length ? targets : lanes.length ? lanes : missions;
+  const targetReplies = number(dailyConsole?.targetReplies, number(packet?.targetReplies, number(manualTargetAtlas?.totalTargetReplies, number(ops?.manualReplyTarget, 3))));
+  const tasks = source.slice(0, 5).map((item, index) => {
+    const matchingLane =
+      lanes.find((lane) => lane.id === item.id || lane.routeUrl === item.routeUrl || lane.label === item.routeLabel) ||
+      lanes[index] ||
+      null;
+    const routeLabel = item.routeLabel || item.label || matchingLane?.label || `Route ${index + 1}`;
+    const openUrl = item.openUrl || item.routeUrl || matchingLane?.routeUrl || null;
+    const pastePayload = item.pastePayload || item.replyText || item.draftText || item.copyBlock || "";
+    const ready = Boolean(openUrl && pastePayload);
+    return {
+      id: item.id || `paste:${index + 1}`,
+      priority: number(item.priority, number(item.rank, index + 1)),
+      routeLabel,
+      openUrl,
+      pastePayload,
+      status: ready ? (item.status || matchingLane?.status || "ok") : "warn",
+      ready,
+      targetReplies: Math.max(1, number(item.targetReplies, number(matchingLane?.targetReplies, 1))),
+      operatorSlaMinutes: Math.max(5, number(item.operatorSlaMinutes, number(matchingLane?.operatorSlaMinutes, 10 + index * 10))),
+      expectedLiftPct: number(item.expectedLiftPct, number(matchingLane?.expectedLiftPct, 0)),
+      reason: item.reason || item.evidence || matchingLane?.reason || "Use the highest-signal fresh technical exchange in this route.",
+      editRule: item.editRule || "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+      skipRule: item.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+      doneSignal: item.doneSignal || "One useful manual response pasted, or this route skipped for quality.",
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+  });
+  const readyTasks = tasks.filter((task) => task.ready);
+  const severity = readyTasks.length >= Math.min(3, tasks.length || 1) ? "ok" : readyTasks.length ? "warn" : "danger";
+  const primary = readyTasks[0] || tasks[0] || null;
+  const copyBlock = [
+    "CODEX OPERATOR PASTE QUEUE",
+    `Generated: ${dashboardData.updatedAt || fallbackData.updatedAt}`,
+    "Mode: manual_paste_queue",
+    "Cost guard: 0 live X search/read ops",
+    `Target: ${formatNumber(targetReplies)} manual route ops`,
+    "",
+    "Queue:",
+    ...tasks.slice(0, 5).flatMap((task) => [
+      `${formatNumber(task.priority)}. ${task.routeLabel} · ${task.ready ? "READY" : "MISSING_ROUTE_OR_PAYLOAD"} · SLA ${formatNumber(task.operatorSlaMinutes)}m`,
+      task.openUrl ? `OPEN: ${task.openUrl}` : null,
+      task.pastePayload ? `PASTE: ${task.pastePayload}` : null,
+      `SKIP: ${task.skipRule}`,
+      "",
+    ].filter(Boolean)),
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "manual_paste_queue",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    targetReplies,
+    readyTasks: readyTasks.length,
+    totalTasks: tasks.length,
+    primaryRouteLabel: primary?.routeLabel || null,
+    primaryOpenUrl: primary?.openUrl || null,
+    primaryPastePayload: primary?.pastePayload || null,
+    nextAction: primary?.ready
+      ? `Open ${primary.routeLabel}, paste one useful payload, then continue down the queue.`
+      : "Refresh manual route payloads before running the paste queue.",
+    operatorMode: "human_in_loop",
+    readGate: "browser_only",
+    guardrails: [
+      "Manual browser execution only; no automated outbound actions.",
+      "Use route links; X search/read API stays at 0.",
+      "Stop at target count and let maintenance write learning back.",
+    ],
+    tasks,
     copyBlock,
   };
 }
@@ -11405,6 +11527,79 @@ function manualReplyTargetAtlasHtml(atlas) {
   `;
 }
 
+function operatorPasteQueueHtml(queue) {
+  if (!queue?.tasks?.length) return "";
+  const severity = ["ok", "warn", "danger"].includes(queue.severity) ? queue.severity : "warn";
+  const tasks = queue.tasks.slice(0, 5);
+  const primary = tasks.find((task) => task.ready) || tasks[0] || {};
+  const taskHtml = tasks.map((task) => {
+    const status = task.ready ? "ok" : "warn";
+    return `
+      <article class="paste-task ${escapeHtml(status)}">
+        <div class="paste-task-head">
+          <span>${String(task.priority || 1).padStart(2, "0")}</span>
+          <div>
+            <strong>${escapeHtml(task.routeLabel || "-")}</strong>
+            <em>${escapeHtml(`${formatNumber(task.operatorSlaMinutes || 0)}m SLA · target ${formatNumber(task.targetReplies || 0)} · +${formatNumber(task.expectedLiftPct || 0, 1)}%`)}</em>
+          </div>
+        </div>
+        <blockquote>${escapeHtml(sreText(task.pastePayload || "-"))}</blockquote>
+        <dl>
+          <div><dt>${escapeHtml(t("paste_queue_skip"))}</dt><dd>${escapeHtml(sreText(task.skipRule || "-"))}</dd></div>
+          <div><dt>${escapeHtml(t("paste_queue_done"))}</dt><dd>${escapeHtml(sreText(task.doneSignal || "-"))}</dd></div>
+        </dl>
+        <div class="paste-task-actions">
+          ${task.openUrl ? `<a class="button button-primary" href="${escapeHtml(task.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("paste_queue_open"))}</a>` : ""}
+          <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(task.pastePayload || ""))}">${escapeHtml(t("paste_queue_copy_payload"))}</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+  const guards = (queue.guardrails || [])
+    .slice(0, 4)
+    .map((guard) => `<code>${escapeHtml(sreText(guard))}</code>`)
+    .join("");
+  return `
+    <article class="operator-paste-queue ${escapeHtml(severity)}">
+      <div class="paste-queue-head">
+        <div>
+          <span class="eyebrow">${escapeHtml(t("paste_queue_eyebrow"))}</span>
+          <strong>${escapeHtml(t("paste_queue_title"))}</strong>
+        </div>
+        <em>${escapeHtml(t("dispatch_zero_reads"))}</em>
+      </div>
+      <div class="paste-queue-core">
+        <section class="paste-queue-command">
+          <span>${escapeHtml(t("paste_queue_next"))}</span>
+          <strong>${escapeHtml(sreText(queue.nextAction || "-"))}</strong>
+          <p>${escapeHtml(sreText(primary.pastePayload || queue.primaryPastePayload || "-"))}</p>
+          <div class="paste-queue-actions">
+            ${queue.primaryOpenUrl ? `<a class="button button-primary" href="${escapeHtml(queue.primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("paste_queue_open"))}: ${escapeHtml(queue.primaryRouteLabel || "-")}</a>` : ""}
+            <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(queue.copyBlock || ""))}">${escapeHtml(t("paste_queue_copy"))}</button>
+          </div>
+        </section>
+        <section class="paste-queue-kpis">
+          <div><span>${escapeHtml(t("paste_queue_ready"))}</span><strong>${escapeHtml(`${formatNumber(queue.readyTasks || 0)}/${formatNumber(queue.totalTasks || 0)}`)}</strong></div>
+          <div><span>${escapeHtml(t("paste_queue_target"))}</span><strong>${escapeHtml(formatNumber(queue.targetReplies || 0))}</strong></div>
+          <div><span>${escapeHtml(t("paste_queue_reads"))}</span><strong>${escapeHtml(formatNumber(queue.estimatedXReadOps || 0))}</strong></div>
+          <div><span>${escapeHtml(t("paste_queue_mode"))}</span><strong>${escapeHtml(sreText(String(queue.operatorMode || "-").replace(/_/g, "-")))}</strong></div>
+        </section>
+      </div>
+      <div class="paste-queue-grid">
+        <section>
+          <div class="manifest-section-title"><span>${escapeHtml(t("paste_queue_tasks"))}</span><strong>${escapeHtml(`${formatNumber(tasks.length)} lanes`)}</strong></div>
+          <div class="paste-task-list">${taskHtml}</div>
+        </section>
+        <aside>
+          <div class="manifest-section-title"><span>${escapeHtml(t("paste_queue_rules"))}</span><strong>${escapeHtml(severity)}</strong></div>
+          <div class="paste-queue-guards">${guards}</div>
+          <pre class="paste-queue-copy"><code>${escapeHtml(sreText(queue.copyBlock || ""))}</code></pre>
+        </aside>
+      </div>
+    </article>
+  `;
+}
+
 function dailyExecutionConsoleHtml(consoleData) {
   if (!consoleData?.rows?.length) return "";
   const severity = ["ok", "warn", "danger"].includes(consoleData.severity) ? consoleData.severity : "warn";
@@ -11580,6 +11775,7 @@ function renderActions() {
   const routeAmplifier = routeAmplifierData(dispatchPacket, ops);
   const manualTargetAtlas = manualReplyTargetAtlasData(dispatchPacket, routeAmplifier, ops);
   const dailyExecutionConsole = dailyExecutionConsoleData(dispatchPacket, routeAmplifier, manualTargetAtlas, ops);
+  const operatorPasteQueue = operatorPasteQueueData(dailyExecutionConsole, dispatchPacket, manualTargetAtlas, routeAmplifier, ops);
   const flightDeck = operatorFlightDeckData(ops, dispatchPacket, routeAmplifier);
   const manifestStatus = ["ok", "warn", "danger"].includes(dispatchPacket.severity) ? dispatchPacket.severity : "ok";
   const manifestPackets = (dispatchPacket.packets || [])
@@ -11676,6 +11872,7 @@ function renderActions() {
     .join("");
 
   $("#action-board").innerHTML = `
+    ${operatorPasteQueueHtml(operatorPasteQueue)}
     ${dailyExecutionConsoleHtml(dailyExecutionConsole)}
     ${flightDeckHtml(flightDeck)}
     <div class="dispatch-strip">

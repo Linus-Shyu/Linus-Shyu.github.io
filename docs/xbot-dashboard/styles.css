@@ -3956,6 +3956,285 @@ h3 {
   border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
 }
 
+.operator-paste-queue {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  border-radius: 7px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 8% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 34%),
+    radial-gradient(circle at 88% 0, color-mix(in srgb, var(--ok) 14%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-soft) 92%, transparent), transparent 62%),
+    var(--surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent),
+    0 0 32px color-mix(in srgb, var(--accent) 11%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.operator-paste-queue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--ok) 6%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.18;
+}
+
+.operator-paste-queue.warn {
+  border-color: color-mix(in srgb, var(--warn) 46%, var(--line));
+}
+
+.operator-paste-queue.danger {
+  border-color: color-mix(in srgb, var(--danger) 54%, var(--line));
+}
+
+.paste-queue-head,
+.paste-queue-core,
+.paste-queue-grid,
+.paste-task,
+.paste-task-head,
+.paste-task-actions,
+.paste-queue-actions,
+.paste-queue-kpis {
+  position: relative;
+  z-index: 1;
+}
+
+.paste-queue-head,
+.paste-task-head,
+.paste-task-actions,
+.paste-queue-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.paste-queue-head strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.paste-queue-head em {
+  border: 1px solid color-mix(in srgb, var(--ok) 44%, var(--line));
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 880;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.paste-queue-core {
+  display: grid;
+  grid-template-columns: minmax(330px, 1fr) minmax(360px, 0.8fr);
+  gap: 9px;
+}
+
+.paste-queue-command,
+.paste-queue-kpis div,
+.paste-task,
+.paste-queue-grid > section,
+.paste-queue-grid > aside {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.paste-queue-command {
+  padding: 12px;
+}
+
+.paste-queue-command span,
+.paste-queue-kpis span,
+.paste-task dt,
+.paste-task em {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.paste-queue-command strong {
+  display: block;
+  margin: 6px 0 8px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(17px, 1.6vw, 26px);
+  font-weight: 900;
+  line-height: 1.02;
+}
+
+.paste-queue-command p {
+  margin: 0 0 12px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.paste-queue-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.paste-queue-kpis div {
+  padding: 12px;
+}
+
+.paste-queue-kpis strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.paste-queue-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+  gap: 9px;
+}
+
+.paste-queue-grid > section,
+.paste-queue-grid > aside {
+  padding: 10px;
+}
+
+.paste-task-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.paste-task {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+}
+
+.paste-task.ok {
+  border-color: color-mix(in srgb, var(--ok) 32%, var(--line));
+}
+
+.paste-task.warn {
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
+}
+
+.paste-task-head > span {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  border-radius: 6px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--mono);
+  font-weight: 900;
+}
+
+.paste-task-head strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.paste-task blockquote {
+  margin: 0;
+  min-height: 76px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+  border-radius: 6px;
+  padding: 9px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--bg) 54%, transparent);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.paste-task dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.paste-task dl div {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.paste-task dd {
+  margin: 0;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.paste-queue-guards {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+
+.paste-queue-guards code,
+.paste-queue-copy {
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 52%, transparent);
+}
+
+.paste-queue-guards code {
+  padding: 8px;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 11px;
+  white-space: normal;
+}
+
+.paste-queue-copy {
+  overflow: auto;
+  max-height: 250px;
+  margin: 0;
+  padding: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .daily-execution-console {
   position: relative;
   display: grid;
@@ -26478,6 +26757,49 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
   color: var(--rail-final-accent) !important;
+}
+
+/* Operator paste queue containment: never spill into adjacent workflow panels. */
+html[data-theme][data-theme] body .operator-paste-queue {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  contain: layout paint !important;
+}
+
+html[data-theme][data-theme] body .action-board > .operator-paste-queue,
+html[data-theme][data-theme] body .action-board > * {
+  min-width: 0 !important;
+}
+
+html[data-theme][data-theme] body .operator-paste-queue .paste-queue-core,
+html[data-theme][data-theme] body .operator-paste-queue .paste-queue-grid,
+html[data-theme][data-theme] body .operator-paste-queue .paste-task-list {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+html[data-theme][data-theme] body .operator-paste-queue .paste-queue-kpis {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+html[data-theme][data-theme] body .operator-paste-queue .paste-queue-kpis strong {
+  overflow-wrap: anywhere !important;
+  font-size: clamp(18px, 2vw, 23px) !important;
+}
+
+@media (min-width: 1680px) {
+  html[data-theme][data-theme] body .operator-paste-queue .paste-queue-core {
+    grid-template-columns: minmax(330px, 1fr) minmax(360px, 0.8fr) !important;
+  }
+
+  html[data-theme][data-theme] body .operator-paste-queue .paste-queue-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr) !important;
+  }
+
+  html[data-theme][data-theme] body .operator-paste-queue .paste-task-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
 }
 
 @media (min-width: 1081px) and (max-width: 1320px) {

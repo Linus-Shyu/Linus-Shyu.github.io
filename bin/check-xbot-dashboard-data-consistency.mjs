@@ -279,6 +279,56 @@ function assertNextWindowCommander(file, data) {
   }
 }
 
+function assertOperatorPasteQueue(file, data) {
+  const queue = data.operatorPasteQueue;
+  if (!queue || typeof queue !== "object") {
+    fail(`${file} is missing explicit operatorPasteQueue telemetry.`);
+  }
+  if (queue.mode !== "manual_paste_queue") {
+    fail(`${file} operatorPasteQueue mode drifted.`, queue.mode || "<missing>");
+  }
+  if (queue.zeroExtraXReads !== true || number(queue.estimatedXReadOps) !== 0 || number(queue.estimatedIncrementalXApiUsd) !== 0) {
+    fail(`${file} operatorPasteQueue must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: queue.zeroExtraXReads,
+      estimatedXReadOps: queue.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: queue.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (queue.readGate !== "browser_only" || queue.operatorMode !== "human_in_loop") {
+    fail(`${file} operatorPasteQueue must remain browser-only and human-in-loop.`, JSON.stringify({
+      readGate: queue.readGate,
+      operatorMode: queue.operatorMode,
+    }));
+  }
+  const tasks = Array.isArray(queue.tasks) ? queue.tasks : [];
+  if (!tasks.length) fail(`${file} operatorPasteQueue tasks are empty.`);
+  const readyTasks = tasks.filter((task) => task.ready);
+  if (number(queue.readyTasks) !== readyTasks.length) {
+    fail(`${file} operatorPasteQueue readyTasks count drifted.`, JSON.stringify({ declared: queue.readyTasks, actual: readyTasks.length }));
+  }
+  if (number(queue.totalTasks) !== tasks.length) {
+    fail(`${file} operatorPasteQueue totalTasks count drifted.`, JSON.stringify({ declared: queue.totalTasks, actual: tasks.length }));
+  }
+  if (readyTasks.length && (!queue.primaryOpenUrl || !queue.primaryPastePayload)) {
+    fail(`${file} operatorPasteQueue primary ready task is incomplete.`, JSON.stringify({
+      primaryOpenUrl: queue.primaryOpenUrl,
+      primaryPastePayload: queue.primaryPastePayload,
+    }));
+  }
+  for (const task of tasks) {
+    if (task.zeroExtraXReads !== true || number(task.estimatedXReadOps) !== 0 || number(task.estimatedIncrementalXApiUsd) !== 0) {
+      fail(`${file} operatorPasteQueue task must be zero-read and zero incremental X API cost.`, JSON.stringify(task));
+    }
+    if (task.ready && (!/^https:\/\/x\.com\//i.test(String(task.openUrl || "")) || !String(task.pastePayload || "").trim())) {
+      fail(`${file} operatorPasteQueue ready task must include an X web route and paste payload.`, JSON.stringify(task));
+    }
+    if (!String(task.skipRule || "").trim() || !String(task.doneSignal || "").trim() || !String(task.editRule || "").trim()) {
+      fail(`${file} operatorPasteQueue task must include edit/skip/done operator rules.`, JSON.stringify(task));
+    }
+  }
+  assertVisibleTextClean(file, "operatorPasteQueue", queue);
+}
+
 function assertCostTelemetry(file, data) {
   const governor = data.rateLimitGovernor;
   if (!governor || typeof governor !== "object") {
@@ -435,6 +485,7 @@ function assertDashboardData(file, data) {
 
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
+  assertOperatorPasteQueue(file, data);
   assertCostTelemetry(file, data);
 }
 

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-09T06:54:19.875Z",
+  "updatedAt": "2026-07-09T07:25:00.540Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-07-09T06:54:19.875Z",
+    "dashboardUpdatedAt": "2026-07-09T07:25:00.540Z",
     "analyticsUpdatedAt": null,
     "usageUpdatedAt": null,
     "accountCheckedAt": null,
@@ -33,7 +33,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -118,7 +118,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "ignition_loop",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -209,7 +209,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -376,7 +376,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "ignition_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -412,7 +412,7 @@
       {
         "id": "temporal_slot",
         "label": "UTC Fire-Control",
-        "command": "window:06:00 utc angle:not x but y",
+        "command": "window:07:00 utc angle:not x but y",
         "detail": "No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
         "status": "warn",
         "source": "temporal.matrix",
@@ -457,12 +457,12 @@
     ],
     "directives": [
       "[P1] lead:not_x_but_y action:explore :: Needs 2 more sample(s) before the bot trusts it.",
-      "[P2] window:06:00 utc angle:not x but y :: No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
+      "[P2] window:07:00 utc angle:not x but y :: No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
       "[P3] route:Target Accounts manual_only :: Execute first; this route has the strongest distribution leverage.",
       "[P4] read_gate:cached_only publish_gate:review :: Safe left $4.500; recommended lane manual route burst; normal backoff only.",
       "[P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small."
     ],
-    "copyBlock": "CODEX AUTOPILOT DIRECTIVE DECK\nmode: ignition_directive_deck\nscore: 63.7\nzero_extra_x_reads: true\nestimated_x_read_ops: 0\n\n- [P1] lead:not_x_but_y action:explore :: Needs 2 more sample(s) before the bot trusts it.\n- [P2] window:06:00 utc angle:not x but y :: No hour-specific sample yet; routed from adaptive scheduler weight 60.0.\n- [P3] route:Target Accounts manual_only :: Execute first; this route has the strongest distribution leverage.\n- [P4] read_gate:cached_only publish_gate:review :: Safe left $4.500; recommended lane manual route burst; normal backoff only.\n- [P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small.\n\nGUARDRAILS:\n- Human-in-loop route ops only.\n- No automatic replies, likes, follows, scraping, or rate-limit circumvention.\n- Use cached telemetry, normal backoff, and cost gates.",
+    "copyBlock": "CODEX AUTOPILOT DIRECTIVE DECK\nmode: ignition_directive_deck\nscore: 63.7\nzero_extra_x_reads: true\nestimated_x_read_ops: 0\n\n- [P1] lead:not_x_but_y action:explore :: Needs 2 more sample(s) before the bot trusts it.\n- [P2] window:07:00 utc angle:not x but y :: No hour-specific sample yet; routed from adaptive scheduler weight 60.0.\n- [P3] route:Target Accounts manual_only :: Execute first; this route has the strongest distribution leverage.\n- [P4] read_gate:cached_only publish_gate:review :: Safe left $4.500; recommended lane manual route burst; normal backoff only.\n- [P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small.\n\nGUARDRAILS:\n- Human-in-loop route ops only.\n- No automatic replies, likes, follows, scraping, or rate-limit circumvention.\n- Use cached telemetry, normal backoff, and cost gates.",
     "runbook": [
       "Open dashboard route links manually.",
       "Paste only high-fit drafts into relevant conversations.",
@@ -818,97 +818,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-07-08T06:54:19.880Z",
-          "endsAt": "2026-07-08T08:54:19.880Z",
-          "label": "06:54",
+          "startsAt": "2026-07-08T07:25:00.545Z",
+          "endsAt": "2026-07-08T09:25:00.545Z",
+          "label": "07:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-07-08T08:54:19.880Z",
-          "endsAt": "2026-07-08T10:54:19.880Z",
-          "label": "08:54",
+          "startsAt": "2026-07-08T09:25:00.545Z",
+          "endsAt": "2026-07-08T11:25:00.545Z",
+          "label": "09:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 2,
-          "startsAt": "2026-07-08T10:54:19.880Z",
-          "endsAt": "2026-07-08T12:54:19.880Z",
-          "label": "10:54",
+          "startsAt": "2026-07-08T11:25:00.545Z",
+          "endsAt": "2026-07-08T13:25:00.545Z",
+          "label": "11:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-07-08T12:54:19.880Z",
-          "endsAt": "2026-07-08T14:54:19.880Z",
-          "label": "12:54",
+          "startsAt": "2026-07-08T13:25:00.545Z",
+          "endsAt": "2026-07-08T15:25:00.545Z",
+          "label": "13:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 4,
-          "startsAt": "2026-07-08T14:54:19.880Z",
-          "endsAt": "2026-07-08T16:54:19.880Z",
-          "label": "14:54",
+          "startsAt": "2026-07-08T15:25:00.545Z",
+          "endsAt": "2026-07-08T17:25:00.545Z",
+          "label": "15:25",
           "value": 0,
           "posts": 1
         },
         {
           "index": 5,
-          "startsAt": "2026-07-08T16:54:19.880Z",
-          "endsAt": "2026-07-08T18:54:19.880Z",
-          "label": "16:54",
+          "startsAt": "2026-07-08T17:25:00.545Z",
+          "endsAt": "2026-07-08T19:25:00.545Z",
+          "label": "17:25",
           "value": 0,
           "posts": 1
         },
         {
           "index": 6,
-          "startsAt": "2026-07-08T18:54:19.880Z",
-          "endsAt": "2026-07-08T20:54:19.880Z",
-          "label": "18:54",
+          "startsAt": "2026-07-08T19:25:00.545Z",
+          "endsAt": "2026-07-08T21:25:00.545Z",
+          "label": "19:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-07-08T20:54:19.880Z",
-          "endsAt": "2026-07-08T22:54:19.880Z",
-          "label": "20:54",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 8,
-          "startsAt": "2026-07-08T22:54:19.880Z",
-          "endsAt": "2026-07-09T00:54:19.880Z",
-          "label": "22:54",
+          "startsAt": "2026-07-08T21:25:00.545Z",
+          "endsAt": "2026-07-08T23:25:00.545Z",
+          "label": "21:25",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 8,
+          "startsAt": "2026-07-08T23:25:00.545Z",
+          "endsAt": "2026-07-09T01:25:00.545Z",
+          "label": "23:25",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 9,
-          "startsAt": "2026-07-09T00:54:19.880Z",
-          "endsAt": "2026-07-09T02:54:19.880Z",
-          "label": "00:54",
+          "startsAt": "2026-07-09T01:25:00.545Z",
+          "endsAt": "2026-07-09T03:25:00.545Z",
+          "label": "01:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-07-09T02:54:19.880Z",
-          "endsAt": "2026-07-09T04:54:19.880Z",
-          "label": "02:54",
+          "startsAt": "2026-07-09T03:25:00.545Z",
+          "endsAt": "2026-07-09T05:25:00.545Z",
+          "label": "03:25",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-07-09T04:54:19.880Z",
-          "endsAt": "2026-07-09T06:54:19.880Z",
-          "label": "04:54",
+          "startsAt": "2026-07-09T05:25:00.545Z",
+          "endsAt": "2026-07-09T07:25:00.545Z",
+          "label": "05:25",
           "value": 0,
           "posts": 0
         }
@@ -925,56 +925,56 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-07-02T06:54:19.880Z",
-          "endsAt": "2026-07-03T06:54:19.880Z",
+          "startsAt": "2026-07-02T07:25:00.545Z",
+          "endsAt": "2026-07-03T07:25:00.545Z",
           "label": "2026-07-02",
           "value": 0,
           "posts": 3
         },
         {
           "index": 1,
-          "startsAt": "2026-07-03T06:54:19.880Z",
-          "endsAt": "2026-07-04T06:54:19.880Z",
+          "startsAt": "2026-07-03T07:25:00.545Z",
+          "endsAt": "2026-07-04T07:25:00.545Z",
           "label": "2026-07-03",
           "value": 0,
           "posts": 3
         },
         {
           "index": 2,
-          "startsAt": "2026-07-04T06:54:19.880Z",
-          "endsAt": "2026-07-05T06:54:19.880Z",
+          "startsAt": "2026-07-04T07:25:00.545Z",
+          "endsAt": "2026-07-05T07:25:00.545Z",
           "label": "2026-07-04",
           "value": 0,
           "posts": 3
         },
         {
           "index": 3,
-          "startsAt": "2026-07-05T06:54:19.880Z",
-          "endsAt": "2026-07-06T06:54:19.880Z",
+          "startsAt": "2026-07-05T07:25:00.545Z",
+          "endsAt": "2026-07-06T07:25:00.545Z",
           "label": "2026-07-05",
           "value": 0,
           "posts": 3
         },
         {
           "index": 4,
-          "startsAt": "2026-07-06T06:54:19.880Z",
-          "endsAt": "2026-07-07T06:54:19.880Z",
+          "startsAt": "2026-07-06T07:25:00.545Z",
+          "endsAt": "2026-07-07T07:25:00.545Z",
           "label": "2026-07-06",
           "value": 0,
           "posts": 3
         },
         {
           "index": 5,
-          "startsAt": "2026-07-07T06:54:19.880Z",
-          "endsAt": "2026-07-08T06:54:19.880Z",
+          "startsAt": "2026-07-07T07:25:00.545Z",
+          "endsAt": "2026-07-08T07:25:00.545Z",
           "label": "2026-07-07",
           "value": 0,
           "posts": 3
         },
         {
           "index": 6,
-          "startsAt": "2026-07-08T06:54:19.880Z",
-          "endsAt": "2026-07-09T06:54:19.880Z",
+          "startsAt": "2026-07-08T07:25:00.545Z",
+          "endsAt": "2026-07-09T07:25:00.545Z",
           "label": "2026-07-08",
           "value": 0,
           "posts": 3
@@ -1274,7 +1274,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-07-09T06:54:19.875Z",
+      "generatedAt": "2026-07-09T07:25:00.540Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (0 text, 0 media).",
@@ -1337,7 +1337,7 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "manual_distribution_only",
     "publishAllowed": false,
     "willBlockPublish": false,
@@ -1352,12 +1352,12 @@
     "safeRemainingUsd": 4.5,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 7.79,
+    "hoursSinceLastPost": 8.3,
     "telemetryAgeMinutes": null,
     "latestTelemetryAt": null,
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-07-09T06:54:19.875Z",
+      "generatedAt": "2026-07-09T07:25:00.540Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 0,
@@ -1366,8 +1366,8 @@
       "mode": "bootstrap",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 6,
-        "label": "06:00",
+        "hour": 7,
+        "label": "07:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -1467,7 +1467,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 7,
@@ -1480,7 +1480,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": false
+          "current": true
         },
         {
           "hour": 8,
@@ -1696,8 +1696,8 @@
       "mode": "bootstrap",
       "confidence": "low",
       "currentHour": {
-        "hour": 6,
-        "label": "06:00",
+        "hour": 7,
+        "label": "07:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -1712,33 +1712,33 @@
     "topicTimingWindow": {
       "mode": "topic_timing_starved",
       "severity": "danger",
-      "routerScore": 41.1,
+      "routerScore": 41.6,
       "trusted": false,
       "windowHours": 1.5,
       "hoursFromNow": 0,
       "activeLane": {
-        "id": "6:consumer_behavior:second_order",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:not_x_but_y",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
         "pillarStatus": "expand",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
+        "formatId": "not_x_but_y",
+        "formatLabel": "Not X But Y",
         "formatStatus": "explore",
-        "score": 55.9,
+        "score": 57,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
         "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
       },
-      "nextAction": "Schedule the next standalone packet for 06:00 UTC as Consumer Behavior / Second Order.",
+      "nextAction": "Schedule the next standalone packet for 07:00 UTC as Consumer Behavior / Not X But Y.",
       "zeroExtraXReads": true
     },
     "checks": [
@@ -1753,7 +1753,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "7.8h since packet",
+        "value": "8.3h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -1781,20 +1781,20 @@
         "id": "hourly_window",
         "ok": true,
         "label": "Learned UTC window",
-        "value": "06:00 score 0.0",
+        "value": "07:00 score 0.0",
         "detail": "Not enough hourly samples; publish only when the story is strong and keep collecting telemetry."
       },
       {
         "id": "topic_timing",
         "ok": true,
         "label": "Topic timing",
-        "value": "06:00 UTC / Consumer Behavior / Second Order in 0.0h",
+        "value": "07:00 UTC / Consumer Behavior / Not X But Y in 0.0h",
         "detail": "No trusted topic timing gate; cadence will not block on this signal."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 55,
@@ -1870,7 +1870,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 100,
@@ -2128,7 +2128,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.115, projected month-end $2.630 / $4.50 safe cap."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -2341,7 +2341,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -2460,7 +2460,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2473,7 +2473,7 @@
     "expectedLiftPct": 0,
     "bestRouteLabel": "Target Accounts",
     "nextAction": "Open Target Accounts in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-07-09T06:54:19.875Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $4.50\nTarget: 3 useful manual route ops · expected lift +0.0%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. Target Accounts · SLA 10m · target 3 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-07-09T07:25:00.540Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $4.50\nTarget: 3 useful manual route ops · expected lift +0.0%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. Target Accounts · SLA 10m · target 3 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -2561,7 +2561,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2574,10 +2574,10 @@
     "primaryReplyText": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
     "nextAction": "Open Target Accounts in X web, paste the first ready output, then stop at 3 useful route ops.",
     "activeOpportunity": {
-      "label": "06:00 UTC / Consumer Behavior / Second Order",
-      "formatId": "second_order",
+      "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+      "formatId": "not_x_but_y",
       "pillarId": "consumer_behavior",
-      "score": 59.8
+      "score": 60.8
     },
     "guardrails": [
       "Manual browser execution only; no auto-search, auto-like, auto-follow, or auto-reply.",
@@ -2602,44 +2602,110 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-07-09T06:54:19.875Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n   SLA: 10m · target 3 · lift +0.0%\n\nPrimary command: Open Target Accounts in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-07-09T07:25:00.540Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n   SLA: 10m · target 3 · lift +0.0%\n\nPrimary command: Open Target Accounts in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+  },
+  "operatorPasteQueue": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "manual_paste_queue",
+    "severity": "ok",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "targetReplies": 3,
+    "readyTasks": 1,
+    "totalTasks": 1,
+    "primaryRouteLabel": "Target Accounts",
+    "primaryOpenUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "primaryPastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+    "nextAction": "Open Target Accounts, paste one useful payload, then continue down the queue.",
+    "operatorMode": "human_in_loop",
+    "readGate": "browser_only",
+    "guardrails": [
+      "Manual browser execution only; no automated outbound actions.",
+      "Use route links; X search/read API stays at 0.",
+      "Stop at target count and let maintenance write learning back."
+    ],
+    "tasks": [
+      {
+        "id": "post:2074993668881305897",
+        "priority": 1,
+        "routeLabel": "Target Accounts",
+        "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+        "status": "ok",
+        "ready": true,
+        "targetReplies": 3,
+        "operatorSlaMinutes": 10,
+        "expectedLiftPct": 0,
+        "reason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
+        "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+        "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+        "doneSignal": "One useful manual response pasted, or this route skipped for quality.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      }
+    ],
+    "steps": [
+      {
+        "id": "open_route",
+        "label": "open.route",
+        "detail": "Open the queued route link in X web."
+      },
+      {
+        "id": "select_exchange",
+        "label": "select.exchange",
+        "detail": "Pick a fresh technical exchange with visible discussion."
+      },
+      {
+        "id": "paste_payload",
+        "label": "paste.payload",
+        "detail": "Paste once, edit only context, then move to the next route."
+      },
+      {
+        "id": "stop_gate",
+        "label": "stop.gate",
+        "detail": "Stop at the target count or when quality drops."
+      }
+    ],
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-07-09T07:25:00.540Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. Target Accounts · READY · SLA 10m · target 3\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "zero_read_next_window_commander",
     "severity": "danger",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 28.6,
+    "commanderScore": 29.2,
     "publishGate": "manual_route_only",
     "readGate": "cached_only",
     "activeWindow": {
-      "hour": 6,
-      "windowLabel": "06:00",
+      "hour": 7,
+      "windowLabel": "07:00",
       "hoursFromNow": 0,
       "loadScore": 0
     },
     "window": {
-      "hour": 6,
-      "label": "06:00",
-      "windowLabel": "06:00",
+      "hour": 7,
+      "label": "07:00",
+      "windowLabel": "07:00",
       "hoursFromNow": 0,
       "loadScore": 0
     },
     "activeAngle": {
-      "formatId": "second_order",
-      "formatLabel": "Second Order",
+      "formatId": "not_x_but_y",
+      "formatLabel": "Not X But Y",
       "pillarId": "consumer_behavior",
       "pillarLabel": "Consumer Behavior",
-      "opportunityScore": 59.8,
-      "timingScore": 42
+      "opportunityScore": 60.8,
+      "timingScore": 42.5
     },
-    "command": "Hold the standalone packet; run one manual route op and keep the Second Order angle warm for 06:00 UTC.",
+    "command": "Hold the standalone packet; run one manual route op and keep the Not X But Y angle warm for 07:00 UTC.",
     "promptBias": [
-      "Format=second_order",
+      "Format=not_x_but_y",
       "Pillar=Consumer Behavior",
-      "Window=06:00 UTC",
+      "Window=07:00 UTC",
       "Hook must state a rule, cost, prediction, or sharp question in the first line.",
       "No headline recap; no generic AI phrasing."
     ],
@@ -2670,23 +2736,23 @@
     "lanes": [
       {
         "id": "opportunity",
-        "label": "06:00 UTC / Consumer Behavior / Second Order",
-        "score": 59.8,
+        "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+        "score": 60.8,
         "status": "watch",
         "source": "topic_timing",
-        "detail": "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
+        "detail": "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
       },
       {
         "id": "timing",
-        "label": "06:00 UTC / Consumer Behavior / Second Order",
-        "score": 57.6,
-        "status": "seed",
+        "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+        "score": 58.7,
+        "status": "watch",
         "source": "topic_timing",
-        "detail": "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
+        "detail": "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
       },
       {
         "id": "angle_load",
-        "label": "06:00 UTC / Not X But Y",
+        "label": "07:00 UTC / Not X But Y",
         "score": 28.8,
         "status": "probe",
         "source": "angle_load",
@@ -2695,11 +2761,11 @@
     ],
     "checklist": [
       "Do not force a standalone packet while cadence/budget gates are in review.",
-      "Use this prompt bias: Format=second_order · Pillar=Consumer Behavior · Window=06:00 UTC.",
+      "Use this prompt bias: Format=not_x_but_y · Pillar=Consumer Behavior · Window=07:00 UTC.",
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 28.6 / Gate: manual_route_only / X reads: 0\nWindow: 06:00 UTC (0.0h from now)\nAngle: Second Order / Consumer Behavior\nCommand: Hold the standalone packet; run one manual route op and keep the Second Order angle warm for 06:00 UTC.\nPrompt bias:\n- Format=second_order\n- Pillar=Consumer Behavior\n- Window=06:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 29.2 / Gate: manual_route_only / X reads: 0\nWindow: 07:00 UTC (0.0h from now)\nAngle: Not X But Y / Consumer Behavior\nCommand: Hold the standalone packet; run one manual route op and keep the Not X But Y angle warm for 07:00 UTC.\nPrompt bias:\n- Format=not_x_but_y\n- Pillar=Consumer Behavior\n- Window=07:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -2707,7 +2773,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -2723,7 +2789,7 @@
     "routeLabel": "Target Accounts",
     "routeUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
     "draftText": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-07-09T06:54:19.875Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: Target Accounts\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen Target Accounts, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nCloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-07-09T07:25:00.540Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: Target Accounts\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen Target Accounts, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nCloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 0,
@@ -2797,7 +2863,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -2855,7 +2921,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2874,7 +2940,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-07-09T06:54:19.875Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 1/1 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. Target Accounts · target_account_mesh · score 85.9 · target 3\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-07-09T07:25:00.540Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 1/1 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. Target Accounts · target_account_mesh · score 85.9 · target 3\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n",
     "targets": [
       {
         "id": "post:2074993668881305897",
@@ -2910,7 +2976,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -3071,7 +3137,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -3080,11 +3146,11 @@
     "baselineScore": 0,
     "exploreFloorPct": 16,
     "recommendedLane": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "not_x_but_y",
+      "label": "Not X But Y",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 50.84,
+      "allocationScore": 50.86,
       "avgScore": 1,
       "samples": 0,
       "liftPct": null,
@@ -3093,18 +3159,18 @@
       "exploitScore": 9,
       "rewardMomentum": 0,
       "regretPenalty": 0,
-      "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-      "nextAction": "Collect more samples for Second Order; keep first line concrete.",
+      "instruction": "Reframe the story as 'not X, but Y': reject the obvious feature-level reading and name the workflow/business shift underneath.",
+      "nextAction": "Collect more samples for Not X But Y; keep first line concrete.",
       "reason": "Needs 2 more sample(s) before the bot trusts it.",
       "rank": 1,
       "allocationPct": 10.6
     },
     "exploreLane": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "not_x_but_y",
+      "label": "Not X But Y",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 50.84,
+      "allocationScore": 50.86,
       "avgScore": 1,
       "samples": 0,
       "liftPct": null,
@@ -3113,49 +3179,29 @@
       "exploitScore": 9,
       "rewardMomentum": 0,
       "regretPenalty": 0,
-      "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-      "nextAction": "Collect more samples for Second Order; keep first line concrete.",
+      "instruction": "Reframe the story as 'not X, but Y': reject the obvious feature-level reading and name the workflow/business shift underneath.",
+      "nextAction": "Collect more samples for Not X But Y; keep first line concrete.",
       "reason": "Needs 2 more sample(s) before the bot trusts it.",
       "rank": 1,
       "allocationPct": 10.6
     },
     "rankedFormatIds": [
-      "second_order",
       "not_x_but_y",
       "decision_rule",
       "playbook",
       "sharp_question",
       "contrarian_cost",
       "operator_pain",
-      "prediction"
+      "prediction",
+      "second_order"
     ],
     "lanes": [
-      {
-        "id": "second_order",
-        "label": "Second Order",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 50.84,
-        "avgScore": 1,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 0.833,
-        "explorationScore": 24.99,
-        "exploitScore": 9,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-        "nextAction": "Collect more samples for Second Order; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 1,
-        "allocationPct": 10.6
-      },
       {
         "id": "not_x_but_y",
         "label": "Not X But Y",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.74,
+        "allocationScore": 50.86,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3167,7 +3213,7 @@
         "instruction": "Reframe the story as 'not X, but Y': reject the obvious feature-level reading and name the workflow/business shift underneath.",
         "nextAction": "Collect more samples for Not X But Y; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 2,
+        "rank": 1,
         "allocationPct": 10.6
       },
       {
@@ -3175,7 +3221,7 @@
         "label": "Decision Rule",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.47,
+        "allocationScore": 50.6,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3187,15 +3233,15 @@
         "instruction": "Give a simple decision rule readers can reuse: if X is true, do Y; otherwise wait, ignore, or budget differently.",
         "nextAction": "Collect more samples for Decision Rule; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 3,
-        "allocationPct": 10.5
+        "rank": 2,
+        "allocationPct": 10.6
       },
       {
         "id": "playbook",
         "label": "Playbook",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.37,
+        "allocationScore": 50.49,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3207,7 +3253,7 @@
         "instruction": "Turn the story into a practical playbook: what builders/operators should do next, what to stop doing, or which default to change.",
         "nextAction": "Collect more samples for Playbook; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 4,
+        "rank": 3,
         "allocationPct": 10.5
       },
       {
@@ -3215,7 +3261,7 @@
         "label": "Sharp Question",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.26,
+        "allocationScore": 50.39,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3227,7 +3273,7 @@
         "instruction": "End with one precise question that a knowledgeable reader can answer, without generic 'what do you think' engagement bait.",
         "nextAction": "Collect more samples for Sharp Question; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 5,
+        "rank": 4,
         "allocationPct": 10.5
       },
       {
@@ -3235,7 +3281,7 @@
         "label": "Contrarian Cost",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.16,
+        "allocationScore": 50.28,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3247,7 +3293,7 @@
         "instruction": "Open with the hidden cost or tradeoff, not the benefit. The take should be debatable but defensible.",
         "nextAction": "Collect more samples for Contrarian Cost; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 6,
+        "rank": 5,
         "allocationPct": 10.5
       },
       {
@@ -3255,7 +3301,7 @@
         "label": "Operator Pain",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.05,
+        "allocationScore": 50.18,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3267,15 +3313,15 @@
         "instruction": "Translate the story into an operator/developer pain point: what gets easier, what gets more annoying, and who now has a new job to do.",
         "nextAction": "Collect more samples for Operator Pain; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 7,
-        "allocationPct": 10.4
+        "rank": 6,
+        "allocationPct": 10.5
       },
       {
         "id": "prediction",
         "label": "Near-term Prediction",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 49.95,
+        "allocationScore": 50.07,
         "avgScore": 1,
         "samples": 0,
         "liftPct": null,
@@ -3287,12 +3333,32 @@
         "instruction": "Make one concrete near-term prediction tied to the story. Include who wins, who loses, or what workflow becomes default without forcing a formulaic 6-12 month frame.",
         "nextAction": "Collect more samples for Near-term Prediction; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 7,
+        "allocationPct": 10.4
+      },
+      {
+        "id": "second_order",
+        "label": "Second Order",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 49.97,
+        "avgScore": 1,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 0.833,
+        "explorationScore": 24.99,
+        "exploitScore": 9,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
+        "nextAction": "Collect more samples for Second Order; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
         "rank": 8,
         "allocationPct": 10.4
       }
     ],
-    "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: low\nprimary_format: second_order\nexploration_lane: second_order\nhook_bias: Decision Rule\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
-    "nextAction": "Allocate next candidates toward Second Order; reserve Second Order for sample growth.",
+    "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: low\nprimary_format: not_x_but_y\nexploration_lane: not_x_but_y\nhook_bias: Decision Rule\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
+    "nextAction": "Allocate next candidates toward Not X But Y; reserve Not X But Y for sample growth.",
     "guardrails": [
       "Uses cached analytics only; 0 X read ops.",
       "Fixed TWEET_CONTENT_FORMAT_ID still overrides allocator.",
@@ -3301,7 +3367,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -3358,7 +3424,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": null,
-        "allocationPct": 10.6,
+        "allocationPct": 10.4,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -3392,7 +3458,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": null,
-        "allocationPct": 10.4,
+        "allocationPct": 10.5,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -3460,7 +3526,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": null,
-        "allocationPct": 10.5,
+        "allocationPct": 10.6,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -3475,7 +3541,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "conversion_starved",
     "severity": "danger",
     "zeroExtraXReads": true,
@@ -3491,7 +3557,7 @@
     "primaryLane": null,
     "nextAction": "Collect more measured packets before trusting conversion allocation.",
     "promptDirectives": [
-      "Keep content format aligned with bandit lane second_order.",
+      "Keep content format aligned with bandit lane not_x_but_y.",
       "expand Consumer Apps: Translate the story into a consumer behavior or distribution habit change.",
       "Make the first line a reusable rule, cost, or prediction a tech-curious reader would follow for."
     ],
@@ -3524,7 +3590,7 @@
     "lanes": []
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -3537,7 +3603,7 @@
       "id": "consumer_behavior",
       "label": "Consumer Behavior",
       "status": "expand",
-      "score": 38.8,
+      "score": 41.8,
       "samples": 0,
       "avgScore": 0,
       "liftPct": null,
@@ -3563,7 +3629,7 @@
         "id": "consumer_behavior",
         "label": "Consumer Behavior",
         "status": "expand",
-        "score": 38.8,
+        "score": 41.8,
         "samples": 0,
         "avgScore": 0,
         "liftPct": null,
@@ -3588,7 +3654,7 @@
         "id": "platform_control",
         "label": "Platform Control",
         "status": "expand",
-        "score": 38.4,
+        "score": 41.4,
         "samples": 0,
         "avgScore": 0,
         "liftPct": null,
@@ -3608,6 +3674,31 @@
         ],
         "examples": [],
         "nextAction": "Expand Platform Control; it is below target share but broad enough for active conn growth."
+      },
+      {
+        "id": "market_timing",
+        "label": "Market Timing",
+        "status": "expand",
+        "score": 40.5,
+        "samples": 0,
+        "avgScore": 0,
+        "liftPct": null,
+        "sharePct": 0,
+        "targetSharePct": 14,
+        "impressions": 0,
+        "engagementRate": 0,
+        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson.",
+        "lexicon": [
+          "pricing",
+          "market",
+          "timing",
+          "distribution",
+          "revenue",
+          "GTM",
+          "business model"
+        ],
+        "examples": [],
+        "nextAction": "Expand Market Timing; it is below target share but broad enough for active conn growth."
       },
       {
         "id": "operator_leverage",
@@ -3633,31 +3724,6 @@
         ],
         "examples": [],
         "nextAction": "Expand Operator Leverage; it is below target share but broad enough for active conn growth."
-      },
-      {
-        "id": "market_timing",
-        "label": "Market Timing",
-        "status": "expand",
-        "score": 37.5,
-        "samples": 0,
-        "avgScore": 0,
-        "liftPct": null,
-        "sharePct": 0,
-        "targetSharePct": 14,
-        "impressions": 0,
-        "engagementRate": 0,
-        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson.",
-        "lexicon": [
-          "pricing",
-          "market",
-          "timing",
-          "distribution",
-          "revenue",
-          "GTM",
-          "business model"
-        ],
-        "examples": [],
-        "nextAction": "Expand Market Timing; it is below target share but broad enough for active conn growth."
       },
       {
         "id": "risk_boundary",
@@ -3722,62 +3788,40 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "topic_timing_starved",
     "severity": "danger",
     "source": "cached hourly load + narrative resonance + content bandit",
     "zeroExtraXReads": true,
     "sampleCount": 0,
-    "routerScore": 42,
+    "routerScore": 42.5,
     "activeLane": {
-      "id": "6:consumer_behavior:second_order",
-      "hour": 6,
-      "windowLabel": "06:00",
+      "id": "7:consumer_behavior:not_x_but_y",
+      "hour": 7,
+      "windowLabel": "07:00",
       "hoursFromNow": 0,
       "loadScore": 0,
       "pillarId": "consumer_behavior",
       "pillarLabel": "Consumer Behavior",
       "pillarStatus": "expand",
-      "formatId": "second_order",
-      "formatLabel": "Second Order",
+      "formatId": "not_x_but_y",
+      "formatLabel": "Not X But Y",
       "formatStatus": "explore",
-      "score": 57.6,
+      "score": 58.7,
       "samples": 0,
       "avgScore": 0,
       "impressions": 0,
       "engagementRate": 0,
       "observed": false,
-      "status": "seed",
-      "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC.",
-      "reason": "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
+      "status": "watch",
+      "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC.",
+      "reason": "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
     },
     "lanes": [
       {
-        "id": "6:consumer_behavior:second_order",
-        "hour": 6,
-        "windowLabel": "06:00",
-        "hoursFromNow": 0,
-        "loadScore": 0,
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
-        "pillarStatus": "expand",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "formatStatus": "explore",
-        "score": 57.6,
-        "samples": 0,
-        "avgScore": 0,
-        "impressions": 0,
-        "engagementRate": 0,
-        "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
-      },
-      {
-        "id": "6:consumer_behavior:not_x_but_y",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:not_x_but_y",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
@@ -3786,20 +3830,20 @@
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
         "formatStatus": "explore",
-        "score": 57.6,
+        "score": 58.7,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Not X But Y in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:consumer_behavior:decision_rule",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:decision_rule",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
@@ -3808,20 +3852,20 @@
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.6,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Decision Rule around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Decision Rule in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Decision Rule around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Decision Rule in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:consumer_behavior:playbook",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:playbook",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
@@ -3830,20 +3874,20 @@
         "formatId": "playbook",
         "formatLabel": "Playbook",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.6,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Playbook around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Playbook in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Playbook around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Playbook in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:consumer_behavior:sharp_question",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:sharp_question",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
@@ -3852,20 +3896,20 @@
         "formatId": "sharp_question",
         "formatLabel": "Sharp Question",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.5,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Sharp Question around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Sharp Question in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Sharp Question around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Sharp Question in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:consumer_behavior:contrarian_cost",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:contrarian_cost",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "consumer_behavior",
@@ -3874,42 +3918,42 @@
         "formatId": "contrarian_cost",
         "formatLabel": "Contrarian Cost",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.5,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Contrarian Cost around 06:00 UTC.",
-        "reason": "Seed Consumer Behavior via Contrarian Cost in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Contrarian Cost around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Contrarian Cost in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:second_order",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:operator_pain",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
         "pillarStatus": "expand",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
+        "formatId": "operator_pain",
+        "formatLabel": "Operator Pain",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.5,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 06:00 UTC.",
-        "reason": "Seed Platform Control via Second Order in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Operator Pain around 07:00 UTC.",
+        "reason": "Seed Consumer Behavior via Operator Pain in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:not_x_but_y",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:platform_control:not_x_but_y",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "platform_control",
@@ -3918,20 +3962,20 @@
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
         "formatStatus": "explore",
-        "score": 57.5,
+        "score": 58.5,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 06:00 UTC.",
-        "reason": "Seed Platform Control via Not X But Y in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 07:00 UTC.",
+        "reason": "Seed Platform Control via Not X But Y in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:decision_rule",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:platform_control:decision_rule",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "platform_control",
@@ -3940,20 +3984,20 @@
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
         "formatStatus": "explore",
-        "score": 57.4,
+        "score": 58.5,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Decision Rule around 06:00 UTC.",
-        "reason": "Seed Platform Control via Decision Rule in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Decision Rule around 07:00 UTC.",
+        "reason": "Seed Platform Control via Decision Rule in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:playbook",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:platform_control:playbook",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "platform_control",
@@ -3962,20 +4006,20 @@
         "formatId": "playbook",
         "formatLabel": "Playbook",
         "formatStatus": "explore",
-        "score": 57.4,
+        "score": 58.4,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Playbook around 06:00 UTC.",
-        "reason": "Seed Platform Control via Playbook in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Playbook around 07:00 UTC.",
+        "reason": "Seed Platform Control via Playbook in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:sharp_question",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:platform_control:sharp_question",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "platform_control",
@@ -3984,20 +4028,20 @@
         "formatId": "sharp_question",
         "formatLabel": "Sharp Question",
         "formatStatus": "explore",
-        "score": 57.4,
+        "score": 58.4,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Sharp Question around 06:00 UTC.",
-        "reason": "Seed Platform Control via Sharp Question in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Sharp Question around 07:00 UTC.",
+        "reason": "Seed Platform Control via Sharp Question in a learned 07:00 UTC load window."
       },
       {
-        "id": "6:platform_control:contrarian_cost",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:platform_control:contrarian_cost",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "pillarId": "platform_control",
@@ -4006,21 +4050,43 @@
         "formatId": "contrarian_cost",
         "formatLabel": "Contrarian Cost",
         "formatStatus": "explore",
-        "score": 57.3,
+        "score": 58.4,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
         "engagementRate": 0,
         "observed": false,
-        "status": "seed",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Contrarian Cost around 06:00 UTC.",
-        "reason": "Seed Platform Control via Contrarian Cost in a learned 06:00 UTC load window."
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Contrarian Cost around 07:00 UTC.",
+        "reason": "Seed Platform Control via Contrarian Cost in a learned 07:00 UTC load window."
+      },
+      {
+        "id": "7:platform_control:operator_pain",
+        "hour": 7,
+        "windowLabel": "07:00",
+        "hoursFromNow": 0,
+        "loadScore": 0,
+        "pillarId": "platform_control",
+        "pillarLabel": "Platform Control",
+        "pillarStatus": "expand",
+        "formatId": "operator_pain",
+        "formatLabel": "Operator Pain",
+        "formatStatus": "explore",
+        "score": 58.4,
+        "samples": 0,
+        "avgScore": 0,
+        "impressions": 0,
+        "engagementRate": 0,
+        "observed": false,
+        "status": "watch",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Operator Pain around 07:00 UTC.",
+        "reason": "Seed Platform Control via Operator Pain in a learned 07:00 UTC load window."
       }
     ],
-    "nextAction": "Schedule the next standalone packet for 06:00 UTC as Consumer Behavior / Second Order.",
+    "nextAction": "Schedule the next standalone packet for 07:00 UTC as Consumer Behavior / Not X But Y.",
     "promptDirectives": [
-      "Topic timing: 06:00 UTC -> Consumer Behavior using Second Order.",
-      "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC.",
+      "Topic timing: 07:00 UTC -> Consumer Behavior using Not X But Y.",
+      "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC.",
       "If dispatching outside the selected UTC window, keep the same pillar but tighten the hook.",
       "0 extra X reads; no live trend scraping required for this timing route."
     ],
@@ -4031,7 +4097,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_opportunity_fusion",
     "severity": "warn",
     "confidence": "low",
@@ -4039,279 +4105,279 @@
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "sampleCount": 0,
-    "opportunityScore": 59.8,
+    "opportunityScore": 60.8,
     "readGate": "cached_only",
     "publishGate": "review",
-    "primaryCommand": "Bias the next packet toward 06:00 UTC / Consumer Behavior / Second Order; use cached signals only.",
+    "primaryCommand": "Bias the next packet toward 07:00 UTC / Consumer Behavior / Not X But Y; use cached signals only.",
     "activeOpportunity": {
-      "id": "6:consumer_behavior:second_order",
-      "label": "06:00 UTC / Consumer Behavior / Second Order",
-      "formatId": "second_order",
-      "formatLabel": "Second Order",
+      "id": "7:consumer_behavior:not_x_but_y",
+      "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+      "formatId": "not_x_but_y",
+      "formatLabel": "Not X But Y",
       "pillarId": "consumer_behavior",
       "pillarLabel": "Consumer Behavior",
-      "hour": 6,
-      "windowLabel": "06:00",
+      "hour": 7,
+      "windowLabel": "07:00",
       "action": "route",
       "status": "watch",
-      "score": 59.8,
+      "score": 60.8,
       "confidence": "low",
       "sources": [
         "topic_timing"
       ],
       "samples": 0,
       "evidence": [
-        "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
+        "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
       ],
       "promptDirectives": [
-        "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC."
+        "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC."
       ]
     },
     "lanes": [
       {
-        "id": "6:consumer_behavior:second_order",
-        "label": "06:00 UTC / Consumer Behavior / Second Order",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
-        "action": "route",
-        "status": "watch",
-        "score": 59.8,
-        "confidence": "low",
-        "sources": [
-          "topic_timing"
-        ],
-        "samples": 0,
-        "evidence": [
-          "Seed Consumer Behavior via Second Order in a learned 06:00 UTC load window."
-        ],
-        "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC."
-        ]
-      },
-      {
-        "id": "6:consumer_behavior:not_x_but_y",
-        "label": "06:00 UTC / Consumer Behavior / Not X But Y",
+        "id": "7:consumer_behavior:not_x_but_y",
+        "label": "07:00 UTC / Consumer Behavior / Not X But Y",
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.8,
+        "status": "watch",
+        "score": 60.8,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Consumer Behavior via Not X But Y in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Not X But Y in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC."
         ]
       },
       {
-        "id": "6:consumer_behavior:decision_rule",
-        "label": "06:00 UTC / Consumer Behavior / Decision Rule",
+        "id": "7:consumer_behavior:decision_rule",
+        "label": "07:00 UTC / Consumer Behavior / Decision Rule",
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.7,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Consumer Behavior via Decision Rule in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Decision Rule in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Decision Rule around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Decision Rule around 07:00 UTC."
         ]
       },
       {
-        "id": "6:consumer_behavior:playbook",
-        "label": "06:00 UTC / Consumer Behavior / Playbook",
+        "id": "7:consumer_behavior:playbook",
+        "label": "07:00 UTC / Consumer Behavior / Playbook",
         "formatId": "playbook",
         "formatLabel": "Playbook",
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.7,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Consumer Behavior via Playbook in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Playbook in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Playbook around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Playbook around 07:00 UTC."
         ]
       },
       {
-        "id": "6:consumer_behavior:sharp_question",
-        "label": "06:00 UTC / Consumer Behavior / Sharp Question",
+        "id": "7:consumer_behavior:sharp_question",
+        "label": "07:00 UTC / Consumer Behavior / Sharp Question",
         "formatId": "sharp_question",
         "formatLabel": "Sharp Question",
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.6,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Consumer Behavior via Sharp Question in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Sharp Question in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Sharp Question around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Sharp Question around 07:00 UTC."
         ]
       },
       {
-        "id": "6:consumer_behavior:contrarian_cost",
-        "label": "06:00 UTC / Consumer Behavior / Contrarian Cost",
+        "id": "7:consumer_behavior:contrarian_cost",
+        "label": "07:00 UTC / Consumer Behavior / Contrarian Cost",
         "formatId": "contrarian_cost",
         "formatLabel": "Contrarian Cost",
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.6,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Consumer Behavior via Contrarian Cost in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Contrarian Cost in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Contrarian Cost around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Contrarian Cost around 07:00 UTC."
         ]
       },
       {
-        "id": "6:platform_control:second_order",
-        "label": "06:00 UTC / Platform Control / Second Order",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "id": "7:consumer_behavior:operator_pain",
+        "label": "07:00 UTC / Consumer Behavior / Operator Pain",
+        "formatId": "operator_pain",
+        "formatLabel": "Operator Pain",
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.6,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Platform Control via Second Order in a learned 06:00 UTC load window."
+          "Seed Consumer Behavior via Operator Pain in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 06:00 UTC."
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Operator Pain around 07:00 UTC."
         ]
       },
       {
-        "id": "6:platform_control:not_x_but_y",
-        "label": "06:00 UTC / Platform Control / Not X But Y",
+        "id": "7:platform_control:not_x_but_y",
+        "label": "07:00 UTC / Platform Control / Not X But Y",
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "action": "route",
-        "status": "seed",
-        "score": 54.7,
+        "status": "watch",
+        "score": 55.6,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Platform Control via Not X But Y in a learned 06:00 UTC load window."
+          "Seed Platform Control via Not X But Y in a learned 07:00 UTC load window."
         ],
         "promptDirectives": [
-          "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 06:00 UTC."
+          "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 07:00 UTC."
         ]
       },
       {
-        "id": "any:any:second_order",
-        "label": "00:00 UTC / Second Order",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "pillarId": null,
-        "pillarLabel": null,
+        "id": "7:platform_control:decision_rule",
+        "label": "07:00 UTC / Platform Control / Decision Rule",
+        "formatId": "decision_rule",
+        "formatLabel": "Decision Rule",
+        "pillarId": "platform_control",
+        "pillarLabel": "Platform Control",
+        "hour": 7,
+        "windowLabel": "07:00",
+        "action": "route",
+        "status": "watch",
+        "score": 55.6,
+        "confidence": "low",
+        "sources": [
+          "topic_timing"
+        ],
+        "samples": 0,
+        "evidence": [
+          "Seed Platform Control via Decision Rule in a learned 07:00 UTC load window."
+        ],
+        "promptDirectives": [
+          "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Decision Rule around 07:00 UTC."
+        ]
+      },
+      {
+        "id": "any:consumer_behavior:any",
+        "label": "00:00 UTC / Consumer Behavior",
+        "formatId": null,
+        "formatLabel": null,
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
         "hour": null,
         "windowLabel": "00:00",
-        "action": "rotate",
-        "status": "explore",
+        "action": "route",
+        "status": "expand",
         "score": 46.8,
-        "confidence": "medium",
+        "confidence": "low",
         "sources": [
-          "content_bandit",
-          "adaptive_scheduler"
+          "narrative_resonance"
         ],
         "samples": 0,
         "evidence": [
-          "Needs 2 more sample(s) before the bot trusts it.",
-          "Needs 2 more sample(s) before the bot trusts it."
+          "Show how a product, app, or device changes user behavior or distribution habits."
         ],
         "promptDirectives": [
-          "Collect more samples for Second Order; keep first line concrete.",
-          "second-order distribution or business consequence"
+          "Show how a product, app, or device changes user behavior or distribution habits."
         ]
       },
       {
-        "id": "any:any:operator_pain",
-        "label": "00:00 UTC / Operator Pain",
-        "formatId": "operator_pain",
-        "formatLabel": "Operator Pain",
+        "id": "any:any:not_x_but_y",
+        "label": "00:00 UTC / Not X But Y",
+        "formatId": "not_x_but_y",
+        "formatLabel": "Not X But Y",
         "pillarId": null,
         "pillarLabel": null,
         "hour": null,
         "windowLabel": "00:00",
         "action": "rotate",
         "status": "explore",
-        "score": 45.3,
+        "score": 46.7,
         "confidence": "medium",
         "sources": [
           "content_bandit",
+          "angle_load",
           "adaptive_scheduler"
         ],
         "samples": 0,
         "evidence": [
           "Needs 2 more sample(s) before the bot trusts it.",
+          "No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
           "Needs 2 more sample(s) before the bot trusts it."
         ],
         "promptDirectives": [
-          "Collect more samples for Operator Pain; keep first line concrete.",
-          "operator pain / hidden workflow tax"
+          "Collect more samples for Not X But Y; keep first line concrete.",
+          "reframe / not the feature, the shift",
+          "reframe / not the feature, the shift"
         ]
       }
     ],
@@ -4324,31 +4390,45 @@
         {
           "source": "topic_timing",
           "lanes": 8,
-          "avgScore": 55.3,
+          "avgScore": 56.3,
+          "samples": 0,
+          "hotLanes": 0
+        },
+        {
+          "source": "narrative_resonance",
+          "lanes": 1,
+          "avgScore": 46.8,
           "samples": 0,
           "hotLanes": 0
         },
         {
           "source": "content_bandit",
-          "lanes": 2,
-          "avgScore": 46,
+          "lanes": 1,
+          "avgScore": 46.7,
+          "samples": 0,
+          "hotLanes": 0
+        },
+        {
+          "source": "angle_load",
+          "lanes": 1,
+          "avgScore": 46.7,
           "samples": 0,
           "hotLanes": 0
         },
         {
           "source": "adaptive_scheduler",
-          "lanes": 2,
-          "avgScore": 46,
+          "lanes": 1,
+          "avgScore": 46.7,
           "samples": 0,
           "hotLanes": 0
         }
       ]
     },
     "promptDirectives": [
-      "Primary format: second_order.",
+      "Primary format: not_x_but_y.",
       "Primary narrative: Consumer Behavior.",
-      "Preferred UTC window: 06:00.",
-      "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC.",
+      "Preferred UTC window: 07:00.",
+      "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC.",
       "No live X search/read calls are required for this opportunity score."
     ],
     "guardrails": [
@@ -4358,7 +4438,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -4368,16 +4448,16 @@
     "language": null,
     "storyTitle": "",
     "storySource": null,
-    "primaryFormatId": "second_order",
-    "primaryFormatLabel": "Second Order",
-    "exploreFormatId": "second_order",
+    "primaryFormatId": "not_x_but_y",
+    "primaryFormatLabel": "Not X But Y",
+    "exploreFormatId": "not_x_but_y",
     "rankedFormatIds": [
-      "second_order",
       "not_x_but_y",
       "decision_rule",
       "playbook",
       "sharp_question",
-      "contrarian_cost"
+      "contrarian_cost",
+      "operator_pain"
     ],
     "avoidFormatIds": [],
     "hookPattern": {
@@ -4392,30 +4472,30 @@
       "directive": "Show how a product, app, or device changes user behavior or distribution habits."
     },
     "opportunity": {
-      "id": "6:consumer_behavior:second_order",
-      "label": "06:00 UTC / Consumer Behavior / Second Order",
-      "score": 59.8,
+      "id": "7:consumer_behavior:not_x_but_y",
+      "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+      "score": 60.8,
       "sources": [
         "topic_timing"
       ],
       "promptDirectives": [
-        "Show how a product, app, or device changes user behavior or distribution habits. Use Second Order around 06:00 UTC."
+        "Show how a product, app, or device changes user behavior or distribution habits. Use Not X But Y around 07:00 UTC."
       ]
     },
     "directives": [
-      "Primary format bias: second_order (Second Order). Use this unless the selected story strongly fits another listed format.",
+      "Primary format bias: not_x_but_y (Not X But Y). Use this unless the selected story strongly fits another listed format.",
       "First-line hook: Decision Rule. Open with a rule the reader can apply today.",
-      "Opportunity lane: 06:00 UTC / Consumer Behavior / Second Order; sources=topic_timing; score=59.8.",
+      "Opportunity lane: 07:00 UTC / Consumer Behavior / Not X But Y; sources=topic_timing; score=60.8.",
       "Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..",
-      "Timing bias: write for the 06:00 UTC learned traffic window; do not mention the window in the packet.",
-      "Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=06:00 UTC / Not X But Y; route=Target Accounts.",
+      "Timing bias: write for the 07:00 UTC learned traffic window; do not mention the window in the packet.",
+      "Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=07:00 UTC / Not X But Y; route=Target Accounts.",
       "Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.",
       "No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap."
     ],
-    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: second_order\nranked_formats: second_order, not_x_but_y, decision_rule, playbook, sharp_question, contrarian_cost\n\nMUST FOLLOW:\n- Primary format bias: second_order (Second Order). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 06:00 UTC / Consumer Behavior / Second Order; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 06:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=06:00 UTC / Not X But Y; route=Target Accounts.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.\n- No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap."
+    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: not_x_but_y\nranked_formats: not_x_but_y, decision_rule, playbook, sharp_question, contrarian_cost, operator_pain\n\nMUST FOLLOW:\n- Primary format bias: not_x_but_y (Not X But Y). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 07:00 UTC / Consumer Behavior / Not X But Y; sources=topic_timing; score=60.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 07:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=07:00 UTC / Not X But Y; route=Target Accounts.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.\n- No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -4436,8 +4516,8 @@
       "reason": "Needs 2 more sample(s) before the bot trusts it.",
       "promptBias": "Lead with Not X But Y."
     },
-    "nextPromptBias": "Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=06:00 UTC / Not X But Y; route=Target Accounts.",
-    "promptPatch": "CODEX ANGLE MUTATION PATCH\nmode: cached_angle_mutation_reactor\nzero_extra_x_reads: true\nmutation_score: 69.6\nprimary_rule: Not X But Y (explore)\nsource_bias: high-signal tech sources\ntopic_bias: AI / platforms / developer tools\ntemporal_window: 06:00 UTC / Not X But Y\nroute_bias: Target Accounts\n\nDO:\n- Lead with a concrete Not X But Y operating rule.\n- Name the real company/product and translate the story into cost, leverage, or workflow impact.\n- End with a sharp question or decision rule that invites a technical reply.\n\nAVOID:\n- Headline recap, generic optimism, unsupported claims, outrage bait, and extra X read/search API calls.",
+    "nextPromptBias": "Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=07:00 UTC / Not X But Y; route=Target Accounts.",
+    "promptPatch": "CODEX ANGLE MUTATION PATCH\nmode: cached_angle_mutation_reactor\nzero_extra_x_reads: true\nmutation_score: 69.6\nprimary_rule: Not X But Y (explore)\nsource_bias: high-signal tech sources\ntopic_bias: AI / platforms / developer tools\ntemporal_window: 07:00 UTC / Not X But Y\nroute_bias: Target Accounts\n\nDO:\n- Lead with a concrete Not X But Y operating rule.\n- Name the real company/product and translate the story into cost, leverage, or workflow impact.\n- End with a sharp question or decision rule that invites a technical reply.\n\nAVOID:\n- Headline recap, generic optimism, unsupported claims, outrage bait, and extra X read/search API calls.",
     "consumers": [
       "composeTweet.performanceContext",
       "manual_reply_drafts.performanceContext",
@@ -4472,7 +4552,7 @@
       {
         "id": "window",
         "label": "UTC window",
-        "value": "06:00 UTC / Not X But Y",
+        "value": "07:00 UTC / Not X But Y",
         "status": "probe"
       },
       {
@@ -4497,11 +4577,11 @@
         "id": "temporal_bias",
         "label": "UTC fire-control",
         "before": "flat cadence",
-        "after": "06:00 UTC / Not X But Y",
+        "after": "07:00 UTC / Not X But Y",
         "status": "warn",
         "score": 28.8,
         "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
-        "promptBias": "Prefer 06:00 UTC / Not X But Y."
+        "promptBias": "Prefer 07:00 UTC / Not X But Y."
       },
       {
         "id": "route_bias",
@@ -4553,7 +4633,7 @@
   },
   "generationDecisionTrace": null,
   "distributionOps": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -4659,7 +4739,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -4728,7 +4808,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 62,
@@ -4860,7 +4940,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "sample_discovery",
     "confidence": "low",
     "zeroExtraXReads": true,
@@ -4871,18 +4951,18 @@
       "impressions7d": 0,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "06:54",
+        "label": "07:25",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-07-08T06:54:19.877Z",
-        "endsAt": "2026-07-08T10:54:19.877Z"
+        "startsAt": "2026-07-08T07:25:00.542Z",
+        "endsAt": "2026-07-08T11:25:00.542Z"
       },
       "quietBucket": {
-        "label": "06:54",
+        "label": "07:25",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-07-08T06:54:19.877Z",
-        "endsAt": "2026-07-08T10:54:19.877Z"
+        "startsAt": "2026-07-08T07:25:00.542Z",
+        "endsAt": "2026-07-08T11:25:00.542Z"
       }
     },
     "safeBudgetLeftUsd": 4.5,
@@ -5008,19 +5088,19 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "temporal_rotation",
     "confidence": "low",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
     "lookbackDays": 30,
     "sampleCount": 0,
-    "nextAction": "Use Not X But Y at 06:00 UTC; No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
+    "nextAction": "Use Not X But Y at 07:00 UTC; No hour-specific sample yet; routed from adaptive scheduler weight 60.0.",
     "slots": [
       {
         "slot": 1,
-        "hour": 6,
-        "windowLabel": "06:00",
+        "hour": 7,
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "formatId": "not_x_but_y",
@@ -5037,15 +5117,15 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
     "severity": "danger",
-    "activeCommand": "Route Not X But Y at 06:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
+    "activeCommand": "Route Not X But Y at 07:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
     "activeSlot": {
-      "windowLabel": "06:00",
-      "hour": 6,
+      "windowLabel": "07:00",
+      "hour": 7,
       "formatId": "not_x_but_y",
       "label": "Not X But Y",
       "angle": "reframe / not the feature, the shift",
@@ -5085,7 +5165,7 @@
       {
         "id": "not_x_but_y",
         "slot": 1,
-        "windowLabel": "06:00",
+        "windowLabel": "07:00",
         "hoursFromNow": 0,
         "label": "Not X But Y",
         "formatId": "not_x_but_y",
@@ -5100,20 +5180,20 @@
       }
     ],
     "directives": [
-      "Route Not X But Y at 06:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
+      "Route Not X But Y at 07:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
       "Next angle slot: not_x_but_y (reframe / not the feature, the shift); Needs 2 more sample(s) before the bot trusts it.",
       "Sample count is low; reserve one candidate for an under-tested format without lowering quality.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output.",
-      "Use Not X But Y at 06:00 UTC; No hour-specific sample yet; routed from adaptive scheduler weight 60.0."
+      "Use Not X But Y at 07:00 UTC; No hour-specific sample yet; routed from adaptive scheduler weight 60.0."
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "sample_writeback",
     "confidence": "low",
-    "epoch": "2026-07-09T06:54",
+    "epoch": "2026-07-09T07:25",
     "sampleCount": 0,
     "baselineScore": 0,
     "activeRule": {
@@ -5173,7 +5253,7 @@
         "id": "temporal_slot",
         "label": "UTC fire-control",
         "before": "current cadence",
-        "after": "06:00 UTC / not_x_but_y",
+        "after": "07:00 UTC / not_x_but_y",
         "status": "warn",
         "score": 28.8,
         "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 60.0."
@@ -5209,7 +5289,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (0 text, 0 media).",
@@ -5256,7 +5336,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -5401,7 +5481,7 @@
     "items": []
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 0,
@@ -5410,8 +5490,8 @@
     "mode": "bootstrap",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 6,
-      "label": "06:00",
+      "hour": 7,
+      "label": "07:00",
       "loadScore": 0,
       "posts": 0,
       "impressions": 0,
@@ -5511,7 +5591,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 7,
@@ -5524,7 +5604,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": false
+        "current": true
       },
       {
         "hour": 8,
@@ -5738,7 +5818,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -5970,7 +6050,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 high-signal tech sources 这类来源；少用 low-confidence formats，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "sample_discovery",
     "confidence": "low",
     "baselineScore": 0,
@@ -6015,7 +6095,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_learning_contract",
     "status": "cold_start",
     "confidence": "low",
@@ -6026,32 +6106,32 @@
     "sampleCount": 0,
     "baselineScore": 0,
     "primaryArm": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "not_x_but_y",
+      "label": "Not X But Y",
       "status": "explore",
       "allocationPct": 10.6,
       "avgScore": 1,
       "samples": 0,
       "liftPct": null,
       "uncertainty": 0.833,
-      "nextAction": "Collect more samples for Second Order; keep first line concrete."
+      "nextAction": "Collect more samples for Not X But Y; keep first line concrete."
     },
     "exploreArm": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "not_x_but_y",
+      "label": "Not X But Y",
       "status": "explore",
       "allocationPct": 10.6,
       "avgScore": 1,
       "samples": 0,
       "liftPct": null,
       "uncertainty": 0.833,
-      "nextAction": "Collect more samples for Second Order; keep first line concrete."
+      "nextAction": "Collect more samples for Not X But Y; keep first line concrete."
     },
     "holdArms": [],
     "activeOpportunity": {
-      "id": "6:consumer_behavior:second_order",
-      "label": "06:00 UTC / Consumer Behavior / Second Order",
-      "score": 59.8,
+      "id": "7:consumer_behavior:not_x_but_y",
+      "label": "07:00 UTC / Consumer Behavior / Not X But Y",
+      "score": 60.8,
       "status": "watch",
       "directive": ""
     },
@@ -6059,7 +6139,7 @@
       "mode": "cached_bandit_reward_settlement",
       "status": null,
       "sampleCount": 0,
-      "winnerArmId": "second_order"
+      "winnerArmId": "not_x_but_y"
     },
     "selectedTrace": {
       "templateId": null,
@@ -6071,27 +6151,27 @@
     "policy": {
       "mode": "cached_generation_policy",
       "confidence": "low",
-      "primaryFormatId": "second_order",
-      "primaryFormatLabel": "Second Order",
-      "exploreFormatId": "second_order",
+      "primaryFormatId": "not_x_but_y",
+      "primaryFormatLabel": "Not X But Y",
+      "exploreFormatId": "not_x_but_y",
       "rankedFormatIds": [
-        "second_order",
         "not_x_but_y",
         "decision_rule",
         "playbook",
         "sharp_question",
         "contrarian_cost",
         "operator_pain",
-        "prediction"
+        "prediction",
+        "second_order"
       ],
       "avoidFormatIds": [],
       "promptBias": [
-        "Primary format bias: second_order (Second Order). Use this unless the selected story strongly fits another listed format.",
+        "Primary format bias: not_x_but_y (Not X But Y). Use this unless the selected story strongly fits another listed format.",
         "First-line hook: Decision Rule. Open with a rule the reader can apply today.",
-        "Opportunity lane: 06:00 UTC / Consumer Behavior / Second Order; sources=topic_timing; score=59.8.",
+        "Opportunity lane: 07:00 UTC / Consumer Behavior / Not X But Y; sources=topic_timing; score=60.8.",
         "Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits.."
       ],
-      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: second_order\nranked_formats: second_order, not_x_but_y, decision_rule, playbook, sharp_question, contrarian_cost\n\nMUST FOLLOW:\n- Primary format bias: second_order (Second Order). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 06:00 UTC / Consumer Behavior / Second Order; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 06:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=06:00 UTC / Not X But Y; route=Target Accounts.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.\n- No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap.",
+      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: not_x_but_y\nranked_formats: not_x_but_y, decision_rule, playbook, sharp_question, contrarian_cost, operator_pain\n\nMUST FOLLOW:\n- Primary format bias: not_x_but_y (Not X But Y). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 07:00 UTC / Consumer Behavior / Not X But Y; sources=topic_timing; score=60.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 07:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=07:00 UTC / Not X But Y; route=Target Accounts.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.\n- No live X search/read calls, no auto-replies, no rate-limit circumvention, no URLs, no headline recap.",
       "zeroExtraXReads": true
     },
     "cells": [
@@ -6105,9 +6185,9 @@
       {
         "id": "primary_arm",
         "label": "PRIMARY_ARM",
-        "value": "second_order",
+        "value": "not_x_but_y",
         "status": "ok",
-        "detail": "Second Order"
+        "detail": "Not X But Y"
       },
       {
         "id": "read_gate",
@@ -6119,12 +6199,12 @@
       {
         "id": "policy_patch",
         "label": "POLICY_PATCH",
-        "value": "second_order",
+        "value": "not_x_but_y",
         "status": "ok",
         "detail": "low"
       }
     ],
-    "nextAction": "Bias the next packet toward 06:00 UTC / Consumer Behavior / Second Order; use cached signals only.",
+    "nextAction": "Bias the next packet toward 07:00 UTC / Consumer Behavior / Not X But Y; use cached signals only.",
     "guardrails": [
       "Cached analytics only; 0 X search/read ops.",
       "No auto-replies, no scraping, no rate-limit bypass.",
@@ -6133,7 +6213,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-07-09T06:54:19.875Z",
+    "generatedAt": "2026-07-09T07:25:00.540Z",
     "mode": "cached_swarm_output_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -6146,7 +6226,7 @@
     "totalTokens": 321,
     "spend": 0,
     "successRate": 100,
-    "updatedAt": "2026-07-09T06:54:19.875Z",
+    "updatedAt": "2026-07-09T07:25:00.540Z",
     "primaryModel": {
       "name": "cached-output-router",
       "calls": 5,
