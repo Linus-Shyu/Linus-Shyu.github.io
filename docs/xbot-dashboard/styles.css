@@ -10304,7 +10304,8 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="light"] .command-card,
 :root[data-theme="light"] .server-card,
 :root[data-theme="light"] .metric,
-:root[data-theme="light"] .panel {
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .hook-gate-firewall {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.82)),
     var(--surface);
@@ -10331,7 +10332,8 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .metric,
 :root[data-theme="dark"] .panel,
 :root[data-theme="dark"] .signal-detail-panel,
-:root[data-theme="dark"] .signal-stage {
+:root[data-theme="dark"] .signal-stage,
+:root[data-theme="dark"] .hook-gate-firewall {
   border-color: color-mix(in srgb, var(--accent) 12%, var(--line));
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 54%),
@@ -11961,6 +11963,295 @@ body:not(.demo-mode) .demo-strip {
   box-shadow:
     0 0 22px color-mix(in srgb, #00f0ff 9%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.hook-gate-firewall {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+  border: 1px solid color-mix(in srgb, #00f0ff 34%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, #00f0ff 14%, transparent), transparent 36%),
+    radial-gradient(circle at 96% 12%, color-mix(in srgb, #ff007a 10%, transparent), transparent 36%),
+    linear-gradient(135deg, color-mix(in srgb, #00ff66 5%, transparent), transparent 54%),
+    var(--surface-soft);
+  box-shadow:
+    0 0 10px rgba(0, 240, 255, 0.1),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.hook-gate-head,
+.hook-gate-core,
+.hook-gate-cells,
+.hook-gate-bus,
+.hook-gate-mode {
+  display: grid;
+  gap: 8px;
+}
+
+.hook-gate-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.hook-gate-head span,
+.hook-gate-selected span,
+.hook-gate-score span,
+.hook-gate-decision span,
+.hook-gate-cells em,
+.hook-gate-bus > div > span,
+.hook-gate-mode span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hook-gate-head strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.hook-gate-head em {
+  border: 1px solid color-mix(in srgb, #00f0ff 44%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #0093a5;
+  background: color-mix(in srgb, #00f0ff 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 860;
+}
+
+.hook-gate-core {
+  grid-template-columns: minmax(0, 1.4fr) minmax(130px, 0.45fr) minmax(150px, 0.55fr);
+}
+
+.hook-gate-selected,
+.hook-gate-score,
+.hook-gate-decision,
+.hook-gate-cells span,
+.hook-gate-bus > div,
+.hook-gate-mode {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 44%, transparent),
+    0 0 10px rgba(0, 240, 255, 0.07);
+}
+
+.hook-gate-selected,
+.hook-gate-score,
+.hook-gate-decision {
+  padding: 10px;
+}
+
+.hook-gate-selected strong,
+.hook-gate-score strong,
+.hook-gate-decision strong,
+.hook-gate-cells strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hook-gate-selected p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 7px 0 0;
+  color: var(--body);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.hook-gate-score strong,
+.hook-gate-decision strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.hook-gate-score strong {
+  color: #00b8d4;
+}
+
+.hook-gate-decision.ok strong {
+  color: #00b34d;
+}
+
+.hook-gate-decision.danger strong {
+  color: #ff007a;
+}
+
+.hook-gate-score div,
+.hook-gate-bus i {
+  overflow: hidden;
+  height: 4px;
+  margin-top: 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.hook-gate-score i,
+.hook-gate-bus i::before {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #ffd166 42%, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.22);
+}
+
+.hook-gate-score i {
+  width: var(--hook-gate-score, 0%);
+}
+
+.hook-gate-decision small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.hook-gate-cells {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hook-gate-cells span {
+  padding: 8px;
+}
+
+.hook-gate-cells span.ok {
+  border-color: color-mix(in srgb, #00ff66 32%, var(--line-soft));
+}
+
+.hook-gate-cells span.warn {
+  border-color: color-mix(in srgb, #ffd166 42%, var(--line-soft));
+}
+
+.hook-gate-cells span.danger {
+  border-color: color-mix(in srgb, #ff007a 38%, var(--line-soft));
+}
+
+.hook-gate-cells strong {
+  color: var(--body);
+  font-size: 12px;
+}
+
+.hook-gate-bus {
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+}
+
+.hook-gate-bus > div {
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+}
+
+.hook-gate-bus article {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+}
+
+.hook-gate-bus article.selected {
+  border-color: color-mix(in srgb, #00f0ff 48%, var(--line-soft));
+}
+
+.hook-gate-bus article.danger {
+  border-color: color-mix(in srgb, #ff007a 38%, var(--line-soft));
+}
+
+.hook-gate-bus article strong,
+.hook-gate-bus article em,
+.hook-gate-bus code,
+.hook-gate-mode code {
+  overflow: hidden;
+  font-family: var(--mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hook-gate-bus article strong {
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.hook-gate-bus article em {
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.hook-gate-bus i::before {
+  content: "";
+  width: var(--candidate-gate, 0%);
+}
+
+.hook-gate-bus code,
+.hook-gate-mode code {
+  display: block;
+  border: 1px solid color-mix(in srgb, #00f0ff 18%, transparent);
+  border-radius: 6px;
+  padding: 6px 7px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 58%, transparent);
+  font-size: 10px;
+}
+
+.hook-gate-mode {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  padding: 8px 9px;
+}
+
+@media (max-width: 1080px) {
+  .hook-gate-core,
+  .hook-gate-bus {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hook-gate-cells {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .hook-gate-head,
+  .hook-gate-cells,
+  .hook-gate-mode {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hook-gate-head em {
+    justify-self: start;
+  }
 }
 
 .hook-head,
@@ -24355,7 +24646,8 @@ html[data-theme="dark"] .service-card,
 html[data-theme="dark"] .action-hero,
 html[data-theme="dark"] .proof-panel,
 html[data-theme="dark"] .goal-panel,
-html[data-theme="dark"] .learning-panel {
+html[data-theme="dark"] .learning-panel,
+html[data-theme="dark"] .hook-gate-firewall {
   border-color: rgba(0, 240, 255, 0.24) !important;
   border-radius: 6px !important;
   background-color: rgba(13, 20, 32, 0.92) !important;
@@ -24375,7 +24667,8 @@ html[data-theme="dark"] .metric:hover,
 html[data-theme="dark"] .panel:hover,
 html[data-theme="dark"] .command-card:hover,
 html[data-theme="dark"] .trend-velocity-radar:hover,
-html[data-theme="dark"] .mission-control-spine:hover {
+html[data-theme="dark"] .mission-control-spine:hover,
+html[data-theme="dark"] .hook-gate-firewall:hover {
   border-color: rgba(0, 240, 255, 0.44) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
@@ -25032,7 +25325,8 @@ html[data-theme="dark"] .daily-console,
 html[data-theme="dark"] .contract-card,
 html[data-theme="dark"] .service-card,
 html[data-theme="dark"] .command-card,
-html[data-theme="dark"] .server-card {
+html[data-theme="dark"] .server-card,
+html[data-theme="dark"] .hook-gate-firewall {
   border-radius: 6px !important;
   border-color: var(--telemetry-line) !important;
   background-color: var(--telemetry-surface) !important;
@@ -25047,7 +25341,8 @@ html[data-theme="dark"] .topbar,
 html[data-theme="dark"] .grafana-toolbar,
 html[data-theme="dark"] .window-command-strip,
 html[data-theme="dark"] .signal-stage,
-html[data-theme="dark"] .event-stream {
+html[data-theme="dark"] .event-stream,
+html[data-theme="dark"] .hook-gate-firewall {
   background-image:
     linear-gradient(180deg, rgba(255, 255, 255, 0.046), rgba(255, 255, 255, 0.01)),
     radial-gradient(circle at 10% 0%, rgba(0, 240, 255, 0.105), transparent 35%),
@@ -27148,7 +27443,8 @@ html[data-theme][data-theme] body .ops-main {
 
 html[data-theme][data-theme] body .ops-main .window-command-strip,
 html[data-theme][data-theme] body .ops-main .http-triage-strip,
-html[data-theme][data-theme] body .ops-main .reactor-hud {
+html[data-theme][data-theme] body .ops-main .reactor-hud,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
@@ -27173,9 +27469,11 @@ html[data-theme][data-theme] body .ops-main .reactor-hud {
 html[data-theme][data-theme] body .ops-main .window-command-strip::before,
 html[data-theme][data-theme] body .ops-main .http-triage-strip::before,
 html[data-theme][data-theme] body .ops-main .reactor-hud::before,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall::before,
 html[data-theme][data-theme] body .ops-main .window-command-strip::after,
 html[data-theme][data-theme] body .ops-main .http-triage-strip::after,
-html[data-theme][data-theme] body .ops-main .reactor-hud::after {
+html[data-theme][data-theme] body .ops-main .reactor-hud::after,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall::after {
   content: "" !important;
   position: absolute !important;
   pointer-events: none !important;
@@ -27183,7 +27481,8 @@ html[data-theme][data-theme] body .ops-main .reactor-hud::after {
 
 html[data-theme][data-theme] body .ops-main .window-command-strip::before,
 html[data-theme][data-theme] body .ops-main .http-triage-strip::before,
-html[data-theme][data-theme] body .ops-main .reactor-hud::before {
+html[data-theme][data-theme] body .ops-main .reactor-hud::before,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall::before {
   inset: 0 !important;
   z-index: 0 !important;
   border-radius: inherit !important;
@@ -27196,7 +27495,8 @@ html[data-theme][data-theme] body .ops-main .reactor-hud::before {
 
 html[data-theme][data-theme] body .ops-main .window-command-strip::after,
 html[data-theme][data-theme] body .ops-main .http-triage-strip::after,
-html[data-theme][data-theme] body .ops-main .reactor-hud::after {
+html[data-theme][data-theme] body .ops-main .reactor-hud::after,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall::after {
   z-index: 0 !important;
   top: 0 !important;
   bottom: 0 !important;
@@ -27209,7 +27509,8 @@ html[data-theme][data-theme] body .ops-main .reactor-hud::after {
 
 html[data-theme][data-theme] body .ops-main .window-command-strip > *,
 html[data-theme][data-theme] body .ops-main .http-triage-strip > *,
-html[data-theme][data-theme] body .ops-main .reactor-hud > * {
+html[data-theme][data-theme] body .ops-main .reactor-hud > *,
+html[data-theme][data-theme] body .ops-main .hook-gate-firewall > * {
   position: relative !important;
   z-index: 1 !important;
 }
@@ -27228,7 +27529,13 @@ html[data-theme][data-theme] body .ops-main .reactor-pressure,
 html[data-theme][data-theme] body .ops-main .reactor-command,
 html[data-theme][data-theme] body .ops-main .reactor-scope span,
 html[data-theme][data-theme] body .ops-main .reactor-lanes article,
-html[data-theme][data-theme] body .ops-main .reactor-footer > div {
+html[data-theme][data-theme] body .ops-main .reactor-footer > div,
+html[data-theme][data-theme] body .ops-main .hook-gate-selected,
+html[data-theme][data-theme] body .ops-main .hook-gate-score,
+html[data-theme][data-theme] body .ops-main .hook-gate-decision,
+html[data-theme][data-theme] body .ops-main .hook-gate-cells span,
+html[data-theme][data-theme] body .ops-main .hook-gate-bus > div,
+html[data-theme][data-theme] body .ops-main .hook-gate-mode {
   color: var(--expo-noc-body) !important;
   border-color: rgba(0, 240, 255, 0.18) !important;
   background-color: rgba(6, 12, 22, 0.78) !important;
@@ -27246,7 +27553,11 @@ html[data-theme][data-theme] body .ops-main .http-triage-counters strong,
 html[data-theme][data-theme] body .ops-main .http-triage-status-matrix strong,
 html[data-theme][data-theme] body .ops-main .reactor-pressure strong,
 html[data-theme][data-theme] body .ops-main .reactor-scope strong,
-html[data-theme][data-theme] body .ops-main .reactor-lanes strong {
+html[data-theme][data-theme] body .ops-main .reactor-lanes strong,
+html[data-theme][data-theme] body .ops-main .hook-gate-selected strong,
+html[data-theme][data-theme] body .ops-main .hook-gate-score strong,
+html[data-theme][data-theme] body .ops-main .hook-gate-decision strong,
+html[data-theme][data-theme] body .ops-main .hook-gate-cells strong {
   color: var(--expo-noc-ink) !important;
   font-family: var(--code-font) !important;
   text-shadow: 0 0 14px rgba(0, 240, 255, 0.18) !important;
@@ -27272,7 +27583,8 @@ html[data-theme][data-theme] body .ops-main .reactor-lanes .danger strong {
 
 html[data-theme][data-theme] body .ops-main .http-triage-title strong,
 html[data-theme][data-theme] body .ops-main .reactor-hud-head strong,
-html[data-theme][data-theme] body .ops-main .window-command-head strong {
+html[data-theme][data-theme] body .ops-main .window-command-head strong,
+html[data-theme][data-theme] body .ops-main .hook-gate-head strong {
   color: var(--expo-noc-ink) !important;
   font-family: var(--code-font) !important;
 }

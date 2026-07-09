@@ -93,6 +93,7 @@ for (const dir of dashboards) {
     ".monitor-panel",
     ".runlog-panel",
     ".panel",
+    ".hook-gate-firewall",
   ];
   const radiusBlock = polish.match(/\.topbar,[\s\S]*?border-radius:\s*6px;/)?.[0] || "";
   const missingPanels = requiredPanelClasses.filter((selector) => !radiusBlock.includes(selector));
@@ -104,12 +105,15 @@ for (const dir of dashboards) {
     ".window-command-strip",
     ".http-triage-strip",
     ".reactor-hud",
+    ".hook-gate-firewall",
     ".window-command-strip::before",
     ".http-triage-strip::before",
     ".reactor-hud::before",
+    ".hook-gate-firewall::before",
     ".window-command-radar",
     ".http-triage-status-matrix",
     ".reactor-lanes article",
+    ".hook-gate-selected",
   ];
   const missingExpoSelectors = requiredExpoSelectors.filter((selector) => !expo.includes(selector));
   if (missingExpoSelectors.length) {

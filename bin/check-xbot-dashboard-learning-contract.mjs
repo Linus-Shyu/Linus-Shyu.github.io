@@ -39,10 +39,16 @@ for (const dir of dashboards) {
 
   requireIncludes(htmlFile, html, [
     '<div class="learning-contract" id="learning-contract"></div>',
+    '<section class="hook-gate-firewall" id="hook-gate-firewall"',
   ]);
 
   requireIncludes(scriptFile, script, [
     "learningLoopContract:",
+    "function hookGateFirewallData()",
+    "function renderHookGateFirewall()",
+    "renderHookGateFirewall();",
+    "viralHookGate:",
+    "deriveViralHookGate",
     "function learningLoopContractData()",
     "function renderLearningLoopContract()",
     "renderLearningLoopContract();",
@@ -57,6 +63,9 @@ for (const dir of dashboards) {
     "learning_contract_eyebrow",
     "learning_contract_zero_reads",
     "learning_contract_guardrails",
+    "hook_gate_eyebrow",
+    "hook_gate_zero_reads",
+    "hook_gate_candidate_bus",
   ]);
 
   const zeroReadUses = countMatches(script, /zeroExtraXReads:\s*true/g);
@@ -74,6 +83,10 @@ for (const dir of dashboards) {
   }
 
   requireIncludes(cssFile, css, [
+    ".hook-gate-firewall {",
+    ".hook-gate-core",
+    ".hook-gate-cells",
+    ".hook-gate-bus",
     ".learning-contract {",
     ".learning-contract-head",
     ".learning-contract-cells",

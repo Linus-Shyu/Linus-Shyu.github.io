@@ -1214,6 +1214,24 @@ const translations = {
     decision_trace_strict_gate: "strict gate",
     decision_trace_x_reads: "X reads",
     decision_trace_local_seed: "local seed",
+    hook_gate_eyebrow: "Hook Gate Firewall",
+    hook_gate_title: "Preflight quality firewall",
+    hook_gate_zero_reads: "0 X read ops",
+    hook_gate_selected: "selected packet",
+    hook_gate_gate_score: "gate score",
+    hook_gate_decision: "decision",
+    hook_gate_pass: "pass",
+    hook_gate_block: "block",
+    hook_gate_warnings: "warnings",
+    hook_gate_entities: "entity hits",
+    hook_gate_candidate_bus: "candidate bus",
+    hook_gate_guardrails: "firewall rules",
+    hook_gate_empty: "No hook gate telemetry available yet.",
+    hook_gate_candidate: "rank {rank}",
+    hook_gate_quality_gate: "local gate",
+    hook_gate_mode: "mode",
+    hook_gate_first_line: "first line",
+    hook_gate_read_guard: "X read partition",
     decision_trace_selected: "selected",
     decision_trace_real: "recorded trace",
     decision_trace_derived: "derived trace",
@@ -2226,6 +2244,24 @@ const translations = {
     decision_trace_strict_gate: "严格闸门",
     decision_trace_x_reads: "X 读取",
     decision_trace_local_seed: "本地种子",
+    hook_gate_eyebrow: "Hook 闸门防火墙",
+    hook_gate_title: "发布前质量防火墙",
+    hook_gate_zero_reads: "0 次 X 读取",
+    hook_gate_selected: "选中数据包",
+    hook_gate_gate_score: "闸门评分",
+    hook_gate_decision: "决策",
+    hook_gate_pass: "放行",
+    hook_gate_block: "拦截",
+    hook_gate_warnings: "告警",
+    hook_gate_entities: "实体命中",
+    hook_gate_candidate_bus: "候选总线",
+    hook_gate_guardrails: "防火墙规则",
+    hook_gate_empty: "暂无 hook 闸门遥测。",
+    hook_gate_candidate: "排名 {rank}",
+    hook_gate_quality_gate: "本地闸门",
+    hook_gate_mode: "模式",
+    hook_gate_first_line: "首行",
+    hook_gate_read_guard: "X 读取分区",
     decision_trace_selected: "已选中",
     decision_trace_real: "真实记录",
     decision_trace_derived: "派生记录",
@@ -11022,9 +11058,158 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
     growthOpportunityDiagnostics: Array.isArray(candidate?.growthOpportunityDiagnostics) ? candidate.growthOpportunityDiagnostics : [],
     cachedGenerationPolicyDiagnostics: Array.isArray(candidate?.cachedGenerationPolicyDiagnostics) ? candidate.cachedGenerationPolicyDiagnostics : [],
     qualityIssues: Array.isArray(candidate?.qualityIssues) ? candidate.qualityIssues : [],
+    viralHookGate: candidate?.viralHookGate || null,
     aiQualityVerdict: candidate?.aiQualityVerdict || null,
     characterCount: number(candidate?.characterCount, String(text).length),
     text,
+  };
+}
+
+function hookGateEntityHits(text = "") {
+  const haystack = String(text || "").toLowerCase();
+  const entities = [
+    "openai",
+    "anthropic",
+    "claude",
+    "gemini",
+    "deepmind",
+    "nvidia",
+    "apple",
+    "google",
+    "microsoft",
+    "meta",
+    "amazon",
+    "github",
+    "cursor",
+    "vercel",
+    "cloudflare",
+    "stripe",
+    "tesla",
+    "android",
+    "iphone",
+    "youtube",
+    "tiktok",
+    "aws",
+  ].filter((entity) => haystack.includes(entity));
+  return [...new Set(entities)].slice(0, 6);
+}
+
+function deriveViralHookGate(candidate = {}) {
+  const text = String(candidate.text || "");
+  const firstLine = firstPostLine(text);
+  const hook = classifyDashboardHook(text);
+  const warnings = [];
+  const reasons = [];
+  let score = 0;
+
+  if (firstLine.length >= 38 && firstLine.length <= 118) {
+    score += 14;
+    reasons.push("compact standalone hook");
+  } else if (firstLine.length > 145) {
+    score -= 14;
+    warnings.push("long_first_line");
+  } else {
+    score -= 5;
+    warnings.push("thin_first_line");
+  }
+
+  if (["decision_rule", "contrast_reframe", "operator_pain", "cost_tradeoff", "prediction"].includes(hook.primaryId)) {
+    score += 18;
+    reasons.push("repostable hook frame");
+  }
+  if (hook.patternIds.includes("weak_recap")) {
+    score -= 22;
+    warnings.push("headline_or_media_frame");
+  }
+
+  const entityHits = hookGateEntityHits(text);
+  if (entityHits.length) {
+    score += Math.min(12, 4 + entityHits.length * 2);
+    reasons.push("concrete entity");
+  } else {
+    score -= 9;
+    warnings.push("missing_concrete_entity");
+  }
+
+  if (/\b(next|stop|start|switch|wait|measure|test|default|budget|pricing|privacy|security|workflow|distribution|rollback|permission|playbook|rule|checklist)\b/i.test(text)) {
+    score += 10;
+    reasons.push("operator action");
+  } else {
+    warnings.push("missing_operator_action");
+  }
+
+  if (/\b(AI is changing|future of AI|game.?changer|revolutionary|exciting|interesting)\b/i.test(text)) {
+    score -= 18;
+    warnings.push("generic_ai_slop");
+  }
+
+  const allow = score >= 8 &&
+    !warnings.includes("headline_or_media_frame") &&
+    !warnings.includes("generic_ai_slop");
+  return {
+    allow,
+    score: Number(score.toFixed(1)),
+    reasons,
+    warnings,
+    entityHits,
+    firstLine,
+    mode: "derived_local_zero_api_hook_gate",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+  };
+}
+
+function normalizeViralHookGate(candidate = {}) {
+  const gate = candidate.viralHookGate || null;
+  if (!gate) return deriveViralHookGate(candidate);
+  return {
+    allow: Boolean(gate.allow),
+    score: number(gate.score),
+    reasons: Array.isArray(gate.reasons) ? gate.reasons : [],
+    warnings: Array.isArray(gate.warnings) ? gate.warnings : [],
+    entityHits: Array.isArray(gate.entityHits) ? gate.entityHits : [],
+    firstLine: gate.firstLine || firstPostLine(candidate.text || ""),
+    mode: gate.mode || "local_zero_api_viral_hook_gate",
+    zeroExtraXReads: gate.zeroExtraXReads !== false,
+    estimatedXReadOps: number(gate.estimatedXReadOps),
+  };
+}
+
+function hookGateFirewallData() {
+  const trace = generationDecisionTraceData();
+  const rawCandidates = Array.isArray(trace?.candidates) && trace.candidates.length
+    ? trace.candidates
+    : [trace?.selectedCandidate].filter(Boolean);
+  const selectedText = trace?.selectedCandidate?.text || "";
+  const candidates = rawCandidates
+    .map((candidate, index) => normalizeTraceCandidate(candidate, index, selectedText))
+    .filter((candidate) => candidate.text || candidate.templateId)
+    .map((candidate) => ({
+      ...candidate,
+      viralHookGate: normalizeViralHookGate(candidate),
+    }));
+  const selected = candidates.find((candidate) => candidate.selected) || candidates[0] || null;
+  const selectedGate = selected?.viralHookGate || null;
+  const passCount = candidates.filter((candidate) => candidate.viralHookGate.allow).length;
+  const blockCount = candidates.length - passCount;
+  const warningCount = candidates.reduce((sum, candidate) => sum + (candidate.viralHookGate.warnings || []).length, 0);
+  const severity = !selectedGate ? "warn" : selectedGate.allow && blockCount === 0 ? "ok" : selectedGate.allow ? "warn" : "danger";
+  return {
+    mode: selectedGate?.mode || "local_zero_api_viral_hook_gate",
+    severity,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    passCount,
+    blockCount,
+    warningCount,
+    selected,
+    selectedGate,
+    candidates,
+    guardrails: [
+      "Block headline recap and generic AI filler.",
+      "Require a concrete entity or operator action.",
+      "Local scoring only; no X search/read call.",
+    ],
   };
 }
 
@@ -11062,6 +11247,7 @@ function derivedGenerationDecisionTrace() {
       : [],
     growthOpportunityDiagnostics: post.growthOpportunityDiagnostics || [],
     qualityIssues: [],
+    viralHookGate: deriveViralHookGate({ text: post.text || "", templateId: post.template || "decision_rule" }),
     characterCount: String(post.text || "").length,
     text: post.text || "",
   };
@@ -11099,10 +11285,86 @@ function derivedGenerationDecisionTrace() {
     candidates: [selectedCandidate],
     gates: {
       qualityGateEnabled: true,
+      viralHookGateEnabled: true,
       aiQualityGateEnabled: false,
       strictQualityGate: false,
     },
   };
+}
+
+function renderHookGateFirewall() {
+  const container = $("#hook-gate-firewall");
+  if (!container) return;
+  const firewall = hookGateFirewallData();
+  const selected = firewall.selected || {};
+  const gate = firewall.selectedGate || null;
+  if (!gate) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("hook_gate_empty"))}</p>`;
+    return;
+  }
+  const gateScore = clamp(number(gate.score), -50, 60);
+  const scorePct = clamp(((gateScore + 50) / 110) * 100, 0, 100);
+  const warnings = (gate.warnings || []).slice(0, 5);
+  const reasons = (gate.reasons || []).slice(0, 4);
+  const entities = (gate.entityHits || []).slice(0, 6);
+  container.innerHTML = `
+    <div class="hook-gate-head">
+      <div>
+        <span>${escapeHtml(t("hook_gate_eyebrow"))}</span>
+        <strong>${escapeHtml(t("hook_gate_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("hook_gate_zero_reads"))}</em>
+    </div>
+    <div class="hook-gate-core ${escapeHtml(firewall.severity)}">
+      <article class="hook-gate-selected">
+        <span>${escapeHtml(t("hook_gate_selected"))}</span>
+        <strong>${escapeHtml(formatTemplate(selected.templateId))}</strong>
+        <p>${escapeHtml(gate.firstLine || firstPostLine(selected.text || "") || "-")}</p>
+      </article>
+      <article class="hook-gate-score" style="--hook-gate-score:${scorePct.toFixed(1)}%">
+        <span>${escapeHtml(t("hook_gate_gate_score"))}</span>
+        <strong>${escapeHtml(formatNumber(gate.score, 1))}</strong>
+        <div><i></i></div>
+      </article>
+      <article class="hook-gate-decision ${gate.allow ? "ok" : "danger"}">
+        <span>${escapeHtml(t("hook_gate_decision"))}</span>
+        <strong>${escapeHtml(t(gate.allow ? "hook_gate_pass" : "hook_gate_block"))}</strong>
+        <small>${escapeHtml(`${firewall.passCount}/${firewall.candidates.length} pass · ${firewall.warningCount} warn`)}</small>
+      </article>
+    </div>
+    <div class="hook-gate-cells">
+      <span class="ok"><em>${escapeHtml(t("hook_gate_read_guard"))}</em><strong>0 ops</strong></span>
+      <span class="${gate.allow ? "ok" : "danger"}"><em>${escapeHtml(t("hook_gate_quality_gate"))}</em><strong>${escapeHtml(t(gate.allow ? "hook_gate_pass" : "hook_gate_block"))}</strong></span>
+      <span class="${warnings.length ? "warn" : "ok"}"><em>${escapeHtml(t("hook_gate_warnings"))}</em><strong>${escapeHtml(warnings.length ? warnings.join(" / ") : "clear")}</strong></span>
+      <span class="${entities.length ? "ok" : "warn"}"><em>${escapeHtml(t("hook_gate_entities"))}</em><strong>${escapeHtml(entities.length ? entities.join(" / ") : "-")}</strong></span>
+    </div>
+    <div class="hook-gate-bus">
+      <div>
+        <span>${escapeHtml(t("hook_gate_candidate_bus"))}</span>
+        ${firewall.candidates.slice(0, 5).map((candidate) => {
+          const candidateGate = candidate.viralHookGate || {};
+          const candidatePct = clamp(((number(candidateGate.score) + 50) / 110) * 100, 0, 100);
+          return `
+            <article class="${candidateGate.allow ? "ok" : "danger"} ${candidate.selected ? "selected" : ""}" style="--candidate-gate:${candidatePct.toFixed(1)}%">
+              <div>
+                <strong>${escapeHtml(t("hook_gate_candidate", { rank: formatNumber(candidate.rank) }))} · ${escapeHtml(formatTemplate(candidate.templateId))}</strong>
+                <em>${escapeHtml(t(candidateGate.allow ? "hook_gate_pass" : "hook_gate_block"))} · ${escapeHtml(formatNumber(candidateGate.score, 1))}</em>
+              </div>
+              <i></i>
+            </article>
+          `;
+        }).join("")}
+      </div>
+      <div>
+        <span>${escapeHtml(t("hook_gate_guardrails"))}</span>
+        ${[...reasons, ...firewall.guardrails].slice(0, 6).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+      </div>
+    </div>
+    <div class="hook-gate-mode">
+      <span>${escapeHtml(t("hook_gate_mode"))}</span>
+      <code>${escapeHtml(gate.mode || firewall.mode)}</code>
+    </div>
+  `;
 }
 
 function generationDecisionTraceData() {
@@ -13114,6 +13376,7 @@ function render() {
   renderHttpTriageStrip();
   renderReactorHud();
   renderTelemetryContract();
+  renderHookGateFirewall();
   renderExpoStory();
   renderAutopilotCommandStrip();
   renderGauges();
