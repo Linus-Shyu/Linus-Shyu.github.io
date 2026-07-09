@@ -7,11 +7,11 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
-const finalGutterMarker = "Highest-specificity rail override v5 final pass: force the light UI rail into the command surface.";
+const finalGutterMarker = "Highest-specificity rail override v6 final pass: keep the light UI sidebar in the command surface.";
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-signal-topology-v3";
+const requiredCssVersion = "20260709-rail-rack-v6";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -112,7 +112,7 @@ for (const dir of dashboards) {
     fail(`${cssFile} is missing the prior rail override marker.`, priorRailMarker);
   }
   if (finalGutterIndex !== markerIndex) {
-    fail(`${cssFile} final rail override must be the v5 light-sidebar guard.`, finalGutterMarker);
+    fail(`${cssFile} final rail override must be the v6 light-sidebar guard.`, finalGutterMarker);
   }
   if (priorRailIndex > markerIndex) {
     fail(`${cssFile} has the older v2 rail override after the v4 final pass.`);
@@ -130,6 +130,8 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, finalCss, "color-scheme: dark !important;", "the forced dark rail color scheme");
   assertIncludes(cssFile, finalCss, "background-color: var(--rail-final-bg) !important;", "the forced dark rail background");
   assertIncludes(cssFile, finalCss, "background-color: rgba(15, 23, 42, 0.88) !important;", "the dark light-mode nav button fill");
+  assertIncludes(cssFile, finalCss, "grid-template-columns: auto minmax(0, 1fr) auto !important;", "the restored readable rack node layout");
+  assertIncludes(cssFile, finalCss, "display: block !important;", "the restored sidebar text labels");
   assertIncludes(
     cssFile,
     finalCss,
