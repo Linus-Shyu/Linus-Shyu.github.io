@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const darkMarker = "Rail harmonizer terminal pass v13: final sidebar colors for both light and dark modes.";
-const lightMarker = "Main console light rail lock v16: force light-mode sidebar to match the reactor surface.";
-const requiredCssVersion = "20260709-command-dock-v1";
+const lightMarker = "Main console sidebar lock v18: keep the light UI rail inside the same dark command surface.";
+const requiredCssVersion = "20260709-rail-lock-v18";
 const darkSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
-const lightSelector = 'html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail';
+const lightSelector = 'html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail';
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -131,8 +131,8 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-panel) !important;", "the light rail card surface");
   assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-panel-2) !important;", "the light active nav fill");
   assertIncludes(cssFile, lightCss, "text-shadow: 0 1px 16px rgba(0, 0, 0, 0.34) !important;", "the light rail text shadow");
-  assertIncludes(cssFile, lightCss, "body > div.ops-shell.ops-shell.ops-shell.ops-shell", "the high-specificity light shell selector");
-  assertIncludes(cssFile, lightCss, "aside.side-rail.side-rail.side-rail.side-rail", "the high-specificity light rail selector");
+  assertIncludes(cssFile, lightCss, "body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell", "the high-specificity light shell selector");
+  assertIncludes(cssFile, lightCss, "aside.side-rail.side-rail.side-rail.side-rail.side-rail", "the high-specificity light rail selector");
 
   assertExpectedVariables(
     cssFile,

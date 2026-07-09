@@ -29100,6 +29100,159 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
   }
 }
 
+/* Main console sidebar lock v18: keep the light UI rail inside the same dark command surface. */
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 11, 18, 0.998) 0,
+      rgba(11, 17, 27, 0.998) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 28px),
+      rgba(11, 17, 27, 0.84) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 58px),
+      rgba(11, 17, 27, 0) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 112px)
+    ) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail {
+  --rail-light-bg: #0b111b !important;
+  --rail-light-panel: rgba(17, 24, 39, 0.985) !important;
+  --rail-light-panel-2: rgba(24, 34, 52, 0.98) !important;
+  --rail-light-text: #f9fafb !important;
+  --rail-light-body: #d8e2f0 !important;
+  --rail-light-muted: #a8b5c7 !important;
+  --rail-light-accent: #f59e0b !important;
+  --rail-light-ok: #7dd36f !important;
+  --rail-light-line: rgba(148, 163, 184, 0.42) !important;
+  --rail-light-line-strong: rgba(245, 158, 11, 0.82) !important;
+  color-scheme: dark !important;
+  color: var(--rail-light-body) !important;
+  background-color: var(--rail-light-bg) !important;
+  background-image:
+    radial-gradient(circle at 38% -10%, rgba(245, 158, 11, 0.34), transparent 31%),
+    radial-gradient(circle at -14% 74%, rgba(125, 211, 111, 0.18), transparent 38%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075), transparent 1px),
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.052) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, #111827, var(--rail-light-bg) 78%) !important;
+  border-color: var(--rail-light-line) !important;
+  box-shadow:
+    36px 0 90px rgba(2, 6, 23, 0.5),
+    inset -1px 0 0 rgba(245, 158, 11, 0.38),
+    inset 1px 0 0 rgba(255, 255, 255, 0.07) !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  scrollbar-color: var(--rail-light-accent) transparent !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail::before,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail::before {
+  display: block !important;
+  opacity: 0.2 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.06) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, rgba(245, 158, 11, 0.12), transparent 44%) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .brand,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .env-card,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-boundary,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rack-mini div,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget {
+  color: var(--rail-light-body) !important;
+  border-color: var(--rail-light-line) !important;
+  background-color: var(--rail-light-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.012)),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.075), rgba(0, 240, 255, 0.03)) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .brand strong,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .env-line strong,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-boundary strong,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rack-mini strong,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a::after,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-light-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.34) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .brand small,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .env-card > span,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-boundary > span,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rack-mini em,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget span,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget small {
+  color: var(--rail-light-muted) !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-boundary-grid p,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a {
+  color: var(--rail-light-body) !important;
+  border-color: var(--rail-light-line) !important;
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.34) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff7df !important;
+  border-color: var(--rail-light-line-strong) !important;
+  background-color: var(--rail-light-panel-2) !important;
+  box-shadow:
+    inset 3px 0 0 var(--rail-light-accent),
+    0 0 0 1px rgba(245, 158, 11, 0.15),
+    0 12px 30px rgba(245, 158, 11, 0.11) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-boundary-grid i,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rack-mini span,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .env-line .status-dot,
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a::before {
+  background: var(--rail-light-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 18px rgba(125, 211, 111, 0.3) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .brand-mark {
+  color: #071018 !important;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.78), transparent 23%),
+    linear-gradient(135deg, #ffd166, var(--rail-light-accent) 58%, #00f0ff) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.44) inset,
+    0 0 26px rgba(245, 158, 11, 0.34) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget {
+  border-color: var(--rail-light-line-strong) !important;
+  background-color: rgba(37, 24, 10, 0.985) !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(245, 158, 11, 0.24), transparent 58%),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(0, 240, 255, 0.04)) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-light-accent) !important;
+}
+
+@media (max-width: 1080px) {
+  html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell {
+    background: transparent !important;
+  }
+}
+
 /* Main console light rail lock v16: force light-mode sidebar to match the reactor surface. */
 html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail,
 html[data-theme="light"][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail {
