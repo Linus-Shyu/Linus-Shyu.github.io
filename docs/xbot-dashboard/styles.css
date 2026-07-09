@@ -24373,6 +24373,383 @@ body .side-rail .rail-budget strong {
   white-space: nowrap;
 }
 
+.growth-leak-profiler {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 159, 28, 0.32);
+  border-radius: 6px;
+  padding: 9px;
+  color: #e7edf7;
+  background:
+    radial-gradient(circle at 10% -8%, rgba(255, 159, 28, 0.2), transparent 30%),
+    radial-gradient(circle at 72% -14%, rgba(0, 240, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 104% 72%, rgba(255, 0, 122, 0.1), transparent 34%),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.045) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.032) 0 1px, transparent 1px 28px),
+    linear-gradient(180deg, rgba(14, 20, 31, 0.992), rgba(7, 10, 16, 0.99));
+  box-shadow:
+    0 0 30px rgba(255, 159, 28, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+.growth-leak-profiler > * {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.growth-leak-profiler.ok {
+  border-color: rgba(0, 255, 102, 0.34);
+  box-shadow:
+    0 0 30px rgba(0, 255, 102, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+.growth-leak-profiler.danger {
+  border-color: rgba(255, 0, 122, 0.55);
+  box-shadow:
+    0 0 36px rgba(255, 0, 122, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+.leak-head,
+.leak-score,
+.leak-primary,
+.leak-actions,
+.leak-cells span,
+.leak-stage-board,
+.leak-stages article,
+.leak-guards code {
+  min-width: 0;
+  border: 1px solid rgba(156, 174, 197, 0.18);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018)),
+    rgba(8, 13, 21, 0.88);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.leak-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+}
+
+.leak-head span,
+.leak-score span,
+.leak-primary span,
+.leak-actions span,
+.leak-cells em,
+.leak-stage-title span,
+.leak-stages footer span,
+.leak-guards span {
+  display: block;
+  overflow: hidden;
+  color: #a2afc2;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 840;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.leak-head strong {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 15px;
+  font-weight: 930;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.leak-head em {
+  border: 1px solid rgba(0, 255, 102, 0.34);
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.075);
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.leak-grid {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 0.74fr) minmax(0, 1.16fr) minmax(0, 0.76fr);
+  gap: 8px;
+}
+
+.leak-score,
+.leak-primary,
+.leak-actions {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 9px;
+}
+
+.leak-score strong {
+  color: #ff9f1c;
+  font-family: var(--code-font);
+  font-size: 25px;
+  font-weight: 940;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(255, 159, 28, 0.34);
+}
+
+.leak-score i,
+.leak-meter {
+  display: block;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.leak-score i {
+  height: 6px;
+}
+
+.leak-score b {
+  display: block;
+  width: var(--leak-score, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff007a, #ff9f1c, #00ff66);
+  box-shadow: 0 0 14px rgba(255, 159, 28, 0.3);
+}
+
+.leak-primary strong {
+  overflow: hidden;
+  color: #ff9f1c;
+  font-family: var(--code-font);
+  font-size: 18px;
+  font-weight: 930;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leak-primary.ok strong {
+  color: #00ff66;
+}
+
+.leak-primary.danger strong {
+  color: #ff007a;
+}
+
+.leak-primary p,
+.leak-actions code {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.leak-cells {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.leak-cells span {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 7px;
+  background: rgba(5, 10, 18, 0.52);
+}
+
+.leak-cells strong,
+.leak-stage-title strong,
+.leak-stages header strong,
+.leak-stages header em,
+.leak-stages footer code {
+  overflow: hidden;
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 910;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leak-cells .ok strong,
+.leak-stages .ok strong {
+  color: #00ff66;
+}
+
+.leak-cells .warn strong,
+.leak-stages .warn strong {
+  color: #ff9f1c;
+}
+
+.leak-cells .danger strong,
+.leak-stages .danger strong {
+  color: #ff007a;
+}
+
+.leak-actions .button {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.leak-stage-board {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+}
+
+.leak-stage-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.leak-stages {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.leak-stages article {
+  display: grid;
+  gap: 7px;
+  padding: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)),
+    rgba(6, 11, 18, 0.74);
+}
+
+.leak-stages article.warn {
+  border-color: rgba(255, 159, 28, 0.34);
+}
+
+.leak-stages article.danger {
+  border-color: rgba(255, 0, 122, 0.5);
+}
+
+.leak-stages header,
+.leak-stages footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 8px;
+}
+
+.leak-stages header strong,
+.leak-stages header em,
+.leak-stages footer span,
+.leak-stages footer code,
+.leak-guards code {
+  min-width: 0;
+}
+
+.leak-stages header em,
+.leak-stages footer code {
+  color: #00f0ff;
+}
+
+.leak-meter {
+  position: relative;
+  height: 8px;
+}
+
+.leak-meter i,
+.leak-meter b {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+}
+
+.leak-meter i {
+  left: 0;
+  width: var(--leak-stage, 0%);
+  background: linear-gradient(90deg, #00f0ff, #00ff66);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.leak-meter b {
+  right: 0;
+  width: var(--leak-loss, 0%);
+  background: linear-gradient(90deg, rgba(255, 159, 28, 0.45), rgba(255, 0, 122, 0.62));
+  opacity: 0.8;
+}
+
+.leak-guards {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  align-items: center;
+}
+
+.leak-guards code {
+  overflow: hidden;
+  padding: 5px 6px;
+  color: #00ff66;
+  background:
+    linear-gradient(180deg, rgba(0, 255, 102, 0.07), rgba(0, 255, 102, 0.024)),
+    rgba(5, 10, 18, 0.72);
+  font-family: var(--code-font);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .leak-grid {
+    grid-template-columns: 88px minmax(0, 0.8fr) minmax(0, 1fr);
+  }
+
+  .leak-actions {
+    grid-column: 1 / -1;
+  }
+
+  .leak-stages {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .leak-head,
+  .leak-stage-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .leak-grid,
+  .leak-stages,
+  .leak-guards {
+    grid-template-columns: 1fr;
+  }
+
+  .leak-cells {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 980px) {
   .surge-core,
   .surge-body {
@@ -28374,6 +28751,87 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
   html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     background: transparent !important;
   }
+}
+
+/* Main console light rail lock v16: force light-mode sidebar to match the reactor surface. */
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail,
+html[data-theme="light"][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail {
+  --rail-light-bg: #0b111b !important;
+  --rail-light-panel: rgba(17, 24, 39, 0.985) !important;
+  --rail-light-panel-2: rgba(24, 34, 52, 0.98) !important;
+  --rail-light-text: #f9fafb !important;
+  --rail-light-body: #d8e2f0 !important;
+  --rail-light-muted: #a8b5c7 !important;
+  --rail-light-accent: #f59e0b !important;
+  --rail-light-ok: #7dd36f !important;
+  --rail-light-line: rgba(148, 163, 184, 0.42) !important;
+  --rail-light-line-strong: rgba(245, 158, 11, 0.82) !important;
+  color-scheme: dark !important;
+  color: var(--rail-light-body) !important;
+  background-color: var(--rail-light-bg) !important;
+  background-image:
+    radial-gradient(circle at 38% -10%, rgba(245, 158, 11, 0.34), transparent 31%),
+    radial-gradient(circle at -14% 74%, rgba(125, 211, 111, 0.18), transparent 38%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075), transparent 1px),
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.052) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, #111827, var(--rail-light-bg) 78%) !important;
+  border-color: var(--rail-light-line) !important;
+  box-shadow:
+    36px 0 90px rgba(2, 6, 23, 0.5),
+    inset -1px 0 0 rgba(245, 158, 11, 0.38),
+    inset 1px 0 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .brand,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .env-card,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-boundary,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rack-mini div,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-budget {
+  color: var(--rail-light-body) !important;
+  border-color: var(--rail-light-line) !important;
+  background-color: var(--rail-light-panel) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.012)),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.075), rgba(0, 240, 255, 0.03)) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .brand strong,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .env-line strong,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-boundary strong,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rack-mini strong,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-light-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.34) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .brand small,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .env-card > span,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-boundary > span,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rack-mini em,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-budget span,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-budget small {
+  color: var(--rail-light-muted) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #fff7df !important;
+  border-color: var(--rail-light-line-strong) !important;
+  background-color: var(--rail-light-panel-2) !important;
+  box-shadow:
+    inset 3px 0 0 var(--rail-light-accent),
+    0 12px 30px rgba(245, 158, 11, 0.11) !important;
+}
+
+html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail .brand-mark {
+  color: #071018 !important;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.78), transparent 23%),
+    linear-gradient(135deg, #ffd166, var(--rail-light-accent) 58%, #00f0ff) !important;
 }
 
 /* Light rail surface lock v15: high-specificity light sidebar that wins over historical dark rail passes. */

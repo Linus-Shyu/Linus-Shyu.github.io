@@ -1184,6 +1184,16 @@ const translations = {
     surge_trace: "L7 load trace",
     surge_guardrails: "hard constraints",
     surge_empty: "No L7 surge sentinel telemetry available.",
+    leak_eyebrow: "Growth Leak Profiler",
+    leak_title: "Conversion leak topology",
+    leak_zero_reads: "0 X read ops",
+    leak_score: "loop health",
+    leak_primary: "primary leak",
+    leak_runbook: "repair action",
+    leak_trace: "leak stages",
+    leak_guardrails: "cost locks",
+    leak_copy: "Copy repair plan",
+    leak_empty: "No growth leak profiler telemetry available.",
     runlog_live_data: "live dashboard data",
     runlog_fallback_data: "fallback telemetry",
     runlog_stale_data: "stale telemetry",
@@ -2280,6 +2290,16 @@ const translations = {
     surge_trace: "L7 负载轨迹",
     surge_guardrails: "硬约束",
     surge_empty: "暂无 L7 突增哨兵遥测。",
+    leak_eyebrow: "增长漏点诊断",
+    leak_title: "转化漏斗拓扑",
+    leak_zero_reads: "0 次 X 读取",
+    leak_score: "闭环健康度",
+    leak_primary: "主漏点",
+    leak_runbook: "修复动作",
+    leak_trace: "漏点阶段",
+    leak_guardrails: "成本锁",
+    leak_copy: "复制修复计划",
+    leak_empty: "暂无增长漏点诊断遥测。",
     runlog_live_data: "实时看板数据",
     runlog_fallback_data: "备用遥测",
     runlog_stale_data: "过期遥测",
@@ -6124,6 +6144,144 @@ function l7SurgeSentinelData() {
   };
 }
 
+function growthLeakProfilerData() {
+  const incoming = dashboardData.growthLeakProfiler || fallbackData.growthLeakProfiler;
+  if (incoming?.stages?.length) return incoming;
+  const sentinel = l7SurgeSentinelData();
+  const optimizer = activeConnConversionOptimizerData();
+  const matrix = routeOpportunityMatrixData();
+  const api = apiBudget();
+  const laneById = new Map((sentinel.lanes || []).map((lane) => [lane.id, lane]));
+  const stageStatus = (score) => score >= 65 ? "ok" : score >= 38 ? "warn" : "danger";
+  const makeStage = ({ id, label, value, score, detail, nextAction }) => {
+    const bounded = clamp(score, 0, 100);
+    return {
+      id,
+      label,
+      value,
+      score: number(bounded.toFixed(1)),
+      status: stageStatus(bounded),
+      leakPct: number((100 - bounded).toFixed(1)),
+      detail,
+      nextAction,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+  };
+  const l7Events24h = number(sentinel.l7Events24h);
+  const ackRate24h = number(sentinel.ackRate24h);
+  const readyRoutes = number(matrix.readyLanes);
+  const totalRoutes = number(matrix.totalLanes);
+  const routeCoveragePct = totalRoutes > 0 ? (readyRoutes / totalRoutes) * 100 : readyRoutes ? 100 : 0;
+  const routeScore = number(matrix.avgScore, number(laneById.get("route_mesh")?.score));
+  const profileClickPer1k = number(optimizer.profileClickPer1k);
+  const sampleCount = number(optimizer.sampleCount);
+  const observedConnPer1k = number(optimizer.observedConversionPer1k);
+  const fallbackConnPer1k = number(optimizer.fallbackConversionPer1k);
+  const activeConnDelta = number(optimizer.activeConnDelta);
+  const conversionScore = number(optimizer.conversionScore);
+  const readGate = sentinel.readGate === "closed" || api.remaining <= 0 ? "closed" : "cached_only";
+  const budgetScore = readGate === "closed" ? 0 : api.remaining > 1 ? 100 : api.remaining > 0 ? Math.max(18, api.remaining * 82) : 0;
+  const stages = [
+    makeStage({
+      id: "l7_input",
+      label: "L7_INPUT",
+      value: formatNumber(l7Events24h),
+      score: number(laneById.get("l7_load")?.score, number(sentinel.sentinelScore)),
+      detail: `${formatNumber(number(sentinel.surgeRatio), 2)}x cached load ratio`,
+      nextAction: "Route one cached high-signal packet inside an active technical exchange before generating more standalone output.",
+    }),
+    makeStage({
+      id: "ack_layer",
+      label: "ACK_LAYER",
+      value: `${formatNumber(ackRate24h, 1)}%`,
+      score: number(laneById.get("ack_rate")?.score, ackRate24h * 16),
+      detail: "reaction layer from cached packet metrics",
+      nextAction: "Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save.",
+    }),
+    makeStage({
+      id: "profile_proxy",
+      label: "PROFILE_PROXY",
+      value: `${formatNumber(profileClickPer1k, 2)}/1k`,
+      score: profileClickPer1k * 18 + Math.min(24, sampleCount * 1.4) + conversionScore * 0.18,
+      detail: `${formatNumber(sampleCount)} measured packets in cache`,
+      nextAction: "Make the payload promise repeatable tech utility and place it under a credible account exchange.",
+    }),
+    makeStage({
+      id: "active_conn",
+      label: "ACTIVE_CONN",
+      value: `${activeConnDelta >= 0 ? "+" : ""}${formatNumber(activeConnDelta)}`,
+      score: activeConnDelta > 0
+        ? 62 + Math.min(28, activeConnDelta * 6) + Math.min(10, observedConnPer1k * 6)
+        : activeConnDelta < 0
+          ? 18 + Math.min(14, fallbackConnPer1k * 4)
+          : 34 + Math.min(22, observedConnPer1k * 12) + Math.min(12, fallbackConnPer1k * 5),
+      detail: `${formatNumber(observedConnPer1k, 2)}/1k observed · ${formatNumber(fallbackConnPer1k, 2)}/1k prior`,
+      nextAction: "Run the strongest route lane and make the account promise explicit in the first sentence.",
+    }),
+    makeStage({
+      id: "route_mesh",
+      label: "ROUTE_MESH",
+      value: `${formatNumber(readyRoutes)}/${formatNumber(totalRoutes)}`,
+      score: routeCoveragePct * 0.7 + routeScore * 0.3,
+      detail: `${formatNumber(routeScore, 1)} avg route score`,
+      nextAction: "Open the ready route lane, paste one useful payload, then mark done or skipped.",
+    }),
+    makeStage({
+      id: "cost_gate",
+      label: "COST_GATE",
+      value: readGate,
+      score: budgetScore,
+      detail: "cached-only X read partition",
+      nextAction: "Keep live reads sealed; operate from cached telemetry and manual browser routes.",
+    }),
+  ];
+  const primaryLeak = stages.slice().sort((left, right) => left.score - right.score || right.leakPct - left.leakPct)[0] || null;
+  const avgScore = stages.length ? stages.reduce((sum, item) => sum + number(item.score), 0) / stages.length : 0;
+  const leakScore = clamp(avgScore * 0.62 + number(primaryLeak?.score) * 0.38, 0, 100);
+  const severity = readGate === "closed" || primaryLeak?.status === "danger" ? "danger" : primaryLeak?.status === "warn" || leakScore < 66 ? "warn" : "ok";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_growth_leak_profiler",
+    severity,
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate,
+    manualOnly: true,
+    leakScore,
+    primaryLeakId: primaryLeak?.id || null,
+    primaryLeak: primaryLeak
+      ? {
+          id: primaryLeak.id,
+          label: primaryLeak.label,
+          status: primaryLeak.status,
+          score: primaryLeak.score,
+          leakPct: primaryLeak.leakPct,
+          nextAction: primaryLeak.nextAction,
+        }
+      : null,
+    nextAction: primaryLeak?.nextAction || "Keep the cached route loop active and protect the read partition.",
+    stages,
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "primary_leak", label: "PRIMARY_LEAK", value: primaryLeak?.label || "-", status: severity },
+      { id: "active_conn", label: "ACTIVE_CONN_DELTA", value: `${activeConnDelta >= 0 ? "+" : ""}${formatNumber(activeConnDelta)}`, status: activeConnDelta > 0 ? "ok" : activeConnDelta < 0 ? "danger" : "warn" },
+      { id: "profile_proxy", label: "PROFILE_PROXY", value: `${formatNumber(profileClickPer1k, 2)}/1k`, status: profileClickPer1k > 0 ? "ok" : "warn" },
+      { id: "route_ready", label: "ROUTE_READY", value: `${formatNumber(readyRoutes)}/${formatNumber(totalRoutes)}`, status: readyRoutes > 0 ? "ok" : "danger" },
+      { id: "cost_gate", label: "COST_GATE", value: readGate, status: readGate === "cached_only" ? "ok" : "danger" },
+    ],
+    guardrails: [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Normal backoff only; no rate-limit circumvention.",
+    ],
+  };
+}
+
 function renderL7SurgeSentinel() {
   const target = $("#l7-surge-sentinel");
   if (!target) return;
@@ -6202,6 +6360,95 @@ function renderL7SurgeSentinel() {
       </div>
       <div class="surge-guards">
         <span>${escapeHtml(t("surge_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderGrowthLeakProfiler() {
+  const target = $("#growth-leak-profiler");
+  if (!target) return;
+  const profiler = growthLeakProfilerData();
+  const stages = Array.isArray(profiler.stages) ? profiler.stages : [];
+  if (!stages.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("leak_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(profiler.leakScore), 0, 100);
+  const cells = Array.isArray(profiler.cells) ? profiler.cells : [];
+  const guardrails = Array.isArray(profiler.guardrails) ? profiler.guardrails : [];
+  const primary = profiler.primaryLeak || stages.find((stage) => stage.id === profiler.primaryLeakId) || stages[0] || {};
+  const copyBlock = [
+    "CODEX GROWTH LEAK PROFILER",
+    `Mode: ${profiler.mode || "-"}`,
+    `Loop health: ${formatNumber(score, 1)} · primary=${primary.label || primary.id || "-"}`,
+    `Action: ${profiler.nextAction || primary.nextAction || "-"}`,
+    "",
+    ...stages.map((stage, index) =>
+      `${index + 1}. ${stage.label || stage.id}: score=${formatNumber(stage.score, 1)} leak=${formatNumber(stage.leakPct, 1)}% :: ${stage.nextAction || "-"}`,
+    ),
+  ].join("\n");
+  target.className = `growth-leak-profiler ${escapeHtml(profiler.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="leak-head">
+      <div>
+        <span>${escapeHtml(t("leak_eyebrow"))}</span>
+        <strong>${escapeHtml(t("leak_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("leak_zero_reads"))}</em>
+    </div>
+    <div class="leak-grid" style="--leak-score:${score.toFixed(1)}%">
+      <article class="leak-score">
+        <span>${escapeHtml(t("leak_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i><b></b></i>
+      </article>
+      <article class="leak-primary ${escapeHtml(primary.status || profiler.severity || "warn")}">
+        <span>${escapeHtml(t("leak_primary"))}</span>
+        <strong>${escapeHtml(primary.label || primary.id || "-")}</strong>
+        <p>${escapeHtml(sreText(primary.nextAction || profiler.nextAction || "-"))}</p>
+      </article>
+      <div class="leak-cells">
+        ${cells.slice(0, 6).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+      <div class="leak-actions">
+        <span>${escapeHtml(t("leak_runbook"))}</span>
+        <code>${escapeHtml(sreText(profiler.nextAction || primary.nextAction || "-"))}</code>
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("leak_copy"))}</button>
+      </div>
+    </div>
+    <div class="leak-stage-board">
+      <div class="leak-stage-title">
+        <span>${escapeHtml(t("leak_trace"))}</span>
+        <strong>${escapeHtml(profiler.readGate || "cached_only")}</strong>
+      </div>
+      <div class="leak-stages">
+        ${stages.slice(0, 6).map((stage) => {
+          const stageScore = clamp(number(stage.score), 0, 100);
+          const leakPct = clamp(number(stage.leakPct, 100 - stageScore), 0, 100);
+          return `
+            <article class="${escapeHtml(stage.status || "warn")}" style="--leak-stage:${stageScore.toFixed(1)}%;--leak-loss:${leakPct.toFixed(1)}%">
+              <header>
+                <strong>${escapeHtml(stage.label || stage.id || "-")}</strong>
+                <em>${escapeHtml(stage.value ?? "-")}</em>
+              </header>
+              <div class="leak-meter"><i></i><b></b></div>
+              <footer>
+                <span>${escapeHtml(stage.detail || "-")}</span>
+                <code>${escapeHtml(formatNumber(stageScore, 1))}</code>
+              </footer>
+            </article>
+          `;
+        }).join("")}
+      </div>
+      <div class="leak-guards">
+        <span>${escapeHtml(t("leak_guardrails"))}</span>
         ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
       </div>
     </div>
@@ -14331,6 +14578,7 @@ function render() {
   renderHttpTriageStrip();
   renderReactorHud();
   renderL7SurgeSentinel();
+  renderGrowthLeakProfiler();
   renderTelemetryContract();
   renderHookGateFirewall();
   renderExpoStory();

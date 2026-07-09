@@ -6896,5 +6896,151 @@
       "Manual browser execution only; no automated outbound actions.",
       "Normal backoff only; no rate-limit circumvention."
     ]
+  },
+  "growthLeakProfiler": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "zero_read_growth_leak_profiler",
+    "severity": "danger",
+    "source": "cached packet metrics + active conn proxy + route matrix",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "cached_only",
+    "manualOnly": true,
+    "leakScore": 24.8,
+    "primaryLeakId": "l7_input",
+    "primaryLeak": {
+      "id": "l7_input",
+      "label": "L7_INPUT",
+      "status": "danger",
+      "score": 0,
+      "leakPct": 100,
+      "nextAction": "Route one cached high-signal packet inside an active technical exchange before generating more standalone output."
+    },
+    "nextAction": "Route one cached high-signal packet inside an active technical exchange before generating more standalone output.",
+    "stages": [
+      {
+        "id": "l7_input",
+        "label": "L7_INPUT",
+        "value": "0",
+        "score": 0,
+        "status": "danger",
+        "leakPct": 100,
+        "detail": "0.00x cached load ratio",
+        "nextAction": "Route one cached high-signal packet inside an active technical exchange before generating more standalone output.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "ack_layer",
+        "label": "ACK_LAYER",
+        "value": "0.0%",
+        "score": 0,
+        "status": "danger",
+        "leakPct": 100,
+        "detail": "reaction layer from cached packet metrics",
+        "nextAction": "Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "profile_proxy",
+        "label": "PROFILE_PROXY",
+        "value": "0.00/1k",
+        "score": 2.9,
+        "status": "danger",
+        "leakPct": 97.1,
+        "detail": "0 measured packets in cache",
+        "nextAction": "Make the payload promise repeatable tech utility and place it under a credible account exchange.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "active_conn",
+        "label": "ACTIVE_CONN",
+        "value": "+0",
+        "score": 38,
+        "status": "warn",
+        "leakPct": 62,
+        "detail": "0.00/1k observed · 0.80/1k prior",
+        "nextAction": "Run the strongest route lane and make the account promise explicit in the first sentence.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "route_mesh",
+        "label": "ROUTE_MESH",
+        "value": "1/1",
+        "score": 98.8,
+        "status": "ok",
+        "leakPct": 1.2,
+        "detail": "96.0 avg route score",
+        "nextAction": "Open the ready route lane, paste one useful payload, then mark done or skipped.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "cost_gate",
+        "label": "COST_GATE",
+        "value": "cached_only",
+        "score": 100,
+        "status": "ok",
+        "leakPct": 0,
+        "detail": "cached-only X read partition",
+        "nextAction": "Keep live reads sealed; operate from cached telemetry and manual browser routes.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      }
+    ],
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "primary_leak",
+        "label": "PRIMARY_LEAK",
+        "value": "L7_INPUT",
+        "status": "danger"
+      },
+      {
+        "id": "active_conn",
+        "label": "ACTIVE_CONN_DELTA",
+        "value": "+0",
+        "status": "warn"
+      },
+      {
+        "id": "profile_proxy",
+        "label": "PROFILE_PROXY",
+        "value": "0.00/1k",
+        "status": "warn"
+      },
+      {
+        "id": "route_ready",
+        "label": "ROUTE_READY",
+        "value": "1/1",
+        "status": "ok"
+      },
+      {
+        "id": "cost_gate",
+        "label": "COST_GATE",
+        "value": "cached_only",
+        "status": "ok"
+      }
+    ],
+    "guardrails": [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Normal backoff only; no rate-limit circumvention."
+    ]
   }
 }

@@ -560,6 +560,81 @@ function assertL7SurgeSentinel(file, data) {
   assertVisibleTextClean(file, "l7SurgeSentinel", sentinel);
 }
 
+function assertGrowthLeakProfiler(file, data) {
+  const profiler = data.growthLeakProfiler;
+  if (!profiler || typeof profiler !== "object") {
+    fail(`${file} is missing explicit growthLeakProfiler telemetry.`);
+  }
+  if (
+    profiler.mode !== "zero_read_growth_leak_profiler" &&
+    profiler.mode !== "derived_zero_read_growth_leak_profiler"
+  ) {
+    fail(`${file} growthLeakProfiler mode drifted.`, profiler.mode || "<missing>");
+  }
+  if (
+    profiler.zeroExtraXReads !== true ||
+    number(profiler.estimatedXReadOps) !== 0 ||
+    number(profiler.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} growthLeakProfiler must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: profiler.zeroExtraXReads,
+      estimatedXReadOps: profiler.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: profiler.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (!["cached_only", "closed"].includes(profiler.readGate)) {
+    fail(`${file} growthLeakProfiler readGate must stay cached_only or closed.`, profiler.readGate || "<missing>");
+  }
+  if (profiler.operatorMode !== "human_in_loop" || profiler.manualOnly !== true) {
+    fail(`${file} growthLeakProfiler must remain human-in-loop and manual-only.`, JSON.stringify({
+      operatorMode: profiler.operatorMode,
+      manualOnly: profiler.manualOnly,
+    }));
+  }
+  const leakScore = number(profiler.leakScore, NaN);
+  if (!(leakScore >= 0 && leakScore <= 100)) {
+    fail(`${file} growthLeakProfiler leakScore must be 0..100.`, String(profiler.leakScore));
+  }
+  const stages = Array.isArray(profiler.stages) ? profiler.stages : [];
+  if (stages.length < 5) fail(`${file} growthLeakProfiler stages are incomplete.`);
+  const allowedStatuses = new Set(["ok", "warn", "danger"]);
+  for (const stage of stages) {
+    if (!allowedStatuses.has(String(stage.status || ""))) {
+      fail(`${file} growthLeakProfiler stage has unknown status.`, JSON.stringify(stage));
+    }
+    const score = number(stage.score, NaN);
+    const leakPct = number(stage.leakPct, NaN);
+    if (!(score >= 0 && score <= 100) || !(leakPct >= 0 && leakPct <= 100)) {
+      fail(`${file} growthLeakProfiler stage score/leakPct must be 0..100.`, JSON.stringify(stage));
+    }
+    if (
+      stage.zeroExtraXReads !== true ||
+      number(stage.estimatedXReadOps) !== 0 ||
+      number(stage.estimatedIncrementalXApiUsd) !== 0
+    ) {
+      fail(`${file} growthLeakProfiler stage must be zero-read and zero incremental cost.`, JSON.stringify(stage));
+    }
+    if (!String(stage.nextAction || "").trim()) {
+      fail(`${file} growthLeakProfiler stage must include an operator action.`, JSON.stringify(stage));
+    }
+  }
+  const primaryLeakId = String(profiler.primaryLeakId || "");
+  if (!primaryLeakId || !stages.some((stage) => stage.id === primaryLeakId)) {
+    fail(`${file} growthLeakProfiler primaryLeakId must reference a stage.`, JSON.stringify({
+      primaryLeakId: profiler.primaryLeakId,
+      stages: stages.map((stage) => stage.id),
+    }));
+  }
+  if (!profiler.primaryLeak || profiler.primaryLeak.id !== primaryLeakId) {
+    fail(`${file} growthLeakProfiler primaryLeak must match primaryLeakId.`, JSON.stringify(profiler.primaryLeak || null));
+  }
+  const xReadCell = (profiler.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} growthLeakProfiler must expose a zero X read cell.`, JSON.stringify(profiler.cells || []));
+  }
+  assertVisibleTextClean(file, "growthLeakProfiler", profiler);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -901,6 +976,7 @@ function assertDashboardData(file, data) {
   assertNextWindowCommander(file, data);
   assertL7FireWindowRouter(file, data);
   assertL7SurgeSentinel(file, data);
+  assertGrowthLeakProfiler(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);

@@ -7,10 +7,10 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const darkMarker = "Rail harmonizer terminal pass v13: final sidebar colors for both light and dark modes.";
-const lightMarker = "Light rail surface lock v15: high-specificity light sidebar that wins over historical dark rail passes.";
-const requiredCssVersion = "20260709-l7-surge-v1";
+const lightMarker = "Main console light rail lock v16: force light-mode sidebar to match the reactor surface.";
+const requiredCssVersion = "20260709-growth-leak-v1";
 const darkSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
-const lightSelector = 'html[data-theme="light"][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail';
+const lightSelector = 'html[data-theme="light"][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail.side-rail';
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -126,15 +126,13 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, css, "font-size: 13px !important;", "the readable rail labels");
 
   assertIncludes(cssFile, lightCss, lightSelector, "the light-mode rail selector");
-  assertIncludes(cssFile, lightCss, "color-scheme: light !important;", "the light rail color scheme");
+  assertIncludes(cssFile, lightCss, "color-scheme: dark !important;", "the light rail color scheme");
   assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-bg) !important;", "the light rail surface");
-  assertIncludes(cssFile, lightCss, "background-color: rgba(255, 255, 255, 0.92) !important;", "the light rail card surface");
-  assertIncludes(cssFile, lightCss, "background-color: rgba(238, 245, 255, 0.98) !important;", "the light active nav fill");
-  assertIncludes(cssFile, lightCss, "text-shadow: none !important;", "the light rail text shadow reset");
-  assertIncludes(cssFile, lightCss, "body > div.ops-shell.ops-shell.ops-shell", "the high-specificity light shell selector");
-  assertIncludes(cssFile, lightCss, "aside.side-rail.side-rail.side-rail", "the high-specificity light rail selector");
-  assertNotIncludes(cssFile, lightCss, "rgba(7, 11, 18, 0.995)", "the old black light-mode gutter");
-  assertNotIncludes(cssFile, lightCss, "color-scheme: dark !important;", "a dark color scheme in the light rail terminal pass");
+  assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-panel) !important;", "the light rail card surface");
+  assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-panel-2) !important;", "the light active nav fill");
+  assertIncludes(cssFile, lightCss, "text-shadow: 0 1px 16px rgba(0, 0, 0, 0.34) !important;", "the light rail text shadow");
+  assertIncludes(cssFile, lightCss, "body > div.ops-shell.ops-shell.ops-shell.ops-shell", "the high-specificity light shell selector");
+  assertIncludes(cssFile, lightCss, "aside.side-rail.side-rail.side-rail.side-rail", "the high-specificity light rail selector");
 
   assertExpectedVariables(
     cssFile,
@@ -155,15 +153,12 @@ for (const dir of dashboards) {
     cssFile,
     lightVariables,
     {
-      bg: "#f4f6f8",
-      panel: "#ffffff",
-      "panel-2": "#f8fafc",
-      text: "#111827",
-      body: "#334155",
-      muted: "#64748b",
-      accent: "#1a56db",
-      ok: "#16a34a",
-      amber: "#f59e0b",
+      bg: "#0b111b",
+      text: "#f9fafb",
+      body: "#d8e2f0",
+      muted: "#a8b5c7",
+      accent: "#f59e0b",
+      ok: "#7dd36f",
     },
     "light rail",
   );
@@ -172,8 +167,8 @@ for (const dir of dashboards) {
   assertContrast(cssFile, darkVariables, "body", "bg", 10);
   assertContrast(cssFile, darkVariables, "muted", "bg", 6);
   assertContrast(cssFile, lightVariables, "text", "bg", 12);
-  assertContrast(cssFile, lightVariables, "body", "bg", 8);
-  assertContrast(cssFile, lightVariables, "muted", "bg", 4.1);
+  assertContrast(cssFile, lightVariables, "body", "bg", 10);
+  assertContrast(cssFile, lightVariables, "muted", "bg", 6);
 }
 
 console.log("X bot dashboard rail contrast check passed.");
