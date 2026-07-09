@@ -1730,6 +1730,8 @@ const translations = {
     opportunity_fusion_directives: "Prompt directives",
     opportunity_fusion_guardrails: "Guardrails",
     opportunity_fusion_empty: "No opportunity fusion telemetry available.",
+    opportunity_fusion_mode_derived_cached_opportunity_fusion: "cached opportunity fusion",
+    opportunity_fusion_mode_opportunity_fusion_warmup: "fusion warmup",
     commander_eyebrow: "Next Window Commander",
     commander_title: "Zero-read fire-control packet",
     commander_zero_reads: "0 X read ops",
@@ -2655,6 +2657,8 @@ const translations = {
     opportunity_fusion_directives: "Prompt 指令",
     opportunity_fusion_guardrails: "护栏",
     opportunity_fusion_empty: "暂无机会融合遥测。",
+    opportunity_fusion_mode_derived_cached_opportunity_fusion: "缓存机会融合",
+    opportunity_fusion_mode_opportunity_fusion_warmup: "融合预热",
     commander_eyebrow: "下一窗口指挥器",
     commander_title: "零读取火控指令包",
     commander_zero_reads: "0 次 X 读取",
@@ -8795,7 +8799,7 @@ function derivedGrowthOpportunityScorer() {
         lane.windowLabel ? `${lane.windowLabel} UTC` : null,
         lane.pillarLabel,
         lane.formatLabel,
-      ].filter(Boolean).join(" / ") || "cached growth lane";
+      ].filter(Boolean).join(" / ") || "cached traffic lane";
       return {
         id: lane.id,
         label,
@@ -8821,7 +8825,7 @@ function derivedGrowthOpportunityScorer() {
   const opportunityScore = number(activeOpportunity?.score);
   return {
     generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
-    mode: lanes.length ? "derived_cached_growth_opportunity_scorer" : "growth_opportunity_warmup",
+    mode: lanes.length ? "derived_cached_opportunity_fusion" : "opportunity_fusion_warmup",
     severity: opportunityScore >= 76 ? "ok" : opportunityScore >= 52 ? "warn" : "danger",
     confidence: activeOpportunity?.confidence || "low",
     source: "derived cached dashboard telemetry",
@@ -9115,6 +9119,7 @@ function renderGrowthOpportunityScorer() {
   const score = clamp(number(scorer.opportunityScore, number(active.score)), 0, 100);
   const directives = Array.isArray(scorer.promptDirectives) ? scorer.promptDirectives : [];
   const guardrails = Array.isArray(scorer.guardrails) ? scorer.guardrails : [];
+  const modeLabel = scorer.mode ? t(`opportunity_fusion_mode_${scorer.mode}`) : "-";
   container.innerHTML = `
     <div class="opportunity-fusion-head">
       <div>
@@ -9146,7 +9151,7 @@ function renderGrowthOpportunityScorer() {
     </div>
     <div class="opportunity-fusion-section-title">
       <span>${escapeHtml(t("opportunity_fusion_lanes"))}</span>
-      <strong>${escapeHtml(scorer.mode || "-")}</strong>
+      <strong>${escapeHtml(modeLabel)}</strong>
     </div>
     <div class="opportunity-fusion-lanes">
       ${lanes.slice(0, 8).map((lane, index) => {
@@ -9493,7 +9498,7 @@ function telemetryEventStreamData() {
       severity: costSeverity,
     },
     {
-      service: "growth.control",
+      service: "traffic.control",
       title: t("event_control_title"),
       detail: t("event_control_detail", {
         readGate: gateLabel(readGate),
@@ -10912,7 +10917,7 @@ function renderActions() {
         <div class="packet-protocol-head">
           <span>${escapeHtml(t("operator_protocol"))}</span>
           <div>
-            <strong>${escapeHtml(primaryProtocol.mode || "manual_zero_read_growth_loop")}</strong>
+            <strong>${escapeHtml(primaryProtocol.mode || "manual_zero_read_route_loop")}</strong>
             <em class="${doneCount === visibleProtocolSteps.length && visibleProtocolSteps.length ? "complete" : ""}">${escapeHtml(protocolProgress)}</em>
           </div>
         </div>
