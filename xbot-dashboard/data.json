@@ -295,6 +295,95 @@
       "apiRemainingUsd": 3.31
     }
   },
+  "nextWindowAngleCommander": {
+    "generatedAt": "2026-07-07T01:09:59.115Z",
+    "mode": "zero_read_next_window_commander",
+    "severity": "warn",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "source": "cached cadence + topic timing + opportunity scorer + angle load",
+    "commanderScore": 72.4,
+    "publishGate": "manual_route_only",
+    "readGate": "cached_only",
+    "activeWindow": {
+      "hour": 13,
+      "windowLabel": "13:00",
+      "hoursFromNow": 11,
+      "loadScore": 88.4
+    },
+    "window": {
+      "hour": 13,
+      "label": "13:00",
+      "windowLabel": "13:00",
+      "hoursFromNow": 11,
+      "loadScore": 88.4
+    },
+    "activeAngle": {
+      "formatId": "decision_rule",
+      "formatLabel": "Decision Rule",
+      "pillarId": "ai_platform",
+      "pillarLabel": "AI / Agent Stack",
+      "opportunityScore": 72.4,
+      "timingScore": 81.6
+    },
+    "command": "Hold standalone packet pressure; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.",
+    "promptBias": [
+      "Format=decision_rule",
+      "Pillar=AI / Agent Stack",
+      "Window=13:00 UTC",
+      "Hook must state a rule, cost, prediction, or sharp question in the first line.",
+      "No headline recap; no generic AI phrasing."
+    ],
+    "routeUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "gates": [
+      {
+        "id": "x_read_partition",
+        "label": "X read partition",
+        "status": "ok",
+        "value": "0 ops",
+        "detail": "Commander uses cached analytics, RSS state, and manual web route links only."
+      },
+      {
+        "id": "cadence",
+        "label": "Cadence",
+        "status": "warn",
+        "value": "manual_route_only",
+        "detail": "Use one manual route op while standalone packet cadence waits for the learned window."
+      },
+      {
+        "id": "budget",
+        "label": "Budget",
+        "status": "ok",
+        "value": "safe",
+        "detail": "No incremental X API spend; dashboard route uses the X web URL."
+      }
+    ],
+    "lanes": [
+      {
+        "id": "timing",
+        "label": "13:00 UTC / AI / Agent Stack / Decision Rule",
+        "score": 81.6,
+        "status": "watch",
+        "source": "topic_timing",
+        "detail": "Learned high-load UTC window with reusable decision-rule angle."
+      },
+      {
+        "id": "opportunity",
+        "label": "decision rule route ops",
+        "score": 72.4,
+        "status": "watch",
+        "source": "cached_packet_analytics",
+        "detail": "Best visible format in the current measured packet pool."
+      }
+    ],
+    "checklist": [
+      "Do not force a standalone packet while cadence gates are in review.",
+      "Use prompt bias: Format=decision_rule · Pillar=AI / Agent Stack · Window=13:00 UTC.",
+      "Open one prepared X web route and paste one useful route op; stop after a real contribution.",
+      "After metrics refresh, let cached learning update the next command."
+    ],
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 72.4 / Gate: manual_route_only / X reads: 0\nWindow: 13:00 UTC (11.0h from now)\nAngle: Decision Rule / AI / Agent Stack\nCommand: Hold standalone packet pressure; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.\nPrompt bias:\n- Format=decision_rule\n- Pillar=AI / Agent Stack\n- Window=13:00 UTC"
+  },
   "actions": [
     {
       "step": 1,

@@ -154,6 +154,71 @@ function assertSignalMap(file, data) {
   }
 }
 
+function assertNextWindowCommander(file, data) {
+  const commander = data.nextWindowAngleCommander;
+  if (!commander || typeof commander !== "object") {
+    fail(`${file} is missing explicit nextWindowAngleCommander telemetry.`);
+  }
+  if (commander.mode !== "zero_read_next_window_commander") {
+    fail(`${file} nextWindowAngleCommander mode drifted.`, commander.mode || "<missing>");
+  }
+  if (commander.zeroExtraXReads !== true || number(commander.estimatedXReadOps) !== 0) {
+    fail(`${file} nextWindowAngleCommander must be zero-read.`, JSON.stringify({
+      zeroExtraXReads: commander.zeroExtraXReads,
+      estimatedXReadOps: commander.estimatedXReadOps,
+    }));
+  }
+  if (commander.readGate !== "cached_only") {
+    fail(`${file} nextWindowAngleCommander read gate must be cached_only.`, commander.readGate || "<missing>");
+  }
+  if (String(commander.source || "").toLowerCase().includes("tweet")) {
+    fail(`${file} nextWindowAngleCommander source must use packet vocabulary.`, commander.source || "<missing>");
+  }
+
+  const score = number(commander.commanderScore, NaN);
+  if (!(score >= 0 && score <= 100)) {
+    fail(`${file} nextWindowAngleCommander score must be 0..100.`, String(commander.commanderScore));
+  }
+  const activeWindow = commander.activeWindow || {};
+  const window = commander.window || {};
+  const activeLabel = activeWindow.windowLabel || activeWindow.label;
+  const windowLabel = window.windowLabel || window.label;
+  if (!activeLabel || !windowLabel || activeLabel !== windowLabel) {
+    fail(`${file} nextWindowAngleCommander window labels must match.`, JSON.stringify({ activeWindow, window }));
+  }
+  if (number(activeWindow.hour, -1) !== number(window.hour, -2)) {
+    fail(`${file} nextWindowAngleCommander activeWindow/window hours must match.`, JSON.stringify({ activeWindow, window }));
+  }
+  if (!(number(window.hour, -1) >= 0 && number(window.hour, -1) <= 23)) {
+    fail(`${file} nextWindowAngleCommander window hour must be 0..23.`, JSON.stringify(window));
+  }
+  if (!Number.isFinite(number(window.hoursFromNow, NaN)) || number(window.hoursFromNow) < 0) {
+    fail(`${file} nextWindowAngleCommander hoursFromNow must be non-negative.`, JSON.stringify(window));
+  }
+
+  const activeAngle = commander.activeAngle || {};
+  if (!activeAngle.formatId || !activeAngle.formatLabel) {
+    fail(`${file} nextWindowAngleCommander active angle is incomplete.`, JSON.stringify(activeAngle));
+  }
+  if (!String(commander.command || "").trim()) {
+    fail(`${file} nextWindowAngleCommander command is empty.`);
+  }
+  const serialized = JSON.stringify(commander);
+  if (/(enable|allow|publish|send|post).{0,80}auto[-_ ]?repl(?:y|ies)/i.test(serialized) ||
+      /(bypass|circumvent).{0,40}rate[-_ ]?limit/i.test(serialized)) {
+    fail(`${file} nextWindowAngleCommander contains unsafe automation wording.`);
+  }
+
+  const actionUrls = new Set((data.actions || []).map((action) => action.url).filter(Boolean));
+  if (commander.routeUrl && actionUrls.size && !actionUrls.has(commander.routeUrl)) {
+    fail(`${file} nextWindowAngleCommander routeUrl must come from manual actions.`, commander.routeUrl);
+  }
+  const gates = Array.isArray(commander.gates) ? commander.gates : [];
+  if (!gates.some((gate) => gate.id === "x_read_partition" && String(gate.value || "").includes("0"))) {
+    fail(`${file} nextWindowAngleCommander must expose a zero-read partition gate.`, JSON.stringify(gates));
+  }
+}
+
 function assertDashboardData(file, data) {
   const last24h = data.last24h || {};
   const api = data.api || {};
@@ -202,6 +267,7 @@ function assertDashboardData(file, data) {
   }
 
   assertSignalMap(file, data);
+  assertNextWindowCommander(file, data);
 }
 
 const sourceData = readJson("xbot-dashboard/data.json");
