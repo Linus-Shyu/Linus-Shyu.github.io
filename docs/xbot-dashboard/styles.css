@@ -9630,29 +9630,29 @@ body:not(.demo-mode) .demo-strip {
   --contract-glow: rgba(26, 86, 219, 0.1);
   --panel-highlight: rgba(255, 255, 255, 0.82);
   --panel-depth: rgba(15, 23, 42, 0.055);
-  --neon-cyan: #00d9ff;
-  --neon-green: #6ee771;
-  --neon-magenta: #ff3d9a;
+  --neon-cyan: #00f0ff;
+  --neon-green: #00ff66;
+  --neon-magenta: #ff007a;
   --matrix-amber: #ff9f2f;
   --code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 :root[data-theme="dark"] {
-  --bg: #090d14;
-  --surface: #11161f;
-  --surface-soft: #0d121a;
-  --surface-tint: #101b25;
+  --bg: #0b0f19;
+  --surface: #111827;
+  --surface-soft: #0f172a;
+  --surface-tint: #111827;
   --line: #242d39;
   --line-soft: #1a222d;
   --accent: var(--neon-cyan);
   --accent-2: var(--neon-green);
   --accent-3: var(--matrix-amber);
   --danger: var(--neon-magenta);
-  --accent-soft: rgba(0, 217, 255, 0.09);
-  --accent-line: rgba(0, 217, 255, 0.26);
-  --stage-line: rgba(0, 217, 255, 0.2);
-  --stage-scan: rgba(0, 217, 255, 0.16);
-  --contract-glow: rgba(0, 217, 255, 0.09);
+  --accent-soft: rgba(0, 240, 255, 0.09);
+  --accent-line: rgba(0, 240, 255, 0.26);
+  --stage-line: rgba(0, 240, 255, 0.2);
+  --stage-scan: rgba(0, 240, 255, 0.16);
+  --contract-glow: rgba(0, 240, 255, 0.09);
   --panel-highlight: rgba(255, 255, 255, 0.035);
   --panel-depth: rgba(0, 0, 0, 0.44);
 }
@@ -9917,18 +9917,18 @@ body:not(.demo-mode) .demo-strip {
   border-color: color-mix(in srgb, var(--accent) 12%, var(--line));
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 54%),
-    radial-gradient(circle at 0 0, rgba(0, 217, 255, 0.055), transparent 38%),
+    radial-gradient(circle at 0 0, rgba(0, 240, 255, 0.055), transparent 38%),
     var(--surface);
   box-shadow:
-    0 0 0 1px rgba(0, 217, 255, 0.018),
+    0 0 0 1px rgba(0, 240, 255, 0.018),
     0 18px 46px rgba(0, 0, 0, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 :root[data-theme="dark"] .signal-stage {
   background:
-    linear-gradient(135deg, rgba(0, 217, 255, 0.08), transparent 36%),
-    radial-gradient(circle at 72% 38%, rgba(110, 231, 113, 0.065), transparent 28%),
+    linear-gradient(135deg, rgba(0, 240, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 72% 38%, rgba(0, 255, 102, 0.065), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 46%),
     var(--surface-soft);
 }
@@ -9939,7 +9939,7 @@ body:not(.demo-mode) .demo-strip {
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
     rgba(12, 18, 26, 0.92);
   box-shadow:
-    0 0 0 1px rgba(0, 217, 255, 0.035),
+    0 0 0 1px rgba(0, 240, 255, 0.035),
     0 18px 38px rgba(0, 0, 0, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -9947,8 +9947,8 @@ body:not(.demo-mode) .demo-strip {
 :root[data-theme="dark"] .signal-node-button.x {
   border-color: color-mix(in srgb, var(--neon-green) 42%, var(--line));
   box-shadow:
-    0 0 0 1px rgba(110, 231, 113, 0.08),
-    0 0 30px rgba(110, 231, 113, 0.07),
+    0 0 0 1px rgba(0, 255, 102, 0.08),
+    0 0 30px rgba(0, 255, 102, 0.07),
     0 18px 38px rgba(0, 0, 0, 0.42);
 }
 
