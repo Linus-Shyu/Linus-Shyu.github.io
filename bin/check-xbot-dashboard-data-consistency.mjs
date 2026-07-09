@@ -39,10 +39,7 @@ function chartPointValues(chart) {
   return chart.points.map((point) => number(point.value ?? point.calls));
 }
 
-function derivedImpressionSeries(periodData = {}, explicitChart = null) {
-  const chartValues = chartPointValues(explicitChart);
-  if (chartValues.length) return chartValues;
-
+function derivedImpressionSeries(periodData = {}) {
   const posts = [...(periodData.topPosts || [])].sort((left, right) => {
     const leftTime = new Date(left.postedAt || 0).getTime();
     const rightTime = new Date(right.postedAt || 0).getTime();
@@ -57,9 +54,7 @@ function derivedImpressionSeries(periodData = {}, explicitChart = null) {
   return cumulativeSeries(values);
 }
 
-function derivedEndpointSeries(api = {}, explicitChart = null) {
-  const chartValues = chartPointValues(explicitChart);
-  if (chartValues.length) return chartValues;
+function derivedEndpointSeries(api = {}) {
   if (Array.isArray(api.days) && api.days.length) {
     return api.days.map((day) => number(day.value ?? day.calls));
   }
@@ -69,6 +64,24 @@ function derivedEndpointSeries(api = {}, explicitChart = null) {
 function assertNear(file, label, actual, expected, tolerance = 0.005) {
   if (Math.abs(number(actual) - number(expected)) > tolerance) {
     fail(`${file} ${label} mismatch.`, `actual=${actual}, expected=${expected}`);
+  }
+}
+
+function hasExplicitChart(chart) {
+  return Array.isArray(chart?.points) && chart.points.length > 0;
+}
+
+function assertBucketedChartTotal(file, label, chart, expectedTotal) {
+  const values = chartPointValues(chart);
+  if (!values.length) {
+    fail(`${file} ${label} is missing explicit chart points.`);
+  }
+  const pointTotal = values.reduce((sum, value) => sum + number(value), 0);
+  assertNear(file, `${label} chart point sum`, pointTotal, expectedTotal);
+  assertNear(file, `${label} chart declared total`, number(chart.total), expectedTotal);
+  assertNear(file, `${label} chart current point`, number(chart.current), values[values.length - 1] || 0);
+  if (chart.aggregate && chart.aggregate !== "sum") {
+    fail(`${file} ${label} chart has unsupported aggregate.`, chart.aggregate);
   }
 }
 
@@ -86,24 +99,32 @@ function assertDashboardData(file, data) {
   const impressionChart = data.charts?.impressions24h;
   const apiChart = data.charts?.xApiCallsDaily;
   const expectedImpressions = number(impressionChart?.total, number(last24h.impressions));
-  const impressionSeries = derivedImpressionSeries(last24h, impressionChart);
-  if (expectedImpressions > 0 && !impressionSeries.length) {
-    fail(`${file} has 24h L7 traffic but no chartable impression series.`);
-  }
-  if (impressionSeries.length) {
-    assertMonotonic(file, "L7 traffic series", impressionSeries);
-    assertNear(file, "L7 traffic series final value", impressionSeries[impressionSeries.length - 1], expectedImpressions);
+  if (hasExplicitChart(impressionChart)) {
+    assertBucketedChartTotal(file, "L7 traffic", impressionChart, expectedImpressions);
+  } else {
+    const impressionSeries = derivedImpressionSeries(last24h);
+    if (expectedImpressions > 0 && !impressionSeries.length) {
+      fail(`${file} has 24h L7 traffic but no chartable impression series.`);
+    }
+    if (impressionSeries.length) {
+      assertMonotonic(file, "L7 traffic fallback series", impressionSeries);
+      assertNear(file, "L7 traffic fallback final value", impressionSeries[impressionSeries.length - 1], expectedImpressions);
+    }
   }
 
   const endpoints = api.endpoints || [];
   const expectedCalls = number(apiChart?.total, endpoints.reduce((sum, endpoint) => sum + number(endpoint.calls), 0));
-  const endpointSeries = derivedEndpointSeries(api, apiChart);
-  if (expectedCalls > 0 && !endpointSeries.length) {
-    fail(`${file} has X API calls but no chartable endpoint series.`);
-  }
-  if (endpointSeries.length) {
-    assertMonotonic(file, "X API ops series", endpointSeries);
-    assertNear(file, "X API ops series final value", endpointSeries[endpointSeries.length - 1], expectedCalls);
+  if (hasExplicitChart(apiChart)) {
+    assertBucketedChartTotal(file, "X API ops", apiChart, expectedCalls);
+  } else {
+    const endpointSeries = derivedEndpointSeries(api);
+    if (expectedCalls > 0 && !endpointSeries.length) {
+      fail(`${file} has X API calls but no chartable endpoint series.`);
+    }
+    if (endpointSeries.length) {
+      assertMonotonic(file, "X API ops fallback series", endpointSeries);
+      assertNear(file, "X API ops fallback final value", endpointSeries[endpointSeries.length - 1], expectedCalls);
+    }
   }
 
   const endpointSpend = endpoints.reduce((sum, endpoint) => sum + number(endpoint.usd), 0);
