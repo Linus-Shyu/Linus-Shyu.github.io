@@ -7,11 +7,11 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
-const finalGutterMarker = "Highest-specificity rail override v8: keep the white UI sidebar aligned with the command surface.";
+const finalGutterMarker = "Highest-specificity rail override v9: keep the light UI sidebar pinned to the SRE command surface.";
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-command-rail";
+const requiredCssVersion = "20260709-rail-v9";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -123,6 +123,8 @@ for (const dir of dashboards) {
   assertIncludes(cssFile, finalCss, finalLightGutterSelector, "the light-mode gutter selector");
   assertIncludes(cssFile, finalCss, "--rail-frame-width: 236px;", "the desktop rail frame width");
   assertIncludes(cssFile, finalCss, "--rail-frame-gap: 12px;", "the rail frame gap");
+  assertIncludes(cssFile, finalCss, "width: 100% !important;", "the enforced full-width dashboard shell");
+  assertIncludes(cssFile, finalCss, "max-width: none !important;", "the removed centered shell cap");
   assertIncludes(cssFile, finalCss, "grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;", "the enforced desktop rail column");
   assertIncludes(cssFile, finalCss, "gap: var(--rail-frame-gap) !important;", "the enforced light-mode rail gap");
   assertIncludes(cssFile, finalCss, "width: var(--rail-frame-width, 236px) !important;", "the enforced readable rail width");

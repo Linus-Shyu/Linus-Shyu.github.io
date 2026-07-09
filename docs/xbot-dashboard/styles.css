@@ -27277,11 +27277,15 @@ html[data-theme][data-theme] body .ops-main .window-command-head strong {
   font-family: var(--code-font) !important;
 }
 
-/* Highest-specificity rail override v8: keep the white UI sidebar aligned with the command surface. */
+/* Highest-specificity rail override v9: keep the light UI sidebar pinned to the SRE command surface. */
 html[data-theme][data-theme] body > div.ops-shell.ops-shell,
 html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell {
   --rail-frame-width: 236px;
   --rail-frame-gap: 12px;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 18px !important;
   grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;
   gap: var(--rail-frame-gap) !important;
 }
@@ -27293,8 +27297,8 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
       90deg,
       rgba(7, 11, 18, 0.995) 0,
       rgba(11, 17, 27, 0.995) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 28px),
-      rgba(11, 17, 27, 0.72) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 50px),
-      rgba(11, 17, 27, 0) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 86px)
+      rgba(11, 17, 27, 0.82) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 58px),
+      rgba(11, 17, 27, 0) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 108px)
     ) !important;
 }
 
@@ -27338,8 +27342,8 @@ html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.si
     linear-gradient(180deg, var(--rail-final-bg-2), var(--rail-final-bg) 76%) !important;
   background-size: auto, auto, auto, 100% 100%, 100% 38px, auto !important;
   box-shadow:
-    26px 0 58px rgba(2, 6, 23, 0.36),
-    inset -1px 0 0 rgba(245, 158, 11, 0.24),
+    34px 0 84px rgba(2, 6, 23, 0.46),
+    inset -1px 0 0 rgba(245, 158, 11, 0.34),
     inset 1px 0 0 rgba(255, 255, 255, 0.07) !important;
   scrollbar-color: var(--rail-final-accent) transparent !important;
 }
@@ -27354,6 +27358,7 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
@@ -27365,7 +27370,7 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
     linear-gradient(135deg, rgba(245, 158, 11, 0.07), rgba(0, 240, 255, 0.025)) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 12px 28px rgba(0, 0, 0, 0.22) !important;
+    0 14px 34px rgba(0, 0, 0, 0.28) !important;
 }
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand {
@@ -27406,10 +27411,67 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary > span,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
   color: var(--rail-final-muted) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary {
+  display: block !important;
+  margin-top: 12px !important;
+  border-color: rgba(245, 158, 11, 0.36) !important;
+  padding: 12px !important;
+  background-color: rgba(20, 26, 38, 0.99) !important;
+  background-image:
+    linear-gradient(180deg, rgba(245, 158, 11, 0.13), rgba(255, 255, 255, 0.018)),
+    linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(125, 211, 111, 0.035)) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary strong {
+  display: block !important;
+  margin-top: 6px !important;
+  color: var(--rail-final-text) !important;
+  font-size: 12px !important;
+  font-weight: 860 !important;
+  text-transform: uppercase !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid {
+  display: grid !important;
+  gap: 7px !important;
+  margin-top: 10px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid p {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 30px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(148, 163, 184, 0.34) !important;
+  border-radius: 7px !important;
+  padding: 0 9px !important;
+  color: var(--rail-final-body) !important;
+  background: rgba(15, 23, 42, 0.82) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid i {
+  width: 7px !important;
+  height: 7px !important;
+  flex: 0 0 7px !important;
+  border-radius: 999px !important;
+  background: var(--rail-final-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 18px rgba(125, 211, 111, 0.28) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid span {
+  color: var(--rail-final-body) !important;
+  font-size: 10px !important;
+  font-weight: 820 !important;
 }
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini {
