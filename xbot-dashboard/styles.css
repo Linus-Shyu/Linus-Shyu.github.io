@@ -11821,6 +11821,230 @@ body:not(.demo-mode) .demo-strip {
   font-weight: 780;
 }
 
+.learning-contract {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, #00f0ff 30%, var(--line-soft));
+  border-radius: 6px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 10% 0, color-mix(in srgb, #00f0ff 12%, transparent), transparent 30%),
+    radial-gradient(circle at 92% 0, color-mix(in srgb, #ff007a 9%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 94%, transparent)),
+    var(--surface-soft);
+  box-shadow:
+    0 0 24px color-mix(in srgb, #00f0ff 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.learning-contract-head,
+.learning-contract-cells,
+.learning-contract-arms,
+.learning-contract-policy,
+.learning-contract-next,
+.learning-contract-guards {
+  display: grid;
+  gap: 8px;
+}
+
+.learning-contract-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.learning-contract-head span,
+.learning-contract-cells span,
+.learning-contract-arms span,
+.learning-contract-policy span,
+.learning-contract-next span,
+.learning-contract-guards span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 880;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.learning-contract-head strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.learning-contract-head em {
+  border: 1px solid color-mix(in srgb, #00ff66 44%, var(--line-soft));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, #00ff66 10%, transparent);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 860;
+  white-space: nowrap;
+}
+
+.learning-contract-cells {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.learning-contract-arms {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.learning-contract-policy {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: stretch;
+}
+
+.learning-contract-cells article,
+.learning-contract-arms article,
+.learning-contract-policy article,
+.learning-contract-next,
+.learning-contract-guards {
+  min-width: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 9px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 48%, transparent);
+}
+
+.learning-contract-cells article.ok,
+.learning-contract-arms article.exploit,
+.learning-contract-arms article.policy {
+  border-color: color-mix(in srgb, #00ff66 42%, var(--line-soft));
+  box-shadow:
+    inset 3px 0 0 #00ff66,
+    0 0 16px color-mix(in srgb, #00ff66 8%, transparent);
+}
+
+.learning-contract-cells article.warn,
+.learning-contract-arms article.explore,
+.learning-contract-arms article.test {
+  border-color: color-mix(in srgb, #00f0ff 40%, var(--line-soft));
+  box-shadow:
+    inset 3px 0 0 #00f0ff,
+    0 0 16px color-mix(in srgb, #00f0ff 8%, transparent);
+}
+
+.learning-contract-cells article.danger,
+.learning-contract-arms article.hold {
+  border-color: color-mix(in srgb, #ff007a 42%, var(--line-soft));
+  box-shadow:
+    inset 3px 0 0 #ff007a,
+    0 0 16px color-mix(in srgb, #ff007a 8%, transparent);
+}
+
+.learning-contract-cells strong,
+.learning-contract-arms strong,
+.learning-contract-policy strong {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.18;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.learning-contract-cells strong {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.learning-contract-cells small,
+.learning-contract-arms small,
+.learning-contract-policy small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.28;
+}
+
+.learning-contract-policy button {
+  align-self: stretch;
+  border: 1px solid color-mix(in srgb, #00f0ff 34%, var(--line-soft));
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #00606a;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, #00f0ff 12%, var(--surface)), color-mix(in srgb, #00f0ff 5%, var(--surface-soft)));
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+:root[data-theme="dark"] .learning-contract-policy button {
+  color: #9ff8ff;
+}
+
+.learning-contract-next code,
+.learning-contract-guards code {
+  display: block;
+  margin-top: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 6px;
+  padding: 6px 7px;
+  color: var(--body);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.learning-contract-guards {
+  grid-template-columns: 118px minmax(0, 1fr);
+  align-items: start;
+}
+
+.learning-contract-guards span {
+  padding-top: 7px;
+}
+
+.learning-contract-guards code {
+  grid-column: 2;
+  margin-top: 0;
+}
+
+@media (max-width: 980px) {
+  .learning-contract-cells,
+  .learning-contract-arms,
+  .learning-contract-policy,
+  .learning-contract-guards {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-contract-guards code {
+    grid-column: auto;
+  }
+}
+
 .content-bandit-allocator {
   display: grid;
   gap: 10px;

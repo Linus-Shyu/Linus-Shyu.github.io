@@ -881,6 +881,50 @@ const fallbackData = {
       "Reserve one candidate for second_order sample discovery.",
     ],
   },
+  learningLoopContract: {
+    generatedAt: "2026-07-07T01:09:59.105Z",
+    mode: "cached_learning_contract",
+    status: "online",
+    confidence: "medium",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    source: "cached analytics, bandit allocator, generation trace",
+    sampleCount: 120,
+    baselineScore: 3.9,
+    primaryArm: { id: "decision_rule", label: "Decision Rule", status: "exploit", allocationPct: 28.5, avgScore: 2.8, samples: 10, liftPct: 12.4 },
+    exploreArm: { id: "second_order", label: "Second-order", status: "explore", allocationPct: 12, avgScore: 0, samples: 0, liftPct: null },
+    holdArms: [{ id: "prediction", label: "Prediction", status: "hold", allocationPct: 0, avgScore: 2.1, samples: 2, liftPct: -18.2 }],
+    activeOpportunity: { id: "decision_rule", label: "Decision Rule", score: 95.3, status: "hot", directive: "Keep the next packet as a reusable decision rule." },
+    selectedTrace: { templateId: "decision_rule", score: 95.3, policyScore: 10, banditScore: 7.2, source: "cached_policy" },
+    policy: {
+      mode: "cached_generation_policy",
+      confidence: "medium",
+      primaryFormatId: "decision_rule",
+      primaryFormatLabel: "Decision Rule",
+      exploreFormatId: "second_order",
+      rankedFormatIds: ["decision_rule", "playbook", "operator_pain", "second_order"],
+      avoidFormatIds: ["prediction"],
+      promptBias: [
+        "Lead with decision_rule: turn the story into a concrete rule.",
+        "Prefer high-signal tech sources.",
+        "Avoid prediction unless story-fit is unusually strong.",
+      ],
+      zeroExtraXReads: true,
+    },
+    cells: [
+      { id: "sample_ledger", label: "SAMPLE_LEDGER", value: 120, status: "ok", detail: "120 cached packets" },
+      { id: "primary_arm", label: "PRIMARY_ARM", value: "decision_rule", status: "ok", detail: "Decision Rule" },
+      { id: "read_gate", label: "READ_GATE", value: "0 X reads", status: "ok", detail: "cached-only learning bus" },
+      { id: "policy_patch", label: "POLICY_PATCH", value: "decision_rule", status: "ok", detail: "medium" },
+    ],
+    nextAction: "Keep the next packet as a reusable decision rule.",
+    guardrails: [
+      "Cached analytics only; 0 X search/read ops.",
+      "No auto-replies, no scraping, no rate-limit bypass.",
+      "Manual route work stays human-reviewed.",
+    ],
+  },
   audienceExpansionRouter: {
     enabled: true,
     mode: "wide_tech_router",
@@ -1598,6 +1642,18 @@ const translations = {
     runway_mode_budget_containment: "budget containment",
     learning_eyebrow: "Feedback Layer",
     learning_title: "Next inference rule to deploy",
+    learning_contract_eyebrow: "Cached Learning Contract",
+    learning_contract_title: "Zero-read policy bus",
+    learning_contract_zero_reads: "0 X read ops",
+    learning_contract_primary: "Primary arm",
+    learning_contract_explore: "Explore arm",
+    learning_contract_hold: "Hold partition",
+    learning_contract_selected: "Last selector",
+    learning_contract_policy: "Policy patch",
+    learning_contract_next: "Next command",
+    learning_contract_guardrails: "Guardrails",
+    learning_contract_copy: "Copy contract",
+    learning_contract_empty: "No cached learning contract available.",
     autopilot_eyebrow: "Model Inference Stream",
     autopilot_mode: "Mode",
     autopilot_samples: "Samples",
@@ -2565,6 +2621,18 @@ const translations = {
     runway_mode_budget_containment: "预算收敛",
     learning_eyebrow: "反馈层",
     learning_title: "下一条要部署的推理规则",
+    learning_contract_eyebrow: "缓存学习合约",
+    learning_contract_title: "零读取策略总线",
+    learning_contract_zero_reads: "0 次 X 读取",
+    learning_contract_primary: "主臂",
+    learning_contract_explore: "探索臂",
+    learning_contract_hold: "暂停分区",
+    learning_contract_selected: "上次选择器",
+    learning_contract_policy: "策略补丁",
+    learning_contract_next: "下一条命令",
+    learning_contract_guardrails: "护栏",
+    learning_contract_copy: "复制合约",
+    learning_contract_empty: "暂无缓存学习合约。",
     autopilot_eyebrow: "模型推理流",
     autopilot_mode: "模式",
     autopilot_samples: "样本",
@@ -7431,6 +7499,182 @@ function renderContentBanditAllocator() {
   `;
 }
 
+function compactContractArm(arm) {
+  if (!arm) return null;
+  return {
+    id: arm.id || arm.formatId || "-",
+    label: arm.label || arm.formatLabel || formatTemplate(arm.id || arm.formatId || "-"),
+    status: arm.status || arm.action || "watch",
+    allocationPct: arm.allocationPct == null ? null : number(arm.allocationPct),
+    avgScore: arm.avgScore == null ? null : number(arm.avgScore),
+    samples: number(arm.samples),
+    liftPct: arm.liftPct == null ? null : number(arm.liftPct),
+    nextAction: arm.nextAction || arm.directive || arm.reason || "",
+  };
+}
+
+function learningLoopContractData() {
+  const incoming = dashboardData.learningLoopContract || fallbackData.learningLoopContract;
+  if (incoming?.cells?.length || incoming?.primaryArm || incoming?.policy) return incoming;
+
+  const autopilot = learningAutopilotData();
+  const bandit = contentBanditAllocatorData();
+  const trace = generationDecisionTraceData();
+  const policy = dashboardData.cachedGenerationPolicy || fallbackData.cachedGenerationPolicy || trace?.cachedGenerationPolicy || {};
+  const lanes = Array.isArray(bandit.lanes) ? bandit.lanes : [];
+  const primaryArm = compactContractArm(
+    bandit.recommendedLane || lanes.find((lane) => lane.status === "exploit") || autopilot.primaryFormat || null,
+  ) || {
+    id: policy.primaryFormatId || "-",
+    label: policy.primaryFormatLabel || formatTemplate(policy.primaryFormatId || "-"),
+    status: "policy",
+    samples: 0,
+  };
+  const exploreArm = compactContractArm(
+    bandit.exploreLane || lanes.find((lane) => lane.status === "explore") || (autopilot.exploreFormats || [])[0] || null,
+  );
+  const holdArms = [
+    ...lanes.filter((lane) => lane.status === "hold").map(compactContractArm).filter(Boolean),
+    ...(autopilot.holdFormats || []).map(compactContractArm).filter(Boolean),
+  ].filter((arm, index, all) => arm.id && all.findIndex((item) => item.id === arm.id) === index).slice(0, 3);
+  const sampleCount = number(bandit.sampleCount, number(autopilot.sampleCount, number((dashboardData.profile || fallbackData.profile || {}).measuredPosts)));
+  const selectedCandidate = trace?.selectedCandidate || (trace?.candidates || []).find((candidate) => candidate.selected) || {};
+  const selectedTrace = {
+    templateId: trace?.selectedTemplateId || selectedCandidate.templateId || "-",
+    score: number(trace?.selectedScore, number(selectedCandidate.score)),
+    policyScore: selectedCandidate.cachedGenerationPolicyScore == null ? null : number(selectedCandidate.cachedGenerationPolicyScore),
+    banditScore: selectedCandidate.contentBanditScore == null ? null : number(selectedCandidate.contentBanditScore),
+    source: selectedCandidate.generationSource || trace?.localFallback?.mode || "cached_policy",
+  };
+  const confidence = policy.confidence || bandit.confidence || autopilot.confidence || "low";
+  const primaryValue = primaryArm.id || policy.primaryFormatId || "-";
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_cached_learning_contract",
+    status: sampleCount > 0 ? "online" : "warming",
+    confidence,
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    source: "derived cached policy bus",
+    sampleCount,
+    baselineScore: number((dashboardData.profile || fallbackData.profile || {}).baselineScore),
+    primaryArm,
+    exploreArm,
+    holdArms,
+    selectedTrace,
+    policy: {
+      mode: policy.mode || "cached_generation_policy",
+      confidence,
+      primaryFormatId: policy.primaryFormatId || primaryArm.id || null,
+      primaryFormatLabel: policy.primaryFormatLabel || primaryArm.label || null,
+      exploreFormatId: policy.exploreFormatId || exploreArm?.id || null,
+      rankedFormatIds: [policy.primaryFormatId, ...(policy.rankedFormatIds || []), ...(bandit.rankedFormatIds || [])].filter(Boolean).slice(0, 8),
+      avoidFormatIds: [...(policy.avoidFormatIds || []), ...holdArms.map((arm) => arm.id)].filter(Boolean).slice(0, 8),
+      promptBias: (policy.directives || autopilot.directives || []).filter(Boolean).slice(0, 4),
+      zeroExtraXReads: true,
+    },
+    cells: [
+      { id: "sample_ledger", label: "SAMPLE_LEDGER", value: sampleCount, status: sampleCount > 0 ? "ok" : "warn", detail: `${formatNumber(sampleCount)} cached packets` },
+      { id: "primary_arm", label: "PRIMARY_ARM", value: primaryValue, status: primaryArm.status === "hold" ? "warn" : "ok", detail: primaryArm.label },
+      { id: "read_gate", label: "READ_GATE", value: "0 X reads", status: "ok", detail: "cached-only learning bus" },
+      { id: "policy_patch", label: "POLICY_PATCH", value: primaryValue, status: primaryValue === "-" ? "warn" : "ok", detail: confidence },
+    ],
+    nextAction: bandit.nextAction || (policy.directives || autopilot.directives || [])[0] || "-",
+    guardrails: [
+      "Cached analytics only; 0 X search/read ops.",
+      "No auto-replies, no scraping, no rate-limit bypass.",
+      "Manual route work stays human-reviewed.",
+    ],
+  };
+}
+
+function renderContractArm(arm, labelKey) {
+  if (!arm) return "";
+  const allocation = arm.allocationPct == null ? "-" : `${formatNumber(arm.allocationPct, 1)}%`;
+  const score = arm.avgScore == null ? "-" : formatNumber(arm.avgScore, 1);
+  return `
+    <article class="${escapeHtml(arm.status || "watch")}">
+      <span>${escapeHtml(t(labelKey))}</span>
+      <strong>${escapeHtml(arm.label || arm.id || "-")}</strong>
+      <small>${escapeHtml(arm.status || "watch")} · alloc ${escapeHtml(allocation)} · score ${escapeHtml(score)} · n=${escapeHtml(formatNumber(arm.samples))}</small>
+    </article>
+  `;
+}
+
+function renderLearningLoopContract() {
+  const contract = learningLoopContractData();
+  const container = $("#learning-contract");
+  if (!container) return;
+  if (!contract) {
+    container.innerHTML = `<p class="empty-state">${escapeHtml(t("learning_contract_empty"))}</p>`;
+    return;
+  }
+  const cells = Array.isArray(contract.cells) ? contract.cells : [];
+  const policy = contract.policy || {};
+  const promptBias = Array.isArray(policy.promptBias) ? policy.promptBias : [];
+  const guardrails = Array.isArray(contract.guardrails) ? contract.guardrails : [];
+  const hold = (contract.holdArms || [])[0] || null;
+  const selected = contract.selectedTrace || {};
+  const copyBlock = [
+    "CODEX LEARNING LOOP CONTRACT",
+    `mode: ${contract.mode || "cached_learning_contract"}`,
+    `status: ${contract.status || "-"}`,
+    `confidence: ${contract.confidence || "-"}`,
+    "x_reads: 0",
+    `primary_arm: ${contract.primaryArm?.id || policy.primaryFormatId || "-"}`,
+    contract.exploreArm?.id ? `explore_arm: ${contract.exploreArm.id}` : null,
+    policy.avoidFormatIds?.length ? `avoid: ${policy.avoidFormatIds.join(", ")}` : null,
+    contract.nextAction ? `next: ${contract.nextAction}` : null,
+    ...promptBias.map((item) => `bias: ${item}`),
+  ].filter(Boolean).join("\n");
+
+  container.innerHTML = `
+    <div class="learning-contract-head">
+      <div>
+        <span>${escapeHtml(t("learning_contract_eyebrow"))}</span>
+        <strong>${escapeHtml(t("learning_contract_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("learning_contract_zero_reads"))}</em>
+    </div>
+    <div class="learning-contract-cells">
+      ${cells.slice(0, 4).map((cell) => `
+        <article class="${escapeHtml(cell.status || "ok")}">
+          <span>${escapeHtml(cell.label || cell.id || "-")}</span>
+          <strong>${escapeHtml(String(cell.value ?? "-"))}</strong>
+          <small>${escapeHtml(cell.detail || "")}</small>
+        </article>
+      `).join("")}
+    </div>
+    <div class="learning-contract-arms">
+      ${renderContractArm(contract.primaryArm, "learning_contract_primary")}
+      ${renderContractArm(contract.exploreArm, "learning_contract_explore")}
+      ${renderContractArm(hold, "learning_contract_hold")}
+    </div>
+    <div class="learning-contract-policy">
+      <article>
+        <span>${escapeHtml(t("learning_contract_selected"))}</span>
+        <strong>${escapeHtml(selected.templateId || "-")}</strong>
+        <small>${escapeHtml(selected.source || "cached_policy")} · score ${escapeHtml(formatNumber(selected.score, 1))} · policy ${escapeHtml(selected.policyScore == null ? "-" : formatNumber(selected.policyScore, 1))} · bandit ${escapeHtml(selected.banditScore == null ? "-" : formatNumber(selected.banditScore, 1))}</small>
+      </article>
+      <article>
+        <span>${escapeHtml(t("learning_contract_policy"))}</span>
+        <strong>${escapeHtml(policy.primaryFormatLabel || formatTemplate(policy.primaryFormatId || "-"))}</strong>
+        <small>${escapeHtml((policy.rankedFormatIds || []).slice(0, 5).join(" / ") || "-")}</small>
+      </article>
+      <button type="button" data-copy="${encodeURIComponent(copyBlock)}">${escapeHtml(t("learning_contract_copy"))}</button>
+    </div>
+    <div class="learning-contract-next">
+      <span>${escapeHtml(t("learning_contract_next"))}</span>
+      <code>${escapeHtml(contract.nextAction || "-")}</code>
+    </div>
+    <div class="learning-contract-guards">
+      <span>${escapeHtml(t("learning_contract_guardrails"))}</span>
+      ${guardrails.slice(0, 4).map((item) => `<code>${escapeHtml(item)}</code>`).join("")}
+    </div>
+  `;
+}
+
 function banditSettlementPosts() {
   const pools = [
     ...(Array.isArray(dashboardData.last24h?.topPosts) ? dashboardData.last24h.topPosts : []),
@@ -9559,6 +9803,7 @@ function renderLearning() {
       `,
     )
     .join("");
+  renderLearningLoopContract();
   renderLearningAutopilot();
   renderAutopilotDirectiveDeck();
   renderAdaptiveAngleScheduler();
