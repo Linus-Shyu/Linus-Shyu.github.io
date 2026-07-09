@@ -4289,6 +4289,65 @@ h3 {
   margin-bottom: 10px;
 }
 
+.paste-queue-events {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+
+.paste-queue-events > span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 860;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.paste-queue-events p {
+  display: grid;
+  grid-template-columns: 78px minmax(88px, 0.45fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 6px;
+  padding: 7px 8px;
+  background: color-mix(in srgb, var(--bg) 46%, transparent);
+}
+
+.paste-queue-events p.empty {
+  display: block;
+  color: var(--muted);
+}
+
+.paste-queue-events time,
+.paste-queue-events strong,
+.paste-queue-events em {
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.paste-queue-events time {
+  color: var(--muted);
+}
+
+.paste-queue-events strong {
+  color: var(--ok);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.paste-queue-events em {
+  overflow: hidden;
+  color: var(--body);
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .paste-queue-guards code,
 .paste-queue-copy {
   border: 1px solid var(--line-soft);
@@ -26913,6 +26972,83 @@ html[data-theme][data-theme] body .operator-paste-queue .paste-queue-kpis strong
   html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
     background: transparent !important;
   }
+}
+
+/* Light rail v10: keep the white UI sidebar from washing out against the ops canvas. */
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 9, 16, 0.995) 0,
+      rgba(9, 14, 24, 0.995) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 28px),
+      rgba(9, 14, 24, 0.72) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 54px),
+      rgba(9, 14, 24, 0) calc(var(--rail-frame-width, 236px) + var(--rail-frame-gap, 12px) + 92px)
+    ) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  --rail-final-bg: #0b111b !important;
+  --rail-final-bg-2: #111827 !important;
+  --rail-final-card: rgba(14, 22, 35, 0.99) !important;
+  --rail-final-card-2: rgba(24, 36, 56, 0.99) !important;
+  --rail-final-line: rgba(203, 213, 225, 0.28) !important;
+  --rail-final-line-strong: rgba(245, 158, 11, 0.88) !important;
+  --rail-final-text: #f9fafb !important;
+  --rail-final-body: #d8e2f0 !important;
+  --rail-final-muted: #a8b5c7 !important;
+  --rail-final-accent: #f59e0b !important;
+  --rail-final-ok: #7dd36f !important;
+  color-scheme: dark !important;
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-bg) !important;
+  background-image:
+    radial-gradient(circle at 34% -8%, rgba(245, 158, 11, 0.42), transparent 32%),
+    radial-gradient(circle at -12% 74%, rgba(125, 211, 111, 0.2), transparent 36%),
+    radial-gradient(circle at 112% 30%, rgba(0, 240, 255, 0.13), transparent 35%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075), transparent 1px),
+    repeating-linear-gradient(0deg, rgba(226, 232, 240, 0.055) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, var(--rail-final-bg-2), var(--rail-final-bg) 76%) !important;
+  box-shadow:
+    30px 0 62px rgba(2, 6, 23, 0.36),
+    inset -1px 0 0 rgba(245, 158, 11, 0.3),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: var(--rail-final-body) !important;
+  border-color: var(--rail-final-line) !important;
+  background-color: var(--rail-final-card) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.014)),
+    linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(0, 240, 255, 0.028)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 14px 30px rgba(0, 0, 0, 0.24) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: var(--rail-final-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.36) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: var(--rail-final-muted) !important;
+  text-shadow: none !important;
 }
 
 /* Expo viewport NOC lock: first-screen command surfaces stay cinematic and reactor-grade in every theme. */

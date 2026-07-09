@@ -1509,6 +1509,8 @@ const translations = {
     paste_queue_progress: "{done} done · {skipped} skipped",
     paste_queue_saved: "Queue state saved",
     paste_queue_reset_done: "Queue reset",
+    paste_queue_events: "local event stream",
+    paste_queue_events_empty: "No local queue events yet.",
     operator_packet_eyebrow: "Operator Packet",
     operator_packet_title: "Execute this route first",
     operator_packet_armed: "armed",
@@ -1566,6 +1568,11 @@ const translations = {
     operator_telemetry_latest: "recent events",
     operator_telemetry_empty: "No local execution events yet.",
     operator_event_done: "step completed",
+    operator_event_skipped: "route skipped",
+    operator_event_queue_done: "queue task done",
+    operator_event_queue_skipped: "queue task skipped",
+    operator_event_queue_reset: "queue reset",
+    operator_event_cleared: "state cleared",
     operator_event_pending: "step reopened",
     operator_event_reset: "protocol reset",
     operator_slo_eyebrow: "Distribution SLO",
@@ -2509,6 +2516,8 @@ const translations = {
     paste_queue_progress: "已完成 {done} · 已跳过 {skipped}",
     paste_queue_saved: "队列状态已保存",
     paste_queue_reset_done: "队列已重置",
+    paste_queue_events: "本地事件流",
+    paste_queue_events_empty: "暂无本地队列事件。",
     operator_packet_eyebrow: "操作员数据包",
     operator_packet_title: "先执行这条路由",
     operator_packet_armed: "已装载",
@@ -2566,6 +2575,11 @@ const translations = {
     operator_telemetry_latest: "最近事件",
     operator_telemetry_empty: "暂无本地执行事件。",
     operator_event_done: "步骤完成",
+    operator_event_skipped: "路由已跳过",
+    operator_event_queue_done: "队列任务完成",
+    operator_event_queue_skipped: "队列任务跳过",
+    operator_event_queue_reset: "队列重置",
+    operator_event_cleared: "状态已清除",
     operator_event_pending: "步骤重开",
     operator_event_reset: "协议重置",
     operator_slo_eyebrow: "分发 SLO",
@@ -4689,6 +4703,23 @@ function appendOperatorLedger(event) {
     ...readOperatorLedger(),
   ];
   writeOperatorLedger(next);
+}
+
+function operatorEventLabel(event) {
+  if (event?.type === "paste_queue" && (event?.step === "reset" || event?.state === "reset")) {
+    return t("operator_event_queue_reset");
+  }
+  if (event?.type === "reset" || event?.state === "reset") return t("operator_event_reset");
+  if (event?.type === "paste_queue" && event?.step === "done") {
+    return t(event?.state === "cleared" ? "operator_event_cleared" : "operator_event_queue_done");
+  }
+  if (event?.type === "paste_queue" && event?.step === "skipped") {
+    return t(event?.state === "cleared" ? "operator_event_cleared" : "operator_event_queue_skipped");
+  }
+  if (event?.step === "skipped") return t("operator_event_skipped");
+  if (event?.state === "done" || event?.state === "active") return t("operator_event_done");
+  if (event?.state === "cleared") return t("operator_event_cleared");
+  return t("operator_event_pending");
 }
 
 function missionProtocolProgress(mission, ops, index) {
@@ -11629,6 +11660,16 @@ function operatorPasteQueueHtml(queue) {
     .slice(0, 4)
     .map((guard) => `<code>${escapeHtml(sreText(guard))}</code>`)
     .join("");
+  const ledger = readOperatorLedger().filter((event) => event.type === "paste_queue").slice(0, 5);
+  const ledgerHtml = ledger.length
+    ? ledger.map((event) => `
+      <p>
+        <time>${escapeHtml(formatDate(event.at))}</time>
+        <strong>${escapeHtml(operatorEventLabel(event))}</strong>
+        <em>${escapeHtml(sreText(`${event.route || "-"} · ${event.step || "-"}`))}</em>
+      </p>
+    `).join("")
+    : `<p class="empty">${escapeHtml(t("paste_queue_events_empty"))}</p>`;
   return `
     <article class="operator-paste-queue ${escapeHtml(severity)}">
       <div class="paste-queue-head">
@@ -11668,6 +11709,10 @@ function operatorPasteQueueHtml(queue) {
         <aside>
           <div class="manifest-section-title"><span>${escapeHtml(t("paste_queue_rules"))}</span><strong>${escapeHtml(severity)}</strong></div>
           <div class="paste-queue-guards">${guards}</div>
+          <div class="paste-queue-events">
+            <span>${escapeHtml(t("paste_queue_events"))}</span>
+            ${ledgerHtml}
+          </div>
           <pre class="paste-queue-copy"><code>${escapeHtml(sreText(queue.copyBlock || ""))}</code></pre>
         </aside>
       </div>
@@ -12089,7 +12134,7 @@ function renderActions() {
       <div class="telemetry-log">
         <span>${escapeHtml(t("operator_telemetry_latest"))}</span>
         ${operatorTelemetry.ledger.length ? operatorTelemetry.ledger.map((event) => `
-          <p><time>${escapeHtml(formatDate(event.at))}</time><strong>${escapeHtml(t(event.type === "reset" ? "operator_event_reset" : event.state === "done" ? "operator_event_done" : "operator_event_pending"))}</strong><em>${escapeHtml(event.route || "-")} · ${escapeHtml(event.step || "-")}</em></p>
+          <p><time>${escapeHtml(formatDate(event.at))}</time><strong>${escapeHtml(operatorEventLabel(event))}</strong><em>${escapeHtml(event.route || "-")} · ${escapeHtml(event.step || "-")}</em></p>
         `).join("") : `<p class="empty">${escapeHtml(t("operator_telemetry_empty"))}</p>`}
       </div>
     </article>
