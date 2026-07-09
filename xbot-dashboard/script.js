@@ -1730,7 +1730,13 @@ const translations = {
     opportunity_fusion_directives: "Prompt directives",
     opportunity_fusion_guardrails: "Guardrails",
     opportunity_fusion_empty: "No opportunity fusion telemetry available.",
+    opportunity_fusion_breakdown: "score breakdown",
+    opportunity_fusion_breakdown_formula: "formula",
+    opportunity_fusion_breakdown_avg: "avg",
+    opportunity_fusion_breakdown_lanes: "lanes",
+    opportunity_fusion_breakdown_hot: "hot",
     opportunity_fusion_mode_derived_cached_opportunity_fusion: "cached opportunity fusion",
+    opportunity_fusion_mode_cached_opportunity_fusion: "cached opportunity fusion",
     opportunity_fusion_mode_opportunity_fusion_warmup: "fusion warmup",
     commander_eyebrow: "Next Window Commander",
     commander_title: "Zero-read fire-control packet",
@@ -2657,7 +2663,13 @@ const translations = {
     opportunity_fusion_directives: "Prompt 指令",
     opportunity_fusion_guardrails: "护栏",
     opportunity_fusion_empty: "暂无机会融合遥测。",
+    opportunity_fusion_breakdown: "评分拆解",
+    opportunity_fusion_breakdown_formula: "公式",
+    opportunity_fusion_breakdown_avg: "均值",
+    opportunity_fusion_breakdown_lanes: "通道",
+    opportunity_fusion_breakdown_hot: "热点",
     opportunity_fusion_mode_derived_cached_opportunity_fusion: "缓存机会融合",
+    opportunity_fusion_mode_cached_opportunity_fusion: "缓存机会融合",
     opportunity_fusion_mode_opportunity_fusion_warmup: "融合预热",
     commander_eyebrow: "下一窗口指挥器",
     commander_title: "零读取火控指令包",
@@ -8603,6 +8615,39 @@ function growthOpportunityScorerData() {
   return derivedGrowthOpportunityScorer();
 }
 
+function opportunityFusionSourceBreakdown(lanes = []) {
+  const rows = new Map();
+  for (const lane of lanes || []) {
+    for (const source of lane.sources || []) {
+      const row = rows.get(source) || {
+        source,
+        lanes: 0,
+        scoreTotal: 0,
+        samples: 0,
+        hotLanes: 0,
+      };
+      row.lanes += 1;
+      row.scoreTotal += number(lane.score);
+      row.samples += number(lane.samples);
+      if (lane.status === "hot") row.hotLanes += 1;
+      rows.set(source, row);
+    }
+  }
+  return [...rows.values()]
+    .map((row) => ({
+      source: row.source,
+      lanes: row.lanes,
+      avgScore: Number((row.scoreTotal / Math.max(1, row.lanes)).toFixed(1)),
+      samples: row.samples,
+      hotLanes: row.hotLanes,
+    }))
+    .sort((left, right) =>
+      number(right.avgScore) - number(left.avgScore) ||
+      number(right.hotLanes) - number(left.hotLanes) ||
+      number(right.lanes) - number(left.lanes),
+    );
+}
+
 function derivedGrowthOpportunityScorer() {
   const timing = topicTimingRouterData();
   const bandit = contentBanditAllocatorData();
@@ -8823,6 +8868,11 @@ function derivedGrowthOpportunityScorer() {
     .slice(0, 10);
   const activeOpportunity = lanes[0] || null;
   const opportunityScore = number(activeOpportunity?.score);
+  const scoreBreakdown = {
+    formula: "weighted cached signals + source diversity + sample depth + active-lane boost",
+    activeSources: activeOpportunity?.sources || [],
+    sources: opportunityFusionSourceBreakdown(lanes),
+  };
   return {
     generatedAt: dashboardData.updatedAt || fallbackData.updatedAt || new Date().toISOString(),
     mode: lanes.length ? "derived_cached_opportunity_fusion" : "opportunity_fusion_warmup",
@@ -8840,6 +8890,7 @@ function derivedGrowthOpportunityScorer() {
       : "Collect more measured packets before trusting opportunity scoring.",
     activeOpportunity,
     lanes,
+    scoreBreakdown,
     promptDirectives: [
       activeOpportunity?.formatId ? `Primary format: ${activeOpportunity.formatId}.` : null,
       activeOpportunity?.pillarLabel ? `Primary narrative: ${activeOpportunity.pillarLabel}.` : null,
@@ -9119,6 +9170,11 @@ function renderGrowthOpportunityScorer() {
   const score = clamp(number(scorer.opportunityScore, number(active.score)), 0, 100);
   const directives = Array.isArray(scorer.promptDirectives) ? scorer.promptDirectives : [];
   const guardrails = Array.isArray(scorer.guardrails) ? scorer.guardrails : [];
+  const breakdown = Array.isArray(scorer.scoreBreakdown?.sources) && scorer.scoreBreakdown.sources.length
+    ? scorer.scoreBreakdown.sources
+    : opportunityFusionSourceBreakdown(lanes);
+  const breakdownFormula =
+    scorer.scoreBreakdown?.formula || "weighted cached signals + source diversity + sample depth + active-lane boost";
   const modeLabel = scorer.mode ? t(`opportunity_fusion_mode_${scorer.mode}`) : "-";
   container.innerHTML = `
     <div class="opportunity-fusion-head">
@@ -9177,6 +9233,27 @@ function renderGrowthOpportunityScorer() {
         `;
       }).join("")}
     </div>
+    ${breakdown.length ? `
+      <div class="opportunity-fusion-breakdown">
+        <div class="opportunity-fusion-section-title">
+          <span>${escapeHtml(t("opportunity_fusion_breakdown"))}</span>
+          <strong>${escapeHtml(t("opportunity_fusion_breakdown_formula"))}: ${escapeHtml(breakdownFormula)}</strong>
+        </div>
+        <div class="opportunity-fusion-breakdown-grid">
+          ${breakdown.slice(0, 6).map((source) => `
+            <article>
+              <strong>${escapeHtml(source.source || "-")}</strong>
+              <dl>
+                <div><dt>${escapeHtml(t("opportunity_fusion_breakdown_avg"))}</dt><dd>${escapeHtml(formatNumber(source.avgScore, 1))}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_breakdown_lanes"))}</dt><dd>${escapeHtml(formatNumber(source.lanes))}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_breakdown_hot"))}</dt><dd>${escapeHtml(formatNumber(source.hotLanes))}</dd></div>
+                <div><dt>${escapeHtml(t("opportunity_fusion_samples"))}</dt><dd>${escapeHtml(formatNumber(source.samples))}</dd></div>
+              </dl>
+            </article>
+          `).join("")}
+        </div>
+      </div>
+    ` : ""}
     <div class="opportunity-fusion-footer-grid">
       <div class="opportunity-fusion-directives">
         <span>${escapeHtml(t("opportunity_fusion_directives"))}</span>
