@@ -16,6 +16,13 @@ const bannedTerms = [
   { label: "AI Content Status", re: /\bAI Content Status\b/i, use: "Swarm Intelligence Output / Model Inference Stream" },
 ];
 
+const requiredTerms = [
+  "Ingress Node Strength (Active Conns)",
+  "Total Ingestion Throughput / L7 Traffic Load",
+  "Swarm Intelligence Output / Model Inference Stream",
+  "HTTP Status Triage (429 Rate-Limit / 503 Backend Faults)",
+];
+
 const files = [
   "xbot-dashboard/index.html",
   "xbot-dashboard/script.js",
@@ -145,6 +152,21 @@ if (violations.length) {
     console.error(`  ${item.value.slice(0, 180)}`);
   }
   process.exit(1);
+}
+
+for (const dir of ["xbot-dashboard", "docs/xbot-dashboard"]) {
+  const visibleSource = [
+    fs.readFileSync(path.join(root, dir, "index.html"), "utf8"),
+    fs.readFileSync(path.join(root, dir, "script.js"), "utf8"),
+    fs.readFileSync(path.join(root, dir, "data.json"), "utf8"),
+  ].join("\n");
+  const missingRequired = requiredTerms.filter((term) => !visibleSource.includes(term));
+  if (missingRequired.length) {
+    console.error("X bot dashboard vocabulary check failed:");
+    console.error(`- ${dir} is missing required cold infrastructure vocabulary:`);
+    for (const term of missingRequired) console.error(`  ${term}`);
+    process.exit(1);
+  }
 }
 
 console.log("X bot dashboard vocabulary check passed.");
