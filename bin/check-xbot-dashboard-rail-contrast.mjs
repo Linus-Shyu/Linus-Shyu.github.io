@@ -7,7 +7,10 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
+const finalGutterMarker = "Highest-specificity rail override v3 final pass: darken the light UI gutter beside the rail.";
+const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
+const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
 const requiredCssVersion = "20260709-command-rail-v3";
 
 function fail(message, details = "") {
@@ -69,6 +72,12 @@ function lastLightRailRuleIndex(css) {
   return matches.length ? matches[matches.length - 1].index : -1;
 }
 
+function assertIncludes(file, value, snippet, label) {
+  if (!value.includes(snippet)) {
+    fail(`${file} is missing ${label}.`, snippet);
+  }
+}
+
 function assertContrast(file, variables, foregroundKey, backgroundKey, minimum) {
   const ratio = contrastRatio(variables[foregroundKey], variables[backgroundKey]);
   if (ratio === null) {
@@ -89,13 +98,42 @@ for (const dir of dashboards) {
   const html = readRelative(htmlFile);
   const { variables, markerIndex } = finalRailVariables(css, cssFile);
   const lightRailIndex = lastLightRailRuleIndex(css);
+  const finalCss = css.slice(markerIndex);
+  const priorRailIndex = css.lastIndexOf(priorRailMarker);
+  const finalGutterIndex = css.lastIndexOf(finalGutterMarker);
 
   if (!html.includes(requiredCssVersion)) {
     fail(`${htmlFile} does not reference the latest rail-contrast stylesheet cache key.`, requiredCssVersion);
   }
+  if (css.includes("*** End of File")) {
+    fail(`${cssFile} contains a patch marker literal.`);
+  }
+  if (priorRailIndex === -1) {
+    fail(`${cssFile} is missing the prior rail override marker.`, priorRailMarker);
+  }
+  if (finalGutterIndex !== markerIndex) {
+    fail(`${cssFile} final rail override must be the v3 light-gutter guard.`, finalGutterMarker);
+  }
+  if (priorRailIndex > markerIndex) {
+    fail(`${cssFile} has the older v2 rail override after the v3 final pass.`);
+  }
   if (lightRailIndex > markerIndex) {
     fail(`${cssFile} has a light-theme rail rule after the final override.`);
   }
+  assertIncludes(cssFile, finalCss, finalLightGutterSelector, "the light-mode gutter selector");
+  assertIncludes(cssFile, finalCss, "--rail-frame-width: 236px;", "the desktop rail frame width");
+  assertIncludes(cssFile, finalCss, "--rail-frame-gap: 12px;", "the rail frame gap");
+  assertIncludes(cssFile, finalCss, "gap: var(--rail-frame-gap) !important;", "the enforced light-mode rail gap");
+  assertIncludes(
+    cssFile,
+    finalCss,
+    "rgba(11, 17, 27, 0.99) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 28px)",
+    "the dark light-mode gutter fill",
+  );
+  assertIncludes(cssFile, finalCss, "@media (min-width: 1081px) and (max-width: 1320px)", "the compact desktop rail breakpoint");
+  assertIncludes(cssFile, finalCss, "--rail-frame-width: 212px;", "the compact desktop rail width");
+  assertIncludes(cssFile, finalCss, "@media (max-width: 1080px)", "the mobile rail breakpoint");
+  assertIncludes(cssFile, finalCss, "background: transparent !important;", "the mobile rail gutter reset");
 
   const requiredValues = {
     bg: "#0b111b",
