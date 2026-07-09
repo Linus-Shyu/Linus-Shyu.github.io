@@ -26110,6 +26110,7 @@ html[data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
@@ -26124,6 +26125,7 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary strong,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
@@ -27044,11 +27046,86 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
 
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary > span,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
 html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
   color: var(--rail-final-muted) !important;
   text-shadow: none !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary {
+  display: grid !important;
+  gap: 9px !important;
+  margin-top: 12px !important;
+  padding: 10px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary > span {
+  font-family: var(--code-font) !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary strong {
+  font-family: var(--code-font) !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid {
+  display: grid !important;
+  gap: 6px !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid p {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 28px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(203, 213, 225, 0.16) !important;
+  border-radius: 6px !important;
+  padding: 0 8px !important;
+  background:
+    linear-gradient(90deg, rgba(125, 211, 111, 0.1), rgba(0, 240, 255, 0.025)) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid i {
+  display: block !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 999px !important;
+  background: var(--rail-final-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(125, 211, 111, 0.14),
+    0 0 16px rgba(125, 211, 111, 0.32) !important;
+}
+
+html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid span {
+  overflow: hidden !important;
+  color: var(--rail-final-body) !important;
+  font-family: var(--code-font) !important;
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  text-overflow: ellipsis !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 1080px) {
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    background: transparent !important;
+  }
+
+  html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
 }
 
 /* Expo viewport NOC lock: first-screen command surfaces stay cinematic and reactor-grade in every theme. */

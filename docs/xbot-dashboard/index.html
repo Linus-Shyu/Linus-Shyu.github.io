@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260709-rail-lock" />
+    <link rel="stylesheet" href="./styles.css?v=20260709-command-rail" />
   </head>
   <body>
     <div class="ops-shell">
@@ -37,6 +37,16 @@
             <strong data-i18n="production">Production</strong>
           </div>
           <span id="updated-at">Loading</span>
+        </div>
+
+        <div class="rail-boundary" aria-label="System boundary">
+          <span data-i18n="rail_boundary_label">SYSTEM BOUNDARY</span>
+          <strong data-i18n="rail_boundary_title">Zero-read route loop</strong>
+          <div class="rail-boundary-grid">
+            <p><i></i><span data-i18n="rail_boundary_reads">0 X reads</span></p>
+            <p><i></i><span data-i18n="rail_boundary_ack">Human ACK</span></p>
+            <p><i></i><span data-i18n="rail_boundary_budget">Budget sealed</span></p>
+          </div>
         </div>
 
         <div class="rack-mini" aria-label="Runtime nodes">
@@ -708,6 +718,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260709-rail-lock" defer></script>
+    <script src="./script.js?v=20260709-command-rail" defer></script>
   </body>
 </html>
