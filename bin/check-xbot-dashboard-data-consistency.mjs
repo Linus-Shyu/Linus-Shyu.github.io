@@ -495,6 +495,71 @@ function assertL7FireWindowRouter(file, data) {
   assertVisibleTextClean(file, "l7FireWindowRouter", router);
 }
 
+function assertL7SurgeSentinel(file, data) {
+  const sentinel = data.l7SurgeSentinel;
+  if (!sentinel || typeof sentinel !== "object") {
+    fail(`${file} is missing explicit l7SurgeSentinel telemetry.`);
+  }
+  if (sentinel.mode !== "zero_read_l7_surge_sentinel" && sentinel.mode !== "derived_zero_read_l7_surge_sentinel") {
+    fail(`${file} l7SurgeSentinel mode drifted.`, sentinel.mode || "<missing>");
+  }
+  if (
+    sentinel.zeroExtraXReads !== true ||
+    number(sentinel.estimatedXReadOps) !== 0 ||
+    number(sentinel.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} l7SurgeSentinel must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: sentinel.zeroExtraXReads,
+      estimatedXReadOps: sentinel.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: sentinel.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (!["cached_only", "closed"].includes(sentinel.readGate)) {
+    fail(`${file} l7SurgeSentinel readGate must stay cached_only or closed.`, sentinel.readGate || "<missing>");
+  }
+  if (sentinel.operatorMode !== "human_in_loop" || sentinel.manualOnly !== true) {
+    fail(`${file} l7SurgeSentinel must remain human-in-loop and manual-only.`, JSON.stringify({
+      operatorMode: sentinel.operatorMode,
+      manualOnly: sentinel.manualOnly,
+    }));
+  }
+  const score = number(sentinel.sentinelScore, NaN);
+  if (!(score >= 0 && score <= 100)) {
+    fail(`${file} l7SurgeSentinel score must be 0..100.`, String(sentinel.sentinelScore));
+  }
+  const routeCoverage = number(sentinel.routeCoveragePct, NaN);
+  if (!(routeCoverage >= 0 && routeCoverage <= 100)) {
+    fail(`${file} l7SurgeSentinel routeCoveragePct must be 0..100.`, String(sentinel.routeCoveragePct));
+  }
+  const lanes = Array.isArray(sentinel.lanes) ? sentinel.lanes : [];
+  if (!lanes.length) fail(`${file} l7SurgeSentinel lanes are empty.`);
+  const allowedStatuses = new Set(["hot", "ok", "watch", "warn", "danger"]);
+  for (const lane of lanes) {
+    if (!allowedStatuses.has(String(lane.status || ""))) {
+      fail(`${file} l7SurgeSentinel lane has unknown status.`, JSON.stringify(lane));
+    }
+    const laneScore = number(lane.score, NaN);
+    if (!(laneScore >= 0 && laneScore <= 100)) {
+      fail(`${file} l7SurgeSentinel lane score must be 0..100.`, JSON.stringify(lane));
+    }
+    if (lane.zeroExtraXReads !== true || number(lane.estimatedXReadOps) !== 0) {
+      fail(`${file} l7SurgeSentinel lane must be zero-read.`, JSON.stringify(lane));
+    }
+  }
+  const xReadCell = (sentinel.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} l7SurgeSentinel must expose a zero X read cell.`, JSON.stringify(sentinel.cells || []));
+  }
+  const trace = Array.isArray(sentinel.trace) ? sentinel.trace : [];
+  if (!trace.length || !trace.every((value) => Number.isFinite(number(value, NaN)) && number(value) >= 0)) {
+    fail(`${file} l7SurgeSentinel trace must contain non-negative numeric values.`, JSON.stringify(trace));
+  }
+  if (number(sentinel.traceMax) < Math.max(1, ...trace.map((value) => number(value)))) {
+    fail(`${file} l7SurgeSentinel traceMax must cover trace values.`, JSON.stringify({ traceMax: sentinel.traceMax, trace }));
+  }
+  assertVisibleTextClean(file, "l7SurgeSentinel", sentinel);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -835,6 +900,7 @@ function assertDashboardData(file, data) {
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
   assertL7FireWindowRouter(file, data);
+  assertL7SurgeSentinel(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);

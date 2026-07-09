@@ -6760,5 +6760,141 @@
       "Stop at target count and let maintenance write learning back."
     ],
     "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-07-09T07:25:00.540Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 1/1 · avg score 96.0\n\n1. Target Accounts · HOT · score 96.0 · SLA 10m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+  },
+  "l7SurgeSentinel": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "zero_read_l7_surge_sentinel",
+    "severity": "danger",
+    "source": "cached packet metrics + route matrix + cost governor",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "cached_only",
+    "manualOnly": true,
+    "sentinelScore": 36,
+    "l7Events24h": 0,
+    "l7Events7d": 0,
+    "dailyBaseline": 0,
+    "surgeRatio": 0,
+    "ackRate24h": 0,
+    "ackRate7d": 0,
+    "routeCoveragePct": 100,
+    "routeScore": 96,
+    "breakoutCount": 0,
+    "avgVelocity": 0,
+    "activeWindow": {
+      "hour": 0,
+      "label": "00:00",
+      "loadScore": 0
+    },
+    "primaryRouteLabel": "Target Accounts",
+    "primaryOpenUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "primaryPastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+    "nextAction": "Seal paid read partitions, hold optional spend, and recover the manual route loop first.",
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "l7_24h",
+        "label": "L7_24H",
+        "value": "0",
+        "status": "danger"
+      },
+      {
+        "id": "surge_ratio",
+        "label": "SURGE_RATIO",
+        "value": "0.00x",
+        "status": "danger"
+      },
+      {
+        "id": "route_ready",
+        "label": "ROUTE_READY",
+        "value": "1/1",
+        "status": "ok"
+      },
+      {
+        "id": "cost_gate",
+        "label": "COST_GATE",
+        "value": "cached_only",
+        "status": "ok"
+      }
+    ],
+    "lanes": [
+      {
+        "id": "l7_load",
+        "label": "L7_LOAD",
+        "value": "0",
+        "score": 0,
+        "status": "danger",
+        "detail": "0.0 baseline/day · 0.00x",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "ack_rate",
+        "label": "ACK_RATE",
+        "value": "0.0%",
+        "score": 0,
+        "status": "danger",
+        "detail": "0.0% 7d baseline",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "route_mesh",
+        "label": "ROUTE_MESH",
+        "value": "1/1",
+        "score": 98.9,
+        "status": "hot",
+        "detail": "96.0 avg matrix score",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "trend_heat",
+        "label": "TREND_HEAT",
+        "value": "0.0",
+        "score": 0,
+        "status": "ok",
+        "detail": "0 cached breakout lanes",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "cost_boundary",
+        "label": "COST_BOUNDARY",
+        "value": "$4.500",
+        "score": 100,
+        "status": "ok",
+        "detail": "cached_only read gate",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      }
+    ],
+    "trace": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "traceMax": 1,
+    "guardrails": [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Normal backoff only; no rate-limit circumvention."
+    ]
   }
 }

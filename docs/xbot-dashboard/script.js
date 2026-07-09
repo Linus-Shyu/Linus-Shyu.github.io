@@ -1172,6 +1172,18 @@ const translations = {
     reactor_hud_hook: "hook",
     reactor_hud_signal_trace: "signal trace",
     reactor_hud_safe_loop: "safe loop",
+    surge_eyebrow: "L7 Surge Sentinel",
+    surge_title: "Traffic anomaly fire-control",
+    surge_zero_reads: "0 X read ops",
+    surge_score: "surge score",
+    surge_runbook: "operator runbook",
+    surge_window: "window",
+    surge_route: "route",
+    surge_open_route: "Open route",
+    surge_copy: "Copy payload",
+    surge_trace: "L7 load trace",
+    surge_guardrails: "hard constraints",
+    surge_empty: "No L7 surge sentinel telemetry available.",
     runlog_live_data: "live dashboard data",
     runlog_fallback_data: "fallback telemetry",
     runlog_stale_data: "stale telemetry",
@@ -2256,6 +2268,18 @@ const translations = {
     reactor_hud_hook: "钩子",
     reactor_hud_signal_trace: "信号轨迹",
     reactor_hud_safe_loop: "安全闭环",
+    surge_eyebrow: "L7 突增哨兵",
+    surge_title: "流量异常火控层",
+    surge_zero_reads: "0 次 X 读取",
+    surge_score: "突增评分",
+    surge_runbook: "操作员手册",
+    surge_window: "窗口",
+    surge_route: "路由",
+    surge_open_route: "打开路由",
+    surge_copy: "复制载荷",
+    surge_trace: "L7 负载轨迹",
+    surge_guardrails: "硬约束",
+    surge_empty: "暂无 L7 突增哨兵遥测。",
     runlog_live_data: "实时看板数据",
     runlog_fallback_data: "备用遥测",
     runlog_stale_data: "过期遥测",
@@ -5990,6 +6014,195 @@ function renderReactorHud() {
         <div class="reactor-safeguards">
           ${hud.safeguards.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
         </div>
+      </div>
+    </div>
+  `;
+}
+
+function l7SurgeSentinelData() {
+  const incoming = dashboardData.l7SurgeSentinel || fallbackData.l7SurgeSentinel;
+  if (incoming?.lanes?.length) return incoming;
+  const kinetics = growthKineticsData();
+  const matrix = routeOpportunityMatrixData();
+  const radar = trendVelocityRadarData();
+  const hourly = hourlyLoadData();
+  const api = apiBudget();
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const last7d = dashboardData.last7d || fallbackData.last7d || {};
+  const l7Events24h = number(kinetics.l7Events24h, number(kinetics.impressions24h, number(last24h.impressions)));
+  const l7Events7d = number(kinetics.l7Events7d, number(kinetics.impressions7d, number(last7d.impressions)));
+  const dailyBaseline = l7Events7d > 0 ? l7Events7d / 7 : l7Events24h;
+  const surgeRatio = dailyBaseline > 0 ? l7Events24h / dailyBaseline : 0;
+  const ackRate24h = number(kinetics.ackRate24h, number(kinetics.engagementRate24h));
+  const ackRate7d = number(kinetics.ackRate7d, number(kinetics.engagementRate7d));
+  const readyRoutes = number(matrix.readyLanes);
+  const totalRoutes = number(matrix.totalLanes);
+  const routeCoveragePct = totalRoutes > 0 ? (readyRoutes / totalRoutes) * 100 : readyRoutes ? 100 : 0;
+  const routeScore = number(matrix.avgScore);
+  const avgVelocity = number(radar.summary?.avgVelocity);
+  const breakoutCount = number(radar.summary?.breakoutCount);
+  const activeWindow = (hourly.hours || [])
+    .slice()
+    .sort((left, right) => number(right.loadScore, number(right.score)) - number(left.loadScore, number(left.score)))[0] || null;
+  const l7LoadScore = clamp(dailyBaseline > 0 ? surgeRatio * 52 : l7Events24h / 4, 0, 100);
+  const ackScore = clamp(ackRate24h * 16 + Math.max(0, ackRate24h - ackRate7d) * 10, 0, 100);
+  const trendScore = clamp(Math.min(70, avgVelocity) + breakoutCount * 7, 0, 100);
+  const routeReadinessScore = clamp(routeCoveragePct * 0.72 + routeScore * 0.28, 0, 100);
+  const budgetScore = api.remaining > 1 ? 100 : api.remaining > 0 ? Math.max(18, api.remaining * 82) : 0;
+  const sentinelScore = clamp(
+    8 +
+      l7LoadScore * 0.23 +
+      ackScore * 0.18 +
+      trendScore * 0.17 +
+      routeReadinessScore * 0.22 +
+      Math.min(12, number(activeWindow?.loadScore, number(activeWindow?.score)) * 0.12) -
+      Math.max(0, 24 - budgetScore * 0.24),
+    0,
+    100,
+  );
+  const severity = api.remaining <= 0
+    ? "danger"
+    : sentinelScore >= 68 && routeCoveragePct >= 50
+      ? "ok"
+      : sentinelScore >= 40
+        ? "warn"
+        : "danger";
+  const trace = impressionSeries(last24h).slice(-18);
+  const traceMax = Math.max(1, ...trace);
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_l7_surge_sentinel",
+    severity,
+    source: "cached packet metrics + route matrix + cost governor",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "cached_only",
+    manualOnly: true,
+    sentinelScore,
+    l7Events24h,
+    l7Events7d,
+    dailyBaseline,
+    surgeRatio,
+    ackRate24h,
+    ackRate7d,
+    routeCoveragePct,
+    routeScore,
+    breakoutCount,
+    avgVelocity,
+    activeWindow,
+    primaryRouteLabel: matrix.topRouteLabel,
+    primaryOpenUrl: matrix.primaryOpenUrl,
+    primaryPastePayload: matrix.primaryPastePayload,
+    nextAction: severity === "ok"
+      ? "Exploit the active load window with one manual route packet; keep live X reads sealed."
+      : severity === "warn"
+        ? "Repair route coverage and use cached swarm output before buying any read operation."
+        : "Seal paid read partitions, hold optional spend, and recover the manual route loop first.",
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "l7_24h", label: "L7_24H", value: formatNumber(l7Events24h), status: l7LoadScore >= 64 ? "ok" : l7LoadScore >= 38 ? "warn" : "danger" },
+      { id: "surge_ratio", label: "SURGE_RATIO", value: `${formatNumber(surgeRatio, 2)}x`, status: surgeRatio >= 1.35 ? "ok" : surgeRatio >= 0.75 ? "warn" : "danger" },
+      { id: "route_ready", label: "ROUTE_READY", value: `${formatNumber(readyRoutes)}/${formatNumber(totalRoutes)}`, status: routeCoveragePct >= 75 ? "ok" : routeCoveragePct >= 35 ? "warn" : "danger" },
+      { id: "cost_gate", label: "COST_GATE", value: "cached_only", status: api.remaining > 0 ? "ok" : "danger" },
+    ],
+    lanes: [
+      { id: "l7_load", label: "L7_LOAD", value: formatNumber(l7Events24h), score: l7LoadScore, status: l7LoadScore >= 64 ? "hot" : l7LoadScore >= 38 ? "watch" : "danger", detail: `${formatNumber(dailyBaseline, 1)} baseline/day · ${formatNumber(surgeRatio, 2)}x`, zeroExtraXReads: true, estimatedXReadOps: 0 },
+      { id: "ack_rate", label: "ACK_RATE", value: `${formatNumber(ackRate24h, 1)}%`, score: ackScore, status: ackScore >= 64 ? "hot" : ackScore >= 34 ? "watch" : "danger", detail: `${formatNumber(ackRate7d, 1)}% 7d baseline`, zeroExtraXReads: true, estimatedXReadOps: 0 },
+      { id: "route_mesh", label: "ROUTE_MESH", value: `${formatNumber(readyRoutes)}/${formatNumber(totalRoutes)}`, score: routeReadinessScore, status: routeReadinessScore >= 72 ? "hot" : routeReadinessScore >= 42 ? "watch" : "danger", detail: `${formatNumber(routeScore, 1)} avg matrix score`, zeroExtraXReads: true, estimatedXReadOps: 0 },
+      { id: "trend_heat", label: "TREND_HEAT", value: formatNumber(avgVelocity, 1), score: trendScore, status: trendScore >= 70 ? "hot" : trendScore >= 36 ? "watch" : "ok", detail: `${formatNumber(breakoutCount)} cached breakout lanes`, zeroExtraXReads: true, estimatedXReadOps: 0 },
+      { id: "cost_boundary", label: "COST_BOUNDARY", value: `$${api.remaining.toFixed(2)}`, score: budgetScore, status: budgetScore >= 60 ? "ok" : budgetScore > 0 ? "watch" : "danger", detail: "cached_only read gate", zeroExtraXReads: true, estimatedXReadOps: 0 },
+    ],
+    trace,
+    traceMax,
+    guardrails: [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Normal backoff only; no rate-limit circumvention.",
+    ],
+  };
+}
+
+function renderL7SurgeSentinel() {
+  const target = $("#l7-surge-sentinel");
+  if (!target) return;
+  const sentinel = l7SurgeSentinelData();
+  const lanes = Array.isArray(sentinel.lanes) ? sentinel.lanes : [];
+  if (!lanes.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("surge_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(sentinel.sentinelScore), 0, 100);
+  const trace = Array.isArray(sentinel.trace) && sentinel.trace.length ? sentinel.trace : [0, 0, 0, 0, 0, 0];
+  const traceMax = Math.max(1, number(sentinel.traceMax), ...trace.map((value) => number(value)));
+  const cells = Array.isArray(sentinel.cells) ? sentinel.cells : [];
+  const guardrails = Array.isArray(sentinel.guardrails) ? sentinel.guardrails : [];
+  const copyBlock = [
+    "CODEX L7 SURGE SENTINEL",
+    `Score: ${formatNumber(score, 1)} · mode=${sentinel.mode || "-"}`,
+    `L7_24H=${formatNumber(sentinel.l7Events24h)} · surge=${formatNumber(sentinel.surgeRatio, 2)}x · route=${formatNumber(sentinel.routeCoveragePct, 1)}%`,
+    `Action: ${sentinel.nextAction || "-"}`,
+    sentinel.primaryPastePayload ? `Payload: ${sentinel.primaryPastePayload}` : null,
+  ].filter(Boolean).join("\n");
+  target.className = `l7-surge-sentinel ${escapeHtml(sentinel.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="surge-head">
+      <div>
+        <span>${escapeHtml(t("surge_eyebrow"))}</span>
+        <strong>${escapeHtml(t("surge_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("surge_zero_reads"))}</em>
+    </div>
+    <div class="surge-core" style="--surge-score:${score.toFixed(1)}%">
+      <div class="surge-score">
+        <span>${escapeHtml(t("surge_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i></i>
+      </div>
+      <div class="surge-command">
+        <span>${escapeHtml(t("surge_runbook"))}</span>
+        <code>${escapeHtml(sreText(sentinel.nextAction || "-"))}</code>
+        <small>${escapeHtml(t("surge_window"))}: ${escapeHtml(sentinel.activeWindow?.label || sentinel.activeWindow?.windowLabel || "-")} · ${escapeHtml(t("surge_route"))}: ${escapeHtml(sentinel.primaryRouteLabel || "-")}</small>
+      </div>
+      <div class="surge-cells">
+        ${cells.slice(0, 5).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+      <div class="surge-actions">
+        ${sentinel.primaryOpenUrl ? `<a class="button button-primary" href="${escapeHtml(sentinel.primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("surge_open_route"))}</a>` : ""}
+        <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(sentinel.primaryPastePayload || copyBlock))}">${escapeHtml(t("surge_copy"))}</button>
+      </div>
+    </div>
+    <div class="surge-body">
+      <div class="surge-lanes">
+        ${lanes.slice(0, 5).map((lane) => {
+          const laneScore = clamp(number(lane.score), 0, 100);
+          return `
+            <article class="${escapeHtml(lane.status || "watch")}" style="--surge-lane:${laneScore.toFixed(1)}%">
+              <div>
+                <strong>${escapeHtml(lane.label || lane.id || "-")}</strong>
+                <span>${escapeHtml(lane.value ?? "-")} · ${escapeHtml(lane.detail || "-")}</span>
+              </div>
+              <em>${escapeHtml(formatNumber(laneScore, 1))}</em>
+              <i><b></b></i>
+            </article>
+          `;
+        }).join("")}
+      </div>
+      <div class="surge-trace-panel">
+        <div><span>${escapeHtml(t("surge_trace"))}</span><strong>${escapeHtml(formatNumber(sentinel.l7Events24h))}</strong></div>
+        <div class="surge-trace">
+          ${trace.map((value) => `<i style="--h:${clamp((number(value) / traceMax) * 100, 5, 100).toFixed(1)}%"></i>`).join("")}
+        </div>
+      </div>
+      <div class="surge-guards">
+        <span>${escapeHtml(t("surge_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
       </div>
     </div>
   `;
@@ -14117,6 +14330,7 @@ function render() {
   renderFireWindowRouter();
   renderHttpTriageStrip();
   renderReactorHud();
+  renderL7SurgeSentinel();
   renderTelemetryContract();
   renderHookGateFirewall();
   renderExpoStory();
