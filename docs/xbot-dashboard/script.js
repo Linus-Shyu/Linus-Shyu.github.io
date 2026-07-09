@@ -1005,7 +1005,7 @@ const fallbackData = {
 
 const translations = {
   en: {
-    page_title: "CODEX SRE Traffic Command Center",
+    page_title: "X Bot Growth Console",
     brand_subtitle: "SRE Matrix Core",
     production: "Production",
     rail_boundary_label: "SYSTEM BOUNDARY",
@@ -1219,6 +1219,18 @@ const translations = {
     trace_guardrails: "hard locks",
     trace_copy: "Copy trace",
     trace_empty: "No growth loop trace telemetry available.",
+    fire_drill_eyebrow: "Route Fire Drill",
+    fire_drill_title: "Manual burst simulator",
+    fire_drill_zero_reads: "0 X read ops",
+    fire_drill_score: "drill score",
+    fire_drill_primary: "primary route",
+    fire_drill_projection: "L7 projection",
+    fire_drill_scenarios: "drill scenarios",
+    fire_drill_guardrails: "hard locks",
+    fire_drill_open: "Open route",
+    fire_drill_copy_payload: "Copy payload",
+    fire_drill_copy: "Copy runbook",
+    fire_drill_empty: "No route fire-drill telemetry available.",
     leak_eyebrow: "Growth Leak Profiler",
     leak_title: "Conversion leak topology",
     leak_zero_reads: "0 X read ops",
@@ -2146,7 +2158,7 @@ const translations = {
     draft_label: "Output {index}",
   },
   zh: {
-    page_title: "CODEX SRE 流量指挥中心",
+    page_title: "X Bot 增长控制台",
     brand_subtitle: "SRE 矩阵核心",
     production: "生产环境",
     rail_boundary_label: "系统边界",
@@ -2360,6 +2372,18 @@ const translations = {
     trace_guardrails: "硬锁",
     trace_copy: "复制链路",
     trace_empty: "暂无增长链路追踪遥测。",
+    fire_drill_eyebrow: "路由火力演练",
+    fire_drill_title: "人工爆发模拟器",
+    fire_drill_zero_reads: "0 次 X 读取操作",
+    fire_drill_score: "演练评分",
+    fire_drill_primary: "主路由",
+    fire_drill_projection: "L7 投影",
+    fire_drill_scenarios: "演练场景",
+    fire_drill_guardrails: "硬锁",
+    fire_drill_open: "打开路由",
+    fire_drill_copy_payload: "复制载荷",
+    fire_drill_copy: "复制手册",
+    fire_drill_empty: "暂无路由火力演练遥测。",
     leak_eyebrow: "增长漏点诊断",
     leak_title: "转化漏斗拓扑",
     leak_zero_reads: "0 次 X 读取",
@@ -6847,6 +6871,161 @@ function growthLoopTraceData() {
   };
 }
 
+function routeFireDrillData() {
+  const incoming = dashboardData.routeFireDrill || fallbackData.routeFireDrill;
+  if (incoming?.scenarios?.length) return incoming;
+  const matrix = routeOpportunityMatrixData();
+  const dock = commandPacketDockData();
+  const firewall = identityConversionFirewallData();
+  const trace = growthLoopTraceData();
+  const sentinel = l7SurgeSentinelData();
+  const kinetics = growthKineticsData();
+  const lanes = Array.isArray(matrix.lanes) ? matrix.lanes : [];
+  const readyLanes = lanes.filter((lane) => lane.ready);
+  const packet = dock.primaryPacket || {};
+  const fallbackLane = {
+    id: packet.id || "command_packet",
+    routeLabel: dock.routeLabel || packet.label || matrix.topRouteLabel || "Route lane",
+    openUrl: dock.openUrl || packet.openUrl || matrix.primaryOpenUrl || null,
+    pastePayload: dock.pastePayload || packet.pastePayload || matrix.primaryPastePayload || "",
+    score: number(dock.commandScore, number(matrix.avgScore)),
+    expectedLiftPct: number(matrix.expectedLiftPct),
+    targetReplies: number(dock.targetOps, number(packet.targetOps, 1)),
+    operatorSlaMinutes: number(dock.operatorSlaMinutes, number(packet.operatorSlaMinutes, 10)),
+    confidence: "medium",
+    ready: Boolean((dock.openUrl || packet.openUrl || matrix.primaryOpenUrl) && (dock.pastePayload || packet.pastePayload || matrix.primaryPastePayload)),
+    routeReason: dock.nextAction || "Use the current command dock packet.",
+    editRule: packet.editRule || "Edit nouns, timing, and one concrete reference only.",
+    skipRule: packet.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+    doneSignal: packet.doneSignal || "One useful route op completed or skipped for quality.",
+  };
+  const candidates = (readyLanes.length ? readyLanes : lanes).length ? (readyLanes.length ? readyLanes : lanes) : [fallbackLane];
+  const l7Base = Math.max(0, number(sentinel.l7Events24h, number(kinetics.l7Events24h, number(kinetics.impressions24h))));
+  const activeConnProxy = Math.max(0.05, number(firewall.profileClickPer1k) || number(kinetics.effectiveConversionPer1k) || 0.8);
+  const traceScore = number(trace.traceScore);
+  const identityScore = number(firewall.identityScore);
+  const statusForScore = (score) => score >= 72 ? "ok" : score >= 44 ? "warn" : "danger";
+  const sortedByScore = candidates.slice().sort((left, right) => Number(right.ready) - Number(left.ready) || number(right.score) - number(left.score));
+  const sortedBySpeed = candidates.slice().sort((left, right) => Number(right.ready) - Number(left.ready) || number(left.operatorSlaMinutes, 99) - number(right.operatorSlaMinutes, 99));
+  const sortedByRepair = candidates.slice().sort((left, right) => Number(left.ready) - Number(right.ready) || number(left.score) - number(right.score));
+  const definitions = [
+    { id: "alpha", label: "ALPHA_FIRE", mode: "highest_score", bias: 1.16, targetBoost: 1, detail: "Execute the strongest ready route first." },
+    { id: "bravo", label: "BRAVO_FAST", mode: "fast_ack", bias: 1.02, targetBoost: 0, detail: "Use the shortest SLA lane when the top route is stale." },
+    { id: "charlie", label: "CHARLIE_REPAIR", mode: "repair_gate", bias: 0.86, targetBoost: -1, detail: "Hold or repair if route quality drops below the manual gate." },
+  ];
+  const pickLane = (index) =>
+    index === 0 ? sortedByScore[0] || fallbackLane :
+      index === 1 ? sortedBySpeed[0] || sortedByScore[1] || fallbackLane :
+        sortedByRepair[0] || sortedByScore[2] || fallbackLane;
+  const scenarios = definitions.map((definition, index) => {
+    const lane = pickLane(index);
+    const routeScore = number(lane.score, number(lane.routeScore, number(dock.commandScore, number(matrix.avgScore))));
+    const expectedLiftPct = Math.max(0, number(lane.expectedLiftPct, routeScore > 0 ? Math.max(0, routeScore - 50) / 2.4 : 0));
+    const targetOps = Math.max(1, number(lane.targetReplies, number(lane.targetOps, 1)) + definition.targetBoost);
+    const operatorSlaMinutes = Math.max(5, number(lane.operatorSlaMinutes, 10 + index * 6));
+    const ready = Boolean(lane.ready && (lane.openUrl || lane.routeUrl) && (lane.pastePayload || lane.replyText || lane.draftText));
+    const drillScore = clamp(
+      (14 +
+        routeScore * 0.34 +
+        traceScore * 0.18 +
+        identityScore * 0.16 +
+        Math.min(18, expectedLiftPct * 0.72) +
+        Math.max(0, 14 - operatorSlaMinutes / 4) +
+        Math.min(8, targetOps * 2) +
+        (ready ? 24 : -28)) * definition.bias,
+      0,
+      100,
+    );
+    const projectedL7Events = Math.max(0, Math.round((l7Base || 20) * (1 + expectedLiftPct / 100) + targetOps * Math.max(2, routeScore / 12)));
+    return {
+      id: definition.id,
+      label: definition.label,
+      mode: definition.mode,
+      status: ready ? statusForScore(drillScore) : "danger",
+      drillScore: number(drillScore.toFixed(1)),
+      routeLabel: lane.routeLabel || lane.label || `Route ${index + 1}`,
+      openUrl: lane.openUrl || lane.routeUrl || null,
+      pastePayload: lane.pastePayload || lane.replyText || lane.draftText || "",
+      targetOps,
+      operatorSlaMinutes,
+      expectedLiftPct: number(expectedLiftPct.toFixed(1)),
+      projectedL7Events,
+      projectedActiveConns: number(((projectedL7Events / 1000) * activeConnProxy).toFixed(2)),
+      confidence: lane.confidence || "low",
+      detail: definition.detail,
+      routeReason: lane.routeReason || lane.reason || "Use cached route evidence and inspect one fresh exchange in browser.",
+      editRule: lane.editRule || "Edit nouns, timing, and one concrete reference only.",
+      skipRule: lane.skipRule || "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+      stopRule: lane.doneSignal || `Stop after ${formatNumber(targetOps)} route op${targetOps > 1 ? "s" : ""} or when quality drops.`,
+      ready,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+      operatorMode: "human_in_loop",
+      readGate: "browser_only",
+      manualOnly: true,
+    };
+  });
+  const primary = scenarios.find((scenario) => scenario.ready && scenario.status === "ok") ||
+    scenarios.find((scenario) => scenario.ready) ||
+    scenarios[0];
+  const drillScore = clamp(
+    scenarios.reduce((sum, scenario) => sum + number(scenario.drillScore), 0) / Math.max(1, scenarios.length) +
+      (primary?.ready ? 4 : -10),
+    0,
+    100,
+  );
+  const severity = primary?.ready ? statusForScore(drillScore) : "danger";
+  const copyBlock = [
+    "CODEX ROUTE FIRE DRILL",
+    "Mode: derived_zero_read_route_fire_drill",
+    "Cost guard: 0 X search/read API operations",
+    `Primary: ${primary?.label || "-"} · ${primary?.routeLabel || "-"}`,
+    `Score: ${formatNumber(drillScore, 1)} · projected L7 ${formatNumber(primary?.projectedL7Events || 0)}`,
+    "",
+    primary?.openUrl ? `OPEN: ${primary.openUrl}` : "OPEN: repair route link first",
+    primary?.pastePayload ? `PASTE: ${primary.pastePayload}` : "PASTE: repair payload first",
+    `EDIT: ${primary?.editRule || "-"}`,
+    `SKIP: ${primary?.skipRule || "-"}`,
+    `STOP: ${primary?.stopRule || "-"}`,
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_route_fire_drill",
+    severity,
+    source: "derived cached route matrix + command dock + growth loop trace",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "browser_only",
+    manualOnly: true,
+    drillScore: number(drillScore.toFixed(1)),
+    primaryScenarioId: primary?.id || null,
+    primaryRouteLabel: primary?.routeLabel || null,
+    primaryOpenUrl: primary?.openUrl || null,
+    primaryPastePayload: primary?.pastePayload || null,
+    nextAction: primary?.ready
+      ? `Run ${primary.label} on ${primary.routeLabel}, then stop at the ACK gate.`
+      : "Repair route URL and payload before opening X web.",
+    scenarios,
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "drill_score", label: "DRILL_SCORE", value: formatNumber(drillScore, 1), status: severity },
+      { id: "primary", label: "PRIMARY_FIRE", value: primary?.label || "-", status: primary?.status || "warn" },
+      { id: "projected_l7", label: "PROJECTED_L7", value: formatNumber(primary?.projectedL7Events || 0), status: primary?.ready ? "ok" : "danger" },
+      { id: "active_conn", label: "ACTIVE_CONN_PROXY", value: formatNumber(primary?.projectedActiveConns || 0, 2), status: number(primary?.projectedActiveConns) > 0 ? "ok" : "warn" },
+      { id: "manual_gate", label: "MANUAL_GATE", value: primary?.ready ? "armed" : "repair", status: primary?.ready ? "ok" : "danger" },
+    ],
+    guardrails: [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Stop at the ACK gate; no automated outbound actions.",
+    ],
+    copyBlock,
+  };
+}
+
 function renderGrowthLoopTrace() {
   const target = $("#growth-loop-trace");
   if (!target) return;
@@ -6931,6 +7110,96 @@ function renderGrowthLoopTrace() {
         ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
       </div>
       <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("trace_copy"))}</button>
+    </div>
+  `;
+}
+
+function renderRouteFireDrill() {
+  const target = $("#route-fire-drill");
+  if (!target) return;
+  const drill = routeFireDrillData();
+  const scenarios = Array.isArray(drill.scenarios) ? drill.scenarios : [];
+  if (!scenarios.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("fire_drill_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(drill.drillScore), 0, 100);
+  const cells = Array.isArray(drill.cells) ? drill.cells : [];
+  const guardrails = Array.isArray(drill.guardrails) ? drill.guardrails : [];
+  const primary = scenarios.find((scenario) => scenario.id === drill.primaryScenarioId) || scenarios[0] || {};
+  const copyBlock = drill.copyBlock || [
+    "CODEX ROUTE FIRE DRILL",
+    `Primary: ${primary.label || "-"} · ${primary.routeLabel || "-"}`,
+    `Score: ${formatNumber(score, 1)}`,
+    `Action: ${drill.nextAction || "-"}`,
+  ].join("\n");
+  target.className = `route-fire-drill ${escapeHtml(drill.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="fire-drill-head">
+      <div>
+        <span>${escapeHtml(t("fire_drill_eyebrow"))}</span>
+        <strong>${escapeHtml(t("fire_drill_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("fire_drill_zero_reads"))}</em>
+    </div>
+    <div class="fire-drill-core" style="--fire-drill-score:${score.toFixed(1)}%">
+      <article class="fire-drill-score">
+        <span>${escapeHtml(t("fire_drill_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i><b></b></i>
+      </article>
+      <article class="fire-drill-primary ${escapeHtml(primary.status || "warn")}">
+        <span>${escapeHtml(t("fire_drill_primary"))}</span>
+        <strong>${escapeHtml(primary.label || "-")} · ${escapeHtml(primary.routeLabel || "-")}</strong>
+        <p>${escapeHtml(sreText(drill.nextAction || primary.routeReason || "-"))}</p>
+      </article>
+      <article class="fire-drill-projection">
+        <span>${escapeHtml(t("fire_drill_projection"))}</span>
+        <strong>${escapeHtml(formatNumber(primary.projectedL7Events || 0))}</strong>
+        <p>${escapeHtml(formatNumber(primary.projectedActiveConns || 0, 2))} active conn proxy · +${escapeHtml(formatNumber(primary.expectedLiftPct || 0, 1))}%</p>
+      </article>
+      <div class="fire-drill-cells">
+        ${cells.slice(0, 6).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+    <div class="fire-drill-scenarios">
+      <span>${escapeHtml(t("fire_drill_scenarios"))}</span>
+      <div>
+        ${scenarios.slice(0, 3).map((scenario) => `
+          <article class="${escapeHtml(scenario.status || "warn")}" style="--scenario-score:${clamp(number(scenario.drillScore), 0, 100).toFixed(1)}%">
+            <header>
+              <div>
+                <em>${escapeHtml(scenario.label || "-")}</em>
+                <strong>${escapeHtml(scenario.routeLabel || "-")}</strong>
+              </div>
+              <b>${escapeHtml(formatNumber(scenario.drillScore, 1))}</b>
+            </header>
+            <p>${escapeHtml(sreText(scenario.detail || scenario.routeReason || "-"))}</p>
+            <dl>
+              <div><dt>SLA</dt><dd>${escapeHtml(formatNumber(scenario.operatorSlaMinutes || 0))}m</dd></div>
+              <div><dt>L7</dt><dd>${escapeHtml(formatNumber(scenario.projectedL7Events || 0))}</dd></div>
+              <div><dt>OPS</dt><dd>${escapeHtml(formatNumber(scenario.targetOps || 0))}</dd></div>
+            </dl>
+            <div class="fire-drill-bar"><i></i></div>
+            <footer>
+              ${scenario.openUrl ? `<a class="button button-primary" href="${escapeHtml(scenario.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("fire_drill_open"))}</a>` : `<span>${escapeHtml("ROUTE_REPAIR")}</span>`}
+              <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(scenario.pastePayload || ""))}">${escapeHtml(t("fire_drill_copy_payload"))}</button>
+            </footer>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="fire-drill-lower">
+      <div class="fire-drill-guards">
+        <span>${escapeHtml(t("fire_drill_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+      </div>
+      <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("fire_drill_copy"))}</button>
     </div>
   `;
 }
@@ -15261,6 +15530,278 @@ function renderApi() {
     .join("");
 }
 
+function xUiText(en, zh) {
+  return currentLang === "zh" ? zh : en;
+}
+
+function xCopyValue(value) {
+  return encodeURIComponent(String(value || ""));
+}
+
+function xStatusLabel(status) {
+  const normalized = String(status || "").toLowerCase();
+  if (["ok", "hot", "ready", "winner"].includes(normalized)) return xUiText("Ready", "就绪");
+  if (["warn", "watch", "hold"].includes(normalized)) return xUiText("Watch", "观察");
+  if (["danger", "blocked"].includes(normalized)) return xUiText("Needs repair", "需修复");
+  return xUiText("Live", "在线");
+}
+
+function xMetricCard(label, value, detail = "", className = "") {
+  return `
+    <article class="x-stat ${escapeHtml(className)}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+      ${detail ? `<small>${escapeHtml(detail)}</small>` : ""}
+    </article>
+  `;
+}
+
+function xPacketCard({ kicker, title, body, meta = [], actions = [], className = "" }) {
+  return `
+    <article class="x-packet ${escapeHtml(className)}">
+      <div class="x-avatar" aria-hidden="true">LS</div>
+      <div class="x-packet-body">
+        <header>
+          <div>
+            <strong>${escapeHtml(title)}</strong>
+            <span>${escapeHtml(kicker)}</span>
+          </div>
+          <em>•••</em>
+        </header>
+        ${body ? `<p>${escapeHtml(body)}</p>` : ""}
+        ${meta.length ? `
+          <div class="x-packet-meta">
+            ${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+          </div>
+        ` : ""}
+        ${actions.length ? `
+          <footer>
+            ${actions.join("")}
+          </footer>
+        ` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function renderXOfficialDashboard() {
+  const shell = $("#x-dashboard");
+  if (!shell) return;
+  const { spend, cap, remaining, ratio } = apiBudget();
+  const profile = dashboardData.profile || fallbackData.profile || {};
+  const last24h = dashboardData.last24h || fallbackData.last24h || {};
+  const last7d = dashboardData.last7d || fallbackData.last7d || {};
+  const drafts = dashboardData.drafts || fallbackData.drafts || [];
+  const kinetics = growthKineticsData();
+  const queue = operatorPasteQueueData();
+  const matrix = routeOpportunityMatrixData(queue);
+  const dock = commandPacketDockData();
+  const drill = routeFireDrillData();
+  const sentinel = l7SurgeSentinelData();
+  const tasks = Array.isArray(queue.tasks) ? queue.tasks : [];
+  const scenarios = Array.isArray(drill.scenarios) ? drill.scenarios : [];
+  const lanes = Array.isArray(matrix.lanes) ? matrix.lanes : [];
+  const readyTasks = tasks.filter((task) => task.ready);
+  const primaryTask = readyTasks[0] || tasks[0] || {};
+  const primaryScenario = scenarios.find((scenario) => scenario.id === drill.primaryScenarioId) || scenarios[0] || {};
+  const bestPacket = [
+    ...((last7d.topPosts || [])),
+    ...((last24h.topPosts || [])),
+  ].sort((left, right) => number(right.score) - number(left.score))[0] || {};
+  const accountName = profile.name || "Linus Shyu";
+  const handle = profile.handle || "@Linus_Shyu";
+  const updated = dashboardData.updatedAt || fallbackData.updatedAt;
+  const queueSummary = xUiText(
+    `${formatNumber(readyTasks.length)} ready route${readyTasks.length === 1 ? "" : "s"}`,
+    `${formatNumber(readyTasks.length)} 条路由就绪`,
+  );
+  const budgetSummary = xUiText(
+    `${money(remaining)} left`,
+    `剩余 ${money(remaining)}`,
+  );
+  const primaryPayload = primaryTask.pastePayload || primaryScenario.pastePayload || dock.pastePayload || "";
+  const primaryOpenUrl = primaryTask.openUrl || primaryScenario.openUrl || dock.openUrl || "https://x.com/Linus_Shyu";
+  const routeTitle = primaryTask.routeLabel || primaryScenario.routeLabel || matrix.topRouteLabel || "Target Accounts";
+  const routeAction = queue.nextAction || drill.nextAction || dock.nextAction || xUiText("Run one manual route.", "执行一条人工路由。");
+  const draftCards = drafts.slice(0, 3).map((draft, index) => xPacketCard({
+    kicker: `${handle} · ${xUiText("draft", "草稿")} ${index + 1}`,
+    title: draft.title || xUiText("Copy-ready packet", "可复制输出"),
+    body: draft.text || draft.angle || "",
+    meta: [
+      draft.format || draft.formatId || xUiText("swarm output", "推理输出"),
+      draft.language || "en",
+    ].filter(Boolean),
+    actions: [
+      `<button type="button" data-copy="${escapeHtml(xCopyValue(draft.text || ""))}">${escapeHtml(xUiText("Copy", "复制"))}</button>`,
+    ],
+  })).join("");
+  const routeCards = scenarios.slice(0, 3).map((scenario) => xPacketCard({
+    kicker: `${handle} · ${escapeHtml(xStatusLabel(scenario.status))}`,
+    title: `${scenario.label || "Route"} · ${scenario.routeLabel || routeTitle}`,
+    body: scenario.detail || scenario.routeReason || "",
+    meta: [
+      `${xUiText("score", "评分")} ${formatNumber(scenario.drillScore, 1)}`,
+      `L7 ${formatNumber(scenario.projectedL7Events || 0)}`,
+      `${formatNumber(scenario.targetOps || 0)} ops`,
+      "0 X reads",
+    ],
+    actions: [
+      scenario.openUrl
+        ? `<a href="${escapeHtml(scenario.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(xUiText("Open route", "打开路由"))}</a>`
+        : "",
+      `<button type="button" data-copy="${escapeHtml(xCopyValue(scenario.pastePayload || ""))}">${escapeHtml(xUiText("Copy payload", "复制载荷"))}</button>`,
+    ].filter(Boolean),
+  })).join("");
+  const laneRows = lanes.slice(0, 4).map((lane) => `
+    <div class="x-trend-row">
+      <div>
+        <span>${escapeHtml(xStatusLabel(lane.status))}</span>
+        <strong>${escapeHtml(lane.routeLabel || lane.label || "-")}</strong>
+        <small>${escapeHtml(lane.routeReason || lane.confidence || "cached route")}</small>
+      </div>
+      <em>${escapeHtml(formatNumber(lane.score, 1))}</em>
+    </div>
+  `).join("");
+  const actionButtons = [
+    primaryOpenUrl ? `<a class="x-primary-action" href="${escapeHtml(primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(xUiText("Open route", "打开路由"))}</a>` : "",
+    primaryPayload ? `<button type="button" data-copy="${escapeHtml(xCopyValue(primaryPayload))}">${escapeHtml(xUiText("Copy payload", "复制载荷"))}</button>` : "",
+    drill.copyBlock ? `<button type="button" data-copy="${escapeHtml(xCopyValue(drill.copyBlock))}">${escapeHtml(xUiText("Copy runbook", "复制手册"))}</button>` : "",
+  ].filter(Boolean).join("");
+
+  shell.innerHTML = `
+    <aside class="x-left-rail" aria-label="Primary navigation">
+      <a class="x-logo" href="#" aria-label="${escapeHtml(accountName)}">X</a>
+      <nav>
+        <a href="#x-home" class="active">${escapeHtml(xUiText("Home", "主页"))}</a>
+        <a href="#x-routes">${escapeHtml(xUiText("Explore", "探索"))}</a>
+        <a href="#x-queue">${escapeHtml(xUiText("Notifications", "通知"))}</a>
+        <a href="#x-drafts">${escapeHtml(xUiText("Messages", "私信"))}</a>
+        <a href="#x-cost">${escapeHtml(xUiText("Bookmarks", "书签"))}</a>
+        <a href="#x-profile">${escapeHtml(xUiText("Profile", "个人资料"))}</a>
+      </nav>
+      <a class="x-compose-button" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">${escapeHtml(xUiText("Open X", "打开 X"))}</a>
+      <div class="x-rail-account">
+        <span>LS</span>
+        <div>
+          <strong>${escapeHtml(accountName)}</strong>
+          <small>${escapeHtml(handle)}</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="x-main-feed" id="x-home">
+      <header class="x-feed-header">
+        <div>
+          <strong>${escapeHtml(xUiText("Growth", "增长"))}</strong>
+          <span>${escapeHtml(formatDate(updated))} · ${escapeHtml(dataLoadStatus === "live" ? xUiText("live data", "实时数据") : xUiText("fallback data", "备用数据"))}</span>
+        </div>
+        <div class="x-top-controls">
+          <button type="button" data-theme-value="light">Light</button>
+          <button type="button" data-theme-value="dark">Dark</button>
+          <button type="button" data-lang-value="en">EN</button>
+          <button type="button" data-lang-value="zh">中文</button>
+        </div>
+      </header>
+
+      <section class="x-tabs" aria-label="Feed filters">
+        <a class="active" href="#x-home">${escapeHtml(xUiText("For you", "为你推荐"))}</a>
+        <a href="#x-routes">${escapeHtml(xUiText("Routes", "路由"))}</a>
+        <a href="#x-drafts">${escapeHtml(xUiText("Drafts", "草稿"))}</a>
+      </section>
+
+      <section class="x-compose-card" id="x-queue">
+        <div class="x-avatar">LS</div>
+        <div>
+          <textarea readonly>${escapeHtml(primaryPayload || routeAction)}</textarea>
+          <div class="x-compose-tools">
+            <span>0 X reads</span>
+            <span>${escapeHtml(queueSummary)}</span>
+            <span>${escapeHtml(budgetSummary)}</span>
+          </div>
+          <div class="x-action-row">${actionButtons}</div>
+        </div>
+      </section>
+
+      <section class="x-stat-grid">
+        ${xMetricCard(xUiText("Active conns", "活跃连接"), formatNumber(kinetics.currentFollowers || profile.followers || 0), `${formatNumber(kinetics.followerDelta || profile.followerDelta || 0)} delta`, "accent")}
+        ${xMetricCard("L7 24h", formatNumber(kinetics.impressions24h || last24h.impressions || 0), `${formatNumber(kinetics.engagements24h || 0)} ACKs`)}
+        ${xMetricCard(xUiText("Route queue", "路由队列"), `${formatNumber(readyTasks.length)}/${formatNumber(tasks.length || 1)}`, queue.readGate || "browser_only")}
+        ${xMetricCard(xUiText("API left", "API 剩余"), money(remaining), `${money(spend)} / ${money(cap)}`)}
+      </section>
+
+      ${xPacketCard({
+        kicker: `${handle} · ${xUiText("manual route", "人工路由")}`,
+        title: routeTitle,
+        body: routeAction,
+        meta: [
+          `${xUiText("drill", "演练")} ${formatNumber(drill.drillScore, 1)}`,
+          `${xUiText("route score", "路由评分")} ${formatNumber(matrix.avgScore || primaryScenario.drillScore || 0, 1)}`,
+          "0 X reads",
+        ],
+        actions: [
+          primaryOpenUrl ? `<a href="${escapeHtml(primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(xUiText("Open route", "打开路由"))}</a>` : "",
+          primaryPayload ? `<button type="button" data-copy="${escapeHtml(xCopyValue(primaryPayload))}">${escapeHtml(xUiText("Copy payload", "复制载荷"))}</button>` : "",
+        ].filter(Boolean),
+        className: "featured",
+      })}
+
+      <section class="x-section-label" id="x-routes">${escapeHtml(xUiText("Route fire drill", "路由火力演练"))}</section>
+      ${routeCards || `<section class="x-empty">${escapeHtml(xUiText("No route scenario ready.", "暂无可用路由场景。"))}</section>`}
+
+      <section class="x-section-label" id="x-drafts">${escapeHtml(xUiText("Copy-ready queue", "可复制队列"))}</section>
+      ${draftCards || `<section class="x-empty">${escapeHtml(xUiText("No draft packet ready.", "暂无可用草稿。"))}</section>`}
+
+      ${bestPacket.text ? xPacketCard({
+        kicker: `${handle} · ${xUiText("best cached signal", "最佳缓存信号")}`,
+        title: xUiText("Best packet", "最佳输出"),
+        body: bestPacket.text,
+        meta: [
+          `${xUiText("score", "评分")} ${formatNumber(bestPacket.score, 1)}`,
+          `L7 ${formatNumber(bestPacket.impressions || 0)}`,
+          `${formatNumber(bestPacket.likes || 0)} ACKs`,
+        ],
+        actions: bestPacket.url ? [`<a href="${escapeHtml(bestPacket.url)}" target="_blank" rel="noreferrer">${escapeHtml(xUiText("Open", "打开"))}</a>`] : [],
+      }) : ""}
+    </main>
+
+    <aside class="x-right-rail" aria-label="Growth context">
+      <div class="x-search-pill">${escapeHtml(xUiText("Search growth signals", "搜索增长信号"))}</div>
+      <section class="x-side-card" id="x-profile">
+        <h2>${escapeHtml(xUiText("Account", "账号"))}</h2>
+        <div class="x-profile-row">
+          <span>LS</span>
+          <div>
+            <strong>${escapeHtml(accountName)}</strong>
+            <small>${escapeHtml(handle)}</small>
+          </div>
+        </div>
+        <p>${escapeHtml(profile.bio || xUiText("Tech signals, useful context, sharp calls.", "科技信号、有效上下文、鲜明判断。"))}</p>
+      </section>
+      <section class="x-side-card" id="x-cost">
+        <h2>${escapeHtml(xUiText("Cost boundary", "成本边界"))}</h2>
+        <div class="x-budget-meter"><span style="width:${escapeHtml(formatNumber(ratio, 1))}%"></span></div>
+        <p>${escapeHtml(`${money(remaining)} ${xUiText("available", "可用")} · 0 X reads`)}</p>
+      </section>
+      <section class="x-side-card">
+        <h2>${escapeHtml(xUiText("What is happening", "正在发生"))}</h2>
+        ${laneRows || `<p>${escapeHtml(xUiText("Route matrix is waiting for the next refresh.", "路由矩阵等待下次刷新。"))}</p>`}
+      </section>
+      <section class="x-side-card">
+        <h2>${escapeHtml(xUiText("Learning", "学习层"))}</h2>
+        <div class="x-trend-row">
+          <div>
+            <span>${escapeHtml(kinetics.mode || "learning")}</span>
+            <strong>${escapeHtml(kinetics.nextAction || sentinel.nextAction || "-")}</strong>
+          </div>
+          <em>${escapeHtml(formatNumber(kinetics.score || sentinel.sentinelScore || 0, 1))}</em>
+        </div>
+      </section>
+      <footer class="x-mini-footer">© ${new Date().getFullYear()} Linus Shyu</footer>
+    </aside>
+  `;
+  applyChromeText();
+}
+
 function bindCopyButtons() {
   document.addEventListener("click", (event) => {
     const button = event.target.closest("[data-copy]");
@@ -15400,6 +15941,7 @@ function render() {
   renderCommandPacketDock();
   renderIdentityConversionFirewall();
   renderGrowthLoopTrace();
+  renderRouteFireDrill();
   renderL7SurgeSentinel();
   renderGrowthLeakProfiler();
   renderTelemetryContract();
@@ -15430,6 +15972,7 @@ function render() {
   renderGenerationDecisionTrace();
   renderPosts();
   renderApi();
+  renderXOfficialDashboard();
   setupSignalCanvas();
 }
 

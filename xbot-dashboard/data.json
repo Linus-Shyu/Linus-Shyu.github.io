@@ -7506,5 +7506,153 @@
       "Normal cooldown only; no rate-limit shortcuts."
     ],
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: derived_zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 50.2\nBottleneck: RSS_INGEST\nLatency budget: 13.8s derived\nAction: Wait for the next normal RSS refresh window."
+  },
+  "routeFireDrill": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "zero_read_route_fire_drill",
+    "severity": "ok",
+    "source": "cached route matrix + command dock + growth loop trace",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "browser_only",
+    "manualOnly": true,
+    "drillScore": 99.3,
+    "primaryScenarioId": "alpha",
+    "primaryRouteLabel": "Target Accounts",
+    "primaryOpenUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+    "primaryPastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+    "nextAction": "Run ALPHA_FIRE on Target Accounts, then stop at the ACK gate.",
+    "scenarios": [
+      {
+        "id": "alpha",
+        "label": "ALPHA_FIRE",
+        "mode": "highest_score",
+        "status": "ok",
+        "drillScore": 100,
+        "routeLabel": "Target Accounts",
+        "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+        "targetOps": 4,
+        "operatorSlaMinutes": 10,
+        "expectedLiftPct": 0,
+        "projectedL7Events": 52,
+        "projectedActiveConns": 0.04,
+        "confidence": "low confidence",
+        "detail": "Execute the strongest ready route first.",
+        "routeReason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
+        "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+        "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+        "stopRule": "One useful manual response pasted, or this route skipped for quality.",
+        "ready": true,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0,
+        "operatorMode": "human_in_loop",
+        "readGate": "browser_only",
+        "manualOnly": true
+      },
+      {
+        "id": "bravo",
+        "label": "BRAVO_FAST",
+        "mode": "fast_ack",
+        "status": "ok",
+        "drillScore": 100,
+        "routeLabel": "Target Accounts",
+        "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+        "targetOps": 3,
+        "operatorSlaMinutes": 10,
+        "expectedLiftPct": 0,
+        "projectedL7Events": 44,
+        "projectedActiveConns": 0.04,
+        "confidence": "low confidence",
+        "detail": "Use the shortest SLA lane when the top route is stale.",
+        "routeReason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
+        "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+        "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+        "stopRule": "One useful manual response pasted, or this route skipped for quality.",
+        "ready": true,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0,
+        "operatorMode": "human_in_loop",
+        "readGate": "browser_only",
+        "manualOnly": true
+      },
+      {
+        "id": "charlie",
+        "label": "CHARLIE_REPAIR",
+        "mode": "repair_gate",
+        "status": "ok",
+        "drillScore": 86,
+        "routeLabel": "Target Accounts",
+        "openUrl": "https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live",
+        "pastePayload": "Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.",
+        "targetOps": 2,
+        "operatorSlaMinutes": 10,
+        "expectedLiftPct": 0,
+        "projectedL7Events": 36,
+        "projectedActiveConns": 0.03,
+        "confidence": "low confidence",
+        "detail": "Hold or repair if route quality drops below the manual gate.",
+        "routeReason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
+        "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
+        "skipRule": "Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.",
+        "stopRule": "One useful manual response pasted, or this route skipped for quality.",
+        "ready": true,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0,
+        "operatorMode": "human_in_loop",
+        "readGate": "browser_only",
+        "manualOnly": true
+      }
+    ],
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "drill_score",
+        "label": "DRILL_SCORE",
+        "value": "99.3",
+        "status": "ok"
+      },
+      {
+        "id": "primary",
+        "label": "PRIMARY_FIRE",
+        "value": "ALPHA_FIRE",
+        "status": "ok"
+      },
+      {
+        "id": "projected_l7",
+        "label": "PROJECTED_L7",
+        "value": "52",
+        "status": "ok"
+      },
+      {
+        "id": "active_conn",
+        "label": "ACTIVE_CONN_PROXY",
+        "value": "0.04",
+        "status": "ok"
+      },
+      {
+        "id": "manual_gate",
+        "label": "MANUAL_GATE",
+        "value": "armed",
+        "status": "ok"
+      }
+    ],
+    "guardrails": [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser execution only; no automated outbound actions.",
+      "Stop at the ACK gate; no automated outbound actions."
+    ],
+    "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · Target Accounts\nScore: 99.3 · projected L7 52\n\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   }
 }

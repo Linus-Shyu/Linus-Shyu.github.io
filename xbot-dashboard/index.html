@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CODEX SRE Traffic Command Center</title>
+    <title>X Bot Growth Console</title>
     <meta
       name="description"
-      content="A cyberpunk SRE command center for CODEX ingress telemetry, swarm inference queues, service health, and API cost boundaries."
+      content="A clean X-style growth console for CODEX route queues, learning signals, manual ACK work, and API cost boundaries."
     />
     <script>
       (() => {
@@ -18,9 +18,42 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260709-sidebar-rail-v16" />
+    <link rel="stylesheet" href="./styles.css?v=20260709-x-official-v1" />
   </head>
   <body>
+    <div class="x-shell" id="x-dashboard" aria-label="X bot growth console">
+      <aside class="x-left-rail" aria-label="Primary navigation">
+        <a class="x-logo" href="#" aria-label="Linus Shyu">X</a>
+        <nav>
+          <a href="#x-home" class="active">Home</a>
+          <a href="#x-routes">Explore</a>
+          <a href="#x-queue">Notifications</a>
+          <a href="#x-drafts">Messages</a>
+          <a href="#x-cost">Bookmarks</a>
+          <a href="#x-profile">Profile</a>
+        </nav>
+        <a class="x-compose-button" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open X</a>
+      </aside>
+
+      <main class="x-main-feed" id="x-home" aria-live="polite">
+        <header class="x-feed-header">
+          <div>
+            <strong>Linus Shyu Growth</strong>
+            <span>Loading route console</span>
+          </div>
+        </header>
+        <section class="x-loading-card">Loading growth system...</section>
+      </main>
+
+      <aside class="x-right-rail" aria-label="Growth context">
+        <div class="x-search-pill">Search growth signals</div>
+        <section class="x-side-card">
+          <h2>What is ready</h2>
+          <p>Loading...</p>
+        </section>
+      </aside>
+    </div>
+
     <div class="ops-shell">
       <aside class="side-rail" aria-label="Server navigation">
         <a class="brand" href="#">
@@ -159,6 +192,8 @@
         <section class="identity-conversion-firewall" id="identity-conversion-firewall" aria-label="Identity conversion firewall"></section>
 
         <section class="growth-loop-trace" id="growth-loop-trace" aria-label="Growth loop trace"></section>
+
+        <section class="route-fire-drill" id="route-fire-drill" aria-label="Route fire drill"></section>
 
         <section class="l7-surge-sentinel" id="l7-surge-sentinel" aria-label="L7 surge sentinel"></section>
 
@@ -734,6 +769,6 @@ learn(metrics)</code></pre>
       <span>© <span id="copyright-year"></span> Linus Shyu.</span>
       <span data-i18n="copyright_suffix">All rights reserved.</span>
     </footer>
-    <script src="./script.js?v=20260709-sidebar-rail-v16" defer></script>
+    <script src="./script.js?v=20260709-x-official-v1" defer></script>
   </body>
 </html>

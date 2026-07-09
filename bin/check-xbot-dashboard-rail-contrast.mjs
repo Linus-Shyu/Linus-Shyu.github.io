@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const railMarker = "Sidebar command-surface readability seal v16.";
-const requiredCssVersion = "20260709-sidebar-rail-v16";
+const requiredCssVersion = "20260709-x-official-v1";
 const darkSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const lightSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail';
 

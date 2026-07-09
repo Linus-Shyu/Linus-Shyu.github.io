@@ -872,6 +872,97 @@ function assertGrowthLoopTrace(file, data) {
   assertVisibleTextClean(file, "growthLoopTrace", trace);
 }
 
+function assertRouteFireDrill(file, data) {
+  const drill = data.routeFireDrill;
+  if (!drill || typeof drill !== "object") {
+    fail(`${file} is missing explicit routeFireDrill telemetry.`);
+  }
+  if (drill.mode !== "zero_read_route_fire_drill" && drill.mode !== "derived_zero_read_route_fire_drill") {
+    fail(`${file} routeFireDrill mode drifted.`, drill.mode || "<missing>");
+  }
+  if (
+    drill.zeroExtraXReads !== true ||
+    number(drill.estimatedXReadOps) !== 0 ||
+    number(drill.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} routeFireDrill must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: drill.zeroExtraXReads,
+      estimatedXReadOps: drill.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: drill.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (drill.readGate !== "browser_only" || drill.operatorMode !== "human_in_loop" || drill.manualOnly !== true) {
+    fail(`${file} routeFireDrill must remain browser-only, manual-only, and human-in-loop.`, JSON.stringify({
+      readGate: drill.readGate,
+      operatorMode: drill.operatorMode,
+      manualOnly: drill.manualOnly,
+    }));
+  }
+  const drillScore = number(drill.drillScore, NaN);
+  if (!(drillScore >= 0 && drillScore <= 100)) {
+    fail(`${file} routeFireDrill drillScore must be 0..100.`, String(drill.drillScore));
+  }
+  const scenarios = Array.isArray(drill.scenarios) ? drill.scenarios : [];
+  if (scenarios.length < 3) fail(`${file} routeFireDrill scenarios are incomplete.`);
+  const scenarioIds = new Set();
+  const allowedStatuses = new Set(["ok", "warn", "danger"]);
+  for (const scenario of scenarios) {
+    scenarioIds.add(scenario.id);
+    if (
+      !String(scenario.id || "").trim() ||
+      !String(scenario.label || "").trim() ||
+      !String(scenario.routeLabel || "").trim() ||
+      !String(scenario.detail || "").trim() ||
+      !String(scenario.editRule || "").trim() ||
+      !String(scenario.skipRule || "").trim() ||
+      !String(scenario.stopRule || "").trim()
+    ) {
+      fail(`${file} routeFireDrill scenario is incomplete.`, JSON.stringify(scenario));
+    }
+    if (!allowedStatuses.has(String(scenario.status || ""))) {
+      fail(`${file} routeFireDrill scenario has unknown status.`, JSON.stringify(scenario));
+    }
+    const scenarioScore = number(scenario.drillScore, NaN);
+    if (!(scenarioScore >= 0 && scenarioScore <= 100)) {
+      fail(`${file} routeFireDrill scenario score must be 0..100.`, JSON.stringify(scenario));
+    }
+    if (
+      scenario.manualOnly !== true ||
+      scenario.zeroExtraXReads !== true ||
+      number(scenario.estimatedXReadOps) !== 0 ||
+      number(scenario.estimatedIncrementalXApiUsd) !== 0
+    ) {
+      fail(`${file} routeFireDrill scenario must be manual-only and zero-read.`, JSON.stringify(scenario));
+    }
+    if (scenario.operatorMode !== "human_in_loop" || scenario.readGate !== "browser_only") {
+      fail(`${file} routeFireDrill scenario must remain browser-only and human-in-loop.`, JSON.stringify(scenario));
+    }
+    if (number(scenario.targetOps) < 1 || number(scenario.operatorSlaMinutes) < 5) {
+      fail(`${file} routeFireDrill scenario route target or SLA is invalid.`, JSON.stringify(scenario));
+    }
+    if (scenario.ready && (!/^https:\/\/x\.com\//i.test(String(scenario.openUrl || "")) || !String(scenario.pastePayload || "").trim())) {
+      fail(`${file} routeFireDrill ready scenario must include an X web route and paste payload.`, JSON.stringify(scenario));
+    }
+  }
+  if (!scenarioIds.has(drill.primaryScenarioId)) {
+    fail(`${file} routeFireDrill primaryScenarioId must reference a scenario.`, JSON.stringify({
+      primaryScenarioId: drill.primaryScenarioId,
+      scenarios: [...scenarioIds],
+    }));
+  }
+  const xReadCell = (drill.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} routeFireDrill must expose a zero X read cell.`, JSON.stringify(drill.cells || []));
+  }
+  if (!String(drill.nextAction || "").trim() || !String(drill.copyBlock || "").trim()) {
+    fail(`${file} routeFireDrill must expose nextAction and copyBlock.`, JSON.stringify({
+      nextAction: drill.nextAction,
+      copyBlock: drill.copyBlock,
+    }));
+  }
+  assertVisibleTextClean(file, "routeFireDrill", drill);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -1217,6 +1308,7 @@ function assertDashboardData(file, data) {
   assertCommandPacketDock(file, data);
   assertIdentityConversionFirewall(file, data);
   assertGrowthLoopTrace(file, data);
+  assertRouteFireDrill(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);
