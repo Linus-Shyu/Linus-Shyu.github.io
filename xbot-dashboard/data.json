@@ -174,6 +174,127 @@
       }
     ]
   },
+  "signalMap": {
+    "version": 1,
+    "generatedAt": "2026-07-07T01:09:59.115Z",
+    "coordinateSystem": "percent",
+    "source": "static dashboard data + cached packet analytics",
+    "core": {
+      "label": "CORE",
+      "value": 3.9,
+      "unit": "baseline",
+      "detail": "112 X API calls, 2 failures tracked this month",
+      "x": 0.46,
+      "y": 0.54
+    },
+    "nodes": [
+      {
+        "id": "rss",
+        "label": "RSS",
+        "value": 5,
+        "unit": "sources",
+        "detail": "5 learned sources",
+        "health": "ok",
+        "x": 0.2,
+        "y": 0.34
+      },
+      {
+        "id": "score",
+        "label": "Ranker",
+        "value": 7.2,
+        "unit": "best",
+        "detail": "baseline 3.9 from 123 measured packets",
+        "health": "ok",
+        "x": 0.48,
+        "y": 0.22
+      },
+      {
+        "id": "draft",
+        "label": "Swarm Output",
+        "value": 5,
+        "unit": "ready",
+        "detail": "5 manual inference outputs queued",
+        "health": "ok",
+        "x": 0.22,
+        "y": 0.7
+      },
+      {
+        "id": "x",
+        "label": "X_ROUTE",
+        "value": 3,
+        "unit": "web routes",
+        "detail": "3 manual web routes; 0 extra X read ops",
+        "health": "ok",
+        "x": 0.72,
+        "y": 0.42
+      },
+      {
+        "id": "learn",
+        "label": "Learn",
+        "value": 123,
+        "unit": "packets",
+        "detail": "123 measured outcomes",
+        "health": "ok",
+        "x": 0.76,
+        "y": 0.69
+      }
+    ],
+    "routes": [
+      {
+        "from": "rss",
+        "to": "score",
+        "value": 5,
+        "unit": "signals",
+        "label": "sources ranked into topics"
+      },
+      {
+        "from": "score",
+        "to": "draft",
+        "value": 5,
+        "unit": "outputs",
+        "label": "winning hooks become outputs"
+      },
+      {
+        "from": "score",
+        "to": "x",
+        "value": 3,
+        "unit": "web routes",
+        "label": "ranked ideas route to X web actions"
+      },
+      {
+        "from": "draft",
+        "to": "x",
+        "value": 5,
+        "unit": "outputs",
+        "label": "manual paste queue"
+      },
+      {
+        "from": "x",
+        "to": "learn",
+        "value": 123,
+        "unit": "measured packets",
+        "label": "outcomes feed learning"
+      },
+      {
+        "from": "learn",
+        "to": "score",
+        "value": 3.9,
+        "unit": "score",
+        "label": "experiments update scoring"
+      }
+    ],
+    "totals": {
+      "learnedSources": 5,
+      "draftsReady": 5,
+      "routesReady": 3,
+      "measuredPosts": 123,
+      "bestScore": 7.2,
+      "baselineScore": 3.9,
+      "xApiCalls": 112,
+      "xApiFailures": 2,
+      "apiRemainingUsd": 3.31
+    }
+  },
   "actions": [
     {
       "step": 1,

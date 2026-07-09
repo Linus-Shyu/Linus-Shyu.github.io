@@ -93,6 +93,67 @@ function assertMonotonic(file, label, values) {
   }
 }
 
+function assertSignalMap(file, data) {
+  const signalMap = data.signalMap;
+  if (!signalMap || typeof signalMap !== "object") {
+    fail(`${file} is missing explicit signalMap telemetry.`);
+  }
+  const expectedNodeIds = ["rss", "score", "draft", "x", "learn"];
+  const nodes = Array.isArray(signalMap.nodes) ? signalMap.nodes : [];
+  const nodeIds = nodes.map((node) => node.id);
+  for (const nodeId of expectedNodeIds) {
+    if (!nodeIds.includes(nodeId)) {
+      fail(`${file} signalMap missing node ${nodeId}.`, JSON.stringify(nodeIds));
+    }
+  }
+  const nodeById = new Map(nodes.map((node) => [node.id, node]));
+  const routes = Array.isArray(signalMap.routes) ? signalMap.routes : [];
+  const xNode = nodeById.get("x") || {};
+  if (xNode.label !== "X_ROUTE") {
+    fail(`${file} signalMap x node must be labeled X_ROUTE.`, JSON.stringify(xNode));
+  }
+  if (xNode.unit !== "web routes") {
+    fail(`${file} signalMap x node must use web routes unit.`, JSON.stringify(xNode));
+  }
+  if (!/0 (?:extra )?X read ops/i.test(String(xNode.detail || ""))) {
+    fail(`${file} signalMap x node must declare zero X read ops.`, JSON.stringify(xNode));
+  }
+
+  const actions = Array.isArray(data.actions) ? data.actions : [];
+  const drafts = Array.isArray(data.drafts) ? data.drafts : [];
+  assertNear(file, "signalMap X_ROUTE count", number(xNode.value), actions.length);
+  assertNear(file, "signalMap draft count", number(nodeById.get("draft")?.value), drafts.length);
+  assertNear(file, "signalMap measured packets", number(nodeById.get("learn")?.value), number(data.profile?.measuredPosts));
+
+  const scoreNode = nodeById.get("score") || {};
+  const topPostScores = (data.last7d?.topPosts || []).map((post) => number(post.score));
+  const expectedBestScore = Math.max(number(data.profile?.baselineScore), ...topPostScores, 0);
+  assertNear(file, "signalMap best score", number(scoreNode.value), expectedBestScore);
+
+  const endpointTotals = (data.api?.endpoints || []).reduce(
+    (totals, endpoint) => ({
+      calls: totals.calls + number(endpoint.calls),
+      failures: totals.failures + number(endpoint.failures),
+    }),
+    { calls: 0, failures: 0 },
+  );
+  assertNear(file, "signalMap API call total", number(signalMap.totals?.xApiCalls), endpointTotals.calls);
+  assertNear(file, "signalMap API failure total", number(signalMap.totals?.xApiFailures), endpointTotals.failures);
+  assertNear(file, "signalMap API remaining", number(signalMap.totals?.apiRemainingUsd), number(data.api?.cap) - number(data.api?.spend));
+
+  for (const route of routes) {
+    if (!nodeById.has(route.from) && route.from !== "core") {
+      fail(`${file} signalMap route has unknown source node.`, JSON.stringify(route));
+    }
+    if (!nodeById.has(route.to) && route.to !== "core") {
+      fail(`${file} signalMap route has unknown target node.`, JSON.stringify(route));
+    }
+  }
+  if (!routes.some((route) => route.from === "x" && route.to === "learn")) {
+    fail(`${file} signalMap must route X_ROUTE outcomes into Learn.`);
+  }
+}
+
 function assertDashboardData(file, data) {
   const last24h = data.last24h || {};
   const api = data.api || {};
@@ -139,6 +200,8 @@ function assertDashboardData(file, data) {
   if (data.learningLoopContract?.zeroExtraXReads === false) {
     fail(`${file} learning loop contract allows live X reads.`);
   }
+
+  assertSignalMap(file, data);
 }
 
 const sourceData = readJson("xbot-dashboard/data.json");
