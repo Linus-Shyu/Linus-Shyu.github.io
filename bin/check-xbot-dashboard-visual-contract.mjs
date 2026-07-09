@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const polishMarker = "Final NOC polish layer";
+const expoViewportMarker = "Expo viewport NOC lock";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard visual contract check failed: ${message}`);
@@ -24,6 +25,12 @@ function finalPolishCss(css, file) {
   return css.slice(index);
 }
 
+function expoViewportCss(css, file) {
+  const index = css.lastIndexOf(expoViewportMarker);
+  if (index === -1) fail(`${file} is missing the Expo viewport NOC lock.`);
+  return css.slice(index);
+}
+
 function cssVariable(css, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = css.match(new RegExp(`${escaped}:\\s*([^;]+);`, "i"));
@@ -38,7 +45,9 @@ for (const dir of dashboards) {
   const cssFile = `${dir}/styles.css`;
   const css = readRelative(cssFile);
   const polish = finalPolishCss(css, cssFile);
+  const expo = expoViewportCss(css, cssFile);
   const lowerPolish = polish.toLowerCase();
+  const lowerExpo = expo.toLowerCase();
 
   const requiredVariables = {
     "--neon-cyan": "#00f0ff",
@@ -89,6 +98,36 @@ for (const dir of dashboards) {
   const missingPanels = requiredPanelClasses.filter((selector) => !radiusBlock.includes(selector));
   if (missingPanels.length) {
     fail(`${cssFile} shared 6px panel radius block is missing required command-center surfaces.`, missingPanels.join(", "));
+  }
+
+  const requiredExpoSelectors = [
+    ".window-command-strip",
+    ".http-triage-strip",
+    ".reactor-hud",
+    ".window-command-strip::before",
+    ".http-triage-strip::before",
+    ".reactor-hud::before",
+    ".window-command-radar",
+    ".http-triage-status-matrix",
+    ".reactor-lanes article",
+  ];
+  const missingExpoSelectors = requiredExpoSelectors.filter((selector) => !expo.includes(selector));
+  if (missingExpoSelectors.length) {
+    fail(`${cssFile} Expo viewport lock is missing first-screen NOC selectors.`, missingExpoSelectors.join(", "));
+  }
+
+  const requiredExpoTokens = [
+    "--expo-noc-bg: #050a12",
+    "--expo-noc-cyan: #00f0ff",
+    "--expo-noc-green: #00ff66",
+    "--expo-noc-magenta: #ff007a",
+    "--expo-noc-glow: 0 0 34px rgba(0, 240, 255, 0.14)",
+    "animation: commandSweep 9.5s ease-in-out infinite",
+    "font-family: var(--code-font) !important",
+  ];
+  const missingExpoTokens = requiredExpoTokens.filter((token) => !lowerExpo.includes(token.toLowerCase()));
+  if (missingExpoTokens.length) {
+    fail(`${cssFile} Expo viewport lock is missing required cyber NOC tokens.`, missingExpoTokens.join(", "));
   }
 }
 

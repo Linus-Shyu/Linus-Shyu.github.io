@@ -26512,3 +26512,152 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
     background: transparent !important;
   }
 }
+
+/* Expo viewport NOC lock: first-screen command surfaces stay cinematic and reactor-grade in every theme. */
+html[data-theme][data-theme] body .ops-main {
+  --expo-noc-bg: #050a12;
+  --expo-noc-bg-2: #0b1220;
+  --expo-noc-panel: rgba(7, 13, 24, 0.965);
+  --expo-noc-panel-2: rgba(13, 20, 35, 0.94);
+  --expo-noc-line: rgba(0, 240, 255, 0.34);
+  --expo-noc-line-soft: rgba(0, 240, 255, 0.16);
+  --expo-noc-green: #00ff66;
+  --expo-noc-cyan: #00f0ff;
+  --expo-noc-magenta: #ff007a;
+  --expo-noc-amber: #ffd166;
+  --expo-noc-ink: #f8fbff;
+  --expo-noc-body: #c9d7e8;
+  --expo-noc-muted: #8f9db2;
+  --expo-noc-glow: 0 0 34px rgba(0, 240, 255, 0.14);
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-strip,
+html[data-theme][data-theme] body .ops-main .http-triage-strip,
+html[data-theme][data-theme] body .ops-main .reactor-hud {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  color: var(--expo-noc-body) !important;
+  border: 1px solid var(--expo-noc-line) !important;
+  border-radius: 6px !important;
+  background-color: var(--expo-noc-panel) !important;
+  background-image:
+    radial-gradient(circle at 8% 0%, rgba(0, 240, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 76% -18%, rgba(0, 255, 102, 0.1), transparent 31%),
+    radial-gradient(circle at 102% 42%, rgba(255, 0, 122, 0.115), transparent 36%),
+    repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.048) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(0deg, rgba(0, 255, 102, 0.028) 0 1px, transparent 1px 34px),
+    linear-gradient(180deg, var(--expo-noc-panel-2), var(--expo-noc-bg)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(0, 240, 255, 0.045),
+    var(--expo-noc-glow),
+    0 24px 72px rgba(0, 0, 0, 0.24) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-strip::before,
+html[data-theme][data-theme] body .ops-main .http-triage-strip::before,
+html[data-theme][data-theme] body .ops-main .reactor-hud::before,
+html[data-theme][data-theme] body .ops-main .window-command-strip::after,
+html[data-theme][data-theme] body .ops-main .http-triage-strip::after,
+html[data-theme][data-theme] body .ops-main .reactor-hud::after {
+  content: "" !important;
+  position: absolute !important;
+  pointer-events: none !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-strip::before,
+html[data-theme][data-theme] body .ops-main .http-triage-strip::before,
+html[data-theme][data-theme] body .ops-main .reactor-hud::before {
+  inset: 0 !important;
+  z-index: 0 !important;
+  border-radius: inherit !important;
+  background:
+    linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.14), transparent),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 28%) !important;
+  mask-image: linear-gradient(180deg, #000 0 14%, transparent 72%) !important;
+  opacity: 0.72 !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-strip::after,
+html[data-theme][data-theme] body .ops-main .http-triage-strip::after,
+html[data-theme][data-theme] body .ops-main .reactor-hud::after {
+  z-index: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: -18% !important;
+  width: 22% !important;
+  transform: skewX(-18deg) !important;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.095), transparent) !important;
+  animation: commandSweep 9.5s ease-in-out infinite !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-strip > *,
+html[data-theme][data-theme] body .ops-main .http-triage-strip > *,
+html[data-theme][data-theme] body .ops-main .reactor-hud > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-radar,
+html[data-theme][data-theme] body .ops-main .window-command-body,
+html[data-theme][data-theme] body .ops-main .window-command-gates,
+html[data-theme][data-theme] body .ops-main .window-command-actions,
+html[data-theme][data-theme] body .ops-main .http-triage-kpis span,
+html[data-theme][data-theme] body .ops-main .http-triage-counters span,
+html[data-theme][data-theme] body .ops-main .http-triage-buses > div,
+html[data-theme][data-theme] body .ops-main .http-triage-runbook,
+html[data-theme][data-theme] body .ops-main .http-triage-status-matrix,
+html[data-theme][data-theme] body .ops-main .reactor-hud-head,
+html[data-theme][data-theme] body .ops-main .reactor-pressure,
+html[data-theme][data-theme] body .ops-main .reactor-command,
+html[data-theme][data-theme] body .ops-main .reactor-scope span,
+html[data-theme][data-theme] body .ops-main .reactor-lanes article,
+html[data-theme][data-theme] body .ops-main .reactor-footer > div {
+  color: var(--expo-noc-body) !important;
+  border-color: rgba(0, 240, 255, 0.18) !important;
+  background-color: rgba(6, 12, 22, 0.78) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.014)),
+    radial-gradient(circle at 0 0, rgba(0, 240, 255, 0.075), transparent 46%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 10px rgba(0, 240, 255, 0.07) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .window-command-radar strong,
+html[data-theme][data-theme] body .ops-main .http-triage-kpis strong,
+html[data-theme][data-theme] body .ops-main .http-triage-counters strong,
+html[data-theme][data-theme] body .ops-main .http-triage-status-matrix strong,
+html[data-theme][data-theme] body .ops-main .reactor-pressure strong,
+html[data-theme][data-theme] body .ops-main .reactor-scope strong,
+html[data-theme][data-theme] body .ops-main .reactor-lanes strong {
+  color: var(--expo-noc-ink) !important;
+  font-family: var(--code-font) !important;
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.18) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .http-triage-kpis .ok strong,
+html[data-theme][data-theme] body .ops-main .http-triage-counters .ok strong,
+html[data-theme][data-theme] body .ops-main .http-triage-status-matrix .ok strong,
+html[data-theme][data-theme] body .ops-main .reactor-scope .ok strong,
+html[data-theme][data-theme] body .ops-main .reactor-lanes .ok strong {
+  color: var(--expo-noc-green) !important;
+  text-shadow: 0 0 16px rgba(0, 255, 102, 0.26) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .http-triage-kpis .danger strong,
+html[data-theme][data-theme] body .ops-main .http-triage-counters .danger strong,
+html[data-theme][data-theme] body .ops-main .http-triage-status-matrix .danger strong,
+html[data-theme][data-theme] body .ops-main .reactor-scope .danger strong,
+html[data-theme][data-theme] body .ops-main .reactor-lanes .danger strong {
+  color: var(--expo-noc-magenta) !important;
+  text-shadow: 0 0 16px rgba(255, 0, 122, 0.3) !important;
+}
+
+html[data-theme][data-theme] body .ops-main .http-triage-title strong,
+html[data-theme][data-theme] body .ops-main .reactor-hud-head strong,
+html[data-theme][data-theme] body .ops-main .window-command-head strong {
+  color: var(--expo-noc-ink) !important;
+  font-family: var(--code-font) !important;
+}
