@@ -1164,6 +1164,7 @@ const translations = {
     decision_trace_ai_gate: "AI gate",
     decision_trace_strict_gate: "strict gate",
     decision_trace_x_reads: "X reads",
+    decision_trace_local_seed: "local seed",
     decision_trace_selected: "selected",
     decision_trace_real: "recorded trace",
     decision_trace_derived: "derived trace",
@@ -2130,6 +2131,7 @@ const translations = {
     decision_trace_ai_gate: "AI 闸门",
     decision_trace_strict_gate: "严格闸门",
     decision_trace_x_reads: "X 读取",
+    decision_trace_local_seed: "本地种子",
     decision_trace_selected: "已选中",
     decision_trace_real: "真实记录",
     decision_trace_derived: "派生记录",
@@ -10513,6 +10515,7 @@ function normalizeTraceCandidate(candidate, index, selectedText = "") {
       ? derivedCandidatePolicyScore(candidate)
       : number(candidate?.cachedGenerationPolicyScore),
     cachedGenerationPolicyHits: candidate?.cachedGenerationPolicyHits || null,
+    generationSource: candidate?.generationSource || "openai",
     growthOpportunityLane: candidate?.growthOpportunityLane || null,
     reason: candidate?.reason || "",
     diagnostics: Array.isArray(candidate?.diagnostics) ? candidate.diagnostics : [],
@@ -10845,6 +10848,17 @@ function renderGenerationDecisionTrace() {
     traceGateCell("decision_trace_ai_gate", trace.gates?.aiQualityGateEnabled),
     traceGateCell("decision_trace_strict_gate", trace.gates?.strictQualityGate),
     traceGateCell("decision_trace_x_reads", true, formatNumber(trace.estimatedXReadOps || 0)),
+    traceGateCell(
+      "decision_trace_local_seed",
+      trace.localFallback?.enabled || trace.localFallback?.seedEnabled,
+      trace.localFallback?.used
+        ? "fallback"
+        : trace.localFallback?.selected
+          ? "selected"
+          : trace.localFallback?.seedEnabled
+            ? "seeded"
+            : "off",
+    ),
   ].join("");
 
   container.innerHTML = `
@@ -10898,7 +10912,7 @@ function renderGenerationDecisionTrace() {
             <div class="trace-candidate-body">
               <div>
                 <strong>${escapeHtml(formatTemplate(candidate.templateId))}</strong>
-                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · ${escapeHtml(t("decision_trace_policy_score"))} ${escapeHtml(formatNumber(candidate.cachedGenerationPolicyScore, 1))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · opportunity ${escapeHtml(formatNumber(candidate.growthOpportunityScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
+                <small>${escapeHtml(t("decision_trace_score", { score: formatNumber(candidate.score, 1) }))} · src ${escapeHtml(candidate.generationSource)} · ${escapeHtml(t("decision_trace_policy_score"))} ${escapeHtml(formatNumber(candidate.cachedGenerationPolicyScore, 1))} · mutation ${escapeHtml(formatNumber(candidate.angleMutationScore, 1))} · router ${escapeHtml(formatNumber(candidate.angleLoadRouterScore, 1))} · opportunity ${escapeHtml(formatNumber(candidate.growthOpportunityScore, 1))} · ${escapeHtml(t("decision_trace_bandit"))} ${escapeHtml(formatNumber(candidate.contentBanditScore, 1))} · ${escapeHtml(t("decision_trace_hook"))} ${escapeHtml(formatNumber(candidate.hookPatternScore, 1))}</small>
               </div>
               <p>${escapeHtml(candidate.reason || candidateDiagnosticText(candidate))}</p>
               <i></i>
