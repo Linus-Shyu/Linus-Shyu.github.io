@@ -12,7 +12,7 @@ const lightTerminalMarker = "Light rail terminal override v11: keep light mode o
 const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
 const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-l7-router-v1";
+const requiredCssVersion = "20260709-rail-harmonizer-v1";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
