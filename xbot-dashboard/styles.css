@@ -4096,6 +4096,39 @@ h3 {
   line-height: 1.45;
 }
 
+.paste-queue-progress {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+
+.paste-queue-progress span {
+  display: block;
+  overflow: hidden;
+  height: 9px;
+  border: 1px solid color-mix(in srgb, var(--ok) 32%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 58%, transparent);
+}
+
+.paste-queue-progress i {
+  display: block;
+  width: var(--paste-progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ok), var(--accent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--ok) 32%, transparent);
+}
+
+.paste-queue-progress strong {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .paste-queue-kpis {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4147,6 +4180,19 @@ h3 {
   border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
 }
 
+.paste-task.done {
+  border-color: color-mix(in srgb, var(--ok) 54%, var(--line));
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--ok) 13%, transparent), transparent 45%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--surface-soft) 92%, transparent)),
+    var(--surface-soft);
+}
+
+.paste-task.skipped {
+  border-color: color-mix(in srgb, var(--warn) 48%, var(--line));
+  opacity: 0.82;
+}
+
 .paste-task-head > span {
   display: grid;
   width: 32px;
@@ -4167,6 +4213,28 @@ h3 {
   font-family: var(--mono);
   font-size: 13px;
   font-weight: 900;
+}
+
+.paste-task-head b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  border: 1px solid color-mix(in srgb, var(--ok) 32%, var(--line));
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 8%, transparent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.paste-task.skipped .paste-task-head b {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 38%, var(--line));
+  background: color-mix(in srgb, var(--warn) 9%, transparent);
 }
 
 .paste-task blockquote {
@@ -4201,6 +4269,18 @@ h3 {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.35;
+}
+
+.paste-state-button.active {
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 48%, var(--line));
+  background: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.paste-state-button[data-paste-state="skipped"].active {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 48%, var(--line));
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
 }
 
 .paste-queue-guards {

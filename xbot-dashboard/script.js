@@ -1503,6 +1503,12 @@ const translations = {
     paste_queue_payload: "payload",
     paste_queue_skip: "skip",
     paste_queue_done: "done",
+    paste_queue_mark_done: "Mark done",
+    paste_queue_mark_skip: "Skip",
+    paste_queue_reset: "Reset queue",
+    paste_queue_progress: "{done} done · {skipped} skipped",
+    paste_queue_saved: "Queue state saved",
+    paste_queue_reset_done: "Queue reset",
     operator_packet_eyebrow: "Operator Packet",
     operator_packet_title: "Execute this route first",
     operator_packet_armed: "armed",
@@ -2497,6 +2503,12 @@ const translations = {
     paste_queue_payload: "载荷",
     paste_queue_skip: "跳过",
     paste_queue_done: "完成",
+    paste_queue_mark_done: "标记完成",
+    paste_queue_mark_skip: "跳过",
+    paste_queue_reset: "重置队列",
+    paste_queue_progress: "已完成 {done} · 已跳过 {skipped}",
+    paste_queue_saved: "队列状态已保存",
+    paste_queue_reset_done: "队列已重置",
     operator_packet_eyebrow: "操作员数据包",
     operator_packet_title: "先执行这条路由",
     operator_packet_armed: "已装载",
@@ -3046,6 +3058,7 @@ const formatNumber = (value, digits = 0) =>
 const FRESH_DATA_MAX_AGE_HOURS = 30;
 const DEMO_STEP_MS = 7500;
 const OPERATOR_STATE_PREFIX = "xbot-dashboard-operator-protocol:";
+const PASTE_QUEUE_STATE_PREFIX = "xbot-dashboard-paste-queue:";
 const OPERATOR_LEDGER_KEY = "xbot-dashboard-operator-ledger";
 const OPERATOR_LEDGER_MAX = 20;
 const DEMO_STEPS = [
@@ -4561,24 +4574,29 @@ function operatorStateKey(mission) {
 }
 
 function readOperatorStateByKey(key) {
-  if (!key) return { done: [] };
+  if (!key) return { done: [], skipped: [] };
   try {
     const raw = localStorage.getItem(key);
-    if (!raw) return { done: [] };
+    if (!raw) return { done: [], skipped: [] };
     const parsed = JSON.parse(raw);
     return {
       done: Array.isArray(parsed.done) ? parsed.done.filter(Boolean) : [],
+      skipped: Array.isArray(parsed.skipped) ? parsed.skipped.filter(Boolean) : [],
       updatedAt: parsed.updatedAt || null,
     };
   } catch {
-    return { done: [] };
+    return { done: [], skipped: [] };
   }
 }
 
-function writeOperatorStateByKey(key, done) {
+function writeOperatorStateByKey(key, done, skipped = []) {
   if (!key) return;
   try {
-    localStorage.setItem(key, JSON.stringify({ done: [...new Set(done)], updatedAt: new Date().toISOString() }));
+    localStorage.setItem(key, JSON.stringify({
+      done: [...new Set(done)],
+      skipped: [...new Set(skipped)],
+      updatedAt: new Date().toISOString(),
+    }));
   } catch {
     // Local execution state is best-effort; dashboard rendering must remain available.
   }
@@ -4590,8 +4608,46 @@ function toggleOperatorStepState(key, stepId) {
   const active = !done.has(stepId);
   if (active) done.add(stepId);
   else done.delete(stepId);
-  writeOperatorStateByKey(key, done);
+  writeOperatorStateByKey(key, done, state.skipped);
   return { done, active };
+}
+
+function pasteQueueTaskId(task, index) {
+  return operatorStepId({
+    id: [
+      task?.id,
+      task?.openUrl,
+      task?.routeLabel,
+      task?.pastePayload ? String(task.pastePayload).slice(0, 48) : "",
+    ].filter(Boolean).join("|"),
+  }, index);
+}
+
+function pasteQueueStateKey(queue) {
+  const day = String(queue?.generatedAt || dashboardData.updatedAt || fallbackData.updatedAt || "")
+    .slice(0, 10) || "today";
+  const stableKey = (queue?.tasks || [])
+    .slice(0, 5)
+    .map((task, index) => pasteQueueTaskId(task, index))
+    .join("|") || "empty";
+  return `${PASTE_QUEUE_STATE_PREFIX}${day}:${stableKey}`;
+}
+
+function togglePasteQueueTaskState(key, taskId, stateName) {
+  const state = readOperatorStateByKey(key);
+  const done = new Set(state.done);
+  const skipped = new Set(state.skipped);
+  const activeSet = stateName === "skipped" ? skipped : done;
+  const inactiveSet = stateName === "skipped" ? done : skipped;
+  const active = !activeSet.has(taskId);
+  if (active) {
+    activeSet.add(taskId);
+    inactiveSet.delete(taskId);
+  } else {
+    activeSet.delete(taskId);
+  }
+  writeOperatorStateByKey(key, done, skipped);
+  return { done, skipped, active, stateName };
 }
 
 function resetOperatorState(key) {
@@ -11532,16 +11588,28 @@ function operatorPasteQueueHtml(queue) {
   const severity = ["ok", "warn", "danger"].includes(queue.severity) ? queue.severity : "warn";
   const tasks = queue.tasks.slice(0, 5);
   const primary = tasks.find((task) => task.ready) || tasks[0] || {};
-  const taskHtml = tasks.map((task) => {
+  const queueKey = pasteQueueStateKey(queue);
+  const queueState = readOperatorStateByKey(queueKey);
+  const doneSet = new Set(queueState.done);
+  const skippedSet = new Set(queueState.skipped);
+  const doneCount = tasks.filter((task, index) => doneSet.has(pasteQueueTaskId(task, index))).length;
+  const skippedCount = tasks.filter((task, index) => skippedSet.has(pasteQueueTaskId(task, index))).length;
+  const progressTarget = Math.max(1, Math.min(Number(queue.targetReplies) || tasks.length || 1, tasks.length || 1));
+  const progressPct = Math.max(0, Math.min(100, (doneCount / progressTarget) * 100));
+  const taskHtml = tasks.map((task, index) => {
+    const taskId = pasteQueueTaskId(task, index);
+    const done = doneSet.has(taskId);
+    const skipped = skippedSet.has(taskId);
     const status = task.ready ? "ok" : "warn";
     return `
-      <article class="paste-task ${escapeHtml(status)}">
+      <article class="paste-task ${escapeHtml(status)} ${done ? "done" : ""} ${skipped ? "skipped" : ""}">
         <div class="paste-task-head">
           <span>${String(task.priority || 1).padStart(2, "0")}</span>
           <div>
             <strong>${escapeHtml(task.routeLabel || "-")}</strong>
             <em>${escapeHtml(`${formatNumber(task.operatorSlaMinutes || 0)}m SLA · target ${formatNumber(task.targetReplies || 0)} · +${formatNumber(task.expectedLiftPct || 0, 1)}%`)}</em>
           </div>
+          <b>${escapeHtml(done ? "DONE" : skipped ? "SKIP" : task.ready ? "READY" : "HOLD")}</b>
         </div>
         <blockquote>${escapeHtml(sreText(task.pastePayload || "-"))}</blockquote>
         <dl>
@@ -11551,6 +11619,8 @@ function operatorPasteQueueHtml(queue) {
         <div class="paste-task-actions">
           ${task.openUrl ? `<a class="button button-primary" href="${escapeHtml(task.openUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("paste_queue_open"))}</a>` : ""}
           <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(task.pastePayload || ""))}">${escapeHtml(t("paste_queue_copy_payload"))}</button>
+          <button class="button button-secondary paste-state-button ${done ? "active" : ""}" type="button" data-paste-key="${escapeHtml(queueKey)}" data-paste-task="${escapeHtml(taskId)}" data-paste-state="done" data-paste-route="${escapeHtml(task.routeLabel || "-")}">${escapeHtml(t("paste_queue_mark_done"))}</button>
+          <button class="button button-secondary paste-state-button ${skipped ? "active" : ""}" type="button" data-paste-key="${escapeHtml(queueKey)}" data-paste-task="${escapeHtml(taskId)}" data-paste-state="skipped" data-paste-route="${escapeHtml(task.routeLabel || "-")}">${escapeHtml(t("paste_queue_mark_skip"))}</button>
         </div>
       </article>
     `;
@@ -11573,13 +11643,18 @@ function operatorPasteQueueHtml(queue) {
           <span>${escapeHtml(t("paste_queue_next"))}</span>
           <strong>${escapeHtml(sreText(queue.nextAction || "-"))}</strong>
           <p>${escapeHtml(sreText(primary.pastePayload || queue.primaryPastePayload || "-"))}</p>
+          <div class="paste-queue-progress" style="--paste-progress:${progressPct}%">
+            <span><i></i></span>
+            <strong>${escapeHtml(t("paste_queue_progress", { done: formatNumber(doneCount), skipped: formatNumber(skippedCount) }))}</strong>
+          </div>
           <div class="paste-queue-actions">
             ${queue.primaryOpenUrl ? `<a class="button button-primary" href="${escapeHtml(queue.primaryOpenUrl)}" target="_blank" rel="noreferrer">${escapeHtml(t("paste_queue_open"))}: ${escapeHtml(queue.primaryRouteLabel || "-")}</a>` : ""}
             <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(queue.copyBlock || ""))}">${escapeHtml(t("paste_queue_copy"))}</button>
+            <button class="button button-secondary" type="button" data-paste-reset="${escapeHtml(queueKey)}">${escapeHtml(t("paste_queue_reset"))}</button>
           </div>
         </section>
         <section class="paste-queue-kpis">
-          <div><span>${escapeHtml(t("paste_queue_ready"))}</span><strong>${escapeHtml(`${formatNumber(queue.readyTasks || 0)}/${formatNumber(queue.totalTasks || 0)}`)}</strong></div>
+          <div><span>${escapeHtml(t("paste_queue_ready"))}</span><strong>${escapeHtml(`${formatNumber(doneCount)}/${formatNumber(progressTarget)}`)}</strong></div>
           <div><span>${escapeHtml(t("paste_queue_target"))}</span><strong>${escapeHtml(formatNumber(queue.targetReplies || 0))}</strong></div>
           <div><span>${escapeHtml(t("paste_queue_reads"))}</span><strong>${escapeHtml(formatNumber(queue.estimatedXReadOps || 0))}</strong></div>
           <div><span>${escapeHtml(t("paste_queue_mode"))}</span><strong>${escapeHtml(sreText(String(queue.operatorMode || "-").replace(/_/g, "-")))}</strong></div>
@@ -12869,6 +12944,36 @@ function bindPreferenceButtons() {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
 
+    const pasteTask = target.closest("button[data-paste-task]");
+    if (pasteTask) {
+      const result = togglePasteQueueTaskState(
+        pasteTask.dataset.pasteKey,
+        pasteTask.dataset.pasteTask,
+        pasteTask.dataset.pasteState || "done",
+      );
+      appendOperatorLedger({
+        type: "paste_queue",
+        route: pasteTask.dataset.pasteRoute,
+        step: pasteTask.dataset.pasteState || "done",
+        state: result.active ? "active" : "cleared",
+      });
+      renderActions();
+      showToast(t("paste_queue_saved"));
+      return;
+    }
+    const pasteReset = target.closest("button[data-paste-reset]");
+    if (pasteReset) {
+      resetOperatorState(pasteReset.dataset.pasteReset);
+      appendOperatorLedger({
+        type: "paste_queue",
+        route: "operator queue",
+        step: "reset",
+        state: "reset",
+      });
+      renderActions();
+      showToast(t("paste_queue_reset_done"));
+      return;
+    }
     const protocolStep = target.closest("button[data-protocol-step]");
     if (protocolStep) {
       const result = toggleOperatorStepState(protocolStep.dataset.protocolKey, protocolStep.dataset.protocolStep);
