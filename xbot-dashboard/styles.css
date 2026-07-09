@@ -25168,3 +25168,139 @@ html[data-theme] body .ops-main .signal-scan {
     overflow-wrap: anywhere !important;
   }
 }
+
+/* Command chrome lock: the responsive header/toolbar belongs to the dark ops rack, even in light mode. */
+html[data-theme] body .ops-main .topbar,
+html[data-theme] body .ops-main .grafana-toolbar {
+  --chrome-bg: #070b12;
+  --chrome-top: #121b28;
+  --chrome-panel: rgba(13, 20, 31, 0.98);
+  --chrome-panel-soft: rgba(17, 27, 40, 0.94);
+  --chrome-line: rgba(148, 163, 184, 0.28);
+  --chrome-hot-line: rgba(255, 159, 28, 0.66);
+  --chrome-text: #fbfdff;
+  --chrome-body: #dce8f6;
+  --chrome-muted: #a6b5c8;
+  --chrome-accent: #ff9f1c;
+  --chrome-ok: #78d86f;
+  --chrome-cyan: #65e7ff;
+  color-scheme: dark !important;
+  color: var(--chrome-body) !important;
+  border: 1px solid var(--chrome-line) !important;
+  background-color: var(--chrome-bg) !important;
+  background-image:
+    radial-gradient(circle at 12% 0, rgba(255, 159, 28, 0.16), transparent 36%),
+    radial-gradient(circle at 92% 0, rgba(101, 231, 255, 0.13), transparent 34%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055), transparent 44%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.032) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, var(--chrome-top), var(--chrome-bg) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(255, 159, 28, 0.12),
+    0 16px 38px rgba(7, 11, 18, 0.22),
+    0 0 16px rgba(255, 159, 28, 0.08) !important;
+}
+
+html[data-theme] body .ops-main .topbar h1,
+html[data-theme] body .ops-main .topbar h2,
+html[data-theme] body .ops-main .topbar strong,
+html[data-theme] body .ops-main .grafana-toolbar strong,
+html[data-theme] body .ops-main .variable-strip strong {
+  color: var(--chrome-text) !important;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.36) !important;
+}
+
+html[data-theme] body .ops-main .topbar .eyebrow,
+html[data-theme] body .ops-main .grafana-toolbar em,
+html[data-theme] body .ops-main .variable-strip span {
+  color: var(--chrome-muted) !important;
+}
+
+html[data-theme] body .ops-main .live-pill,
+html[data-theme] body .ops-main .toolbar-group .segmented,
+html[data-theme] body .ops-main .topbar .button,
+html[data-theme] body .ops-main .variable-strip label {
+  color: var(--chrome-body) !important;
+  border-color: var(--chrome-line) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.014)),
+    var(--chrome-panel) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 10px 22px rgba(0, 0, 0, 0.2) !important;
+}
+
+html[data-theme] body .ops-main .toolbar-group .segmented button {
+  color: var(--chrome-body) !important;
+  border-color: var(--chrome-line) !important;
+  background: transparent !important;
+}
+
+html[data-theme] body .ops-main .toolbar-group .segmented button:hover,
+html[data-theme] body .ops-main .toolbar-group .segmented button:focus-visible,
+html[data-theme] body .ops-main .toolbar-group .segmented button.active,
+html[data-theme] body .ops-main .topbar .button-secondary:hover,
+html[data-theme] body .ops-main .topbar .button-secondary:focus-visible,
+html[data-theme] body .ops-main .topbar .button-secondary.active {
+  color: #fff8e8 !important;
+  border-color: var(--chrome-hot-line) !important;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 159, 28, 0.34), transparent 44%),
+    linear-gradient(135deg, rgba(255, 159, 28, 0.24), rgba(120, 216, 111, 0.08)),
+    var(--chrome-panel-soft) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(255, 159, 28, 0.18),
+    0 12px 26px rgba(255, 159, 28, 0.1) !important;
+}
+
+html[data-theme] body .ops-main .topbar .button-primary {
+  color: #071018 !important;
+  border-color: rgba(255, 209, 102, 0.82) !important;
+  background:
+    linear-gradient(135deg, #ffd166 0%, var(--chrome-accent) 54%, var(--chrome-ok) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 14px 30px rgba(255, 159, 28, 0.22),
+    0 0 18px rgba(120, 216, 111, 0.12) !important;
+}
+
+html[data-theme] body .ops-main .live-pill span {
+  background: var(--chrome-ok) !important;
+  box-shadow:
+    0 0 0 4px rgba(120, 216, 111, 0.14),
+    0 0 16px rgba(120, 216, 111, 0.34) !important;
+}
+
+html[data-theme] body .ops-main .grafana-mark {
+  color: #071018 !important;
+  background:
+    radial-gradient(circle at 34% 28%, #fff2c6, transparent 26%),
+    linear-gradient(135deg, #ffd166, var(--chrome-accent) 58%, var(--chrome-ok)) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+    0 0 18px rgba(255, 159, 28, 0.2) !important;
+}
+
+html[data-theme] body .ops-main .variable-strip span {
+  background: rgba(255, 255, 255, 0.055) !important;
+}
+
+@media (max-width: 1080px) {
+  html[data-theme] body .ops-main .topbar,
+  html[data-theme] body .ops-main .grafana-toolbar {
+    border-radius: 8px !important;
+  }
+
+  html[data-theme] body .ops-main .top-actions,
+  html[data-theme] body .ops-main .toolbar-group,
+  html[data-theme] body .ops-main .variable-strip {
+    width: 100% !important;
+  }
+
+  html[data-theme] body .ops-main .top-actions > *,
+  html[data-theme] body .ops-main .toolbar-group .segmented,
+  html[data-theme] body .ops-main .topbar .button {
+    flex: 1 1 auto !important;
+  }
+}
