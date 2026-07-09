@@ -29475,6 +29475,114 @@ html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
   }
 }
 
+/* Density hardening terminal pass v1: long telemetry tokens must compress inside SRE cells. */
+:where(
+  .window-command-metrics,
+  .fire-router-telemetry,
+  .fire-router-footer,
+  .http-triage-cells,
+  .reactor-scope,
+  .command-cells,
+  .command-guards,
+  .identity-cells,
+  .identity-checks,
+  .identity-runbook,
+  .identity-guards,
+  .surge-lanes,
+  .surge-guards,
+  .leak-grid,
+  .leak-guards,
+  .contract-card,
+  .outcome-stats,
+  .velocity-topic,
+  .rss-lane-id,
+  .rss-lane-topic,
+  .route-matrix-card,
+  .monitor-table,
+  .signal-detail-panel,
+  .target-atlas-card,
+  .daily-console-card,
+  .learning-contract-card,
+  .mutation-card,
+  .narrative-card,
+  .timing-card,
+  .opportunity-card,
+  .fire-router-card
+) {
+  min-width: 0;
+}
+
+:where(
+  .window-command-metrics,
+  .fire-router-telemetry,
+  .http-triage-cells,
+  .command-cells,
+  .identity-cells,
+  .surge-lanes,
+  .outcome-stats
+) > * {
+  min-width: 0;
+  align-content: start;
+}
+
+:where(
+  .window-command-metrics,
+  .fire-router-telemetry,
+  .fire-router-footer,
+  .http-triage-cells,
+  .reactor-scope,
+  .command-cells,
+  .identity-cells,
+  .identity-checks,
+  .surge-lanes,
+  .leak-grid,
+  .contract-card,
+  .outcome-stats,
+  .velocity-topic,
+  .rss-lane-id,
+  .rss-lane-topic,
+  .route-matrix-card,
+  .target-atlas-card,
+  .daily-console-card,
+  .learning-contract-card,
+  .mutation-card,
+  .narrative-card,
+  .timing-card,
+  .opportunity-card,
+  .fire-router-card
+) :where(strong, em, span, small, a, p, code) {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+:where(.command-guards, .identity-guards, .surge-guards, .leak-guards) code,
+:where(.identity-runbook) code {
+  min-width: 0 !important;
+  max-width: 100%;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word;
+  line-height: 1.28;
+}
+
+:where(.velocity-topic, .rss-lane-topic) a {
+  display: inline-block;
+  line-height: 1.22;
+}
+
+:where(.reactor-hud, .command-packet-dock, .identity-conversion-firewall, .l7-surge-sentinel, .growth-leak-profiler) {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+:where(.reactor-hud-head, .surge-lanes, .surge-lanes article, .surge-lanes article div, .surge-lanes article footer) {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 /* Main console sidebar lock v18: keep the light UI rail inside the same dark command surface. */
 html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell,
 html[data-theme="light"][data-theme][data-theme][data-theme][data-theme] body.demo-mode > div.ops-shell.ops-shell.ops-shell.ops-shell.ops-shell {
