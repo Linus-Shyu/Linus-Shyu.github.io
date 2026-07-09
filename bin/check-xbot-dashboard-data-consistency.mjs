@@ -785,6 +785,93 @@ function assertIdentityConversionFirewall(file, data) {
   assertVisibleTextClean(file, "identityConversionFirewall", firewall);
 }
 
+function assertGrowthLoopTrace(file, data) {
+  const trace = data.growthLoopTrace;
+  if (!trace || typeof trace !== "object") {
+    fail(`${file} is missing explicit growthLoopTrace telemetry.`);
+  }
+  if (trace.mode !== "zero_read_growth_loop_trace" && trace.mode !== "derived_zero_read_growth_loop_trace") {
+    fail(`${file} growthLoopTrace mode drifted.`, trace.mode || "<missing>");
+  }
+  if (
+    trace.zeroExtraXReads !== true ||
+    number(trace.estimatedXReadOps) !== 0 ||
+    number(trace.estimatedIncrementalXApiUsd) !== 0
+  ) {
+    fail(`${file} growthLoopTrace must be zero-read and zero incremental X API cost.`, JSON.stringify({
+      zeroExtraXReads: trace.zeroExtraXReads,
+      estimatedXReadOps: trace.estimatedXReadOps,
+      estimatedIncrementalXApiUsd: trace.estimatedIncrementalXApiUsd,
+    }));
+  }
+  if (trace.readGate !== "cached_only" || trace.operatorMode !== "human_in_loop" || trace.manualOnly !== true) {
+    fail(`${file} growthLoopTrace must remain cached-only, manual-only, and human-in-loop.`, JSON.stringify({
+      readGate: trace.readGate,
+      operatorMode: trace.operatorMode,
+      manualOnly: trace.manualOnly,
+    }));
+  }
+  const traceScore = number(trace.traceScore, NaN);
+  if (!(traceScore >= 0 && traceScore <= 100)) {
+    fail(`${file} growthLoopTrace traceScore must be 0..100.`, String(trace.traceScore));
+  }
+  const stages = Array.isArray(trace.stages) ? trace.stages : [];
+  if (stages.length < 5) fail(`${file} growthLoopTrace stages are incomplete.`);
+  const stageIds = new Set();
+  const allowedStatuses = new Set(["ok", "warn", "danger"]);
+  let previousStart = -1;
+  for (const stage of stages) {
+    if (!String(stage.id || "").trim() || !String(stage.label || "").trim() || !String(stage.detail || "").trim()) {
+      fail(`${file} growthLoopTrace stage is incomplete.`, JSON.stringify(stage));
+    }
+    stageIds.add(stage.id);
+    if (!allowedStatuses.has(String(stage.status || ""))) {
+      fail(`${file} growthLoopTrace stage has unknown status.`, JSON.stringify(stage));
+    }
+    const score = number(stage.score, NaN);
+    if (!(score >= 0 && score <= 100)) {
+      fail(`${file} growthLoopTrace stage score must be 0..100.`, JSON.stringify(stage));
+    }
+    if (stage.zeroExtraXReads !== true || number(stage.estimatedXReadOps) !== 0 || number(stage.estimatedIncrementalXApiUsd) !== 0) {
+      fail(`${file} growthLoopTrace stage must be zero-read and zero incremental cost.`, JSON.stringify(stage));
+    }
+    if (!["cached_only", "browser_only"].includes(String(stage.readGate || ""))) {
+      fail(`${file} growthLoopTrace stage readGate is invalid.`, JSON.stringify(stage));
+    }
+    if (number(stage.durationMs) <= 0 || number(stage.startPct) < previousStart || number(stage.widthPct) <= 0) {
+      fail(`${file} growthLoopTrace stage timing is invalid.`, JSON.stringify(stage));
+    }
+    previousStart = number(stage.startPct);
+  }
+  const edges = Array.isArray(trace.edges) ? trace.edges : [];
+  if (edges.length < stages.length - 1) fail(`${file} growthLoopTrace edges are incomplete.`);
+  for (const edge of edges) {
+    if (!stageIds.has(edge.from) || !stageIds.has(edge.to)) {
+      fail(`${file} growthLoopTrace edge references unknown stage.`, JSON.stringify(edge));
+    }
+    if (edge.zeroExtraXReads !== true || number(edge.estimatedXReadOps) !== 0 || number(edge.estimatedIncrementalXApiUsd) !== 0) {
+      fail(`${file} growthLoopTrace edge must be zero-read.`, JSON.stringify(edge));
+    }
+  }
+  if (trace.bottleneckStageId && !stageIds.has(trace.bottleneckStageId)) {
+    fail(`${file} growthLoopTrace bottleneckStageId must reference a stage.`, JSON.stringify({
+      bottleneckStageId: trace.bottleneckStageId,
+      stages: [...stageIds],
+    }));
+  }
+  const xReadCell = (trace.cells || []).find((cell) => cell.id === "x_reads");
+  if (!xReadCell || !/0/.test(String(xReadCell.value || ""))) {
+    fail(`${file} growthLoopTrace must expose a zero X read cell.`, JSON.stringify(trace.cells || []));
+  }
+  if (!String(trace.nextAction || "").trim() || !String(trace.copyBlock || "").trim()) {
+    fail(`${file} growthLoopTrace must expose nextAction and copyBlock.`, JSON.stringify({
+      nextAction: trace.nextAction,
+      copyBlock: trace.copyBlock,
+    }));
+  }
+  assertVisibleTextClean(file, "growthLoopTrace", trace);
+}
+
 function assertRssSourceMesh(file, data) {
   const mesh = data.rssSourceMesh;
   if (!mesh) return;
@@ -1129,6 +1216,7 @@ function assertDashboardData(file, data) {
   assertGrowthLeakProfiler(file, data);
   assertCommandPacketDock(file, data);
   assertIdentityConversionFirewall(file, data);
+  assertGrowthLoopTrace(file, data);
   assertRssSourceMesh(file, data);
   assertOperatorPasteQueue(file, data);
   assertRouteOpportunityMatrix(file, data);

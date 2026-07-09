@@ -7290,5 +7290,221 @@
       "Normal cooldown only; no rate-limit shortcuts."
     ],
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 44.8\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Consumer Behavior\nRoute: Target Accounts\nAction: Route one cached high-signal packet inside an active technical exchange before generating more standalone output."
+  },
+  "growthLoopTrace": {
+    "generatedAt": "2026-07-09T07:25:00.540Z",
+    "mode": "derived_zero_read_growth_loop_trace",
+    "severity": "danger",
+    "source": "derived cached dashboard telemetry",
+    "zeroExtraXReads": true,
+    "estimatedXReadOps": 0,
+    "estimatedIncrementalXApiUsd": 0,
+    "operatorMode": "human_in_loop",
+    "readGate": "cached_only",
+    "manualOnly": true,
+    "traceScore": 50.2,
+    "totalLatencyMs": 13817,
+    "savedReadOps": 5,
+    "activeSource": "cached RSS",
+    "bottleneckStageId": "rss_ingest",
+    "bottleneckStageLabel": "RSS_INGEST",
+    "nextAction": "Wait for the next normal RSS refresh window.",
+    "stages": [
+      {
+        "id": "rss_ingest",
+        "label": "RSS_INGEST",
+        "subsystem": "RSS",
+        "score": 0,
+        "durationMs": 3000,
+        "input": "0 cached sources",
+        "output": "0 cached signals",
+        "detail": "cached RSS feeds the route loop without X read ops.",
+        "nextAction": "Wait for the next normal RSS refresh window.",
+        "readGate": "cached_only",
+        "operatorMode": "cached_only",
+        "status": "danger",
+        "startMs": 0,
+        "endMs": 3000,
+        "startPct": 0,
+        "widthPct": 21.71,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "swarm_rank",
+        "label": "SWARM_RANK",
+        "subsystem": "AI",
+        "score": 60.8,
+        "durationMs": 2680,
+        "input": "0 signal candidates",
+        "output": "6 angle lanes",
+        "detail": "Cached rank policy selected the next angle lane.",
+        "nextAction": "Keep the winning angle lane pinned until maintenance writes new evidence.",
+        "readGate": "cached_only",
+        "operatorMode": "cached_only",
+        "status": "warn",
+        "startMs": 3000,
+        "endMs": 5680,
+        "startPct": 21.71,
+        "widthPct": 19.4,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "packet_draft",
+        "label": "PACKET_DRAFT",
+        "subsystem": "TXT",
+        "score": 72.3,
+        "durationMs": 2052,
+        "input": "Target Accounts",
+        "output": "payload armed",
+        "detail": "Operator packet is ready for manual paste.",
+        "nextAction": "Copy one payload and preserve the operator-grade first line.",
+        "readGate": "cached_only",
+        "operatorMode": "cached_only",
+        "status": "ok",
+        "startMs": 5680,
+        "endMs": 7732,
+        "startPct": 41.11,
+        "widthPct": 14.85,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "manual_route",
+        "label": "MANUAL_ROUTE",
+        "subsystem": "X",
+        "score": 64,
+        "durationMs": 3265,
+        "input": "Target Accounts",
+        "output": "browser route armed",
+        "detail": "Manual X web route is armed; API read partition stays sealed.",
+        "nextAction": "Open Target Accounts, select one fresh technical exchange, paste the payload, then stop after 3 route ops.",
+        "readGate": "browser_only",
+        "operatorMode": "human_in_loop",
+        "status": "warn",
+        "startMs": 7732,
+        "endMs": 10997,
+        "startPct": 55.96,
+        "widthPct": 23.63,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "learn_writeback",
+        "label": "LEARN_WRITEBACK",
+        "subsystem": "ML",
+        "score": 34,
+        "durationMs": 2820,
+        "input": "0 packet samples",
+        "output": "angle weights updated",
+        "detail": "Maintenance writes cached packet outcomes into the next angle decision.",
+        "nextAction": "Let maintenance refresh metrics before widening the topic surface.",
+        "readGate": "cached_only",
+        "operatorMode": "cached_only",
+        "status": "danger",
+        "startMs": 10997,
+        "endMs": 13817,
+        "startPct": 79.59,
+        "widthPct": 20.41,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      }
+    ],
+    "edges": [
+      {
+        "id": "rss_ingest->swarm_rank",
+        "from": "rss_ingest",
+        "to": "swarm_rank",
+        "label": "RSS->AI",
+        "status": "danger",
+        "score": 30.4,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "swarm_rank->packet_draft",
+        "from": "swarm_rank",
+        "to": "packet_draft",
+        "label": "AI->TXT",
+        "status": "warn",
+        "score": 66.5,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "packet_draft->manual_route",
+        "from": "packet_draft",
+        "to": "manual_route",
+        "label": "TXT->X",
+        "status": "warn",
+        "score": 68.2,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      },
+      {
+        "id": "manual_route->learn_writeback",
+        "from": "manual_route",
+        "to": "learn_writeback",
+        "label": "X->ML",
+        "status": "warn",
+        "score": 49,
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0,
+        "estimatedIncrementalXApiUsd": 0
+      }
+    ],
+    "cells": [
+      {
+        "id": "x_reads",
+        "label": "X_READ_PARTITION",
+        "value": "0 ops",
+        "status": "ok"
+      },
+      {
+        "id": "trace_score",
+        "label": "TRACE_SCORE",
+        "value": "50.2",
+        "status": "danger"
+      },
+      {
+        "id": "bottleneck",
+        "label": "BOTTLENECK",
+        "value": "RSS_INGEST",
+        "status": "danger"
+      },
+      {
+        "id": "latency",
+        "label": "TRACE_LATENCY",
+        "value": "13.8s",
+        "status": "warn"
+      },
+      {
+        "id": "saved_reads",
+        "label": "SAVED_READ_OPS",
+        "value": "5 ops",
+        "status": "ok"
+      },
+      {
+        "id": "manual_gate",
+        "label": "MANUAL_GATE",
+        "value": "armed",
+        "status": "ok"
+      }
+    ],
+    "guardrails": [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser route only; no automated outbound actions.",
+      "Normal cooldown only; no rate-limit shortcuts."
+    ],
+    "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: derived_zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 50.2\nBottleneck: RSS_INGEST\nLatency budget: 13.8s derived\nAction: Wait for the next normal RSS refresh window."
   }
 }

@@ -1207,6 +1207,18 @@ const translations = {
     identity_guardrails: "cost locks",
     identity_copy: "Copy identity plan",
     identity_empty: "No identity conversion firewall telemetry available.",
+    trace_eyebrow: "Growth Loop Trace",
+    trace_title: "RSS to ML waterfall",
+    trace_zero_reads: "0 X read ops",
+    trace_score: "trace score",
+    trace_bottleneck: "bottleneck",
+    trace_latency: "latency budget",
+    trace_stages: "stage waterfall",
+    trace_edges: "handoff edges",
+    trace_cells: "trace cells",
+    trace_guardrails: "hard locks",
+    trace_copy: "Copy trace",
+    trace_empty: "No growth loop trace telemetry available.",
     leak_eyebrow: "Growth Leak Profiler",
     leak_title: "Conversion leak topology",
     leak_zero_reads: "0 X read ops",
@@ -2336,6 +2348,18 @@ const translations = {
     identity_guardrails: "成本锁",
     identity_copy: "复制身份计划",
     identity_empty: "暂无身份转化防火墙遥测。",
+    trace_eyebrow: "增长链路追踪",
+    trace_title: "RSS 到 ML 瀑布流",
+    trace_zero_reads: "0 次 X 读取",
+    trace_score: "链路评分",
+    trace_bottleneck: "瓶颈分区",
+    trace_latency: "延迟预算",
+    trace_stages: "阶段瀑布",
+    trace_edges: "交接边",
+    trace_cells: "链路单元",
+    trace_guardrails: "硬锁",
+    trace_copy: "复制链路",
+    trace_empty: "暂无增长链路追踪遥测。",
     leak_eyebrow: "增长漏点诊断",
     leak_title: "转化漏斗拓扑",
     leak_zero_reads: "0 次 X 读取",
@@ -6628,6 +6652,287 @@ function identityConversionFirewallData() {
     ],
     copyBlock,
   };
+}
+
+function growthLoopTraceData() {
+  const incoming = dashboardData.growthLoopTrace || fallbackData.growthLoopTrace;
+  if (incoming?.stages?.length) return incoming;
+
+  const statusFor = (score) => score >= 70 ? "ok" : score >= 42 ? "warn" : "danger";
+  const radar = trendVelocityRadarData();
+  const mesh = rssSourceMeshData();
+  const policy = dashboardData.cachedGenerationPolicy || fallbackData.cachedGenerationPolicy || {};
+  const scorer = growthOpportunityScorerData();
+  const dock = commandPacketDockData();
+  const identity = identityConversionFirewallData();
+  const learning = learningLoopContractData();
+  const inference = inferenceStreamData();
+  const kinetics = growthKineticsData();
+  const activeSource = mesh.activeSource || (Array.isArray(mesh.lanes) ? mesh.lanes[0] : null) || (Array.isArray(radar.items) ? radar.items[0] : null) || {};
+  const sourceLabel = activeSource.source || activeSource.host || "cached RSS";
+  const cachedSignals = Math.max(0, number(radar.summary?.totalItems, number((radar.items || []).length, number(mesh.summary?.cachedTrendItems))));
+  const rssScore = clamp(number(activeSource.priorityScore, number(activeSource.velocityScore, number(mesh.summary?.avgVelocity, number(radar.summary?.avgVelocity)))), 0, 100);
+  const policyFormats = Array.isArray(policy.formats)
+    ? policy.formats.length
+    : Array.isArray(policy.selectedFormats)
+      ? policy.selectedFormats.length
+      : Array.isArray(policy.rankedFormatIds)
+        ? policy.rankedFormatIds.length
+        : 0;
+  const policyScore = clamp(
+    number(policy.policyScore, number(policy.score, number(scorer.opportunityScore, policyFormats ? 68 + Math.min(12, policyFormats * 2) : 46))),
+    0,
+    100,
+  );
+  const packet = dock.primaryPacket || {};
+  const payload = String(dock.pastePayload || packet.pastePayload || "");
+  const payloadReady = Boolean(payload.trim());
+  const draftScore = clamp(number(dock.commandScore) * 0.72 + (payloadReady ? 18 : -18) + Math.min(10, payload.length / 32), 0, 100);
+  const routeReady = packet.status === "ready" && Boolean(dock.openUrl || packet.openUrl);
+  const routeScore = clamp(number(dock.commandScore) * 0.46 + number(identity.identityScore) * 0.42 + (routeReady ? 14 : -18), 0, 100);
+  const measuredPackets = number(learning.sampleCount, number((dashboardData.profile || fallbackData.profile || {}).measuredPosts));
+  const learnScore = clamp(number(learning.contractScore, measuredPackets ? 52 + Math.min(28, measuredPackets * 0.7) : 34), 0, 100);
+  const manualGate = dock.operatorMode === "human_in_loop" && dock.manualOnly === true;
+  const rawStages = [
+    {
+      id: "rss_ingest",
+      label: "RSS_INGEST",
+      subsystem: "RSS",
+      score: rssScore,
+      durationMs: Math.round(1200 + Math.max(0, 100 - rssScore) * 18 + cachedSignals * 4),
+      input: `${formatNumber(mesh.summary?.totalSources || (mesh.lanes || []).length || 0)} cached sources`,
+      output: `${formatNumber(cachedSignals)} cached signals`,
+      detail: `${sourceLabel} feeds the route loop without X read ops.`,
+      nextAction: activeSource.source ? `Keep ${sourceLabel} hot until its cached velocity cools.` : "Wait for the next normal RSS refresh window.",
+      readGate: "cached_only",
+      operatorMode: "cached_only",
+    },
+    {
+      id: "swarm_rank",
+      label: "SWARM_RANK",
+      subsystem: "AI",
+      score: policyScore,
+      durationMs: Math.round(1800 + Math.max(0, 100 - policyScore) * 22 + Math.min(2800, number(inference.tokens) / 18)),
+      input: `${formatNumber(cachedSignals)} signal candidates`,
+      output: `${formatNumber(Math.max(1, policyFormats))} angle lanes`,
+      detail: number(inference.spend) > 0
+        ? `Model inference stream spent ${money(inference.spend)} on cached ranking.`
+        : "Cached rank policy selected the next angle lane.",
+      nextAction: "Keep the winning angle lane pinned until maintenance writes new evidence.",
+      readGate: "cached_only",
+      operatorMode: "cached_only",
+    },
+    {
+      id: "packet_draft",
+      label: "PACKET_DRAFT",
+      subsystem: "TXT",
+      score: draftScore,
+      durationMs: Math.round(900 + Math.max(0, 100 - draftScore) * 16 + Math.min(1800, payload.length * 4)),
+      input: dock.routeLabel || packet.label || "route lane",
+      output: payloadReady ? "payload armed" : "payload repair",
+      detail: payloadReady ? "Operator packet is ready for manual paste." : "Payload buffer needs repair before route execution.",
+      nextAction: payloadReady ? "Copy one payload and preserve the operator-grade first line." : "Repair payload before opening any route lane.",
+      readGate: "cached_only",
+      operatorMode: "cached_only",
+    },
+    {
+      id: "manual_route",
+      label: "MANUAL_ROUTE",
+      subsystem: "X",
+      score: routeScore,
+      durationMs: Math.round(2400 + Math.max(0, 100 - routeScore) * 24 + (manualGate ? 0 : 1400)),
+      input: dock.routeLabel || packet.label || "route lane",
+      output: routeReady ? "browser route armed" : "route gate closed",
+      detail: routeReady ? "Manual X web route is armed; API read partition stays sealed." : "Route gate is not ready for operator execution.",
+      nextAction: routeReady ? (dock.nextAction || "Open the browser route, paste once, then stop at the ACK gate.") : "Repair route readiness before any distribution attempt.",
+      readGate: "browser_only",
+      operatorMode: "human_in_loop",
+    },
+    {
+      id: "learn_writeback",
+      label: "LEARN_WRITEBACK",
+      subsystem: "ML",
+      score: learnScore,
+      durationMs: Math.round(1500 + Math.max(0, 100 - learnScore) * 20 + Math.min(2400, measuredPackets * 6)),
+      input: `${formatNumber(measuredPackets)} packet samples`,
+      output: "angle weights updated",
+      detail: "Maintenance writes cached packet outcomes into the next angle decision.",
+      nextAction: "Let maintenance refresh metrics before widening the topic surface.",
+      readGate: "cached_only",
+      operatorMode: "cached_only",
+    },
+  ];
+  let cursorMs = 0;
+  const totalLatencyMs = rawStages.reduce((sum, stage) => sum + Math.max(250, number(stage.durationMs, 250)), 0);
+  const stages = rawStages.map((stage) => {
+    const durationMs = Math.max(250, number(stage.durationMs, 250));
+    const result = {
+      ...stage,
+      score: clamp(number(stage.score), 0, 100),
+      status: statusFor(number(stage.score)),
+      durationMs,
+      startMs: cursorMs,
+      endMs: cursorMs + durationMs,
+      startPct: (cursorMs / Math.max(1, totalLatencyMs)) * 100,
+      widthPct: (durationMs / Math.max(1, totalLatencyMs)) * 100,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+    cursorMs += durationMs;
+    return result;
+  });
+  const traceScore = clamp(stages.reduce((sum, stage) => sum + number(stage.score), 0) / Math.max(1, stages.length) + (manualGate ? 4 : -8), 0, 100);
+  const bottleneck = stages.slice().sort((left, right) => number(left.score) - number(right.score))[0] || {};
+  const severity = bottleneck.status === "danger" || traceScore < 42 ? "danger" : bottleneck.status === "warn" || traceScore < 70 ? "warn" : "ok";
+  const edges = stages.slice(1).map((stage, index) => {
+    const previous = stages[index];
+    const edgeScore = clamp((number(previous.score) + number(stage.score)) / 2, 0, 100);
+    return {
+      id: `${previous.id}->${stage.id}`,
+      from: previous.id,
+      to: stage.id,
+      label: `${previous.subsystem}->${stage.subsystem}`,
+      status: statusFor(edgeScore),
+      score: edgeScore,
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+      estimatedIncrementalXApiUsd: 0,
+    };
+  });
+  const nextAction = bottleneck.nextAction || "Keep the cached route trace armed and wait for the next maintenance writeback.";
+  const copyBlock = [
+    "CODEX GROWTH LOOP TRACE",
+    "Mode: derived_zero_read_growth_loop_trace",
+    "Cost guard: 0 X search/read API operations",
+    `Trace score: ${formatNumber(traceScore, 1)}`,
+    `Bottleneck: ${bottleneck.label || "-"}`,
+    `Latency budget: ${formatNumber(totalLatencyMs / 1000, 1)}s derived`,
+    `Action: ${nextAction}`,
+  ].join("\n");
+  return {
+    generatedAt: dashboardData.updatedAt || fallbackData.updatedAt,
+    mode: "derived_zero_read_growth_loop_trace",
+    severity,
+    source: "derived cached dashboard telemetry",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    operatorMode: "human_in_loop",
+    readGate: "cached_only",
+    manualOnly: true,
+    traceScore,
+    totalLatencyMs,
+    savedReadOps: stages.length,
+    activeSource: sourceLabel,
+    bottleneckStageId: bottleneck.id || null,
+    bottleneckStageLabel: bottleneck.label || null,
+    nextAction,
+    stages,
+    edges,
+    cells: [
+      { id: "x_reads", label: "X_READ_PARTITION", value: "0 ops", status: "ok" },
+      { id: "trace_score", label: "TRACE_SCORE", value: formatNumber(traceScore, 1), status: severity },
+      { id: "bottleneck", label: "BOTTLENECK", value: bottleneck.label || "-", status: bottleneck.status || "warn" },
+      { id: "latency", label: "TRACE_LATENCY", value: `${formatNumber(totalLatencyMs / 1000, 1)}s`, status: totalLatencyMs <= 12000 ? "ok" : "warn" },
+      { id: "saved_reads", label: "SAVED_READ_OPS", value: `${formatNumber(stages.length)} ops`, status: "ok" },
+      { id: "manual_gate", label: "MANUAL_GATE", value: manualGate ? "armed" : "repair", status: manualGate ? "ok" : "danger" },
+    ],
+    guardrails: [
+      "Cached telemetry only; 0 X search/read API operations.",
+      "Manual browser route only; no automated outbound actions.",
+      "Normal cooldown only; no rate-limit shortcuts.",
+    ],
+    copyBlock,
+  };
+}
+
+function renderGrowthLoopTrace() {
+  const target = $("#growth-loop-trace");
+  if (!target) return;
+  const trace = growthLoopTraceData();
+  const stages = Array.isArray(trace.stages) ? trace.stages : [];
+  if (!stages.length) {
+    target.innerHTML = `<p class="empty-state">${escapeHtml(t("trace_empty"))}</p>`;
+    return;
+  }
+  const score = clamp(number(trace.traceScore), 0, 100);
+  const cells = Array.isArray(trace.cells) ? trace.cells : [];
+  const edges = Array.isArray(trace.edges) ? trace.edges : [];
+  const guardrails = Array.isArray(trace.guardrails) ? trace.guardrails : [];
+  const bottleneck = stages.find((stage) => stage.id === trace.bottleneckStageId) || stages.slice().sort((left, right) => number(left.score) - number(right.score))[0] || {};
+  const copyBlock = trace.copyBlock || [
+    "CODEX GROWTH LOOP TRACE",
+    `Trace score: ${formatNumber(score, 1)}`,
+    `Bottleneck: ${trace.bottleneckStageLabel || bottleneck.label || "-"}`,
+    `Action: ${trace.nextAction || bottleneck.nextAction || "-"}`,
+  ].join("\n");
+  target.className = `growth-loop-trace ${escapeHtml(trace.severity || "warn")}`;
+  target.innerHTML = `
+    <div class="trace-head">
+      <div>
+        <span>${escapeHtml(t("trace_eyebrow"))}</span>
+        <strong>${escapeHtml(t("trace_title"))}</strong>
+      </div>
+      <em>${escapeHtml(t("trace_zero_reads"))}</em>
+    </div>
+    <div class="trace-core" style="--trace-score:${score.toFixed(1)}%">
+      <article class="trace-score">
+        <span>${escapeHtml(t("trace_score"))}</span>
+        <strong>${escapeHtml(formatNumber(score, 1))}</strong>
+        <i><b></b></i>
+      </article>
+      <article class="trace-bottleneck ${escapeHtml(bottleneck.status || trace.severity || "warn")}">
+        <span>${escapeHtml(t("trace_bottleneck"))}</span>
+        <strong>${escapeHtml(trace.bottleneckStageLabel || bottleneck.label || "-")}</strong>
+        <p>${escapeHtml(sreText(trace.nextAction || bottleneck.nextAction || "-"))}</p>
+      </article>
+      <article class="trace-latency">
+        <span>${escapeHtml(t("trace_latency"))}</span>
+        <strong>${escapeHtml(formatNumber(number(trace.totalLatencyMs) / 1000, 1))}s</strong>
+        <p>${escapeHtml(trace.activeSource || "-")} · ${escapeHtml(formatNumber(trace.savedReadOps || stages.length))} saved ops</p>
+      </article>
+      <div class="trace-cells" aria-label="${escapeHtml(t("trace_cells"))}">
+        ${cells.slice(0, 6).map((cell) => `
+          <span class="${escapeHtml(cell.status || "warn")}">
+            <em>${escapeHtml(cell.label || cell.id || "-")}</em>
+            <strong>${escapeHtml(cell.value ?? "-")}</strong>
+          </span>
+        `).join("")}
+      </div>
+    </div>
+    <div class="trace-waterfall">
+      <span>${escapeHtml(t("trace_stages"))}</span>
+      <div class="trace-axis">
+        ${stages.slice(0, 5).map((stage) => `
+          <article class="${escapeHtml(stage.status || "warn")}" style="--trace-start:${clamp(number(stage.startPct), 0, 100).toFixed(2)}%; --trace-width:${clamp(number(stage.widthPct), 2, 100).toFixed(2)}%; --trace-stage:${clamp(number(stage.score), 0, 100).toFixed(1)}%">
+            <div>
+              <em>${escapeHtml(stage.subsystem || "-")}</em>
+              <strong>${escapeHtml(stage.label || stage.id || "-")}</strong>
+              <small>${escapeHtml(formatNumber(number(stage.durationMs) / 1000, 1))}s · ${escapeHtml(stage.readGate || "cached_only")}</small>
+            </div>
+            <p>${escapeHtml(sreText(stage.detail || stage.nextAction || "-"))}</p>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+    <div class="trace-lower">
+      <div class="trace-edges">
+        <span>${escapeHtml(t("trace_edges"))}</span>
+        ${edges.slice(0, 4).map((edge) => `
+          <article class="${escapeHtml(edge.status || "warn")}">
+            <strong>${escapeHtml(edge.label || edge.id || "-")}</strong>
+            <em>${escapeHtml(formatNumber(edge.score, 1))}</em>
+          </article>
+        `).join("")}
+      </div>
+      <div class="trace-guards">
+        <span>${escapeHtml(t("trace_guardrails"))}</span>
+        ${guardrails.slice(0, 3).map((item) => `<code>${escapeHtml(sreText(item))}</code>`).join("")}
+      </div>
+      <button class="button button-secondary" type="button" data-copy="${encodeURIComponent(sreText(copyBlock))}">${escapeHtml(t("trace_copy"))}</button>
+    </div>
+  `;
 }
 
 function renderIdentityConversionFirewall() {
@@ -15094,6 +15399,7 @@ function render() {
   renderReactorHud();
   renderCommandPacketDock();
   renderIdentityConversionFirewall();
+  renderGrowthLoopTrace();
   renderL7SurgeSentinel();
   renderGrowthLeakProfiler();
   renderTelemetryContract();
