@@ -153,6 +153,192 @@ function assertVisibleTextClean(file, label, value) {
   }
 }
 
+const httpStatusBucketIds = ["success2xx", "client4xx", "auth4xx", "rateLimit429", "backend5xx"];
+
+function normalizedHttpStatus(status) {
+  const code = Number.parseInt(String(status ?? ""), 10);
+  return Number.isFinite(code) ? code : null;
+}
+
+function httpStatusBucketId(code) {
+  if (code === 429) return "rateLimit429";
+  if (code >= 500) return "backend5xx";
+  if (code === 401 || code === 403) return "auth4xx";
+  if (code >= 400) return "client4xx";
+  if (code >= 200 && code < 300) return "success2xx";
+  return null;
+}
+
+function endpointStatusCounts(endpoint = {}) {
+  const counts = {};
+  for (const [status, count] of Object.entries(endpoint.statuses || {})) {
+    const code = normalizedHttpStatus(status);
+    const value = number(count);
+    if (!code || value <= 0) continue;
+    counts[String(code)] = (counts[String(code)] || 0) + value;
+  }
+  if (!Object.keys(counts).length && endpoint.lastStatus != null) {
+    const code = normalizedHttpStatus(endpoint.lastStatus);
+    if (code) {
+      counts[String(code)] = code >= 400
+        ? Math.max(1, number(endpoint.failures))
+        : Math.max(1, number(endpoint.calls));
+    }
+  }
+  return counts;
+}
+
+function expectedApiStatusTriage(api = {}) {
+  const buckets = Object.fromEntries(httpStatusBucketIds.map((id) => [id, { count: 0, endpoints: new Map() }]));
+  const totals = {
+    totalCalls: 0,
+    totalFailures: 0,
+    success2xx: 0,
+    rateLimit429: 0,
+    backendFault5xx: 0,
+    authFault4xx: 0,
+    clientFault4xx: 0,
+    activeRateLimit429: 0,
+    activeBackendFault5xx: 0,
+    activeAuthFault4xx: 0,
+    activeClientFault4xx: 0,
+  };
+  const incidents = [];
+
+  for (const endpoint of api.endpoints || []) {
+    const endpointName = endpoint.name || "-";
+    const calls = number(endpoint.calls);
+    const failures = number(endpoint.failures);
+    const statuses = endpointStatusCounts(endpoint);
+    const local = {
+      rateLimit429: 0,
+      backendFault5xx: 0,
+      authFault4xx: 0,
+      clientFault4xx: 0,
+      activeRateLimit429: 0,
+      activeBackendFault5xx: 0,
+      activeAuthFault4xx: 0,
+      activeClientFault4xx: 0,
+    };
+    totals.totalCalls += calls;
+    totals.totalFailures += failures;
+
+    const latestCode = normalizedHttpStatus(endpoint.lastStatus);
+    if (latestCode === 429) {
+      totals.activeRateLimit429 += 1;
+      local.activeRateLimit429 += 1;
+    } else if (latestCode >= 500) {
+      totals.activeBackendFault5xx += 1;
+      local.activeBackendFault5xx += 1;
+    } else if (latestCode === 401 || latestCode === 403) {
+      totals.activeAuthFault4xx += 1;
+      local.activeAuthFault4xx += 1;
+    } else if (latestCode >= 400) {
+      totals.activeClientFault4xx += 1;
+      local.activeClientFault4xx += 1;
+    }
+
+    for (const [status, countValue] of Object.entries(statuses)) {
+      const code = normalizedHttpStatus(status);
+      const count = number(countValue);
+      const bucketId = code ? httpStatusBucketId(code) : null;
+      if (!bucketId || count <= 0) continue;
+      buckets[bucketId].count += count;
+      buckets[bucketId].endpoints.set(endpointName, (buckets[bucketId].endpoints.get(endpointName) || 0) + count);
+      if (bucketId === "success2xx") totals.success2xx += count;
+      if (bucketId === "rateLimit429") {
+        totals.rateLimit429 += count;
+        local.rateLimit429 += count;
+      } else if (bucketId === "backend5xx") {
+        totals.backendFault5xx += count;
+        local.backendFault5xx += count;
+      } else if (bucketId === "auth4xx") {
+        totals.authFault4xx += count;
+        local.authFault4xx += count;
+      } else if (bucketId === "client4xx") {
+        totals.clientFault4xx += count;
+        local.clientFault4xx += count;
+      }
+    }
+
+    if (failures || local.rateLimit429 || local.backendFault5xx || local.authFault4xx || local.clientFault4xx) {
+      const active = Boolean(
+        local.activeRateLimit429 ||
+        local.activeBackendFault5xx ||
+        local.activeAuthFault4xx ||
+        local.activeClientFault4xx,
+      );
+      incidents.push({ endpoint: endpointName, active, failures, ...local });
+    }
+  }
+
+  const severity = totals.activeRateLimit429 || totals.activeBackendFault5xx
+    ? "danger"
+    : totals.activeAuthFault4xx || totals.activeClientFault4xx
+      ? "warn"
+      : totals.totalFailures
+        ? "cached"
+        : "ok";
+  return {
+    ...totals,
+    severity,
+    failureRate: totals.totalCalls ? round((totals.totalFailures / totals.totalCalls) * 100, 2) : 0,
+    statusMatrix: httpStatusBucketIds.map((id) => ({
+      id,
+      count: buckets[id].count,
+      sharePct: totals.totalCalls ? round((buckets[id].count / totals.totalCalls) * 100, 1) : 0,
+      endpoints: [...buckets[id].endpoints.entries()].map(([endpoint, count]) => ({ endpoint, count })),
+    })),
+    incidents,
+  };
+}
+
+function assertApiStatusTriage(file, data) {
+  const api = data.api || {};
+  const triage = api.statusTriage;
+  if (!triage || typeof triage !== "object") {
+    fail(`${file} is missing explicit api.statusTriage telemetry.`);
+  }
+  const expected = expectedApiStatusTriage(api);
+  for (const key of [
+    "totalCalls",
+    "totalFailures",
+    "success2xx",
+    "rateLimit429",
+    "backendFault5xx",
+    "authFault4xx",
+    "clientFault4xx",
+    "activeRateLimit429",
+    "activeBackendFault5xx",
+    "activeAuthFault4xx",
+    "activeClientFault4xx",
+  ]) {
+    assertNear(file, `api.statusTriage ${key}`, triage[key], expected[key]);
+  }
+  assertNear(file, "api.statusTriage failureRate", triage.failureRate, expected.failureRate, 0.01);
+  if (triage.severity !== expected.severity) {
+    fail(`${file} api.statusTriage severity drifted.`, `actual=${triage.severity}, expected=${expected.severity}`);
+  }
+
+  const rows = new Map((Array.isArray(triage.statusMatrix) ? triage.statusMatrix : []).map((row) => [row.id, row]));
+  for (const expectedRow of expected.statusMatrix) {
+    const row = rows.get(expectedRow.id);
+    if (!row) fail(`${file} api.statusTriage status matrix is missing ${expectedRow.id}.`);
+    assertNear(file, `api.statusTriage statusMatrix.${expectedRow.id}.count`, row.count, expectedRow.count);
+    assertNear(file, `api.statusTriage statusMatrix.${expectedRow.id}.sharePct`, row.sharePct, expectedRow.sharePct, 0.1);
+  }
+
+  const incidents = Array.isArray(triage.incidents) ? triage.incidents : [];
+  for (const incident of expected.incidents) {
+    if (!incidents.some((row) => row.endpoint === incident.endpoint)) {
+      fail(`${file} api.statusTriage incidents are missing ${incident.endpoint}.`);
+    }
+  }
+  if ((expected.activeRateLimit429 || expected.activeBackendFault5xx) && data.rateLimitGovernor?.gates?.read !== "closed") {
+    fail(`${file} active 429/5xx partitions must close the rateLimitGovernor read gate.`, data.rateLimitGovernor?.gates?.read || "<missing>");
+  }
+}
+
 function assertSignalMap(file, data) {
   const signalMap = data.signalMap;
   if (!signalMap || typeof signalMap !== "object") {
@@ -645,6 +831,7 @@ function assertDashboardData(file, data) {
     fail(`${file} learning loop contract allows live X reads.`);
   }
 
+  assertApiStatusTriage(file, data);
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
   assertL7FireWindowRouter(file, data);
