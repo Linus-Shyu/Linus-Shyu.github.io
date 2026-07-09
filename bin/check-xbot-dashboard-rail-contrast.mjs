@@ -6,13 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
-const finalMarker = "Highest-specificity rail override";
-const finalGutterMarker = "Highest-specificity rail override v9: keep the light UI sidebar pinned to the SRE command surface.";
-const lightTerminalMarker = "Light rail terminal override v11: keep light mode on the same dark NOC rail as the command surface.";
-const priorRailMarker = "Highest-specificity rail override v2: keep the white UI rail aligned with the main console.";
-const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
-const finalLightGutterSelector = 'html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell';
-const requiredCssVersion = "20260709-rss-mesh-v1";
+const darkMarker = "Rail harmonizer terminal pass v13: final sidebar colors for both light and dark modes.";
+const lightMarker = "Light rail surface lock v15: high-specificity light sidebar that wins over historical dark rail passes.";
+const requiredCssVersion = "20260709-light-rail-v2";
+const darkSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
+const lightSelector = 'html[data-theme="light"][data-theme][data-theme] body > div.ops-shell.ops-shell.ops-shell > aside.side-rail.side-rail.side-rail';
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -53,29 +51,30 @@ function contrastRatio(foreground, background) {
   return (light + 0.05) / (dark + 0.05);
 }
 
-function finalRailVariables(css, file) {
-  const markerIndex = css.lastIndexOf(finalMarker);
-  if (markerIndex === -1) fail(`${file} is missing final rail override marker.`);
-  const finalCss = css.slice(markerIndex);
-  if (!finalCss.includes(finalSelector)) {
-    fail(`${file} is missing the highest-specificity rail selector.`, finalSelector);
-  }
-
-  const variables = {};
-  for (const match of finalCss.matchAll(/--rail-final-([a-z0-9-]+):\s*([^;!]+)\s*!important\s*;/gi)) {
-    variables[match[1]] = match[2].trim();
-  }
-  return { variables, markerIndex };
+function blockFromMarker(css, file, marker) {
+  const markerIndex = css.lastIndexOf(marker);
+  if (markerIndex === -1) fail(`${file} is missing rail marker.`, marker);
+  return { markerIndex, css: css.slice(markerIndex) };
 }
 
-function lastLightRailRuleIndex(css) {
-  const matches = [...css.matchAll(/data-theme=["']light["'][^{]*\.side-rail/g)];
-  return matches.length ? matches[matches.length - 1].index : -1;
+function variablesFrom(css, prefix) {
+  const variables = {};
+  const matcher = new RegExp(`--${prefix}-([a-z0-9-]+):\\s*([^;!]+)\\s*!important\\s*;`, "gi");
+  for (const match of css.matchAll(matcher)) {
+    variables[match[1]] = match[2].trim();
+  }
+  return variables;
 }
 
 function assertIncludes(file, value, snippet, label) {
   if (!value.includes(snippet)) {
     fail(`${file} is missing ${label}.`, snippet);
+  }
+}
+
+function assertNotIncludes(file, value, snippet, label) {
+  if (value.includes(snippet)) {
+    fail(`${file} still contains ${label}.`, snippet);
   }
 }
 
@@ -92,92 +91,89 @@ function assertContrast(file, variables, foregroundKey, backgroundKey, minimum) 
   }
 }
 
+function assertExpectedVariables(file, variables, expected, label) {
+  for (const [key, value] of Object.entries(expected)) {
+    if (variables[key]?.toLowerCase() !== value.toLowerCase()) {
+      fail(`${file} ${label} variable --${key} drifted.`, `expected ${value}, got ${variables[key] || "<missing>"}`);
+    }
+  }
+}
+
 for (const dir of dashboards) {
   const cssFile = `${dir}/styles.css`;
   const htmlFile = `${dir}/index.html`;
   const css = readRelative(cssFile);
   const html = readRelative(htmlFile);
-  const { variables, markerIndex } = finalRailVariables(css, cssFile);
-  const lightRailIndex = lastLightRailRuleIndex(css);
-  const finalCss = css.slice(markerIndex);
-  const priorRailIndex = css.lastIndexOf(priorRailMarker);
-  const finalGutterIndex = css.lastIndexOf(finalGutterMarker);
-  const lightTerminalIndex = css.lastIndexOf(lightTerminalMarker);
-  const lightTerminalCss = lightTerminalIndex === -1 ? "" : css.slice(lightTerminalIndex);
+  const { markerIndex: darkIndex, css: darkCssFromMarker } = blockFromMarker(css, cssFile, darkMarker);
+  const { markerIndex: lightIndex } = blockFromMarker(css, cssFile, lightMarker);
+  const darkCss = lightIndex > darkIndex ? css.slice(darkIndex, lightIndex) : css.slice(darkIndex);
+  const nextLightBlockIndex = css.indexOf("\n/*", lightIndex + lightMarker.length);
+  const lightCss = css.slice(lightIndex, nextLightBlockIndex === -1 ? css.length : nextLightBlockIndex);
+  const darkVariables = variablesFrom(darkCssFromMarker, "rail-final");
+  const lightVariables = variablesFrom(lightCss, "rail-light");
 
   if (!html.includes(requiredCssVersion)) {
-    fail(`${htmlFile} does not reference the latest rail-contrast stylesheet cache key.`, requiredCssVersion);
+    fail(`${htmlFile} does not reference the latest rail stylesheet cache key.`, requiredCssVersion);
   }
   if (css.includes("*** End of File")) {
     fail(`${cssFile} contains a patch marker literal.`);
   }
-  if (priorRailIndex === -1) {
-    fail(`${cssFile} is missing the prior rail override marker.`, priorRailMarker);
-  }
-  if (finalGutterIndex !== markerIndex) {
-    fail(`${cssFile} final rail override must be the v8 light-sidebar guard.`, finalGutterMarker);
-  }
-  if (lightTerminalIndex <= markerIndex) {
-    fail(`${cssFile} is missing the terminal light-sidebar override after the dark rail guard.`, lightTerminalMarker);
-  }
-  if (priorRailIndex > markerIndex) {
-    fail(`${cssFile} has the older v2 rail override after the v4 final pass.`);
-  }
-  if (lightRailIndex > lightTerminalIndex && !css.slice(lightTerminalIndex, lightRailIndex).includes(lightTerminalMarker)) {
-    fail(`${cssFile} has an untracked light-theme rail rule after the terminal light override.`);
-  }
-  assertIncludes(cssFile, finalCss, finalLightGutterSelector, "the light-mode gutter selector");
-  assertIncludes(cssFile, finalCss, "--rail-frame-width: 236px;", "the desktop rail frame width");
-  assertIncludes(cssFile, finalCss, "--rail-frame-gap: 12px;", "the rail frame gap");
-  assertIncludes(cssFile, finalCss, "width: 100% !important;", "the enforced full-width dashboard shell");
-  assertIncludes(cssFile, finalCss, "max-width: none !important;", "the removed centered shell cap");
-  assertIncludes(cssFile, finalCss, "grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;", "the enforced desktop rail column");
-  assertIncludes(cssFile, finalCss, "gap: var(--rail-frame-gap) !important;", "the enforced light-mode rail gap");
-  assertIncludes(cssFile, finalCss, "width: var(--rail-frame-width, 236px) !important;", "the enforced readable rail width");
-  assertIncludes(cssFile, finalCss, "font-size: 13px !important;", "the restored readable rail labels");
-  assertIncludes(cssFile, finalCss, "color-scheme: dark !important;", "the forced dark rail color scheme");
-  assertIncludes(cssFile, finalCss, "background-color: var(--rail-final-bg) !important;", "the forced dark rail background");
-  assertIncludes(cssFile, finalCss, "background-color: rgba(15, 23, 42, 0.88) !important;", "the dark light-mode nav button fill");
-  assertIncludes(cssFile, finalCss, "grid-template-columns: auto minmax(0, 1fr) auto !important;", "the restored readable rack node layout");
-  assertIncludes(cssFile, finalCss, "display: block !important;", "the restored sidebar text labels");
-  assertIncludes(
+  assertIncludes(cssFile, darkCss, darkSelector, "the dark-mode rail selector");
+  assertIncludes(cssFile, darkCss, "color-scheme: dark !important;", "the dark rail color scheme");
+  assertIncludes(cssFile, darkCss, "background-color: var(--rail-final-bg) !important;", "the dark rail background");
+  assertIncludes(cssFile, css, "grid-template-columns: var(--rail-frame-width) minmax(0, 1fr) !important;", "the desktop rail column");
+  assertIncludes(cssFile, css, "width: var(--rail-frame-width, 236px) !important;", "the readable rail width");
+  assertIncludes(cssFile, css, "font-size: 13px !important;", "the readable rail labels");
+
+  assertIncludes(cssFile, lightCss, lightSelector, "the light-mode rail selector");
+  assertIncludes(cssFile, lightCss, "color-scheme: light !important;", "the light rail color scheme");
+  assertIncludes(cssFile, lightCss, "background-color: var(--rail-light-bg) !important;", "the light rail surface");
+  assertIncludes(cssFile, lightCss, "background-color: rgba(255, 255, 255, 0.92) !important;", "the light rail card surface");
+  assertIncludes(cssFile, lightCss, "background-color: rgba(238, 245, 255, 0.98) !important;", "the light active nav fill");
+  assertIncludes(cssFile, lightCss, "text-shadow: none !important;", "the light rail text shadow reset");
+  assertIncludes(cssFile, lightCss, "body > div.ops-shell.ops-shell.ops-shell", "the high-specificity light shell selector");
+  assertIncludes(cssFile, lightCss, "aside.side-rail.side-rail.side-rail", "the high-specificity light rail selector");
+  assertNotIncludes(cssFile, lightCss, "rgba(7, 11, 18, 0.995)", "the old black light-mode gutter");
+  assertNotIncludes(cssFile, lightCss, "color-scheme: dark !important;", "a dark color scheme in the light rail terminal pass");
+
+  assertExpectedVariables(
     cssFile,
-    finalCss,
-    "rgba(11, 17, 27, 0.995) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 28px)",
-    "the dark light-mode gutter fill",
+    darkVariables,
+    {
+      bg: "#0b111b",
+      "bg-2": "#111827",
+      text: "#f9fafb",
+      body: "#d8e2f0",
+      muted: "#a8b5c7",
+      accent: "#f59e0b",
+      ok: "#7dd36f",
+    },
+    "dark rail",
   );
-  assertIncludes(cssFile, finalCss, "@media (min-width: 1081px) and (max-width: 1320px)", "the compact desktop rail breakpoint");
-  assertIncludes(cssFile, finalCss, "--rail-frame-width: 228px;", "the compact desktop rail width");
-  assertIncludes(cssFile, finalCss, "@media (max-width: 1080px)", "the mobile rail breakpoint");
-  assertIncludes(cssFile, finalCss, "background: transparent !important;", "the mobile rail gutter reset");
-  assertIncludes(cssFile, lightTerminalCss, "color-scheme: dark !important;", "the light-mode dark rail color scheme");
-  assertIncludes(cssFile, lightTerminalCss, "color: #d8e2f0 !important;", "the readable light-mode dark rail body text");
-  assertIncludes(cssFile, lightTerminalCss, "color: #f9fafb !important;", "the readable light-mode dark rail heading text");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: #0b111b !important;", "the light-mode dark rail surface");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(17, 24, 39, 0.985) !important;", "the light-mode dark rail card surface");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(15, 23, 42, 0.88) !important;", "the light-mode dark nav fill");
-  assertIncludes(cssFile, lightTerminalCss, "background-color: rgba(24, 34, 52, 0.98) !important;", "the light-mode dark active fill");
-  assertIncludes(cssFile, lightTerminalCss, "text-shadow: 0 1px 16px rgba(0, 0, 0, 0.3) !important;", "the light-mode dark rail text glow");
 
-  const requiredValues = {
-    bg: "#0b111b",
-    "bg-2": "#111827",
-    text: "#f9fafb",
-    body: "#d8e2f0",
-    muted: "#a8b5c7",
-    accent: "#f59e0b",
-    ok: "#7dd36f",
-  };
+  assertExpectedVariables(
+    cssFile,
+    lightVariables,
+    {
+      bg: "#f4f6f8",
+      panel: "#ffffff",
+      "panel-2": "#f8fafc",
+      text: "#111827",
+      body: "#334155",
+      muted: "#64748b",
+      accent: "#1a56db",
+      ok: "#16a34a",
+      amber: "#f59e0b",
+    },
+    "light rail",
+  );
 
-  for (const [key, expected] of Object.entries(requiredValues)) {
-    if (variables[key]?.toLowerCase() !== expected) {
-      fail(`${cssFile} rail variable --rail-final-${key} drifted.`, `expected ${expected}, got ${variables[key] || "<missing>"}`);
-    }
-  }
-
-  assertContrast(cssFile, variables, "text", "bg", 12);
-  assertContrast(cssFile, variables, "body", "bg", 10);
-  assertContrast(cssFile, variables, "muted", "bg", 6);
+  assertContrast(cssFile, darkVariables, "text", "bg", 12);
+  assertContrast(cssFile, darkVariables, "body", "bg", 10);
+  assertContrast(cssFile, darkVariables, "muted", "bg", 6);
+  assertContrast(cssFile, lightVariables, "text", "bg", 12);
+  assertContrast(cssFile, lightVariables, "body", "bg", 8);
+  assertContrast(cssFile, lightVariables, "muted", "bg", 4.1);
 }
 
 console.log("X bot dashboard rail contrast check passed.");
