@@ -352,6 +352,24 @@ function assertCostTelemetry(file, data) {
   if (!governor.partitionMatrix.some((partition) => partition.id === "read_search")) {
     fail(`${file} rateLimitGovernor partitionMatrix must include read_search.`);
   }
+  const accountSnapshotPartition = governor.partitionMatrix.find((partition) => partition.id === "account_snapshot");
+  if (accountSnapshotPartition) {
+    if (!["cached_only", "sampled", "closed"].includes(accountSnapshotPartition.gate)) {
+      fail(`${file} account_snapshot partition has unknown gate.`, accountSnapshotPartition.gate || "<missing>");
+    }
+    if (accountSnapshotPartition.cache && accountSnapshotPartition.cache.zeroExtraXReads === false && accountSnapshotPartition.cache.due !== true) {
+      fail(`${file} account_snapshot cache telemetry must not claim reads unless refresh is due.`, JSON.stringify(accountSnapshotPartition.cache));
+    }
+  }
+  if (governor.accountSnapshotCache) {
+    const cache = governor.accountSnapshotCache;
+    if (!["cache_hit", "refresh_due", "disabled"].includes(cache.mode)) {
+      fail(`${file} accountSnapshotCache mode drifted.`, cache.mode || "<missing>");
+    }
+    if (cache.fresh === true && cache.due === true) {
+      fail(`${file} accountSnapshotCache cannot be both fresh and due.`, JSON.stringify(cache));
+    }
+  }
   if (!Number.isFinite(number(governor.budget?.safeCapUsd, NaN))) {
     fail(`${file} rateLimitGovernor budget.safeCapUsd must be numeric.`, JSON.stringify(governor.budget || {}));
   }

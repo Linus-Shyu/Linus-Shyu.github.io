@@ -27917,3 +27917,152 @@ html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.si
     background: transparent !important;
   }
 }
+/* Light rail terminal override v10: align the white UI sidebar with the bright command surface. */
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(239, 243, 248, 0.98) 0,
+      rgba(248, 250, 252, 0.98) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 24px),
+      rgba(248, 250, 252, 0.72) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 58px),
+      rgba(248, 250, 252, 0) calc(var(--rail-frame-width) + var(--rail-frame-gap) + 104px)
+    ) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail,
+html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell > aside.side-rail.side-rail {
+  color-scheme: light !important;
+  color: #334155 !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  background-color: #eef3f8 !important;
+  background-image:
+    radial-gradient(circle at 30% -8%, rgba(249, 115, 22, 0.2), transparent 31%),
+    radial-gradient(circle at -10% 78%, rgba(22, 163, 74, 0.12), transparent 36%),
+    radial-gradient(circle at 112% 32%, rgba(37, 99, 235, 0.1), transparent 35%),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05), transparent 1px),
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.042) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, #ffffff, #eef3f8 78%) !important;
+  box-shadow:
+    28px 0 72px rgba(15, 23, 42, 0.1),
+    inset -1px 0 0 rgba(249, 115, 22, 0.28),
+    inset 1px 0 0 rgba(255, 255, 255, 0.9) !important;
+  scrollbar-color: rgba(249, 115, 22, 0.72) rgba(226, 232, 240, 0.7) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail::before {
+  opacity: 0.34 !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.04) 0 1px, transparent 1px 38px),
+    linear-gradient(180deg, rgba(249, 115, 22, 0.12), transparent 44%) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini div,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  color: #334155 !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.78)),
+    linear-gradient(135deg, rgba(249, 115, 22, 0.055), rgba(37, 99, 235, 0.035)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 12px 30px rgba(15, 23, 42, 0.075) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand strong,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line strong,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary strong,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini strong,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #111827 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand small,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-card > span,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary > span,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini em,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget span,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget small {
+  color: #64748b !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .brand-mark {
+  color: #111827 !important;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.8), transparent 23%),
+    linear-gradient(135deg, #fff7ed, #f97316 58%, #2563eb) !important;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.12) inset,
+    0 12px 24px rgba(249, 115, 22, 0.16) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary {
+  border-color: rgba(249, 115, 22, 0.28) !important;
+  background-color: rgba(255, 255, 255, 0.97) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 247, 237, 0.82), rgba(255, 255, 255, 0.88)),
+    linear-gradient(135deg, rgba(37, 99, 235, 0.04), rgba(22, 163, 74, 0.04)) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid p,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a {
+  color: #334155 !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  background-color: rgba(248, 250, 252, 0.92) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid span {
+  color: #334155 !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-boundary-grid i,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rack-mini span,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .env-line .status-dot,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a::before {
+  background: #16a34a !important;
+  box-shadow:
+    0 0 0 4px rgba(22, 163, 74, 0.13),
+    0 0 18px rgba(22, 163, 74, 0.22) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:hover,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a:focus-visible,
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-nav.rail-nav a.active {
+  color: #111827 !important;
+  border-color: rgba(249, 115, 22, 0.58) !important;
+  background-color: #fff7ed !important;
+  background-image:
+    linear-gradient(90deg, rgba(249, 115, 22, 0.14), transparent 56%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 237, 0.82)) !important;
+  box-shadow:
+    inset 3px 0 0 #f97316,
+    0 0 0 1px rgba(249, 115, 22, 0.12),
+    0 12px 28px rgba(249, 115, 22, 0.11) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget {
+  border-color: rgba(249, 115, 22, 0.42) !important;
+  background-color: #fff7ed !important;
+  background-image:
+    radial-gradient(circle at 50% 0, rgba(249, 115, 22, 0.18), transparent 58%),
+    linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(37, 99, 235, 0.035)) !important;
+}
+
+html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail .rail-budget strong {
+  color: #c2410c !important;
+}
+
+@media (max-width: 1080px) {
+  html[data-theme="light"][data-theme] body > div.ops-shell.ops-shell,
+  html[data-theme="light"][data-theme] body.demo-mode > div.ops-shell.ops-shell {
+    background: transparent !important;
+  }
+}

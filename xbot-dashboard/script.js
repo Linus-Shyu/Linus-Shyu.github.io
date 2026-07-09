@@ -1329,6 +1329,12 @@ const translations = {
     governor_daily_burn: "daily burn",
     governor_month_end: "month-end",
     governor_runway_days: "runway",
+    governor_account_snapshot: "account snapshot",
+    governor_snapshot_hit: "cache hit",
+    governor_snapshot_due: "refresh due",
+    governor_snapshot_disabled: "disabled",
+    governor_snapshot_age: "age {hours}h",
+    governor_snapshot_saved: "saved {amount}",
     governor_pressure: "circuit pressure",
     governor_mode: "circuit mode",
     governor_hottest: "hot partition",
@@ -2359,6 +2365,12 @@ const translations = {
     governor_daily_burn: "日烧钱",
     governor_month_end: "月底投影",
     governor_runway_days: "续航",
+    governor_account_snapshot: "账号快照",
+    governor_snapshot_hit: "缓存命中",
+    governor_snapshot_due: "刷新到期",
+    governor_snapshot_disabled: "已关闭",
+    governor_snapshot_age: "年龄 {hours} 小时",
+    governor_snapshot_saved: "节省 {amount}",
     governor_pressure: "电路压力",
     governor_mode: "电路模式",
     governor_hottest: "高压分区",
@@ -12640,6 +12652,7 @@ function governorCellLabel(cell) {
     month_end: "governor_month_end",
     safe_cap: "governor_safe_cap",
     safe_left: "governor_safe_left",
+    account_snapshot: "governor_account_snapshot",
   };
   return labels[cell?.id] ? t(labels[cell.id]) : cell?.label || cell?.id || "-";
 }
@@ -12655,6 +12668,7 @@ function renderRateGovernor() {
   const cadence = cadenceData();
   const cooldown = governor?.cooldown || api.cooldown || {};
   const runwayGuard = runwayGuardData(governor);
+  const accountSnapshotCache = governor?.accountSnapshotCache || dashboardData.accountSnapshotCache || null;
   const active429 = metricNumber(governor?.partitions?.activeRateLimit429, number(triage.activeRateLimit429 ?? triage.rateLimit429));
   const active503 = metricNumber(governor?.partitions?.activeBackendFault5xx, number(triage.activeBackendFault5xx ?? triage.backendFault5xx));
   const cooldownActive = Boolean(cooldown.active);
@@ -12805,6 +12819,20 @@ function renderRateGovernor() {
       ${partitionMatrix
         .map((partition) => {
           const status = ["ok", "warn", "danger", "cached"].includes(partition.status) ? partition.status : "neutral";
+          const cache = partition.cache || (partition.id === "account_snapshot" ? accountSnapshotCache : null);
+          const cacheStatus = !cache
+            ? null
+            : cache.enabled === false
+              ? t("governor_snapshot_disabled")
+              : cache.due
+                ? t("governor_snapshot_due")
+                : t("governor_snapshot_hit");
+          const cacheDetail = cache
+            ? [
+                cache.ageHours == null ? null : t("governor_snapshot_age", { hours: formatNumber(cache.ageHours, 1) }),
+                cache.savedReadCostUsd ? t("governor_snapshot_saved", { amount: money(cache.savedReadCostUsd) }) : null,
+              ].filter(Boolean).join(" · ")
+            : null;
           const lastStatus = partition.lastStatus == null
             ? t("governor_no_status")
             : t("governor_last_status", { status: partition.lastStatus });
@@ -12820,6 +12848,7 @@ function renderRateGovernor() {
                 <li>${escapeHtml(t("governor_failures", { count: formatNumber(partition.failures || 0) }))}</li>
                 <li>${escapeHtml(t("governor_cost", { amount: money(partition.usd || 0) }))}</li>
                 <li>${escapeHtml(lastStatus)}</li>
+                ${cacheStatus ? `<li>${escapeHtml(`${cacheStatus}${cacheDetail ? ` · ${cacheDetail}` : ""}`)}</li>` : ""}
               </ul>
               <p>${escapeHtml(partition.directive || "")}</p>
             </article>
