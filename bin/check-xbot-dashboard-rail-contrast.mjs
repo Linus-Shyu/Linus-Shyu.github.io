@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dashboards = ["xbot-dashboard", "docs/xbot-dashboard"];
 const finalMarker = "Highest-specificity rail override";
 const finalSelector = "html[data-theme][data-theme] body > div.ops-shell.ops-shell > aside.side-rail.side-rail";
-const requiredCssVersion = "20260709-final-rail-contrast";
+const requiredCssVersion = "20260709-command-rail-v2";
 
 function fail(message, details = "") {
   console.error(`X bot dashboard rail contrast check failed: ${message}`);
@@ -98,13 +98,13 @@ for (const dir of dashboards) {
   }
 
   const requiredValues = {
-    bg: "#070b12",
-    "bg-2": "#0f1724",
-    text: "#f8fafc",
-    body: "#d9e5f3",
-    muted: "#9fb0c4",
-    accent: "#ff9f1c",
-    ok: "#78d86f",
+    bg: "#0b111b",
+    "bg-2": "#111827",
+    text: "#f9fafb",
+    body: "#d8e2f0",
+    muted: "#a8b5c7",
+    accent: "#f59e0b",
+    ok: "#7dd36f",
   };
 
   for (const [key, expected] of Object.entries(requiredValues)) {
