@@ -93,6 +93,66 @@ function assertMonotonic(file, label, values) {
   }
 }
 
+const visibleStringSkipKeys = new Set([
+  "id",
+  "formatId",
+  "pillarId",
+  "routeUrl",
+  "routeQuery",
+  "url",
+  "link",
+  "postedAt",
+  "createdAt",
+  "updatedAt",
+  "generatedAt",
+  "checkedAt",
+  "workflowEvent",
+]);
+
+function collectVisibleStrings(value, key = "", pointer = "$") {
+  if (typeof value === "string") {
+    if (visibleStringSkipKeys.has(key) || /^https?:\/\//i.test(value) || /^\d{4}-\d{2}-\d{2}T/.test(value)) {
+      return [];
+    }
+    return [{ pointer, value }];
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => collectVisibleStrings(item, key, `${pointer}[${index}]`));
+  }
+  if (value && typeof value === "object") {
+    return Object.entries(value).flatMap(([entryKey, entryValue]) => collectVisibleStrings(entryValue, entryKey, `${pointer}.${entryKey}`));
+  }
+  return [];
+}
+
+function assertVisibleTextClean(file, label, value) {
+  const bannedVocabulary = [
+    [/\bfollowers?\b/i, "Ingress Node Strength / Active Conns"],
+    [/\bimpressions?\b/i, "Total Ingestion Throughput / L7 Traffic Load"],
+    [/\bviews\b/i, "L7 events / throughput"],
+    [/\berrors?\b/i, "HTTP Status Triage"],
+    [/\btweets?\b/i, "packets / dispatches"],
+    [/\bpost(?:s|ing)?\b/i, "packets / dispatches"],
+  ];
+  const unsafeAutomation = [
+    /(enable|allow|publish|send|post|dispatch).{0,80}auto[-_ ]?repl(?:y|ies)/i,
+    /(bypass|circumvent).{0,40}rate[-_ ]?limit/i,
+  ];
+
+  for (const item of collectVisibleStrings(value)) {
+    for (const [pattern, replacement] of bannedVocabulary) {
+      if (pattern.test(item.value)) {
+        fail(`${file} ${label} contains forbidden dashboard vocabulary at ${item.pointer}; use ${replacement}.`, item.value);
+      }
+    }
+    for (const pattern of unsafeAutomation) {
+      if (pattern.test(item.value)) {
+        fail(`${file} ${label} contains unsafe automation wording at ${item.pointer}.`, item.value);
+      }
+    }
+  }
+}
+
 function assertSignalMap(file, data) {
   const signalMap = data.signalMap;
   if (!signalMap || typeof signalMap !== "object") {
@@ -219,6 +279,113 @@ function assertNextWindowCommander(file, data) {
   }
 }
 
+function assertCostTelemetry(file, data) {
+  const governor = data.rateLimitGovernor;
+  if (!governor || typeof governor !== "object") {
+    fail(`${file} is missing rateLimitGovernor telemetry.`);
+  }
+  if (governor.zeroExtraXReads !== true || governor.circuit?.zeroExtraXReads !== true) {
+    fail(`${file} rateLimitGovernor must be zero-read.`, JSON.stringify({
+      zeroExtraXReads: governor.zeroExtraXReads,
+      circuitZeroExtraXReads: governor.circuit?.zeroExtraXReads,
+    }));
+  }
+  if (!["cached_only", "closed"].includes(governor.gates?.read)) {
+    fail(`${file} rateLimitGovernor read gate must stay cached_only or closed.`, governor.gates?.read || "<missing>");
+  }
+  if (!["open", "review", "closed", "guarded"].includes(governor.gates?.publish)) {
+    fail(`${file} rateLimitGovernor publish gate has unknown state.`, governor.gates?.publish || "<missing>");
+  }
+  if (!Array.isArray(governor.partitionMatrix) || !governor.partitionMatrix.length) {
+    fail(`${file} rateLimitGovernor is missing partitionMatrix telemetry.`);
+  }
+  if (!governor.partitionMatrix.some((partition) => partition.id === "read_search")) {
+    fail(`${file} rateLimitGovernor partitionMatrix must include read_search.`);
+  }
+  if (!Number.isFinite(number(governor.budget?.safeCapUsd, NaN))) {
+    fail(`${file} rateLimitGovernor budget.safeCapUsd must be numeric.`, JSON.stringify(governor.budget || {}));
+  }
+
+  const runway = data.xApiRunwayGuard;
+  if (!runway || typeof runway !== "object") {
+    fail(`${file} is missing xApiRunwayGuard telemetry.`);
+  }
+  if (typeof runway.active !== "boolean" || typeof runway.monthEndSafe !== "boolean") {
+    fail(`${file} xApiRunwayGuard must expose active/monthEndSafe booleans.`, JSON.stringify(runway));
+  }
+  if (!Number.isFinite(number(runway.projectedCostUsd, NaN)) || !Number.isFinite(number(runway.monthEndProjectedSpendUsd, NaN))) {
+    fail(`${file} xApiRunwayGuard must expose numeric projected cost telemetry.`, JSON.stringify(runway));
+  }
+
+  const burn = data.budgetBurnReactor;
+  if (!burn || typeof burn !== "object") {
+    fail(`${file} is missing budgetBurnReactor telemetry.`);
+  }
+  if (burn.zeroExtraXReads !== true) {
+    fail(`${file} budgetBurnReactor must be zero-read.`, JSON.stringify({ zeroExtraXReads: burn.zeroExtraXReads }));
+  }
+  if (!["cached_only", "sealed"].includes(burn.readGate)) {
+    fail(`${file} budgetBurnReactor read gate must be cached_only or sealed.`, burn.readGate || "<missing>");
+  }
+  if (!Number.isFinite(number(burn.safeCapUsd, NaN)) || !Number.isFinite(number(burn.projectedDailyBurnUsd, NaN))) {
+    fail(`${file} budgetBurnReactor must expose numeric safeCap/projectedDailyBurn telemetry.`, JSON.stringify(burn));
+  }
+  if (!Array.isArray(burn.series) || !burn.series.length) {
+    fail(`${file} budgetBurnReactor must expose a burn series.`);
+  }
+  const liveReads = (burn.partitions || []).find((partition) => partition.id === "live_reads");
+  if (!liveReads || !/0/.test(String(liveReads.value || ""))) {
+    fail(`${file} budgetBurnReactor must show the live X read partition at 0 ops.`, JSON.stringify(liveReads || {}));
+  }
+
+  const optimizer = data.budgetAllocationOptimizer;
+  if (!optimizer || typeof optimizer !== "object") {
+    fail(`${file} is missing budgetAllocationOptimizer telemetry.`);
+  }
+  if (optimizer.mode !== "zero_read_budget_allocator" || optimizer.zeroExtraXReads !== true) {
+    fail(`${file} budgetAllocationOptimizer mode drifted.`, JSON.stringify({
+      mode: optimizer.mode,
+      zeroExtraXReads: optimizer.zeroExtraXReads,
+    }));
+  }
+  const lanes = Array.isArray(optimizer.lanes) ? optimizer.lanes : [];
+  if (!lanes.length) fail(`${file} budgetAllocationOptimizer lanes are empty.`);
+  const recommended = lanes.find((lane) => lane.id === optimizer.recommendedLaneId);
+  if (!recommended) fail(`${file} budgetAllocationOptimizer recommended lane is missing.`, optimizer.recommendedLaneId || "<missing>");
+  if (number(recommended.xReadOps) !== 0 || recommended.id === "live_x_search") {
+    fail(`${file} budgetAllocationOptimizer recommended lane must not require X reads.`, JSON.stringify(recommended));
+  }
+  const manualLane = lanes.find((lane) => lane.id === "manual_route_burst");
+  if (!manualLane || number(manualLane.costUsd) !== 0 || number(manualLane.xReadOps) !== 0) {
+    fail(`${file} budgetAllocationOptimizer must preserve a zero-cost manual route lane.`, JSON.stringify(manualLane || {}));
+  }
+  const liveLane = lanes.find((lane) => lane.id === "live_x_search");
+  if (!liveLane || number(liveLane.xReadOps) <= 0 || !["closed", "sealed"].includes(liveLane.gate) || liveLane.status !== "danger") {
+    fail(`${file} budgetAllocationOptimizer must keep live_x_search sealed as a danger lane.`, JSON.stringify(liveLane || {}));
+  }
+
+  const media = data.mediaRoiGate || data.automation?.mediaRoiGate;
+  if (!media || typeof media !== "object") {
+    fail(`${file} is missing mediaRoiGate telemetry.`);
+  }
+  if (media.zeroExtraXReads !== true || typeof media.attachImageAllowed !== "boolean" || !String(media.decision || "").trim()) {
+    fail(`${file} mediaRoiGate must expose zero-read boolean image gating.`, JSON.stringify(media));
+  }
+  if (media.attachImageAllowed && media.decision !== "allow") {
+    fail(`${file} mediaRoiGate cannot attach images unless decision is allow.`, JSON.stringify(media));
+  }
+  const xReadCheck = (media.checks || []).find((check) => check.id === "x_reads");
+  if (!xReadCheck || String(xReadCheck.value || "") !== "0") {
+    fail(`${file} mediaRoiGate must expose a zero extra X reads check.`, JSON.stringify(xReadCheck || {}));
+  }
+
+  assertVisibleTextClean(file, "rateLimitGovernor", governor);
+  assertVisibleTextClean(file, "xApiRunwayGuard", runway);
+  assertVisibleTextClean(file, "budgetBurnReactor", burn);
+  assertVisibleTextClean(file, "budgetAllocationOptimizer", optimizer);
+  assertVisibleTextClean(file, "mediaRoiGate", media);
+}
+
 function assertDashboardData(file, data) {
   const last24h = data.last24h || {};
   const api = data.api || {};
@@ -268,6 +435,7 @@ function assertDashboardData(file, data) {
 
   assertSignalMap(file, data);
   assertNextWindowCommander(file, data);
+  assertCostTelemetry(file, data);
 }
 
 const sourceData = readJson("xbot-dashboard/data.json");
