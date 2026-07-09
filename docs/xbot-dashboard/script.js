@@ -1039,6 +1039,7 @@ const translations = {
     http_triage_zero_reads: "0 live X reads",
     http_triage_fault_bus: "fault bus",
     http_triage_endpoint_bus: "endpoint bus",
+    http_triage_status_matrix: "status matrix",
     http_triage_no_faults: "No active fault partitions. Cached routing remains safe.",
     http_triage_last_status: "last HTTP {status}",
     http_triage_calls: "{count} calls",
@@ -1046,6 +1047,11 @@ const translations = {
     http_triage_read_cached: "cached_only",
     http_triage_read_closed: "sealed",
     http_triage_read_review: "review",
+    http_status_success2xx: "2xx success",
+    http_status_client4xx: "4xx client",
+    http_status_auth4xx: "401/403 auth",
+    http_status_rateLimit429: "429 rate-limit",
+    http_status_backend5xx: "5xx backend",
     reactor_hud_eyebrow: "Reactor HUD",
     reactor_hud_title: "Reactor fire-control bus",
     reactor_hud_zero_reads: "0 live X reads",
@@ -1972,6 +1978,7 @@ const translations = {
     http_triage_zero_reads: "0 次实时 X 读取",
     http_triage_fault_bus: "故障总线",
     http_triage_endpoint_bus: "端点总线",
+    http_triage_status_matrix: "状态矩阵",
     http_triage_no_faults: "无活跃故障分区。缓存路由保持安全。",
     http_triage_last_status: "最后 HTTP {status}",
     http_triage_calls: "{count} 次调用",
@@ -1979,6 +1986,11 @@ const translations = {
     http_triage_read_cached: "仅缓存",
     http_triage_read_closed: "封闭",
     http_triage_read_review: "复核",
+    http_status_success2xx: "2xx 成功",
+    http_status_client4xx: "4xx 客户端",
+    http_status_auth4xx: "401/403 授权",
+    http_status_rateLimit429: "429 限流",
+    http_status_backend5xx: "5xx 后端",
     reactor_hud_eyebrow: "反应堆 HUD",
     reactor_hud_title: "反应堆火控总线",
     reactor_hud_zero_reads: "0 次实时 X 读取",
@@ -4724,8 +4736,49 @@ function statusCountMap(endpoint = {}) {
   return counts;
 }
 
+function httpStatusBucketId(code) {
+  if (code === 429) return "rateLimit429";
+  if (code >= 500) return "backend5xx";
+  if (code === 401 || code === 403) return "auth4xx";
+  if (code >= 400) return "client4xx";
+  if (code >= 200 && code < 300) return "success2xx";
+  return null;
+}
+
+function emptyHttpStatusMatrix() {
+  return {
+    success2xx: { id: "success2xx", label: "2xx success", count: 0, endpoints: new Map() },
+    client4xx: { id: "client4xx", label: "4xx client", count: 0, endpoints: new Map() },
+    auth4xx: { id: "auth4xx", label: "401/403 auth", count: 0, endpoints: new Map() },
+    rateLimit429: { id: "rateLimit429", label: "429 rate-limit", count: 0, endpoints: new Map() },
+    backend5xx: { id: "backend5xx", label: "5xx backend", count: 0, endpoints: new Map() },
+  };
+}
+
+function addHttpStatusMatrix(matrix, code, endpoint, count) {
+  const bucket = matrix[httpStatusBucketId(code)];
+  const value = number(count);
+  if (!bucket || value <= 0) return;
+  bucket.count += value;
+  bucket.endpoints.set(endpoint, (bucket.endpoints.get(endpoint) || 0) + value);
+}
+
+function serializeHttpStatusMatrix(matrix, totalCalls) {
+  return Object.values(matrix).map((bucket) => ({
+    id: bucket.id,
+    label: bucket.label,
+    count: bucket.count,
+    sharePct: totalCalls ? Number(((bucket.count / totalCalls) * 100).toFixed(1)) : 0,
+    endpoints: [...bucket.endpoints.entries()]
+      .sort((left, right) => number(right[1]) - number(left[1]))
+      .slice(0, 3)
+      .map(([endpoint, count]) => ({ endpoint, count })),
+  }));
+}
+
 function deriveApiStatusTriage(api = {}) {
   const endpoints = api.endpoints || [];
+  const statusMatrix = emptyHttpStatusMatrix();
   const totals = {
     totalCalls: 0,
     totalFailures: 0,
@@ -4775,6 +4828,7 @@ function deriveApiStatusTriage(api = {}) {
       const code = Number.parseInt(status, 10);
       const count = number(countValue);
       if (!Number.isFinite(code) || count <= 0) return;
+      addHttpStatusMatrix(statusMatrix, code, endpoint.name || "-", count);
       if (code >= 200 && code < 300) totals.success2xx += count;
       if (code === 429) {
         totals.rateLimit429 += count;
@@ -4828,6 +4882,28 @@ function deriveApiStatusTriage(api = {}) {
     ...totals,
     severity,
     failureRate: Number(failureRate.toFixed(2)),
+    statusMatrix: serializeHttpStatusMatrix(statusMatrix, totals.totalCalls),
+    topFaultEndpoints: incidents
+      .map((incident) => ({
+        endpoint: incident.endpoint,
+        severity: incident.severity,
+        active: incident.active,
+        failures: incident.failures,
+        lastStatus: incident.lastStatus,
+        totalFaults:
+          number(incident.rateLimit429) +
+          number(incident.backendFault5xx) +
+          number(incident.authFault4xx) +
+          number(incident.clientFault4xx),
+      }))
+      .sort((left, right) => {
+        const activeDelta = Number(Boolean(right.active)) - Number(Boolean(left.active));
+        if (activeDelta) return activeDelta;
+        const faultDelta = number(right.totalFaults) - number(left.totalFaults);
+        if (faultDelta) return faultDelta;
+        return number(right.failures) - number(left.failures);
+      })
+      .slice(0, 5),
     incidents: incidents
       .sort((left, right) => {
         const activeDelta = Number(Boolean(right.active)) - Number(Boolean(left.active));
@@ -4849,6 +4925,8 @@ function apiStatusTriage() {
     ...triage,
     severity: triage.severity || derived.severity,
     incidents: Array.isArray(triage.incidents) ? triage.incidents : derived.incidents,
+    statusMatrix: Array.isArray(triage.statusMatrix) ? triage.statusMatrix : derived.statusMatrix,
+    topFaultEndpoints: Array.isArray(triage.topFaultEndpoints) ? triage.topFaultEndpoints : derived.topFaultEndpoints,
   };
 }
 
@@ -4934,6 +5012,17 @@ function endpointActiveFaultWeight(endpoint = {}) {
   return 0;
 }
 
+function statusMatrixSeverity(row = {}) {
+  if (row.id === "rateLimit429" || row.id === "backend5xx") return number(row.count) ? "danger" : "ok";
+  if (row.id === "auth4xx" || row.id === "client4xx") return number(row.count) ? "warn" : "ok";
+  return "ok";
+}
+
+function statusMatrixLabel(row = {}) {
+  const key = row.id ? `http_status_${row.id}` : "";
+  return key && translations.en[key] ? t(key) : row.label || row.id || "-";
+}
+
 function httpTriageReadGate(triage = apiStatusTriage()) {
   if (number(triage.activeRateLimit429) || number(triage.activeBackendFault5xx)) {
     return { key: "http_triage_read_closed", severity: "danger" };
@@ -4960,6 +5049,7 @@ function renderHttpTriageStrip() {
     number(triage.activeAuthFault4xx) +
     number(triage.activeClientFault4xx);
   const incidents = Array.isArray(triage.incidents) ? triage.incidents : [];
+  const statusMatrix = Array.isArray(triage.statusMatrix) ? triage.statusMatrix : [];
   const incidentBus = incidents.length
     ? incidents.slice(0, 4).map((incident) => {
       const severity = incident.active ? (incident.severity || "warn") : "cached";
@@ -4992,6 +5082,23 @@ function renderHttpTriageStrip() {
       `;
     })
     .join("");
+  const maxStatusCount = Math.max(1, ...statusMatrix.map((row) => number(row.count)));
+  const statusMatrixMarkup = statusMatrix.length
+    ? statusMatrix.map((row) => {
+      const severity = statusMatrixSeverity(row);
+      const topEndpoint = Array.isArray(row.endpoints) && row.endpoints.length
+        ? row.endpoints[0]
+        : null;
+      return `
+        <span class="${escapeHtml(severity)}" style="--status-share:${clamp((number(row.count) / maxStatusCount) * 100, 0, 100).toFixed(1)}%">
+          <em>${escapeHtml(statusMatrixLabel(row))}</em>
+          <strong>${escapeHtml(formatNumber(row.count))}</strong>
+          <small>${escapeHtml(formatNumber(row.sharePct, 1))}% · ${escapeHtml(topEndpoint ? `${topEndpoint.endpoint}:${formatNumber(topEndpoint.count)}` : "no endpoint")}</small>
+          <i></i>
+        </span>
+      `;
+    }).join("")
+    : "";
 
   root.className = `http-triage-strip ${escapeHtml(triage.severity || "ok")}`;
   root.innerHTML = `
@@ -5028,6 +5135,12 @@ function renderHttpTriageStrip() {
       ${triageCounter("triage_auth", triage.authFault4xx, triage.activeAuthFault4xx)}
       ${triageCounter("triage_client", triage.clientFault4xx, triage.activeClientFault4xx)}
     </div>
+    ${statusMatrixMarkup ? `
+      <div class="http-triage-status-matrix">
+        <span>${escapeHtml(t("http_triage_status_matrix"))}</span>
+        <div>${statusMatrixMarkup}</div>
+      </div>
+    ` : ""}
     <div class="http-triage-buses">
       <div>
         <span>${escapeHtml(t("http_triage_fault_bus"))}</span>

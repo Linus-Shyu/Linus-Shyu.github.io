@@ -20891,6 +20891,123 @@ body .side-rail .rail-budget strong {
   gap: 6px;
 }
 
+.http-triage-status-matrix {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid rgba(0, 240, 255, 0.16);
+  border-radius: 6px;
+  padding: 9px;
+  background:
+    linear-gradient(90deg, rgba(0, 240, 255, 0.07), rgba(255, 0, 122, 0.045)),
+    rgba(11, 17, 27, 0.9);
+}
+
+.http-triage-status-matrix > span {
+  overflow: hidden;
+  color: #9eacc0;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.http-triage-status-matrix > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.http-triage-status-matrix > div > span {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid rgba(156, 174, 197, 0.18);
+  border-radius: 6px;
+  padding: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    rgba(7, 10, 16, 0.88);
+}
+
+.http-triage-status-matrix em,
+.http-triage-status-matrix small {
+  overflow: hidden;
+  color: #9eacc0;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.http-triage-status-matrix strong {
+  color: #f7fbff;
+  font-family: var(--code-font);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.http-triage-status-matrix i {
+  display: block;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(156, 174, 197, 0.16);
+}
+
+.http-triage-status-matrix i::before {
+  content: "";
+  display: block;
+  width: var(--status-share, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.28);
+}
+
+.http-triage-status-matrix .ok {
+  border-color: rgba(0, 255, 102, 0.26);
+}
+
+.http-triage-status-matrix .ok strong,
+.http-triage-status-matrix .ok i::before {
+  color: #00ff66;
+  background: #00ff66;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.28);
+}
+
+.http-triage-status-matrix .warn {
+  border-color: rgba(255, 159, 28, 0.42);
+}
+
+.http-triage-status-matrix .warn strong,
+.http-triage-status-matrix .warn i::before {
+  color: #ff9f1c;
+  background: #ff9f1c;
+  box-shadow: 0 0 12px rgba(255, 159, 28, 0.26);
+}
+
+.http-triage-status-matrix .danger {
+  border-color: rgba(255, 0, 122, 0.54);
+}
+
+.http-triage-status-matrix .danger strong,
+.http-triage-status-matrix .danger i::before {
+  color: #ff007a;
+  background: #ff007a;
+  box-shadow: 0 0 13px rgba(255, 0, 122, 0.32);
+}
+
 .http-triage-kpis span,
 .http-triage-counters span,
 .http-triage-buses > div,
@@ -21044,7 +21161,8 @@ body .side-rail .rail-budget strong {
 
 @media (max-width: 680px) {
   .http-triage-kpis,
-  .http-triage-counters {
+  .http-triage-counters,
+  .http-triage-status-matrix > div {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
