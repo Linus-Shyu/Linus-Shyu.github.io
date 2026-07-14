@@ -502,6 +502,7 @@ svg {
 .freshness-list,
 .task-list,
 .funnel-list,
+.language-track-grid,
 .evidence-grid,
 .post-list,
 .draft-list,
@@ -514,6 +515,7 @@ svg {
 .freshness-row,
 .task-card,
 .funnel-row,
+.language-track-card,
 .evidence-card,
 .post-card,
 .draft-card,
@@ -535,6 +537,7 @@ svg {
 .freshness-row strong,
 .task-card strong,
 .funnel-row strong,
+.language-track-card strong,
 .evidence-card strong {
   display: block;
   color: var(--ink);
@@ -543,6 +546,7 @@ svg {
 .freshness-row span,
 .task-card span,
 .funnel-row span,
+.language-track-card span,
 .evidence-card span {
   color: var(--muted);
   font-size: 13px;
@@ -630,6 +634,103 @@ svg {
   font-family: var(--mono);
   font-size: 13px;
   text-align: right;
+}
+
+.language-track-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.language-track-card {
+  display: grid;
+  gap: 14px;
+}
+
+.language-track-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.language-track-code {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(135deg, var(--accent), #7856ff);
+  font-weight: 950;
+}
+
+.language-track-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.language-track-meta span,
+.language-track-status {
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.language-track-status {
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 12%, transparent);
+}
+
+.language-track-status.scheduled {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.language-track-status.done {
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 14%, transparent);
+}
+
+.language-track-progress {
+  display: grid;
+  gap: 8px;
+}
+
+.language-track-progress div {
+  overflow: hidden;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--line-soft);
+}
+
+.language-track-progress div span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.language-track-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.language-track-kpis div {
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  padding: 10px;
+  background: var(--surface);
+}
+
+.language-track-kpis b {
+  display: block;
+  color: var(--ink);
+  font-size: 20px;
 }
 
 .evidence-grid {
@@ -818,6 +919,7 @@ svg {
   .hero-grid,
   .content-grid,
   .ops-grid,
+  .language-track-grid,
   .evidence-grid,
   .trend-grid {
     grid-template-columns: 1fr;
@@ -858,5 +960,13 @@ svg {
 
   .funnel-value {
     text-align: left;
+  }
+
+  .language-track-head {
+    display: grid;
+  }
+
+  .language-track-kpis {
+    grid-template-columns: 1fr;
   }
 }

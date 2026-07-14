@@ -29,13 +29,15 @@ for (const dir of dashboards) {
     "renderAdvice",
     "renderEvidence",
     "evidenceCards",
+    "languageTracks",
+    "renderLanguageTracks",
     "learning",
     "growthLeakProfiler",
     "copyText",
   ]) {
     if (!script.includes(token)) fail(`${dir}/script.js lost AI advice or learning output coverage.`, token);
   }
-  for (const id of ["advice", "drafts", "evidence", "tasks"]) {
+  for (const id of ["advice", "drafts", "evidence", "tasks", "language"]) {
     if (!html.includes(`id="${id}"`)) fail(`${dir}/index.html lost the AI operator section.`, id);
   }
 }

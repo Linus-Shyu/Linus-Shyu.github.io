@@ -9,6 +9,15 @@ const fallbackData = {
   drafts: [],
   actions: [],
   opportunities: [],
+  languageTracks: {
+    mode: "timezone",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    tracks: [
+      { id: "zh", label: "ZH", utcHours: [4, 12, 13], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
+      { id: "en", label: "EN", utcHours: [14, 17, 22], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
+    ],
+  },
   api: { spend: 0, cap: 5, remaining: 5, endpoints: [], days: [] },
   openai: { calls: 0, failures: 0, totalEstimatedUsd: 0 },
 };
@@ -16,6 +25,7 @@ const fallbackData = {
 const I18N = {
   en: {
     nav_overview: "Overview",
+    nav_language: "Language",
     nav_tasks: "Tasks",
     nav_funnel: "Funnel",
     nav_trend: "Trend",
@@ -55,6 +65,13 @@ const I18N = {
     no_posts: "No recent posts in the synced data.",
     no_drafts: "No reply drafts ready yet. Run growth maintenance to generate fresh drafts.",
     no_advice: "No AI advice in the current data.",
+    language_eyebrow: "Language Tracks",
+    language_title: "Chinese and English run in their own windows",
+    language_next: "Next slot",
+    language_progress: "24h progress",
+    language_traffic: "7d reach",
+    language_ack: "7d ACKs",
+    language_score: "Avg score",
     freshness_eyebrow: "Data Freshness",
     freshness_title: "Can I trust this run?",
     tasks_eyebrow: "Today",
@@ -69,6 +86,7 @@ const I18N = {
   },
   zh: {
     nav_overview: "总览",
+    nav_language: "语言",
     nav_tasks: "任务",
     nav_funnel: "漏斗",
     nav_trend: "趋势",
@@ -108,6 +126,13 @@ const I18N = {
     no_posts: "同步数据里暂无近期发帖。",
     no_drafts: "当前没有回复草稿。运行 growth maintenance 生成。",
     no_advice: "当前数据里没有 AI 建议。",
+    language_eyebrow: "语言轨道",
+    language_title: "中文和英文按各自时区独立运行",
+    language_next: "下个窗口",
+    language_progress: "24h 进度",
+    language_traffic: "7日触达",
+    language_ack: "7日互动",
+    language_score: "平均分",
     freshness_eyebrow: "数据新鲜度",
     freshness_title: "这次判断可信吗？",
     tasks_eyebrow: "今日",
@@ -164,6 +189,18 @@ function formatRelativeAge(value) {
   if (hours < 48) return lang() === "zh" ? `${hours} 小时前` : `${hours}h ago`;
   const days = Math.round(hours / 24);
   return lang() === "zh" ? `${days} 天前` : `${days}d ago`;
+}
+
+function formatUtcHours(hours = []) {
+  const labels = (hours || [])
+    .map((hour) => Number.parseInt(hour, 10))
+    .filter((hour) => Number.isInteger(hour) && hour >= 0 && hour <= 23)
+    .map((hour) => `${String(hour).padStart(2, "0")}:00`);
+  return labels.length ? `${labels.join(" / ")} UTC` : "-";
+}
+
+function languageTrackDefaults() {
+  return fallbackData.languageTracks.tracks;
 }
 
 function ageMinutes(value) {
@@ -662,6 +699,54 @@ function renderFunnel(data) {
   }).join("");
 }
 
+function renderLanguageTracks(data) {
+  const sourceTracks = data.languageTracks?.tracks?.length
+    ? data.languageTracks.tracks
+    : languageTrackDefaults();
+  const sorted = [...sourceTracks].sort((left, right) => {
+    const order = { zh: 0, en: 1 };
+    return (order[left.id] ?? 9) - (order[right.id] ?? 9);
+  });
+  $("#language-track-grid").innerHTML = sorted.map((track) => {
+    const progress = Math.max(
+      0,
+      Math.min(100, (Number(track.packetsLast24h) / Math.max(1, Number(track.dailyTarget) || 1)) * 100),
+    );
+    const nextSlot = track.nextWindow?.label || formatUtcHours((track.utcHours || []).slice(0, 1));
+    const status = String(track.status || "scheduled").toLowerCase();
+    const label = track.id === "zh"
+      ? (lang() === "zh" ? "中文" : "Chinese")
+      : (lang() === "zh" ? "英文" : "English");
+    return `
+      <article class="language-track-card">
+        <div class="language-track-head">
+          <div>
+            <span class="language-track-code">${escapeHtml(track.label || track.id?.toUpperCase() || "-")}</span>
+            <strong>${escapeHtml(label)}</strong>
+            <span>${escapeHtml(formatUtcHours(track.utcHours || []))}</span>
+          </div>
+          <em class="language-track-status ${escapeHtml(status)}">${escapeHtml(status)}</em>
+        </div>
+        <div class="language-track-progress">
+          <span>${escapeHtml(t("language_progress"))}: ${formatNumber(track.packetsLast24h)}/${formatNumber(track.dailyTarget)}</span>
+          <div><span style="width:${progress}%"></span></div>
+        </div>
+        <div class="language-track-meta">
+          <span>${escapeHtml(t("language_next"))}: ${escapeHtml(nextSlot)}</span>
+          <span>${escapeHtml(data.languageTracks?.mode || "timezone")}</span>
+          <span>0 X reads</span>
+        </div>
+        <div class="language-track-kpis">
+          <div><span>${escapeHtml(t("language_traffic"))}</span><b>${formatNumber(track.traffic7d)}</b></div>
+          <div><span>${escapeHtml(t("language_ack"))}</span><b>${formatNumber(track.ack7d)}</b></div>
+          <div><span>${escapeHtml(t("language_score"))}</span><b>${formatNumber(track.avgScore, 1)}</b></div>
+        </div>
+        <span>${escapeHtml(track.nextAction || "")}</span>
+      </article>
+    `;
+  }).join("");
+}
+
 function renderEvidence(data) {
   $("#evidence-grid").innerHTML = evidenceCards(data).map((card) => `
     <article class="evidence-card">
@@ -691,6 +776,7 @@ function render(data) {
   setPreferenceButtons();
   renderHero(dashboardData);
   renderPrimaryAdvice(dashboardData);
+  renderLanguageTracks(dashboardData);
   renderFreshness(dashboardData);
   renderTasks(dashboardData);
   renderFunnel(dashboardData);

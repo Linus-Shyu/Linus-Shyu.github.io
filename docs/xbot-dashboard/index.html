@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260714-growth-v4" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-growth-v5" />
   </head>
   <body>
     <div class="app-shell">
@@ -29,6 +29,7 @@
         </a>
         <nav class="rail-nav">
           <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
+          <a href="#language" data-i18n="nav_language">Language</a>
           <a href="#tasks" data-i18n="nav_tasks">Tasks</a>
           <a href="#funnel" data-i18n="nav_funnel">Funnel</a>
           <a href="#trend" data-i18n="nav_trend">Trend</a>
@@ -107,6 +108,14 @@
               <button class="button secondary" id="copy-best-draft" type="button" data-i18n="copy_best">Copy best draft</button>
             </div>
           </article>
+        </section>
+
+        <section class="panel language-panel" id="language">
+          <div class="section-head">
+            <p data-i18n="language_eyebrow">Language Tracks</p>
+            <h2 data-i18n="language_title">Chinese and English run in their own windows</h2>
+          </div>
+          <div class="language-track-grid" id="language-track-grid"></div>
         </section>
 
         <section class="ops-grid">
@@ -223,6 +232,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=20260714-growth-v2"></script>
+    <script src="./script.js?v=20260714-growth-v3"></script>
   </body>
 </html>

@@ -20,10 +20,10 @@ function read(file) {
 for (const dir of dashboards) {
   const html = read(`${dir}/index.html`);
   const script = read(`${dir}/script.js`);
-  for (const section of ["overview", "tasks", "funnel", "trend", "posts", "advice", "drafts", "cost", "evidence"]) {
+  for (const section of ["overview", "language", "tasks", "funnel", "trend", "posts", "advice", "drafts", "cost", "evidence"]) {
     if (!html.includes(`id="${section}"`)) fail(`${dir}/index.html is missing growth topology section.`, section);
   }
-  for (const token of ["renderHero", "renderFreshness", "renderTasks", "renderFunnel", "renderCharts", "renderPosts", "renderDrafts", "renderAdvice", "renderCost", "renderEvidence"]) {
+  for (const token of ["renderHero", "renderLanguageTracks", "renderFreshness", "renderTasks", "renderFunnel", "renderCharts", "renderPosts", "renderDrafts", "renderAdvice", "renderCost", "renderEvidence"]) {
     if (!script.includes(token)) fail(`${dir}/script.js is missing growth topology renderer.`, token);
   }
 }
