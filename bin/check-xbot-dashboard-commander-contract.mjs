@@ -13,52 +13,17 @@ function fail(message, details = "") {
   process.exit(1);
 }
 
-function readRelative(file) {
+function read(file) {
   return fs.readFileSync(path.join(root, file), "utf8");
 }
 
-function requireIncludes(file, text, snippets) {
-  for (const snippet of snippets) {
-    if (!text.includes(snippet)) {
-      fail(`${file} is missing commander contract token.`, snippet);
-    }
-  }
-}
-
 for (const dir of dashboards) {
-  const scriptFile = `${dir}/script.js`;
-  const script = readRelative(scriptFile);
-
-  requireIncludes(scriptFile, script, [
-    "function nextWindowCommanderData()",
-    "incoming?.window || incoming?.activeWindow",
-    "function commanderWindow(commander)",
-    "commander?.window || commander?.activeWindow",
-    "const windowLabel = raw.windowLabel || raw.label || raw.window || \"-\";",
-    "const window = commanderWindow(commander);",
-    "renderWindowCommandStrip();",
-    "renderNextWindowCommander();",
-    "zeroExtraXReads: true",
-    "readGate: \"cached_only\"",
-  ]);
-
-  const commanderWindowUses = [...script.matchAll(/commanderWindow\(commander\)/g)].length;
-  if (commanderWindowUses < 2) {
-    fail(`${scriptFile} must use commanderWindow() in both commander surfaces.`, `found ${commanderWindowUses}`);
+  const script = read(`${dir}/script.js`);
+  for (const token of ["routeHref", "primary-route", "actions", "opportunities"]) {
+    if (!script.includes(token)) fail(`${dir}/script.js lost manual route commander coverage.`, token);
   }
-
-  if (/commander\.activeWindow \|\| \{\}/.test(script)) {
-    fail(`${scriptFile} still reads commander.activeWindow directly in a rendered surface.`);
-  }
-
-  const commanderStart = script.indexOf("function nextWindowCommanderData()");
-  const commanderEnd = script.indexOf("function renderGrowthOpportunityScorer()", commanderStart);
-  const commanderSurface = commanderStart >= 0 && commanderEnd > commanderStart
-    ? script.slice(commanderStart, commanderEnd)
-    : script;
-  if (/(enable|allow|publish|send|post).{0,80}auto[-_ ]?repl(?:y|ies)/i.test(commanderSurface) ||
-      /(bypass|evade).{0,40}rate[-_ ]?limit/i.test(commanderSurface)) {
-    fail(`${scriptFile} commander surface contains unsafe automation wording.`);
+  if (/(auto|automatic).{0,40}(reply|publish|send)/i.test(script)) {
+    fail(`${dir}/script.js must keep X route work manual.`);
   }
 }
 

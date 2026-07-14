@@ -3,772 +3,192 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>X Bot Growth Console</title>
+    <title>X Growth Dashboard</title>
     <meta
       name="description"
-      content="A clean X-style growth console for CODEX route queues, learning signals, manual ACK work, and API cost boundaries."
+      content="Live X growth dashboard for Linus Shyu: growth trend, posted content, AI suggestions, and cost controls."
     />
     <script>
       (() => {
         const theme = localStorage.getItem("xbot-dashboard-theme") || "dark";
         const savedLang = localStorage.getItem("xbot-dashboard-lang");
-        const lang = savedLang || ((navigator.language || "").startsWith("zh") ? "zh" : "en");
+        const lang = savedLang || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en");
         document.documentElement.dataset.theme = theme;
         document.documentElement.dataset.lang = lang;
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260709-x-official-v1" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-growth-v1" />
   </head>
   <body>
-    <div class="x-shell" id="x-dashboard" aria-label="X bot growth console">
-      <aside class="x-left-rail" aria-label="Primary navigation">
-        <a class="x-logo" href="#" aria-label="Linus Shyu">X</a>
-        <nav>
-          <a href="#x-home" class="active">Home</a>
-          <a href="#x-routes">Explore</a>
-          <a href="#x-queue">Notifications</a>
-          <a href="#x-drafts">Messages</a>
-          <a href="#x-cost">Bookmarks</a>
-          <a href="#x-profile">Profile</a>
-        </nav>
-        <a class="x-compose-button" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">Open X</a>
-      </aside>
-
-      <main class="x-main-feed" id="x-home" aria-live="polite">
-        <header class="x-feed-header">
-          <div>
-            <strong>Linus Shyu Growth</strong>
-            <span>Loading route console</span>
-          </div>
-        </header>
-        <section class="x-loading-card">Loading growth system...</section>
-      </main>
-
-      <aside class="x-right-rail" aria-label="Growth context">
-        <div class="x-search-pill">Search growth signals</div>
-        <section class="x-side-card">
-          <h2>What is ready</h2>
-          <p>Loading...</p>
-        </section>
-      </aside>
-    </div>
-
-    <div class="ops-shell">
-      <aside class="side-rail" aria-label="Server navigation">
-        <a class="brand" href="#">
-          <span class="brand-mark">LS</span>
-          <span>
-            <strong>CODEX</strong>
-            <small data-i18n="brand_subtitle">SRE Matrix Core</small>
-          </span>
+    <div class="app-shell">
+      <aside class="left-rail" aria-label="Navigation">
+        <a class="brand" href="#overview" aria-label="Linus Shyu dashboard">
+          <span>LS</span>
+          <strong>Growth</strong>
         </a>
-
-        <div class="env-card">
-          <div class="env-line">
-            <span class="status-dot"></span>
-            <strong data-i18n="production">Production</strong>
-          </div>
-          <span id="updated-at">Loading</span>
-        </div>
-
-        <div class="rail-boundary" aria-label="System boundary">
-          <span data-i18n="rail_boundary_label">SYSTEM BOUNDARY</span>
-          <strong data-i18n="rail_boundary_title">Zero-read route loop</strong>
-          <div class="rail-boundary-grid">
-            <p><i></i><span data-i18n="rail_boundary_reads">0 X reads</span></p>
-            <p><i></i><span data-i18n="rail_boundary_ack">Human ACK</span></p>
-            <p><i></i><span data-i18n="rail_boundary_budget">Cost partition sealed</span></p>
-          </div>
-        </div>
-
-        <div class="rack-mini" aria-label="Runtime nodes">
-          <div><span></span><strong>RSS</strong><em>ingest</em></div>
-          <div><span></span><strong>AI</strong><em>infer</em></div>
-          <div><span></span><strong>X</strong><em>route</em></div>
-          <div><span></span><strong>OPS</strong><em>learn</em></div>
-        </div>
-
         <nav class="rail-nav">
           <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
-          <a href="#services" data-i18n="nav_services">Services</a>
-          <a href="#today" data-i18n="nav_workflow">Workflow</a>
-          <a href="#drafts" data-i18n="nav_queue">Swarm Queue</a>
-          <a href="#performance" data-i18n="nav_signals">Signals</a>
-          <a href="#cost" data-i18n="nav_cost">Cost Boundary</a>
+          <a href="#trend" data-i18n="nav_trend">Trend</a>
+          <a href="#posts" data-i18n="nav_posts">Posts</a>
+          <a href="#advice" data-i18n="nav_advice">AI Advice</a>
+          <a href="#drafts" data-i18n="nav_drafts">Drafts</a>
+          <a href="#cost" data-i18n="nav_cost">Cost</a>
         </nav>
-
-        <div class="rail-budget">
-          <span data-i18n="x_api_budget">X API Cost Partition</span>
-          <strong id="rail-api-left">-</strong>
-          <div class="meter"><div id="rail-api-meter"></div></div>
-          <small id="rail-api-spend">Loading spend</small>
+        <div class="rail-status">
+          <span class="live-dot"></span>
+          <div>
+            <strong data-i18n="auto_update">Auto update</strong>
+            <small id="rail-sync">data.json</small>
+          </div>
         </div>
       </aside>
 
-      <main class="ops-main">
+      <main class="main">
         <header class="topbar">
           <div>
-            <p class="eyebrow" data-i18n="top_eyebrow">CODEX / Production Console</p>
-            <h1 data-i18n="title">CODEX Command Center</h1>
+            <p class="eyebrow" data-i18n="eyebrow">Linus Shyu / X Growth</p>
+            <h1 data-i18n="title">Growth dashboard that shows what matters.</h1>
           </div>
           <div class="top-actions">
-            <span class="live-pill"><span></span><strong id="mode-label">Zero extra X API</strong></span>
-            <div class="toolbar-group" aria-label="Dashboard preferences">
-              <div class="segmented" role="group" aria-label="Theme">
-                <button type="button" data-theme-value="light">Light</button>
-                <button type="button" data-theme-value="dark">Dark</button>
-              </div>
-              <div class="segmented" role="group" aria-label="Language">
-                <button type="button" data-lang-value="en">EN</button>
-                <button type="button" data-lang-value="zh">中文</button>
-              </div>
+            <div class="segmented" aria-label="Theme">
+              <button type="button" data-theme-value="light">Light</button>
+              <button type="button" data-theme-value="dark">Dark</button>
             </div>
-            <button class="button button-secondary" type="button" id="demo-toggle" data-demo-toggle data-i18n="demo_mode">Demo mode</button>
-            <button class="button button-secondary" type="button" id="autoplay-toggle" data-autoplay-toggle data-i18n="auto_demo">Auto demo</button>
-            <a class="button button-primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
+            <div class="segmented" aria-label="Language">
+              <button type="button" data-lang-value="en">EN</button>
+              <button type="button" data-lang-value="zh">中文</button>
+            </div>
+            <button class="button secondary" id="refresh-button" type="button" data-i18n="refresh">Refresh</button>
+            <a class="button primary" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
 
-        <section class="grafana-toolbar" aria-label="Dashboard variables">
-          <div class="dashboard-breadcrumb">
-            <span class="grafana-mark">G</span>
-            <strong data-i18n="grafana_title">Node Exporter: CODEX Traffic Matrix</strong>
-            <em data-i18n="grafana_window">Last 24 hours</em>
+        <section class="hero-grid" id="overview">
+          <article class="hero-card">
+            <div class="hero-head">
+              <span class="status-pill" id="freshness-pill">Live data</span>
+              <span id="updated-at">-</span>
+            </div>
+            <h2 id="growth-headline">Loading growth signal...</h2>
+            <p id="growth-summary">Fetching the latest dashboard data.</p>
+            <div class="hero-metrics">
+              <div>
+                <span data-i18n="followers">Followers</span>
+                <strong id="metric-followers">-</strong>
+                <small id="metric-follower-delta">-</small>
+              </div>
+              <div>
+                <span data-i18n="posts_24h">24h Posts</span>
+                <strong id="metric-posts">-</strong>
+                <small id="metric-engagement">-</small>
+              </div>
+              <div>
+                <span data-i18n="traffic_7d">7d Reach</span>
+                <strong id="metric-reach">-</strong>
+                <small id="metric-score">-</small>
+              </div>
+              <div>
+                <span data-i18n="api_left">API Left</span>
+                <strong id="metric-api">-</strong>
+                <small id="metric-api-spend">-</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="focus-card" id="advice">
+            <div class="section-head compact">
+              <p data-i18n="ai_today">AI Today</p>
+              <h2 id="primary-advice-title">Next best move</h2>
+            </div>
+            <p id="primary-advice">Loading AI suggestions...</p>
+            <div class="action-row">
+              <a class="button primary" id="primary-route" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_route">Open route</a>
+              <button class="button secondary" id="copy-best-draft" type="button" data-i18n="copy_best">Copy best draft</button>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" id="trend">
+          <div class="section-head">
+            <p data-i18n="growth_trend">Growth Trend</p>
+            <h2 data-i18n="trend_title">Follower, reach, and posting velocity</h2>
           </div>
-          <div class="variable-strip">
-            <label>
-              <span>interval</span>
-              <strong>5s</strong>
-            </label>
-            <label>
-              <span>datasource</span>
-              <strong>GitHub Pages</strong>
-            </label>
-            <label>
-              <span>job</span>
-              <strong>x_bot</strong>
-            </label>
-            <label>
-              <span>host</span>
-              <strong>Linus-Shyu</strong>
-            </label>
-            <label>
-              <span>env</span>
-              <strong>prod</strong>
-            </label>
+          <div class="trend-grid">
+            <div class="chart-card">
+              <div class="chart-title">
+                <strong data-i18n="reach_chart">Reach over time</strong>
+                <span id="reach-total">-</span>
+              </div>
+              <div class="chart-wrap">
+                <svg id="reach-chart" viewBox="0 0 640 220" role="img" aria-label="Reach trend"></svg>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title">
+                <strong data-i18n="cost_chart">X API spend</strong>
+                <span id="cost-total">-</span>
+              </div>
+              <div class="chart-wrap">
+                <svg id="cost-chart" viewBox="0 0 640 220" role="img" aria-label="Cost trend"></svg>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section class="noc-strip" aria-label="Operations status">
-          <div>
-            <span data-i18n="noc_runtime">Runtime</span>
-            <strong data-i18n="noc_runtime_value">Actions online</strong>
-          </div>
-          <div>
-            <span data-i18n="noc_sync">Pages sync</span>
-            <strong data-i18n="noc_sync_value">Static deploy</strong>
-          </div>
-          <div>
-            <span data-i18n="noc_budget">Cost guard</span>
-            <strong data-i18n="noc_budget_value">No X reads</strong>
-          </div>
-          <div>
-            <span data-i18n="noc_operator">Operator mode</span>
-            <strong data-i18n="noc_operator_value">Manual paste</strong>
-          </div>
-        </section>
-
-        <section class="window-command-strip" id="window-command-strip" aria-label="Next window commander"></section>
-
-        <section class="fire-window-router" id="fire-window-router" aria-label="L7 fire-window router"></section>
-
-        <section class="http-triage-strip" id="http-triage-strip" aria-label="HTTP status triage"></section>
-
-        <section class="reactor-hud" id="reactor-hud" aria-label="Reactor command HUD"></section>
-
-        <section class="command-packet-dock" id="command-packet-dock" aria-label="Command packet dock"></section>
-
-        <section class="identity-conversion-firewall" id="identity-conversion-firewall" aria-label="Identity conversion firewall"></section>
-
-        <section class="growth-loop-trace" id="growth-loop-trace" aria-label="Growth loop trace"></section>
-
-        <section class="route-fire-drill" id="route-fire-drill" aria-label="Route fire drill"></section>
-
-        <section class="l7-surge-sentinel" id="l7-surge-sentinel" aria-label="L7 surge sentinel"></section>
-
-        <section class="growth-leak-profiler" id="growth-leak-profiler" aria-label="Growth leak profiler"></section>
-
-        <section class="telemetry-contract" id="telemetry-contract" aria-label="Telemetry data contract"></section>
-
-        <section class="hook-gate-firewall" id="hook-gate-firewall" aria-label="Hook gate firewall"></section>
-
-        <section class="expo-story-grid" id="expo-story" aria-label="Expo story">
-          <article class="outcome-panel">
-            <div class="story-head">
-              <span data-i18n="story_eyebrow">Expo brief</span>
-              <strong data-i18n="story_title">Zero-waste control loop</strong>
+        <section class="content-grid">
+          <article class="panel" id="posts">
+            <div class="section-head">
+              <p data-i18n="posted_content">Posted Content</p>
+              <h2 data-i18n="posts_title">What the bot published recently</h2>
             </div>
-            <div class="outcome-score" id="story-outcome-score">0 X reads</div>
-            <p id="story-outcome-copy">The system turns tech signal into paste-ready route outputs, then learns from measured outcomes.</p>
-            <div class="outcome-stats" id="outcome-stats"></div>
+            <div class="post-list" id="post-list"></div>
           </article>
 
-          <article class="pipeline-panel">
-            <div class="story-head">
-              <span data-i18n="pipeline_eyebrow">Live pipeline</span>
-              <strong data-i18n="pipeline_title">Signal to learning</strong>
-            </div>
-            <div class="pipeline-rail" aria-label="Signal pipeline">
-              <div class="pipeline-flow" aria-hidden="true"></div>
-              <div class="pipeline-node rss"><span>RSS</span><strong data-i18n="pipeline_rss">Ingest</strong></div>
-              <div class="pipeline-node rank"><span>AI</span><strong data-i18n="pipeline_rank">Rank</strong></div>
-              <div class="pipeline-node draft"><span>TXT</span><strong data-i18n="pipeline_draft">Draft</strong></div>
-              <div class="pipeline-node route"><span>X</span><strong data-i18n="pipeline_route">Route</strong></div>
-              <div class="pipeline-node learn"><span>ML</span><strong data-i18n="pipeline_learn">Learn</strong></div>
-            </div>
-            <div class="pipeline-status" id="pipeline-status">5-stage loop active</div>
-            <div class="pipeline-metrics" id="pipeline-metrics"></div>
-          </article>
-
-          <article class="runlog-panel">
-            <div class="story-head">
-              <span data-i18n="runlog_eyebrow">Task log</span>
-              <strong id="runlog-status">operator ready</strong>
-            </div>
-            <div class="runlog-list" id="runlog-list"></div>
-          </article>
-        </section>
-
-        <section class="autopilot-command-strip" id="autopilot-command-strip" aria-label="Autopilot command strip"></section>
-
-        <section class="trend-velocity-radar" id="trend-velocity-radar" aria-label="RSS trend velocity radar"></section>
-        <section class="rss-source-mesh" id="rss-source-mesh" aria-label="RSS source mesh"></section>
-        <section class="route-opportunity-matrix" id="route-opportunity-matrix" aria-label="Route opportunity matrix"></section>
-
-        <section class="gauge-grid" id="gauge-grid" aria-label="Live monitoring gauges"></section>
-
-        <section class="monitor-grid" aria-label="Traffic telemetry">
-          <article class="monitor-panel monitor-panel-wide">
-            <div class="monitor-head">
-              <strong data-i18n="monitor_load">System average load</strong>
-              <em id="monitor-load-current">current -</em>
-            </div>
-            <div class="monitor-chart" id="monitor-load-chart"></div>
-          </article>
-
-          <article class="monitor-panel monitor-heatmap-panel">
-            <div class="monitor-head">
-              <strong data-i18n="monitor_hourly">UTC load balancer</strong>
-              <em id="monitor-hourly-current">current -</em>
-            </div>
-            <div class="hourly-heatmap" id="monitor-hourly-heatmap"></div>
-          </article>
-
-          <article class="monitor-panel monitor-alert">
-            <div class="monitor-head">
-              <strong data-i18n="monitor_alerts">Alert state</strong>
-              <em id="monitor-alert-state">-</em>
-            </div>
-            <div class="alert-console" id="monitor-alert"></div>
-          </article>
-
-          <article class="monitor-panel monitor-table-panel">
-            <div class="monitor-head">
-              <strong data-i18n="monitor_partition">API partition usage</strong>
-              <em id="monitor-api-summary">-</em>
-            </div>
-            <div class="monitor-table-wrap">
-              <table class="monitor-table">
-                <thead>
-                  <tr>
-                    <th>endpoint</th>
-                    <th>calls</th>
-                    <th>faults</th>
-                    <th>usage</th>
-                  </tr>
-                </thead>
-                <tbody id="monitor-endpoints"></tbody>
-              </table>
-            </div>
-            <div class="monitor-cost-firewall" id="monitor-cost-firewall"></div>
-          </article>
-
-          <article class="monitor-panel monitor-panel-wide monitor-requests-panel">
-            <div class="monitor-head">
-              <strong data-i18n="monitor_requests">X API operations per run</strong>
-              <em id="monitor-request-current">current -</em>
-            </div>
-            <div class="monitor-chart compact" id="monitor-request-chart"></div>
-          </article>
-        </section>
-
-        <section class="demo-strip" aria-live="polite">
-          <div>
-            <p class="eyebrow" data-i18n="demo_live">30-second demo</p>
-            <strong id="demo-step-label">Signal Map</strong>
-          </div>
-          <div class="demo-step-list" id="demo-step-list"></div>
-          <div class="demo-progress" aria-hidden="true"><span id="demo-progress-bar"></span></div>
-        </section>
-
-        <section class="overview-grid" id="overview">
-          <article class="command-card">
-            <div class="hero-copy">
-              <div class="command-head">
-                <div>
-                  <p class="eyebrow" data-i18n="mission_eyebrow">Mission Control</p>
-                  <h2 data-i18n="mission_title">Live server-matrix traffic operations.</h2>
-                </div>
-                <span class="server-badge" data-i18n="expo_mode">Expo Mode</span>
-              </div>
-              <p class="command-copy" data-i18n="mission_copy">
-                The bot scans signal, writes copy-ready outputs, tracks outcomes, and keeps API spend visible.
-              </p>
-              <div class="hero-signal-strip" aria-label="Live traffic loop summary">
-                <div>
-                  <span data-i18n="hero_strip_signal">Signal</span>
-                  <strong id="hero-strip-signal">-</strong>
-                </div>
-                <div>
-                  <span data-i18n="hero_strip_cost">Cost Boundary</span>
-                  <strong id="hero-strip-cost">-</strong>
-                </div>
-                <div>
-                  <span data-i18n="hero_strip_learning">Learning</span>
-                  <strong id="hero-strip-learning">-</strong>
-                </div>
-              </div>
-              <div class="command-actions">
-                <a class="button button-primary" href="#today" data-i18n="start_loop">Start loop</a>
-                <button class="button button-secondary" type="button" id="copy-top-three" data-i18n="copy_top_three">Copy top 3 drafts</button>
-              </div>
-              <div class="ops-terminal">
-                <div class="terminal-bar">
-                  <span></span><span></span><span></span>
-                  <strong>codex-router.sh</strong>
-                </div>
-                <pre><code>ingest(feed)
-infer(angle)
-route(conversation)
-learn(metrics)</code></pre>
-              </div>
-            </div>
-
-            <div class="signal-stage" aria-label="Live traffic signal map">
-              <div class="signal-stage-effects" aria-hidden="true">
-                <span class="signal-edge edge-top"></span>
-                <span class="signal-edge edge-right"></span>
-                <span class="signal-beam beam-a"></span>
-                <span class="signal-beam beam-b"></span>
-                <span class="signal-scan"></span>
-              </div>
-              <canvas id="signal-canvas" width="640" height="420"></canvas>
-              <div class="signal-head">
-                <span class="signal-live"><i></i><span data-i18n="live">Live</span></span>
-                <strong data-i18n="signal_map">Signal Map</strong>
-              </div>
-              <div class="signal-node-layer" aria-label="Signal map nodes">
-                <button class="signal-node-button rss active" type="button" data-signal-node="rss">RSS</button>
-                <button class="signal-node-button draft" type="button" data-signal-node="draft">Draft</button>
-                <button class="signal-node-button score" type="button" data-signal-node="score">Score</button>
-                <button class="signal-node-button x" type="button" data-signal-node="x">X_ROUTE</button>
-                <button class="signal-node-button learn" type="button" data-signal-node="learn">Learn</button>
-              </div>
-              <aside class="signal-detail-panel" id="signal-detail-panel" aria-live="polite">
-                <div class="signal-detail-head">
-                  <span id="signal-detail-kicker">RSS</span>
-                  <button type="button" data-signal-close data-i18n="signal_detail_close">Close</button>
-                </div>
-                <h3 id="signal-detail-title">RSS ingest</h3>
-                <div class="signal-detail-tabs" aria-label="Signal detail tabs">
-                  <button class="signal-detail-tab active" type="button" data-signal-node="rss">RSS</button>
-                  <button class="signal-detail-tab" type="button" data-signal-node="draft">Draft</button>
-                  <button class="signal-detail-tab" type="button" data-signal-node="score">Score</button>
-                  <button class="signal-detail-tab" type="button" data-signal-node="x">X_ROUTE</button>
-                  <button class="signal-detail-tab" type="button" data-signal-node="learn">Learn</button>
-                </div>
-                <div class="signal-detail-body" id="signal-detail-body"></div>
-              </aside>
-              <div class="signal-metrics" aria-label="Signal metrics">
-                <div>
-                  <span data-i18n="hero_signal_label">Signal score</span>
-                  <strong id="hero-signal-score">-</strong>
-                </div>
-                <div>
-                  <span data-i18n="hero_loop_label">Today's loop</span>
-                  <strong id="hero-loop-count">-</strong>
-                </div>
-                <div>
-                  <span data-i18n="hero_cost_label">Cost guard</span>
-                  <strong id="hero-cost-guard">-</strong>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <aside class="server-card" aria-label="Live server status">
-            <div class="server-top">
-              <span data-i18n="deployment">Deployment</span>
-              <strong id="sync-updated">Loading</strong>
-            </div>
-            <div class="server-screen">
-              <div class="pulse-ring">
-                <span></span>
-                <strong id="hero-followers">-</strong>
-                <small data-i18n="followers">active conns</small>
-              </div>
-              <div class="server-stats">
-                <div>
-                  <span data-i18n="impressions_24h_short">24h L7</span>
-                  <strong id="hero-impressions">-</strong>
-                </div>
-                <div>
-                  <span data-i18n="api_left">API Partition</span>
-                  <strong id="hero-api-left">-</strong>
-                </div>
-              </div>
-            </div>
-            <div class="next-reply">
-              <span data-i18n="next_reply">Next swarm output</span>
-              <p id="hero-draft">Loading latest swarm output...</p>
-            </div>
-          </aside>
-        </section>
-
-        <section class="metric-grid" id="metric-grid" aria-label="Key metrics"></section>
-
-        <section class="mission-control-spine" id="mission-control-spine" aria-label="Ingress SLO mission control"></section>
-
-        <section class="publish-arbiter" id="publish-arbiter" aria-label="Publish arbiter"></section>
-
-        <section class="goal-grid" id="goal">
-          <article class="panel goal-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow" data-i18n="goal_eyebrow">Ingress Target</p>
-                <h2 data-i18n="goal_title">1,000 active conns is the ingress SLO.</h2>
-              </div>
-              <span class="pill" id="goal-remaining">-</span>
-            </div>
-            <div class="goal-progress">
-              <div><span id="goal-progress-bar"></span></div>
-              <small id="goal-progress-label">-</small>
-            </div>
-            <div class="goal-stats" id="goal-stats"></div>
-          </article>
-
-          <article class="panel growth-kinetics-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="kinetics_eyebrow">Traffic Kinetics</p>
-                <h2 data-i18n="kinetics_title">L7 load controller</h2>
-              </div>
-              <span class="pill" id="kinetics-state">-</span>
-            </div>
-            <div class="kinetics-core">
-              <div class="kinetics-score">
-                <span data-i18n="kinetics_score">Kinetic score</span>
-                <strong id="kinetics-score">-</strong>
-                <div><span id="kinetics-score-bar"></span></div>
-              </div>
-              <div class="kinetics-next" id="kinetics-next">-</div>
-            </div>
-            <div class="kinetics-cells" id="kinetics-cells"></div>
-            <div class="kinetics-lanes" id="kinetics-lanes"></div>
-          </article>
-
-          <article class="panel runway-simulator-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="runway_eyebrow">Runway Simulator</p>
-                <h2 data-i18n="runway_title">Milestone compression model</h2>
-              </div>
-              <span class="pill pill-neutral" id="runway-state">-</span>
-            </div>
-            <div class="runway-simulator" id="runway-simulator"></div>
-          </article>
-
-          <article class="panel learning-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="learning_eyebrow">Learning Layer</p>
-                <h2 data-i18n="learning_title">What the bot should try next</h2>
-              </div>
-              <span class="pill pill-neutral" id="learning-confidence">-</span>
-            </div>
-            <div class="learning-grid" id="learning-grid"></div>
-            <div class="learning-contract" id="learning-contract"></div>
-            <div class="autopilot-stream" id="autopilot-stream"></div>
-            <div class="autopilot-directive-deck" id="autopilot-directive-deck"></div>
-            <div class="angle-scheduler" id="angle-scheduler"></div>
-            <div class="angle-load-router" id="angle-load-router"></div>
-            <div class="next-window-commander" id="next-window-commander"></div>
-            <div class="growth-opportunity-scorer" id="growth-opportunity-scorer"></div>
-            <div class="learning-writeback" id="learning-writeback"></div>
-            <div class="hook-pattern-reactor" id="hook-pattern-reactor"></div>
-            <div class="content-bandit-allocator" id="content-bandit-allocator"></div>
-            <div class="bandit-reward-settlement" id="bandit-reward-settlement"></div>
-            <div class="active-conn-optimizer" id="active-conn-optimizer"></div>
-            <div class="narrative-resonance" id="narrative-resonance"></div>
-            <div class="topic-timing-router" id="topic-timing-router"></div>
-            <div class="angle-mutation-reactor" id="angle-mutation-reactor"></div>
-            <div class="audience-router" id="audience-router"></div>
-            <div class="temporal-angle-matrix" id="temporal-angle-matrix"></div>
-            <div class="experiment-plan" id="experiment-plan"></div>
-          </article>
-        </section>
-
-        <section class="control-plane-grid" id="control-plane" aria-label="Traffic control plane">
-          <article class="panel control-plane-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="control_eyebrow">Traffic Control Plane</p>
-                <h2 data-i18n="control_title">Next operating mode</h2>
-              </div>
-              <span class="pill" id="control-plane-state">-</span>
-            </div>
-            <div class="control-plane-body">
-              <div class="control-core">
-                <span data-i18n="control_pressure">traffic pressure</span>
-                <strong id="control-pressure">-</strong>
-                <div class="control-pressure-meter"><span id="control-pressure-bar"></span></div>
-                <p id="control-decision">-</p>
-              </div>
-              <div class="control-gates" id="control-gates"></div>
-            </div>
-            <div class="control-pulses" id="control-pulses"></div>
-          </article>
-
-          <article class="panel control-route-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="control_top_route">Top route</p>
-                <h2 id="control-route-title">-</h2>
-              </div>
-              <span class="pill pill-neutral" data-i18n="control_zero_reads">0 extra X reads</span>
-            </div>
-            <div class="control-route-body">
-              <div>
-                <span data-i18n="control_top_format">Top format</span>
-                <strong id="control-format">-</strong>
-              </div>
-              <div>
-                <span data-i18n="control_next_action">Next action</span>
-                <p id="control-next-action">-</p>
-              </div>
-              <div>
-                <span data-i18n="control_safeguards">Safeguards</span>
-                <ul id="control-safeguards"></ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="panel flywheel-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="flywheel_eyebrow">Route Flywheel Matrix</p>
-                <h2 data-i18n="flywheel_title">Zero-read route control loop</h2>
-              </div>
-              <span class="pill pill-good" id="flywheel-mode">-</span>
-            </div>
-            <div class="flywheel-body">
-              <div class="flywheel-core">
-                <span data-i18n="flywheel_velocity">Velocity score</span>
-                <strong id="flywheel-velocity">-</strong>
-                <p id="flywheel-burst">-</p>
-                <div class="flywheel-core-metrics" id="flywheel-core-metrics"></div>
-                <div class="flywheel-bottleneck" id="flywheel-bottleneck"></div>
-              </div>
-              <div class="flywheel-stages" id="flywheel-stages"></div>
-              <div class="flywheel-edge-bus" id="flywheel-edge-bus"></div>
-              <div class="flywheel-rules">
-                <span data-i18n="flywheel_rules">Execution rules</span>
-                <ul id="flywheel-rules"></ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="panel telemetry-event-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="event_stream_eyebrow">Telemetry Event Stream</p>
-                <h2 data-i18n="event_stream_title">NOC event bus</h2>
-              </div>
-              <span class="pill pill-good" id="event-stream-state">-</span>
-            </div>
-            <div class="telemetry-event-stream" id="telemetry-event-stream"></div>
-          </article>
-        </section>
-
-        <section class="proof-grid" id="proof">
-          <article class="panel proof-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow" data-i18n="proof_eyebrow">Proof of Work</p>
-                <h2 data-i18n="proof_title">Best signal this week</h2>
-              </div>
-              <span class="pill" id="proof-score-pill">Score -</span>
-            </div>
-            <div class="proof-body">
-              <blockquote id="proof-tweet">Loading strongest packet...</blockquote>
-              <div class="proof-metrics" id="proof-metrics"></div>
-            </div>
-            <div class="proof-reason">
-              <span data-i18n="why_it_worked">Why it worked</span>
-              <p id="proof-reason">Loading signal explanation...</p>
-            </div>
-            <div class="row-actions">
-              <a class="button button-primary" id="proof-open" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_winner">Open winner</a>
-            </div>
-          </article>
-
-          <article class="panel loop-panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="loop_eyebrow">Control Loop</p>
-                <h2 data-i18n="loop_title">System learns from every packet</h2>
-              </div>
-            </div>
-            <div class="loop-steps" id="loop-steps"></div>
-          </article>
-        </section>
-
-        <section class="ops-grid support-grid">
-          <article class="panel panel-wide" id="services">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow" data-i18n="server_health">Server Health</p>
-                <h2 data-i18n="runtime_services">Runtime services</h2>
-              </div>
-              <span class="pill" data-i18n="no_extra_x_reads">No extra X reads</span>
-            </div>
-            <div class="service-grid" id="service-grid"></div>
-          </article>
-
-          <article class="panel inference-panel" id="inference-stream">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="inference_eyebrow">Swarm Intelligence</p>
-                <h2 data-i18n="inference_title">Model inference stream</h2>
-              </div>
-              <span class="pill pill-neutral" id="inference-mode">cached</span>
-            </div>
-            <div class="inference-stream" id="inference-stream-body"></div>
-          </article>
-
-          <article class="panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="traffic">L7 Ingress</p>
-                <h2 data-i18n="signal_shape">7d signal shape</h2>
-              </div>
-            </div>
-            <div class="spark-panel" id="trend-bars"></div>
-          </article>
-        </section>
-
-        <section class="ops-grid workflow-grid">
-          <article class="panel panel-wide" id="today">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow" data-i18n="posting_pipeline">Inference Pipeline</p>
-                <h2 data-i18n="today_workflow">Today workflow</h2>
-              </div>
-              <span class="pill" data-i18n="manual_web_actions">Manual web actions only</span>
-            </div>
-            <div class="action-board" id="action-board"></div>
-          </article>
-
-          <article class="panel" id="opportunities">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="opportunity_eyebrow">Opportunity Router</p>
-                <h2 data-i18n="opportunity_title">Highest leverage moves</h2>
-              </div>
-              <span class="pill pill-neutral" data-i18n="zero_api_action">Zero extra API</span>
-            </div>
-            <div class="opportunity-list" id="opportunity-list"></div>
-          </article>
-
-          <article class="panel">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="runbook">Runbook</p>
-                <h2 data-i18n="operator_notes">Operator notes</h2>
-              </div>
-            </div>
-            <ol class="diagnosis-list" id="diagnosis-list"></ol>
-          </article>
-        </section>
-
-        <section class="ops-grid detail-grid">
-          <article class="panel panel-wide" id="drafts">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow" data-i18n="reply_queue">Swarm Output Queue</p>
-                <h2 data-i18n="copy_ready_drafts">Paste-ready inference outputs</h2>
-              </div>
+          <article class="panel" id="drafts">
+            <div class="section-head">
+              <p data-i18n="reply_queue">Reply Queue</p>
+              <h2 data-i18n="drafts_title">Copy-paste drafts for manual replies</h2>
             </div>
             <div class="draft-list" id="draft-list"></div>
           </article>
+        </section>
+
+        <section class="content-grid lower">
+          <article class="panel">
+            <div class="section-head">
+              <p data-i18n="ai_reasoning">AI Reasoning</p>
+              <h2 data-i18n="advice_title">What the system thinks you should do</h2>
+            </div>
+            <div class="advice-list" id="advice-list"></div>
+          </article>
 
           <article class="panel" id="cost">
-            <div class="panel-heading compact-heading">
-              <div>
-                <p class="eyebrow" data-i18n="cost_guard">Cost Guard</p>
-                <h2 data-i18n="x_api_budget">X API Cost Partition</h2>
-              </div>
-              <span class="pill pill-good" data-i18n="guarded">Guarded</span>
+            <div class="section-head">
+              <p data-i18n="cost_guard">Cost Guard</p>
+              <h2 data-i18n="cost_title">Keep growth cheap</h2>
             </div>
-            <div class="budget-card">
-              <div class="budget-line">
-                <span id="api-spend-label">-</span>
-                <span id="api-cap-label">-</span>
+            <div class="cost-card">
+              <div class="cost-ring" id="cost-ring">
+                <strong id="cost-percent">-</strong>
+                <span data-i18n="used">used</span>
               </div>
-              <div class="meter"><div id="api-meter"></div></div>
-              <p data-i18n="cost_note">Dashboard sync uses GitHub API only. It does not add X API search/read calls.</p>
+              <div class="cost-copy">
+                <p id="cost-summary">Loading cost data...</p>
+                <div class="endpoint-list" id="endpoint-list"></div>
+              </div>
             </div>
-            <div class="rate-governor" id="rate-governor"></div>
-            <div class="budget-burn-reactor" id="budget-burn-reactor"></div>
-            <div class="budget-allocation-optimizer" id="budget-allocation-optimizer"></div>
-            <div class="media-firewall" id="media-roi-gate"></div>
-            <div class="api-list" id="api-usage"></div>
           </article>
         </section>
 
-        <section class="panel" id="performance">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow" data-i18n="signal_store">Signal Store</p>
-              <h2 data-i18n="recent_winners">Highest-throughput packets</h2>
-            </div>
-            <span class="pill pill-neutral" data-i18n="last_7_days">Last 7 days</span>
-          </div>
-          <div class="generation-trace" id="generation-decision-trace"></div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th data-i18n="score">Ranker</th>
-                  <th data-i18n="impr">L7 events</th>
-                  <th data-i18n="likes">ACKs</th>
-                  <th data-i18n="format">Format</th>
-                  <th data-i18n="tweet">Packet</th>
-                </tr>
-              </thead>
-              <tbody id="top-posts"></tbody>
-            </table>
-          </div>
-        </section>
+        <footer class="footer">
+          <span>© <span id="copyright-year"></span> Linus Shyu.</span>
+          <span id="footer-sync">Auto-updated from GitHub Actions.</span>
+        </footer>
       </main>
     </div>
 
-    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <footer class="site-footer">
-      <span>© <span id="copyright-year"></span> Linus Shyu.</span>
-      <span data-i18n="copyright_suffix">All rights reserved.</span>
-    </footer>
-    <script src="./script.js?v=20260709-x-official-v1" defer></script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./script.js?v=20260714-growth-v1"></script>
   </body>
 </html>
