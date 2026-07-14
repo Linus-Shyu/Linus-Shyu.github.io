@@ -222,6 +222,11 @@ h1 {
   justify-content: flex-end;
 }
 
+.top-actions .button,
+.top-actions .segmented {
+  flex: 0 0 auto;
+}
+
 .button,
 .segmented button {
   display: inline-flex;
@@ -242,6 +247,12 @@ h1 {
   border-color: var(--accent);
   color: white;
   background: var(--accent);
+}
+
+.open-x-button {
+  min-width: 92px;
+  padding-inline: 18px;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 .button.secondary,
