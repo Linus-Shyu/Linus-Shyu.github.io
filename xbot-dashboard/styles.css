@@ -169,10 +169,11 @@ a {
 }
 
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 24px;
   margin-bottom: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -203,7 +204,7 @@ h1 {
   max-width: 760px;
   margin-bottom: 0;
   color: var(--ink);
-  font-size: clamp(30px, 4vw, 54px);
+  font-size: clamp(30px, 3.4vw, 52px);
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
@@ -218,8 +219,10 @@ h1 {
 }
 
 .top-actions {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
+  width: max-content;
+  max-width: 100%;
 }
 
 .top-actions .button,
