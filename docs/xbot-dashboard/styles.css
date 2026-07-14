@@ -224,6 +224,9 @@ h1 {
 
 .button,
 .segmented button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -231,6 +234,8 @@ h1 {
   cursor: pointer;
   text-decoration: none;
   font-weight: 850;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .button.primary {
