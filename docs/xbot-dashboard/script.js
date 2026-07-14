@@ -16,6 +16,8 @@ const fallbackData = {
 const I18N = {
   en: {
     nav_overview: "Overview",
+    nav_tasks: "Tasks",
+    nav_funnel: "Funnel",
     nav_trend: "Trend",
     nav_posts: "Posts",
     nav_advice: "AI Advice",
@@ -53,9 +55,22 @@ const I18N = {
     no_posts: "No recent posts in the synced data.",
     no_drafts: "No reply drafts ready yet. Run growth maintenance to generate fresh drafts.",
     no_advice: "No AI advice in the current data.",
+    freshness_eyebrow: "Data Freshness",
+    freshness_title: "Can I trust this run?",
+    tasks_eyebrow: "Today",
+    tasks_title: "Do these 5 things",
+    funnel_eyebrow: "Growth Funnel",
+    funnel_title: "Where growth is leaking",
+    evidence_eyebrow: "AI Evidence",
+    evidence_title: "Why the AI suggested this",
+    open: "Open",
+    copy: "Copy",
+    done: "Done",
   },
   zh: {
     nav_overview: "总览",
+    nav_tasks: "任务",
+    nav_funnel: "漏斗",
     nav_trend: "趋势",
     nav_posts: "已发内容",
     nav_advice: "AI 建议",
@@ -93,6 +108,17 @@ const I18N = {
     no_posts: "同步数据里暂无近期发帖。",
     no_drafts: "当前没有回复草稿。运行 growth maintenance 生成。",
     no_advice: "当前数据里没有 AI 建议。",
+    freshness_eyebrow: "数据新鲜度",
+    freshness_title: "这次判断可信吗？",
+    tasks_eyebrow: "今日",
+    tasks_title: "照着做这 5 件事",
+    funnel_eyebrow: "增长漏斗",
+    funnel_title: "增长卡在哪一步",
+    evidence_eyebrow: "AI 证据",
+    evidence_title: "AI 为什么这么建议",
+    open: "打开",
+    copy: "复制",
+    done: "完成",
   },
 };
 
@@ -128,6 +154,16 @@ function formatDate(value) {
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(ms));
+}
+
+function formatRelativeAge(value) {
+  const minutes = ageMinutes(value);
+  if (minutes == null) return lang() === "zh" ? "未知" : "unknown";
+  if (minutes < 60) return lang() === "zh" ? `${minutes} 分钟前` : `${minutes}m ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 48) return lang() === "zh" ? `${hours} 小时前` : `${hours}h ago`;
+  const days = Math.round(hours / 24);
+  return lang() === "zh" ? `${days} 天前` : `${days}d ago`;
 }
 
 function ageMinutes(value) {
@@ -241,6 +277,205 @@ function routeHref(data) {
   return data?.opportunities?.find((item) => item.routeUrl)?.routeUrl ||
     data?.actions?.find((item) => item.url)?.url ||
     "https://x.com/Linus_Shyu";
+}
+
+function taskStateKey(data) {
+  return `xbot-dashboard-tasks:${String(data?.updatedAt || "").slice(0, 10)}`;
+}
+
+function taskDoneSet(data) {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(taskStateKey(data)) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function setTaskDone(data, id, done) {
+  const set = taskDoneSet(data);
+  if (done) set.add(id);
+  else set.delete(id);
+  localStorage.setItem(taskStateKey(data), JSON.stringify([...set]));
+}
+
+function latestTelemetryAt(data) {
+  const values = [
+    data?.telemetry?.tweetMetricsCheckedAt,
+    data?.telemetry?.accountCheckedAt,
+    data?.telemetry?.checkedAt,
+    data?.telemetry?.analyticsUpdatedAt,
+    data?.telemetry?.dashboardUpdatedAt,
+    data?.updatedAt,
+  ].filter(Boolean);
+  return values
+    .map((value) => ({ value, ms: Date.parse(value) }))
+    .filter((item) => Number.isFinite(item.ms))
+    .sort((a, b) => b.ms - a.ms)[0]?.value || null;
+}
+
+function freshnessRows(data) {
+  const telemetry = data.telemetry || {};
+  const dashboardAt = telemetry.dashboardUpdatedAt || data.updatedAt;
+  const metricsAt = telemetry.tweetMetricsCheckedAt || telemetry.checkedAt;
+  const accountAt = telemetry.accountCheckedAt || data.profile?.followerCheckedAt;
+  const rows = [
+    {
+      label: lang() === "zh" ? "Dashboard 同步" : "Dashboard sync",
+      detail: dashboardAt ? `${formatDate(dashboardAt)} · ${formatRelativeAge(dashboardAt)}` : "missing",
+      state: ageMinutes(dashboardAt) != null && ageMinutes(dashboardAt) <= 24 * 60 ? "ok" : "warn",
+    },
+    {
+      label: lang() === "zh" ? "X 指标" : "X metrics",
+      detail: metricsAt ? `${formatDate(metricsAt)} · ${formatRelativeAge(metricsAt)}` : (lang() === "zh" ? "等待 metrics_report" : "waiting for metrics_report"),
+      state: metricsAt ? (ageMinutes(metricsAt) <= 36 * 60 ? "ok" : "warn") : "danger",
+    },
+    {
+      label: lang() === "zh" ? "粉丝快照" : "Follower snapshot",
+      detail: accountAt ? `${formatDate(accountAt)} · ${formatRelativeAge(accountAt)}` : (lang() === "zh" ? "等待账号快照" : "waiting for account snapshot"),
+      state: accountAt ? (ageMinutes(accountAt) <= 7 * 24 * 60 ? "ok" : "warn") : "danger",
+    },
+    {
+      label: lang() === "zh" ? "刷新模式" : "Refresh mode",
+      detail: telemetry.cachedOnlyRefresh
+        ? `${telemetry.refreshMode || "cached"} · ${telemetry.cachedReason || "cached_only"}`
+        : `${telemetry.refreshMode || "live"} · metrics refreshed`,
+      state: telemetry.cachedOnlyRefresh ? "warn" : "ok",
+    },
+  ];
+  return rows;
+}
+
+function buildDailyTasks(data) {
+  const opportunity = data.opportunities?.[0] || {};
+  const action = data.actions?.[0] || {};
+  const topPost = data.last7d?.topPosts?.[0] || data.last24h?.topPosts?.[0] || {};
+  const routeUrl = routeHref(data);
+  const draft = bestDraft(data);
+  return [
+    {
+      id: "check-freshness",
+      title: lang() === "zh" ? "先看数据新鲜度" : "Check data freshness first",
+      detail: lang() === "zh"
+        ? "如果 X 指标或粉丝快照缺失，先跑 growth maintenance 的 metrics_report。"
+        : "If X metrics or follower snapshot is missing, run growth maintenance in metrics_report mode.",
+    },
+    {
+      id: "open-route",
+      title: lang() === "zh" ? `打开路线：${opportunity.routeLabel || action.label || "Target Accounts"}` : `Open route: ${opportunity.routeLabel || action.label || "Target Accounts"}`,
+      detail: opportunity.reason || action.reason || (lang() === "zh" ? "进入高信号技术讨论。" : "Enter high-signal tech conversations."),
+      url: routeUrl,
+    },
+    {
+      id: "copy-draft",
+      title: lang() === "zh" ? "复制最佳回复草稿" : "Copy the best reply draft",
+      detail: draft || (lang() === "zh" ? "当前没有草稿，先跑维护任务。" : "No draft available; run maintenance first."),
+      copy: draft,
+    },
+    {
+      id: "reply-three",
+      title: lang() === "zh" ? "只回复 3 个高质量讨论" : "Reply to only 3 high-quality threads",
+      detail: lang() === "zh"
+        ? "不要乱贴；只选最新、相关、有真实技术讨论的帖子。"
+        : "Do not spray replies; choose fresh, relevant threads with real technical discussion.",
+    },
+    {
+      id: "review-winner",
+      title: lang() === "zh" ? "复盘最近最强内容" : "Review the strongest recent post",
+      detail: topPost.text || (lang() === "zh" ? "等待下一次发帖数据。" : "Waiting for post data."),
+      url: topPost.url,
+    },
+  ];
+}
+
+function funnelRows(data) {
+  const last7d = data.last7d || {};
+  const profile = data.profile || {};
+  const topPosts = [...(data.last24h?.topPosts || []), ...(data.last7d?.topPosts || [])];
+  const engagement = (Number(last7d.likes) || 0) + (Number(last7d.reposts) || 0) + (Number(last7d.replies) || 0);
+  const profileClicks = topPosts.reduce((sum, post) => sum + (Number(post.profileClicks) || 0), 0);
+  const hasProfileClicks = topPosts.some((post) => Number.isFinite(Number(post.profileClicks)));
+  const followerDelta = Number(profile.followerDelta);
+  const leakStages = data.growthLeakProfiler?.stages || [];
+  const stageScore = (id, fallback) => {
+    const stage = leakStages.find((item) => item.id === id);
+    return Number.isFinite(Number(stage?.score)) ? Number(stage.score) : fallback;
+  };
+  return [
+    {
+      label: lang() === "zh" ? "发帖" : "Posts",
+      detail: lang() === "zh" ? "过去 7 天发布量" : "7d publishing volume",
+      value: formatNumber(last7d.posts),
+      pct: Math.min(100, (Number(last7d.posts) || 0) * 8),
+    },
+    {
+      label: lang() === "zh" ? "触达" : "Reach",
+      detail: lang() === "zh" ? "曝光/阅读，缺失时说明 metrics 没刷新" : "Impressions/reach; missing means metrics are stale",
+      value: Number(last7d.impressions) > 0 ? formatNumber(last7d.impressions) : (lang() === "zh" ? "待刷新" : "pending"),
+      pct: stageScore("l7_input", Number(last7d.impressions) > 0 ? 50 : 0),
+    },
+    {
+      label: lang() === "zh" ? "互动" : "Engagement",
+      detail: lang() === "zh" ? "likes + reposts + replies" : "likes + reposts + replies",
+      value: formatNumber(engagement),
+      pct: stageScore("ack_layer", Math.min(100, engagement * 8)),
+    },
+    {
+      label: lang() === "zh" ? "主页点击" : "Profile clicks",
+      detail: lang() === "zh" ? "当前数据源缺失 profile click 时不伪造" : "Shown only when source metrics include profile clicks",
+      value: hasProfileClicks ? formatNumber(profileClicks) : (lang() === "zh" ? "待指标" : "waiting"),
+      pct: stageScore("profile_proxy", hasProfileClicks ? Math.min(100, profileClicks * 10) : 3),
+    },
+    {
+      label: lang() === "zh" ? "粉丝变化" : "Follower delta",
+      detail: lang() === "zh" ? "账号快照之间的变化" : "Change between account snapshots",
+      value: Number.isFinite(followerDelta) ? `${followerDelta >= 0 ? "+" : ""}${formatNumber(followerDelta)}` : (lang() === "zh" ? "待快照" : "waiting"),
+      pct: stageScore("active_conn", Number.isFinite(followerDelta) ? Math.max(0, Math.min(100, 45 + followerDelta * 10)) : 0),
+    },
+  ];
+}
+
+function evidenceCards(data) {
+  const opportunity = data.opportunities?.[0] || {};
+  const topPost = data.last7d?.topPosts?.[0] || data.last24h?.topPosts?.[0] || {};
+  const learning = data.learning || {};
+  const leak = data.growthLeakProfiler?.primaryLeak || {};
+  const policy = data.cachedGenerationPolicy || {};
+  return [
+    {
+      title: lang() === "zh" ? "建议来源" : "Suggested move",
+      meta: opportunity.confidence || opportunity.kind || "AI",
+      text: opportunity.reason || data.diagnosis?.[0] || t("no_advice"),
+      detail: opportunity.evidence || "",
+      url: opportunity.routeUrl,
+    },
+    {
+      title: lang() === "zh" ? "参考推文" : "Reference post",
+      meta: topPost.template || topPost.source || "recent post",
+      text: topPost.text || (lang() === "zh" ? "没有最近推文证据。" : "No recent post evidence."),
+      detail: `${formatNumber(topPost.impressions)} reach · ${formatNumber(topPost.likes)} likes · score ${formatNumber(topPost.score, 1)}`,
+      url: topPost.url,
+    },
+    {
+      title: lang() === "zh" ? "学习结论" : "Learning signal",
+      meta: learning.confidenceZh && lang() === "zh" ? learning.confidenceZh : learning.confidence,
+      text: lang() === "zh" ? learning.nextExperimentZh || learning.nextExperiment : learning.nextExperiment,
+      detail: learning.bestHook ? `best hook: ${learning.bestHook.label || learning.bestHook.id}` : (policy.primaryFormatId ? `primary format: ${policy.primaryFormatId}` : ""),
+    },
+    {
+      title: lang() === "zh" ? "漏斗瓶颈" : "Funnel bottleneck",
+      meta: leak.status || data.growthLeakProfiler?.severity,
+      text: leak.nextAction || data.growthLeakProfiler?.nextAction || "",
+      detail: leak.label ? `${leak.label} · leak ${formatNumber(leak.leakPct, 1)}%` : "",
+    },
+    {
+      title: lang() === "zh" ? "数据来源" : "Data basis",
+      meta: data.telemetry?.refreshMode || "dashboard",
+      text: lang() === "zh"
+        ? `最近真实指标：${latestTelemetryAt(data) ? formatDate(latestTelemetryAt(data)) : "缺失"}。Dashboard 同步：${formatDate(data.updatedAt)}。`
+        : `Latest real metric: ${latestTelemetryAt(data) ? formatDate(latestTelemetryAt(data)) : "missing"}. Dashboard sync: ${formatDate(data.updatedAt)}.`,
+      detail: data.telemetry?.cachedOnlyRefresh ? "cached_only refresh; no extra X reads" : "metrics refreshed",
+    },
+  ].filter((item) => item.text || item.detail);
 }
 
 function renderHero(data) {
@@ -380,6 +615,67 @@ function renderCost(data) {
   `).join("");
 }
 
+function renderFreshness(data) {
+  $("#freshness-list").innerHTML = freshnessRows(data).map((row) => `
+    <div class="freshness-row">
+      <div>
+        <strong>${escapeHtml(row.label)}</strong>
+        <span>${escapeHtml(row.detail)}</span>
+      </div>
+      <em class="freshness-state ${row.state === "ok" ? "" : row.state}">${row.state === "ok" ? "OK" : row.state.toUpperCase()}</em>
+    </div>
+  `).join("");
+}
+
+function renderTasks(data) {
+  const done = taskDoneSet(data);
+  $("#task-list").innerHTML = buildDailyTasks(data).map((task, index) => `
+    <article class="task-card ${done.has(task.id) ? "done" : ""}" data-task-id="${escapeHtml(task.id)}">
+      <button class="task-check" type="button" data-task-toggle="${escapeHtml(task.id)}" aria-label="${escapeHtml(t("done"))}">${done.has(task.id) ? "✓" : index + 1}</button>
+      <div>
+        <strong>${escapeHtml(task.title)}</strong>
+        <span>${escapeHtml(task.detail || "")}</span>
+        <div class="task-actions">
+          ${task.url ? `<a class="link-button" href="${escapeHtml(task.url)}" target="_blank" rel="noreferrer">${escapeHtml(t("open"))}</a>` : ""}
+          ${task.copy ? `<button class="copy-button" type="button" data-copy="${escapeHtml(task.copy)}">${escapeHtml(t("copy"))}</button>` : ""}
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderFunnel(data) {
+  $("#funnel-list").innerHTML = funnelRows(data).map((row) => {
+    const pct = Math.max(0, Math.min(100, Number(row.pct) || 0));
+    return `
+      <div class="funnel-row">
+        <div>
+          <strong>${escapeHtml(row.label)}</strong>
+          <span>${escapeHtml(row.detail)}</span>
+        </div>
+        <div class="funnel-bar" aria-label="${escapeHtml(row.label)} ${formatNumber(pct, 1)}%">
+          <div style="width:${pct}%"></div>
+        </div>
+        <div class="funnel-value">${escapeHtml(row.value)}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderEvidence(data) {
+  $("#evidence-grid").innerHTML = evidenceCards(data).map((card) => `
+    <article class="evidence-card">
+      <span class="tag">${escapeHtml(card.meta || "signal")}</span>
+      <strong>${escapeHtml(card.title)}</strong>
+      <p>${escapeHtml(card.text || "")}</p>
+      ${card.detail ? `<span>${escapeHtml(card.detail)}</span>` : ""}
+      <div class="evidence-links">
+        ${card.url ? `<a class="link-button" href="${escapeHtml(card.url)}" target="_blank" rel="noreferrer">${escapeHtml(t("open"))}</a>` : ""}
+      </div>
+    </article>
+  `).join("");
+}
+
 function renderCharts(data) {
   const reach = trendPoints(data);
   const cost = costPoints(data);
@@ -395,11 +691,15 @@ function render(data) {
   setPreferenceButtons();
   renderHero(dashboardData);
   renderPrimaryAdvice(dashboardData);
+  renderFreshness(dashboardData);
+  renderTasks(dashboardData);
+  renderFunnel(dashboardData);
   renderCharts(dashboardData);
   renderPosts(dashboardData);
   renderDrafts(dashboardData);
   renderAdvice(dashboardData);
   renderCost(dashboardData);
+  renderEvidence(dashboardData);
   $("#copyright-year").textContent = new Date().getFullYear();
   $("#footer-sync").textContent = `Auto-updated from GitHub Actions · ${formatDate(dashboardData.updatedAt)}`;
 }
@@ -457,6 +757,13 @@ function bindEvents() {
   document.addEventListener("click", (event) => {
     const button = event.target.closest("[data-copy]");
     if (button) copyText(button.dataset.copy);
+    const taskButton = event.target.closest("[data-task-toggle]");
+    if (taskButton) {
+      const id = taskButton.dataset.taskToggle;
+      const done = taskDoneSet(dashboardData);
+      setTaskDone(dashboardData, id, !done.has(id));
+      renderTasks(dashboardData);
+    }
   });
 }
 

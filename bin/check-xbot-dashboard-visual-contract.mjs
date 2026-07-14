@@ -28,6 +28,10 @@ for (const dir of dashboards) {
     "post-list",
     "draft-list",
     "advice-list",
+    "freshness-list",
+    "task-list",
+    "funnel-list",
+    "evidence-grid",
     "endpoint-list",
   ]) {
     if (!html.includes(`id="${id}"`)) fail(`${dir}/index.html is missing visual surface.`, id);
@@ -39,6 +43,10 @@ for (const dir of dashboards) {
     ".post-card",
     ".draft-card",
     ".advice-card",
+    ".freshness-row",
+    ".task-card",
+    ".funnel-row",
+    ".evidence-card",
     ".cost-ring",
     "@media (max-width: 720px)",
   ]) {
@@ -50,6 +58,10 @@ for (const dir of dashboards) {
     "renderLineChart",
     "renderPosts",
     "renderAdvice",
+    "renderFreshness",
+    "renderTasks",
+    "renderFunnel",
+    "renderEvidence",
     "renderCost",
   ]) {
     if (!script.includes(token)) fail(`${dir}/script.js is missing live rendering contract.`, token);

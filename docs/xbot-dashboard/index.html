@@ -18,7 +18,7 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260714-growth-v3" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-growth-v4" />
   </head>
   <body>
     <div class="app-shell">
@@ -29,11 +29,11 @@
         </a>
         <nav class="rail-nav">
           <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
+          <a href="#tasks" data-i18n="nav_tasks">Tasks</a>
+          <a href="#funnel" data-i18n="nav_funnel">Funnel</a>
           <a href="#trend" data-i18n="nav_trend">Trend</a>
           <a href="#posts" data-i18n="nav_posts">Posts</a>
           <a href="#advice" data-i18n="nav_advice">AI Advice</a>
-          <a href="#drafts" data-i18n="nav_drafts">Drafts</a>
-          <a href="#cost" data-i18n="nav_cost">Cost</a>
         </nav>
         <div class="rail-status">
           <span class="live-dot"></span>
@@ -109,6 +109,32 @@
           </article>
         </section>
 
+        <section class="ops-grid">
+          <article class="panel freshness-panel" id="freshness">
+            <div class="section-head compact">
+              <p data-i18n="freshness_eyebrow">Data Freshness</p>
+              <h2 data-i18n="freshness_title">Can I trust this run?</h2>
+            </div>
+            <div class="freshness-list" id="freshness-list"></div>
+          </article>
+
+          <article class="panel task-panel" id="tasks">
+            <div class="section-head compact">
+              <p data-i18n="tasks_eyebrow">Today</p>
+              <h2 data-i18n="tasks_title">Do these 5 things</h2>
+            </div>
+            <div class="task-list" id="task-list"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="funnel">
+          <div class="section-head">
+            <p data-i18n="funnel_eyebrow">Growth Funnel</p>
+            <h2 data-i18n="funnel_title">Where growth is leaking</h2>
+          </div>
+          <div class="funnel-list" id="funnel-list"></div>
+        </section>
+
         <section class="panel" id="trend">
           <div class="section-head">
             <p data-i18n="growth_trend">Growth Trend</p>
@@ -181,6 +207,14 @@
           </article>
         </section>
 
+        <section class="panel" id="evidence">
+          <div class="section-head">
+            <p data-i18n="evidence_eyebrow">AI Evidence</p>
+            <h2 data-i18n="evidence_title">Why the AI suggested this</h2>
+          </div>
+          <div class="evidence-grid" id="evidence-grid"></div>
+        </section>
+
         <footer class="footer">
           <span>© <span id="copyright-year"></span> Linus Shyu.</span>
           <span id="footer-sync">Auto-updated from GitHub Actions.</span>
@@ -189,6 +223,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=20260714-growth-v1"></script>
+    <script src="./script.js?v=20260714-growth-v2"></script>
   </body>
 </html>
