@@ -14,7 +14,7 @@ const fallbackData = {
     zeroExtraXReads: true,
     estimatedXReadOps: 0,
     tracks: [
-      { id: "zh", label: "ZH", utcHours: [4, 12, 13], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
+      { id: "zh", label: "ZH", utcHours: [12, 13], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
       { id: "en", label: "EN", utcHours: [14, 17, 22], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
     ],
   },
