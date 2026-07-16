@@ -18,6 +18,38 @@ const fallbackData = {
       { id: "en", label: "EN", utcHours: [14, 17, 22], dailyTarget: 1, packetsLast24h: 0, packetsLast7d: 0, traffic7d: 0, ack7d: 0, avgScore: 0, status: "scheduled" },
     ],
   },
+  growthDecision: {
+    mode: "zero_read_growth_decision_layer",
+    zeroExtraXReads: true,
+    estimatedXReadOps: 0,
+    estimatedIncrementalXApiUsd: 0,
+    today: {
+      summary: "Today: prioritize EN in the next scheduled window; keep X reads at zero.",
+      primaryLanguage: "en",
+      selectedTags: ["#AI", "#BigTech"],
+      canPost: true,
+      nextSlot: { label: "14:00 UTC" },
+    },
+    review24h: { hours: 24, total: 0, counts: {}, items: [], zeroExtraXReads: true, estimatedXReadOps: 0 },
+    review72h: { hours: 72, total: 0, counts: {}, items: [], zeroExtraXReads: true, estimatedXReadOps: 0 },
+    languageMix: {
+      primary: "en",
+      confidence: "fallback",
+      recommendation: "Keep English as the main growth rail and use Chinese as a support rail.",
+      scores: { en: 0, zh: 0, enSamples: 0, zhSamples: 0 },
+      zeroExtraXReads: true,
+      estimatedXReadOps: 0,
+    },
+    failureStats: { totalEvents: 0, topReasons: [], primaryReason: null, zeroExtraXReads: true, estimatedXReadOps: 0 },
+    abPlan: {
+      mode: "zero_read_low_cost_ab",
+      arms: [
+        { id: "hook_format", label: "Hook format", armA: "operator_pain", armB: "decision_rule", metric: "24h score" },
+        { id: "hashtag_pair", label: "Hashtag pair", armA: "#AI #DevTools", armB: "#BigTech #Cloud", metric: "traffic" },
+        { id: "language_mix", label: "Language mix", armA: "EN primary", armB: "ZH control", metric: "72h conversion proxy" },
+      ],
+    },
+  },
   api: { spend: 0, cap: 5, remaining: 5, endpoints: [], days: [] },
   openai: { calls: 0, failures: 0, totalEstimatedUsd: 0 },
 };
@@ -25,6 +57,7 @@ const fallbackData = {
 const I18N = {
   en: {
     nav_overview: "Overview",
+    nav_decision: "Decision",
     nav_language: "Language",
     nav_tasks: "Tasks",
     nav_funnel: "Funnel",
@@ -65,6 +98,16 @@ const I18N = {
     no_posts: "No recent posts in the synced data.",
     no_drafts: "No reply drafts ready yet. Run growth maintenance to generate fresh drafts.",
     no_advice: "No AI advice in the current data.",
+    decision_eyebrow: "Growth Decision",
+    decision_title: "Today’s operating call",
+    decision_today: "Today",
+    decision_review_24h: "24h review",
+    decision_review_72h: "72h review",
+    decision_language: "Language mix",
+    decision_failures: "Failure reasons",
+    decision_ab: "Low-cost A/B",
+    decision_zero_reads: "0 extra X reads",
+    decision_none: "Waiting for enough cached results.",
     language_eyebrow: "Language Tracks",
     language_title: "Chinese and English run in their own windows",
     language_next: "Next slot",
@@ -86,6 +129,7 @@ const I18N = {
   },
   zh: {
     nav_overview: "总览",
+    nav_decision: "决策",
     nav_language: "语言",
     nav_tasks: "任务",
     nav_funnel: "漏斗",
@@ -126,6 +170,16 @@ const I18N = {
     no_posts: "同步数据里暂无近期发帖。",
     no_drafts: "当前没有回复草稿。运行 growth maintenance 生成。",
     no_advice: "当前数据里没有 AI 建议。",
+    decision_eyebrow: "增长决策",
+    decision_title: "今天该怎么做",
+    decision_today: "今日",
+    decision_review_24h: "24h 复盘",
+    decision_review_72h: "72h 复盘",
+    decision_language: "语言配比",
+    decision_failures: "失败原因",
+    decision_ab: "低成本 A/B",
+    decision_zero_reads: "0 额外 X 读取",
+    decision_none: "等待更多缓存结果。",
     language_eyebrow: "语言轨道",
     language_title: "中文和英文按各自时区独立运行",
     language_next: "下个窗口",
@@ -311,7 +365,8 @@ function bestDraft(data) {
 }
 
 function routeHref(data) {
-  return data?.opportunities?.find((item) => item.routeUrl)?.routeUrl ||
+  return data?.growthDecision?.today?.nextRoute?.routeUrl ||
+    data?.opportunities?.find((item) => item.routeUrl)?.routeUrl ||
     data?.actions?.find((item) => item.url)?.url ||
     "https://x.com/Linus_Shyu";
 }
@@ -568,12 +623,100 @@ function renderHero(data) {
 }
 
 function renderPrimaryAdvice(data) {
+  const today = data.growthDecision?.today;
+  if (today?.summary) {
+    $("#primary-advice-title").textContent = lang() === "zh" ? "今日操作判断" : "Today’s operating call";
+    $("#primary-advice").textContent = today.summary;
+    $("#primary-route").href = routeHref(data);
+    return;
+  }
   const opportunity = data.opportunities?.[0] || {};
   const action = data.actions?.[0] || {};
   const diagnosis = data.diagnosis?.[0] || "";
   $("#primary-advice-title").textContent = opportunity.label || action.label || "Next best move";
   $("#primary-advice").textContent = opportunity.reason || action.reason || diagnosis || t("no_advice");
   $("#primary-route").href = routeHref(data);
+}
+
+function actionLabel(action) {
+  const labels = {
+    follow_up: lang() === "zh" ? "继续追问" : "follow up",
+    continue_topic: lang() === "zh" ? "继续这个方向" : "continue",
+    reframe: lang() === "zh" ? "换角度" : "reframe",
+    drop: lang() === "zh" ? "放弃" : "drop",
+    wait_metrics: lang() === "zh" ? "等数据" : "wait",
+  };
+  return labels[action] || action || "-";
+}
+
+function reviewSummary(review) {
+  const counts = Object.entries(review?.counts || {})
+    .sort((left, right) => right[1] - left[1])
+    .map(([action, count]) => `${actionLabel(action)} ${formatNumber(count)}`)
+    .join(" · ");
+  return counts || t("decision_none");
+}
+
+function topReviewItem(review) {
+  const item = review?.items?.[0];
+  if (!item) return "";
+  return `${actionLabel(item.action)} · score ${formatNumber(item.score, 1)} · ${item.reason || ""}`;
+}
+
+function renderGrowthDecision(data) {
+  const decision = data.growthDecision || fallbackData.growthDecision;
+  const today = decision.today || {};
+  const language = decision.languageMix || {};
+  const primaryFailure = decision.failureStats?.primaryReason || decision.failureStats?.topReasons?.[0];
+  const arms = (decision.abPlan?.arms || []).slice(0, 3);
+  const tags = (today.selectedTags || []).join(" ");
+  $("#decision-grid").innerHTML = `
+    <article class="decision-card primary">
+      <span class="tag">${escapeHtml(t("decision_today"))}</span>
+      <strong>${escapeHtml(today.summary || t("decision_none"))}</strong>
+      <div class="decision-meta">
+        <span>${escapeHtml(t("decision_zero_reads"))}</span>
+        <span>${escapeHtml((today.primaryLanguage || language.primary || "en").toUpperCase())}</span>
+        <span>${escapeHtml(today.nextSlot?.label || "-")}</span>
+        ${tags ? `<span>${escapeHtml(tags)}</span>` : ""}
+      </div>
+    </article>
+    <article class="decision-card">
+      <span class="tag">${escapeHtml(t("decision_review_24h"))}</span>
+      <strong>${escapeHtml(reviewSummary(decision.review24h))}</strong>
+      <p>${escapeHtml(topReviewItem(decision.review24h) || t("decision_none"))}</p>
+    </article>
+    <article class="decision-card">
+      <span class="tag">${escapeHtml(t("decision_review_72h"))}</span>
+      <strong>${escapeHtml(reviewSummary(decision.review72h))}</strong>
+      <p>${escapeHtml(topReviewItem(decision.review72h) || t("decision_none"))}</p>
+    </article>
+    <article class="decision-card">
+      <span class="tag">${escapeHtml(t("decision_language"))}</span>
+      <strong>${escapeHtml(String(language.primary || "en").toUpperCase())} · ${escapeHtml(language.confidence || "cached")}</strong>
+      <p>${escapeHtml(language.recommendation || t("decision_none"))}</p>
+      <div class="decision-meta">
+        <span>EN ${formatNumber(language.scores?.en, 1)}</span>
+        <span>ZH ${formatNumber(language.scores?.zh, 1)}</span>
+      </div>
+    </article>
+    <article class="decision-card">
+      <span class="tag">${escapeHtml(t("decision_failures"))}</span>
+      <strong>${escapeHtml(primaryFailure?.category || (lang() === "zh" ? "暂无主要故障" : "No primary fault"))}</strong>
+      <p>${escapeHtml(primaryFailure?.lastMessage || t("decision_none"))}</p>
+    </article>
+    <article class="decision-card">
+      <span class="tag">${escapeHtml(t("decision_ab"))}</span>
+      <div class="decision-list">
+        ${arms.map((arm) => `
+          <div>
+            <strong>${escapeHtml(arm.label || arm.id)}</strong>
+            <span>${escapeHtml(arm.armA || "-")} / ${escapeHtml(arm.armB || "-")}</span>
+          </div>
+        `).join("") || `<p>${escapeHtml(t("decision_none"))}</p>`}
+      </div>
+    </article>
+  `;
 }
 
 function renderPosts(data) {
@@ -776,6 +919,7 @@ function render(data) {
   setPreferenceButtons();
   renderHero(dashboardData);
   renderPrimaryAdvice(dashboardData);
+  renderGrowthDecision(dashboardData);
   renderLanguageTracks(dashboardData);
   renderFreshness(dashboardData);
   renderTasks(dashboardData);

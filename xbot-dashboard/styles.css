@@ -503,6 +503,7 @@ svg {
 .task-list,
 .funnel-list,
 .language-track-grid,
+.decision-grid,
 .evidence-grid,
 .post-list,
 .draft-list,
@@ -516,6 +517,7 @@ svg {
 .task-card,
 .funnel-row,
 .language-track-card,
+.decision-card,
 .evidence-card,
 .post-card,
 .draft-card,
@@ -733,6 +735,79 @@ svg {
   font-size: 20px;
 }
 
+.decision-grid {
+  grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(220px, 0.85fr));
+}
+
+.decision-card {
+  display: grid;
+  min-height: 148px;
+  align-content: start;
+  gap: 10px;
+}
+
+.decision-card.primary {
+  grid-row: span 2;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 13%, transparent), transparent 52%),
+    var(--surface-2);
+}
+
+.decision-card strong {
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.decision-card.primary strong {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 0.98;
+}
+
+.decision-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.decision-meta,
+.decision-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.decision-meta span,
+.decision-list div {
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.decision-list {
+  display: grid;
+}
+
+.decision-list div {
+  display: grid;
+  gap: 2px;
+  border-radius: 14px;
+}
+
+.decision-list strong {
+  font-size: 13px;
+}
+
+.decision-list span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .evidence-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -920,6 +995,7 @@ svg {
   .content-grid,
   .ops-grid,
   .language-track-grid,
+  .decision-grid,
   .evidence-grid,
   .trend-grid {
     grid-template-columns: 1fr;
