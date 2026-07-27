@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T00:17:26.488Z",
+  "updatedAt": "2026-07-27T00:16:22.073Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-07-26T00:17:26.488Z",
-    "analyticsUpdatedAt": "2026-07-26T00:17:26.121Z",
-    "usageUpdatedAt": "2026-07-26T00:15:33.215Z",
+    "dashboardUpdatedAt": "2026-07-27T00:16:22.073Z",
+    "analyticsUpdatedAt": "2026-07-27T00:16:21.823Z",
+    "usageUpdatedAt": "2026-07-27T00:14:37.161Z",
     "accountCheckedAt": null,
     "tweetMetricsCheckedAt": null,
     "checkedAt": null,
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -40,7 +40,7 @@
         },
         "dailyTarget": 1,
         "packetsLast24h": 0,
-        "packetsLast7d": 4,
+        "packetsLast7d": 3,
         "measuredPackets": 0,
         "traffic7d": 0,
         "ack7d": 0,
@@ -155,7 +155,7 @@
         },
         "dailyTarget": 1,
         "packetsLast24h": 0,
-        "packetsLast7d": 4,
+        "packetsLast7d": 3,
         "measuredPackets": 0,
         "traffic7d": 0,
         "ack7d": 0,
@@ -256,13 +256,13 @@
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -281,10 +281,10 @@
       "budgetSafeRemainingUsd": 4.5,
       "cadenceReason": "Cadence allows the next packet.",
       "nextRoute": {
-        "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+        "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "reason": "Open live X web search and reply manually under active high-throughput conversations."
       },
       "experiment": {
@@ -294,7 +294,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 0,
@@ -304,59 +304,16 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 0,
-      "total": 2,
-      "counts": {
-        "wait_metrics": 2
-      },
-      "items": [
-        {
-          "id": "2080321476314747133",
-          "url": "https://x.com/i/web/status/2080321476314747133",
-          "text": "Do not migrate to Apple cloud platform shift because the demo looks better. Test one real workflow first: speed, rollback, and default behavior. If only the demo improves, wait. #BigTech #ConsumerTech",
-          "language": "en",
-          "postedAt": "2026-07-23T15:57:45.281Z",
-          "score": 0,
-          "impressions": 0,
-          "likes": 0,
-          "reposts": 0,
-          "replies": 0,
-          "template": "decision_rule",
-          "hashtags": [
-            "bigtech",
-            "consumertech"
-          ],
-          "action": "wait_metrics",
-          "status": "watch",
-          "reason": "No metrics snapshot yet."
-        },
-        {
-          "id": "2080281379602940125",
-          "url": "https://x.com/i/web/status/2080281379602940125",
-          "text": "先别急着迁移到 Hacker News thread，拿一个真实流程测三件事：是否更快、是否可回滚、是否会改变默认入口，只改善演示就先等。 #AI #BigTech",
-          "language": "zh",
-          "postedAt": "2026-07-23T13:18:25.489Z",
-          "score": 0,
-          "impressions": 0,
-          "likes": 0,
-          "reposts": 0,
-          "replies": 0,
-          "template": "decision_rule",
-          "hashtags": [
-            "ai",
-            "bigtech"
-          ],
-          "action": "wait_metrics",
-          "status": "watch",
-          "reason": "No metrics snapshot yet."
-        }
-      ]
+      "total": 0,
+      "counts": {},
+      "items": []
     },
     "languageMix": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "en",
@@ -374,7 +331,7 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
@@ -393,7 +350,7 @@
         {
           "reason": "x_auth",
           "count": 1,
-          "lastAt": "2026-07-26T00:15:33.236Z",
+          "lastAt": "2026-07-27T00:14:37.174Z",
           "samples": [
             "X OAuth2 refresh failed (GitHub secret refresh token): Value passed for the token was invalid. Update GitHub secret X_OAUTH2_REFRESH_TOKEN after re-authorizing."
           ]
@@ -411,7 +368,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -447,7 +404,7 @@
   },
   "growthStrategy": {
     "version": 1,
-    "generatedAt": "2026-07-26T00:17:26.418Z",
+    "generatedAt": "2026-07-27T00:16:21.999Z",
     "mode": "self_evolving_cached_strategy",
     "status": "insufficient_recent_samples",
     "source": "cached packet analytics",
@@ -535,7 +492,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -620,7 +577,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -711,7 +668,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -878,7 +835,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "ignition_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -980,7 +937,7 @@
     "topPosts": []
   },
   "last7d": {
-    "posts": 8,
+    "posts": 6,
     "impressions": 0,
     "likes": 0,
     "reposts": 0,
@@ -1159,64 +1116,6 @@
         "topicTimingDiagnostics": [],
         "topicTimingLane": null,
         "generationDecisionTrace": null
-      },
-      {
-        "id": "2078976092866535709",
-        "text": "Decision rule for Kimi K3发布三天后暂停新会员订阅 月之暗面称算力已逼近极限: test it where rollback is cheap first. If it changes the default workflow, expand. If it only improves the demo, wait. #tech #technews",
-        "url": "https://x.com/i/web/status/2078976092866535709",
-        "score": 0,
-        "impressions": 0,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "decision_rule",
-        "source": "cnbeta.com.tw",
-        "postedAt": "2026-07-19T22:51:40.909Z",
-        "candidateScore": 107.7,
-        "candidateReason": null,
-        "angleMutationScore": null,
-        "angleMutationDiagnostics": [],
-        "hookPatternScore": null,
-        "hookPatternDiagnostics": [],
-        "hookPattern": null,
-        "contentBanditScore": null,
-        "contentBanditDiagnostics": [],
-        "narrativeResonanceScore": null,
-        "narrativeResonanceDiagnostics": [],
-        "narrativePillar": null,
-        "topicTimingScore": null,
-        "topicTimingDiagnostics": [],
-        "topicTimingLane": null,
-        "generationDecisionTrace": null
-      },
-      {
-        "id": "2078848477191352469",
-        "text": "Alibaba's Qwen takes on Kimi K3 with open-weight Qwen 3.8, 真正的问题是：它减少了操作成本，还是只是把成本转移到提示词、权限和回滚里？ #devtools #ai",
-        "url": "https://x.com/i/web/status/2078848477191352469",
-        "score": 0,
-        "impressions": 0,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "sharp_question",
-        "source": "the-decoder.com",
-        "postedAt": "2026-07-19T14:24:34.903Z",
-        "candidateScore": 102.6,
-        "candidateReason": null,
-        "angleMutationScore": null,
-        "angleMutationDiagnostics": [],
-        "hookPatternScore": null,
-        "hookPatternDiagnostics": [],
-        "hookPattern": null,
-        "contentBanditScore": null,
-        "contentBanditDiagnostics": [],
-        "narrativeResonanceScore": null,
-        "narrativeResonanceDiagnostics": [],
-        "narrativePillar": null,
-        "topicTimingScore": null,
-        "topicTimingDiagnostics": [],
-        "topicTimingLane": null,
-        "generationDecisionTrace": null
       }
     ]
   },
@@ -1232,97 +1131,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-07-25T00:17:26.512Z",
-          "endsAt": "2026-07-25T02:17:26.512Z",
-          "label": "00:17",
+          "startsAt": "2026-07-26T00:16:22.097Z",
+          "endsAt": "2026-07-26T02:16:22.097Z",
+          "label": "00:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-07-25T02:17:26.512Z",
-          "endsAt": "2026-07-25T04:17:26.512Z",
-          "label": "02:17",
+          "startsAt": "2026-07-26T02:16:22.097Z",
+          "endsAt": "2026-07-26T04:16:22.097Z",
+          "label": "02:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 2,
-          "startsAt": "2026-07-25T04:17:26.512Z",
-          "endsAt": "2026-07-25T06:17:26.512Z",
-          "label": "04:17",
+          "startsAt": "2026-07-26T04:16:22.097Z",
+          "endsAt": "2026-07-26T06:16:22.097Z",
+          "label": "04:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-07-25T06:17:26.512Z",
-          "endsAt": "2026-07-25T08:17:26.512Z",
-          "label": "06:17",
+          "startsAt": "2026-07-26T06:16:22.097Z",
+          "endsAt": "2026-07-26T08:16:22.097Z",
+          "label": "06:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 4,
-          "startsAt": "2026-07-25T08:17:26.512Z",
-          "endsAt": "2026-07-25T10:17:26.512Z",
-          "label": "08:17",
+          "startsAt": "2026-07-26T08:16:22.097Z",
+          "endsAt": "2026-07-26T10:16:22.097Z",
+          "label": "08:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 5,
-          "startsAt": "2026-07-25T10:17:26.512Z",
-          "endsAt": "2026-07-25T12:17:26.512Z",
-          "label": "10:17",
+          "startsAt": "2026-07-26T10:16:22.097Z",
+          "endsAt": "2026-07-26T12:16:22.097Z",
+          "label": "10:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-07-25T12:17:26.512Z",
-          "endsAt": "2026-07-25T14:17:26.512Z",
-          "label": "12:17",
+          "startsAt": "2026-07-26T12:16:22.097Z",
+          "endsAt": "2026-07-26T14:16:22.097Z",
+          "label": "12:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-07-25T14:17:26.512Z",
-          "endsAt": "2026-07-25T16:17:26.512Z",
-          "label": "14:17",
+          "startsAt": "2026-07-26T14:16:22.097Z",
+          "endsAt": "2026-07-26T16:16:22.097Z",
+          "label": "14:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-07-25T16:17:26.512Z",
-          "endsAt": "2026-07-25T18:17:26.512Z",
-          "label": "16:17",
+          "startsAt": "2026-07-26T16:16:22.097Z",
+          "endsAt": "2026-07-26T18:16:22.097Z",
+          "label": "16:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-07-25T18:17:26.512Z",
-          "endsAt": "2026-07-25T20:17:26.512Z",
-          "label": "18:17",
+          "startsAt": "2026-07-26T18:16:22.097Z",
+          "endsAt": "2026-07-26T20:16:22.097Z",
+          "label": "18:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-07-25T20:17:26.512Z",
-          "endsAt": "2026-07-25T22:17:26.512Z",
-          "label": "20:17",
+          "startsAt": "2026-07-26T20:16:22.097Z",
+          "endsAt": "2026-07-26T22:16:22.097Z",
+          "label": "20:16",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-07-25T22:17:26.512Z",
-          "endsAt": "2026-07-26T00:17:26.512Z",
-          "label": "22:17",
+          "startsAt": "2026-07-26T22:16:22.097Z",
+          "endsAt": "2026-07-27T00:16:22.097Z",
+          "label": "22:16",
           "value": 0,
           "posts": 0
         }
@@ -1339,57 +1238,57 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-07-19T00:17:26.512Z",
-          "endsAt": "2026-07-20T00:17:26.512Z",
-          "label": "2026-07-19",
-          "value": 0,
-          "posts": 2
-        },
-        {
-          "index": 1,
-          "startsAt": "2026-07-20T00:17:26.512Z",
-          "endsAt": "2026-07-21T00:17:26.512Z",
+          "startsAt": "2026-07-20T00:16:22.097Z",
+          "endsAt": "2026-07-21T00:16:22.097Z",
           "label": "2026-07-20",
           "value": 0,
           "posts": 2
         },
         {
-          "index": 2,
-          "startsAt": "2026-07-21T00:17:26.512Z",
-          "endsAt": "2026-07-22T00:17:26.512Z",
+          "index": 1,
+          "startsAt": "2026-07-21T00:16:22.097Z",
+          "endsAt": "2026-07-22T00:16:22.097Z",
           "label": "2026-07-21",
           "value": 0,
           "posts": 0
         },
         {
-          "index": 3,
-          "startsAt": "2026-07-22T00:17:26.512Z",
-          "endsAt": "2026-07-23T00:17:26.512Z",
+          "index": 2,
+          "startsAt": "2026-07-22T00:16:22.097Z",
+          "endsAt": "2026-07-23T00:16:22.097Z",
           "label": "2026-07-22",
           "value": 0,
           "posts": 2
         },
         {
-          "index": 4,
-          "startsAt": "2026-07-23T00:17:26.512Z",
-          "endsAt": "2026-07-24T00:17:26.512Z",
+          "index": 3,
+          "startsAt": "2026-07-23T00:16:22.097Z",
+          "endsAt": "2026-07-24T00:16:22.097Z",
           "label": "2026-07-23",
           "value": 0,
           "posts": 2
         },
         {
-          "index": 5,
-          "startsAt": "2026-07-24T00:17:26.512Z",
-          "endsAt": "2026-07-25T00:17:26.512Z",
+          "index": 4,
+          "startsAt": "2026-07-24T00:16:22.097Z",
+          "endsAt": "2026-07-25T00:16:22.097Z",
           "label": "2026-07-24",
           "value": 0,
           "posts": 0
         },
         {
-          "index": 6,
-          "startsAt": "2026-07-25T00:17:26.512Z",
-          "endsAt": "2026-07-26T00:17:26.512Z",
+          "index": 5,
+          "startsAt": "2026-07-25T00:16:22.097Z",
+          "endsAt": "2026-07-26T00:16:22.097Z",
           "label": "2026-07-25",
+          "value": 0,
+          "posts": 0
+        },
+        {
+          "index": 6,
+          "startsAt": "2026-07-26T00:16:22.097Z",
+          "endsAt": "2026-07-27T00:16:22.097Z",
+          "label": "2026-07-26",
           "value": 0,
           "posts": 0
         }
@@ -1406,15 +1305,6 @@
       "points": [
         {
           "index": 0,
-          "date": "2026-07-13",
-          "label": "07-13",
-          "value": 0,
-          "calls": 0,
-          "failures": 0,
-          "usd": 0
-        },
-        {
-          "index": 1,
           "date": "2026-07-14",
           "label": "07-14",
           "value": 0,
@@ -1423,7 +1313,7 @@
           "usd": 0
         },
         {
-          "index": 2,
+          "index": 1,
           "date": "2026-07-15",
           "label": "07-15",
           "value": 0,
@@ -1432,7 +1322,7 @@
           "usd": 0
         },
         {
-          "index": 3,
+          "index": 2,
           "date": "2026-07-16",
           "label": "07-16",
           "value": 0,
@@ -1441,7 +1331,7 @@
           "usd": 0
         },
         {
-          "index": 4,
+          "index": 3,
           "date": "2026-07-17",
           "label": "07-17",
           "value": 0,
@@ -1450,7 +1340,7 @@
           "usd": 0
         },
         {
-          "index": 5,
+          "index": 4,
           "date": "2026-07-18",
           "label": "07-18",
           "value": 0,
@@ -1459,7 +1349,7 @@
           "usd": 0
         },
         {
-          "index": 6,
+          "index": 5,
           "date": "2026-07-19",
           "label": "07-19",
           "value": 0,
@@ -1468,7 +1358,7 @@
           "usd": 0
         },
         {
-          "index": 7,
+          "index": 6,
           "date": "2026-07-20",
           "label": "07-20",
           "value": 0,
@@ -1477,7 +1367,7 @@
           "usd": 0
         },
         {
-          "index": 8,
+          "index": 7,
           "date": "2026-07-21",
           "label": "07-21",
           "value": 0,
@@ -1486,7 +1376,7 @@
           "usd": 0
         },
         {
-          "index": 9,
+          "index": 8,
           "date": "2026-07-22",
           "label": "07-22",
           "value": 0,
@@ -1495,7 +1385,7 @@
           "usd": 0
         },
         {
-          "index": 10,
+          "index": 9,
           "date": "2026-07-23",
           "label": "07-23",
           "value": 0,
@@ -1504,7 +1394,7 @@
           "usd": 0
         },
         {
-          "index": 11,
+          "index": 10,
           "date": "2026-07-24",
           "label": "07-24",
           "value": 0,
@@ -1513,7 +1403,7 @@
           "usd": 0
         },
         {
-          "index": 12,
+          "index": 11,
           "date": "2026-07-25",
           "label": "07-25",
           "value": 0,
@@ -1522,9 +1412,18 @@
           "usd": 0
         },
         {
-          "index": 13,
+          "index": 12,
           "date": "2026-07-26",
           "label": "07-26",
+          "value": 0,
+          "calls": 0,
+          "failures": 0,
+          "usd": 0
+        },
+        {
+          "index": 13,
+          "date": "2026-07-27",
+          "label": "07-27",
           "value": 1,
           "calls": 1,
           "failures": 1,
@@ -1571,7 +1470,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (0 text, 0 media).",
@@ -1634,7 +1533,7 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "publish_experiment",
     "publishAllowed": true,
     "willBlockPublish": false,
@@ -1651,12 +1550,12 @@
     "safeRemainingUsd": 4.5,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 56.33,
+    "hoursSinceLastPost": 80.31,
     "telemetryAgeMinutes": null,
     "latestTelemetryAt": null,
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 0,
@@ -2052,7 +1951,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "56.3h since packet",
+        "value": "80.3h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -2093,7 +1992,7 @@
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "scale_experiment",
     "severity": "ok",
     "pressureScore": 99,
@@ -2112,7 +2011,7 @@
     },
     "topRoute": {
       "label": "breakout X route",
-      "url": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "url": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
       "score": 11.4,
       "reason": "Open live X web search and reply manually under active high-throughput conversations."
     },
@@ -2169,7 +2068,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 100,
@@ -2214,12 +2113,12 @@
       "observedDailyBurnUsd": 0,
       "plannedDailyBurnUsd": 0.13,
       "projectedDailyBurnUsd": 0.13,
-      "monthDay": 26,
-      "daysRemaining": 5,
-      "monthEndProjectedSpendUsd": 0.75,
+      "monthDay": 27,
+      "daysRemaining": 4,
+      "monthEndProjectedSpendUsd": 0.62,
       "monthEndSafe": true,
       "runwayDays": 33.8,
-      "reason": "X API runway guard clear: daily burn ~$0.130, projected month-end $0.750 / $4.50 safe cap."
+      "reason": "X API runway guard clear: daily burn ~$0.130, projected month-end $0.620 / $4.50 safe cap."
     },
     "partitionMatrix": [
       {
@@ -2268,7 +2167,7 @@
         "gate": "sampled",
         "status": "ok",
         "cache": {
-          "generatedAt": "2026-07-26T00:17:26.488Z",
+          "generatedAt": "2026-07-27T00:16:22.073Z",
           "enabled": true,
           "mode": "refresh_due",
           "status": "warn",
@@ -2431,7 +2330,7 @@
       {
         "id": "month_end",
         "label": "month-end projection",
-        "value": "$0.750",
+        "value": "$0.620",
         "status": "ok"
       },
       {
@@ -2448,7 +2347,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-07-26T00:17:26.488Z",
+      "generatedAt": "2026-07-27T00:16:22.073Z",
       "enabled": true,
       "mode": "refresh_due",
       "status": "warn",
@@ -2482,15 +2381,15 @@
     "observedDailyBurnUsd": 0,
     "plannedDailyBurnUsd": 0.13,
     "projectedDailyBurnUsd": 0.13,
-    "monthDay": 26,
-    "daysRemaining": 5,
-    "monthEndProjectedSpendUsd": 0.75,
+    "monthDay": 27,
+    "daysRemaining": 4,
+    "monthEndProjectedSpendUsd": 0.62,
     "monthEndSafe": true,
     "runwayDays": 33.8,
-    "reason": "X API runway guard clear: daily burn ~$0.130, projected month-end $0.750 / $4.50 safe cap."
+    "reason": "X API runway guard clear: daily burn ~$0.130, projected month-end $0.620 / $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "enabled": true,
     "mode": "refresh_due",
     "status": "warn",
@@ -2508,7 +2407,7 @@
     "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -2522,11 +2421,11 @@
     "plannedDailyBurnUsd": 0.015,
     "projectedDailyBurnUsd": 0.015,
     "runwayDays": 300,
-    "monthDay": 26,
+    "monthDay": 27,
     "daysInMonth": 31,
-    "daysRemaining": 5,
-    "monthProgressPct": 83.9,
-    "monthEndProjectedSpendUsd": 0.075,
+    "daysRemaining": 4,
+    "monthProgressPct": 87.1,
+    "monthEndProjectedSpendUsd": 0.06,
     "monthEndSafe": true,
     "safeTextSlots": 300,
     "safeMediaSlots": 150,
@@ -2594,15 +2493,6 @@
     "series": [
       {
         "index": 0,
-        "date": "2026-07-13",
-        "label": "07-13",
-        "value": 0,
-        "calls": 0,
-        "failures": 0,
-        "usd": 0
-      },
-      {
-        "index": 1,
         "date": "2026-07-14",
         "label": "07-14",
         "value": 0,
@@ -2611,7 +2501,7 @@
         "usd": 0
       },
       {
-        "index": 2,
+        "index": 1,
         "date": "2026-07-15",
         "label": "07-15",
         "value": 0,
@@ -2620,7 +2510,7 @@
         "usd": 0
       },
       {
-        "index": 3,
+        "index": 2,
         "date": "2026-07-16",
         "label": "07-16",
         "value": 0,
@@ -2629,7 +2519,7 @@
         "usd": 0
       },
       {
-        "index": 4,
+        "index": 3,
         "date": "2026-07-17",
         "label": "07-17",
         "value": 0,
@@ -2638,7 +2528,7 @@
         "usd": 0
       },
       {
-        "index": 5,
+        "index": 4,
         "date": "2026-07-18",
         "label": "07-18",
         "value": 0,
@@ -2647,7 +2537,7 @@
         "usd": 0
       },
       {
-        "index": 6,
+        "index": 5,
         "date": "2026-07-19",
         "label": "07-19",
         "value": 0,
@@ -2656,7 +2546,7 @@
         "usd": 0
       },
       {
-        "index": 7,
+        "index": 6,
         "date": "2026-07-20",
         "label": "07-20",
         "value": 0,
@@ -2665,7 +2555,7 @@
         "usd": 0
       },
       {
-        "index": 8,
+        "index": 7,
         "date": "2026-07-21",
         "label": "07-21",
         "value": 0,
@@ -2674,7 +2564,7 @@
         "usd": 0
       },
       {
-        "index": 9,
+        "index": 8,
         "date": "2026-07-22",
         "label": "07-22",
         "value": 0,
@@ -2683,7 +2573,7 @@
         "usd": 0
       },
       {
-        "index": 10,
+        "index": 9,
         "date": "2026-07-23",
         "label": "07-23",
         "value": 0,
@@ -2692,7 +2582,7 @@
         "usd": 0
       },
       {
-        "index": 11,
+        "index": 10,
         "date": "2026-07-24",
         "label": "07-24",
         "value": 0,
@@ -2701,7 +2591,7 @@
         "usd": 0
       },
       {
-        "index": 12,
+        "index": 11,
         "date": "2026-07-25",
         "label": "07-25",
         "value": 0,
@@ -2710,9 +2600,18 @@
         "usd": 0
       },
       {
-        "index": 13,
+        "index": 12,
         "date": "2026-07-26",
         "label": "07-26",
+        "value": 0,
+        "calls": 0,
+        "failures": 0,
+        "usd": 0
+      },
+      {
+        "index": 13,
+        "date": "2026-07-27",
+        "label": "07-27",
         "value": 1,
         "calls": 1,
         "failures": 1,
@@ -2721,7 +2620,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -2840,7 +2739,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "scale_experiment",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2853,7 +2752,7 @@
     "expectedLiftPct": 693.3,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-07-26T00:17:26.488Z\nMode: scale_experiment\nCost guard: 0 extra X search/read API ops · safe budget $4.50\nTarget: 3 useful manual route ops · expected lift +693.3%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-07-27T00:16:22.073Z\nMode: scale_experiment\nCost guard: 0 extra X search/read API ops · safe budget $4.50\nTarget: 3 useful manual route ops · expected lift +693.3%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -2886,15 +2785,15 @@
     ],
     "packets": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "priority": 1,
-        "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+        "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "reason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "evidence": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
-        "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "evidence": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
+        "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "targetReplies": 1,
         "operatorSlaMinutes": 10,
         "expectedLiftPct": 1040,
@@ -2903,15 +2802,15 @@
         "ready": true
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "priority": 2,
-        "label": "Velocity route: The Loneliness Protocol of a Solo Tech Founder",
+        "label": "Velocity route: Apple is banking on privacy to set its smart glasses apart",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "reason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "evidence": "velocity 100.0, 0.3h old, 1 echoes, dev.to",
-        "draftText": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "evidence": "velocity 100.0, 4.6h old, 3 echoes, theverge.com",
+        "draftText": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "targetReplies": 1,
         "operatorSlaMinutes": 20,
         "expectedLiftPct": 1040,
@@ -2966,17 +2865,17 @@
     ],
     "opportunities": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
-        "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
+        "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
         "score": 11.4,
-        "evidence": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
+        "evidence": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
         "routeLabel": "breakout X route"
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
-        "label": "Velocity route: The Loneliness Protocol of a Solo Tech Founder",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
+        "label": "Velocity route: Apple is banking on privacy to set its smart glasses apart",
         "score": 11.4,
-        "evidence": "velocity 100.0, 0.3h old, 1 echoes, dev.to",
+        "evidence": "velocity 100.0, 4.6h old, 3 echoes, theverge.com",
         "routeLabel": "breakout X route"
       },
       {
@@ -2989,7 +2888,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2998,8 +2897,8 @@
     "readyRows": 3,
     "totalRows": 3,
     "primaryRouteLabel": "breakout X route",
-    "primaryRouteUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "primaryReplyText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "primaryRouteUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "primaryReplyText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
     "activeOpportunity": {
       "label": "00:00 UTC / Consumer Behavior / Decision Rule",
@@ -3014,14 +2913,14 @@
     ],
     "rows": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "priority": 1,
         "status": "ok",
         "ready": true,
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "replyText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "replyText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "replyAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "reason": "Open live X web search and reply manually under active high-throughput conversations.",
         "targetReplies": 1,
         "operatorSlaMinutes": 10,
@@ -3030,14 +2929,14 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "priority": 2,
         "status": "ok",
         "ready": true,
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "replyText": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "replyAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "replyText": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "reason": "Open live X web search and reply manually under active high-throughput conversations.",
         "targetReplies": 1,
         "operatorSlaMinutes": 20,
@@ -3062,10 +2961,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-07-26T00:17:26.488Z\nMode: publish_experiment\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +1,040.0%\n2. OPEN: breakout X route - https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +1,040.0%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n   SLA: 30m · target 1 · lift +0.0%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-07-27T00:16:22.073Z\nMode: publish_experiment\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +1,040.0%\n2. OPEN: breakout X route - https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +1,040.0%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n   SLA: 30m · target 1 · lift +0.0%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -3075,8 +2974,8 @@
     "readyTasks": 3,
     "totalTasks": 3,
     "primaryRouteLabel": "breakout X route",
-    "primaryOpenUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "primaryPastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "primaryOpenUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "primaryPastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Open breakout X route, paste one useful payload, then continue down the queue.",
     "operatorMode": "human_in_loop",
     "readGate": "browser_only",
@@ -3087,11 +2986,11 @@
     ],
     "tasks": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "priority": 1,
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "status": "ok",
         "ready": true,
         "targetReplies": 1,
@@ -3106,11 +3005,11 @@
         "estimatedIncrementalXApiUsd": 0
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "priority": 2,
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "status": "ok",
         "ready": true,
         "targetReplies": 1,
@@ -3166,10 +3065,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-07-26T00:17:26.488Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-07-27T00:16:22.073Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -3183,8 +3082,8 @@
     "avgScore": 100,
     "expectedLiftPct": 693.3,
     "topRouteLabel": "breakout X route",
-    "primaryOpenUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "primaryPastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "primaryOpenUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "primaryPastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Open breakout X route, paste one useful payload, then mark the lane done or skipped.",
     "summary": {
       "topRouteLabel": "breakout X route",
@@ -3224,13 +3123,13 @@
     ],
     "lanes": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "source": "paste_queue",
         "rank": 1,
         "label": "breakout X route",
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "status": "hot",
         "ready": true,
         "score": 100,
@@ -3258,13 +3157,13 @@
         "estimatedIncrementalXApiUsd": 0
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "source": "paste_queue",
         "rank": 2,
         "label": "breakout X route",
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "status": "hot",
         "ready": true,
         "score": 100,
@@ -3332,10 +3231,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-07-26T00:17:26.488Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-07-27T00:16:22.073Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -3362,8 +3261,8 @@
       "loadScore": 0
     },
     "primaryRouteLabel": "breakout X route",
-    "primaryOpenUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "primaryPastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "primaryOpenUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "primaryPastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Repair route coverage and use cached swarm output before buying any read operation.",
     "cells": [
       {
@@ -3460,7 +3359,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -3606,7 +3505,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -3618,8 +3517,8 @@
     "manualOnly": true,
     "commandScore": 72.8,
     "routeLabel": "breakout X route",
-    "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "targetOps": 1,
     "operatorSlaMinutes": 10,
     "primaryLeakId": "ack_layer",
@@ -3627,11 +3526,11 @@
     "primaryLeakStatus": "danger",
     "nextAction": "Open breakout X route, select one fresh technical exchange, paste the payload, then stop after 1 route op.",
     "primaryPacket": {
-      "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+      "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
       "label": "breakout X route",
       "status": "ready",
-      "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-      "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+      "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
       "score": 100,
       "operatorSlaMinutes": 10,
       "targetOps": 1,
@@ -3705,10 +3604,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-07-26T00:17:26.488Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 72.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-07-27T00:16:22.073Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 72.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -3854,7 +3753,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 47.2\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Consumer Behavior\nRoute: breakout X route\nAction: Turn the first sentence into a reason to inspect the operator behind the packet."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "danger",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -3864,8 +3763,8 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "traceScore": 71.8,
-    "totalLatencyMs": 12133,
+    "traceScore": 70.9,
+    "totalLatencyMs": 12219,
     "savedReadOps": 5,
     "activeSource": "news.ycombinator.com",
     "bottleneckStageId": "learn_writeback",
@@ -3876,22 +3775,22 @@
         "id": "rss_ingest",
         "label": "RSS_INGEST",
         "subsystem": "RSS",
-        "score": 100,
-        "durationMs": 1248,
+        "score": 95.6,
+        "durationMs": 1327,
         "input": "12 cached sources",
         "output": "12 cached signals",
         "detail": "news.ycombinator.com feeds the route loop without X read ops.",
         "nextAction": "Keep news.ycombinator.com hot until its cached velocity cools.",
         "status": "ok",
         "startMs": 0,
-        "endMs": 1248,
+        "endMs": 1327,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
         "startPct": 0,
-        "widthPct": 10.29
+        "widthPct": 10.86
       },
       {
         "id": "swarm_rank",
@@ -3904,36 +3803,36 @@
         "detail": "Cached rank policy selected the next angle lane.",
         "nextAction": "Keep the winning angle lane pinned until maintenance writes new evidence.",
         "status": "warn",
-        "startMs": 1248,
-        "endMs": 3932,
+        "startMs": 1327,
+        "endMs": 4011,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 10.29,
-        "widthPct": 22.12
+        "startPct": 10.86,
+        "widthPct": 21.97
       },
       {
         "id": "packet_draft",
         "label": "PACKET_DRAFT",
         "subsystem": "TXT",
         "score": 77.8,
-        "durationMs": 2196,
+        "durationMs": 2203,
         "input": "breakout X route",
         "output": "payload armed",
         "detail": "Operator packet is ready for manual paste.",
         "nextAction": "Copy one payload and preserve the operator-grade first line.",
         "status": "ok",
-        "startMs": 3932,
-        "endMs": 6128,
+        "startMs": 4011,
+        "endMs": 6214,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 32.41,
-        "widthPct": 18.1
+        "startPct": 32.83,
+        "widthPct": 18.03
       },
       {
         "id": "manual_route",
@@ -3947,14 +3846,14 @@
         "nextAction": "Open breakout X route, select one fresh technical exchange, paste the payload, then stop after 1 route op.",
         "readGate": "browser_only",
         "status": "warn",
-        "startMs": 6128,
-        "endMs": 9313,
+        "startMs": 6214,
+        "endMs": 9399,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "human_in_loop",
-        "startPct": 50.51,
-        "widthPct": 26.25
+        "startPct": 50.86,
+        "widthPct": 26.07
       },
       {
         "id": "learn_writeback",
@@ -3967,15 +3866,15 @@
         "detail": "Maintenance writes cached packet outcomes into the next angle decision.",
         "nextAction": "Let maintenance refresh metrics before widening the topic surface.",
         "status": "danger",
-        "startMs": 9313,
-        "endMs": 12133,
+        "startMs": 9399,
+        "endMs": 12219,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 76.76,
-        "widthPct": 23.24
+        "startPct": 76.92,
+        "widthPct": 23.08
       }
     ],
     "edges": [
@@ -3985,7 +3884,7 @@
         "to": "swarm_rank",
         "label": "RSS->AI",
         "status": "ok",
-        "score": 79.9,
+        "score": 77.7,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0
@@ -4034,7 +3933,7 @@
       {
         "id": "trace_score",
         "label": "TRACE_SCORE",
-        "value": "71.8",
+        "value": "70.9",
         "status": "danger"
       },
       {
@@ -4046,7 +3945,7 @@
       {
         "id": "latency",
         "label": "TRACE_LATENCY",
-        "value": "12.1s",
+        "value": "12.2s",
         "status": "warn"
       },
       {
@@ -4067,10 +3966,10 @@
       "Manual browser route only; no automated outbound actions.",
       "Normal cooldown only; no rate-limit shortcuts."
     ],
-    "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 71.8\nBottleneck: LEARN_WRITEBACK\nLatency budget: 12.1s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
+    "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 70.9\nBottleneck: LEARN_WRITEBACK\nLatency budget: 12.2s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -4083,8 +3982,8 @@
     "drillScore": 99.3,
     "primaryScenarioId": "alpha",
     "primaryRouteLabel": "breakout X route",
-    "primaryOpenUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "primaryPastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "primaryOpenUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "primaryPastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Run ALPHA_FIRE on breakout X route, then stop at the ACK gate.",
     "scenarios": [
       {
@@ -4094,8 +3993,8 @@
         "status": "ok",
         "drillScore": 100,
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "targetOps": 2,
         "operatorSlaMinutes": 10,
         "expectedLiftPct": 1040,
@@ -4122,8 +4021,8 @@
         "status": "ok",
         "drillScore": 100,
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "targetOps": 1,
         "operatorSlaMinutes": 10,
         "expectedLiftPct": 1040,
@@ -4150,8 +4049,8 @@
         "status": "ok",
         "drillScore": 86,
         "routeLabel": "breakout X route",
-        "openUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "pastePayload": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "openUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "pastePayload": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
         "targetOps": 1,
         "operatorSlaMinutes": 10,
         "expectedLiftPct": 1040,
@@ -4215,10 +4114,10 @@
       "Manual browser execution only; no automated outbound actions.",
       "Stop at the ACK gate; no automated outbound actions."
     ],
-    "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 245\n\nOPEN: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 245\n\nOPEN: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_next_window_commander",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -4320,7 +4219,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "armed_packet_window",
     "severity": "warn",
@@ -4537,7 +4436,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -4551,9 +4450,9 @@
     "readyPackets": 3,
     "totalPackets": 3,
     "routeLabel": "breakout X route",
-    "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-    "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-07-26T00:17:26.488Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+    "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-07-27T00:16:22.073Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 0,
@@ -4614,10 +4513,10 @@
     ],
     "packets": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "priority": 1,
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "ready": true,
         "confidence": "high",
         "operatorSlaMinutes": 10,
@@ -4625,10 +4524,10 @@
         "expectedLiftPct": 1040
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "priority": 2,
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "ready": true,
         "confidence": "high",
         "operatorSlaMinutes": 20,
@@ -4649,7 +4548,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -4688,10 +4587,10 @@
     ],
     "lanes": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "rank": 1,
         "label": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "status": "ok",
         "ready": true,
         "score": 100,
@@ -4702,13 +4601,13 @@
         "xReadOps": 0,
         "incrementalXApiUsd": 0,
         "action": "Execute first; this route has the strongest distribution leverage.",
-        "reason": "velocity 100.0, 0.2h old, 7 echoes, dev.to"
+        "reason": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com"
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "rank": 2,
         "label": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "status": "ok",
         "ready": true,
         "score": 100,
@@ -4719,7 +4618,7 @@
         "xReadOps": 0,
         "incrementalXApiUsd": 0,
         "action": "Execute first; this route has the strongest distribution leverage.",
-        "reason": "velocity 100.0, 0.3h old, 1 echoes, dev.to"
+        "reason": "velocity 100.0, 4.6h old, 3 echoes, theverge.com"
       },
       {
         "id": "post:2080321476314747133",
@@ -4741,7 +4640,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4751,7 +4650,7 @@
     "totalTargets": 3,
     "totalTargetReplies": 3,
     "topRouteLabel": "breakout X route",
-    "topQueryClass": "broad_tech_load",
+    "topQueryClass": "big_tech_load",
     "nextAction": "Open breakout X route, paste the paired output under 1 fresh high-signal thread(s), then stop.",
     "queryPolicy": "Use X web links manually; no recent_search/read API calls for this atlas.",
     "guardrails": [
@@ -4760,14 +4659,14 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-07-26T00:17:26.488Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · operator_builder_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 75.8 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-07-27T00:16:22.073Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 75.8 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Cloud dev platforms are becoming operating systems for teams. The lock-in is not compute; it is CI history, secrets, preview URLs, observability, and who owns the incident path.\n",
     "targets": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "rank": 1,
         "label": "breakout X route",
-        "queryClass": "broad_tech_load",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "queryClass": "big_tech_load",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "status": "ok",
         "ready": true,
         "score": 100,
@@ -4778,9 +4677,9 @@
         "expectedLiftPct": 1040,
         "xReadOps": 0,
         "incrementalXApiUsd": 0,
-        "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
-        "evidence": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
+        "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "evidence": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
         "useWhen": [
           "packet is fresh",
           "thread has real technical exchange",
@@ -4791,14 +4690,14 @@
           "no visible technical argument",
           "draft would require unsupported claims"
         ],
-        "copyBlock": "ROUTE 1: breakout X route\nClass: broad_tech_load · target 1 · SLA 10m · X reads 0\nOpen: https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nWhy: velocity 100.0, 0.2h old, 7 echoes, dev.to\n\nOn Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost."
+        "copyBlock": "ROUTE 1: breakout X route\nClass: big_tech_load · target 1 · SLA 10m · X reads 0\nOpen: https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nWhy: velocity 100.0, 3.1h old, 3 echoes, techcrunch.com\n\nOn Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost."
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "rank": 2,
         "label": "breakout X route",
-        "queryClass": "operator_builder_load",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "queryClass": "big_tech_load",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "status": "ok",
         "ready": true,
         "score": 100,
@@ -4809,9 +4708,9 @@
         "expectedLiftPct": 1040,
         "xReadOps": 0,
         "incrementalXApiUsd": 0,
-        "draftText": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
-        "evidence": "velocity 100.0, 0.3h old, 1 echoes, dev.to",
+        "draftText": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "evidence": "velocity 100.0, 4.6h old, 3 echoes, theverge.com",
         "useWhen": [
           "packet is fresh",
           "thread has real technical exchange",
@@ -4822,7 +4721,7 @@
           "no visible technical argument",
           "draft would require unsupported claims"
         ],
-        "copyBlock": "ROUTE 2: breakout X route\nClass: operator_builder_load · target 1 · SLA 20m · X reads 0\nOpen: https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nWhy: velocity 100.0, 0.3h old, 1 echoes, dev.to\n\nOn The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost."
+        "copyBlock": "ROUTE 2: breakout X route\nClass: big_tech_load · target 1 · SLA 20m · X reads 0\nOpen: https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nWhy: velocity 100.0, 4.6h old, 3 echoes, theverge.com\n\nOn Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost."
       },
       {
         "id": "post:2080321476314747133",
@@ -4858,7 +4757,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -5019,7 +4918,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -5249,7 +5148,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -5423,7 +5322,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "conversion_starved",
     "severity": "danger",
     "zeroExtraXReads": true,
@@ -5472,7 +5371,7 @@
     "lanes": []
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -5670,7 +5569,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "topic_timing_starved",
     "severity": "danger",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -5979,7 +5878,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_opportunity_fusion",
     "severity": "warn",
     "confidence": "low",
@@ -6306,7 +6205,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -6314,8 +6213,8 @@
     "estimatedIncrementalXApiUsd": 0,
     "confidence": "low",
     "language": null,
-    "storyTitle": "Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
-    "storySource": "dev.to",
+    "storyTitle": "Can Apple make smart glasses that aren’t a constant privacy threat?",
+    "storySource": "techcrunch.com",
     "primaryFormatId": "decision_rule",
     "primaryFormatLabel": "Decision Rule",
     "exploreFormatId": "decision_rule",
@@ -6392,13 +6291,13 @@
       "Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.",
       "Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.",
       "Persisted strategy: Bias candidate formats toward: decision_rule, not_x_but_y.",
-      "Source bias: turn dev.to into an operator rule, cost, default shift, or distribution consequence.",
+      "Source bias: turn techcrunch.com into an operator rule, cost, default shift, or distribution consequence.",
       "Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries."
     ],
-    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: decision_rule\nranked_formats: decision_rule, not_x_but_y, playbook, sharp_question, contrarian_cost, operator_pain\nselected_story: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 00:00 UTC / Consumer Behavior / Decision Rule; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=00:00 UTC / Not X But Y; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: decision_rule, not_x_but_y.\n- Source bias: turn dev.to into an operator rule, cost, default shift, or distribution consequence.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries."
+    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: decision_rule\nranked_formats: decision_rule, not_x_but_y, playbook, sharp_question, contrarian_cost, operator_pain\nselected_story: Can Apple make smart glasses that aren’t a constant privacy threat?\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 00:00 UTC / Consumer Behavior / Decision Rule; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=00:00 UTC / Not X But Y; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: decision_rule, not_x_but_y.\n- Source bias: turn techcrunch.com into an operator rule, cost, default shift, or distribution consequence.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -6493,7 +6392,7 @@
         "after": "breakout X route",
         "status": "ok",
         "score": 100,
-        "reason": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
+        "reason": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
         "promptBias": "Open breakout X route; paste only when thread fit is strong."
       },
       {
@@ -6536,7 +6435,7 @@
   },
   "generationDecisionTrace": null,
   "distributionOps": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "scale_experiment",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -6545,7 +6444,7 @@
     "missionCount": 3,
     "primaryRoute": {
       "label": "breakout X route",
-      "url": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "url": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
       "score": 11.4,
       "confidence": "high"
     },
@@ -6583,21 +6482,21 @@
     ],
     "missions": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
         "priority": 1,
-        "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+        "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
         "kind": "trend",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "evidence": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
+        "evidence": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
         "score": 11.4,
         "expectedLiftPct": 1040,
         "confidence": "high",
         "targetReplies": 1,
         "operatorSlaMinutes": 10,
-        "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true,
         "costEfficiency": {
           "mode": "manual_web_route",
@@ -6640,21 +6539,21 @@
         }
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
         "priority": 2,
-        "label": "Velocity route: The Loneliness Protocol of a Solo Tech Founder",
+        "label": "Velocity route: Apple is banking on privacy to set its smart glasses apart",
         "kind": "trend",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "evidence": "velocity 100.0, 0.3h old, 1 echoes, dev.to",
+        "evidence": "velocity 100.0, 4.6h old, 3 echoes, theverge.com",
         "score": 11.4,
         "expectedLiftPct": 1040,
         "confidence": "high",
         "targetReplies": 1,
         "operatorSlaMinutes": 20,
-        "draftText": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-        "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "draftText": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+        "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true,
         "costEfficiency": {
           "mode": "manual_web_route",
@@ -6756,7 +6655,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -6802,10 +6701,10 @@
     ],
     "lanes": [
       {
-        "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
-        "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+        "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
+        "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "priority": 1,
         "status": "ok",
         "targetReplies": 1,
@@ -6818,10 +6717,10 @@
         "efficiencyLabel": "0 incremental X API spend"
       },
       {
-        "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
-        "label": "Velocity route: The Loneliness Protocol of a Solo Tech Founder",
+        "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
+        "label": "Velocity route: Apple is banking on privacy to set its smart glasses apart",
         "routeLabel": "breakout X route",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "priority": 2,
         "status": "ok",
         "targetReplies": 1,
@@ -6857,7 +6756,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 86,
@@ -6876,10 +6775,10 @@
     "routeCoveragePct": 100,
     "swarmCoveragePct": 166.7,
     "nextBurst": {
-      "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+      "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
       "routeLabel": "breakout X route",
-      "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-      "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+      "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
       "targetReplies": 3,
       "expectedLiftPct": 1040
     },
@@ -6887,7 +6786,7 @@
       {
         "id": "ingress",
         "label": "signal ingress",
-        "value": "8 pkts",
+        "value": "6 pkts",
         "status": "ok",
         "detail": "0 L7 events in 7d telemetry"
       },
@@ -6896,7 +6795,7 @@
         "label": "ranker lift",
         "value": "+1,040.0%",
         "status": "ok",
-        "detail": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price over baseline 1.0"
+        "detail": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat? over baseline 1.0"
       },
       {
         "id": "swarm",
@@ -6927,7 +6826,7 @@
         "to": "RANKER",
         "load": "0 L7",
         "status": "warn",
-        "detail": "8 packets scored"
+        "detail": "6 packets scored"
       },
       {
         "id": "ranker_swarm",
@@ -6989,7 +6888,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "sample_discovery",
     "confidence": "low",
     "zeroExtraXReads": true,
@@ -7000,18 +6899,18 @@
       "impressions7d": 0,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "00:17",
+        "label": "00:16",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-07-25T00:17:26.494Z",
-        "endsAt": "2026-07-25T04:17:26.494Z"
+        "startsAt": "2026-07-26T00:16:22.079Z",
+        "endsAt": "2026-07-26T04:16:22.079Z"
       },
       "quietBucket": {
-        "label": "00:17",
+        "label": "00:16",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-07-25T00:17:26.494Z",
-        "endsAt": "2026-07-25T04:17:26.494Z"
+        "startsAt": "2026-07-26T00:16:22.079Z",
+        "endsAt": "2026-07-26T04:16:22.079Z"
       }
     },
     "safeBudgetLeftUsd": 4.5,
@@ -7137,7 +7036,7 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "temporal_rotation",
     "confidence": "low",
     "source": "cached packet analytics only",
@@ -7166,7 +7065,7 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -7237,12 +7136,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "sample_writeback",
     "confidence": "low",
-    "epoch": "2026-07-26T00:17",
+    "epoch": "2026-07-27T00:16",
     "sampleCount": 0,
     "baselineScore": 0,
     "activeRule": {
@@ -7338,7 +7237,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (0 text, 0 media).",
@@ -7385,7 +7284,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -7515,7 +7414,7 @@
     "nextAction": "expand Consumer Apps: Translate the story into a consumer behavior or distribution habit change."
   },
   "trendVelocityRadar": {
-    "updatedAt": "2026-07-26T00:17:26.101Z",
+    "updatedAt": "2026-07-27T00:16:21.805Z",
     "zeroExtraXReads": true,
     "mode": "rss_velocity",
     "summary": {
@@ -7523,148 +7422,148 @@
       "breakoutCount": 12,
       "avgVelocity": 100,
       "primaryStage": "breakout",
-      "primaryTitle": "Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
-      "primarySource": "dev.to",
-      "nextAction": "Route breakout story from dev.to into the next packet angle."
+      "primaryTitle": "Can Apple make smart glasses that aren’t a constant privacy threat?",
+      "primarySource": "techcrunch.com",
+      "nextAction": "Route breakout story from techcrunch.com into the next packet angle."
     },
     "items": [
       {
         "rank": 1,
-        "title": "Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
-        "link": "https://dev.to/raxxostudios/claude-opus-5-is-here-fable-5-intelligence-at-half-the-price-4fme",
-        "source": "dev.to",
-        "sourceTier": "discussion",
-        "audienceSegment": "big_tech_platform",
-        "audienceLabel": "Big Tech Platform",
-        "hotScore": 5.44,
+        "title": "Can Apple make smart glasses that aren’t a constant privacy threat?",
+        "link": "https://techcrunch.com/2026/07/26/can-apple-make-smart-glasses-that-arent-a-constant-privacy-threat/",
+        "source": "techcrunch.com",
+        "sourceTier": "mainstream",
+        "audienceSegment": "consumer_apps",
+        "audienceLabel": "Consumer Apps",
+        "hotScore": 3.07,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 0.24,
-        "echoes": 7,
-        "reason": "0.2h old · 7 echoes · 68 sources · discussion source · Big Tech Platform",
+        "ageHours": 3.13,
+        "echoes": 3,
+        "reason": "3.1h old · 3 echoes · 10 sources · mainstream source · Consumer Apps",
         "routeLabel": "Live X route",
-        "routeQuery": "(claude OR opus OR here OR fable OR intelligence OR half) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(can OR apple OR make OR smart OR glasses OR aren) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 2,
-        "title": "The Loneliness Protocol of a Solo Tech Founder",
-        "link": "https://dev.to/kevin_jang_200b10826b3a5d/the-loneliness-protocol-of-a-solo-tech-founder-36ed",
-        "source": "dev.to",
-        "sourceTier": "discussion",
-        "audienceSegment": "consumer_apps",
-        "audienceLabel": "Consumer Apps",
-        "hotScore": 2.14,
+        "title": "Apple is banking on privacy to set its smart glasses apart",
+        "link": "https://www.theverge.com/tech/971101/apple-smart-glasses-privacy",
+        "source": "theverge.com",
+        "sourceTier": "mainstream",
+        "audienceSegment": "big_tech_platform",
+        "audienceLabel": "Big Tech Platform",
+        "hotScore": 3.06,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 0.25,
-        "echoes": 1,
-        "reason": "0.2h old · 1 echoes · 24 sources · discussion source · Consumer Apps",
+        "ageHours": 4.64,
+        "echoes": 3,
+        "reason": "4.6h old · 3 echoes · 9 sources · mainstream source · Big Tech Platform",
         "routeLabel": "Live X route",
-        "routeQuery": "(loneliness OR protocol OR solo OR tech OR founder OR dev) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(apple OR banking OR privacy OR set OR smart OR glasses) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 3,
-        "title": "What is happening to jobs? Separating AI hype from reality",
-        "link": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
-        "source": "hnrss.org",
-        "sourceTier": "discussion",
-        "audienceSegment": "ai_platform",
-        "audienceLabel": "AI / Agent Stack",
-        "hotScore": 2.12,
+        "title": "Here's our first look at Apple TV's Neuromancer adaptation",
+        "link": "https://www.engadget.com/2223559/first-look-apple-tv-neuromancer-adaptation-teaser-trailer/",
+        "source": "engadget.com",
+        "sourceTier": "mainstream",
+        "audienceSegment": "big_tech_platform",
+        "audienceLabel": "Big Tech Platform",
+        "hotScore": 2.54,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 1.41,
-        "echoes": 1,
-        "reason": "1.4h old · 1 echoes · 1 sources · discussion source · AI / Agent Stack",
+        "ageHours": 5.83,
+        "echoes": 2,
+        "reason": "5.8h old · 2 echoes · 13 sources · mainstream source · Big Tech Platform",
         "routeLabel": "Live X route",
-        "routeQuery": "(happening OR jobs OR separating OR hype OR reality OR article) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(happening%20OR%20jobs%20OR%20separating%20OR%20hype%20OR%20reality%20OR%20article)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(here OR our OR first OR look OR apple OR neuromancer) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(here%20OR%20our%20OR%20first%20OR%20look%20OR%20apple%20OR%20neuromancer)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: What is happening to jobs? Separating AI hype from reality\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Here's our first look at Apple TV's Neuromancer adaptation\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 4,
-        "title": "What is happening to jobs? Separating AI hype from reality",
-        "link": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
-        "source": "news.ycombinator.com",
+        "title": "We have proof automation now",
+        "link": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
+        "source": "hnrss.org",
         "sourceTier": "discussion",
-        "audienceSegment": "ai_platform",
-        "audienceLabel": "AI / Agent Stack",
-        "hotScore": 2.12,
+        "audienceSegment": "general_tech",
+        "audienceLabel": "General Tech",
+        "hotScore": 2.52,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 1.41,
-        "echoes": 1,
-        "reason": "1.4h old · 1 echoes · 5 sources · discussion source · AI / Agent Stack",
+        "ageHours": 3.36,
+        "echoes": 2,
+        "reason": "3.4h old · 2 echoes · 3 sources · discussion source · General Tech",
         "routeLabel": "Live X route",
-        "routeQuery": "(happening OR jobs OR separating OR hype OR reality OR comments) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(happening%20OR%20jobs%20OR%20separating%20OR%20hype%20OR%20reality%20OR%20comments)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(proof OR automation OR now OR article OR url OR https) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(proof%20OR%20automation%20OR%20now%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: What is happening to jobs? Separating AI hype from reality\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: We have proof automation now\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 5,
-        "title": "Cloudflare's new AI traffic options for customers",
-        "link": "https://blog.cloudflare.com/content-independence-day-ai-options/",
+        "title": "We have proof automation now",
+        "link": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
         "source": "news.ycombinator.com",
         "sourceTier": "discussion",
-        "audienceSegment": "ai_platform",
-        "audienceLabel": "AI / Agent Stack",
-        "hotScore": 2.12,
+        "audienceSegment": "general_tech",
+        "audienceLabel": "General Tech",
+        "hotScore": 2.52,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 1.41,
-        "echoes": 1,
-        "reason": "1.4h old · 1 echoes · 14 sources · discussion source · AI / Agent Stack",
+        "ageHours": 3.36,
+        "echoes": 2,
+        "reason": "3.4h old · 2 echoes · 6 sources · discussion source · General Tech",
         "routeLabel": "Live X route",
-        "routeQuery": "(cloudflare OR new OR traffic OR options OR customers OR comments) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(cloudflare%20OR%20new%20OR%20traffic%20OR%20options%20OR%20customers%20OR%20comments)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(proof OR automation OR now OR comments OR news OR tech) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(proof%20OR%20automation%20OR%20now%20OR%20comments%20OR%20news%20OR%20tech)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Cloudflare's new AI traffic options for customers\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: We have proof automation now\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 6,
-        "title": "Becoming a Research Engineer at a Big LLM Lab",
-        "link": "https://www.maxmynter.com/pages/blog/jobhunt",
-        "source": "hnrss.org",
-        "sourceTier": "discussion",
-        "audienceSegment": "ai_platform",
-        "audienceLabel": "AI / Agent Stack",
-        "hotScore": 2.12,
+        "title": "Apple Watch Series 12 and Ultra 4: What to expect",
+        "link": "https://9to5mac.com/2026/07/26/apple-watch-series-12-and-ultra-4-what-to-expect/",
+        "source": "9to5mac.com",
+        "sourceTier": "other",
+        "audienceSegment": "big_tech_platform",
+        "audienceLabel": "Big Tech Platform",
+        "hotScore": 2.44,
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 2.93,
-        "echoes": 1,
-        "reason": "2.9h old · 1 echoes · 2 sources · discussion source · AI / Agent Stack",
+        "ageHours": 0.53,
+        "echoes": 2,
+        "reason": "0.5h old · 2 echoes · 9 sources · other source · Big Tech Platform",
         "routeLabel": "Live X route",
-        "routeQuery": "(becoming OR research OR engineer OR big OR llm OR lab) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(becoming%20OR%20research%20OR%20engineer%20OR%20big%20OR%20llm%20OR%20lab)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(apple OR watch OR series OR ultra OR expect OR announce) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20watch%20OR%20series%20OR%20ultra%20OR%20expect%20OR%20announce)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Becoming a Research Engineer at a Big LLM Lab\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple Watch Series 12 and Ultra 4: What to expect\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 7,
-        "title": "Becoming a Research Engineer at a Big LLM Lab",
-        "link": "https://www.maxmynter.com/pages/blog/jobhunt",
-        "source": "news.ycombinator.com",
+        "title": "Show HN: Distill and serve small models with frontier quality for half the cost",
+        "link": "https://github.com/experientiallabs/world-model-optimizer",
+        "source": "hnrss.org",
         "sourceTier": "discussion",
         "audienceSegment": "ai_platform",
         "audienceLabel": "AI / Agent Stack",
@@ -7672,20 +7571,42 @@
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 2.93,
+        "ageHours": 0.66,
         "echoes": 1,
-        "reason": "2.9h old · 1 echoes · 8 sources · discussion source · AI / Agent Stack",
+        "reason": "0.7h old · 1 echoes · 11 sources · discussion source · AI / Agent Stack",
         "routeLabel": "Live X route",
-        "routeQuery": "(becoming OR research OR engineer OR big OR llm OR lab) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(becoming%20OR%20research%20OR%20engineer%20OR%20big%20OR%20llm%20OR%20lab)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(show OR distill OR serve OR small OR models OR frontier) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(show%20OR%20distill%20OR%20serve%20OR%20small%20OR%20models%20OR%20frontier)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Becoming a Research Engineer at a Big LLM Lab\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Show HN: Distill and serve small models with frontier quality for half the cost\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 8,
-        "title": "The new rules of context engineering for Claude 5 generation models",
-        "link": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models",
+        "title": "Show HN: Distill and serve small models with frontier quality for half the cost",
+        "link": "https://github.com/experientiallabs/world-model-optimizer",
+        "source": "news.ycombinator.com",
+        "sourceTier": "discussion",
+        "audienceSegment": "ai_platform",
+        "audienceLabel": "AI / Agent Stack",
+        "hotScore": 2.12,
+        "velocityScore": 100,
+        "velocityLift": 0.28,
+        "stage": "breakout",
+        "ageHours": 0.66,
+        "echoes": 1,
+        "reason": "0.7h old · 1 echoes · 9 sources · discussion source · AI / Agent Stack",
+        "routeLabel": "Live X route",
+        "routeQuery": "(show OR distill OR serve OR small OR models OR frontier) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(show%20OR%20distill%20OR%20serve%20OR%20small%20OR%20models%20OR%20frontier)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
+        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Show HN: Distill and serve small models with frontier quality for half the cost\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "zeroExtraXReads": true
+      },
+      {
+        "rank": 9,
+        "title": "Cursor Bridge – Run Unlimited Claude Code on Your Cursor Subscription",
+        "link": "https://github.com/hkc5/cursor-bridge",
         "source": "hnrss.org",
         "sourceTier": "discussion",
         "audienceSegment": "ai_platform",
@@ -7694,42 +7615,42 @@
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 3.55,
+        "ageHours": 1.44,
         "echoes": 1,
-        "reason": "3.6h old · 1 echoes · 10 sources · discussion source · AI / Agent Stack",
+        "reason": "1.4h old · 1 echoes · 6 sources · discussion source · AI / Agent Stack",
         "routeLabel": "Live X route",
-        "routeQuery": "(new OR rules OR context OR engineering OR claude OR generation) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(new%20OR%20rules%20OR%20context%20OR%20engineering%20OR%20claude%20OR%20generation)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(cursor OR bridge OR run OR unlimited OR claude OR code) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(cursor%20OR%20bridge%20OR%20run%20OR%20unlimited%20OR%20claude%20OR%20code)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: The new rules of context engineering for Claude 5 generation models\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
-        "zeroExtraXReads": true
-      },
-      {
-        "rank": 9,
-        "title": "Clinical Failure Rates over the Decades: Yikes",
-        "link": "https://www.science.org/content/blog-post/clinical-failure-rates-over-decades-yikes",
-        "source": "hnrss.org",
-        "sourceTier": "discussion",
-        "audienceSegment": "general_tech",
-        "audienceLabel": "General Tech",
-        "hotScore": 2,
-        "velocityScore": 100,
-        "velocityLift": 0.28,
-        "stage": "breakout",
-        "ageHours": 1.31,
-        "echoes": 1,
-        "reason": "1.3h old · 1 echoes · 3 sources · discussion source · General Tech",
-        "routeLabel": "Live X route",
-        "routeQuery": "(clinical OR failure OR rates OR over OR decades OR yikes) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(clinical%20OR%20failure%20OR%20rates%20OR%20over%20OR%20decades%20OR%20yikes)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Clinical Failure Rates over the Decades: Yikes\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Cursor Bridge – Run Unlimited Claude Code on Your Cursor Subscription\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
         "rank": 10,
-        "title": "Clinical Failure Rates over the Decades: Yikes",
-        "link": "https://www.science.org/content/blog-post/clinical-failure-rates-over-decades-yikes",
+        "title": "Cursor Bridge – Run Unlimited Claude Code on Your Cursor Subscription",
+        "link": "https://github.com/hkc5/cursor-bridge",
+        "source": "news.ycombinator.com",
+        "sourceTier": "discussion",
+        "audienceSegment": "ai_platform",
+        "audienceLabel": "AI / Agent Stack",
+        "hotScore": 2.12,
+        "velocityScore": 100,
+        "velocityLift": 0.28,
+        "stage": "breakout",
+        "ageHours": 1.44,
+        "echoes": 1,
+        "reason": "1.4h old · 1 echoes · 8 sources · discussion source · AI / Agent Stack",
+        "routeLabel": "Live X route",
+        "routeQuery": "(cursor OR bridge OR run OR unlimited OR claude OR code) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(cursor%20OR%20bridge%20OR%20run%20OR%20unlimited%20OR%20claude%20OR%20code)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
+        "replyAngle": "Reply angle: Tie the story to model adoption, workflow lock-in, or operator cost.\nUse the story as evidence, not a recap: Cursor Bridge – Run Unlimited Claude Code on Your Cursor Subscription\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "zeroExtraXReads": true
+      },
+      {
+        "rank": 11,
+        "title": "Japan legend Miura, 59, scores first goal since 2022",
+        "link": "https://www.bbc.com/sport/football/articles/c3r087181ndo",
         "source": "news.ycombinator.com",
         "sourceTier": "discussion",
         "audienceSegment": "general_tech",
@@ -7738,20 +7659,20 @@
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 1.31,
+        "ageHours": 1.19,
         "echoes": 1,
-        "reason": "1.3h old · 1 echoes · 9 sources · discussion source · General Tech",
+        "reason": "1.2h old · 1 echoes · 5 sources · discussion source · General Tech",
         "routeLabel": "Live X route",
-        "routeQuery": "(clinical OR failure OR rates OR over OR decades OR yikes) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(clinical%20OR%20failure%20OR%20rates%20OR%20over%20OR%20decades%20OR%20yikes)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(japan OR legend OR miura OR scores OR first OR goal) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(japan%20OR%20legend%20OR%20miura%20OR%20scores%20OR%20first%20OR%20goal)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Clinical Failure Rates over the Decades: Yikes\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Japan legend Miura, 59, scores first goal since 2022\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       },
       {
-        "rank": 11,
-        "title": "Kimi K3 built a Windows XP in browser",
-        "link": "https://windows-xp.kimi.site/",
+        "rank": 12,
+        "title": "Teaching Kids Forth",
+        "link": "https://gracefulliberty.com/articles/teaching-kids-forth/",
         "source": "hnrss.org",
         "sourceTier": "discussion",
         "audienceSegment": "general_tech",
@@ -7760,43 +7681,21 @@
         "velocityScore": 100,
         "velocityLift": 0.28,
         "stage": "breakout",
-        "ageHours": 2.21,
+        "ageHours": 2.59,
         "echoes": 1,
-        "reason": "2.2h old · 1 echoes · 4 sources · discussion source · General Tech",
+        "reason": "2.6h old · 1 echoes · 2 sources · discussion source · General Tech",
         "routeLabel": "Live X route",
-        "routeQuery": "(kimi OR built OR windows OR browser OR article OR url) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(kimi%20OR%20built%20OR%20windows%20OR%20browser%20OR%20article%20OR%20url)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(teaching OR kids OR forth OR article OR url OR https) -is:retweet lang:en min_faves:5",
+        "routeUrl": "https://x.com/search?q=(teaching%20OR%20kids%20OR%20forth%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Kimi K3 built a Windows XP in browser\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
-        "zeroExtraXReads": true
-      },
-      {
-        "rank": 12,
-        "title": "Kimi K3 built a Windows XP in browser",
-        "link": "https://windows-xp.kimi.site/",
-        "source": "news.ycombinator.com",
-        "sourceTier": "discussion",
-        "audienceSegment": "general_tech",
-        "audienceLabel": "General Tech",
-        "hotScore": 2,
-        "velocityScore": 100,
-        "velocityLift": 0.28,
-        "stage": "breakout",
-        "ageHours": 2.21,
-        "echoes": 1,
-        "reason": "2.2h old · 1 echoes · 9 sources · discussion source · General Tech",
-        "routeLabel": "Live X route",
-        "routeQuery": "(kimi OR built OR windows OR browser OR comments OR news) -is:retweet lang:en min_faves:5",
-        "routeUrl": "https://x.com/search?q=(kimi%20OR%20built%20OR%20windows%20OR%20browser%20OR%20comments%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
-        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Kimi K3 built a Windows XP in browser\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+        "replyAngle": "Reply angle: Use a broad tech framing with one concrete company, product, or user behavior.\nUse the story as evidence, not a recap: Teaching Kids Forth\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
         "zeroExtraXReads": true
       }
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
-    "updatedAt": "2026-07-26T00:15:41.105Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
+    "updatedAt": "2026-07-27T00:14:45.452Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
     "zeroExtraXReads": true,
@@ -7812,23 +7711,23 @@
       "sourceTier": "discussion",
       "status": "hot",
       "healthLabel": "velocity hot",
-      "priorityScore": 100,
+      "priorityScore": 95.6,
       "totalSuccesses": 1,
       "totalFailures": 0,
       "consecutiveFailures": 0,
       "lastItemCount": 8,
       "lastStatus": "ok",
       "lastError": null,
-      "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+      "lastSuccessAt": "2026-07-27T00:14:45.452Z",
       "lastFailureAt": null,
-      "updatedAt": "2026-07-26T00:15:41.105Z",
-      "trendItems": 5,
-      "breakoutCount": 5,
+      "updatedAt": "2026-07-27T00:14:45.452Z",
+      "trendItems": 4,
+      "breakoutCount": 4,
       "avgVelocity": 100,
-      "topTitle": "What is happening to jobs? Separating AI hype from reality",
-      "topLink": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
-      "routeUrl": "https://x.com/search?q=(happening%20OR%20jobs%20OR%20separating%20OR%20hype%20OR%20reality%20OR%20comments)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-      "routeQuery": "(happening OR jobs OR separating OR hype OR reality OR comments) -is:retweet lang:en min_faves:5",
+      "topTitle": "We have proof automation now",
+      "topLink": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
+      "routeUrl": "https://x.com/search?q=(proof%20OR%20automation%20OR%20now%20OR%20comments%20OR%20news%20OR%20tech)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "routeQuery": "(proof OR automation OR now OR comments OR news OR tech) -is:retweet lang:en min_faves:5",
       "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0
@@ -7840,7 +7739,7 @@
       "failingSources": 0,
       "cachedTrendItems": 12,
       "breakoutCount": 12,
-      "avgVelocity": 25,
+      "avgVelocity": 50,
       "primarySource": "news.ycombinator.com",
       "nextAction": "Route the hottest cached RSS source through manual X web lanes."
     },
@@ -7860,7 +7759,7 @@
       {
         "id": "velocity",
         "label": "AVG_VELOCITY",
-        "value": "25.0",
+        "value": "50.0",
         "status": "ok"
       },
       {
@@ -7879,23 +7778,23 @@
         "sourceTier": "discussion",
         "status": "hot",
         "healthLabel": "velocity hot",
-        "priorityScore": 100,
+        "priorityScore": 95.6,
         "totalSuccesses": 1,
         "totalFailures": 0,
         "consecutiveFailures": 0,
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 5,
-        "breakoutCount": 5,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 4,
+        "breakoutCount": 4,
         "avgVelocity": 100,
-        "topTitle": "What is happening to jobs? Separating AI hype from reality",
-        "topLink": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
-        "routeUrl": "https://x.com/search?q=(happening%20OR%20jobs%20OR%20separating%20OR%20hype%20OR%20reality%20OR%20comments)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "routeQuery": "(happening OR jobs OR separating OR hype OR reality OR comments) -is:retweet lang:en min_faves:5",
+        "topTitle": "We have proof automation now",
+        "topLink": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
+        "routeUrl": "https://x.com/search?q=(proof%20OR%20automation%20OR%20now%20OR%20comments%20OR%20news%20OR%20tech)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(proof OR automation OR now OR comments OR news OR tech) -is:retweet lang:en min_faves:5",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
@@ -7908,52 +7807,139 @@
         "sourceTier": "discussion",
         "status": "hot",
         "healthLabel": "velocity hot",
-        "priorityScore": 100,
+        "priorityScore": 95.6,
         "totalSuccesses": 1,
         "totalFailures": 0,
         "consecutiveFailures": 0,
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 5,
-        "breakoutCount": 5,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 4,
+        "breakoutCount": 4,
         "avgVelocity": 100,
-        "topTitle": "What is happening to jobs? Separating AI hype from reality",
-        "topLink": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
-        "routeUrl": "https://x.com/search?q=(happening%20OR%20jobs%20OR%20separating%20OR%20hype%20OR%20reality%20OR%20article)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "routeQuery": "(happening OR jobs OR separating OR hype OR reality OR article) -is:retweet lang:en min_faves:5",
+        "topTitle": "We have proof automation now",
+        "topLink": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
+        "routeUrl": "https://x.com/search?q=(proof%20OR%20automation%20OR%20now%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(proof OR automation OR now OR article OR url OR https) -is:retweet lang:en min_faves:5",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
       {
-        "id": "rss:dev.to",
-        "source": "dev.to",
-        "host": "dev.to",
-        "url": "https://dev.to/feed",
-        "sourceTier": "discussion",
+        "id": "rss:techcrunch.com",
+        "source": "techcrunch.com",
+        "host": "techcrunch.com",
+        "url": "https://techcrunch.com/feed/",
+        "sourceTier": "mainstream",
         "status": "hot",
         "healthLabel": "velocity hot",
-        "priorityScore": 79.6,
+        "priorityScore": 71.6,
         "totalSuccesses": 1,
         "totalFailures": 0,
         "consecutiveFailures": 0,
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 2,
-        "breakoutCount": 2,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 1,
+        "breakoutCount": 1,
         "avgVelocity": 100,
-        "topTitle": "Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
-        "topLink": "https://dev.to/raxxostudios/claude-opus-5-is-here-fable-5-intelligence-at-half-the-price-4fme",
-        "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
-        "routeQuery": "(claude OR opus OR here OR fable OR intelligence OR half) -is:retweet lang:en min_faves:5",
+        "topTitle": "Can Apple make smart glasses that aren’t a constant privacy threat?",
+        "topLink": "https://techcrunch.com/2026/07/26/can-apple-make-smart-glasses-that-arent-a-constant-privacy-threat/",
+        "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(can OR apple OR make OR smart OR glasses OR aren) -is:retweet lang:en min_faves:5",
+        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "rss:theverge.com",
+        "source": "theverge.com",
+        "host": "theverge.com",
+        "url": "https://www.theverge.com/rss/index.xml",
+        "sourceTier": "mainstream",
+        "status": "hot",
+        "healthLabel": "velocity hot",
+        "priorityScore": 71.6,
+        "totalSuccesses": 1,
+        "totalFailures": 0,
+        "consecutiveFailures": 0,
+        "lastItemCount": 8,
+        "lastStatus": "ok",
+        "lastError": null,
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
+        "lastFailureAt": null,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 1,
+        "breakoutCount": 1,
+        "avgVelocity": 100,
+        "topTitle": "Apple is banking on privacy to set its smart glasses apart",
+        "topLink": "https://www.theverge.com/tech/971101/apple-smart-glasses-privacy",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(apple OR banking OR privacy OR set OR smart OR glasses) -is:retweet lang:en min_faves:5",
+        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "rss:engadget.com",
+        "source": "engadget.com",
+        "host": "engadget.com",
+        "url": "https://www.engadget.com/rss.xml",
+        "sourceTier": "mainstream",
+        "status": "hot",
+        "healthLabel": "velocity hot",
+        "priorityScore": 71.6,
+        "totalSuccesses": 1,
+        "totalFailures": 0,
+        "consecutiveFailures": 0,
+        "lastItemCount": 8,
+        "lastStatus": "ok",
+        "lastError": null,
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
+        "lastFailureAt": null,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 1,
+        "breakoutCount": 1,
+        "avgVelocity": 100,
+        "topTitle": "Here's our first look at Apple TV's Neuromancer adaptation",
+        "topLink": "https://www.engadget.com/2223559/first-look-apple-tv-neuromancer-adaptation-teaser-trailer/",
+        "routeUrl": "https://x.com/search?q=(here%20OR%20our%20OR%20first%20OR%20look%20OR%20apple%20OR%20neuromancer)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(here OR our OR first OR look OR apple OR neuromancer) -is:retweet lang:en min_faves:5",
+        "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "rss:9to5mac.com",
+        "source": "9to5mac.com",
+        "host": "9to5mac.com",
+        "url": "https://9to5mac.com/feed/",
+        "sourceTier": "other",
+        "status": "hot",
+        "healthLabel": "velocity hot",
+        "priorityScore": 71.6,
+        "totalSuccesses": 1,
+        "totalFailures": 0,
+        "consecutiveFailures": 0,
+        "lastItemCount": 8,
+        "lastStatus": "ok",
+        "lastError": null,
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
+        "lastFailureAt": null,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 1,
+        "breakoutCount": 1,
+        "avgVelocity": 100,
+        "topTitle": "Apple Watch Series 12 and Ultra 4: What to expect",
+        "topLink": "https://9to5mac.com/2026/07/26/apple-watch-series-12-and-ultra-4-what-to-expect/",
+        "routeUrl": "https://x.com/search?q=(apple%20OR%20watch%20OR%20series%20OR%20ultra%20OR%20expect%20OR%20announce)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+        "routeQuery": "(apple OR watch OR series OR ultra OR expect OR announce) -is:retweet lang:en min_faves:5",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
@@ -7973,9 +7959,9 @@
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
+        "updatedAt": "2026-07-27T00:14:45.452Z",
         "trendItems": 0,
         "breakoutCount": 0,
         "avgVelocity": 0,
@@ -8002,125 +7988,9 @@
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 0,
-        "breakoutCount": 0,
-        "avgVelocity": 0,
-        "topTitle": null,
-        "topLink": null,
-        "routeUrl": null,
-        "routeQuery": null,
-        "routeReason": "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
-        "zeroExtraXReads": true,
-        "estimatedXReadOps": 0
-      },
-      {
-        "id": "rss:ifanr.com",
-        "source": "ifanr.com",
-        "host": "ifanr.com",
-        "url": "https://www.ifanr.com/feed",
-        "sourceTier": "cn",
-        "status": "ok",
-        "healthLabel": "stream healthy",
-        "priorityScore": 13.6,
-        "totalSuccesses": 1,
-        "totalFailures": 0,
-        "consecutiveFailures": 0,
-        "lastItemCount": 8,
-        "lastStatus": "ok",
-        "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
-        "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 0,
-        "breakoutCount": 0,
-        "avgVelocity": 0,
-        "topTitle": null,
-        "topLink": null,
-        "routeUrl": null,
-        "routeQuery": null,
-        "routeReason": "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
-        "zeroExtraXReads": true,
-        "estimatedXReadOps": 0
-      },
-      {
-        "id": "rss:qbitai.com",
-        "source": "qbitai.com",
-        "host": "qbitai.com",
-        "url": "https://www.qbitai.com/feed",
-        "sourceTier": "cn",
-        "status": "ok",
-        "healthLabel": "stream healthy",
-        "priorityScore": 13.6,
-        "totalSuccesses": 1,
-        "totalFailures": 0,
-        "consecutiveFailures": 0,
-        "lastItemCount": 8,
-        "lastStatus": "ok",
-        "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
-        "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 0,
-        "breakoutCount": 0,
-        "avgVelocity": 0,
-        "topTitle": null,
-        "topLink": null,
-        "routeUrl": null,
-        "routeQuery": null,
-        "routeReason": "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
-        "zeroExtraXReads": true,
-        "estimatedXReadOps": 0
-      },
-      {
-        "id": "rss:v2ex.com",
-        "source": "v2ex.com",
-        "host": "v2ex.com",
-        "url": "https://www.v2ex.com/index.xml",
-        "sourceTier": "discussion",
-        "status": "ok",
-        "healthLabel": "stream healthy",
-        "priorityScore": 13.6,
-        "totalSuccesses": 1,
-        "totalFailures": 0,
-        "consecutiveFailures": 0,
-        "lastItemCount": 8,
-        "lastStatus": "ok",
-        "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
-        "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
-        "trendItems": 0,
-        "breakoutCount": 0,
-        "avgVelocity": 0,
-        "topTitle": null,
-        "topLink": null,
-        "routeUrl": null,
-        "routeQuery": null,
-        "routeReason": "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
-        "zeroExtraXReads": true,
-        "estimatedXReadOps": 0
-      },
-      {
-        "id": "rss:36kr.com",
-        "source": "36kr.com",
-        "host": "36kr.com",
-        "url": "https://www.36kr.com/feed",
-        "sourceTier": "cn",
-        "status": "ok",
-        "healthLabel": "stream healthy",
-        "priorityScore": 13.6,
-        "totalSuccesses": 1,
-        "totalFailures": 0,
-        "consecutiveFailures": 0,
-        "lastItemCount": 8,
-        "lastStatus": "ok",
-        "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
-        "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
+        "updatedAt": "2026-07-27T00:14:45.452Z",
         "trendItems": 0,
         "breakoutCount": 0,
         "avgVelocity": 0,
@@ -8147,9 +8017,9 @@
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
+        "updatedAt": "2026-07-27T00:14:45.452Z",
         "trendItems": 0,
         "breakoutCount": 0,
         "avgVelocity": 0,
@@ -8162,10 +8032,10 @@
         "estimatedXReadOps": 0
       },
       {
-        "id": "rss:ithome.com",
-        "source": "ithome.com",
-        "host": "ithome.com",
-        "url": "https://www.ithome.com/rss/",
+        "id": "rss:ifanr.com",
+        "source": "ifanr.com",
+        "host": "ifanr.com",
+        "url": "https://www.ifanr.com/feed",
         "sourceTier": "cn",
         "status": "ok",
         "healthLabel": "stream healthy",
@@ -8176,9 +8046,9 @@
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
+        "updatedAt": "2026-07-27T00:14:45.452Z",
         "trendItems": 0,
         "breakoutCount": 0,
         "avgVelocity": 0,
@@ -8191,11 +8061,11 @@
         "estimatedXReadOps": 0
       },
       {
-        "id": "rss:techcrunch.com",
-        "source": "techcrunch.com",
-        "host": "techcrunch.com",
-        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "sourceTier": "mainstream",
+        "id": "rss:v2ex.com",
+        "source": "v2ex.com",
+        "host": "v2ex.com",
+        "url": "https://www.v2ex.com/index.xml",
+        "sourceTier": "discussion",
         "status": "ok",
         "healthLabel": "stream healthy",
         "priorityScore": 13.6,
@@ -8205,9 +8075,38 @@
         "lastItemCount": 8,
         "lastStatus": "ok",
         "lastError": null,
-        "lastSuccessAt": "2026-07-26T00:15:41.105Z",
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
         "lastFailureAt": null,
-        "updatedAt": "2026-07-26T00:15:41.105Z",
+        "updatedAt": "2026-07-27T00:14:45.452Z",
+        "trendItems": 0,
+        "breakoutCount": 0,
+        "avgVelocity": 0,
+        "topTitle": null,
+        "topLink": null,
+        "routeUrl": null,
+        "routeQuery": null,
+        "routeReason": "Use cached RSS signal as the angle anchor; execute routes manually in X web.",
+        "zeroExtraXReads": true,
+        "estimatedXReadOps": 0
+      },
+      {
+        "id": "rss:36kr.com",
+        "source": "36kr.com",
+        "host": "36kr.com",
+        "url": "https://www.36kr.com/feed",
+        "sourceTier": "cn",
+        "status": "ok",
+        "healthLabel": "stream healthy",
+        "priorityScore": 13.6,
+        "totalSuccesses": 1,
+        "totalFailures": 0,
+        "consecutiveFailures": 0,
+        "lastItemCount": 8,
+        "lastStatus": "ok",
+        "lastError": null,
+        "lastSuccessAt": "2026-07-27T00:14:45.452Z",
+        "lastFailureAt": null,
+        "updatedAt": "2026-07-27T00:14:45.452Z",
         "trendItems": 0,
         "breakoutCount": 0,
         "avgVelocity": 0,
@@ -8228,7 +8127,7 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 0,
@@ -8565,7 +8464,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -8689,39 +8588,39 @@
   },
   "opportunities": [
     {
-      "id": "trend:1:claude-opus-5-is-here-fable-5-intelligence",
-      "label": "Velocity route: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price",
+      "id": "trend:1:can-apple-make-smart-glasses-that-aren-t-a",
+      "label": "Velocity route: Can Apple make smart glasses that aren’t a constant privacy threat?",
       "kind": "trend",
       "priority": 1,
       "score": 11.4,
       "confidence": "high",
       "routeLabel": "breakout X route",
-      "routeUrl": "https://x.com/search?q=(claude%20OR%20opus%20OR%20here%20OR%20fable%20OR%20intelligence%20OR%20half)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "routeUrl": "https://x.com/search?q=(can%20OR%20apple%20OR%20make%20OR%20smart%20OR%20glasses%20OR%20aren)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
       "draftIndex": 0,
-      "draftText": "On Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-      "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+      "draftText": "On Can Apple make smart glasses that aren’t a constant privacy threat?: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+      "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: Can Apple make smart glasses that aren’t a constant privacy threat?\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
       "reason": "Open live X web search and reply manually under active high-throughput conversations.",
-      "evidence": "velocity 100.0, 0.2h old, 7 echoes, dev.to",
+      "evidence": "velocity 100.0, 3.1h old, 3 echoes, techcrunch.com",
       "zeroExtraXReads": true,
-      "source": "dev.to",
+      "source": "techcrunch.com",
       "stage": "breakout"
     },
     {
-      "id": "trend:2:the-loneliness-protocol-of-a-solo-tech-fou",
-      "label": "Velocity route: The Loneliness Protocol of a Solo Tech Founder",
+      "id": "trend:2:apple-is-banking-on-privacy-to-set-its-sma",
+      "label": "Velocity route: Apple is banking on privacy to set its smart glasses apart",
       "kind": "trend",
       "priority": 2,
       "score": 11.4,
       "confidence": "high",
       "routeLabel": "breakout X route",
-      "routeUrl": "https://x.com/search?q=(loneliness%20OR%20protocol%20OR%20solo%20OR%20tech%20OR%20founder%20OR%20dev)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
+      "routeUrl": "https://x.com/search?q=(apple%20OR%20banking%20OR%20privacy%20OR%20set%20OR%20smart%20OR%20glasses)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
       "draftIndex": 1,
-      "draftText": "On The Loneliness Protocol of a Solo Tech Founder: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-      "draftAngle": "Reply angle: Translate the story into a consumer behavior or distribution habit change.\nUse the story as evidence, not a recap: The Loneliness Protocol of a Solo Tech Founder\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
+      "draftText": "On Apple is banking on privacy to set its smart glasses apart: the useful question is whether this changes a default workflow for Big Tech Platform. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
+      "draftAngle": "Reply angle: Frame the platform shift as distribution, margin, privacy, or default-control leverage.\nUse the story as evidence, not a recap: Apple is banking on privacy to set its smart glasses apart\nFormat: one concrete operating rule, one cost/tradeoff, one sharp question.",
       "reason": "Open live X web search and reply manually under active high-throughput conversations.",
-      "evidence": "velocity 100.0, 0.3h old, 1 echoes, dev.to",
+      "evidence": "velocity 100.0, 4.6h old, 3 echoes, theverge.com",
       "zeroExtraXReads": true,
-      "source": "dev.to",
+      "source": "theverge.com",
       "stage": "breakout"
     },
     {
@@ -8833,7 +8732,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 high-signal tech sources 这类来源；少用 low-confidence formats，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "sample_discovery",
     "confidence": "low",
     "baselineScore": 0,
@@ -8878,7 +8777,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "cached_learning_contract",
     "status": "cold_start",
     "confidence": "low",
@@ -8954,7 +8853,7 @@
         "Opportunity lane: 00:00 UTC / Consumer Behavior / Decision Rule; sources=topic_timing; score=59.8.",
         "Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits.."
       ],
-      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: decision_rule\nranked_formats: decision_rule, not_x_but_y, playbook, sharp_question, contrarian_cost, operator_pain\nselected_story: Claude Opus 5 Is Here: Fable 5 Intelligence at Half the Price\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 00:00 UTC / Consumer Behavior / Decision Rule; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=00:00 UTC / Not X But Y; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: decision_rule, not_x_but_y.\n- Source bias: turn dev.to into an operator rule, cost, default shift, or distribution consequence.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.",
+      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: decision_rule\nranked_formats: decision_rule, not_x_but_y, playbook, sharp_question, contrarian_cost, operator_pain\nselected_story: Can Apple make smart glasses that aren’t a constant privacy threat?\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Decision Rule. Open with a rule the reader can apply today.\n- Opportunity lane: 00:00 UTC / Consumer Behavior / Decision Rule; sources=topic_timing; score=59.8.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Not X But Y; source=high-signal tech sources; topic=AI / platforms / developer tools; window=00:00 UTC / Not X But Y; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: decision_rule, not_x_but_y.\n- Source bias: turn techcrunch.com into an operator rule, cost, default shift, or distribution consequence.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries.",
       "zeroExtraXReads": true
     },
     "cells": [
@@ -8996,7 +8895,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-07-26T00:17:26.488Z",
+    "generatedAt": "2026-07-27T00:16:22.073Z",
     "mode": "tracked_model_inference_stream",
     "status": "warn",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -9009,7 +8908,7 @@
     "totalTokens": 0,
     "spend": 0,
     "successRate": 0,
-    "updatedAt": "2026-07-26T00:17:26.414Z",
+    "updatedAt": "2026-07-27T00:16:21.995Z",
     "primaryModel": {
       "name": "gpt-5.5",
       "calls": 1,
@@ -9330,8 +9229,8 @@
           "calls": 1,
           "failures": 1,
           "lastStatus": 400,
-          "lastCalledAt": "2026-07-26T00:15:33.213Z",
-          "lastFailureAt": "2026-07-26T00:15:33.213Z",
+          "lastCalledAt": "2026-07-27T00:14:37.159Z",
+          "lastFailureAt": "2026-07-27T00:14:37.159Z",
           "statuses": {
             "400": 1
           },
@@ -9362,15 +9261,6 @@
     "days": [
       {
         "index": 0,
-        "date": "2026-07-13",
-        "label": "07-13",
-        "value": 0,
-        "calls": 0,
-        "failures": 0,
-        "usd": 0
-      },
-      {
-        "index": 1,
         "date": "2026-07-14",
         "label": "07-14",
         "value": 0,
@@ -9379,7 +9269,7 @@
         "usd": 0
       },
       {
-        "index": 2,
+        "index": 1,
         "date": "2026-07-15",
         "label": "07-15",
         "value": 0,
@@ -9388,7 +9278,7 @@
         "usd": 0
       },
       {
-        "index": 3,
+        "index": 2,
         "date": "2026-07-16",
         "label": "07-16",
         "value": 0,
@@ -9397,7 +9287,7 @@
         "usd": 0
       },
       {
-        "index": 4,
+        "index": 3,
         "date": "2026-07-17",
         "label": "07-17",
         "value": 0,
@@ -9406,7 +9296,7 @@
         "usd": 0
       },
       {
-        "index": 5,
+        "index": 4,
         "date": "2026-07-18",
         "label": "07-18",
         "value": 0,
@@ -9415,7 +9305,7 @@
         "usd": 0
       },
       {
-        "index": 6,
+        "index": 5,
         "date": "2026-07-19",
         "label": "07-19",
         "value": 0,
@@ -9424,7 +9314,7 @@
         "usd": 0
       },
       {
-        "index": 7,
+        "index": 6,
         "date": "2026-07-20",
         "label": "07-20",
         "value": 0,
@@ -9433,7 +9323,7 @@
         "usd": 0
       },
       {
-        "index": 8,
+        "index": 7,
         "date": "2026-07-21",
         "label": "07-21",
         "value": 0,
@@ -9442,7 +9332,7 @@
         "usd": 0
       },
       {
-        "index": 9,
+        "index": 8,
         "date": "2026-07-22",
         "label": "07-22",
         "value": 0,
@@ -9451,7 +9341,7 @@
         "usd": 0
       },
       {
-        "index": 10,
+        "index": 9,
         "date": "2026-07-23",
         "label": "07-23",
         "value": 0,
@@ -9460,7 +9350,7 @@
         "usd": 0
       },
       {
-        "index": 11,
+        "index": 10,
         "date": "2026-07-24",
         "label": "07-24",
         "value": 0,
@@ -9469,7 +9359,7 @@
         "usd": 0
       },
       {
-        "index": 12,
+        "index": 11,
         "date": "2026-07-25",
         "label": "07-25",
         "value": 0,
@@ -9478,9 +9368,18 @@
         "usd": 0
       },
       {
-        "index": 13,
+        "index": 12,
         "date": "2026-07-26",
         "label": "07-26",
+        "value": 0,
+        "calls": 0,
+        "failures": 0,
+        "usd": 0
+      },
+      {
+        "index": 13,
+        "date": "2026-07-27",
+        "label": "07-27",
         "value": 1,
         "calls": 1,
         "failures": 1,
@@ -9503,7 +9402,7 @@
   "openai": {
     "month": "2026-07",
     "spend": 0,
-    "updatedAt": "2026-07-26T00:17:26.414Z",
+    "updatedAt": "2026-07-27T00:16:21.995Z",
     "purposes": [
       {
         "name": "manual_reply_drafts",
