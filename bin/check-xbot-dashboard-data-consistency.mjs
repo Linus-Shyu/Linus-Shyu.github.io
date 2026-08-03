@@ -375,6 +375,9 @@ function assertSignalMap(file, data) {
   const topPostScores = (data.last7d?.topPosts || []).map((post) => number(post.score));
   const expectedBestScore = Math.max(number(data.profile?.baselineScore), ...topPostScores, 0);
   assertNear(file, "signalMap best score", number(scoreNode.value), expectedBestScore);
+  if (Number.isFinite(number(signalMap.totals?.bestScore, NaN))) {
+    assertNear(file, "signalMap totals.bestScore", number(signalMap.totals.bestScore), expectedBestScore);
+  }
 
   const endpointTotals = (data.api?.endpoints || []).reduce(
     (totals, endpoint) => ({
