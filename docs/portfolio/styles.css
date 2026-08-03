@@ -496,54 +496,6 @@ body {
     font-size: 0.75rem;
 }
 
-/* ========== Competition & Experience Section ========== */
-.comp-section {
-    padding: var(--spacing-section) 0;
-}
-
-.comp-section__title {
-    margin-bottom: 2rem;
-}
-
-.comp-block {
-    margin-bottom: 2.5rem;
-}
-
-.comp-block:last-of-type {
-    margin-bottom: 0;
-}
-
-.comp-block__label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-text-tertiary);
-    margin: 0 0 0.75rem;
-}
-
-.comp-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.comp-list li {
-    font-size: var(--font-size-body);
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    padding: 0.35rem 0;
-    padding-left: 1.25rem;
-    position: relative;
-}
-
-.comp-list li::before {
-    content: "·";
-    position: absolute;
-    left: 0;
-    color: var(--color-text-tertiary);
-}
-
 /* ========== Footer ========== */
 .portfolio-footer {
     padding: var(--spacing-section) 0;
