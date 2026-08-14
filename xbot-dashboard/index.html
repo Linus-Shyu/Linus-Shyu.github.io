@@ -18,13 +18,21 @@
         document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260716-decision-v1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260815-cobalt-v1" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="left-rail" aria-label="Navigation">
         <a class="brand" href="#overview" aria-label="Linus Shyu dashboard">
-          <span>LS</span>
+          <span class="brand-mark" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </span>
           <strong>Growth</strong>
         </a>
         <nav class="rail-nav">
@@ -65,6 +73,17 @@
             <a class="button primary open-x-button" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
           </div>
         </header>
+
+        <div class="signal-strip" aria-label="Live operator feed">
+          <span class="signal-pulse"></span>
+          <span data-i18n="signal_feed">Operator feed</span>
+          <span class="signal-sep"></span>
+          <span id="signal-sync">data.json</span>
+          <span class="signal-sep"></span>
+          <span data-i18n="decision_zero_reads">0 extra X reads</span>
+          <span class="signal-sep"></span>
+          <span data-i18n="signal_manual">Manual routes only</span>
+        </div>
 
         <section class="hero-grid" id="overview">
           <article class="hero-card">
@@ -241,6 +260,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=20260716-decision-v1"></script>
+    <script src="./script.js?v=20260815-cobalt-v1"></script>
   </body>
 </html>

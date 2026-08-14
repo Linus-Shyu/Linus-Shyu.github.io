@@ -67,8 +67,10 @@ const I18N = {
     nav_drafts: "Drafts",
     nav_cost: "Cost",
     auto_update: "Auto update",
+    signal_feed: "Operator feed",
+    signal_manual: "Manual routes only",
     eyebrow: "Linus Shyu / X Growth",
-    title: "Growth dashboard that shows what matters.",
+    title: "The operating surface for X growth.",
     refresh: "Refresh",
     open_x: "Open X",
     followers: "Followers",
@@ -139,8 +141,10 @@ const I18N = {
     nav_drafts: "回复草稿",
     nav_cost: "成本",
     auto_update: "自动更新",
+    signal_feed: "操作台信号",
+    signal_manual: "仅手动路线",
     eyebrow: "Linus Shyu / X 增长",
-    title: "一眼看懂推特增长、内容和 AI 建议。",
+    title: "一眼看懂增长、内容和下一步动作。",
     refresh: "刷新",
     open_x: "打开 X",
     followers: "粉丝",
@@ -583,6 +587,8 @@ function renderHero(data) {
   pill.classList.remove("offline");
   $("#updated-at").textContent = formatDate(data.updatedAt);
   $("#rail-sync").textContent = `${formatDate(data.updatedAt)} · ${isStale ? t("stale") : t("live")}`;
+  const signalSync = $("#signal-sync");
+  if (signalSync) signalSync.textContent = `${formatDate(data.updatedAt)} · ${isStale ? t("stale") : t("live")}`;
 
   const reach = Number(last7d.impressions ?? last7d.reach ?? 0) || 0;
   const reachPending = reach === 0 && Number(last7d.posts || 0) > 0;
