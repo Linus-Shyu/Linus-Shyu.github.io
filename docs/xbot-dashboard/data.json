@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T21:41:32.636Z",
+  "updatedAt": "2026-08-22T22:42:45.517Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-08-22T21:41:32.636Z",
+    "dashboardUpdatedAt": "2026-08-22T22:42:45.517Z",
     "analyticsUpdatedAt": "2026-08-22T19:18:47.220Z",
     "usageUpdatedAt": "2026-08-22T19:18:47.175Z",
     "accountCheckedAt": "2026-08-21T23:41:50.861Z",
     "tweetMetricsCheckedAt": "2026-08-21T23:41:50.986Z",
     "checkedAt": "2026-08-21T23:41:50.986Z",
-    "ageMinutes": 1320,
+    "ageMinutes": 1381,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -36,7 +36,7 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 15
+          "hoursFromNow": 14
         },
         "dailyTarget": 1,
         "packetsLast24h": 1,
@@ -4729,15 +4729,15 @@
         "nextWindow": {
           "hour": 0,
           "label": "00:00 UTC",
-          "hoursFromNow": 3
+          "hoursFromNow": 2
         },
         "dailyTarget": 3,
         "packetsLast24h": 3,
-        "packetsLast7d": 10,
-        "measuredPackets": 5,
-        "traffic7d": 229,
+        "packetsLast7d": 9,
+        "measuredPackets": 4,
+        "traffic7d": 189,
         "ack7d": 3,
-        "avgScore": 0.8,
+        "avgScore": 0.9,
         "topPackets": [
           {
             "id": "2089359193199509760",
@@ -9575,13 +9575,13 @@
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -9590,7 +9590,7 @@
       "nextSlot": {
         "hour": 12,
         "label": "12:00 UTC",
-        "hoursFromNow": 15
+        "hoursFromNow": 14
       },
       "selectedTags": [
         "#devtools",
@@ -9613,7 +9613,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
@@ -9706,7 +9706,7 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
@@ -9838,7 +9838,7 @@
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "zh",
@@ -9849,18 +9849,18 @@
         "zh": 1
       },
       "scores": {
-        "en": 0.8,
+        "en": 0.9,
         "zh": 1.2,
-        "enSamples": 5,
+        "enSamples": 4,
         "zhSamples": 5
       }
     },
     "failureStats": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
-      "totalEvents": 35,
+      "totalEvents": 34,
       "topReasons": [
         {
           "reason": "cadence",
@@ -9874,12 +9874,12 @@
         },
         {
           "reason": "x_api",
-          "count": 16,
+          "count": 15,
           "lastAt": "2026-08-22T19:18:47.220Z",
           "samples": [
-            "packet posted: 2088752716990304337",
             "packet posted: 2088981815910342996",
-            "packet posted: 2089346309845397954"
+            "packet posted: 2089346309845397954",
+            "packet posted: 2089359193199509760"
           ]
         }
       ],
@@ -9895,7 +9895,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -9966,19 +9966,19 @@
         "avgScore": 0
       },
       "last7d": {
-        "posts": 16,
-        "measuredPosts": 10,
-        "impressions": 355,
+        "posts": 15,
+        "measuredPosts": 9,
+        "impressions": 315,
         "likes": 6,
         "replies": 0,
-        "avgScore": 1.6
+        "avgScore": 1.7
       },
       "bestFormat": {
         "id": "prediction",
         "action": "watch",
-        "avgScore": 1.6,
-        "samples": 5,
-        "liftPct": -49.3
+        "avgScore": 1.9,
+        "samples": 4,
+        "liftPct": -39.7
       },
       "worstFormat": {
         "id": "decision_rule",
@@ -9992,9 +9992,9 @@
         {
           "id": "prediction",
           "action": "watch",
-          "avgScore": 1.6,
-          "samples": 5,
-          "liftPct": -49.3
+          "avgScore": 1.9,
+          "samples": 4,
+          "liftPct": -39.7
         },
         {
           "id": "decision_rule",
@@ -10008,9 +10008,9 @@
         {
           "id": "en",
           "action": "watch",
-          "avgScore": 1.7,
-          "samples": 5,
-          "liftPct": -47.8
+          "avgScore": 2,
+          "samples": 4,
+          "liftPct": -37.9
         },
         {
           "id": "zh",
@@ -10130,7 +10130,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -10142,14 +10142,14 @@
     "nextMilestone": 100,
     "remainingToMilestone": 31,
     "impressions24h": 0,
-    "impressions7d": 355,
+    "impressions7d": 315,
     "engagements24h": 0,
     "engagements7d": 6,
     "engagementRate24h": 0,
-    "engagementRate7d": 1.69,
+    "engagementRate7d": 1.9,
     "observedConversionPer1k": 0,
     "effectiveConversionPer1k": 0.8,
-    "projectedDaysToMilestone": 764.1,
+    "projectedDaysToMilestone": 861.1,
     "routeReadinessPct": 100,
     "replyCoveragePct": 100,
     "nextAction": "Use the next swarm output as a reply-first packet; standalone dispatching is not the current bottleneck.",
@@ -10175,7 +10175,7 @@
       {
         "id": "runway",
         "label": "milestone runway",
-        "value": "764d",
+        "value": "861d",
         "status": "danger"
       }
     ],
@@ -10186,7 +10186,7 @@
         "value": 0,
         "score": 0,
         "status": "danger",
-        "detail": "355 L7 events over 7d"
+        "detail": "315 L7 events over 7d"
       },
       {
         "id": "ack",
@@ -10215,7 +10215,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "ignition_loop",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -10226,7 +10226,7 @@
       "current": 69,
       "target": 100,
       "remaining": 31,
-      "projectedDays": 764.1
+      "projectedDays": 861.1
     },
     "gates": {
       "read": "cached_only",
@@ -10251,7 +10251,7 @@
       {
         "id": "milestone",
         "label": "milestone runway",
-        "value": "764d",
+        "value": "861d",
         "status": "warn"
       },
       {
@@ -10306,7 +10306,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -10316,38 +10316,38 @@
     "currentFollowers": 69,
     "nextMilestone": 100,
     "remainingToMilestone": 31,
-    "dailyThroughput": 50.7,
+    "dailyThroughput": 45,
     "conversionPer1k": 0.8,
     "baseline": {
-      "projectedDays": 764.1,
-      "dailyThroughput": 50.7,
+      "projectedDays": 861.1,
+      "dailyThroughput": 45,
       "dailyNewFollowers": 0.04,
       "conversionPer1k": 0.8
     },
     "recommendedLaneId": "manual_route_burst",
     "recommendedAction": "Execute first; this route has the strongest distribution leverage.",
     "projectedLiftPct": 189.6,
-    "projectedDaysToMilestone": 263.8,
-    "savedDays": 500.3,
+    "projectedDaysToMilestone": 297.3,
+    "savedDays": 563.8,
     "confidence": "high",
     "deckScore": 100,
     "cells": [
       {
         "id": "baseline_days",
         "label": "baseline runway",
-        "value": "764d",
+        "value": "861d",
         "status": "danger"
       },
       {
         "id": "projected_days",
         "label": "simulated runway",
-        "value": "264d",
+        "value": "297d",
         "status": "ok"
       },
       {
         "id": "saved_days",
         "label": "days compressed",
-        "value": "500d",
+        "value": "564d",
         "status": "ok"
       },
       {
@@ -10373,8 +10373,8 @@
         "efficiencyScore": 100,
         "confidence": "high",
         "confidenceScore": 100,
-        "projectedDays": 263.8,
-        "savedDays": 500.3,
+        "projectedDays": 297.3,
+        "savedDays": 563.8,
         "detail": "Operator paste loop uses prepared X web routes and spends no X search/read API.",
         "nextAction": "Execute first; this route has the strongest distribution leverage."
       },
@@ -10393,8 +10393,8 @@
         "efficiencyScore": 48,
         "confidence": "high",
         "confidenceScore": 76.6,
-        "projectedDays": 374,
-        "savedDays": 390.1,
+        "projectedDays": 421.5,
+        "savedDays": 439.6,
         "detail": "Daily packet target reached (4/4 UTC day).",
         "nextAction": "Spend the next growth loop on route ops under high-signal tech conversations."
       },
@@ -10413,7 +10413,7 @@
         "efficiencyScore": 10,
         "confidence": "medium",
         "confidenceScore": 50.2,
-        "projectedDays": 764.1,
+        "projectedDays": 861.1,
         "savedDays": 0,
         "detail": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
         "nextAction": "Keep image packets off until enough cached outcomes prove lift."
@@ -10433,7 +10433,7 @@
         "efficiencyScore": 14.8,
         "confidence": "low",
         "confidenceScore": 39.3,
-        "projectedDays": 764.1,
+        "projectedDays": 861.1,
         "savedDays": 0,
         "detail": "Cached telemetry is fresh enough; do not spend a read just to make the dashboard prettier.",
         "nextAction": "Hold metrics reads."
@@ -10453,7 +10453,7 @@
         "efficiencyScore": 0,
         "confidence": "low",
         "confidenceScore": 4,
-        "projectedDays": 764.1,
+        "projectedDays": 861.1,
         "savedDays": 0,
         "detail": "Use browser/web search links instead; the bot should not burn X search/read quota for manual targeting.",
         "nextAction": "Keep this partition sealed unless you explicitly switch out of the low-cost mode."
@@ -10469,11 +10469,11 @@
     "runbook": [
       "Dispatch manual route burst first; it has the best cached efficiency under the zero-read constraint.",
       "Keep live X search/read partitions sealed; use prepared web routes and cached telemetry for the operator loop.",
-      "Current model estimates 264d to 100 active conns after the recommended lane."
+      "Current model estimates 297d to 100 active conns after the recommended lane."
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "ignition_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -17093,8 +17093,8 @@
     ]
   },
   "last7d": {
-    "posts": 16,
-    "impressions": 355,
+    "posts": 15,
+    "impressions": 315,
     "likes": 6,
     "reposts": 0,
     "replies": 0,
@@ -26582,1628 +26582,6 @@
               "angle": "AI adoption playbook",
               "characterCount": 203,
               "text": "Before you adopt an AI feature, run one real workflow for a week. If it doesn't change how you operate daily, skip it. The Pixel 11 Pro's AI sells because it does—most assistants don't.\n#AI #ConsumerTech"
-            }
-          ],
-          "gates": {
-            "qualityGateEnabled": true,
-            "viralHookGateEnabled": true,
-            "aiQualityGateEnabled": false,
-            "strictQualityGate": false
-          }
-        }
-      },
-      {
-        "id": "2088752716990304337",
-        "text": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later. #AI #BigTech",
-        "url": "https://x.com/i/web/status/2088752716990304337",
-        "score": 0.4,
-        "impressions": 40,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "prediction",
-        "source": "blog.langchain.com",
-        "postedAt": "2026-08-15T22:20:29.702Z",
-        "candidateScore": 226.4,
-        "candidateReason": "Sharp prediction with a concrete timeline and actionable stake, invites replies from builders weighing observability priorities.",
-        "angleMutationScore": 14,
-        "angleMutationDiagnostics": [
-          "mutation primary format",
-          "mutation keyword"
-        ],
-        "hookPatternScore": 10,
-        "hookPatternDiagnostics": [
-          "hook reactor primary"
-        ],
-        "hookPattern": {
-          "primaryId": "decision_rule",
-          "primaryLabel": "Decision Rule",
-          "patternIds": [
-            "decision_rule",
-            "operator_pain",
-            "cost_tradeoff",
-            "prediction"
-          ],
-          "firstLine": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later."
-        },
-        "contentBanditScore": 6.5,
-        "contentBanditDiagnostics": [
-          "bandit exploration lane"
-        ],
-        "narrativeResonanceScore": 5.5,
-        "narrativeResonanceDiagnostics": [
-          "narrative rotation lane"
-        ],
-        "narrativePillar": {
-          "id": "platform_control",
-          "label": "Platform Control",
-          "matchScore": 1.18
-        },
-        "topicTimingScore": 26.2,
-        "topicTimingDiagnostics": [
-          "topic timing active lane",
-          "topic timing hot lane",
-          "observed timing sample"
-        ],
-        "topicTimingLane": {
-          "id": "17:platform_control:prediction",
-          "windowLabel": "17:00",
-          "hour": 17,
-          "pillarId": "platform_control",
-          "pillarLabel": "Platform Control",
-          "formatId": "prediction",
-          "formatLabel": "Near-term Prediction",
-          "score": 100,
-          "status": "hot"
-        },
-        "generationDecisionTrace": {
-          "generatedAt": "2026-08-15T22:20:29.440Z",
-          "mode": "candidate_ranker_with_hook_angle_load_narrative_and_topic_timing",
-          "zeroExtraXReads": true,
-          "estimatedXReadOps": 0,
-          "selectedRank": 1,
-          "selectedTemplateId": "prediction",
-          "selectedScore": 226.4,
-          "selectedReason": "Sharp prediction with a concrete timeline and actionable stake, invites replies from builders weighing observability priorities.",
-          "candidateCount": 5,
-          "localFallback": {
-            "enabled": true,
-            "seedEnabled": true,
-            "used": false,
-            "selected": false,
-            "candidateCount": 2,
-            "aiCandidateCount": 4,
-            "error": null,
-            "mode": "cached_policy_local_fallback",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "language": "en",
-          "story": {
-            "title": "How to Debug AI Agents",
-            "source": "blog.langchain.com",
-            "hotScore": 4.665873057816033,
-            "learnedScore": 4.665873057816033
-          },
-          "angleMutation": {
-            "mode": "cached_angle_mutation_reactor",
-            "severity": "ok",
-            "confidence": "low",
-            "mutationScore": 83,
-            "nextPromptBias": "Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.",
-            "primaryMutation": {
-              "id": "prompt_rule",
-              "label": "prompt rule",
-              "before": "baseline rotation",
-              "after": "prediction",
-              "status": "ok",
-              "score": 83,
-              "reason": "Needs 1 more sample(s) before the bot trusts it.",
-              "promptBias": "Lead with Near-term Prediction."
-            },
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "hookPattern": {
-            "mode": "cached_hook_pattern_reactor",
-            "confidence": "low",
-            "recommendedPattern": {
-              "id": "prediction",
-              "label": "Near-Term Prediction",
-              "status": "exploit",
-              "score": 6.35,
-              "avgScore": 6.35,
-              "samples": 7,
-              "primarySamples": 0,
-              "liftPct": 21.1,
-              "directive": "Make a concrete near-term prediction tied to a platform or user behavior.",
-              "nextHook": "The next shift is boring but brutal: this moves from feature to default, then everyone else pays the distribution tax.",
-              "examples": [
-                {
-                  "text": "gemini AI model cycle will matter if teams stop configuring something manually after week one. If it only makes demos cleaner, it will stay optional.",
-                  "score": 13.6,
-                  "url": "https://x.com/i/web/status/2088313181449912613",
-                  "postedAt": "2026-08-14T17:13:56.251Z"
-                },
-                {
-                  "text": "先别急着迁移到 Product Hunt launch，拿一个真实流程测三件事：是否更快、是否可回滚、是否会改变默认入口，只改善演示就先等。",
-                  "score": 9.4,
-                  "url": "https://x.com/i/web/status/2086819934919909405",
-                  "postedAt": "2026-08-10T14:20:18.519Z"
-                },
-                {
-                  "text": "Meta's Muse Glimmer is Apache 2.0, 30B, runs locally. Rule: if you have compliance or latency constraints, open weights with a clean license beat closed APIs every time. Test it before your next API renewal.",
-                  "score": 6.4,
-                  "url": "https://x.com/i/web/status/2087192401177707005",
-                  "postedAt": "2026-08-11T15:00:21.454Z"
-                }
-              ],
-              "reason": "Measured avg 6.4 from 7 packets."
-            },
-            "avoidPatterns": [
-              {
-                "id": "weak_recap",
-                "label": "Weak News Recap",
-                "status": "hold",
-                "score": 0,
-                "avgScore": 0,
-                "samples": 0,
-                "primarySamples": 0,
-                "liftPct": null,
-                "directive": "Do not recap the headline. Replace it with a take, rule, or tradeoff.",
-                "nextHook": "Skip the recap. Start with the consequence.",
-                "examples": [],
-                "reason": "Needs 2+ measured packets; use controlled exploration."
-              }
-            ],
-            "promptPatch": "First line hook pattern: Near-Term Prediction. Make a concrete near-term prediction tied to a platform or user behavior. Example shape: The next shift is boring but brutal: this moves from feature to default, then everyone else pays the distribution tax. Avoid: Weak News Recap.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "contentBandit": {
-            "mode": "cached_ucb_content_bandit",
-            "confidence": "low",
-            "recommendedLane": {
-              "id": "prediction",
-              "label": "Near-term Prediction",
-              "status": "explore",
-              "action": "explore",
-              "allocationScore": 167.67,
-              "avgScore": 13.6,
-              "samples": 1,
-              "liftPct": null,
-              "uncertainty": 1.073,
-              "explorationScore": 29.31,
-              "exploitScore": 122.4,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Make one concrete near-term prediction tied to the story. Include who wins, who loses, or what workflow becomes default without forcing a formulaic 6-12 month frame.",
-              "nextAction": "Collect more samples for Near-term Prediction; keep first line concrete.",
-              "reason": "Needs 1 more sample(s) before the bot trusts it.",
-              "rank": 1,
-              "allocationPct": 18
-            },
-            "exploreLane": {
-              "id": "prediction",
-              "label": "Near-term Prediction",
-              "status": "explore",
-              "action": "explore",
-              "allocationScore": 167.67,
-              "avgScore": 13.6,
-              "samples": 1,
-              "liftPct": null,
-              "uncertainty": 1.073,
-              "explorationScore": 29.31,
-              "exploitScore": 122.4,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Make one concrete near-term prediction tied to the story. Include who wins, who loses, or what workflow becomes default without forcing a formulaic 6-12 month frame.",
-              "nextAction": "Collect more samples for Near-term Prediction; keep first line concrete.",
-              "reason": "Needs 1 more sample(s) before the bot trusts it.",
-              "rank": 1,
-              "allocationPct": 18
-            },
-            "rankedFormatIds": [
-              "prediction",
-              "second_order",
-              "not_x_but_y",
-              "playbook",
-              "contrarian_cost",
-              "operator_pain",
-              "decision_rule",
-              "sharp_question"
-            ],
-            "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: low\nprimary_format: prediction\nexploration_lane: prediction\nhook_bias: Near-Term Prediction\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "angleLoadRouter": {
-            "mode": "cached_angle_load_router",
-            "severity": "ok",
-            "activeSlot": {
-              "windowLabel": "14:00",
-              "hour": 14,
-              "formatId": "prediction",
-              "label": "Near-term Prediction",
-              "angle": "near-term prediction / default shift",
-              "score": 83.4,
-              "loadScore": 66.8,
-              "action": "explore",
-              "status": "hot",
-              "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-            },
-            "rankedFormatIds": [
-              "prediction"
-            ],
-            "lanes": [
-              {
-                "id": "prediction",
-                "slot": 1,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "explore",
-                "angle": "near-term prediction / default shift",
-                "status": "hot",
-                "score": 100,
-                "loadScore": 92,
-                "samples": 1,
-                "avgScore": 13.6,
-                "reason": "prediction has 1 sample(s) in this UTC hour with avg score 13.6."
-              },
-              {
-                "id": "prediction",
-                "slot": 2,
-                "windowLabel": "14:00",
-                "hoursFromNow": 16,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "explore",
-                "angle": "near-term prediction / default shift",
-                "status": "hot",
-                "score": 83.4,
-                "loadScore": 66.8,
-                "samples": 1,
-                "avgScore": 13.6,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-              },
-              {
-                "id": "prediction",
-                "slot": 3,
-                "windowLabel": "15:00",
-                "hoursFromNow": 17,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "explore",
-                "angle": "near-term prediction / default shift",
-                "status": "hot",
-                "score": 79.9,
-                "loadScore": 57.7,
-                "samples": 1,
-                "avgScore": 13.6,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-              },
-              {
-                "id": "prediction",
-                "slot": 4,
-                "windowLabel": "12:00",
-                "hoursFromNow": 14,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "explore",
-                "angle": "near-term prediction / default shift",
-                "status": "watch",
-                "score": 74.9,
-                "loadScore": 44.4,
-                "samples": 1,
-                "avgScore": 13.6,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-              },
-              {
-                "id": "prediction",
-                "slot": 5,
-                "windowLabel": "22:00",
-                "hoursFromNow": 0,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "explore",
-                "angle": "near-term prediction / default shift",
-                "status": "watch",
-                "score": 69.9,
-                "loadScore": 31.4,
-                "samples": 1,
-                "avgScore": 13.6,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-              }
-            ],
-            "activeCommand": "Route Near-term Prediction at 14:00 UTC. Use manual distribution first and let cached writeback update the next run.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "narrativeResonance": {
-            "mode": "narrative_tune",
-            "severity": "warn",
-            "accountPromise": "Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-            "resonanceScore": 47.3,
-            "primaryPillar": {
-              "id": "consumer_behavior",
-              "label": "Consumer Behavior",
-              "status": "expand",
-              "score": 59.2,
-              "samples": 0,
-              "avgScore": 0,
-              "liftPct": null,
-              "sharePct": 0,
-              "targetSharePct": 18,
-              "impressions": 0,
-              "engagementRate": 0,
-              "directive": "Show how a product, app, or device changes user behavior or distribution habits.",
-              "lexicon": [
-                "users",
-                "creators",
-                "notifications",
-                "onboarding",
-                "retention",
-                "habit",
-                "ranking"
-              ],
-              "examples": [],
-              "nextAction": "Expand Consumer Behavior; it is below target share but broad enough for active conn growth."
-            },
-            "promptDirectives": [
-              "Show how a product, app, or device changes user behavior or distribution habits.",
-              "Account promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-              "Every packet must reinforce one durable memory: operator leverage, platform control, consumer behavior, risk boundary, or market timing.",
-              "Prefer reusable rules and tradeoffs over standalone news takes."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "topicTimingRouter": {
-            "mode": "topic_timing_exploit",
-            "severity": "ok",
-            "routerScore": 72.5,
-            "activeLane": {
-              "id": "17:platform_control:prediction",
-              "hour": 17,
-              "windowLabel": "17:00",
-              "hoursFromNow": 19,
-              "loadScore": 92,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "pillarStatus": "watch",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "formatStatus": "explore",
-              "score": 100,
-              "samples": 1,
-              "avgScore": 13.6,
-              "impressions": 161,
-              "engagementRate": 1.24,
-              "observed": true,
-              "status": "hot",
-              "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-              "reason": "prediction x Platform Control has 1 sample(s) at 17:00 UTC with avg 13.6."
-            },
-            "lanes": [
-              {
-                "id": "17:platform_control:prediction",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "loadScore": 92,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 13.6,
-                "impressions": 161,
-                "engagementRate": 1.24,
-                "observed": true,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-                "reason": "prediction x Platform Control has 1 sample(s) at 17:00 UTC with avg 13.6."
-              },
-              {
-                "id": "17:platform_control:second_order",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "loadScore": 92,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 0,
-                "avgScore": 5.6,
-                "impressions": 0,
-                "engagementRate": 4.27,
-                "observed": false,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 17:00 UTC.",
-                "reason": "Seed Platform Control via Second Order in a learned 17:00 UTC load window."
-              },
-              {
-                "id": "17:platform_control:not_x_but_y",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "loadScore": 92,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "not_x_but_y",
-                "formatLabel": "Not X But Y",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 0,
-                "avgScore": 5.6,
-                "impressions": 0,
-                "engagementRate": 4.27,
-                "observed": false,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 17:00 UTC.",
-                "reason": "Seed Platform Control via Not X But Y in a learned 17:00 UTC load window."
-              },
-              {
-                "id": "17:platform_control:playbook",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "loadScore": 92,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "playbook",
-                "formatLabel": "Playbook",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 0,
-                "avgScore": 5.6,
-                "impressions": 0,
-                "engagementRate": 4.27,
-                "observed": false,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Playbook around 17:00 UTC.",
-                "reason": "Seed Platform Control via Playbook in a learned 17:00 UTC load window."
-              },
-              {
-                "id": "17:platform_control:contrarian_cost",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 19,
-                "loadScore": 92,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "contrarian_cost",
-                "formatLabel": "Contrarian Cost",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 0,
-                "avgScore": 5.6,
-                "impressions": 0,
-                "engagementRate": 4.27,
-                "observed": false,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Contrarian Cost around 17:00 UTC.",
-                "reason": "Seed Platform Control via Contrarian Cost in a learned 17:00 UTC load window."
-              }
-            ],
-            "promptDirectives": [
-              "Topic timing: 17:00 UTC -> Platform Control using Near-term Prediction.",
-              "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-              "If dispatching outside the selected UTC window, keep the same pillar but tighten the hook.",
-              "0 extra X reads; no live trend scraping required for this timing route."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "growthOpportunityScorer": {
-            "mode": "cached_opportunity_fusion",
-            "severity": "ok",
-            "confidence": "low",
-            "opportunityScore": 100,
-            "activeOpportunity": {
-              "id": "any:any:prediction",
-              "label": "00:00 UTC / Near-term Prediction",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "pillarId": null,
-              "pillarLabel": null,
-              "hour": null,
-              "windowLabel": "00:00",
-              "action": "rotate",
-              "status": "hot",
-              "score": 100,
-              "confidence": "medium",
-              "sources": [
-                "content_bandit",
-                "angle_load",
-                "adaptive_scheduler"
-              ],
-              "samples": 7,
-              "evidence": [
-                "Needs 1 more sample(s) before the bot trusts it.",
-                "prediction has 1 sample(s) in this UTC hour with avg score 13.6.",
-                "No hour-specific sample yet; routed from adaptive scheduler weight 100.0.",
-                "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-              ],
-              "promptDirectives": [
-                "Collect more samples for Near-term Prediction; keep first line concrete.",
-                "near-term prediction / default shift",
-                "near-term prediction / default shift",
-                "near-term prediction / default shift"
-              ]
-            },
-            "lanes": [
-              {
-                "id": "any:any:prediction",
-                "label": "00:00 UTC / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": null,
-                "pillarLabel": null,
-                "hour": null,
-                "windowLabel": "00:00",
-                "action": "rotate",
-                "status": "hot",
-                "score": 100,
-                "confidence": "medium",
-                "sources": [
-                  "content_bandit",
-                  "angle_load",
-                  "adaptive_scheduler"
-                ],
-                "samples": 7,
-                "evidence": [
-                  "Needs 1 more sample(s) before the bot trusts it.",
-                  "prediction has 1 sample(s) in this UTC hour with avg score 13.6.",
-                  "No hour-specific sample yet; routed from adaptive scheduler weight 100.0.",
-                  "No hour-specific sample yet; routed from adaptive scheduler weight 100.0."
-                ],
-                "promptDirectives": [
-                  "Collect more samples for Near-term Prediction; keep first line concrete.",
-                  "near-term prediction / default shift",
-                  "near-term prediction / default shift",
-                  "near-term prediction / default shift"
-                ]
-              },
-              {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "prediction x Platform Control has 1 sample(s) at 17:00 UTC with avg 13.6."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC."
-                ]
-              },
-              {
-                "id": "17:platform_control:second_order",
-                "label": "17:00 UTC / Platform Control / Second Order",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 95,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Platform Control via Second Order in a learned 17:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 17:00 UTC."
-                ]
-              },
-              {
-                "id": "17:platform_control:not_x_but_y",
-                "label": "17:00 UTC / Platform Control / Not X But Y",
-                "formatId": "not_x_but_y",
-                "formatLabel": "Not X But Y",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 95,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Platform Control via Not X But Y in a learned 17:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 17:00 UTC."
-                ]
-              },
-              {
-                "id": "17:platform_control:playbook",
-                "label": "17:00 UTC / Platform Control / Playbook",
-                "formatId": "playbook",
-                "formatLabel": "Playbook",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 95,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Platform Control via Playbook in a learned 17:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Playbook around 17:00 UTC."
-                ]
-              }
-            ],
-            "promptDirectives": [
-              "Primary format: prediction.",
-              "Preferred UTC window: 00:00.",
-              "Collect more samples for Near-term Prediction; keep first line concrete.",
-              "No live X search/read calls are required for this opportunity score."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "cachedGenerationPolicy": {
-            "mode": "cached_generation_policy",
-            "confidence": "low",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0,
-            "estimatedIncrementalXApiUsd": 0,
-            "primaryFormatId": "prediction",
-            "primaryFormatLabel": "Near-term Prediction",
-            "exploreFormatId": "prediction",
-            "rankedFormatIds": [
-              "prediction",
-              "second_order",
-              "not_x_but_y",
-              "playbook",
-              "contrarian_cost",
-              "operator_pain"
-            ],
-            "avoidFormatIds": [],
-            "hookPattern": {
-              "id": "prediction",
-              "label": "Near-Term Prediction",
-              "directive": "Make a concrete near-term prediction tied to a platform or user behavior.",
-              "nextHook": "The next shift is boring but brutal: this moves from feature to default, then everyone else pays the distribution tax."
-            },
-            "narrativePillar": {
-              "id": "consumer_behavior",
-              "label": "Consumer Behavior",
-              "directive": "Show how a product, app, or device changes user behavior or distribution habits."
-            },
-            "opportunity": {
-              "id": "any:any:prediction",
-              "label": "00:00 UTC / Near-term Prediction",
-              "score": 100,
-              "sources": [
-                "content_bandit",
-                "angle_load",
-                "adaptive_scheduler"
-              ],
-              "promptDirectives": [
-                "Collect more samples for Near-term Prediction; keep first line concrete.",
-                "near-term prediction / default shift",
-                "near-term prediction / default shift",
-                "near-term prediction / default shift"
-              ]
-            },
-            "directives": [
-              "Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.",
-              "First-line hook: Near-Term Prediction. Make a concrete near-term prediction tied to a platform or user behavior.",
-              "Opportunity lane: 00:00 UTC / Near-term Prediction; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.",
-              "Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..",
-              "Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.",
-              "Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.",
-              "Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.",
-              "Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.",
-              "Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.",
-              "Persisted strategy: Bias candidate formats toward: prediction, decision_rule."
-            ],
-            "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: low\nprimary_format: prediction\nranked_formats: prediction, second_order, not_x_but_y, playbook, contrarian_cost, operator_pain\nselected_story: How to Debug AI Agents\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Near-Term Prediction. Make a concrete near-term prediction tied to a platform or user behavior.\n- Opportunity lane: 00:00 UTC / Near-term Prediction; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.\n- Narrative pillar: Consumer Behavior; Show how a product, app, or device changes user behavior or distribution habits..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: prediction, decision_rule.\n- Source bias: turn blog.langchain.com into an operator rule, cost, default shift, or distribution consequence.\n- Generate candidates that already satisfy this policy; do not rely on downstream scoring to rescue weak summaries."
-          },
-          "growthStrategy": {
-            "mode": "self_evolving_cached_strategy",
-            "status": "flat",
-            "confidence": "low",
-            "promotedFormats": [
-              {
-                "id": "prediction",
-                "action": "promote",
-                "avgScore": 13.6,
-                "samples": 1,
-                "liftPct": 159.4
-              },
-              {
-                "id": "decision_rule",
-                "action": "promote",
-                "avgScore": 4.8,
-                "samples": 7,
-                "liftPct": -9.3
-              }
-            ],
-            "holdFormats": [],
-            "preferredHashtags": [
-              "Hardware",
-              "BigTech",
-              "AI",
-              "DevTools",
-              "ConsumerTech"
-            ],
-            "nextAction": "Exploit prediction while keeping one controlled exploration candidate.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "selectedCandidate": {
-            "rank": 1,
-            "selected": true,
-            "templateId": "prediction",
-            "score": 226.4,
-            "angleMutationScore": 14,
-            "hookPatternScore": 10,
-            "contentBanditScore": 6.5,
-            "narrativeResonanceScore": 5.5,
-            "narrativePillar": {
-              "id": "platform_control",
-              "label": "Platform Control",
-              "matchScore": 1.18
-            },
-            "topicTimingScore": 26.2,
-            "topicTimingLane": {
-              "id": "17:platform_control:prediction",
-              "windowLabel": "17:00",
-              "hour": 17,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "score": 100,
-              "status": "hot"
-            },
-            "growthOpportunityScore": 16.7,
-            "growthOpportunityLane": {
-              "id": "17:platform_control:prediction",
-              "label": "17:00 UTC / Platform Control / Near-term Prediction",
-              "formatId": "prediction",
-              "pillarId": "platform_control",
-              "score": 100,
-              "status": "hot",
-              "sources": [
-                "topic_timing"
-              ]
-            },
-            "cachedGenerationPolicyScore": 25.8,
-            "cachedGenerationPolicyHits": {
-              "directive": [
-                "prediction",
-                "near",
-                "term",
-                "line"
-              ],
-              "narrative": [],
-              "opportunity": [
-                "near",
-                "term",
-                "prediction"
-              ]
-            },
-            "hookPattern": {
-              "primaryId": "decision_rule",
-              "primaryLabel": "Decision Rule",
-              "patternIds": [
-                "decision_rule",
-                "operator_pain",
-                "cost_tradeoff",
-                "prediction"
-              ],
-              "firstLine": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later."
-            },
-            "reason": "Sharp prediction with a concrete timeline and actionable stake, invites replies from builders weighing observability priorities.",
-            "diagnostics": [
-              "tight length",
-              "practical takeaway",
-              "autopilot explore",
-              "angle scheduler format",
-              "angle scheduler keyword",
-              "mutation primary format",
-              "mutation keyword",
-              "hook reactor primary",
-              "bandit exploration lane",
-              "angle load active slot",
-              "angle load hot lane",
-              "narrative rotation lane"
-            ],
-            "angleMutationDiagnostics": [
-              "mutation primary format",
-              "mutation keyword"
-            ],
-            "hookPatternDiagnostics": [
-              "hook reactor primary"
-            ],
-            "contentBanditDiagnostics": [
-              "bandit exploration lane"
-            ],
-            "angleLoadRouterScore": 22.7,
-            "angleLoadRouterDiagnostics": [
-              "angle load active slot",
-              "angle load hot lane"
-            ],
-            "narrativeResonanceDiagnostics": [
-              "narrative rotation lane"
-            ],
-            "topicTimingDiagnostics": [
-              "topic timing active lane",
-              "topic timing hot lane",
-              "observed timing sample"
-            ],
-            "growthOpportunityDiagnostics": [
-              "opportunity format",
-              "hot opportunity lane"
-            ],
-            "cachedGenerationPolicyDiagnostics": [
-              "policy primary format",
-              "policy hook pattern",
-              "policy opportunity lane",
-              "policy directive match"
-            ],
-            "selfEvolvingStrategyScore": 11,
-            "selfEvolvingStrategyDiagnostics": [
-              "self-evolving promote",
-              "self-evolving tag match"
-            ],
-            "qualityIssues": [
-              "headline_frame_risk",
-              "strategy_headline_similarity_risk",
-              "viral_hook_gate:long_first_line|headline_or_media_frame"
-            ],
-            "viralHookGate": {
-              "allow": false,
-              "score": -20,
-              "reasons": [
-                "concrete entity",
-                "operator action"
-              ],
-              "warnings": [
-                "long_first_line",
-                "headline_or_media_frame"
-              ],
-              "entityHits": [
-                "debug"
-              ],
-              "firstLine": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later.",
-              "mode": "local_zero_api_viral_hook_gate",
-              "zeroExtraXReads": true,
-              "estimatedXReadOps": 0
-            },
-            "aiQualityVerdict": null,
-            "generationSource": "openai",
-            "angle": "near-term prediction",
-            "characterCount": 232,
-            "text": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later.\n#AI #BigTech"
-          },
-          "candidates": [
-            {
-              "rank": 1,
-              "selected": true,
-              "templateId": "prediction",
-              "score": 226.4,
-              "angleMutationScore": 14,
-              "hookPatternScore": 10,
-              "contentBanditScore": 6.5,
-              "narrativeResonanceScore": 5.5,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.18
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:prediction",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 16.7,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 25.8,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "prediction",
-                  "near",
-                  "term",
-                  "line"
-                ],
-                "narrative": [],
-                "opportunity": [
-                  "near",
-                  "term",
-                  "prediction"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "decision_rule",
-                "primaryLabel": "Decision Rule",
-                "patternIds": [
-                  "decision_rule",
-                  "operator_pain",
-                  "cost_tradeoff",
-                  "prediction"
-                ],
-                "firstLine": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later."
-              },
-              "reason": "Sharp prediction with a concrete timeline and actionable stake, invites replies from builders weighing observability priorities.",
-              "diagnostics": [
-                "tight length",
-                "practical takeaway",
-                "autopilot explore",
-                "angle scheduler format",
-                "angle scheduler keyword",
-                "mutation primary format",
-                "mutation keyword",
-                "hook reactor primary",
-                "bandit exploration lane",
-                "angle load active slot",
-                "angle load hot lane",
-                "narrative rotation lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format",
-                "mutation keyword"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 22.7,
-              "angleLoadRouterDiagnostics": [
-                "angle load active slot",
-                "angle load hot lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity format",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "policy hook pattern",
-                "policy opportunity lane",
-                "policy directive match"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "headline_frame_risk",
-                "strategy_headline_similarity_risk",
-                "viral_hook_gate:long_first_line|headline_or_media_frame"
-              ],
-              "viralHookGate": {
-                "allow": false,
-                "score": -20,
-                "reasons": [
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "headline_or_media_frame"
-                ],
-                "entityHits": [
-                  "debug"
-                ],
-                "firstLine": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later.",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "near-term prediction",
-              "characterCount": 232,
-              "text": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later.\n#AI #BigTech"
-            },
-            {
-              "rank": 2,
-              "selected": false,
-              "templateId": "prediction",
-              "score": 207,
-              "angleMutationScore": 12,
-              "hookPatternScore": 10,
-              "contentBanditScore": 6.5,
-              "narrativeResonanceScore": 7.1,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:prediction",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 16.7,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 25.8,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "prediction",
-                  "near",
-                  "term",
-                  "make"
-                ],
-                "narrative": [],
-                "opportunity": [
-                  "near",
-                  "term",
-                  "prediction"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "decision_rule",
-                "primaryLabel": "Decision Rule",
-                "patternIds": [
-                  "decision_rule",
-                  "operator_pain",
-                  "prediction"
-                ],
-                "firstLine": "blog.langchain.com story will matter if teams stop configuring something manually after week one. If it only makes demos cleaner, it will stay optional."
-              },
-              "reason": "local cached policy candidate for OpenAI fallback and ranker calibration",
-              "diagnostics": [
-                "tight length",
-                "practical takeaway",
-                "too similar to history",
-                "autopilot explore",
-                "angle scheduler format",
-                "angle scheduler keyword",
-                "mutation primary format",
-                "mutation keyword",
-                "hook reactor primary",
-                "bandit exploration lane",
-                "angle load active slot",
-                "angle load hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format",
-                "mutation keyword"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 22.7,
-              "angleLoadRouterDiagnostics": [
-                "angle load active slot",
-                "angle load hot lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "account lexicon"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity format",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "policy hook pattern",
-                "policy opportunity lane",
-                "policy directive match"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "viral_hook_gate:long_first_line|missing_concrete_entity"
-              ],
-              "viralHookGate": {
-                "allow": false,
-                "score": -8,
-                "reasons": [
-                  "operator action",
-                  "not headline recap"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "missing_concrete_entity"
-                ],
-                "entityHits": [],
-                "firstLine": "blog.langchain.com story will matter if teams stop configuring something manually after week one. If it only makes demos cleaner, it will stay optional.",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "local_cached_policy",
-              "angle": "Near-Term Prediction",
-              "characterCount": 165,
-              "text": "blog.langchain.com story will matter if teams stop configuring something manually after week one. If it only makes demos cleaner, it will stay optional.\n#AI #BigTech"
-            },
-            {
-              "rank": 3,
-              "selected": false,
-              "templateId": "second_order",
-              "score": 159.9,
-              "angleMutationScore": -1,
-              "hookPatternScore": 10,
-              "contentBanditScore": 5.9,
-              "narrativeResonanceScore": 5.5,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.18
-              },
-              "topicTimingScore": 17.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:second_order",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:second_order",
-                "label": "17:00 UTC / Platform Control / Second Order",
-                "formatId": "second_order",
-                "pillarId": "platform_control",
-                "score": 95,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 14,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "first"
-                ],
-                "narrative": [],
-                "opportunity": [
-                  "first",
-                  "shift"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "decision_rule",
-                "primaryLabel": "Decision Rule",
-                "patternIds": [
-                  "decision_rule",
-                  "operator_pain",
-                  "prediction"
-                ],
-                "firstLine": "Debugging AI agents without traces is like deploying microservices without logs. LangChain's observability push turns a dirty secret into a standard practice. The teams that adopt early will ship faster and break less."
-              },
-              "reason": "Analogizes a familiar pain point and reframes the second-order shift toward observability-first culture, inviting agreement and shares.",
-              "diagnostics": [
-                "tight length",
-                "time-bound prediction",
-                "practical takeaway",
-                "angle scheduler format",
-                "angle scheduler keyword",
-                "missed mutation format",
-                "mutation keyword",
-                "hook reactor primary",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format",
-                "mutation keyword"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "policy hook pattern",
-                "policy opportunity lane"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "headline_frame_risk",
-                "strategy_headline_similarity_risk",
-                "viral_hook_gate:long_first_line|missing_operator_action"
-              ],
-              "viralHookGate": {
-                "allow": false,
-                "score": -8,
-                "reasons": [
-                  "concrete entity"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "missing_operator_action"
-                ],
-                "entityHits": [
-                  "debug"
-                ],
-                "firstLine": "Debugging AI agents without traces is like deploying microservices without logs. LangChain's observability push turns a dirty secret into a standard practice. The teams that adopt early will ship faster and break less.",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "second-order shift",
-              "characterCount": 231,
-              "text": "Debugging AI agents without traces is like deploying microservices without logs. LangChain's observability push turns a dirty secret into a standard practice. The teams that adopt early will ship faster and break less.\n#AI #BigTech"
-            },
-            {
-              "rank": 4,
-              "selected": false,
-              "templateId": "playbook",
-              "score": 119.5,
-              "angleMutationScore": -3,
-              "hookPatternScore": -3,
-              "contentBanditScore": 5.9,
-              "narrativeResonanceScore": 5.5,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.18
-              },
-              "topicTimingScore": 17.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:playbook",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "playbook",
-                "formatLabel": "Playbook",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:playbook",
-                "label": "17:00 UTC / Platform Control / Playbook",
-                "formatId": "playbook",
-                "pillarId": "platform_control",
-                "score": 95,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 5.1,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "another",
-                  "make",
-                  "concrete"
-                ],
-                "narrative": [],
-                "opportunity": [
-                  "concrete"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "sharp_question",
-                "primaryLabel": "Sharp Question",
-                "patternIds": [
-                  "sharp_question"
-                ],
-                "firstLine": "Before you build another agent, set up tracing. Make every step auditable so you can answer 'why did it choose this?' Debugging via reasoning trace cuts iteration time from hours to minutes. Adopt observability now."
-              },
-              "reason": "Provides a concrete actionable rule with time-saving benefit, positions the account as a practical advisor, likely bookmarked and shared.",
-              "diagnostics": [
-                "tight length",
-                "angle scheduler keyword",
-                "missed mutation format",
-                "missed hook reactor",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "topic timing pillar",
-                "topic timing hot lane",
-                "hot opportunity lane",
-                "policy ranked format",
-                "missed policy hook",
-                "policy opportunity lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "missed policy hook",
-                "policy opportunity lane",
-                "policy directive match"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "viral_hook_gate:long_first_line|missing_operator_action"
-              ],
-              "viralHookGate": {
-                "allow": false,
-                "score": -3,
-                "reasons": [
-                  "concrete entity",
-                  "not headline recap"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "missing_operator_action"
-                ],
-                "entityHits": [
-                  "debug"
-                ],
-                "firstLine": "Before you build another agent, set up tracing. Make every step auditable so you can answer 'why did it choose this?' Debugging via reasoning trace cuts iteration time from hours to minutes. Adopt observability now.",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "practical playbook",
-              "characterCount": 228,
-              "text": "Before you build another agent, set up tracing. Make every step auditable so you can answer 'why did it choose this?' Debugging via reasoning trace cuts iteration time from hours to minutes. Adopt observability now.\n#AI #BigTech"
-            },
-            {
-              "rank": 5,
-              "selected": false,
-              "templateId": "not_x_but_y",
-              "score": 115.9,
-              "angleMutationScore": -3,
-              "hookPatternScore": -3,
-              "contentBanditScore": 5.9,
-              "narrativeResonanceScore": 5.5,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.18
-              },
-              "topicTimingScore": 17.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:not_x_but_y",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "not_x_but_y",
-                "formatLabel": "Not X But Y",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:not_x_but_y",
-                "label": "17:00 UTC / Platform Control / Not X But Y",
-                "formatId": "not_x_but_y",
-                "pillarId": "platform_control",
-                "score": 95,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 1.5,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": [
-                  "more"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "contrast_reframe",
-                "primaryLabel": "Contrast Reframe",
-                "patternIds": [
-                  "contrast_reframe"
-                ],
-                "firstLine": "People think debugging an AI agent is about better prompts. Actually it's about visibility into the whole loop. LangChain's observability layer exposes that most work isn't tuning the model—it's fixing the glue. Stop polishing prompts."
-              },
-              "reason": "Challenges a common misconception and proposes a more useful frame, sparking replies from surprised builders who realize the real friction.",
-              "diagnostics": [
-                "angle scheduler format",
-                "angle scheduler keyword",
-                "missed mutation format",
-                "missed hook reactor",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "topic timing pillar",
-                "topic timing hot lane",
-                "hot opportunity lane",
-                "policy ranked format",
-                "missed policy hook",
-                "policy opportunity lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "missed policy hook",
-                "policy opportunity lane"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "viral_hook_gate:long_first_line"
-              ],
-              "viralHookGate": {
-                "allow": false,
-                "score": 7,
-                "reasons": [
-                  "concrete entity",
-                  "operator action",
-                  "not headline recap"
-                ],
-                "warnings": [
-                  "long_first_line"
-                ],
-                "entityHits": [
-                  "debug"
-                ],
-                "firstLine": "People think debugging an AI agent is about better prompts. Actually it's about visibility into the whole loop. LangChain's observability layer exposes that most work isn't tuning the model—it's fixing the glue. Stop polishing prompts.",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "reframe not X but Y",
-              "characterCount": 248,
-              "text": "People think debugging an AI agent is about better prompts. Actually it's about visibility into the whole loop. LangChain's observability layer exposes that most work isn't tuning the model—it's fixing the glue. Stop polishing prompts.\n#AI #BigTech"
             }
           ],
           "gates": {
@@ -42795,97 +41173,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-08-21T21:41:32.636Z",
-          "endsAt": "2026-08-21T23:41:32.636Z",
-          "label": "21:41",
+          "startsAt": "2026-08-21T22:42:45.517Z",
+          "endsAt": "2026-08-22T00:42:45.517Z",
+          "label": "22:42",
           "value": 0,
           "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-08-21T23:41:32.636Z",
-          "endsAt": "2026-08-22T01:41:32.636Z",
-          "label": "23:41",
+          "startsAt": "2026-08-22T00:42:45.517Z",
+          "endsAt": "2026-08-22T02:42:45.517Z",
+          "label": "00:42",
           "value": 0,
           "posts": 1
         },
         {
           "index": 2,
-          "startsAt": "2026-08-22T01:41:32.636Z",
-          "endsAt": "2026-08-22T03:41:32.636Z",
-          "label": "01:41",
+          "startsAt": "2026-08-22T02:42:45.517Z",
+          "endsAt": "2026-08-22T04:42:45.517Z",
+          "label": "02:42",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-08-22T03:41:32.636Z",
-          "endsAt": "2026-08-22T05:41:32.636Z",
-          "label": "03:41",
+          "startsAt": "2026-08-22T04:42:45.517Z",
+          "endsAt": "2026-08-22T06:42:45.517Z",
+          "label": "04:42",
           "value": 0,
           "posts": 0
         },
         {
           "index": 4,
-          "startsAt": "2026-08-22T05:41:32.636Z",
-          "endsAt": "2026-08-22T07:41:32.636Z",
-          "label": "05:41",
+          "startsAt": "2026-08-22T06:42:45.517Z",
+          "endsAt": "2026-08-22T08:42:45.517Z",
+          "label": "06:42",
           "value": 0,
           "posts": 0
         },
         {
           "index": 5,
-          "startsAt": "2026-08-22T07:41:32.636Z",
-          "endsAt": "2026-08-22T09:41:32.636Z",
-          "label": "07:41",
+          "startsAt": "2026-08-22T08:42:45.517Z",
+          "endsAt": "2026-08-22T10:42:45.517Z",
+          "label": "08:42",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-08-22T09:41:32.636Z",
-          "endsAt": "2026-08-22T11:41:32.636Z",
-          "label": "09:41",
+          "startsAt": "2026-08-22T10:42:45.517Z",
+          "endsAt": "2026-08-22T12:42:45.517Z",
+          "label": "10:42",
           "value": 0,
-          "posts": 0
+          "posts": 1
         },
         {
           "index": 7,
-          "startsAt": "2026-08-22T11:41:32.636Z",
-          "endsAt": "2026-08-22T13:41:32.636Z",
-          "label": "11:41",
-          "value": 0,
-          "posts": 1
-        },
-        {
-          "index": 8,
-          "startsAt": "2026-08-22T13:41:32.636Z",
-          "endsAt": "2026-08-22T15:41:32.636Z",
-          "label": "13:41",
+          "startsAt": "2026-08-22T12:42:45.517Z",
+          "endsAt": "2026-08-22T14:42:45.517Z",
+          "label": "12:42",
           "value": 0,
           "posts": 0
         },
         {
-          "index": 9,
-          "startsAt": "2026-08-22T15:41:32.636Z",
-          "endsAt": "2026-08-22T17:41:32.636Z",
-          "label": "15:41",
+          "index": 8,
+          "startsAt": "2026-08-22T14:42:45.517Z",
+          "endsAt": "2026-08-22T16:42:45.517Z",
+          "label": "14:42",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 9,
+          "startsAt": "2026-08-22T16:42:45.517Z",
+          "endsAt": "2026-08-22T18:42:45.517Z",
+          "label": "16:42",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 10,
-          "startsAt": "2026-08-22T17:41:32.636Z",
-          "endsAt": "2026-08-22T19:41:32.636Z",
-          "label": "17:41",
+          "startsAt": "2026-08-22T18:42:45.517Z",
+          "endsAt": "2026-08-22T20:42:45.517Z",
+          "label": "18:42",
           "value": 0,
           "posts": 1
         },
         {
           "index": 11,
-          "startsAt": "2026-08-22T19:41:32.636Z",
-          "endsAt": "2026-08-22T21:41:32.636Z",
-          "label": "19:41",
+          "startsAt": "2026-08-22T20:42:45.517Z",
+          "endsAt": "2026-08-22T22:42:45.517Z",
+          "label": "20:42",
           "value": 0,
           "posts": 0
         }
@@ -42897,7 +41275,7 @@
       "source": "tweet_metrics",
       "aggregate": "sum",
       "pointCount": 8,
-      "total": 355,
+      "total": 315,
       "current": 0,
       "points": [
         {
@@ -42905,8 +41283,8 @@
           "startsAt": "2026-08-15T00:00:00.000Z",
           "endsAt": "2026-08-16T00:00:00.000Z",
           "label": "2026-08-15",
-          "value": 40,
-          "posts": 1
+          "value": 0,
+          "posts": 0
         },
         {
           "index": 1,
@@ -43259,7 +41637,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -43322,7 +41700,7 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_distribution_only",
     "publishAllowed": false,
     "willBlockPublish": true,
@@ -43341,12 +41719,12 @@
     "safeRemainingUsd": 3.38,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 2.38,
-    "telemetryAgeMinutes": 1320,
+    "hoursSinceLastPost": 3.4,
+    "telemetryAgeMinutes": 1381,
     "latestTelemetryAt": "2026-08-21T23:41:50.986Z",
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 20,
@@ -43355,18 +41733,18 @@
       "mode": "manual_distribution",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 21,
-        "label": "21:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 22,
+        "label": "22:00",
+        "loadScore": 38.8,
+        "posts": 2,
+        "impressions": 68,
+        "avgScore": 1.3,
+        "status": "cool"
       },
       "nextWindow": {
         "hour": 13,
         "label": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "loadScore": 53,
         "posts": 5,
         "impressions": 128,
@@ -43697,7 +42075,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 22,
@@ -43710,7 +42088,7 @@
           "avgScore": 1.3,
           "loadScore": 38.8,
           "status": "cool",
-          "current": false
+          "current": true
         },
         {
           "hour": 23,
@@ -43731,18 +42109,18 @@
       "mode": "manual_distribution",
       "confidence": "medium",
       "currentHour": {
-        "hour": 21,
-        "label": "21:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 22,
+        "label": "22:00",
+        "loadScore": 38.8,
+        "posts": 2,
+        "impressions": 68,
+        "avgScore": 1.3,
+        "status": "cool"
       },
       "nextWindow": {
         "hour": 13,
         "label": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "loadScore": 53,
         "posts": 5,
         "impressions": 128,
@@ -43796,12 +42174,12 @@
       "routerScore": 85,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 16,
+      "hoursFromNow": 15,
       "activeLane": {
         "id": "13:platform_control:decision_rule",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "loadScore": 53,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -43834,7 +42212,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "2.4h since packet",
+        "value": "3.4h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -43848,7 +42226,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "1320 min old",
+        "value": "1381 min old",
         "detail": "Latest checked telemetry: 2026-08-21T23:41:50.986Z."
       },
       {
@@ -43862,20 +42240,20 @@
         "id": "hourly_window",
         "ok": true,
         "label": "Learned UTC window",
-        "value": "21:00 score 0.0",
+        "value": "22:00 score 38.8",
         "detail": "No near-term learned peak; use manual distribution now and schedule the next packet near 17:00 UTC."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "13:00 UTC / Platform Control / Decision Rule in 16.0h",
+        "value": "13:00 UTC / Platform Control / Decision Rule in 15.0h",
         "detail": "Schedule the next standalone packet for 13:00 UTC as Platform Control / Decision Rule."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 80,
@@ -43940,7 +42318,7 @@
         "label": "learning load",
         "value": "0",
         "status": "ok",
-        "detail": "355 L7 events in 7d feedback window"
+        "detail": "315 L7 events in 7d feedback window"
       }
     ],
     "safeguards": [
@@ -43951,7 +42329,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "status": "boundary watch",
     "severity": "warn",
     "reactorFillPct": 75.1,
@@ -44050,7 +42428,7 @@
         "gate": "sampled",
         "status": "ok",
         "cache": {
-          "generatedAt": "2026-08-22T21:41:32.636Z",
+          "generatedAt": "2026-08-22T22:42:45.517Z",
           "enabled": true,
           "mode": "refresh_due",
           "status": "warn",
@@ -44058,7 +42436,7 @@
           "readGate": "sampled",
           "latestCheckedAt": "2026-08-21T23:41:50.861Z",
           "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-          "ageHours": 21.99,
+          "ageHours": 23.02,
           "maxAgeHours": 12,
           "fresh": false,
           "due": true,
@@ -44230,7 +42608,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-08-22T21:41:32.636Z",
+      "generatedAt": "2026-08-22T22:42:45.517Z",
       "enabled": true,
       "mode": "refresh_due",
       "status": "warn",
@@ -44238,7 +42616,7 @@
       "readGate": "sampled",
       "latestCheckedAt": "2026-08-21T23:41:50.861Z",
       "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-      "ageHours": 21.99,
+      "ageHours": 23.02,
       "maxAgeHours": 12,
       "fresh": false,
       "due": true,
@@ -44272,7 +42650,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.160, projected month-end $2.660 / $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "enabled": true,
     "mode": "refresh_due",
     "status": "warn",
@@ -44280,7 +42658,7 @@
     "readGate": "sampled",
     "latestCheckedAt": "2026-08-21T23:41:50.861Z",
     "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-    "ageHours": 21.99,
+    "ageHours": 23.02,
     "maxAgeHours": 12,
     "fresh": false,
     "due": true,
@@ -44290,7 +42668,7 @@
     "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -44503,7 +42881,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -44622,7 +43000,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44635,7 +43013,7 @@
     "expectedLiftPct": 189.6,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T21:41:32.636Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.38\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T22:42:45.517Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.38\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -44771,7 +43149,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44844,10 +43222,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T21:41:32.636Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T22:42:45.517Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44948,10 +43326,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T21:41:32.636Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T22:42:45.517Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -45114,10 +43492,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T21:41:32.636Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T22:42:45.517Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -45129,11 +43507,11 @@
     "manualOnly": true,
     "sentinelScore": 66.6,
     "l7Events24h": 0,
-    "l7Events7d": 355,
-    "dailyBaseline": 50.7,
+    "l7Events7d": 315,
+    "dailyBaseline": 45,
     "surgeRatio": 0,
     "ackRate24h": 0,
-    "ackRate7d": 1.69,
+    "ackRate7d": 1.9,
     "routeCoveragePct": 100,
     "routeScore": 100,
     "breakoutCount": 12,
@@ -45186,7 +43564,7 @@
         "value": "0",
         "score": 0,
         "status": "danger",
-        "detail": "50.7 baseline/day · 0.00x",
+        "detail": "45.0 baseline/day · 0.00x",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
@@ -45196,7 +43574,7 @@
         "value": "0.0%",
         "score": 0,
         "status": "danger",
-        "detail": "1.7% 7d baseline",
+        "detail": "1.9% 7d baseline",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
@@ -45245,7 +43623,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -45391,7 +43769,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -45490,10 +43868,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T21:41:32.636Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T22:42:45.517Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -45639,7 +44017,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 69.5\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "warn",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -45855,7 +44233,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 90.1\nBottleneck: LEARN_WRITEBACK\nLatency budget: 12.9s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -46003,7 +44381,7 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 88\n\nOPEN: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_next_window_commander",
     "severity": "danger",
     "zeroExtraXReads": true,
@@ -46015,14 +44393,14 @@
     "activeWindow": {
       "hour": 13,
       "windowLabel": "13:00",
-      "hoursFromNow": 16,
+      "hoursFromNow": 15,
       "loadScore": 53
     },
     "window": {
       "hour": 13,
       "label": "13:00",
       "windowLabel": "13:00",
-      "hoursFromNow": 16,
+      "hoursFromNow": 15,
       "loadScore": 53
     },
     "activeAngle": {
@@ -46097,7 +44475,7 @@
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 67.8 / Gate: blocked / X reads: 0\nWindow: 13:00 UTC (16.0h from now)\nAngle: Decision Rule / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.\nPrompt bias:\n- Format=decision_rule\n- Pillar=Platform Control\n- Window=13:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 67.8 / Gate: blocked / X reads: 0\nWindow: 13:00 UTC (15.0h from now)\nAngle: Decision Rule / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.\nPrompt bias:\n- Format=decision_rule\n- Pillar=Platform Control\n- Window=13:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -46105,7 +44483,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_holding",
     "severity": "ok",
@@ -46120,7 +44498,7 @@
       "source": "topic_timing",
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 20,
+      "hoursFromNow": 19,
       "loadScore": 90.6,
       "formatId": "decision_rule",
       "formatLabel": "Decision Rule",
@@ -46138,7 +44516,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -46155,7 +44533,7 @@
         "source": "topic_timing",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "loadScore": 79.5,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -46172,7 +44550,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "second_order",
         "formatLabel": "Second Order",
@@ -46189,7 +44567,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
@@ -46206,7 +44584,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
@@ -46223,7 +44601,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -46240,7 +44618,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "massive_value_drop",
         "formatLabel": "Massive Value Drop",
@@ -46257,7 +44635,7 @@
         "source": "temporal_matrix",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -46274,7 +44652,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -46322,7 +44700,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -46338,11 +44716,11 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T21:41:32.636Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 264d to next milestone · 500d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T22:42:45.517Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 297d to next milestone · 564d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
-      "projectedDaysToMilestone": 263.8,
-      "savedDays": 500.3,
+      "projectedDaysToMilestone": 297.3,
+      "savedDays": 563.8,
       "projectedLiftPct": 189.6
     },
     "gates": [
@@ -46434,7 +44812,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -46526,7 +44904,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -46545,7 +44923,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T21:41:32.636Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · ai_platform_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T22:42:45.517Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · ai_platform_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(llm%20OR%20release%20OR%20highlights%20OR%20upgraded%20OR%20openai%20OR%20python)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm 0.33: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(aws%20OR%20ec2%20OR%20deployment%20OR%20reference%20OR%20guide%20OR%20compiled)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On AWS EC2 Deployment — Q&A Reference: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
     "targets": [
       {
         "id": "trend:1:llm-0-33",
@@ -46643,7 +45021,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -46946,7 +45324,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -46959,7 +45337,7 @@
       "label": "Decision Rule",
       "status": "exploit",
       "action": "test",
-      "allocationScore": 55.54,
+      "allocationScore": 55.63,
       "avgScore": 3.4,
       "samples": 12,
       "liftPct": 7,
@@ -46979,7 +45357,7 @@
       "label": "Second Order",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 86.81,
+      "allocationScore": 86.9,
       "avgScore": 3.18,
       "samples": 0,
       "liftPct": null,
@@ -47005,8 +45383,8 @@
       "contrarian_cost",
       "operator_pain",
       "decision_rule",
-      "prediction",
-      "sharp_question"
+      "sharp_question",
+      "prediction"
     ],
     "lanes": [
       {
@@ -47014,7 +45392,7 @@
         "label": "Decision Rule",
         "status": "exploit",
         "action": "test",
-        "allocationScore": 55.54,
+        "allocationScore": 55.63,
         "avgScore": 3.4,
         "samples": 12,
         "liftPct": 7,
@@ -47034,7 +45412,7 @@
         "label": "Second Order",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.81,
+        "allocationScore": 86.9,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47054,7 +45432,7 @@
         "label": "Not X But Y",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.75,
+        "allocationScore": 86.83,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47074,7 +45452,7 @@
         "label": "The Hard Way",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.45,
+        "allocationScore": 86.53,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47094,7 +45472,7 @@
         "label": "Myth Busting",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.38,
+        "allocationScore": 86.47,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47114,7 +45492,7 @@
         "label": "Massive Value Drop",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.32,
+        "allocationScore": 86.4,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47134,7 +45512,7 @@
         "label": "Brutal Truth",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.26,
+        "allocationScore": 86.34,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47147,14 +45525,14 @@
         "nextAction": "Collect more samples for Brutal Truth; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
         "rank": 7,
-        "allocationPct": 7.7
+        "allocationPct": 7.8
       },
       {
         "id": "playbook",
         "label": "Playbook",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.13,
+        "allocationScore": 86.21,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47174,7 +45552,7 @@
         "label": "Contrarian Cost",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86,
+        "allocationScore": 86.09,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47194,7 +45572,7 @@
         "label": "Operator Pain",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 85.94,
+        "allocationScore": 86.02,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -47214,7 +45592,7 @@
         "label": "Sharp Question",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.98,
+        "allocationScore": 51.06,
         "avgScore": 0.3,
         "samples": 1,
         "liftPct": null,
@@ -47234,7 +45612,7 @@
         "label": "Near-term Prediction",
         "status": "test",
         "action": "test",
-        "allocationScore": 51.64,
+        "allocationScore": 50.72,
         "avgScore": 3.2,
         "samples": 7,
         "liftPct": 0.7,
@@ -47260,7 +45638,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -47419,7 +45797,7 @@
         "regret": 3.4,
         "recentRegret": 3.4,
         "baselineLiftPct": null,
-        "allocationPct": 7.7,
+        "allocationPct": 7.8,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -47613,7 +45991,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "conversion_probe",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -47991,7 +46369,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -48228,7 +46606,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -48239,7 +46617,7 @@
       "id": "13:platform_control:decision_rule",
       "hour": 13,
       "windowLabel": "13:00",
-      "hoursFromNow": 16,
+      "hoursFromNow": 15,
       "loadScore": 53,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
@@ -48262,7 +46640,7 @@
         "id": "13:platform_control:decision_rule",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "loadScore": 53,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48284,7 +46662,7 @@
         "id": "14:platform_control:decision_rule",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "loadScore": 79.5,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48306,7 +46684,7 @@
         "id": "17:platform_control:decision_rule",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48328,7 +46706,7 @@
         "id": "15:platform_control:decision_rule",
         "hour": 15,
         "windowLabel": "15:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 17,
         "loadScore": 64.5,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48350,7 +46728,7 @@
         "id": "17:operator_leverage:second_order",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48372,7 +46750,7 @@
         "id": "17:operator_leverage:not_x_but_y",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48394,7 +46772,7 @@
         "id": "17:operator_leverage:the_hard_way",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48416,7 +46794,7 @@
         "id": "17:operator_leverage:myth_busting",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48438,7 +46816,7 @@
         "id": "17:operator_leverage:massive_value_drop",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48460,7 +46838,7 @@
         "id": "17:operator_leverage:decision_rule",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48482,7 +46860,7 @@
         "id": "14:operator_leverage:second_order",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "loadScore": 79.5,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48504,7 +46882,7 @@
         "id": "14:operator_leverage:not_x_but_y",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "loadScore": 79.5,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48537,7 +46915,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -48876,7 +47254,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -48978,7 +47356,7 @@
     "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: decision_rule\nranked_formats: decision_rule, brutal_truth, prediction, playbook, second_order, not_x_but_y\nselected_story: llm 0.33\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 13:00 UTC / Platform Control / Decision Rule; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 13:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: second_order is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Decision Rule; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Yesterday's traffic winner is prediction (score 0.2, 1 samples). Bias candidates toward it.\n- Source bias: turn simonwillison.net into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -50630,7 +49008,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -50850,7 +49228,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -50951,11 +49329,11 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "manual_distribution",
     "zeroExtraXReads": true,
     "velocityScore": 87.3,
-    "loopCoefficient": 2.26,
+    "loopCoefficient": 2.27,
     "expectedLiftPct": 258.8,
     "baselineScore": 3.2,
     "safeBudgetLeftUsd": 3.38,
@@ -50966,7 +49344,7 @@
       "action": "Execute the top route burst, then let maintenance write outcomes back."
     },
     "ackRate24h": 0,
-    "ackRate7d": 1.69,
+    "ackRate7d": 1.9,
     "routeCoveragePct": 100,
     "swarmCoveragePct": 166.7,
     "nextBurst": {
@@ -50981,9 +49359,9 @@
       {
         "id": "ingress",
         "label": "signal ingress",
-        "value": "16 pkts",
+        "value": "15 pkts",
         "status": "ok",
-        "detail": "355 L7 events in 7d telemetry"
+        "detail": "315 L7 events in 7d telemetry"
       },
       {
         "id": "ranker",
@@ -51019,9 +49397,9 @@
         "id": "ingress_ranker",
         "from": "INGRESS",
         "to": "RANKER",
-        "load": "355 L7",
+        "load": "315 L7",
         "status": "ok",
-        "detail": "16 packets scored"
+        "detail": "15 packets scored"
       },
       {
         "id": "ranker_swarm",
@@ -51051,7 +49429,7 @@
         "id": "writeback_ingress",
         "from": "WRITEBACK",
         "to": "INGRESS",
-        "load": "1.69% ACK",
+        "load": "1.90% ACK",
         "status": "warn",
         "detail": "learning signal density"
       }
@@ -51083,7 +49461,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "recovery_route",
     "confidence": "medium",
     "zeroExtraXReads": true,
@@ -51091,21 +49469,21 @@
     "baselineScore": 3.2,
     "load": {
       "impressions24h": 0,
-      "impressions7d": 355,
+      "impressions7d": 315,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "21:41",
+        "label": "22:42",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-21T21:41:32.645Z",
-        "endsAt": "2026-08-22T01:41:32.645Z"
+        "startsAt": "2026-08-21T22:42:45.528Z",
+        "endsAt": "2026-08-22T02:42:45.528Z"
       },
       "quietBucket": {
-        "label": "21:41",
+        "label": "22:42",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-21T21:41:32.645Z",
-        "endsAt": "2026-08-22T01:41:32.645Z"
+        "startsAt": "2026-08-21T22:42:45.528Z",
+        "endsAt": "2026-08-22T02:42:45.528Z"
       }
     },
     "safeBudgetLeftUsd": 3.38,
@@ -51234,7 +49612,7 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "temporal_rotation",
     "confidence": "medium",
     "source": "cached packet analytics only",
@@ -51247,7 +49625,7 @@
         "slot": 1,
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "loadScore": 90.6,
         "formatId": "prediction",
         "label": "Near-term Prediction",
@@ -51264,7 +49642,7 @@
         "slot": 2,
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "loadScore": 79.5,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -51281,7 +49659,7 @@
         "slot": 3,
         "hour": 15,
         "windowLabel": "15:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 17,
         "loadScore": 64.5,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -51298,7 +49676,7 @@
         "slot": 4,
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "loadScore": 53,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -51313,16 +49691,16 @@
       },
       {
         "slot": 5,
-        "hour": 21,
-        "windowLabel": "21:00",
+        "hour": 22,
+        "windowLabel": "22:00",
         "hoursFromNow": 0,
-        "loadScore": 0,
+        "loadScore": 38.8,
         "formatId": "playbook",
         "label": "Playbook",
         "angle": "builder playbook / practical next move",
         "action": "explore",
         "status": "probe",
-        "score": 28,
+        "score": 42.7,
         "avgScore": 0,
         "samples": 0,
         "impressions": 0,
@@ -51331,7 +49709,7 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -51380,7 +49758,7 @@
         "id": "prediction",
         "slot": 1,
         "windowLabel": "17:00",
-        "hoursFromNow": 20,
+        "hoursFromNow": 19,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "test",
@@ -51396,7 +49774,7 @@
         "id": "decision_rule",
         "slot": 2,
         "windowLabel": "14:00",
-        "hoursFromNow": 17,
+        "hoursFromNow": 16,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -51412,7 +49790,7 @@
         "id": "decision_rule",
         "slot": 3,
         "windowLabel": "15:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 17,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -51428,7 +49806,7 @@
         "id": "decision_rule",
         "slot": 4,
         "windowLabel": "13:00",
-        "hoursFromNow": 16,
+        "hoursFromNow": 15,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -51443,15 +49821,15 @@
       {
         "id": "playbook",
         "slot": 5,
-        "windowLabel": "21:00",
+        "windowLabel": "22:00",
         "hoursFromNow": 0,
         "label": "Playbook",
         "formatId": "playbook",
         "action": "explore",
         "angle": "builder playbook / practical next move",
         "status": "probe",
-        "score": 28,
-        "loadScore": 0,
+        "score": 42.7,
+        "loadScore": 38.8,
         "samples": 0,
         "avgScore": 0,
         "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 58.0."
@@ -51466,12 +49844,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "medium",
-    "epoch": "2026-08-22T21:41",
+    "epoch": "2026-08-22T22:42",
     "sampleCount": 20,
     "baselineScore": 3.2,
     "activeRule": {
@@ -51567,7 +49945,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -51614,7 +49992,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -52024,7 +50402,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "updatedAt": "2026-08-22T19:17:05.943Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -52457,7 +50835,7 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 20,
@@ -52466,18 +50844,18 @@
     "mode": "manual_distribution",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 21,
-      "label": "21:00",
-      "loadScore": 0,
-      "posts": 0,
-      "impressions": 0,
-      "avgScore": 0,
-      "status": "dark"
+      "hour": 22,
+      "label": "22:00",
+      "loadScore": 38.8,
+      "posts": 2,
+      "impressions": 68,
+      "avgScore": 1.3,
+      "status": "cool"
     },
     "nextWindow": {
       "hour": 13,
       "label": "13:00",
-      "hoursFromNow": 16,
+      "hoursFromNow": 15,
       "loadScore": 53,
       "posts": 5,
       "impressions": 128,
@@ -52808,7 +51186,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 22,
@@ -52821,7 +51199,7 @@
         "avgScore": 1.3,
         "loadScore": 38.8,
         "status": "cool",
-        "current": false
+        "current": true
       },
       {
         "hour": 23,
@@ -52840,7 +51218,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -53179,7 +51557,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 dev.to 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "controlled_test",
     "confidence": "medium",
     "baselineScore": 3.2,
@@ -53280,7 +51658,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -53398,7 +51776,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-08-22T21:41:32.636Z",
+    "generatedAt": "2026-08-22T22:42:45.517Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -53678,7 +52056,7 @@
   "diagnosis": [
     "Today: prioritize ZH at 12:00 UTC; use #devtools #ai when story-fit allows.",
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 7 天记录到 16 条、355 次触达；24 小时 4 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
+    "最近 7 天记录到 15 条、315 次触达；24 小时 4 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
     "路由操作优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
