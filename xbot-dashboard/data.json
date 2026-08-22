@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T16:45:09.183Z",
+  "updatedAt": "2026-08-22T17:41:06.903Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-08-22T16:45:09.183Z",
+    "dashboardUpdatedAt": "2026-08-22T17:41:06.903Z",
     "analyticsUpdatedAt": "2026-08-22T16:27:41.716Z",
     "usageUpdatedAt": "2026-08-22T16:27:41.671Z",
     "accountCheckedAt": "2026-08-21T23:41:50.861Z",
     "tweetMetricsCheckedAt": "2026-08-21T23:41:50.986Z",
     "checkedAt": "2026-08-21T23:41:50.986Z",
-    "ageMinutes": 1023,
+    "ageMinutes": 1079,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -36,7 +36,7 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 20
+          "hoursFromNow": 19
         },
         "dailyTarget": 1,
         "packetsLast24h": 1,
@@ -4727,9 +4727,9 @@
           19
         ],
         "nextWindow": {
-          "hour": 16,
-          "label": "16:00 UTC",
-          "hoursFromNow": 0
+          "hour": 19,
+          "label": "19:00 UTC",
+          "hoursFromNow": 2
         },
         "dailyTarget": 3,
         "packetsLast24h": 3,
@@ -9575,13 +9575,13 @@
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -9590,7 +9590,7 @@
       "nextSlot": {
         "hour": 12,
         "label": "12:00 UTC",
-        "hoursFromNow": 20
+        "hoursFromNow": 19
       },
       "selectedTags": [
         "#devtools",
@@ -9598,7 +9598,7 @@
       ],
       "canPost": true,
       "budgetSafeRemainingUsd": 3.395,
-      "cadenceReason": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
+      "cadenceReason": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h.",
       "nextRoute": {
         "label": "Velocity route: [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56...",
         "routeLabel": "breakout X route",
@@ -9613,7 +9613,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
@@ -9706,11 +9706,11 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
-      "total": 9,
+      "total": 8,
       "counts": {
         "wait_metrics": 5,
         "reframe": 1
@@ -9839,7 +9839,7 @@
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "zh",
@@ -9857,19 +9857,19 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
-      "totalEvents": 35,
+      "totalEvents": 34,
       "topReasons": [
         {
           "reason": "cadence",
-          "count": 20,
+          "count": 19,
           "lastAt": "2026-08-22T13:29:48.337Z",
           "samples": [
-            "cadence skip: Daily en packet target reached (1/1).",
             "cadence skip: Daily zh packet target reached (1/1).",
+            "cadence skip: Daily en packet target reached (1/1).",
             "cadence skip: Daily en packet target reached (1/1)."
           ]
         },
@@ -9886,17 +9886,17 @@
       ],
       "primaryReason": {
         "reason": "cadence",
-        "count": 20,
+        "count": 19,
         "lastAt": "2026-08-22T13:29:48.337Z",
         "samples": [
-          "cadence skip: Daily en packet target reached (1/1).",
           "cadence skip: Daily zh packet target reached (1/1).",
+          "cadence skip: Daily en packet target reached (1/1).",
           "cadence skip: Daily en packet target reached (1/1)."
         ]
       }
     },
     "abPlan": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -10131,7 +10131,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -10216,7 +10216,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -10307,7 +10307,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -10396,8 +10396,8 @@
         "confidenceScore": 76.6,
         "projectedDays": 374,
         "savedDays": 390.1,
-        "detail": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
-        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window."
+        "detail": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h.",
+        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane."
       },
       {
         "id": "media_post_surge",
@@ -10474,7 +10474,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "scale_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -41180,97 +41180,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-08-21T16:45:09.183Z",
-          "endsAt": "2026-08-21T18:45:09.183Z",
-          "label": "16:45",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 1,
-          "startsAt": "2026-08-21T18:45:09.183Z",
-          "endsAt": "2026-08-21T20:45:09.183Z",
-          "label": "18:45",
+          "startsAt": "2026-08-21T17:41:06.903Z",
+          "endsAt": "2026-08-21T19:41:06.903Z",
+          "label": "17:41",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 1,
+          "startsAt": "2026-08-21T19:41:06.903Z",
+          "endsAt": "2026-08-21T21:41:06.903Z",
+          "label": "19:41",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 2,
-          "startsAt": "2026-08-21T20:45:09.183Z",
-          "endsAt": "2026-08-21T22:45:09.183Z",
-          "label": "20:45",
+          "startsAt": "2026-08-21T21:41:06.903Z",
+          "endsAt": "2026-08-21T23:41:06.903Z",
+          "label": "21:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-08-21T22:45:09.183Z",
-          "endsAt": "2026-08-22T00:45:09.183Z",
-          "label": "22:45",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 4,
-          "startsAt": "2026-08-22T00:45:09.183Z",
-          "endsAt": "2026-08-22T02:45:09.183Z",
-          "label": "00:45",
+          "startsAt": "2026-08-21T23:41:06.903Z",
+          "endsAt": "2026-08-22T01:41:06.903Z",
+          "label": "23:41",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 4,
+          "startsAt": "2026-08-22T01:41:06.903Z",
+          "endsAt": "2026-08-22T03:41:06.903Z",
+          "label": "01:41",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 5,
-          "startsAt": "2026-08-22T02:45:09.183Z",
-          "endsAt": "2026-08-22T04:45:09.183Z",
-          "label": "02:45",
+          "startsAt": "2026-08-22T03:41:06.903Z",
+          "endsAt": "2026-08-22T05:41:06.903Z",
+          "label": "03:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-08-22T04:45:09.183Z",
-          "endsAt": "2026-08-22T06:45:09.183Z",
-          "label": "04:45",
+          "startsAt": "2026-08-22T05:41:06.903Z",
+          "endsAt": "2026-08-22T07:41:06.903Z",
+          "label": "05:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-08-22T06:45:09.183Z",
-          "endsAt": "2026-08-22T08:45:09.183Z",
-          "label": "06:45",
+          "startsAt": "2026-08-22T07:41:06.903Z",
+          "endsAt": "2026-08-22T09:41:06.903Z",
+          "label": "07:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-08-22T08:45:09.183Z",
-          "endsAt": "2026-08-22T10:45:09.183Z",
-          "label": "08:45",
+          "startsAt": "2026-08-22T09:41:06.903Z",
+          "endsAt": "2026-08-22T11:41:06.903Z",
+          "label": "09:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-08-22T10:45:09.183Z",
-          "endsAt": "2026-08-22T12:45:09.183Z",
-          "label": "10:45",
+          "startsAt": "2026-08-22T11:41:06.903Z",
+          "endsAt": "2026-08-22T13:41:06.903Z",
+          "label": "11:41",
           "value": 0,
           "posts": 1
         },
         {
           "index": 10,
-          "startsAt": "2026-08-22T12:45:09.183Z",
-          "endsAt": "2026-08-22T14:45:09.183Z",
-          "label": "12:45",
+          "startsAt": "2026-08-22T13:41:06.903Z",
+          "endsAt": "2026-08-22T15:41:06.903Z",
+          "label": "13:41",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-08-22T14:45:09.183Z",
-          "endsAt": "2026-08-22T16:45:09.183Z",
-          "label": "14:45",
+          "startsAt": "2026-08-22T15:41:06.903Z",
+          "endsAt": "2026-08-22T17:41:06.903Z",
+          "label": "15:41",
           "value": 0,
           "posts": 1
         }
@@ -41644,7 +41644,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -41707,15 +41707,15 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-08-22T16:45:09.183Z",
-    "mode": "wait_for_learned_peak",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
+    "mode": "wait_for_topic_timing",
     "publishAllowed": false,
     "willBlockPublish": false,
     "manualOverride": false,
-    "reasonCode": "learned_peak_wait",
+    "reasonCode": "topic_timing_wait",
     "severity": "warn",
-    "reason": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
-    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
+    "reason": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h.",
+    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
     "languageCode": null,
     "dailyPostTarget": 4,
     "postsLast24h": 4,
@@ -41726,32 +41726,32 @@
     "safeRemainingUsd": 3.395,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 0.29,
-    "telemetryAgeMinutes": 1023,
+    "hoursSinceLastPost": 1.22,
+    "telemetryAgeMinutes": 1079,
     "latestTelemetryAt": "2026-08-21T23:41:50.986Z",
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 20,
       "minSamples": 2,
       "confidence": "medium",
-      "mode": "wait_for_peak",
+      "mode": "publish_now",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 16,
-        "label": "16:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 17,
+        "label": "17:00",
+        "loadScore": 90.6,
+        "posts": 5,
+        "impressions": 335,
+        "avgScore": 4.3,
+        "status": "hot"
       },
       "nextWindow": {
         "hour": 17,
         "label": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "posts": 5,
         "impressions": 335,
@@ -41796,7 +41796,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
+      "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
       "hours": [
         {
           "hour": 0,
@@ -42017,7 +42017,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 17,
@@ -42030,7 +42030,7 @@
           "avgScore": 4.3,
           "loadScore": 90.6,
           "status": "hot",
-          "current": false
+          "current": true
         },
         {
           "hour": 18,
@@ -42113,21 +42113,21 @@
       ]
     },
     "cadenceWindow": {
-      "mode": "wait_for_peak",
+      "mode": "publish_now",
       "confidence": "medium",
       "currentHour": {
-        "hour": 16,
-        "label": "16:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 17,
+        "label": "17:00",
+        "loadScore": 90.6,
+        "posts": 5,
+        "impressions": 335,
+        "avgScore": 4.3,
+        "status": "hot"
       },
       "nextWindow": {
         "hour": 17,
         "label": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "posts": 5,
         "impressions": 335,
@@ -42172,7 +42172,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
+      "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
       "zeroExtraXReads": true
     },
     "topicTimingWindow": {
@@ -42181,12 +42181,12 @@
       "routerScore": 85,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 21,
+      "hoursFromNow": 20,
       "activeLane": {
         "id": "13:platform_control:decision_rule",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "loadScore": 53,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -42219,7 +42219,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "0.3h since packet",
+        "value": "1.2h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -42233,7 +42233,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "1023 min old",
+        "value": "1079 min old",
         "detail": "Latest checked telemetry: 2026-08-21T23:41:50.986Z."
       },
       {
@@ -42245,27 +42245,27 @@
       },
       {
         "id": "hourly_window",
-        "ok": false,
+        "ok": true,
         "label": "Learned UTC window",
-        "value": "16:00 score 0.0",
-        "detail": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now."
+        "value": "17:00 score 90.6",
+        "detail": "Current UTC hour 17:00 is inside a learned warm window."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "13:00 UTC / Platform Control / Decision Rule in 21.0h",
+        "value": "13:00 UTC / Platform Control / Decision Rule in 20.0h",
         "detail": "Schedule the next standalone packet for 13:00 UTC as Platform Control / Decision Rule."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 80.1,
     "decision": "Spend this loop on manual route ops under high-signal conversations before another standalone packet.",
-    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
+    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
     "publishGate": "review",
     "readGate": "cached_only",
     "distributionGate": "ready",
@@ -42297,7 +42297,7 @@
         "label": "publish gate",
         "value": "review",
         "status": "warn",
-        "detail": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now."
+        "detail": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h."
       },
       {
         "id": "read",
@@ -42336,7 +42336,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 75.4,
@@ -42350,7 +42350,7 @@
     "gates": {
       "read": "cached_only",
       "publish": "review",
-      "cadence": "wait_for_learned_peak"
+      "cadence": "wait_for_topic_timing"
     },
     "budget": {
       "capUsd": 5,
@@ -42435,7 +42435,7 @@
         "gate": "sampled",
         "status": "ok",
         "cache": {
-          "generatedAt": "2026-08-22T16:45:09.183Z",
+          "generatedAt": "2026-08-22T17:41:06.903Z",
           "enabled": true,
           "mode": "refresh_due",
           "status": "warn",
@@ -42443,7 +42443,7 @@
           "readGate": "sampled",
           "latestCheckedAt": "2026-08-21T23:41:50.861Z",
           "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-          "ageHours": 17.06,
+          "ageHours": 17.99,
           "maxAgeHours": 12,
           "fresh": false,
           "due": true,
@@ -42615,7 +42615,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-08-22T16:45:09.183Z",
+      "generatedAt": "2026-08-22T17:41:06.903Z",
       "enabled": true,
       "mode": "refresh_due",
       "status": "warn",
@@ -42623,7 +42623,7 @@
       "readGate": "sampled",
       "latestCheckedAt": "2026-08-21T23:41:50.861Z",
       "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-      "ageHours": 17.06,
+      "ageHours": 17.99,
       "maxAgeHours": 12,
       "fresh": false,
       "due": true,
@@ -42657,7 +42657,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.160, projected month-end $2.645 / $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "enabled": true,
     "mode": "refresh_due",
     "status": "warn",
@@ -42665,7 +42665,7 @@
     "readGate": "sampled",
     "latestCheckedAt": "2026-08-21T23:41:50.861Z",
     "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-    "ageHours": 17.06,
+    "ageHours": 17.99,
     "maxAgeHours": 12,
     "fresh": false,
     "due": true,
@@ -42675,7 +42675,7 @@
     "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -42888,7 +42888,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -42923,8 +42923,8 @@
         "gate": "guarded",
         "status": "warn",
         "efficiencyScore": 48,
-        "detail": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
-        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
+        "detail": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h.",
+        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
         "xReadOps": 0,
         "zeroExtraXReads": true
       },
@@ -43007,7 +43007,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43020,7 +43020,7 @@
     "expectedLiftPct": 189.6,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T16:45:09.183Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.40\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T17:41:06.903Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.40\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -43156,7 +43156,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43229,10 +43229,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T16:45:09.183Z\nMode: wait_for_learned_peak\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T17:41:06.903Z\nMode: wait_for_topic_timing\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43333,10 +43333,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T16:45:09.183Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T17:41:06.903Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43499,10 +43499,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T16:45:09.183Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T17:41:06.903Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -43630,7 +43630,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -43776,7 +43776,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -43875,10 +43875,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T16:45:09.183Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T17:41:06.903Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -44024,7 +44024,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 69.6\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "warn",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -44240,7 +44240,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 90.5\nBottleneck: LEARN_WRITEBACK\nLatency budget: 13.1s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -44388,26 +44388,26 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 88\n\nOPEN: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_next_window_commander",
     "severity": "warn",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 74.6,
+    "commanderScore": 91.6,
     "publishGate": "manual_route_only",
     "readGate": "cached_only",
     "activeWindow": {
       "hour": 13,
       "windowLabel": "13:00",
-      "hoursFromNow": 21,
+      "hoursFromNow": 20,
       "loadScore": 90.6
     },
     "window": {
       "hour": 13,
       "label": "13:00",
       "windowLabel": "13:00",
-      "hoursFromNow": 21,
+      "hoursFromNow": 20,
       "loadScore": 90.6
     },
     "activeAngle": {
@@ -44440,7 +44440,7 @@
         "label": "Cadence",
         "status": "warn",
         "value": "manual_route_only",
-        "detail": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now."
+        "detail": "Topic timing router prefers 13:00 UTC / Platform Control / Decision Rule in 20.0h."
       },
       {
         "id": "budget",
@@ -44482,7 +44482,7 @@
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 74.6 / Gate: manual_route_only / X reads: 0\nWindow: 13:00 UTC (21.0h from now)\nAngle: Decision Rule / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.\nPrompt bias:\n- Format=decision_rule\n- Pillar=Platform Control\n- Window=13:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 91.6 / Gate: manual_route_only / X reads: 0\nWindow: 13:00 UTC (20.0h from now)\nAngle: Decision Rule / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Decision Rule angle warm for 13:00 UTC.\nPrompt bias:\n- Format=decision_rule\n- Pillar=Platform Control\n- Window=13:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -44490,7 +44490,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_warmup",
     "severity": "ok",
@@ -44505,7 +44505,7 @@
       "source": "topic_timing",
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 1,
+      "hoursFromNow": 0,
       "loadScore": 90.6,
       "formatId": "decision_rule",
       "formatLabel": "Decision Rule",
@@ -44523,7 +44523,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -44540,7 +44540,7 @@
         "source": "topic_timing",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "loadScore": 79.5,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -44557,7 +44557,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "playbook",
         "formatLabel": "Playbook",
@@ -44574,7 +44574,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "contrarian_cost",
         "formatLabel": "Contrarian Cost",
@@ -44591,7 +44591,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "operator_pain",
         "formatLabel": "Operator Pain",
@@ -44608,7 +44608,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "second_order",
         "formatLabel": "Second Order",
@@ -44625,7 +44625,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
@@ -44642,7 +44642,7 @@
         "source": "opportunity",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "loadScore": 90.6,
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
@@ -44659,7 +44659,7 @@
         "source": "opportunity",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "loadScore": 90.6,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -44707,7 +44707,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -44723,7 +44723,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T16:45:09.183Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 264d to next milestone · 500d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T17:41:06.903Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 264d to next milestone · 500d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 263.8,
@@ -44819,7 +44819,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -44911,7 +44911,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44930,7 +44930,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T16:45:09.183Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T17:41:06.903Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(local%20OR%20llm%20OR%20ante%20OR%20%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E6%9C%AC%E5%9C%B0%20OR%20gguf%20OR%20coding)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(new%20OR%20mcp%20OR%20roadmap%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The New MCP Roadmap: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
     "targets": [
       {
         "id": "trend:1:local-llm-ante-gguf-coding-agent-qwen3-6-2",
@@ -45028,7 +45028,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -45331,7 +45331,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -45344,7 +45344,7 @@
       "label": "Decision Rule",
       "status": "exploit",
       "action": "test",
-      "allocationScore": 56.13,
+      "allocationScore": 55.21,
       "avgScore": 3.4,
       "samples": 12,
       "liftPct": 7,
@@ -45364,7 +45364,7 @@
       "label": "Playbook",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 86.71,
+      "allocationScore": 86.8,
       "avgScore": 3.18,
       "samples": 0,
       "liftPct": null,
@@ -45399,7 +45399,7 @@
         "label": "Decision Rule",
         "status": "exploit",
         "action": "test",
-        "allocationScore": 56.13,
+        "allocationScore": 55.21,
         "avgScore": 3.4,
         "samples": 12,
         "liftPct": 7,
@@ -45419,7 +45419,7 @@
         "label": "Playbook",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.71,
+        "allocationScore": 86.8,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45439,7 +45439,7 @@
         "label": "Contrarian Cost",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.59,
+        "allocationScore": 86.67,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45459,7 +45459,7 @@
         "label": "Operator Pain",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.52,
+        "allocationScore": 86.61,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45479,7 +45479,7 @@
         "label": "Second Order",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.4,
+        "allocationScore": 86.48,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45499,7 +45499,7 @@
         "label": "Not X But Y",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.33,
+        "allocationScore": 86.42,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45519,7 +45519,7 @@
         "label": "The Hard Way",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 86.03,
+        "allocationScore": 86.11,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45539,7 +45539,7 @@
         "label": "Myth Busting",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 85.97,
+        "allocationScore": 86.05,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45559,7 +45559,7 @@
         "label": "Massive Value Drop",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 85.9,
+        "allocationScore": 85.99,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45579,7 +45579,7 @@
         "label": "Brutal Truth",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 85.84,
+        "allocationScore": 85.92,
         "avgScore": 3.18,
         "samples": 0,
         "liftPct": null,
@@ -45599,7 +45599,7 @@
         "label": "Sharp Question",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 51.56,
+        "allocationScore": 51.64,
         "avgScore": 0.3,
         "samples": 1,
         "liftPct": null,
@@ -45619,7 +45619,7 @@
         "label": "Near-term Prediction",
         "status": "test",
         "action": "test",
-        "allocationScore": 51.22,
+        "allocationScore": 51.31,
         "avgScore": 3.2,
         "samples": 7,
         "liftPct": 0.7,
@@ -45645,7 +45645,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -45998,7 +45998,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "conversion_probe",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -46376,7 +46376,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -46613,7 +46613,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -46624,7 +46624,7 @@
       "id": "13:platform_control:decision_rule",
       "hour": 13,
       "windowLabel": "13:00",
-      "hoursFromNow": 21,
+      "hoursFromNow": 20,
       "loadScore": 53,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
@@ -46647,7 +46647,7 @@
         "id": "13:platform_control:decision_rule",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "loadScore": 53,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -46669,7 +46669,7 @@
         "id": "17:platform_control:decision_rule",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -46691,7 +46691,7 @@
         "id": "14:platform_control:decision_rule",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "loadScore": 79.5,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -46713,7 +46713,7 @@
         "id": "15:platform_control:decision_rule",
         "hour": 15,
         "windowLabel": "15:00",
-        "hoursFromNow": 23,
+        "hoursFromNow": 22,
         "loadScore": 64.5,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -46735,7 +46735,7 @@
         "id": "17:operator_leverage:playbook",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46757,7 +46757,7 @@
         "id": "17:operator_leverage:contrarian_cost",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46779,7 +46779,7 @@
         "id": "17:operator_leverage:operator_pain",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46801,7 +46801,7 @@
         "id": "17:operator_leverage:second_order",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46823,7 +46823,7 @@
         "id": "17:operator_leverage:not_x_but_y",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46845,7 +46845,7 @@
         "id": "17:operator_leverage:decision_rule",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46853,7 +46853,7 @@
         "formatId": "decision_rule",
         "formatLabel": "Decision Rule",
         "formatStatus": "exploit",
-        "score": 94.2,
+        "score": 94,
         "samples": 0,
         "avgScore": 2.3,
         "impressions": 0,
@@ -46867,7 +46867,7 @@
         "id": "14:operator_leverage:playbook",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "loadScore": 79.5,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46889,7 +46889,7 @@
         "id": "14:operator_leverage:contrarian_cost",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "loadScore": 79.5,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -46897,7 +46897,7 @@
         "formatId": "contrarian_cost",
         "formatLabel": "Contrarian Cost",
         "formatStatus": "explore",
-        "score": 93.7,
+        "score": 93.8,
         "samples": 0,
         "avgScore": 2.3,
         "impressions": 0,
@@ -46922,7 +46922,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -47193,7 +47193,7 @@
         ],
         "samples": 5,
         "evidence": [
-          "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now."
+          "Current UTC hour 17:00 is inside a learned warm window."
         ],
         "promptDirectives": [
           "Prefer 17:00 UTC if cadence allows."
@@ -47243,7 +47243,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -47345,7 +47345,7 @@
     "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: decision_rule\nranked_formats: decision_rule, brutal_truth, prediction, playbook, contrarian_cost, operator_pain\nselected_story: [Local LLM] ANTE：原生支持本地 GGUF 的 Coding Agent， Qwen3.6 27B 在 TB 2.1 跑到 56.2%\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 13:00 UTC / Platform Control / Decision Rule; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 13:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: playbook is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Decision Rule; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Yesterday's traffic winner is prediction (score 0.2, 1 samples). Bias candidates toward it.\n- Source bias: turn v2ex.com into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -48997,7 +48997,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -49217,7 +49217,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -49318,7 +49318,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 87.3,
@@ -49450,7 +49450,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "recovery_route",
     "confidence": "medium",
     "zeroExtraXReads": true,
@@ -49461,18 +49461,18 @@
       "impressions7d": 355,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "16:45",
+        "label": "17:41",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-21T16:45:09.196Z",
-        "endsAt": "2026-08-21T20:45:09.196Z"
+        "startsAt": "2026-08-21T17:41:06.916Z",
+        "endsAt": "2026-08-21T21:41:06.916Z"
       },
       "quietBucket": {
-        "label": "16:45",
+        "label": "17:41",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-21T16:45:09.196Z",
-        "endsAt": "2026-08-21T20:45:09.196Z"
+        "startsAt": "2026-08-21T17:41:06.916Z",
+        "endsAt": "2026-08-21T21:41:06.916Z"
       }
     },
     "safeBudgetLeftUsd": 3.395,
@@ -49601,8 +49601,8 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
-    "mode": "peak_angle_wait",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
+    "mode": "temporal_rotation",
     "confidence": "medium",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
@@ -49614,7 +49614,7 @@
         "slot": 1,
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "loadScore": 90.6,
         "formatId": "prediction",
         "label": "Near-term Prediction",
@@ -49631,7 +49631,7 @@
         "slot": 2,
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "loadScore": 79.5,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -49648,7 +49648,7 @@
         "slot": 3,
         "hour": 15,
         "windowLabel": "15:00",
-        "hoursFromNow": 23,
+        "hoursFromNow": 22,
         "loadScore": 64.5,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -49665,7 +49665,7 @@
         "slot": 4,
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "loadScore": 53,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -49677,28 +49677,11 @@
         "samples": 3,
         "impressions": 88,
         "reason": "decision_rule has 3 sample(s) in this UTC hour with avg score 3.0."
-      },
-      {
-        "slot": 5,
-        "hour": 16,
-        "windowLabel": "16:00",
-        "hoursFromNow": 0,
-        "loadScore": 0,
-        "formatId": "playbook",
-        "label": "Playbook",
-        "angle": "builder playbook / practical next move",
-        "action": "explore",
-        "status": "probe",
-        "score": 28,
-        "avgScore": 0,
-        "samples": 0,
-        "impressions": 0,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 58.0."
       }
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -49747,7 +49730,7 @@
         "id": "prediction",
         "slot": 1,
         "windowLabel": "17:00",
-        "hoursFromNow": 1,
+        "hoursFromNow": 0,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "test",
@@ -49763,7 +49746,7 @@
         "id": "decision_rule",
         "slot": 2,
         "windowLabel": "14:00",
-        "hoursFromNow": 22,
+        "hoursFromNow": 21,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -49779,7 +49762,7 @@
         "id": "decision_rule",
         "slot": 3,
         "windowLabel": "15:00",
-        "hoursFromNow": 23,
+        "hoursFromNow": 22,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -49795,7 +49778,7 @@
         "id": "decision_rule",
         "slot": 4,
         "windowLabel": "13:00",
-        "hoursFromNow": 21,
+        "hoursFromNow": 20,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -49806,22 +49789,6 @@
         "samples": 3,
         "avgScore": 3,
         "reason": "decision_rule has 3 sample(s) in this UTC hour with avg score 3.0."
-      },
-      {
-        "id": "playbook",
-        "slot": 5,
-        "windowLabel": "16:00",
-        "hoursFromNow": 0,
-        "label": "Playbook",
-        "formatId": "playbook",
-        "action": "explore",
-        "angle": "builder playbook / practical next move",
-        "status": "probe",
-        "score": 28,
-        "loadScore": 0,
-        "samples": 0,
-        "avgScore": 0,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 58.0."
       }
     ],
     "directives": [
@@ -49833,12 +49800,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "medium",
-    "epoch": "2026-08-22T16:45",
+    "epoch": "2026-08-22T17:41",
     "sampleCount": 20,
     "baselineScore": 3.2,
     "activeRule": {
@@ -49934,7 +49901,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -49981,7 +49948,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -50391,7 +50358,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "updatedAt": "2026-08-22T16:26:01.536Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -50824,27 +50791,27 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 20,
     "minSamples": 2,
     "confidence": "medium",
-    "mode": "wait_for_peak",
+    "mode": "publish_now",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 16,
-      "label": "16:00",
-      "loadScore": 0,
-      "posts": 0,
-      "impressions": 0,
-      "avgScore": 0,
-      "status": "dark"
+      "hour": 17,
+      "label": "17:00",
+      "loadScore": 90.6,
+      "posts": 5,
+      "impressions": 335,
+      "avgScore": 4.3,
+      "status": "hot"
     },
     "nextWindow": {
       "hour": 17,
       "label": "17:00",
-      "hoursFromNow": 1,
+      "hoursFromNow": 0,
       "loadScore": 90.6,
       "posts": 5,
       "impressions": 335,
@@ -50889,7 +50856,7 @@
         "status": "warm"
       }
     ],
-    "nextAction": "Hold the standalone packet for 1.0h until 17:00 UTC; use manual route ops now.",
+    "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
     "hours": [
       {
         "hour": 0,
@@ -51110,7 +51077,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 17,
@@ -51123,7 +51090,7 @@
         "avgScore": 4.3,
         "loadScore": 90.6,
         "status": "hot",
-        "current": false
+        "current": true
       },
       {
         "hour": 18,
@@ -51207,7 +51174,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -51546,7 +51513,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 dev.to 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "controlled_test",
     "confidence": "medium",
     "baselineScore": 3.2,
@@ -51647,7 +51614,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -51765,7 +51732,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-08-22T16:45:09.183Z",
+    "generatedAt": "2026-08-22T17:41:06.903Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
