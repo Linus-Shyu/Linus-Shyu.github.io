@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T13:05:25.740Z",
+  "updatedAt": "2026-08-22T13:47:48.759Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-08-22T13:05:25.740Z",
-    "analyticsUpdatedAt": "2026-08-22T12:13:44.090Z",
+    "dashboardUpdatedAt": "2026-08-22T13:47:48.759Z",
+    "analyticsUpdatedAt": "2026-08-22T13:29:48.337Z",
     "usageUpdatedAt": "2026-08-22T12:13:44.055Z",
     "accountCheckedAt": "2026-08-21T23:41:50.861Z",
     "tweetMetricsCheckedAt": "2026-08-21T23:41:50.986Z",
     "checkedAt": "2026-08-21T23:41:50.986Z",
-    "ageMinutes": 804,
+    "ageMinutes": 846,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -39,7 +39,7 @@
           "hoursFromNow": 0
         },
         "dailyTarget": 1,
-        "packetsLast24h": 2,
+        "packetsLast24h": 1,
         "packetsLast7d": 6,
         "measuredPackets": 5,
         "traffic7d": 126,
@@ -9575,13 +9575,13 @@
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -9613,14 +9613,13 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
-      "total": 5,
+      "total": 4,
       "counts": {
-        "wait_metrics": 4,
-        "reframe": 1
+        "wait_metrics": 4
       },
       "items": [
         {
@@ -9702,32 +9701,12 @@
           "action": "wait_metrics",
           "status": "watch",
           "reason": "No metrics snapshot yet."
-        },
-        {
-          "id": "2090797046810706211",
-          "url": "https://x.com/i/web/status/2090797046810706211",
-          "text": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。 #AI #BigTech",
-          "language": "zh",
-          "postedAt": "2026-08-21T13:43:55.902Z",
-          "score": 0.2,
-          "impressions": 20,
-          "likes": 0,
-          "reposts": 0,
-          "replies": 0,
-          "template": "prediction",
-          "hashtags": [
-            "ai",
-            "bigtech"
-          ],
-          "action": "reframe",
-          "status": "warn",
-          "reason": "Got distribution but weak ACK; change the angle before repeating."
         }
       ]
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.2,
@@ -9860,7 +9839,7 @@
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "zh",
@@ -9878,7 +9857,7 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
@@ -9887,11 +9866,11 @@
         {
           "reason": "cadence",
           "count": 21,
-          "lastAt": "2026-08-21T12:18:27.473Z",
+          "lastAt": "2026-08-22T13:29:48.337Z",
           "samples": [
-            "cadence skip: Daily zh packet target reached (1/1).",
             "cadence skip: Daily en packet target reached (1/1).",
-            "cadence skip: Daily en packet target reached (1/1)."
+            "cadence skip: Daily en packet target reached (1/1).",
+            "cadence skip: Daily zh packet target reached (1/1)."
           ]
         },
         {
@@ -9908,16 +9887,16 @@
       "primaryReason": {
         "reason": "cadence",
         "count": 21,
-        "lastAt": "2026-08-21T12:18:27.473Z",
+        "lastAt": "2026-08-22T13:29:48.337Z",
         "samples": [
-          "cadence skip: Daily zh packet target reached (1/1).",
           "cadence skip: Daily en packet target reached (1/1).",
-          "cadence skip: Daily en packet target reached (1/1)."
+          "cadence skip: Daily en packet target reached (1/1).",
+          "cadence skip: Daily zh packet target reached (1/1)."
         ]
       }
     },
     "abPlan": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -9980,12 +9959,12 @@
     "dailyDigest": {
       "utcDay": "2026-08-22",
       "last24h": {
-        "posts": 5,
-        "measuredPosts": 1,
-        "impressions": 20,
+        "posts": 4,
+        "measuredPosts": 0,
+        "impressions": 0,
         "likes": 0,
         "replies": 0,
-        "avgScore": 0.2
+        "avgScore": 0
       },
       "last7d": {
         "posts": 14,
@@ -9998,26 +9977,18 @@
       "bestFormat": {
         "id": "prediction",
         "action": "watch",
-        "avgScore": 0.2,
-        "samples": 1,
-        "liftPct": -93.7
+        "avgScore": 1.6,
+        "samples": 5,
+        "liftPct": -49.3
       },
       "worstFormat": {
-        "id": "prediction",
+        "id": "decision_rule",
         "action": "watch",
-        "avgScore": 0.2,
-        "samples": 1,
-        "liftPct": -93.7
+        "avgScore": 1.5,
+        "samples": 5,
+        "liftPct": -52.8
       },
-      "formatRows24h": [
-        {
-          "id": "prediction",
-          "action": "watch",
-          "avgScore": 0.2,
-          "samples": 1,
-          "liftPct": -93.7
-        }
-      ],
+      "formatRows24h": [],
       "formatRows7d": [
         {
           "id": "prediction",
@@ -10050,14 +10021,7 @@
           "liftPct": -54.3
         }
       ],
-      "winningHooks": [
-        {
-          "formatId": "prediction",
-          "score": 0.2,
-          "impressions": 20,
-          "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。"
-        }
-      ],
+      "winningHooks": [],
       "losingHooks": [],
       "baselineScore": 3.2
     },
@@ -10167,18 +10131,18 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
     "status": "warn",
-    "score": 51.9,
+    "score": 50.2,
     "currentFollowers": 69,
     "followerDelta": 0,
     "followerCheckedAt": "2026-08-21T23:41:50.861Z",
     "nextMilestone": 100,
     "remainingToMilestone": 31,
-    "impressions24h": 20,
+    "impressions24h": 0,
     "impressions7d": 355,
     "engagements24h": 0,
     "engagements7d": 6,
@@ -10194,7 +10158,7 @@
       {
         "id": "throughput",
         "label": "L7 throughput",
-        "value": 20,
+        "value": 0,
         "status": "danger"
       },
       {
@@ -10220,8 +10184,8 @@
       {
         "id": "ingress",
         "label": "ingress throughput",
-        "value": 20,
-        "score": 19.718309859154928,
+        "value": 0,
+        "score": 0,
         "status": "danger",
         "detail": "355 L7 events over 7d"
       },
@@ -10252,12 +10216,12 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
     "source": "cached traffic kinetics + SLO + cost governor",
-    "missionScore": 74.6,
+    "missionScore": 73.9,
     "northStar": {
       "label": "active conn milestone",
       "current": 69,
@@ -10282,7 +10246,7 @@
       {
         "id": "mission_score",
         "label": "mission score",
-        "value": "74.6%",
+        "value": "73.9%",
         "status": "ok"
       },
       {
@@ -10314,7 +10278,7 @@
       {
         "id": "ingress",
         "label": "ingress load",
-        "value": "51.9%",
+        "value": "50.2%",
         "status": "warn"
       },
       {
@@ -10343,7 +10307,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -10510,7 +10474,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "scale_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -10518,7 +10482,7 @@
     "estimatedIncrementalXApiUsd": 0,
     "severity": "ok",
     "confidence": "medium",
-    "deckScore": 76.9,
+    "deckScore": 78.5,
     "activeDirective": "[P1] lead:decision_rule action:test :: Near baseline; keep in controlled rotation.",
     "primaryRule": {
       "id": "decision_rule",
@@ -10540,7 +10504,7 @@
         "status": "warn",
         "source": "learning.writeback",
         "priority": 1,
-        "score": 57,
+        "score": 65,
         "xReadOps": 0
       },
       {
@@ -10551,7 +10515,7 @@
         "status": "ok",
         "source": "temporal.matrix",
         "priority": 2,
-        "score": 98.3,
+        "score": 98.2,
         "xReadOps": 0
       },
       {
@@ -10596,7 +10560,7 @@
       "[P4] read_gate:cached_only publish_gate:open :: Safe left $3.410; recommended lane manual route burst; normal backoff only.",
       "[P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small."
     ],
-    "copyBlock": "CODEX AUTOPILOT DIRECTIVE DECK\nmode: scale_directive_deck\nscore: 76.9\nzero_extra_x_reads: true\nestimated_x_read_ops: 0\n\n- [P1] lead:decision_rule action:test :: Near baseline; keep in controlled rotation.\n- [P2] window:17:00 utc angle:prediction :: prediction has 2 sample(s) in this UTC hour with avg score 7.3.\n- [P3] route:breakout X route manual_only :: Execute first; this route has the strongest distribution leverage.\n- [P4] read_gate:cached_only publish_gate:open :: Safe left $3.410; recommended lane manual route burst; normal backoff only.\n- [P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small.\n\nGUARDRAILS:\n- Human-in-loop route ops only.\n- No automatic replies, likes, follows, scraping, or rate-limit circumvention.\n- Use cached telemetry, normal backoff, and cost gates.",
+    "copyBlock": "CODEX AUTOPILOT DIRECTIVE DECK\nmode: scale_directive_deck\nscore: 78.5\nzero_extra_x_reads: true\nestimated_x_read_ops: 0\n\n- [P1] lead:decision_rule action:test :: Near baseline; keep in controlled rotation.\n- [P2] window:17:00 utc angle:prediction :: prediction has 2 sample(s) in this UTC hour with avg score 7.3.\n- [P3] route:breakout X route manual_only :: Execute first; this route has the strongest distribution leverage.\n- [P4] read_gate:cached_only publish_gate:open :: Safe left $3.410; recommended lane manual route burst; normal backoff only.\n- [P5] suppress:none :: No under-baseline format is currently blocked; keep exploration small.\n\nGUARDRAILS:\n- Human-in-loop route ops only.\n- No automatic replies, likes, follows, scraping, or rate-limit circumvention.\n- Use cached telemetry, normal backoff, and cost gates.",
     "runbook": [
       "Open dashboard route links manually.",
       "Paste only high-fit drafts into relevant conversations.",
@@ -10604,1592 +10568,12 @@
     ]
   },
   "last24h": {
-    "posts": 5,
-    "impressions": 20,
+    "posts": 4,
+    "impressions": 0,
     "likes": 0,
     "reposts": 0,
     "replies": 0,
     "topPosts": [
-      {
-        "id": "2090797046810706211",
-        "text": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。 #AI #BigTech",
-        "url": "https://x.com/i/web/status/2090797046810706211",
-        "score": 0.2,
-        "impressions": 20,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "prediction",
-        "source": "openai.com",
-        "postedAt": "2026-08-21T13:43:55.902Z",
-        "candidateScore": 249.9,
-        "candidateReason": "预测性观点，绑定 OpenAI 和治理话题，易引发讨论和转发",
-        "angleMutationScore": 10,
-        "angleMutationDiagnostics": [
-          "mutation primary format"
-        ],
-        "hookPatternScore": 12,
-        "hookPatternDiagnostics": [
-          "hook reactor primary",
-          "compact first line"
-        ],
-        "hookPattern": {
-          "primaryId": "operator_pain",
-          "primaryLabel": "Operator Pain",
-          "patternIds": [
-            "operator_pain",
-            "prediction",
-            "entity_led"
-          ],
-          "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。"
-        },
-        "contentBanditScore": 9.9,
-        "contentBanditDiagnostics": [
-          "bandit exploit lane"
-        ],
-        "narrativeResonanceScore": 8.8,
-        "narrativeResonanceDiagnostics": [
-          "narrative rotation lane",
-          "durable account memory"
-        ],
-        "narrativePillar": {
-          "id": "platform_control",
-          "label": "Platform Control",
-          "matchScore": 1.18
-        },
-        "topicTimingScore": 26.2,
-        "topicTimingDiagnostics": [
-          "topic timing active lane",
-          "topic timing hot lane",
-          "observed timing sample"
-        ],
-        "topicTimingLane": {
-          "id": "17:platform_control:prediction",
-          "windowLabel": "17:00",
-          "hour": 17,
-          "pillarId": "platform_control",
-          "pillarLabel": "Platform Control",
-          "formatId": "prediction",
-          "formatLabel": "Near-term Prediction",
-          "score": 100,
-          "status": "hot"
-        },
-        "generationDecisionTrace": {
-          "generatedAt": "2026-08-21T13:43:55.673Z",
-          "mode": "candidate_ranker_with_hook_angle_load_narrative_and_topic_timing",
-          "zeroExtraXReads": true,
-          "estimatedXReadOps": 0,
-          "selectedRank": 1,
-          "selectedTemplateId": "prediction",
-          "selectedScore": 249.9,
-          "selectedReason": "预测性观点，绑定 OpenAI 和治理话题，易引发讨论和转发",
-          "candidateCount": 5,
-          "localFallback": {
-            "enabled": true,
-            "seedEnabled": true,
-            "used": false,
-            "selected": false,
-            "candidateCount": 2,
-            "aiCandidateCount": 4,
-            "error": null,
-            "mode": "cached_policy_local_fallback",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "language": "zh",
-          "story": {
-            "title": "Introducing AI Futures",
-            "source": "openai.com",
-            "hotScore": 5.876921308591063,
-            "learnedScore": 5.876921308591063
-          },
-          "angleMutation": {
-            "mode": "cached_angle_mutation_reactor",
-            "severity": "ok",
-            "confidence": "medium",
-            "mutationScore": 97.5,
-            "nextPromptBias": "Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.",
-            "primaryMutation": {
-              "id": "prompt_rule",
-              "label": "prompt rule",
-              "before": "baseline rotation",
-              "after": "prediction",
-              "status": "ok",
-              "score": 97.5,
-              "reason": "Above baseline 3.3 with enough samples.",
-              "promptBias": "Lead with Near-term Prediction."
-            },
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "hookPattern": {
-            "mode": "cached_hook_pattern_reactor",
-            "confidence": "medium",
-            "recommendedPattern": {
-              "id": "entity_led",
-              "label": "Entity-Led",
-              "status": "exploit",
-              "score": 3.8,
-              "avgScore": 4.13,
-              "samples": 9,
-              "primarySamples": 0,
-              "liftPct": 24.3,
-              "directive": "Name the company or product in the first line, then make a non-obvious claim.",
-              "nextHook": "OpenAI is not just shipping a model here. It is moving the workflow boundary closer to the operating system.",
-              "examples": [
-                {
-                  "text": "gemini AI model cycle will matter if teams stop configuring something manually after week one. If it only makes demos cleaner, it will stay optional.",
-                  "score": 14.1,
-                  "url": "https://x.com/i/web/status/2088313181449912613",
-                  "postedAt": "2026-08-14T17:13:56.251Z"
-                },
-                {
-                  "text": "Meta's Muse Glimmer is Apache 2.0, 30B, runs locally. Rule: if you have compliance or latency constraints, open weights with a clean license beat closed APIs every time. Test it before your next API renewal.",
-                  "score": 6.4,
-                  "url": "https://x.com/i/web/status/2087192401177707005",
-                  "postedAt": "2026-08-11T15:00:21.454Z"
-                },
-                {
-                  "text": "GitHub's raw content endpoints just hit a 50% HTTP status triage rate and broke half the internet's builds. The real shift: teams will stop treating GitHub as a default dependency source and start pinning mirror URLs.",
-                  "score": 4.8,
-                  "url": "https://x.com/i/web/status/2089359193199509760",
-                  "postedAt": "2026-08-17T14:30:24.881Z"
-                }
-              ],
-              "reason": "Measured avg 4.1 from 9 packets."
-            },
-            "avoidPatterns": [
-              {
-                "id": "cost_tradeoff",
-                "label": "Cost Tradeoff",
-                "status": "hold",
-                "score": 0.38,
-                "avgScore": 0.35,
-                "samples": 2,
-                "primarySamples": 0,
-                "liftPct": -89.3,
-                "directive": "Lead with the hidden cost, budget tradeoff, or margin transfer.",
-                "nextHook": "The hidden cost is not the subscription. It is the migration work every team has to redo before the gain shows up.",
-                "examples": [
-                  {
-                    "text": "LangChain just made a playbook for debugging agents. Next quarter, every serious agent team will treat observability as a core feature, not a packet-mortem afterthought. Start tracing today or pay the debugging tax later.",
-                    "score": 0.4,
-                    "url": "https://x.com/i/web/status/2088752716990304337",
-                    "postedAt": "2026-08-15T22:20:29.702Z"
-                  },
-                  {
-                    "text": "The next shift is boring but brutal: Google's AI will move from a feature to a default on Pixel devices. Everyone else in the Android suite will pay the distribution tax. Expect Samsung to mirror this within 18 months.",
-                    "score": 0.3,
-                    "url": "https://x.com/i/web/status/2090126053100736871",
-                    "postedAt": "2026-08-19T17:17:38.545Z"
-                  }
-                ],
-                "reason": "Measured avg 0.4 from 2 packets."
-              },
-              {
-                "id": "weak_recap",
-                "label": "Weak News Recap",
-                "status": "hold",
-                "score": 0,
-                "avgScore": 0,
-                "samples": 0,
-                "primarySamples": 0,
-                "liftPct": null,
-                "directive": "Do not recap the headline. Replace it with a take, rule, or tradeoff.",
-                "nextHook": "Skip the recap. Start with the consequence.",
-                "examples": [],
-                "reason": "Needs 2+ measured packets; use controlled exploration."
-              }
-            ],
-            "promptPatch": "First line hook pattern: Entity-Led. Name the company or product in the first line, then make a non-obvious claim. Example shape: OpenAI is not just shipping a model here. It is moving the workflow boundary closer to the operating system. Avoid: Cost Tradeoff, Weak News Recap.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "contentBandit": {
-            "mode": "cached_ucb_content_bandit",
-            "confidence": "medium",
-            "recommendedLane": {
-              "id": "prediction",
-              "label": "Near-term Prediction",
-              "status": "exploit",
-              "action": "exploit",
-              "allocationScore": 75.54,
-              "avgScore": 3.7,
-              "samples": 6,
-              "liftPct": 11.5,
-              "uncertainty": 0.654,
-              "explorationScore": 11.78,
-              "exploitScore": 40.93,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Make one concrete near-term prediction tied to the story. Include who wins, who loses, or what workflow becomes default without forcing a formulaic 6-12 month frame.",
-              "nextAction": "Exploit Near-term Prediction with Entity-Led.",
-              "reason": "Above baseline 3.3 with enough samples.",
-              "rank": 1,
-              "allocationPct": 10.3
-            },
-            "exploreLane": {
-              "id": "second_order",
-              "label": "Second Order",
-              "status": "explore",
-              "action": "explore",
-              "allocationScore": 87.75,
-              "avgScore": 3.32,
-              "samples": 0,
-              "liftPct": null,
-              "uncertainty": 1.731,
-              "explorationScore": 41.15,
-              "exploitScore": 29.87,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-              "nextAction": "Collect more samples for Second Order; keep first line concrete.",
-              "reason": "Needs 2 more sample(s) before the bot trusts it.",
-              "rank": 2,
-              "allocationPct": 12
-            },
-            "rankedFormatIds": [
-              "second_order",
-              "not_x_but_y",
-              "playbook",
-              "contrarian_cost",
-              "operator_pain",
-              "prediction",
-              "decision_rule",
-              "sharp_question"
-            ],
-            "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: medium\nprimary_format: prediction\nexploration_lane: second_order\nhook_bias: Entity-Led\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "angleLoadRouter": {
-            "mode": "cached_angle_load_router",
-            "severity": "warn",
-            "activeSlot": {
-              "windowLabel": "13:00",
-              "hour": 13,
-              "formatId": "decision_rule",
-              "label": "Decision Rule",
-              "angle": "decision rule / what to do next",
-              "score": 57.8,
-              "loadScore": 55.8,
-              "action": "test",
-              "status": "watch",
-              "reason": "decision_rule has 3 sample(s) in this UTC hour with avg score 3.0."
-            },
-            "rankedFormatIds": [
-              "decision_rule",
-              "prediction"
-            ],
-            "lanes": [
-              {
-                "id": "prediction",
-                "slot": 1,
-                "windowLabel": "17:00",
-                "hoursFromNow": 4,
-                "label": "Near-term Prediction",
-                "formatId": "prediction",
-                "action": "exploit",
-                "angle": "near-term prediction / default shift",
-                "status": "hot",
-                "score": 100,
-                "loadScore": 90.4,
-                "samples": 2,
-                "avgScore": 7.2,
-                "reason": "prediction has 2 sample(s) in this UTC hour with avg score 7.2."
-              },
-              {
-                "id": "decision_rule",
-                "slot": 2,
-                "windowLabel": "14:00",
-                "hoursFromNow": 1,
-                "label": "Decision Rule",
-                "formatId": "decision_rule",
-                "action": "test",
-                "angle": "decision rule / what to do next",
-                "status": "hot",
-                "score": 87.9,
-                "loadScore": 80.2,
-                "samples": 2,
-                "avgScore": 5.9,
-                "reason": "decision_rule has 2 sample(s) in this UTC hour with avg score 5.9."
-              },
-              {
-                "id": "decision_rule",
-                "slot": 3,
-                "windowLabel": "15:00",
-                "hoursFromNow": 2,
-                "label": "Decision Rule",
-                "formatId": "decision_rule",
-                "action": "test",
-                "angle": "decision rule / what to do next",
-                "status": "hot",
-                "score": 80.4,
-                "loadScore": 64.8,
-                "samples": 1,
-                "avgScore": 6.4,
-                "reason": "decision_rule has 1 sample(s) in this UTC hour with avg score 6.4."
-              },
-              {
-                "id": "decision_rule",
-                "slot": 4,
-                "windowLabel": "13:00",
-                "hoursFromNow": 0,
-                "label": "Decision Rule",
-                "formatId": "decision_rule",
-                "action": "test",
-                "angle": "decision rule / what to do next",
-                "status": "probe",
-                "score": 57.8,
-                "loadScore": 55.8,
-                "samples": 3,
-                "avgScore": 3,
-                "reason": "decision_rule has 3 sample(s) in this UTC hour with avg score 3.0."
-              }
-            ],
-            "activeCommand": "Route Decision Rule at 13:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "narrativeResonance": {
-            "mode": "narrative_tune",
-            "severity": "warn",
-            "accountPromise": "Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-            "resonanceScore": 52.8,
-            "primaryPillar": {
-              "id": "operator_leverage",
-              "label": "Operator Leverage",
-              "status": "expand",
-              "score": 56.8,
-              "samples": 2,
-              "avgScore": 2.3,
-              "liftPct": -29.6,
-              "sharePct": 10.5,
-              "targetSharePct": 30,
-              "impressions": 67,
-              "engagementRate": 2.99,
-              "directive": "Translate the story into how builders and operators gain or lose leverage.",
-              "lexicon": [
-                "workflow",
-                "operator",
-                "permission",
-                "rollback",
-                "tooling",
-                "incident",
-                "automation"
-              ],
-              "examples": [
-                {
-                  "id": "2089346309845397954",
-                  "url": "https://x.com/i/web/status/2089346309845397954",
-                  "text": "Runbook 不再只是文档，而是基础设施，明年，每个 AI 团队都会把 runbook 当作代码一样 review、测试、版本化，谁不这么做，谁就在为故障买单。 #DevTools #AI",
-                  "score": 2.2
-                },
-                {
-                  "id": "2086065027321086214",
-                  "url": "https://x.com/i/web/status/2086065027321086214",
-                  "text": "Databricks 把 agentic workflow 捧成下一代，但多数团队连 prompt 基线都没建，规则：先量化当前单轮 prompt 的耗时和失败率，再上 workflow，如果基线没数据，上 workflow 就是给自己造黑盒。 #AI #De",
-                  "score": 2.5
-                }
-              ],
-              "nextAction": "Expand Operator Leverage; it is below target share but broad enough for active conn growth."
-            },
-            "promptDirectives": [
-              "Translate the story into how builders and operators gain or lose leverage.",
-              "Account promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-              "Every packet must reinforce one durable memory: operator leverage, platform control, consumer behavior, risk boundary, or market timing.",
-              "Prefer reusable rules and tradeoffs over standalone news takes."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "topicTimingRouter": {
-            "mode": "topic_timing_exploit",
-            "severity": "ok",
-            "routerScore": 82,
-            "activeLane": {
-              "id": "17:platform_control:prediction",
-              "hour": 17,
-              "windowLabel": "17:00",
-              "hoursFromNow": 4,
-              "loadScore": 90.4,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "pillarStatus": "watch",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "formatStatus": "exploit",
-              "score": 100,
-              "samples": 2,
-              "avgScore": 7.2,
-              "impressions": 245,
-              "engagementRate": 0.82,
-              "observed": true,
-              "status": "hot",
-              "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-              "reason": "prediction x Platform Control has 2 sample(s) at 17:00 UTC with avg 7.2."
-            },
-            "lanes": [
-              {
-                "id": "17:platform_control:prediction",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 4,
-                "loadScore": 90.4,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "formatStatus": "exploit",
-                "score": 100,
-                "samples": 2,
-                "avgScore": 7.2,
-                "impressions": 245,
-                "engagementRate": 0.82,
-                "observed": true,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-                "reason": "prediction x Platform Control has 2 sample(s) at 17:00 UTC with avg 7.2."
-              },
-              {
-                "id": "13:operator_leverage:prediction",
-                "hour": 13,
-                "windowLabel": "13:00",
-                "hoursFromNow": 0,
-                "loadScore": 55.8,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "pillarStatus": "expand",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "formatStatus": "exploit",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 2.2,
-                "impressions": 20,
-                "engagementRate": 5,
-                "observed": true,
-                "status": "hot",
-                "directive": "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 13:00 UTC.",
-                "reason": "prediction x Operator Leverage has 1 sample(s) at 13:00 UTC with avg 2.2."
-              },
-              {
-                "id": "14:platform_control:prediction",
-                "hour": 14,
-                "windowLabel": "14:00",
-                "hoursFromNow": 1,
-                "loadScore": 80.2,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "formatStatus": "exploit",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 4.8,
-                "impressions": 85,
-                "engagementRate": 2.35,
-                "observed": true,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 14:00 UTC.",
-                "reason": "prediction x Platform Control has 1 sample(s) at 14:00 UTC with avg 4.9."
-              },
-              {
-                "id": "17:operator_leverage:prediction",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 4,
-                "loadScore": 90.4,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "pillarStatus": "expand",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "formatStatus": "exploit",
-                "score": 98.1,
-                "samples": 0,
-                "avgScore": 2.3,
-                "impressions": 0,
-                "engagementRate": 2.99,
-                "observed": false,
-                "status": "hot",
-                "directive": "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 17:00 UTC.",
-                "reason": "Seed Operator Leverage via Near-term Prediction in a learned 17:00 UTC load window."
-              },
-              {
-                "id": "17:operator_leverage:second_order",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "hoursFromNow": 4,
-                "loadScore": 90.4,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "pillarStatus": "expand",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "formatStatus": "explore",
-                "score": 96.8,
-                "samples": 0,
-                "avgScore": 2.3,
-                "impressions": 0,
-                "engagementRate": 2.99,
-                "observed": false,
-                "status": "hot",
-                "directive": "Translate the story into how builders and operators gain or lose leverage. Use Second Order around 17:00 UTC.",
-                "reason": "Seed Operator Leverage via Second Order in a learned 17:00 UTC load window."
-              }
-            ],
-            "promptDirectives": [
-              "Topic timing: 17:00 UTC -> Platform Control using Near-term Prediction.",
-              "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-              "If dispatching outside the selected UTC window, keep the same pillar but tighten the hook.",
-              "0 extra X reads; no live trend scraping required for this timing route."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "growthOpportunityScorer": {
-            "mode": "cached_opportunity_fusion",
-            "severity": "ok",
-            "confidence": "medium",
-            "opportunityScore": 100,
-            "activeOpportunity": {
-              "id": "17:platform_control:prediction",
-              "label": "17:00 UTC / Platform Control / Near-term Prediction",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "hour": 17,
-              "windowLabel": "17:00",
-              "action": "exploit",
-              "status": "hot",
-              "score": 100,
-              "confidence": "low",
-              "sources": [
-                "topic_timing"
-              ],
-              "samples": 2,
-              "evidence": [
-                "prediction x Platform Control has 2 sample(s) at 17:00 UTC with avg 7.2."
-              ],
-              "promptDirectives": [
-                "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC."
-              ]
-            },
-            "lanes": [
-              {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 2,
-                "evidence": [
-                  "prediction x Platform Control has 2 sample(s) at 17:00 UTC with avg 7.2."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC."
-                ]
-              },
-              {
-                "id": "13:operator_leverage:prediction",
-                "label": "13:00 UTC / Operator Leverage / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "hour": 13,
-                "windowLabel": "13:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 97.9,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "prediction x Operator Leverage has 1 sample(s) at 13:00 UTC with avg 2.2."
-                ],
-                "promptDirectives": [
-                  "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 13:00 UTC."
-                ]
-              },
-              {
-                "id": "14:platform_control:prediction",
-                "label": "14:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 14,
-                "windowLabel": "14:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 97.9,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "prediction x Platform Control has 1 sample(s) at 14:00 UTC with avg 4.9."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 14:00 UTC."
-                ]
-              },
-              {
-                "id": "17:operator_leverage:prediction",
-                "label": "17:00 UTC / Operator Leverage / Near-term Prediction",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 95.2,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Operator Leverage via Near-term Prediction in a learned 17:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 17:00 UTC."
-                ]
-              },
-              {
-                "id": "17:operator_leverage:second_order",
-                "label": "17:00 UTC / Operator Leverage / Second Order",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "hour": 17,
-                "windowLabel": "17:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 94.1,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Operator Leverage via Second Order in a learned 17:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Translate the story into how builders and operators gain or lose leverage. Use Second Order around 17:00 UTC."
-                ]
-              }
-            ],
-            "promptDirectives": [
-              "Primary format: prediction.",
-              "Primary narrative: Platform Control.",
-              "Preferred UTC window: 17:00.",
-              "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC.",
-              "No live X search/read calls are required for this opportunity score."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "cachedGenerationPolicy": {
-            "mode": "cached_generation_policy",
-            "confidence": "medium",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0,
-            "estimatedIncrementalXApiUsd": 0,
-            "primaryFormatId": "prediction",
-            "primaryFormatLabel": "Near-term Prediction",
-            "exploreFormatId": "second_order",
-            "rankedFormatIds": [
-              "prediction",
-              "decision_rule",
-              "second_order",
-              "not_x_but_y",
-              "playbook",
-              "contrarian_cost"
-            ],
-            "avoidFormatIds": [],
-            "hookPattern": {
-              "id": "entity_led",
-              "label": "Entity-Led",
-              "directive": "Name the company or product in the first line, then make a non-obvious claim.",
-              "nextHook": "OpenAI is not just shipping a model here. It is moving the workflow boundary closer to the operating system."
-            },
-            "narrativePillar": {
-              "id": "operator_leverage",
-              "label": "Operator Leverage",
-              "directive": "Translate the story into how builders and operators gain or lose leverage."
-            },
-            "opportunity": {
-              "id": "17:platform_control:prediction",
-              "label": "17:00 UTC / Platform Control / Near-term Prediction",
-              "score": 100,
-              "sources": [
-                "topic_timing"
-              ],
-              "promptDirectives": [
-                "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC."
-              ]
-            },
-            "directives": [
-              "Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.",
-              "First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.",
-              "Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.",
-              "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..",
-              "Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.",
-              "Controlled exploration: second_order is allowed only if it is a better fit for this exact story.",
-              "Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.",
-              "Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.",
-              "Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.",
-              "Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype."
-            ],
-            "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, decision_rule, second_order, not_x_but_y, playbook, contrarian_cost\nselected_story: Introducing AI Futures\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: second_order is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=standalone packet generation lane.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Bias candidate formats toward: prediction.\n- Source bias: turn openai.com into an operator rule, cost, default shift, or distribution consequence."
-          },
-          "growthStrategy": {
-            "mode": "self_evolving_cached_strategy",
-            "status": "declining",
-            "confidence": "low",
-            "promotedFormats": [
-              {
-                "id": "prediction",
-                "action": "promote",
-                "avgScore": 3.7,
-                "samples": 6,
-                "liftPct": 10.9
-              }
-            ],
-            "holdFormats": [],
-            "preferredHashtags": [
-              "Hardware",
-              "Cloud",
-              "DevTools",
-              "AI",
-              "BigTech"
-            ],
-            "nextAction": "Tighten hook specificity and hold repeated low-reward formats for the next dispatching cycle.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "selectedCandidate": {
-            "rank": 1,
-            "selected": true,
-            "templateId": "prediction",
-            "score": 249.9,
-            "angleMutationScore": 10,
-            "hookPatternScore": 12,
-            "contentBanditScore": 9.9,
-            "narrativeResonanceScore": 8.8,
-            "narrativePillar": {
-              "id": "platform_control",
-              "label": "Platform Control",
-              "matchScore": 1.18
-            },
-            "topicTimingScore": 26.2,
-            "topicTimingLane": {
-              "id": "17:platform_control:prediction",
-              "windowLabel": "17:00",
-              "hour": 17,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "formatId": "prediction",
-              "formatLabel": "Near-term Prediction",
-              "score": 100,
-              "status": "hot"
-            },
-            "growthOpportunityScore": 22.7,
-            "growthOpportunityLane": {
-              "id": "17:platform_control:prediction",
-              "label": "17:00 UTC / Platform Control / Near-term Prediction",
-              "formatId": "prediction",
-              "pillarId": "platform_control",
-              "score": 100,
-              "status": "hot",
-              "sources": [
-                "topic_timing"
-              ]
-            },
-            "cachedGenerationPolicyScore": 17,
-            "cachedGenerationPolicyHits": {
-              "directive": [],
-              "narrative": [],
-              "opportunity": []
-            },
-            "hookPattern": {
-              "primaryId": "operator_pain",
-              "primaryLabel": "Operator Pain",
-              "patternIds": [
-                "operator_pain",
-                "prediction",
-                "entity_led"
-              ],
-              "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。"
-            },
-            "reason": "预测性观点，绑定 OpenAI 和治理话题，易引发讨论和转发",
-            "diagnostics": [
-              "tight length",
-              "reframe hook",
-              "time-bound prediction",
-              "practical takeaway",
-              "template lift 11%",
-              "autopilot exploit",
-              "angle scheduler format",
-              "mutation primary format",
-              "hook reactor primary",
-              "compact first line",
-              "bandit exploit lane",
-              "angle load hot lane"
-            ],
-            "angleMutationDiagnostics": [
-              "mutation primary format"
-            ],
-            "hookPatternDiagnostics": [
-              "hook reactor primary",
-              "compact first line"
-            ],
-            "contentBanditDiagnostics": [
-              "bandit exploit lane"
-            ],
-            "angleLoadRouterScore": 11.6,
-            "angleLoadRouterDiagnostics": [
-              "angle load hot lane"
-            ],
-            "narrativeResonanceDiagnostics": [
-              "narrative rotation lane",
-              "durable account memory"
-            ],
-            "topicTimingDiagnostics": [
-              "topic timing active lane",
-              "topic timing hot lane",
-              "observed timing sample"
-            ],
-            "growthOpportunityDiagnostics": [
-              "opportunity active lane",
-              "hot opportunity lane"
-            ],
-            "cachedGenerationPolicyDiagnostics": [
-              "policy primary format",
-              "policy hook pattern"
-            ],
-            "selfEvolvingStrategyScore": 11,
-            "selfEvolvingStrategyDiagnostics": [
-              "self-evolving promote",
-              "self-evolving tag match"
-            ],
-            "qualityIssues": [
-              "headline_frame_risk",
-              "strategy_headline_similarity_risk"
-            ],
-            "viralHookGate": {
-              "allow": true,
-              "score": 22,
-              "reasons": [
-                "repostable hook frame",
-                "concrete entity",
-                "operator action"
-              ],
-              "warnings": [
-                "long_first_line"
-              ],
-              "entityHits": [
-                "openai",
-                "futures"
-              ],
-              "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。",
-              "mode": "local_zero_api_viral_hook_gate",
-              "zeroExtraXReads": true,
-              "estimatedXReadOps": 0
-            },
-            "aiQualityVerdict": {
-              "allow": true,
-              "reason": "AI quality gate disabled",
-              "risk": null
-            },
-            "generationSource": "openai",
-            "angle": "AI 治理叙事成为默认",
-            "characterCount": 110,
-            "text": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。\n#AI #BigTech"
-          },
-          "candidates": [
-            {
-              "rank": 1,
-              "selected": true,
-              "templateId": "prediction",
-              "score": 249.9,
-              "angleMutationScore": 10,
-              "hookPatternScore": 12,
-              "contentBanditScore": 9.9,
-              "narrativeResonanceScore": 8.8,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.18
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:prediction",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 22.7,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 17,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。"
-              },
-              "reason": "预测性观点，绑定 OpenAI 和治理话题，易引发讨论和转发",
-              "diagnostics": [
-                "tight length",
-                "reframe hook",
-                "time-bound prediction",
-                "practical takeaway",
-                "template lift 11%",
-                "autopilot exploit",
-                "angle scheduler format",
-                "mutation primary format",
-                "hook reactor primary",
-                "compact first line",
-                "bandit exploit lane",
-                "angle load hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploit lane"
-              ],
-              "angleLoadRouterScore": 11.6,
-              "angleLoadRouterDiagnostics": [
-                "angle load hot lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity active lane",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "policy hook pattern"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "headline_frame_risk",
-                "strategy_headline_similarity_risk"
-              ],
-              "viralHookGate": {
-                "allow": true,
-                "score": 22,
-                "reasons": [
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [
-                  "long_first_line"
-                ],
-                "entityHits": [
-                  "openai",
-                  "futures"
-                ],
-                "firstLine": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": {
-                "allow": true,
-                "reason": "AI quality gate disabled",
-                "risk": null
-              },
-              "generationSource": "openai",
-              "angle": "AI 治理叙事成为默认",
-              "characterCount": 110,
-              "text": "OpenAI 的 AI Futures 不是博客，是 OpenAI 在提前布道 AI 治理的默认叙事，未来 12 个月，每个 AI 公司都会被拉进这场对话，不表态的团队在客户和监管面前都会失分。\n#AI #BigTech"
-            },
-            {
-              "rank": 2,
-              "selected": false,
-              "templateId": "prediction",
-              "score": 230.8,
-              "angleMutationScore": 10,
-              "hookPatternScore": 12,
-              "contentBanditScore": 9.9,
-              "narrativeResonanceScore": 10.4,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "17:platform_control:prediction",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "prediction",
-                "formatLabel": "Near-term Prediction",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 22.7,
-              "growthOpportunityLane": {
-                "id": "17:platform_control:prediction",
-                "label": "17:00 UTC / Platform Control / Near-term Prediction",
-                "formatId": "prediction",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 17,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "entity"
-                ],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "decision_rule",
-                "primaryLabel": "Decision Rule",
-                "patternIds": [
-                  "decision_rule",
-                  "operator_pain",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "openai AI model cycle 如果真的重要，第一周就会改变默认流程；如果只让演示更好看，很快会被团队丢回待办清单。"
-              },
-              "reason": "local cached policy candidate for OpenAI fallback and ranker calibration",
-              "diagnostics": [
-                "tight length",
-                "time-bound prediction",
-                "practical takeaway",
-                "too similar to history",
-                "template lift 11%",
-                "autopilot exploit",
-                "angle scheduler format",
-                "mutation primary format",
-                "hook reactor primary",
-                "compact first line",
-                "bandit exploit lane",
-                "angle load hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploit lane"
-              ],
-              "angleLoadRouterScore": 11.6,
-              "angleLoadRouterDiagnostics": [
-                "angle load hot lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "account lexicon",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity active lane",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "policy hook pattern"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": true,
-                "score": 53,
-                "reasons": [
-                  "compact standalone hook",
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action",
-                  "not headline recap"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "openai"
-                ],
-                "firstLine": "openai AI model cycle 如果真的重要，第一周就会改变默认流程；如果只让演示更好看，很快会被团队丢回待办清单。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "local_cached_policy",
-              "angle": "Entity-Led",
-              "characterCount": 77,
-              "text": "openai AI model cycle 如果真的重要，第一周就会改变默认流程；如果只让演示更好看，很快会被团队丢回待办清单。\n#AI #BigTech"
-            },
-            {
-              "rank": 3,
-              "selected": false,
-              "templateId": "not_x_but_y",
-              "score": 159.1,
-              "angleMutationScore": -3,
-              "hookPatternScore": 12,
-              "contentBanditScore": 6,
-              "narrativeResonanceScore": 3.8,
-              "narrativePillar": {
-                "id": "tech_signal",
-                "label": "Tech Signal",
-                "matchScore": 0.5
-              },
-              "topicTimingScore": 8,
-              "topicTimingLane": {
-                "id": "17:operator_leverage:not_x_but_y",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "formatId": "not_x_but_y",
-                "formatLabel": "Not X But Y",
-                "score": 96.7,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:operator_leverage:not_x_but_y",
-                "label": "17:00 UTC / Operator Leverage / Not X But Y",
-                "formatId": "not_x_but_y",
-                "pillarId": "operator_leverage",
-                "score": 94.1,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 11,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "OpenAI 的 AI Futures 不是科普，是 OpenAI 在重定义 AI 时代的权力叙事，谁掌握这个叙事，谁就掌握未来 AI 产品的合法性，现在不参与定义的团队，只能接受别人的框架。"
-              },
-              "reason": "反常识视角，揭示叙事主导权，引发深刻讨论",
-              "diagnostics": [
-                "tight length",
-                "reframe hook",
-                "time-bound prediction",
-                "practical takeaway",
-                "autopilot explore",
-                "angle scheduler format",
-                "missed mutation format",
-                "hook reactor primary",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "missed timing lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "missed timing lane",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "policy hook pattern"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": false,
-                "score": 4,
-                "reasons": [
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [
-                  "long_first_line"
-                ],
-                "entityHits": [
-                  "openai",
-                  "futures"
-                ],
-                "firstLine": "OpenAI 的 AI Futures 不是科普，是 OpenAI 在重定义 AI 时代的权力叙事，谁掌握这个叙事，谁就掌握未来 AI 产品的合法性，现在不参与定义的团队，只能接受别人的框架。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "叙事控制权之争",
-              "characterCount": 109,
-              "text": "OpenAI 的 AI Futures 不是科普，是 OpenAI 在重定义 AI 时代的权力叙事，谁掌握这个叙事，谁就掌握未来 AI 产品的合法性，现在不参与定义的团队，只能接受别人的框架。\n#AI #BigTech"
-            },
-            {
-              "rank": 4,
-              "selected": false,
-              "templateId": "playbook",
-              "score": 143.1,
-              "angleMutationScore": -3,
-              "hookPatternScore": 12,
-              "contentBanditScore": 6,
-              "narrativeResonanceScore": 3.8,
-              "narrativePillar": {
-                "id": "tech_signal",
-                "label": "Tech Signal",
-                "matchScore": 0.5
-              },
-              "topicTimingScore": 8,
-              "topicTimingLane": {
-                "id": "17:operator_leverage:playbook",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "formatId": "playbook",
-                "formatLabel": "Playbook",
-                "score": 96.7,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:operator_leverage:playbook",
-                "label": "17:00 UTC / Operator Leverage / Playbook",
-                "formatId": "playbook",
-                "pillarId": "operator_leverage",
-                "score": 94.1,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 11,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "contrast_reframe",
-                "primaryLabel": "Contrast Reframe",
-                "patternIds": [
-                  "contrast_reframe",
-                  "operator_pain",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "OpenAI 推出 AI Futures 的时候，真正的信号是：未来 AI 产品必须内置权力分配、经济影响和自由的讨论，否则就是设计缺陷，现在做 AI 产品的团队，应该趁早把这种对话写进路线图。"
-              },
-              "reason": "可操作建议，给 AI 团队实际指导，易被收藏和转发",
-              "diagnostics": [
-                "tight length",
-                "time-bound prediction",
-                "practical takeaway",
-                "usable structure",
-                "missed mutation format",
-                "hook reactor primary",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "missed timing lane",
-                "topic timing hot lane",
-                "hot opportunity lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane"
-              ],
-              "topicTimingDiagnostics": [
-                "missed timing lane",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "policy hook pattern"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": false,
-                "score": -6,
-                "reasons": [
-                  "concrete entity"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "missing_operator_action"
-                ],
-                "entityHits": [
-                  "openai",
-                  "futures"
-                ],
-                "firstLine": "OpenAI 推出 AI Futures 的时候，真正的信号是：未来 AI 产品必须内置权力分配、经济影响和自由的讨论，否则就是设计缺陷，现在做 AI 产品的团队，应该趁早把这种对话写进路线图。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "把治理讨论引入产品路线图",
-              "characterCount": 110,
-              "text": "OpenAI 推出 AI Futures 的时候，真正的信号是：未来 AI 产品必须内置权力分配、经济影响和自由的讨论，否则就是设计缺陷，现在做 AI 产品的团队，应该趁早把这种对话写进路线图。\n#AI #BigTech"
-            },
-            {
-              "rank": 5,
-              "selected": false,
-              "templateId": "second_order",
-              "score": 141.3,
-              "angleMutationScore": -3,
-              "hookPatternScore": 12,
-              "contentBanditScore": 6,
-              "narrativeResonanceScore": 10,
-              "narrativePillar": {
-                "id": "consumer_behavior",
-                "label": "Consumer Behavior",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 8,
-              "topicTimingLane": {
-                "id": "17:operator_leverage:second_order",
-                "windowLabel": "17:00",
-                "hour": 17,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "formatId": "second_order",
-                "formatLabel": "Second Order",
-                "score": 96.8,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 10.3,
-              "growthOpportunityLane": {
-                "id": "17:operator_leverage:second_order",
-                "label": "17:00 UTC / Operator Leverage / Second Order",
-                "formatId": "second_order",
-                "pillarId": "operator_leverage",
-                "score": 94.1,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 11,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "contrast_reframe",
-                "primaryLabel": "Contrast Reframe",
-                "patternIds": [
-                  "contrast_reframe",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "OpenAI 发布 AI Futures 后，真正的胜负手不在模型能力，而在谁能定义 AI 对个人自由的影响，未来三年，AI 公司必须证明自己不是新型控制工具，否则将失去用户信任和政策空间。"
-              },
-              "reason": "揭示长远影响，强调信任和政策风险，引发深度思考",
-              "diagnostics": [
-                "tight length",
-                "time-bound prediction",
-                "angle scheduler format",
-                "missed mutation format",
-                "hook reactor primary",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative expansion lane",
-                "durable account memory",
-                "missed timing lane",
-                "topic timing hot lane",
-                "hot opportunity lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "hook reactor primary",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative expansion lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "missed timing lane",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "policy hook pattern"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": false,
-                "score": -6,
-                "reasons": [
-                  "concrete entity"
-                ],
-                "warnings": [
-                  "long_first_line",
-                  "missing_operator_action"
-                ],
-                "entityHits": [
-                  "openai",
-                  "futures"
-                ],
-                "firstLine": "OpenAI 发布 AI Futures 后，真正的胜负手不在模型能力，而在谁能定义 AI 对个人自由的影响，未来三年，AI 公司必须证明自己不是新型控制工具，否则将失去用户信任和政策空间。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "AI 公司必须证明非控制工具",
-              "characterCount": 108,
-              "text": "OpenAI 发布 AI Futures 后，真正的胜负手不在模型能力，而在谁能定义 AI 对个人自由的影响，未来三年，AI 公司必须证明自己不是新型控制工具，否则将失去用户信任和政策空间。\n#AI #BigTech"
-            }
-          ],
-          "gates": {
-            "qualityGateEnabled": true,
-            "viralHookGateEnabled": true,
-            "aiQualityGateEnabled": false,
-            "strictQualityGate": false
-          }
-        }
-      },
       {
         "id": "2090841741926506843",
         "text": "Hard lesson on Apple consumer app shift: the demo was free, the rollback was not. Next time, measure one real workflow before it becomes default. #DevTools #BigTech",
@@ -41204,102 +39588,102 @@
       "source": "tweet_metrics",
       "aggregate": "sum",
       "pointCount": 12,
-      "total": 20,
+      "total": 0,
       "current": 0,
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-08-21T13:05:25.740Z",
-          "endsAt": "2026-08-21T15:05:25.740Z",
-          "label": "13:05",
-          "value": 20,
-          "posts": 1
+          "startsAt": "2026-08-21T13:47:48.759Z",
+          "endsAt": "2026-08-21T15:47:48.759Z",
+          "label": "13:47",
+          "value": 0,
+          "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-08-21T15:05:25.740Z",
-          "endsAt": "2026-08-21T17:05:25.740Z",
-          "label": "15:05",
+          "startsAt": "2026-08-21T15:47:48.759Z",
+          "endsAt": "2026-08-21T17:47:48.759Z",
+          "label": "15:47",
           "value": 0,
           "posts": 1
         },
         {
           "index": 2,
-          "startsAt": "2026-08-21T17:05:25.740Z",
-          "endsAt": "2026-08-21T19:05:25.740Z",
-          "label": "17:05",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 3,
-          "startsAt": "2026-08-21T19:05:25.740Z",
-          "endsAt": "2026-08-21T21:05:25.740Z",
-          "label": "19:05",
+          "startsAt": "2026-08-21T17:47:48.759Z",
+          "endsAt": "2026-08-21T19:47:48.759Z",
+          "label": "17:47",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 3,
+          "startsAt": "2026-08-21T19:47:48.759Z",
+          "endsAt": "2026-08-21T21:47:48.759Z",
+          "label": "19:47",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 4,
-          "startsAt": "2026-08-21T21:05:25.740Z",
-          "endsAt": "2026-08-21T23:05:25.740Z",
-          "label": "21:05",
+          "startsAt": "2026-08-21T21:47:48.759Z",
+          "endsAt": "2026-08-21T23:47:48.759Z",
+          "label": "21:47",
           "value": 0,
           "posts": 0
         },
         {
           "index": 5,
-          "startsAt": "2026-08-21T23:05:25.740Z",
-          "endsAt": "2026-08-22T01:05:25.740Z",
-          "label": "23:05",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 6,
-          "startsAt": "2026-08-22T01:05:25.740Z",
-          "endsAt": "2026-08-22T03:05:25.740Z",
-          "label": "01:05",
+          "startsAt": "2026-08-21T23:47:48.759Z",
+          "endsAt": "2026-08-22T01:47:48.759Z",
+          "label": "23:47",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 6,
+          "startsAt": "2026-08-22T01:47:48.759Z",
+          "endsAt": "2026-08-22T03:47:48.759Z",
+          "label": "01:47",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 7,
-          "startsAt": "2026-08-22T03:05:25.740Z",
-          "endsAt": "2026-08-22T05:05:25.740Z",
-          "label": "03:05",
+          "startsAt": "2026-08-22T03:47:48.759Z",
+          "endsAt": "2026-08-22T05:47:48.759Z",
+          "label": "03:47",
           "value": 0,
           "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-08-22T05:05:25.740Z",
-          "endsAt": "2026-08-22T07:05:25.740Z",
-          "label": "05:05",
+          "startsAt": "2026-08-22T05:47:48.759Z",
+          "endsAt": "2026-08-22T07:47:48.759Z",
+          "label": "05:47",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-08-22T07:05:25.740Z",
-          "endsAt": "2026-08-22T09:05:25.740Z",
-          "label": "07:05",
+          "startsAt": "2026-08-22T07:47:48.759Z",
+          "endsAt": "2026-08-22T09:47:48.759Z",
+          "label": "07:47",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-08-22T09:05:25.740Z",
-          "endsAt": "2026-08-22T11:05:25.740Z",
-          "label": "09:05",
+          "startsAt": "2026-08-22T09:47:48.759Z",
+          "endsAt": "2026-08-22T11:47:48.759Z",
+          "label": "09:47",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-08-22T11:05:25.740Z",
-          "endsAt": "2026-08-22T13:05:25.740Z",
-          "label": "11:05",
+          "startsAt": "2026-08-22T11:47:48.759Z",
+          "endsAt": "2026-08-22T13:47:48.759Z",
+          "label": "11:47",
           "value": 0,
           "posts": 1
         }
@@ -41673,7 +40057,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -41736,7 +40120,7 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "publish_experiment",
     "publishAllowed": true,
     "willBlockPublish": false,
@@ -41747,20 +40131,20 @@
     "nextAction": "Proceed with the next packet candidate under the current budget guard.",
     "languageCode": null,
     "dailyPostTarget": 4,
-    "postsLast24h": 5,
+    "postsLast24h": 4,
     "postsUtcDay": 2,
-    "allLanguagePostsLast24h": 5,
+    "allLanguagePostsLast24h": 4,
     "allLanguagePostsUtcDay": 2,
     "safeTextPostsLeft": 227,
     "safeRemainingUsd": 3.41,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 0.86,
-    "telemetryAgeMinutes": 804,
+    "hoursSinceLastPost": 1.57,
+    "telemetryAgeMinutes": 846,
     "latestTelemetryAt": "2026-08-21T23:41:50.986Z",
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 20,
@@ -42248,7 +40632,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "0.9h since packet",
+        "value": "1.6h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -42262,7 +40646,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "804 min old",
+        "value": "846 min old",
         "detail": "Latest checked telemetry: 2026-08-21T23:41:50.986Z."
       },
       {
@@ -42289,7 +40673,7 @@
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "scale_experiment",
     "severity": "ok",
     "pressureScore": 96.1,
@@ -42304,7 +40688,7 @@
       "drafts": 5,
       "routes": 3,
       "experimentSlots": 3,
-      "postsLast24h": 5
+      "postsLast24h": 4
     },
     "topRoute": {
       "label": "breakout X route",
@@ -42352,7 +40736,7 @@
       {
         "id": "learning",
         "label": "learning load",
-        "value": "20",
+        "value": "0",
         "status": "ok",
         "detail": "355 L7 events in 7d feedback window"
       }
@@ -42365,7 +40749,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 75.8,
@@ -42464,7 +40848,7 @@
         "gate": "sampled",
         "status": "ok",
         "cache": {
-          "generatedAt": "2026-08-22T13:05:25.740Z",
+          "generatedAt": "2026-08-22T13:47:48.759Z",
           "enabled": true,
           "mode": "refresh_due",
           "status": "warn",
@@ -42472,7 +40856,7 @@
           "readGate": "sampled",
           "latestCheckedAt": "2026-08-21T23:41:50.861Z",
           "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-          "ageHours": 13.39,
+          "ageHours": 14.1,
           "maxAgeHours": 12,
           "fresh": false,
           "due": true,
@@ -42644,7 +41028,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-08-22T13:05:25.740Z",
+      "generatedAt": "2026-08-22T13:47:48.759Z",
       "enabled": true,
       "mode": "refresh_due",
       "status": "warn",
@@ -42652,7 +41036,7 @@
       "readGate": "sampled",
       "latestCheckedAt": "2026-08-21T23:41:50.861Z",
       "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-      "ageHours": 13.39,
+      "ageHours": 14.1,
       "maxAgeHours": 12,
       "fresh": false,
       "due": true,
@@ -42686,7 +41070,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.160, projected month-end $2.630 / $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "enabled": true,
     "mode": "refresh_due",
     "status": "warn",
@@ -42694,7 +41078,7 @@
     "readGate": "sampled",
     "latestCheckedAt": "2026-08-21T23:41:50.861Z",
     "nextRefreshAt": "2026-08-22T11:41:50.861Z",
-    "ageHours": 13.39,
+    "ageHours": 14.1,
     "maxAgeHours": 12,
     "fresh": false,
     "due": true,
@@ -42704,7 +41088,7 @@
     "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -42917,7 +41301,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -43036,7 +41420,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "scale_experiment",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43049,7 +41433,7 @@
     "expectedLiftPct": 189.6,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T13:05:25.740Z\nMode: scale_experiment\nCost guard: 0 extra X search/read API ops · safe budget $3.41\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-22T13:47:48.759Z\nMode: scale_experiment\nCost guard: 0 extra X search/read API ops · safe budget $3.41\nTarget: 3 useful manual route ops · expected lift +189.6%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -43185,7 +41569,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43258,10 +41642,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T13:05:25.740Z\nMode: publish_experiment\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-22T13:47:48.759Z\nMode: publish_experiment\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +258.8%\n2. OPEN: breakout X route - https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +258.8%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n   SLA: 30m · target 1 · lift +51.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43362,10 +41746,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T13:05:25.740Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-22T13:47:48.759Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -43528,12 +41912,12 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T13:05:25.740Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-22T13:47:48.759Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_l7_surge_sentinel",
-    "severity": "ok",
+    "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -43541,11 +41925,11 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "sentinelScore": 71.3,
-    "l7Events24h": 20,
+    "sentinelScore": 66.6,
+    "l7Events24h": 0,
     "l7Events7d": 355,
     "dailyBaseline": 50.7,
-    "surgeRatio": 0.39,
+    "surgeRatio": 0,
     "ackRate24h": 0,
     "ackRate7d": 1.69,
     "routeCoveragePct": 100,
@@ -43560,7 +41944,7 @@
     "primaryRouteLabel": "breakout X route",
     "primaryOpenUrl": "https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "primaryPastePayload": "On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "nextAction": "Exploit the active load window with one manual route packet; keep live X reads sealed.",
+    "nextAction": "Repair route coverage and use cached swarm output before buying any read operation.",
     "cells": [
       {
         "id": "x_reads",
@@ -43571,13 +41955,13 @@
       {
         "id": "l7_24h",
         "label": "L7_24H",
-        "value": "20",
+        "value": "0",
         "status": "danger"
       },
       {
         "id": "surge_ratio",
         "label": "SURGE_RATIO",
-        "value": "0.39x",
+        "value": "0.00x",
         "status": "danger"
       },
       {
@@ -43597,10 +41981,10 @@
       {
         "id": "l7_load",
         "label": "L7_LOAD",
-        "value": "20",
-        "score": 20.5,
+        "value": "0",
+        "score": 0,
         "status": "danger",
-        "detail": "50.7 baseline/day · 0.39x",
+        "detail": "50.7 baseline/day · 0.00x",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
@@ -43646,13 +42030,12 @@
       }
     ],
     "trace": [
-      20,
       0,
       0,
       0,
       0
     ],
-    "traceMax": 20,
+    "traceMax": 1,
     "guardrails": [
       "Cached telemetry only; 0 X search/read API operations.",
       "Manual browser execution only; no automated outbound actions.",
@@ -43660,7 +42043,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -43670,7 +42053,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "leakScore": 34.5,
+    "leakScore": 39.3,
     "primaryLeakId": "ack_layer",
     "primaryLeak": {
       "id": "ack_layer",
@@ -43685,11 +42068,11 @@
       {
         "id": "l7_input",
         "label": "L7_INPUT",
-        "value": "20",
-        "score": 20.5,
-        "status": "danger",
-        "leakPct": 79.5,
-        "detail": "0.39x cached load ratio",
+        "value": "0",
+        "score": 66.6,
+        "status": "ok",
+        "leakPct": 33.4,
+        "detail": "0.00x cached load ratio",
         "nextAction": "Route one cached high-signal packet inside an active technical exchange before generating more standalone output.",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
@@ -43806,7 +42189,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -43816,7 +42199,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "browser_only",
     "manualOnly": true,
-    "commandScore": 82.5,
+    "commandScore": 82.8,
     "routeLabel": "breakout X route",
     "openUrl": "https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "pastePayload": "On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
@@ -43905,10 +42288,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T13:05:25.740Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.5\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-22T13:47:48.759Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 82.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -43918,7 +42301,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "identityScore": 69,
+    "identityScore": 69.6,
     "accountPromise": "Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
     "primaryPillarId": "operator_leverage",
     "primaryPillarLabel": "Operator Leverage",
@@ -43969,7 +42352,7 @@
         "id": "route_proof",
         "label": "ROUTE_PROOF",
         "value": "armed",
-        "score": 87.6,
+        "score": 87.8,
         "status": "ok",
         "detail": "breakout X route command dock lane",
         "nextAction": "Open breakout X route, paste one useful payload, then stop at the manual gate.",
@@ -43981,7 +42364,7 @@
         "id": "leak_repair",
         "label": "LEAK_REPAIR",
         "value": "ACK_LAYER",
-        "score": 16.3,
+        "score": 20.2,
         "status": "danger",
         "detail": "lowest-scoring cached loop partition",
         "nextAction": "Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save.",
@@ -44012,7 +42395,7 @@
       {
         "id": "identity_score",
         "label": "IDENTITY_SCORE",
-        "value": "69.1",
+        "value": "69.6",
         "status": "danger"
       },
       {
@@ -44051,10 +42434,10 @@
       "Manual browser execution only; no automated outbound actions.",
       "Normal cooldown only; no rate-limit shortcuts."
     ],
-    "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 69.1\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
+    "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 69.6\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "warn",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -44064,8 +42447,8 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "traceScore": 90.2,
-    "totalLatencyMs": 13031,
+    "traceScore": 90.3,
+    "totalLatencyMs": 13017,
     "savedReadOps": 5,
     "activeSource": "hnrss.org",
     "bottleneckStageId": "learn_writeback",
@@ -44091,7 +42474,7 @@
         "operatorMode": "cached_only",
         "readGate": "cached_only",
         "startPct": 0,
-        "widthPct": 9.58
+        "widthPct": 9.59
       },
       {
         "id": "swarm_rank",
@@ -44111,50 +42494,50 @@
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 9.58,
-        "widthPct": 35.3
+        "startPct": 9.59,
+        "widthPct": 35.34
       },
       {
         "id": "packet_draft",
         "label": "PACKET_DRAFT",
         "subsystem": "TXT",
-        "score": 84.2,
-        "durationMs": 2025,
+        "score": 84.4,
+        "durationMs": 2021,
         "input": "breakout X route",
         "output": "payload armed",
         "detail": "Operator packet is ready for manual paste.",
         "nextAction": "Copy one payload and preserve the operator-grade first line.",
         "status": "ok",
         "startMs": 5848,
-        "endMs": 7873,
+        "endMs": 7869,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 44.88,
-        "widthPct": 15.54
+        "startPct": 44.93,
+        "widthPct": 15.53
       },
       {
         "id": "manual_route",
         "label": "MANUAL_ROUTE",
         "subsystem": "X",
-        "score": 80.9,
-        "durationMs": 2858,
+        "score": 81.3,
+        "durationMs": 2848,
         "input": "breakout X route",
         "output": "browser route armed",
         "detail": "Manual X web route is armed; API read partition stays sealed.",
         "nextAction": "Open breakout X route, select one fresh technical exchange, paste the payload, then stop after 1 route op.",
         "readGate": "browser_only",
         "status": "ok",
-        "startMs": 7873,
-        "endMs": 10731,
+        "startMs": 7869,
+        "endMs": 10717,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "human_in_loop",
-        "startPct": 60.42,
-        "widthPct": 21.93
+        "startPct": 60.45,
+        "widthPct": 21.88
       },
       {
         "id": "learn_writeback",
@@ -44167,15 +42550,15 @@
         "detail": "Maintenance writes cached packet outcomes into the next angle decision.",
         "nextAction": "Let maintenance refresh metrics before widening the topic surface.",
         "status": "warn",
-        "startMs": 10731,
-        "endMs": 13031,
+        "startMs": 10717,
+        "endMs": 13017,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 82.35,
-        "widthPct": 17.65
+        "startPct": 82.33,
+        "widthPct": 17.67
       }
     ],
     "edges": [
@@ -44196,7 +42579,7 @@
         "to": "packet_draft",
         "label": "AI->TXT",
         "status": "ok",
-        "score": 92.1,
+        "score": 92.2,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0
@@ -44207,7 +42590,7 @@
         "to": "manual_route",
         "label": "TXT->X",
         "status": "ok",
-        "score": 82.6,
+        "score": 82.8,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0
@@ -44218,7 +42601,7 @@
         "to": "learn_writeback",
         "label": "X->ML",
         "status": "ok",
-        "score": 73.5,
+        "score": 73.7,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0
@@ -44234,7 +42617,7 @@
       {
         "id": "trace_score",
         "label": "TRACE_SCORE",
-        "value": "90.2",
+        "value": "90.3",
         "status": "warn"
       },
       {
@@ -44267,10 +42650,10 @@
       "Manual browser route only; no automated outbound actions.",
       "Normal cooldown only; no rate-limit shortcuts."
     ],
-    "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 90.2\nBottleneck: LEARN_WRITEBACK\nLatency budget: 13.0s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
+    "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 90.3\nBottleneck: LEARN_WRITEBACK\nLatency budget: 13.0s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -44418,7 +42801,7 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 88\n\nOPEN: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_next_window_commander",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44500,7 +42883,7 @@
       {
         "id": "angle_load",
         "label": "13:00 UTC / Decision Rule",
-        "score": 57.8,
+        "score": 60.8,
         "status": "watch",
         "source": "angle_load",
         "detail": "decision_rule has 3 sample(s) in this UTC hour with avg score 3.0."
@@ -44520,7 +42903,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "armed_packet_window",
     "severity": "ok",
@@ -44668,23 +43051,6 @@
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Contrarian Cost around 17:00 UTC."
       },
       {
-        "id": "17_00_prediction_platform_control_temporal_matrix",
-        "source": "temporal_matrix",
-        "hour": 17,
-        "windowLabel": "17:00",
-        "hoursFromNow": 4,
-        "loadScore": 90.6,
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "status": "hot",
-        "score": 96,
-        "sampleCount": 2,
-        "l7Events": 255,
-        "directive": "prediction has 2 sample(s) in this UTC hour with avg score 7.3."
-      },
-      {
         "id": "17_00_decision_rule_operator_leverage_topic_timing",
         "source": "topic_timing",
         "hour": 17,
@@ -44700,6 +43066,23 @@
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Decision Rule around 17:00 UTC."
+      },
+      {
+        "id": "17_00_prediction_platform_control_temporal_matrix",
+        "source": "temporal_matrix",
+        "hour": 17,
+        "windowLabel": "17:00",
+        "hoursFromNow": 4,
+        "loadScore": 90.6,
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": "platform_control",
+        "pillarLabel": "Platform Control",
+        "status": "hot",
+        "score": 95.9,
+        "sampleCount": 2,
+        "l7Events": 255,
+        "directive": "prediction has 2 sample(s) in this UTC hour with avg score 7.3."
       }
     ],
     "safeCostLeftUsd": 3.41,
@@ -44737,7 +43120,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -44753,7 +43136,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T13:05:25.740Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 264d to next milestone · 500d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-22T13:47:48.759Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 264d to next milestone · 500d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 263.8,
@@ -44849,7 +43232,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -44941,7 +43324,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44960,7 +43343,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T13:05:25.740Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-22T13:47:48.759Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(apple%20OR%20vision%20OR%20pro%20OR%20almost%20OR%20called%20OR%20reality)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple Vision Pro Was Almost Called 'Reality Pro': the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(evolution%20OR%20agent%20OR%20harness%20OR%20models%20OR%20keep%20OR%20absorbing)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On The Evolution of the Agent Harness: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.0 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Treat your runbook as code: review, test, version it. AI teams that don't will pay for it in incidents. Infrastructure is not just servers anymore, it's your operational knowledge.\n",
     "targets": [
       {
         "id": "trend:1:apple-vision-pro-was-almost-called-reality",
@@ -45058,7 +43441,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -45361,7 +43744,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -45675,7 +44058,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -46028,7 +44411,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "conversion_probe",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -46406,7 +44789,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -46643,7 +45026,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -46952,7 +45335,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -47192,7 +45575,7 @@
         "windowLabel": "00:00",
         "action": "exploit",
         "status": "hot",
-        "score": 82.4,
+        "score": 85,
         "confidence": "medium",
         "sources": [
           "content_bandit",
@@ -47257,21 +45640,21 @@
         {
           "source": "content_bandit",
           "lanes": 1,
-          "avgScore": 82.4,
+          "avgScore": 85,
           "samples": 30,
           "hotLanes": 1
         },
         {
           "source": "angle_load",
           "lanes": 2,
-          "avgScore": 81.7,
+          "avgScore": 83,
           "samples": 39,
           "hotLanes": 2
         },
         {
           "source": "adaptive_scheduler",
           "lanes": 2,
-          "avgScore": 81.7,
+          "avgScore": 83,
           "samples": 39,
           "hotLanes": 2
         }
@@ -47291,7 +45674,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -47393,7 +45776,7 @@
     "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: decision_rule\nranked_formats: decision_rule, brutal_truth, prediction, myth_busting, massive_value_drop, playbook\nselected_story: Apple Vision Pro Was Almost Called 'Reality Pro'\n\nMUST FOLLOW:\n- Primary format bias: decision_rule (Decision Rule). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 13:00 UTC / Platform Control / Decision Rule; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 13:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: myth_busting is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Decision Rule; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Yesterday's traffic winner is prediction (score 0.2, 1 samples). Bias candidates toward it.\n- Source bias: turn macrumors.com into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -47477,7 +45860,7 @@
         "before": "flat cadence",
         "after": "17:00 UTC / Near-term Prediction",
         "status": "ok",
-        "score": 98.3,
+        "score": 98.2,
         "reason": "prediction has 2 sample(s) in this UTC hour with avg score 7.3.",
         "promptBias": "Prefer 17:00 UTC / Near-term Prediction."
       },
@@ -49045,7 +47428,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "scale_experiment",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -49265,7 +47648,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -49366,7 +47749,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 87.3,
@@ -49426,7 +47809,7 @@
         "label": "learning writeback",
         "value": "20 packets",
         "status": "ok",
-        "detail": "20 L7 events in 24h feedback window"
+        "detail": "0 L7 events in 24h feedback window"
       }
     ],
     "edges": [
@@ -49498,29 +47881,29 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
-    "mode": "surge_exploit",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
+    "mode": "recovery_route",
     "confidence": "medium",
     "zeroExtraXReads": true,
     "sampleCount": 20,
     "baselineScore": 3.2,
     "load": {
-      "impressions24h": 20,
+      "impressions24h": 0,
       "impressions7d": 355,
-      "avgBucket": 3.3,
+      "avgBucket": 0,
       "peakBucket": {
-        "label": "13:05",
-        "value": 20,
-        "posts": 2,
-        "startsAt": "2026-08-21T13:05:25.755Z",
-        "endsAt": "2026-08-21T17:05:25.755Z"
-      },
-      "quietBucket": {
-        "label": "17:05",
+        "label": "13:47",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-21T17:05:25.755Z",
-        "endsAt": "2026-08-21T21:05:25.755Z"
+        "startsAt": "2026-08-21T13:47:48.769Z",
+        "endsAt": "2026-08-21T17:47:48.769Z"
+      },
+      "quietBucket": {
+        "label": "13:47",
+        "value": 0,
+        "posts": 1,
+        "startsAt": "2026-08-21T13:47:48.769Z",
+        "endsAt": "2026-08-21T17:47:48.769Z"
       }
     },
     "safeBudgetLeftUsd": 3.41,
@@ -49532,7 +47915,7 @@
         "angle": "decision rule / what to do next",
         "action": "test",
         "status": "watch",
-        "weight": 57,
+        "weight": 65,
         "avgScore": 3.4,
         "samples": 12,
         "reason": "Near baseline; keep in controlled rotation.",
@@ -49550,6 +47933,51 @@
       },
       {
         "slot": 2,
+        "formatId": "operator_pain",
+        "label": "Operator Pain",
+        "angle": "operator pain / hidden workflow tax",
+        "action": "explore",
+        "status": "probe",
+        "weight": 50,
+        "avgScore": 0,
+        "samples": 0,
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "keywords": [
+          "operator",
+          "operators",
+          "migration",
+          "rollback",
+          "budget",
+          "permissions",
+          "evals",
+          "maintenance",
+          "platform team"
+        ]
+      },
+      {
+        "slot": 3,
+        "formatId": "playbook",
+        "label": "Playbook",
+        "angle": "builder playbook / practical next move",
+        "action": "explore",
+        "status": "probe",
+        "weight": 58,
+        "avgScore": 0,
+        "samples": 0,
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "keywords": [
+          "playbook",
+          "checklist",
+          "do next",
+          "stop",
+          "ship",
+          "review",
+          "monitor",
+          "measure"
+        ]
+      },
+      {
+        "slot": 4,
         "formatId": "prediction",
         "label": "Near-term Prediction",
         "angle": "near-term prediction / default shift",
@@ -49568,61 +47996,19 @@
           "within",
           "months"
         ]
-      },
-      {
-        "slot": 3,
-        "formatId": "not_x_but_y",
-        "label": "Not X But Y",
-        "angle": "reframe / not the feature, the shift",
-        "action": "explore",
-        "status": "probe",
-        "weight": 50,
-        "avgScore": 0,
-        "samples": 0,
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "keywords": [
-          "not ",
-          "but ",
-          "instead",
-          "underneath",
-          "really",
-          "shift"
-        ]
-      },
-      {
-        "slot": 4,
-        "formatId": "second_order",
-        "label": "Second Order",
-        "angle": "second-order distribution or business consequence",
-        "action": "explore",
-        "status": "probe",
-        "weight": 50,
-        "avgScore": 0,
-        "samples": 0,
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "keywords": [
-          "second-order",
-          "distribution",
-          "default",
-          "incentive",
-          "pricing",
-          "platform",
-          "workflow",
-          "behavior"
-        ]
       }
     ],
     "promptDirectives": [
       "Next angle slot: decision_rule (decision rule / what to do next); Near baseline; keep in controlled rotation.",
-      "Traffic load is spiking; exploit the strongest proven angle and avoid experiments.",
+      "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output."
     ],
     "scoringBias": {
       "preferredFormatIds": [
         "decision_rule",
-        "prediction",
-        "not_x_but_y",
-        "second_order"
+        "operator_pain",
+        "playbook",
+        "prediction"
       ],
       "preferredAngleKeywords": [
         "if ",
@@ -49634,20 +48020,20 @@
         "budget",
         "wait",
         "switch",
-        "prediction",
-        "next",
-        "2026",
-        "standard",
-        "within",
-        "months",
-        "not "
+        "operator",
+        "operators",
+        "migration",
+        "rollback",
+        "permissions",
+        "evals",
+        "maintenance"
       ],
       "holdFormatIds": []
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
-    "mode": "surge_angle_exploit",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
+    "mode": "temporal_rotation",
     "confidence": "medium",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
@@ -49666,7 +48052,7 @@
         "angle": "near-term prediction / default shift",
         "action": "test",
         "status": "hot",
-        "score": 98.3,
+        "score": 98.2,
         "avgScore": 7.3,
         "samples": 2,
         "impressions": 255,
@@ -49683,7 +48069,7 @@
         "angle": "decision rule / what to do next",
         "action": "test",
         "status": "hot",
-        "score": 91.6,
+        "score": 94.7,
         "avgScore": 5.9,
         "samples": 2,
         "impressions": 85,
@@ -49700,7 +48086,7 @@
         "angle": "decision rule / what to do next",
         "action": "test",
         "status": "hot",
-        "score": 82.2,
+        "score": 85.2,
         "avgScore": 6.4,
         "samples": 1,
         "impressions": 44,
@@ -49717,7 +48103,7 @@
         "angle": "decision rule / what to do next",
         "action": "test",
         "status": "watch",
-        "score": 57.8,
+        "score": 60.8,
         "avgScore": 3,
         "samples": 3,
         "impressions": 88,
@@ -49726,7 +48112,7 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -49738,7 +48124,7 @@
       "formatId": "decision_rule",
       "label": "Decision Rule",
       "angle": "decision rule / what to do next",
-      "score": 57.8,
+      "score": 60.8,
       "loadScore": 53,
       "action": "test",
       "status": "watch",
@@ -49781,7 +48167,7 @@
         "action": "test",
         "angle": "near-term prediction / default shift",
         "status": "hot",
-        "score": 98.3,
+        "score": 98.2,
         "loadScore": 90.6,
         "samples": 2,
         "avgScore": 7.3,
@@ -49797,7 +48183,7 @@
         "action": "test",
         "angle": "decision rule / what to do next",
         "status": "hot",
-        "score": 91.6,
+        "score": 94.7,
         "loadScore": 79.5,
         "samples": 2,
         "avgScore": 5.9,
@@ -49813,7 +48199,7 @@
         "action": "test",
         "angle": "decision rule / what to do next",
         "status": "hot",
-        "score": 82.2,
+        "score": 85.2,
         "loadScore": 64.5,
         "samples": 1,
         "avgScore": 6.4,
@@ -49828,8 +48214,8 @@
         "formatId": "decision_rule",
         "action": "test",
         "angle": "decision rule / what to do next",
-        "status": "probe",
-        "score": 57.8,
+        "status": "watch",
+        "score": 60.8,
         "loadScore": 53,
         "samples": 3,
         "avgScore": 3,
@@ -49839,34 +48225,34 @@
     "directives": [
       "Route Decision Rule at 13:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
       "Next angle slot: decision_rule (decision rule / what to do next); Near baseline; keep in controlled rotation.",
-      "Traffic load is spiking; exploit the strongest proven angle and avoid experiments.",
+      "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output.",
       "Use Near-term Prediction at 17:00 UTC; prediction has 2 sample(s) in this UTC hour with avg score 7.3."
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
-    "mode": "surge_rule_writeback",
+    "mode": "controlled_rule_writeback",
     "confidence": "medium",
-    "epoch": "2026-08-22T13:05",
+    "epoch": "2026-08-22T13:47",
     "sampleCount": 20,
     "baselineScore": 3.2,
     "activeRule": {
       "id": "decision_rule",
       "label": "Decision Rule",
       "action": "test",
-      "weight": 57,
+      "weight": 65,
       "avgScore": 3.4,
       "samples": 12,
       "reason": "Near baseline; keep in controlled rotation."
     },
     "preferredFormatIds": [
       "decision_rule",
-      "prediction",
-      "not_x_but_y",
-      "second_order"
+      "operator_pain",
+      "playbook",
+      "prediction"
     ],
     "holdFormatIds": [],
     "nextWriteback": "Promote Decision Rule into the next prompt route; keep weak formats behind the hold gate.",
@@ -49903,7 +48289,7 @@
         "before": "baseline rotation",
         "after": "decision_rule",
         "status": "warn",
-        "score": 57,
+        "score": 65,
         "reason": "Near baseline; keep in controlled rotation."
       },
       {
@@ -49912,7 +48298,7 @@
         "before": "current cadence",
         "after": "17:00 UTC / prediction",
         "status": "ok",
-        "score": 98.3,
+        "score": 98.2,
         "reason": "prediction has 2 sample(s) in this UTC hour with avg score 7.3."
       },
       {
@@ -49936,7 +48322,7 @@
     ],
     "directives": [
       "Next angle slot: decision_rule (decision rule / what to do next); Near baseline; keep in controlled rotation.",
-      "Traffic load is spiking; exploit the strongest proven angle and avoid experiments.",
+      "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output.",
       "Lead with decision_rule: Near baseline; keep in controlled rotation.",
       "Prefer stories from dev.to or adjacent sources when the topic is timely."
@@ -49946,7 +48332,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -49993,7 +48379,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -50403,7 +48789,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "updatedAt": "2026-08-22T12:12:07.172Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -50836,7 +49222,7 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 20,
@@ -51219,7 +49605,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -51558,7 +49944,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 dev.to 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "controlled_test",
     "confidence": "medium",
     "baselineScore": 3.2,
@@ -51659,7 +50045,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -51777,7 +50163,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-08-22T13:05:25.740Z",
+    "generatedAt": "2026-08-22T13:47:48.759Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -52057,7 +50443,7 @@
   "diagnosis": [
     "Today: prioritize ZH at 13:00 UTC; use #devtools #ai when story-fit allows.",
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 7 天记录到 14 条、355 次触达；24 小时 5 条、20 次触达。瓶颈是分发入口，不是发帖数量。",
+    "最近 7 天记录到 14 条、355 次触达；24 小时 4 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
     "路由操作优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
