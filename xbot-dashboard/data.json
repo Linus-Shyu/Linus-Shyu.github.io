@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T09:47:55.012Z",
+  "updatedAt": "2026-08-23T10:45:36.405Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-08-23T09:47:55.012Z",
+    "dashboardUpdatedAt": "2026-08-23T10:45:36.405Z",
     "analyticsUpdatedAt": "2026-08-23T01:21:43.726Z",
     "usageUpdatedAt": "2026-08-23T01:21:43.683Z",
     "accountCheckedAt": "2026-08-22T23:37:38.536Z",
     "tweetMetricsCheckedAt": "2026-08-22T23:37:38.657Z",
     "checkedAt": "2026-08-22T23:37:38.657Z",
-    "ageMinutes": 610,
+    "ageMinutes": 668,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -36,7 +36,7 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 3
+          "hoursFromNow": 2
         },
         "dailyTarget": 1,
         "packetsLast24h": 1,
@@ -4773,7 +4773,7 @@
         "nextWindow": {
           "hour": 16,
           "label": "16:00 UTC",
-          "hoursFromNow": 7
+          "hoursFromNow": 6
         },
         "dailyTarget": 3,
         "packetsLast24h": 3,
@@ -9619,13 +9619,13 @@
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -9634,7 +9634,7 @@
       "nextSlot": {
         "hour": 12,
         "label": "12:00 UTC",
-        "hoursFromNow": 3
+        "hoursFromNow": 2
       },
       "selectedTags": [
         "#devtools",
@@ -9642,7 +9642,7 @@
       ],
       "canPost": true,
       "budgetSafeRemainingUsd": 3.265,
-      "cadenceReason": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h.",
+      "cadenceReason": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
       "nextRoute": {
         "label": "Velocity route: Google’s new Pixel 11 offers an incredible camera feature that Apple sh...",
         "routeLabel": "breakout X route",
@@ -9657,7 +9657,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.6,
@@ -9750,7 +9750,7 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 3.6,
@@ -9882,7 +9882,7 @@
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "zh",
@@ -9900,7 +9900,7 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
@@ -9939,7 +9939,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -10172,7 +10172,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -10257,7 +10257,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -10348,7 +10348,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -10437,8 +10437,8 @@
         "confidenceScore": 76.6,
         "projectedDays": 402.7,
         "savedDays": 419.3,
-        "detail": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h.",
-        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane."
+        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window."
       },
       {
         "id": "media_post_surge",
@@ -10515,7 +10515,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "scale_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -42892,97 +42892,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-08-22T09:47:55.012Z",
-          "endsAt": "2026-08-22T11:47:55.012Z",
-          "label": "09:47",
+          "startsAt": "2026-08-22T10:45:36.405Z",
+          "endsAt": "2026-08-22T12:45:36.405Z",
+          "label": "10:45",
           "value": 0,
-          "posts": 0
+          "posts": 1
         },
         {
           "index": 1,
-          "startsAt": "2026-08-22T11:47:55.012Z",
-          "endsAt": "2026-08-22T13:47:55.012Z",
-          "label": "11:47",
-          "value": 0,
-          "posts": 1
-        },
-        {
-          "index": 2,
-          "startsAt": "2026-08-22T13:47:55.012Z",
-          "endsAt": "2026-08-22T15:47:55.012Z",
-          "label": "13:47",
+          "startsAt": "2026-08-22T12:45:36.405Z",
+          "endsAt": "2026-08-22T14:45:36.405Z",
+          "label": "12:45",
           "value": 0,
           "posts": 0
         },
         {
-          "index": 3,
-          "startsAt": "2026-08-22T15:47:55.012Z",
-          "endsAt": "2026-08-22T17:47:55.012Z",
-          "label": "15:47",
+          "index": 2,
+          "startsAt": "2026-08-22T14:45:36.405Z",
+          "endsAt": "2026-08-22T16:45:36.405Z",
+          "label": "14:45",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 3,
+          "startsAt": "2026-08-22T16:45:36.405Z",
+          "endsAt": "2026-08-22T18:45:36.405Z",
+          "label": "16:45",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 4,
-          "startsAt": "2026-08-22T17:47:55.012Z",
-          "endsAt": "2026-08-22T19:47:55.012Z",
-          "label": "17:47",
+          "startsAt": "2026-08-22T18:45:36.405Z",
+          "endsAt": "2026-08-22T20:45:36.405Z",
+          "label": "18:45",
           "value": 0,
           "posts": 1
         },
         {
           "index": 5,
-          "startsAt": "2026-08-22T19:47:55.012Z",
-          "endsAt": "2026-08-22T21:47:55.012Z",
-          "label": "19:47",
+          "startsAt": "2026-08-22T20:45:36.405Z",
+          "endsAt": "2026-08-22T22:45:36.405Z",
+          "label": "20:45",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-08-22T21:47:55.012Z",
-          "endsAt": "2026-08-22T23:47:55.012Z",
-          "label": "21:47",
+          "startsAt": "2026-08-22T22:45:36.405Z",
+          "endsAt": "2026-08-23T00:45:36.405Z",
+          "label": "22:45",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-08-22T23:47:55.012Z",
-          "endsAt": "2026-08-23T01:47:55.012Z",
-          "label": "23:47",
+          "startsAt": "2026-08-23T00:45:36.405Z",
+          "endsAt": "2026-08-23T02:45:36.405Z",
+          "label": "00:45",
           "value": 0,
           "posts": 1
         },
         {
           "index": 8,
-          "startsAt": "2026-08-23T01:47:55.012Z",
-          "endsAt": "2026-08-23T03:47:55.012Z",
-          "label": "01:47",
+          "startsAt": "2026-08-23T02:45:36.405Z",
+          "endsAt": "2026-08-23T04:45:36.405Z",
+          "label": "02:45",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-08-23T03:47:55.012Z",
-          "endsAt": "2026-08-23T05:47:55.012Z",
-          "label": "03:47",
+          "startsAt": "2026-08-23T04:45:36.405Z",
+          "endsAt": "2026-08-23T06:45:36.405Z",
+          "label": "04:45",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-08-23T05:47:55.012Z",
-          "endsAt": "2026-08-23T07:47:55.012Z",
-          "label": "05:47",
+          "startsAt": "2026-08-23T06:45:36.405Z",
+          "endsAt": "2026-08-23T08:45:36.405Z",
+          "label": "06:45",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-08-23T07:47:55.012Z",
-          "endsAt": "2026-08-23T09:47:55.012Z",
-          "label": "07:47",
+          "startsAt": "2026-08-23T08:45:36.405Z",
+          "endsAt": "2026-08-23T10:45:36.405Z",
+          "label": "08:45",
           "value": 0,
           "posts": 0
         }
@@ -43356,7 +43356,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -43419,15 +43419,15 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-08-23T09:47:55.012Z",
-    "mode": "wait_for_topic_timing",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
+    "mode": "wait_for_learned_peak",
     "publishAllowed": false,
     "willBlockPublish": false,
     "manualOverride": false,
-    "reasonCode": "topic_timing_wait",
+    "reasonCode": "learned_peak_wait",
     "severity": "warn",
-    "reason": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h.",
-    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+    "reason": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
     "languageCode": null,
     "dailyPostTarget": 4,
     "postsLast24h": 4,
@@ -43438,22 +43438,22 @@
     "safeRemainingUsd": 3.265,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 8.44,
-    "telemetryAgeMinutes": 610,
+    "hoursSinceLastPost": 9.4,
+    "telemetryAgeMinutes": 668,
     "latestTelemetryAt": "2026-08-22T23:37:38.657Z",
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
       "sampleCount": 20,
       "minSamples": 2,
       "confidence": "medium",
-      "mode": "manual_distribution",
+      "mode": "wait_for_peak",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 9,
-        "label": "09:00",
+        "hour": 10,
+        "label": "10:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -43463,7 +43463,7 @@
       "nextWindow": {
         "hour": 13,
         "label": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "loadScore": 65.7,
         "posts": 5,
         "impressions": 134,
@@ -43508,7 +43508,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 17:00 UTC.",
+      "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
       "hours": [
         {
           "hour": 0,
@@ -43638,7 +43638,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 10,
@@ -43651,7 +43651,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": false
+          "current": true
         },
         {
           "hour": 11,
@@ -43825,11 +43825,11 @@
       ]
     },
     "cadenceWindow": {
-      "mode": "manual_distribution",
+      "mode": "wait_for_peak",
       "confidence": "medium",
       "currentHour": {
-        "hour": 9,
-        "label": "09:00",
+        "hour": 10,
+        "label": "10:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -43839,7 +43839,7 @@
       "nextWindow": {
         "hour": 13,
         "label": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "loadScore": 65.7,
         "posts": 5,
         "impressions": 134,
@@ -43884,7 +43884,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 17:00 UTC.",
+      "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
       "zeroExtraXReads": true
     },
     "topicTimingWindow": {
@@ -43893,12 +43893,12 @@
       "routerScore": 85,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 8,
+      "hoursFromNow": 7,
       "activeLane": {
         "id": "17:platform_control:prediction",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -43931,7 +43931,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "8.4h since packet",
+        "value": "9.4h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -43945,7 +43945,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "610 min old",
+        "value": "668 min old",
         "detail": "Latest checked telemetry: 2026-08-22T23:37:38.657Z."
       },
       {
@@ -43957,27 +43957,27 @@
       },
       {
         "id": "hourly_window",
-        "ok": true,
+        "ok": false,
         "label": "Learned UTC window",
-        "value": "09:00 score 0.0",
-        "detail": "No near-term learned peak; use manual distribution now and schedule the next packet near 17:00 UTC."
+        "value": "10:00 score 0.0",
+        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "17:00 UTC / Platform Control / Near-term Prediction in 8.0h",
+        "value": "17:00 UTC / Platform Control / Near-term Prediction in 7.0h",
         "detail": "Schedule the next standalone packet for 17:00 UTC as Platform Control / Near-term Prediction."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 79.7,
     "decision": "Spend this loop on manual route ops under high-signal conversations before another standalone packet.",
-    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
     "publishGate": "review",
     "readGate": "cached_only",
     "distributionGate": "ready",
@@ -44009,7 +44009,7 @@
         "label": "publish gate",
         "value": "review",
         "status": "warn",
-        "detail": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h."
+        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "read",
@@ -44048,7 +44048,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 72.6,
@@ -44062,7 +44062,7 @@
     "gates": {
       "read": "cached_only",
       "publish": "review",
-      "cadence": "wait_for_topic_timing"
+      "cadence": "wait_for_learned_peak"
     },
     "budget": {
       "capUsd": 5,
@@ -44147,7 +44147,7 @@
         "gate": "cached_only",
         "status": "warn",
         "cache": {
-          "generatedAt": "2026-08-23T09:47:55.012Z",
+          "generatedAt": "2026-08-23T10:45:36.405Z",
           "enabled": true,
           "mode": "cache_hit",
           "status": "ok",
@@ -44155,7 +44155,7 @@
           "readGate": "cached_only",
           "latestCheckedAt": "2026-08-22T23:37:38.536Z",
           "nextRefreshAt": "2026-08-23T11:37:38.536Z",
-          "ageHours": 10.17,
+          "ageHours": 11.13,
           "maxAgeHours": 12,
           "fresh": true,
           "due": false,
@@ -44327,7 +44327,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-08-23T09:47:55.012Z",
+      "generatedAt": "2026-08-23T10:45:36.405Z",
       "enabled": true,
       "mode": "cache_hit",
       "status": "ok",
@@ -44335,7 +44335,7 @@
       "readGate": "cached_only",
       "latestCheckedAt": "2026-08-22T23:37:38.536Z",
       "nextRefreshAt": "2026-08-23T11:37:38.536Z",
-      "ageHours": 10.17,
+      "ageHours": 11.13,
       "maxAgeHours": 12,
       "fresh": true,
       "due": false,
@@ -44369,7 +44369,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.118, projected month-end $2.228 / $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "enabled": true,
     "mode": "cache_hit",
     "status": "ok",
@@ -44377,7 +44377,7 @@
     "readGate": "cached_only",
     "latestCheckedAt": "2026-08-22T23:37:38.536Z",
     "nextRefreshAt": "2026-08-23T11:37:38.536Z",
-    "ageHours": 10.17,
+    "ageHours": 11.13,
     "maxAgeHours": 12,
     "fresh": true,
     "due": false,
@@ -44387,7 +44387,7 @@
     "directive": "Account snapshot cache is fresh; skip USER_ME_LOOKUP and preserve X read budget."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -44600,7 +44600,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -44635,8 +44635,8 @@
         "gate": "guarded",
         "status": "warn",
         "efficiencyScore": 48,
-        "detail": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h.",
-        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
         "xReadOps": 0,
         "zeroExtraXReads": true
       },
@@ -44719,7 +44719,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44732,7 +44732,7 @@
     "expectedLiftPct": 189.2,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-23T09:47:55.012Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.27\nTarget: 3 useful manual route ops · expected lift +189.2%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-08-23T10:45:36.405Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.27\nTarget: 3 useful manual route ops · expected lift +189.2%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -44868,7 +44868,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -44941,10 +44941,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-23T09:47:55.012Z\nMode: wait_for_topic_timing\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +218.0%\n2. OPEN: breakout X route - https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +218.0%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\n   SLA: 30m · target 1 · lift +131.6%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-08-23T10:45:36.405Z\nMode: wait_for_learned_peak\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +218.0%\n2. OPEN: breakout X route - https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +218.0%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\n   SLA: 30m · target 1 · lift +131.6%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -45045,10 +45045,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-23T09:47:55.012Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-08-23T10:45:36.405Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -45211,10 +45211,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-23T09:47:55.012Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-08-23T10:45:36.405Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -45342,7 +45342,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -45488,7 +45488,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -45587,10 +45587,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-23T09:47:55.012Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.3\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-08-23T10:45:36.405Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.3\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -45736,7 +45736,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 72.0\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "warn",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -45952,7 +45952,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 91.3\nBottleneck: LEARN_WRITEBACK\nLatency budget: 13.0s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -46100,26 +46100,26 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 80\n\nOPEN: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_next_window_commander",
     "severity": "warn",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 87.1,
+    "commanderScore": 70.1,
     "publishGate": "manual_route_only",
     "readGate": "cached_only",
     "activeWindow": {
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 7,
       "loadScore": 65.7
     },
     "window": {
       "hour": 17,
       "label": "17:00",
       "windowLabel": "17:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 7,
       "loadScore": 65.7
     },
     "activeAngle": {
@@ -46152,7 +46152,7 @@
         "label": "Cadence",
         "status": "warn",
         "value": "manual_route_only",
-        "detail": "Topic timing router prefers 17:00 UTC / Platform Control / Near-term Prediction in 8.0h."
+        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "budget",
@@ -46194,7 +46194,7 @@
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 87.1 / Gate: manual_route_only / X reads: 0\nWindow: 17:00 UTC (8.0h from now)\nAngle: Near-term Prediction / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Near-term Prediction angle warm for 17:00 UTC.\nPrompt bias:\n- Format=prediction\n- Pillar=Platform Control\n- Window=17:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 70.1 / Gate: manual_route_only / X reads: 0\nWindow: 17:00 UTC (7.0h from now)\nAngle: Near-term Prediction / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Near-term Prediction angle warm for 17:00 UTC.\nPrompt bias:\n- Format=prediction\n- Pillar=Platform Control\n- Window=17:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -46202,7 +46202,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_warmup",
     "severity": "ok",
@@ -46217,7 +46217,7 @@
       "source": "topic_timing",
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 7,
       "loadScore": 89.8,
       "formatId": "prediction",
       "formatLabel": "Near-term Prediction",
@@ -46235,7 +46235,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -46252,14 +46252,14 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
         "status": "hot",
-        "score": 99.6,
+        "score": 99.5,
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 17:00 UTC."
@@ -46269,7 +46269,7 @@
         "source": "topic_timing",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 5,
+        "hoursFromNow": 4,
         "loadScore": 79.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -46286,7 +46286,7 @@
         "source": "temporal_matrix",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -46299,45 +46299,11 @@
         "directive": "prediction has 2 sample(s) in this UTC hour with avg score 7.3."
       },
       {
-        "id": "17_00_prediction_market_timing_topic_timing",
-        "source": "topic_timing",
-        "hour": 17,
-        "windowLabel": "17:00",
-        "hoursFromNow": 8,
-        "loadScore": 89.8,
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "market_timing",
-        "pillarLabel": "Market Timing",
-        "status": "hot",
-        "score": 97,
-        "sampleCount": 0,
-        "l7Events": 0,
-        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 17:00 UTC."
-      },
-      {
-        "id": "17_00_prediction_risk_boundary_topic_timing",
-        "source": "topic_timing",
-        "hour": 17,
-        "windowLabel": "17:00",
-        "hoursFromNow": 8,
-        "loadScore": 89.8,
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "risk_boundary",
-        "pillarLabel": "Risk Boundary",
-        "status": "hot",
-        "score": 97,
-        "sampleCount": 0,
-        "l7Events": 0,
-        "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 17:00 UTC."
-      },
-      {
         "id": "17_00_second_order_operator_leverage_topic_timing",
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "second_order",
         "formatLabel": "Second Order",
@@ -46354,7 +46320,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "not_x_but_y",
         "formatLabel": "Not X But Y",
@@ -46367,11 +46333,28 @@
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Not X But Y around 17:00 UTC."
       },
       {
+        "id": "17_00_prediction_market_timing_topic_timing",
+        "source": "topic_timing",
+        "hour": 17,
+        "windowLabel": "17:00",
+        "hoursFromNow": 7,
+        "loadScore": 89.8,
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": "market_timing",
+        "pillarLabel": "Market Timing",
+        "status": "hot",
+        "score": 96.9,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 17:00 UTC."
+      },
+      {
         "id": "17_00_the_hard_way_operator_leverage_topic_timing",
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
@@ -46382,6 +46365,23 @@
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use The Hard Way around 17:00 UTC."
+      },
+      {
+        "id": "17_00_myth_busting_operator_leverage_topic_timing",
+        "source": "topic_timing",
+        "hour": 17,
+        "windowLabel": "17:00",
+        "hoursFromNow": 7,
+        "loadScore": 89.8,
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
+        "status": "hot",
+        "score": 96.8,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Translate the story into how builders and operators gain or lose leverage. Use Myth Busting around 17:00 UTC."
       }
     ],
     "safeCostLeftUsd": 3.265,
@@ -46419,7 +46419,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -46435,7 +46435,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-23T09:47:55.012Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 284d to next milestone · 538d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-08-23T10:45:36.405Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 284d to next milestone · 538d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 284.2,
@@ -46531,7 +46531,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -46623,7 +46623,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -46642,7 +46642,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-23T09:47:55.012Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.9 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-08-23T10:45:36.405Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(google%20OR%20new%20OR%20pixel%20OR%20offers%20OR%20incredible%20OR%20camera)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google’s new Pixel 11 offers an incredible camera feature that Apple shou...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(nanogpt%20OR%20speedrun%20OR%20frontier%20OR%20article%20OR%20url%20OR%20https)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On NanoGPT Speedrun Frontier: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 93.9 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Not the AI model that wins, but the one that becomes the default workflow. Speed and demo quality are table stakes. Check rollback and integration effort. Winners own the operator's daily routine, not the benchmark.\n",
     "targets": [
       {
         "id": "trend:1:google-s-new-pixel-11-offers-an-incredible",
@@ -46740,7 +46740,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -47043,7 +47043,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -47056,7 +47056,7 @@
       "label": "Near-term Prediction",
       "status": "exploit",
       "action": "exploit",
-      "allocationScore": 88.56,
+      "allocationScore": 87.64,
       "avgScore": 4.4,
       "samples": 7,
       "liftPct": 22.8,
@@ -47069,14 +47069,14 @@
       "nextAction": "Exploit Near-term Prediction with Entity-Led.",
       "reason": "Above baseline 3.6 with enough samples.",
       "rank": 1,
-      "allocationPct": 7.5
+      "allocationPct": 7.4
     },
     "exploreLane": {
       "id": "second_order",
       "label": "Second Order",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 90.48,
+      "allocationScore": 90.56,
       "avgScore": 3.58,
       "samples": 0,
       "liftPct": null,
@@ -47111,7 +47111,7 @@
         "label": "Near-term Prediction",
         "status": "exploit",
         "action": "exploit",
-        "allocationScore": 88.56,
+        "allocationScore": 87.64,
         "avgScore": 4.4,
         "samples": 7,
         "liftPct": 22.8,
@@ -47124,14 +47124,14 @@
         "nextAction": "Exploit Near-term Prediction with Entity-Led.",
         "reason": "Above baseline 3.6 with enough samples.",
         "rank": 1,
-        "allocationPct": 7.5
+        "allocationPct": 7.4
       },
       {
         "id": "second_order",
         "label": "Second Order",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 90.48,
+        "allocationScore": 90.56,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47151,7 +47151,7 @@
         "label": "Not X But Y",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 90.42,
+        "allocationScore": 90.5,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47171,7 +47171,7 @@
         "label": "The Hard Way",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 90.11,
+        "allocationScore": 90.2,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47191,7 +47191,7 @@
         "label": "Myth Busting",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 90.05,
+        "allocationScore": 90.13,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47211,7 +47211,7 @@
         "label": "Massive Value Drop",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 89.99,
+        "allocationScore": 90.07,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47231,7 +47231,7 @@
         "label": "Brutal Truth",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 89.92,
+        "allocationScore": 90.01,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47251,7 +47251,7 @@
         "label": "Playbook",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 89.8,
+        "allocationScore": 89.88,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47271,7 +47271,7 @@
         "label": "Contrarian Cost",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 89.67,
+        "allocationScore": 89.75,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47291,7 +47291,7 @@
         "label": "Operator Pain",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 89.61,
+        "allocationScore": 89.69,
         "avgScore": 3.58,
         "samples": 0,
         "liftPct": null,
@@ -47304,14 +47304,14 @@
         "nextAction": "Collect more samples for Operator Pain; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
         "rank": 10,
-        "allocationPct": 7.5
+        "allocationPct": 7.6
       },
       {
         "id": "sharp_question",
         "label": "Sharp Question",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 50.98,
+        "allocationScore": 51.06,
         "avgScore": 0.3,
         "samples": 1,
         "liftPct": null,
@@ -47331,7 +47331,7 @@
         "label": "Decision Rule",
         "status": "test",
         "action": "test",
-        "allocationScore": 47.68,
+        "allocationScore": 47.77,
         "avgScore": 3.4,
         "samples": 12,
         "liftPct": -5.1,
@@ -47357,7 +47357,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -47378,7 +47378,7 @@
       "regret": 0,
       "recentRegret": 0,
       "baselineLiftPct": 21.4,
-      "allocationPct": 7.5,
+      "allocationPct": 7.4,
       "actualSharePct": 35,
       "laneStatus": "exploit",
       "nextAction": "Settle Near-term Prediction as a winning arm; keep exploit pressure."
@@ -47415,7 +47415,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": 21.4,
-        "allocationPct": 7.5,
+        "allocationPct": 7.4,
         "actualSharePct": 35,
         "laneStatus": "exploit",
         "nextAction": "Settle Near-term Prediction as a winning arm; keep exploit pressure."
@@ -47466,7 +47466,7 @@
         "regret": 4.35,
         "recentRegret": 4.35,
         "baselineLiftPct": null,
-        "allocationPct": 7.5,
+        "allocationPct": 7.6,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -47728,7 +47728,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "conversion_exploit",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -48106,7 +48106,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -48343,7 +48343,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -48354,7 +48354,7 @@
       "id": "17:platform_control:prediction",
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 7,
       "loadScore": 89.8,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
@@ -48377,7 +48377,7 @@
         "id": "17:platform_control:prediction",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48399,7 +48399,7 @@
         "id": "13:operator_leverage:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "loadScore": 65.7,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48421,7 +48421,7 @@
         "id": "13:platform_control:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "loadScore": 65.7,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48443,7 +48443,7 @@
         "id": "14:platform_control:prediction",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 5,
+        "hoursFromNow": 4,
         "loadScore": 79.3,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -48465,7 +48465,7 @@
         "id": "17:operator_leverage:prediction",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48473,7 +48473,7 @@
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "formatStatus": "exploit",
-        "score": 99.3,
+        "score": 99.1,
         "samples": 0,
         "avgScore": 2.3,
         "impressions": 0,
@@ -48487,7 +48487,7 @@
         "id": "14:operator_leverage:prediction",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 5,
+        "hoursFromNow": 4,
         "loadScore": 79.3,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48495,7 +48495,7 @@
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "formatStatus": "exploit",
-        "score": 96.6,
+        "score": 96.4,
         "samples": 0,
         "avgScore": 2.3,
         "impressions": 0,
@@ -48506,54 +48506,10 @@
         "reason": "Seed Operator Leverage via Near-term Prediction in a learned 14:00 UTC load window."
       },
       {
-        "id": "17:market_timing:prediction",
-        "hour": 17,
-        "windowLabel": "17:00",
-        "hoursFromNow": 8,
-        "loadScore": 89.8,
-        "pillarId": "market_timing",
-        "pillarLabel": "Market Timing",
-        "pillarStatus": "expand",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "formatStatus": "exploit",
-        "score": 95.9,
-        "samples": 0,
-        "avgScore": 0,
-        "impressions": 0,
-        "engagementRate": 0,
-        "observed": false,
-        "status": "hot",
-        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 17:00 UTC.",
-        "reason": "Seed Market Timing via Near-term Prediction in a learned 17:00 UTC load window."
-      },
-      {
-        "id": "17:risk_boundary:prediction",
-        "hour": 17,
-        "windowLabel": "17:00",
-        "hoursFromNow": 8,
-        "loadScore": 89.8,
-        "pillarId": "risk_boundary",
-        "pillarLabel": "Risk Boundary",
-        "pillarStatus": "expand",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "formatStatus": "exploit",
-        "score": 95.8,
-        "samples": 0,
-        "avgScore": 0,
-        "impressions": 0,
-        "engagementRate": 0,
-        "observed": false,
-        "status": "hot",
-        "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 17:00 UTC.",
-        "reason": "Seed Risk Boundary via Near-term Prediction in a learned 17:00 UTC load window."
-      },
-      {
         "id": "17:operator_leverage:second_order",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48575,7 +48531,7 @@
         "id": "17:operator_leverage:not_x_but_y",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48594,10 +48550,32 @@
         "reason": "Seed Operator Leverage via Not X But Y in a learned 17:00 UTC load window."
       },
       {
+        "id": "17:market_timing:prediction",
+        "hour": 17,
+        "windowLabel": "17:00",
+        "hoursFromNow": 7,
+        "loadScore": 89.8,
+        "pillarId": "market_timing",
+        "pillarLabel": "Market Timing",
+        "pillarStatus": "expand",
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "formatStatus": "exploit",
+        "score": 95.7,
+        "samples": 0,
+        "avgScore": 0,
+        "impressions": 0,
+        "engagementRate": 0,
+        "observed": false,
+        "status": "hot",
+        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 17:00 UTC.",
+        "reason": "Seed Market Timing via Near-term Prediction in a learned 17:00 UTC load window."
+      },
+      {
         "id": "17:operator_leverage:the_hard_way",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48619,7 +48597,7 @@
         "id": "17:operator_leverage:myth_busting",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -48636,6 +48614,28 @@
         "status": "hot",
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Myth Busting around 17:00 UTC.",
         "reason": "Seed Operator Leverage via Myth Busting in a learned 17:00 UTC load window."
+      },
+      {
+        "id": "17:operator_leverage:massive_value_drop",
+        "hour": 17,
+        "windowLabel": "17:00",
+        "hoursFromNow": 7,
+        "loadScore": 89.8,
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
+        "pillarStatus": "expand",
+        "formatId": "massive_value_drop",
+        "formatLabel": "Massive Value Drop",
+        "formatStatus": "explore",
+        "score": 95.6,
+        "samples": 0,
+        "avgScore": 2.3,
+        "impressions": 0,
+        "engagementRate": 2.99,
+        "observed": false,
+        "status": "hot",
+        "directive": "Translate the story into how builders and operators gain or lose leverage. Use Massive Value Drop around 17:00 UTC.",
+        "reason": "Seed Operator Leverage via Massive Value Drop in a learned 17:00 UTC load window."
       }
     ],
     "nextAction": "Schedule the next standalone packet for 17:00 UTC as Platform Control / Near-term Prediction.",
@@ -48652,7 +48652,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -48796,7 +48796,7 @@
         "windowLabel": "17:00",
         "action": "exploit",
         "status": "hot",
-        "score": 96.7,
+        "score": 96.6,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -48820,7 +48820,7 @@
         "windowLabel": "14:00",
         "action": "exploit",
         "status": "hot",
-        "score": 94.5,
+        "score": 94.3,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -48834,51 +48834,51 @@
         ]
       },
       {
-        "id": "17:market_timing:prediction",
-        "label": "17:00 UTC / Market Timing / Near-term Prediction",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "market_timing",
-        "pillarLabel": "Market Timing",
+        "id": "17:operator_leverage:second_order",
+        "label": "17:00 UTC / Operator Leverage / Second Order",
+        "formatId": "second_order",
+        "formatLabel": "Second Order",
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
         "hour": 17,
         "windowLabel": "17:00",
         "action": "exploit",
         "status": "hot",
-        "score": 93.9,
+        "score": 93.8,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Market Timing via Near-term Prediction in a learned 17:00 UTC load window."
+          "Seed Operator Leverage via Second Order in a learned 17:00 UTC load window."
         ],
         "promptDirectives": [
-          "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 17:00 UTC."
+          "Translate the story into how builders and operators gain or lose leverage. Use Second Order around 17:00 UTC."
         ]
       },
       {
-        "id": "17:risk_boundary:prediction",
-        "label": "17:00 UTC / Risk Boundary / Near-term Prediction",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "risk_boundary",
-        "pillarLabel": "Risk Boundary",
+        "id": "17:operator_leverage:not_x_but_y",
+        "label": "17:00 UTC / Operator Leverage / Not X But Y",
+        "formatId": "not_x_but_y",
+        "formatLabel": "Not X But Y",
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
         "hour": 17,
         "windowLabel": "17:00",
         "action": "exploit",
         "status": "hot",
-        "score": 93.9,
+        "score": 93.8,
         "confidence": "low",
         "sources": [
           "topic_timing"
         ],
         "samples": 0,
         "evidence": [
-          "Seed Risk Boundary via Near-term Prediction in a learned 17:00 UTC load window."
+          "Seed Operator Leverage via Not X But Y in a learned 17:00 UTC load window."
         ],
         "promptDirectives": [
-          "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 17:00 UTC."
+          "Translate the story into how builders and operators gain or lose leverage. Use Not X But Y around 17:00 UTC."
         ]
       },
       {
@@ -48892,7 +48892,7 @@
         "windowLabel": "00:00",
         "action": "exploit",
         "status": "hot",
-        "score": 82.7,
+        "score": 82.6,
         "confidence": "medium",
         "sources": [
           "content_bandit",
@@ -48947,21 +48947,21 @@
         {
           "source": "topic_timing",
           "lanes": 8,
-          "avgScore": 96.8,
+          "avgScore": 96.7,
           "samples": 5,
           "hotLanes": 8
         },
         {
           "source": "content_bandit",
           "lanes": 1,
-          "avgScore": 82.7,
+          "avgScore": 82.6,
           "samples": 25,
           "hotLanes": 1
         },
         {
           "source": "adaptive_scheduler",
           "lanes": 1,
-          "avgScore": 82.7,
+          "avgScore": 82.6,
           "samples": 25,
           "hotLanes": 1
         },
@@ -48988,7 +48988,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -49090,7 +49090,7 @@
     "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, brutal_truth, decision_rule, second_order, not_x_but_y, the_hard_way\nselected_story: Google’s new Pixel 11 offers an incredible camera feature that Apple should copy\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: second_order is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=17:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -50742,7 +50742,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -50962,7 +50962,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -51063,7 +51063,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 87,
@@ -51195,7 +51195,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "recovery_route",
     "confidence": "medium",
     "zeroExtraXReads": true,
@@ -51206,18 +51206,18 @@
       "impressions7d": 330,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "09:47",
+        "label": "10:45",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-22T09:47:55.037Z",
-        "endsAt": "2026-08-22T13:47:55.037Z"
+        "startsAt": "2026-08-22T10:45:36.414Z",
+        "endsAt": "2026-08-22T14:45:36.414Z"
       },
       "quietBucket": {
-        "label": "09:47",
+        "label": "10:45",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-08-22T09:47:55.037Z",
-        "endsAt": "2026-08-22T13:47:55.037Z"
+        "startsAt": "2026-08-22T10:45:36.414Z",
+        "endsAt": "2026-08-22T14:45:36.414Z"
       }
     },
     "safeBudgetLeftUsd": 3.265,
@@ -51346,8 +51346,8 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
-    "mode": "temporal_rotation",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
+    "mode": "peak_angle_wait",
     "confidence": "medium",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
@@ -51359,7 +51359,7 @@
         "slot": 1,
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "loadScore": 89.8,
         "formatId": "prediction",
         "label": "Near-term Prediction",
@@ -51376,7 +51376,7 @@
         "slot": 2,
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 5,
+        "hoursFromNow": 4,
         "loadScore": 79.3,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -51393,7 +51393,7 @@
         "slot": 3,
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "loadScore": 65.7,
         "formatId": "prediction",
         "label": "Near-term Prediction",
@@ -51410,7 +51410,7 @@
         "slot": 4,
         "hour": 15,
         "windowLabel": "15:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 5,
         "loadScore": 64.4,
         "formatId": "decision_rule",
         "label": "Decision Rule",
@@ -51425,8 +51425,8 @@
       },
       {
         "slot": 5,
-        "hour": 9,
-        "windowLabel": "09:00",
+        "hour": 10,
+        "windowLabel": "10:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "formatId": "prediction",
@@ -51443,7 +51443,7 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -51492,7 +51492,7 @@
         "id": "prediction",
         "slot": 1,
         "windowLabel": "17:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 7,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
@@ -51508,7 +51508,7 @@
         "id": "decision_rule",
         "slot": 2,
         "windowLabel": "14:00",
-        "hoursFromNow": 5,
+        "hoursFromNow": 4,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -51524,7 +51524,7 @@
         "id": "prediction",
         "slot": 3,
         "windowLabel": "13:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 3,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
@@ -51540,7 +51540,7 @@
         "id": "decision_rule",
         "slot": 4,
         "windowLabel": "15:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 5,
         "label": "Decision Rule",
         "formatId": "decision_rule",
         "action": "test",
@@ -51555,7 +51555,7 @@
       {
         "id": "prediction",
         "slot": 5,
-        "windowLabel": "09:00",
+        "windowLabel": "10:00",
         "hoursFromNow": 0,
         "label": "Near-term Prediction",
         "formatId": "prediction",
@@ -51578,12 +51578,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "medium",
-    "epoch": "2026-08-23T09:47",
+    "epoch": "2026-08-23T10:45",
     "sampleCount": 20,
     "baselineScore": 3.6,
     "activeRule": {
@@ -51679,7 +51679,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -51726,7 +51726,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -52136,7 +52136,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "updatedAt": "2026-08-23T01:20:01.352Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -52569,17 +52569,17 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
     "sampleCount": 20,
     "minSamples": 2,
     "confidence": "medium",
-    "mode": "manual_distribution",
+    "mode": "wait_for_peak",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 9,
-      "label": "09:00",
+      "hour": 10,
+      "label": "10:00",
       "loadScore": 0,
       "posts": 0,
       "impressions": 0,
@@ -52589,7 +52589,7 @@
     "nextWindow": {
       "hour": 13,
       "label": "13:00",
-      "hoursFromNow": 4,
+      "hoursFromNow": 3,
       "loadScore": 65.7,
       "posts": 5,
       "impressions": 134,
@@ -52634,7 +52634,7 @@
         "status": "warm"
       }
     ],
-    "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 17:00 UTC.",
+    "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
     "hours": [
       {
         "hour": 0,
@@ -52764,7 +52764,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 10,
@@ -52777,7 +52777,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": false
+        "current": true
       },
       {
         "hour": 11,
@@ -52952,7 +52952,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -53291,7 +53291,7 @@
     "nextExperimentZh": "继续加码 prediction，优先使用 dev.to 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "exploit_winners",
     "confidence": "medium",
     "baselineScore": 3.6,
@@ -53393,7 +53393,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -53407,7 +53407,7 @@
       "id": "prediction",
       "label": "Near-term Prediction",
       "status": "exploit",
-      "allocationPct": 7.5,
+      "allocationPct": 7.4,
       "avgScore": 4.4,
       "samples": 7,
       "liftPct": 22.8,
@@ -53511,7 +53511,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-08-23T09:47:55.012Z",
+    "generatedAt": "2026-08-23T10:45:36.405Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
