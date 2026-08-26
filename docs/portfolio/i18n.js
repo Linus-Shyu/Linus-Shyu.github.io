@@ -2,8 +2,8 @@ window.PORTFOLIO_I18N = {
   zh: {
     about: {
       title: "个人简介",
-      para1: "我是来自青海的高三学生，申请方向是计算机科学。信息学竞赛训练让我习惯把难题拆成清晰算法；自己做产品，则逼我把系统真正做完、让别人也能用。",
-      para2: "我关心系统软件、人机界面，以及服务学习者的工具。读大学时期望打下更扎实的理论，同时继续把作品做出来——尤其希望在香港严谨的 CS 环境里成长。",
+      para1: "我是来自青海的高三学生，通过内地高考申请香港理工大学，意向专业为电子计算及人工智能（计算机科学方向）。信息学竞赛训练让我习惯把难题拆成清晰算法；自己做产品，则逼我把系统真正做完、让别人也能用。",
+      para2: "我认同理大「应用为本」：软件要上线、工具要服务真实用户。Luma Bar、FeelFlow、XTerminal 都是沿着「发现问题 → 做成可用系统 → 公开验证」这条路走的。希望在理大继续强化软件工程与 AI 应用能力，并把握体验式学习与行业衔接。",
       para3: "高中阶段联合创立杭州星落湖探人工智能有限公司，并担任技术负责人 / CTO。课余在 B 站与 YouTube 公开记录开发过程。"
     },
     hobby: {
@@ -26,9 +26,9 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "高三 · 计算机科学申请者 · 中国青海",
+      eyebrow: "高三 · 高考申请 · 香港理工大学 Computing & AI",
       headline: "做能讲清楚、也能真正上线的系统。",
-      subheadline: "信息学竞赛训练、已上架的 App Store 产品，以及可公开验证的获奖作品与代码。"
+      subheadline: "信息学竞赛训练、已上架的 App Store 产品，以及可公开验证的获奖作品与代码——对齐理大应用为本。"
     },
     proof: {
       title: "亮点",
@@ -151,8 +151,8 @@ window.PORTFOLIO_I18N = {
   en: {
     about: {
       title: "About",
-      para1: "I'm a Grade 12 student from Qinghai applying to study Computer Science. Olympiad training taught me to turn hard problems into clear algorithms; building products taught me to finish systems that other people can actually use.",
-      para2: "I care about systems software, human–computer interfaces, and tools for learners. At university I want deeper theory plus the space to keep shipping—especially in a rigorous CS environment in Hong Kong.",
+      para1: "I'm a Grade 12 student from Qinghai applying to The Hong Kong Polytechnic University through the mainland Gaokao route. My intended programme is the BSc (Hons) Scheme in Computing and AI (Computer Science). Olympiad training taught me to turn hard problems into clear algorithms; building products taught me to finish systems other people can actually use.",
+      para2: "PolyU's application-oriented education matches how I already work: ship usable software, serve real users, and verify results in public. Projects like Luma Bar, FeelFlow, and XTerminal follow the same loop—spot a concrete need, build an end-to-end system, then open the code or ship the app. I want to deepen software engineering and applied AI at PolyU, and take full advantage of experiential learning and industry links.",
       para3: "I co-founded Star Lake Explorer AI (Hangzhou) and serve as technical lead / CTO while finishing high school. Outside class I document builds on Bilibili and YouTube."
     },
     hobby: {
@@ -175,9 +175,9 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "Grade 12 · Computer Science applicant · Qinghai, China",
+      eyebrow: "Grade 12 · Gaokao applicant · PolyU Computing & AI",
       headline: "I build systems I can explain—and ship.",
-      subheadline: "Olympiad training, a live App Store product, and award-winning tools with public code and demos."
+      subheadline: "Olympiad training, a live App Store product, and award-winning tools with public code—aligned with PolyU’s application-oriented education."
     },
     proof: {
       title: "Highlights",
