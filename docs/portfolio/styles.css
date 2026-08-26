@@ -256,7 +256,7 @@ body {
 
 /* ========== Hero Section ========== */
 .hero {
-    min-height: 80vh;
+    min-height: 72vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -327,7 +327,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    max-width: 16ch;
+    max-width: 18em;
     margin: 0 auto;
     opacity: 0;
     animation: heroFadeIn var(--duration-slow) var(--ease-out) 0.25s forwards;
@@ -360,6 +360,125 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ========== Proof strip ========== */
+.proof-section {
+    padding: 0 0 var(--spacing-section);
+}
+
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--color-border);
+}
+
+.proof-item {
+    padding: 1.35rem 1.25rem;
+    background: var(--color-bg-elevated);
+}
+
+.proof-value {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 800;
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: 1.15;
+    color: var(--color-award-strong);
+}
+
+.proof-label {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 900px) {
+    .proof-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .proof-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== Also section ========== */
+.also-section {
+    padding: 0 0 var(--spacing-section);
+}
+
+.also-lead {
+    margin: -0.35rem 0 1.5rem;
+    max-width: 48ch;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+}
+
+.also-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.also-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-subtle);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.also-card:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-text-tertiary);
+    transform: translateY(-2px);
+}
+
+.also-card__title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text);
+}
+
+.also-card__meta {
+    font-size: 0.8125rem;
+    color: var(--color-text-tertiary);
+}
+
+@media (max-width: 768px) {
+    .also-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.project-result {
+    margin: -0.35rem 0 0;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-award-border);
+    background: var(--color-award-bg);
+    color: var(--color-award-strong);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
 }
 
 /* ========== About & Hobby Sections ========== */

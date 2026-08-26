@@ -2,16 +2,15 @@ window.PORTFOLIO_I18N = {
   zh: {
     about: {
       title: "个人简介",
-      para1: "我叫林纳斯，来自青海，目前是一名高三学生。热爱计算机科学，享受动手开发有趣的项目，同时也是一名科技领域的自媒体创作者，乐于分享所学所得。大家可以在B站或YouTube上找到我的频道「Linus Shyu」，那里记录了我的学习与创作点滴。",
-      para2: "除了代码，我也喜欢在户外骑自行车、滑滑板，用镜头捕捉生活，或是在钢琴前放松自己。作为一名信息学竞赛选手，我有幸入围了NOI2025冬令营、2024全国青少年信息学奥林匹克联赛以及AdventureX2025。这些经历让我对软件开发和理论计算机科学产生了更深厚的兴趣，也坚定了未来希望进入MIT攻读计算机科学博士的理想。我期待能创造出既适合自己、也能帮助到更多有相似经历的人的工具与应用。",
-      para3: "目前，我正使用Swift开发并上架了一款名为「FeelFlow」的App至App Store。同时也在学习前端技术，希望能构建出既美观又交互丰富的高质量页面。为了进一步拓宽技术视野，我也在入门Rust语言，尝试复刻开源项目NeoFetch，并深入探索Linux底层相关的知识。重新构思我可以用Solidity写哪些真正能够打动大家的产品，而并不简单局限于Crypto。"
+      para1: "我是林纳斯，来自青海，高三。日常在写 Swift / macOS 原生工具，也在黑客松里把竞赛向 CLI 做出来。NOI 2025 冬令营、AdventureX、探月 MoonShot48 是我验证想法最快的地方。",
+      para2: "现在一边把 FeelFlow、Luma Bar 这类产品继续打磨，一边在 B 站 / YouTube 把过程公开。目标很具体：做出自己天天会用的工具，再让同类人也能用上。"
     },
     hobby: {
       title: "代码之外",
       creatorLabel: "创作",
       offlineLabel: "线下",
-      para1: "我是科技领域的创作者，喜欢把学习和正在做的项目分享出去——教程、黑客松与作品进展。",
-      para2: "离开键盘时，我更愿意待在户外，或动手做点别的事。",
+      para1: "把学习、黑客松和产品进展拍成内容，公开做给同龄 builder 看。",
+      para2: "离开键盘时，更愿意在户外或动手做点别的。",
       tagCycling: "骑行",
       tagSkateboarding: "滑板",
       tagPhotography: "摄影",
@@ -26,23 +25,46 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "18岁开发者 · 创业公司 CTO · 极简主义推崇者",
-      headline: "在 Rust 性能与 Swift 优雅之间，构建未来。",
-      subheadline: "杭州星落湖探人工智能有限公司联合创始人兼 CTO。专注数字主权与个人隐私。"
+      eyebrow: "18 · 高三 · Co-founder & CTO",
+      headline: "做真正能上手用的 macOS 与竞赛工具。",
+      subheadline: "用 Swift 做原生应用，在黑客松里把 CLI 做出来；能用的就开源，能上架的就上架。"
+    },
+    proof: {
+      title: "结果",
+      item1Value: "App Store",
+      item1Label: "FeelFlow 已上架",
+      item2Value: "第二名",
+      item2Label: "AdventureX 2026 · 亚马逊云科技赛道",
+      item3Value: "三等奖 ×2",
+      item3Label: "AdventureX 2025 · MoonShot48 2026",
+      item4Value: "开源",
+      item4Label: "XTerminal / StarFetch 各 12★"
+    },
+    also: {
+      title: "Also",
+      lead: "主线之外，这些也是我的一部分。",
+      photo: "风光摄影",
+      photoMeta: "Instagram",
+      homelab: "Homelab",
+      homelabMeta: "Bilibili",
+      paytube: "PayTube",
+      paytubeMeta: "Crypto 支付页"
     },
     projects: {
       heading: "核心项目",
       awardMark: "获奖",
       feelflow: {
         title: "FeelFlow.",
-        subhead: "隐私至上的情感共鸣。",
-        body: "Swift / SwiftUI / iOS 18 全新特性。数据完全存储于本地，不上传云端；内置多重 AI 人格，提供非预设的深度共情反馈；完美适配 Apple 生态。",
+        subhead: "隐私优先的情感日记，已上架 App Store。",
+        body: "SwiftUI · iOS 18。数据只留在本机；多人格 AI 提供非模板化共情反馈。面向真正会写日记、又在意隐私的人。",
+        result: "已上架 App Store",
         link: "App Store 查看 >"
       },
       xterminal: {
         title: "XTerminal.",
-        subhead: "为竞技编程而生的生产力工具。",
-        body: "Python 编写。针对 NOI/ACM 选手设计，将实时代码分析整合进终端流。已获软件著作权。",
+        subhead: "为 OI / ACM 选手准备的下一代终端工具。",
+        body: "Python。把打开赛题站、建本地文件、接本地 / 在线 LLM、看 Rating 变化，收进同一条终端工作流。已登记软件著作权。",
+        result: "GitHub 12★ · 软著",
         awardRank: "三等奖",
         awardMeta: "AdventureX 2025 · Kimi For Vibe Coding 赛道",
         badge: "三等奖 · AdventureX 2025",
@@ -51,8 +73,9 @@ window.PORTFOLIO_I18N = {
       },
       lumabar: {
         title: "Luma Bar.",
-        subhead: "围绕 MacBook 刘海的原生 macOS 灵动岛。",
-        body: "把音乐、本地 Agent、语音、任务提醒、系统控制与桌面宠物收进同一块缺口界面。现已开源。",
+        subhead: "长在 MacBook 刘海上的原生工作台。",
+        body: "Swift · macOS。音乐、本地 Agent、语音、任务提醒、系统控制与桌面宠物，收进同一块缺口界面。现已开源。",
+        result: "赛道第二名 · 开源",
         awardRank: "第二名",
         awardMeta: "AdventureX 2026 · 亚马逊云科技「快快快」赛道",
         badge: "第二名 · AdventureX 2026",
@@ -61,8 +84,9 @@ window.PORTFOLIO_I18N = {
       },
       causelink: {
         title: "CauseLink.",
-        subhead: "聚焦「错因分析」的 AI 学习诊断工具。",
-        body: "智能错题本：OCR 扫描、AI 解析、思维导图与举一反三闯关。智能识别错因、生成对应练习，并为教师提供群体错因统计与学情报告。",
+        subhead: "聚焦「错因」而不是错题堆叠的学习诊断。",
+        body: "OCR 扫描、AI 解析、思维导图与举一反三练习；给学生找错因，给老师看群体学情。",
+        result: "MoonShot48 三等奖",
         awardRank: "三等奖",
         awardMeta: "探月学校 2026 · MoonShot48 黑客松寒假场",
         badge: "三等奖 · MoonShot48",
@@ -70,8 +94,9 @@ window.PORTFOLIO_I18N = {
       },
       starfetch: {
         title: "StarFetch.",
-        subhead: "终端里的系统美学。",
-        body: "Rust 打造。极致追求轻量化与自适应 ASCII 布局；支持现代终端的可点击超链接。获 neofetch 作者背书。",
+        subhead: "用 Rust 重写的极简系统信息工具。",
+        body: "自适应 ASCII、可点击终端超链接，追求启动快、输出干净。获 neofetch 作者背书。",
+        result: "GitHub 12★ · neofetch 作者背书",
         link: "GitHub 查看 >",
         demo: "观看 Demo >"
       },
@@ -109,16 +134,15 @@ window.PORTFOLIO_I18N = {
   en: {
     about: {
       title: "About me",
-      para1: "I'm Linus, from Qinghai. I'm currently a Grade 12 student. I love computer science and enjoy building interesting projects. I'm also a tech creator and like to share what I learn. You can find my channel \"Linus Shyu\" on Bilibili or YouTube, where I document my learning and creations.",
-      para2: "Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.",
-      para3: "Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals—and rethinking what I could build with Solidity that truly resonates, beyond crypto alone."
+      para1: "I'm Linus, from Qinghai, currently in Grade 12. I build native Swift / macOS tools and ship competition-focused CLIs at hackathons. NOI 2025 Winter Camp, AdventureX, and Moonshot Academy's MoonShot48 are where I stress-test ideas fastest.",
+      para2: "Right now I'm polishing products like FeelFlow and Luma Bar while documenting the process on Bilibili and YouTube. The goal is concrete: ship tools I use every day—then make them useful for people on the same path."
     },
     hobby: {
       title: "Beyond code",
       creatorLabel: "Creator",
       offlineLabel: "Offline",
-      para1: "I share what I learn and build as a tech creator—walkthroughs, hackathons, and projects in progress.",
-      para2: "When I step away from the keyboard, I stay outside and keep making things with my hands.",
+      para1: "I publish walkthroughs, hackathon runs, and shipping notes for other student builders.",
+      para2: "Away from the keyboard, I stay outside or make things with my hands.",
       tagCycling: "Cycling",
       tagSkateboarding: "Skateboarding",
       tagPhotography: "Photography",
@@ -133,23 +157,46 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "18 · Developer · CTO · Minimalist",
-      headline: "Building the future where Rust meets Swift.",
-      subheadline: "Co-founder & CTO at Star Lake Explorer AI (Hangzhou). Focused on digital sovereignty and privacy."
+      eyebrow: "18 · Grade 12 · Co-founder & CTO",
+      headline: "Native tools for Mac and competitive programmers.",
+      subheadline: "I ship Swift apps and hackathon-built CLIs—open-source what works, publish what ships."
+    },
+    proof: {
+      title: "Proof",
+      item1Value: "App Store",
+      item1Label: "FeelFlow shipped",
+      item2Value: "2nd Place",
+      item2Label: "AdventureX 2026 · AWS track",
+      item3Value: "3rd ×2",
+      item3Label: "AdventureX 2025 · MoonShot48 2026",
+      item4Value: "Open source",
+      item4Label: "XTerminal / StarFetch · 12★ each"
+    },
+    also: {
+      title: "Also",
+      lead: "Outside the core line, these still shape how I build.",
+      photo: "Landscape photography",
+      photoMeta: "Instagram",
+      homelab: "Homelab",
+      homelabMeta: "Bilibili",
+      paytube: "PayTube",
+      paytubeMeta: "Crypto pay page"
     },
     projects: {
       heading: "Core Projects",
       awardMark: "Award",
       feelflow: {
         title: "FeelFlow.",
-        subhead: "Privacy-first emotional resonance.",
-        body: "Swift / SwiftUI / iOS 18. Data stays entirely on-device; multiple AI personalities for unscripted empathy; built for the Apple ecosystem.",
+        subhead: "Privacy-first emotional journal. Live on the App Store.",
+        body: "SwiftUI · iOS 18. On-device only. Multiple AI personalities for unscripted empathy—built for people who journal and care about privacy.",
+        result: "Shipped on the App Store",
         link: "View on App Store >"
       },
       xterminal: {
         title: "XTerminal.",
-        subhead: "Productivity tool built for competitive programming.",
-        body: "Written in Python. Real-time AI analysis in the terminal for NOI/ACM athletes. Software copyright registered.",
+        subhead: "Next-gen terminal workflow for OI / ACM athletes.",
+        body: "Python. Contest sites, local files, local/online LLMs, and rating charts in one terminal stream. Software copyright registered.",
+        result: "12 GitHub ★ · Software copyright",
         awardRank: "Third Prize",
         awardMeta: "AdventureX 2025 · Kimi For Vibe Coding Track",
         badge: "3rd · AdventureX 2025",
@@ -158,8 +205,9 @@ window.PORTFOLIO_I18N = {
       },
       lumabar: {
         title: "Luma Bar.",
-        subhead: "Native macOS Dynamic Island around the MacBook notch.",
-        body: "Music, local AI agent, voice, task reminders, system controls, and desktop pets in one notch workspace. Now open source.",
+        subhead: "A native macOS workspace around the MacBook notch.",
+        body: "Swift · macOS. Music, local agent, voice, reminders, system controls, and desktop pets in one notch UI. Now open source.",
+        result: "Track 2nd · Open source",
         awardRank: "2nd Place",
         awardMeta: "AdventureX 2026 · Amazon Web Services Quick Quick Track",
         badge: "2nd · AdventureX 2026",
@@ -168,8 +216,9 @@ window.PORTFOLIO_I18N = {
       },
       causelink: {
         title: "CauseLink.",
-        subhead: "AI learning diagnostic focused on error-cause analysis.",
-        body: "Smart wrong-question notebook: OCR scan, AI parsing, mind maps & drill games. Identifies error causes, generates practice, and provides group analytics for teachers.",
+        subhead: "Learning diagnostics focused on error causes—not piles of wrong answers.",
+        body: "OCR, AI parsing, mind maps, and targeted drills. Students get causes; teachers get cohort insight.",
+        result: "MoonShot48 Third Prize",
         awardRank: "Third Prize",
         awardMeta: "Moonshot Academy 2026 · MoonShot48 Winter Hackathon",
         badge: "3rd · MoonShot48",
@@ -177,8 +226,9 @@ window.PORTFOLIO_I18N = {
       },
       starfetch: {
         title: "StarFetch.",
-        subhead: "System aesthetics in the terminal.",
-        body: "Rust. Lightweight, adaptive ASCII layout; clickable hyperlinks for modern terminals. Endorsed by the author of neofetch.",
+        subhead: "A minimal system-info tool rewritten in Rust.",
+        body: "Adaptive ASCII, clickable terminal hyperlinks, fast startup. Endorsed by the author of neofetch.",
+        result: "12 GitHub ★ · neofetch author endorsement",
         link: "View on GitHub >",
         demo: "Watch Demo >"
       },
