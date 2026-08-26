@@ -15,7 +15,7 @@
   }
 
   function getLang() {
-    return localStorage.getItem(STORAGE_LANG) || (navigator.language && navigator.language.indexOf("zh") === 0 ? "zh" : "en");
+    return localStorage.getItem(STORAGE_LANG) || "en";
   }
 
   function getNested(obj, path) {

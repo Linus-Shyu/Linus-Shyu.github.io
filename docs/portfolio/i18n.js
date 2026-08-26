@@ -2,8 +2,9 @@ window.PORTFOLIO_I18N = {
   zh: {
     about: {
       title: "个人简介",
-      para1: "我是林纳斯，来自青海，高三。日常在写 Swift / macOS 原生工具，也在黑客松里把竞赛向 CLI 做出来。NOI 2025 冬令营、AdventureX、探月 MoonShot48 是我验证想法最快的地方。",
-      para2: "现在一边把 FeelFlow、Luma Bar 这类产品继续打磨，一边在 B 站 / YouTube 把过程公开。目标很具体：做出自己天天会用的工具，再让同类人也能用上。"
+      para1: "我是来自青海的高三学生，申请方向是计算机科学。信息学竞赛训练让我习惯把难题拆成清晰算法；自己做产品，则逼我把系统真正做完、让别人也能用。",
+      para2: "我关心系统软件、人机界面，以及服务学习者的工具。读大学时期望打下更扎实的理论，同时继续把作品做出来——尤其希望在香港严谨的 CS 环境里成长。",
+      para3: "高中阶段联合创立杭州星落湖探人工智能有限公司，并担任技术负责人 / CTO。课余在 B 站与 YouTube 公开记录开发过程。"
     },
     hobby: {
       title: "代码之外",
@@ -25,20 +26,36 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "18 · 高三 · Co-founder & CTO",
-      headline: "做真正能上手用的 macOS 与竞赛工具。",
-      subheadline: "用 Swift 做原生应用，在黑客松里把 CLI 做出来；能用的就开源，能上架的就上架。"
+      eyebrow: "高三 · 计算机科学申请者 · 中国青海",
+      headline: "做能讲清楚、也能真正上线的系统。",
+      subheadline: "信息学竞赛训练、已上架的 App Store 产品，以及可公开验证的获奖作品与代码。"
     },
     proof: {
-      title: "结果",
-      item1Value: "App Store",
-      item1Label: "FeelFlow 已上架",
-      item2Value: "第二名",
-      item2Label: "AdventureX 2026 · 亚马逊云科技赛道",
-      item3Value: "三等奖 ×2",
-      item3Label: "AdventureX 2025 · MoonShot48 2026",
-      item4Value: "开源",
-      item4Label: "XTerminal / StarFetch 各 12★"
+      title: "亮点",
+      item1Value: "NOI 2025",
+      item1Label: "冬令营入选",
+      item2Value: "App Store",
+      item2Label: "FeelFlow 已上架",
+      item3Value: "第二名",
+      item3Label: "AdventureX 2026 · 亚马逊云科技赛道",
+      item4Value: "三等奖 ×2",
+      item4Label: "AdventureX 2025 · MoonShot48 2026"
+    },
+    academic: {
+      title: "学术与获奖",
+      lead: "招生官可核对的证据：竞赛、产品与开源。",
+      item1When: "2025",
+      item1What: "入选 NOI 冬令营（全国青少年信息学奥林匹克）。",
+      item2When: "2024",
+      item2What: "全国青少年信息学奥林匹克联赛（NOIP）。",
+      item3When: "2026",
+      item3What: "AdventureX — 亚马逊云科技赛道第二名（Luma Bar）。",
+      item4When: "2026",
+      item4What: "探月学校 MoonShot48 黑客松寒假场三等奖（CauseLink）。",
+      item5When: "2025",
+      item5What: "AdventureX — Kimi For Vibe Coding 赛道三等奖（XTerminal）；已登记软件著作权。",
+      item6When: "产品",
+      item6What: "FeelFlow 已上架 App Store；Luma Bar / XTerminal / StarFetch 开源。"
     },
     also: {
       title: "Also",
@@ -133,9 +150,10 @@ window.PORTFOLIO_I18N = {
   },
   en: {
     about: {
-      title: "About me",
-      para1: "I'm Linus, from Qinghai, currently in Grade 12. I build native Swift / macOS tools and ship competition-focused CLIs at hackathons. NOI 2025 Winter Camp, AdventureX, and Moonshot Academy's MoonShot48 are where I stress-test ideas fastest.",
-      para2: "Right now I'm polishing products like FeelFlow and Luma Bar while documenting the process on Bilibili and YouTube. The goal is concrete: ship tools I use every day—then make them useful for people on the same path."
+      title: "About",
+      para1: "I'm a Grade 12 student from Qinghai applying to study Computer Science. Olympiad training taught me to turn hard problems into clear algorithms; building products taught me to finish systems that other people can actually use.",
+      para2: "I care about systems software, human–computer interfaces, and tools for learners. At university I want deeper theory plus the space to keep shipping—especially in a rigorous CS environment in Hong Kong.",
+      para3: "I co-founded Star Lake Explorer AI (Hangzhou) and serve as technical lead / CTO while finishing high school. Outside class I document builds on Bilibili and YouTube."
     },
     hobby: {
       title: "Beyond code",
@@ -157,20 +175,36 @@ window.PORTFOLIO_I18N = {
       codeforces: "CodeForces"
     },
     hero: {
-      eyebrow: "18 · Grade 12 · Co-founder & CTO",
-      headline: "Native tools for Mac and competitive programmers.",
-      subheadline: "I ship Swift apps and hackathon-built CLIs—open-source what works, publish what ships."
+      eyebrow: "Grade 12 · Computer Science applicant · Qinghai, China",
+      headline: "I build systems I can explain—and ship.",
+      subheadline: "Olympiad training, a live App Store product, and award-winning tools with public code and demos."
     },
     proof: {
-      title: "Proof",
-      item1Value: "App Store",
-      item1Label: "FeelFlow shipped",
-      item2Value: "2nd Place",
-      item2Label: "AdventureX 2026 · AWS track",
-      item3Value: "3rd ×2",
-      item3Label: "AdventureX 2025 · MoonShot48 2026",
-      item4Value: "Open source",
-      item4Label: "XTerminal / StarFetch · 12★ each"
+      title: "Highlights",
+      item1Value: "NOI 2025",
+      item1Label: "Winter Camp selected",
+      item2Value: "App Store",
+      item2Label: "FeelFlow shipped",
+      item3Value: "2nd Place",
+      item3Label: "AdventureX 2026 · AWS track",
+      item4Value: "3rd ×2",
+      item4Label: "AdventureX 2025 · MoonShot48 2026"
+    },
+    academic: {
+      title: "Academic & awards",
+      lead: "Evidence admissions readers can verify—contests, products, and open-source work.",
+      item1When: "2025",
+      item1What: "Selected for NOI Winter Camp (National Olympiad in Informatics).",
+      item2When: "2024",
+      item2What: "NOIP (National Olympiad in Informatics in Provinces).",
+      item3When: "2026",
+      item3What: "AdventureX — 2nd Place, Amazon Web Services track (Luma Bar).",
+      item4When: "2026",
+      item4What: "Moonshot Academy MoonShot48 Winter Hackathon — Third Prize (CauseLink).",
+      item5When: "2025",
+      item5What: "AdventureX — Third Prize, Kimi For Vibe Coding track (XTerminal); software copyright registered.",
+      item6When: "Product",
+      item6What: "FeelFlow live on the App Store; Luma Bar / XTerminal / StarFetch open on GitHub."
     },
     also: {
       title: "Also",

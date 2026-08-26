@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linus Shyu — Portfolio</title>
-    <meta name="description" content="Linus Shyu · 18岁高三开发者，Star Lake Explorer AI 联合创始人兼 CTO。做 macOS / Swift 原生工具与竞赛 CLI：FeelFlow、Luma Bar、XTerminal、StarFetch、CauseLink。">
-    <meta name="keywords" content="Linus Shyu, 许发鑫, portfolio, FeelFlow, Luma Bar, CauseLink, XTerminal, StarFetch, Swift, macOS, Rust, AdventureX, MoonShot48">
-    <meta property="og:title" content="Linus Shyu — Portfolio">
-    <meta property="og:description" content="18 · Grade 12 · Building native Mac tools and competition CLIs. FeelFlow, Luma Bar, XTerminal, StarFetch.">
+    <meta name="description" content="Faxin Xu (Linus Shyu) · Grade 12 student from Qinghai applying in Computer Science. NOI Winter Camp, shipped App Store app, AdventureX & MoonShot48 awards. Projects: Luma Bar, FeelFlow, XTerminal, CauseLink, StarFetch.">
+    <meta name="keywords" content="Faxin Xu, Linus Shyu, 许发鑫, portfolio, university application, Computer Science, Hong Kong, NOI, FeelFlow, Luma Bar, XTerminal, StarFetch, CauseLink">
+    <meta property="og:title" content="Linus Shyu (Faxin Xu) — Portfolio">
+    <meta property="og:description" content="Grade 12 CS applicant. Olympiad training, shipped products, and award-winning tools—with code and demos.">
     <meta property="og:image" content="https://github.com/Linus-Shyu.png">
     <meta property="og:url" content="https://linusshyu.dev/portfolio/">
     <meta property="og:type" content="website">
@@ -15,7 +15,8 @@
     <script>
         (function () {
             var theme = localStorage.getItem('portfolio-theme') || 'dark';
-            var lang = localStorage.getItem('portfolio-lang') || (navigator.language && navigator.language.indexOf('zh') === 0 ? 'zh' : 'en');
+            // Default English for university admissions readers; user can still switch.
+            var lang = localStorage.getItem('portfolio-lang') || 'en';
             document.documentElement.setAttribute('data-theme', theme);
             document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
         })();
@@ -51,33 +52,66 @@
 
     <section class="hero">
         <div class="hero-inner container">
-            <p class="hero-eyebrow" data-i18n="hero.eyebrow">18 · Grade 12 · Co-founder &amp; CTO</p>
-            <h1 class="hero-headline" data-i18n="hero.headline">Native tools for Mac and competitive programmers.</h1>
-            <p class="hero-subheadline" data-i18n="hero.subheadline">I ship Swift apps and hackathon-built CLIs—open-source what works, publish what ships.</p>
+            <p class="hero-eyebrow" data-i18n="hero.eyebrow">Grade 12 · Computer Science applicant · Qinghai, China</p>
+            <h1 class="hero-headline" data-i18n="hero.headline">I build systems I can explain—and ship.</h1>
+            <p class="hero-subheadline" data-i18n="hero.subheadline">Olympiad training, a live App Store product, and award-winning tools with public code and demos.</p>
         </div>
     </section>
 
     <section class="proof-section" aria-labelledby="proof-heading">
         <div class="container">
-            <h2 id="proof-heading" class="visually-hidden" data-i18n="proof.title">Proof</h2>
+            <h2 id="proof-heading" class="visually-hidden" data-i18n="proof.title">Highlights</h2>
             <div class="proof-grid">
                 <div class="proof-item">
-                    <p class="proof-value" data-i18n="proof.item1Value">App Store</p>
-                    <p class="proof-label" data-i18n="proof.item1Label">FeelFlow shipped</p>
+                    <p class="proof-value" data-i18n="proof.item1Value">NOI 2025</p>
+                    <p class="proof-label" data-i18n="proof.item1Label">Winter Camp selected</p>
                 </div>
                 <div class="proof-item">
-                    <p class="proof-value" data-i18n="proof.item2Value">2nd Place</p>
-                    <p class="proof-label" data-i18n="proof.item2Label">AdventureX 2026 · AWS track</p>
+                    <p class="proof-value" data-i18n="proof.item2Value">App Store</p>
+                    <p class="proof-label" data-i18n="proof.item2Label">FeelFlow shipped</p>
                 </div>
                 <div class="proof-item">
-                    <p class="proof-value" data-i18n="proof.item3Value">3rd ×2</p>
-                    <p class="proof-label" data-i18n="proof.item3Label">AdventureX 2025 · MoonShot48 2026</p>
+                    <p class="proof-value" data-i18n="proof.item3Value">2nd Place</p>
+                    <p class="proof-label" data-i18n="proof.item3Label">AdventureX 2026 · AWS track</p>
                 </div>
                 <div class="proof-item">
-                    <p class="proof-value" data-i18n="proof.item4Value">Open source</p>
-                    <p class="proof-label" data-i18n="proof.item4Label">XTerminal / StarFetch · 12★ each</p>
+                    <p class="proof-value" data-i18n="proof.item4Value">3rd ×2</p>
+                    <p class="proof-label" data-i18n="proof.item4Label">AdventureX 2025 · MoonShot48 2026</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="academic-section" aria-labelledby="academic-heading">
+        <div class="container">
+            <h2 id="academic-heading" class="section-title" data-i18n="academic.title">Academic &amp; awards</h2>
+            <p class="academic-lead" data-i18n="academic.lead">Evidence admissions readers can verify—contests, products, and open-source work.</p>
+            <ul class="academic-list">
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item1When">2025</span>
+                    <span class="academic-list__what" data-i18n="academic.item1What">Selected for NOI Winter Camp (National Olympiad in Informatics).</span>
+                </li>
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item2When">2024</span>
+                    <span class="academic-list__what" data-i18n="academic.item2What">NOIP (National Olympiad in Informatics in Provinces).</span>
+                </li>
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item3When">2026</span>
+                    <span class="academic-list__what" data-i18n="academic.item3What">AdventureX — 2nd Place, Amazon Web Services track (Luma Bar).</span>
+                </li>
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item4When">2026</span>
+                    <span class="academic-list__what" data-i18n="academic.item4What">Moonshot Academy MoonShot48 Winter Hackathon — Third Prize (CauseLink).</span>
+                </li>
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item5When">2025</span>
+                    <span class="academic-list__what" data-i18n="academic.item5What">AdventureX — Third Prize, Kimi For Vibe Coding track (XTerminal); software copyright registered.</span>
+                </li>
+                <li>
+                    <span class="academic-list__when" data-i18n="academic.item6When">Product</span>
+                    <span class="academic-list__what" data-i18n="academic.item6What">FeelFlow live on the App Store; Luma Bar / XTerminal / StarFetch open on GitHub.</span>
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -234,14 +268,16 @@
 
     <section class="about-section" aria-labelledby="about-heading">
         <div class="container">
-            <h2 id="about-heading" class="section-title about-section__title" data-i18n="about.title">About me</h2>
+            <h2 id="about-heading" class="section-title about-section__title" data-i18n="about.title">About</h2>
             <div class="about-inner">
                 <div class="about-content">
-                    <p class="about-para" data-i18n="about.para1">I'm Linus, from Qinghai, currently in Grade 12. I build native Swift / macOS tools and ship competition-focused CLIs at hackathons. NOI 2025 Winter Camp, AdventureX, and Moonshot Academy's MoonShot48 are where I stress-test ideas fastest.</p>
-                    <p class="about-para" data-i18n="about.para2">Right now I'm polishing products like FeelFlow and Luma Bar while documenting the process on Bilibili and YouTube. The goal is concrete: ship tools I use every day—then make them useful for people on the same path.</p>
+                    <p class="about-name">Faxin Xu <span class="about-name__aka">(Linus Shyu / 许发鑫)</span></p>
+                    <p class="about-para" data-i18n="about.para1">I'm a Grade 12 student from Qinghai applying to study Computer Science. Olympiad training taught me to turn hard problems into clear algorithms; building products taught me to finish systems that other people can actually use.</p>
+                    <p class="about-para" data-i18n="about.para2">I care about systems software, human–computer interfaces, and tools for learners. At university I want deeper theory plus the space to keep shipping—especially in a rigorous CS environment in Hong Kong.</p>
+                    <p class="about-para" data-i18n="about.para3">I co-founded Star Lake Explorer AI (Hangzhou) and serve as technical lead / CTO while finishing high school. Outside class I document builds on Bilibili and YouTube.</p>
                 </div>
                 <div class="about-photo">
-                    <img src="https://github.com/Linus-Shyu.png" alt="Linus Shyu" class="about-photo__img" width="320" height="320" loading="lazy" decoding="async">
+                    <img src="https://github.com/Linus-Shyu.png" alt="Faxin Xu (Linus Shyu)" class="about-photo__img" width="320" height="320" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -281,6 +317,7 @@
     <footer class="portfolio-footer">
         <div class="container">
             <p class="footer-contact-label" data-i18n="footer.contact">Contact</p>
+            <p class="footer-name">Faxin Xu · Linus Shyu · 许发鑫</p>
             <p class="footer-email">
                 <a href="mailto:0x11@linusshyu.dev" class="footer-link">0x11@linusshyu.dev</a>
             </p>
