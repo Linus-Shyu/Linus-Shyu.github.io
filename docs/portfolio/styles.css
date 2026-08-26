@@ -916,6 +916,12 @@ body {
     border-radius: inherit;
 }
 
+.project-block--media > picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .project-image {
     width: 100%;
     height: 100%;
