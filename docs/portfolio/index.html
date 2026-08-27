@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/portfolio/styles.css">
     <script>
         (function () {
-            var theme = localStorage.getItem('portfolio-theme') || 'dark';
-            if (theme !== 'light' && theme !== 'polyu' && theme !== 'medialab') theme = 'dark';
+            var theme = localStorage.getItem('portfolio-theme') || 'medialab';
+            if (theme !== 'light' && theme !== 'polyu' && theme !== 'medialab' && theme !== 'dark') theme = 'medialab';
             var lang = localStorage.getItem('portfolio-lang') || (navigator.language && navigator.language.indexOf('zh') === 0 ? 'zh' : 'en');
             document.documentElement.setAttribute('data-theme', theme);
             document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
@@ -70,8 +70,11 @@
                     <p class="about-para" data-i18n="about.para2">Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025 and 2026. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.</p>
                     <p class="about-para" data-i18n="about.para3">Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals. I keep publishing Solidity and Ethers.js tutorials on Bilibili, and I'm rethinking what I could build with Solidity that truly resonates, beyond crypto alone.</p>
                 </div>
-                <div class="about-photo">
-                    <img src="https://github.com/Linus-Shyu.png" alt="许发鑫 / Faxin Xu (Linus Shyu)" class="about-photo__img" width="320" height="320" loading="lazy" decoding="async">
+                <div class="about-photo project-block--media" aria-label="Portrait">
+                    <picture>
+                        <source type="image/webp" srcset="/portfolio/img/me.webp">
+                        <img src="/portfolio/img/me.JPG" alt="许发鑫 / Faxin Xu (Linus Shyu)" class="about-photo__img project-image" width="1600" height="1068" loading="lazy" decoding="async">
+                    </picture>
                 </div>
             </div>
         </div>

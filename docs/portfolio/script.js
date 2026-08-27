@@ -3,9 +3,9 @@
   var STORAGE_LANG = "portfolio-lang";
 
   function getTheme() {
-    var theme = localStorage.getItem(STORAGE_THEME) || "dark";
-    if (theme === "light" || theme === "polyu" || theme === "medialab") return theme;
-    return "dark";
+    var theme = localStorage.getItem(STORAGE_THEME) || "medialab";
+    if (theme === "light" || theme === "polyu" || theme === "medialab" || theme === "dark") return theme;
+    return "medialab";
   }
 
   function mediaLabIconHtml() {
