@@ -1,5 +1,5 @@
 (function () {
-  var STORAGE_THEME = "portfolio-theme";
+  var STORAGE_THEME = "portfolio-theme-v2";
   var STORAGE_LANG = "portfolio-lang";
 
   function getTheme() {
