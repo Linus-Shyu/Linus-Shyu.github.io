@@ -252,15 +252,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.15rem;
-    height: 1.15rem;
-    border-radius: 0.2rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0;
-    color: #f7f1f2;
-    background: #a02337;
+    width: 1.35rem;
+    height: 1.35rem;
+    padding: 0;
+    border-radius: 0.28rem;
+    overflow: hidden;
+    background: #0a0a0a;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.theme-icon--polyu img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .lang-text {
@@ -1141,9 +1146,8 @@ html[lang="zh-CN"] .hero-headline {
 }
 
 [data-theme="polyu"] .theme-icon--polyu {
-    color: #a02337;
-    background: #f0d59a;
-    box-shadow: none;
+    background: #0a0a0a;
+    box-shadow: inset 0 0 0 1px rgba(240, 213, 154, 0.45);
 }
 
 .project-block--media {

@@ -8,20 +8,20 @@
     return "dark";
   }
 
-  function themeIcon(theme) {
-    if (theme === "light") return "☀️";
-    if (theme === "polyu") return "P";
-    return "🌙";
-  }
-
   function setTheme(theme) {
     if (theme !== "light" && theme !== "polyu") theme = "dark";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(STORAGE_THEME, theme);
     var icon = document.getElementById("themeIcon");
     if (icon) {
-      icon.textContent = themeIcon(theme);
-      icon.classList.toggle("theme-icon--polyu", theme === "polyu");
+      if (theme === "polyu") {
+        icon.classList.add("theme-icon--polyu");
+        icon.innerHTML =
+          '<img src="/portfolio/img/polyu-symbol.webp" alt="" width="18" height="20" decoding="async">';
+      } else {
+        icon.classList.remove("theme-icon--polyu");
+        icon.textContent = theme === "light" ? "☀️" : "🌙";
+      }
     }
     var btn = document.getElementById("themeToggle");
     if (btn) {
