@@ -145,58 +145,73 @@
     initProjectCoverTilt();
   }
 
+  function bindMediaTilt(surface, target, options) {
+    var maxTilt = (options && options.maxTilt) || 10;
+    var scale = (options && options.scale) || 1.03;
+    var glare = document.createElement("span");
+    glare.className = "project-media-glare";
+    glare.setAttribute("aria-hidden", "true");
+    target.appendChild(glare);
+
+    var frame = 0;
+
+    function onMove(e) {
+      var rect = surface.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      var px = (e.clientX - rect.left) / rect.width;
+      var py = (e.clientY - rect.top) / rect.height;
+      var rotateY = (px - 0.5) * (maxTilt * 2);
+      var rotateX = (0.5 - py) * (maxTilt * 2);
+
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(function () {
+        target.classList.add("is-tilting");
+        target.style.transform =
+          "perspective(1000px) rotateX(" +
+          rotateX.toFixed(2) +
+          "deg) rotateY(" +
+          rotateY.toFixed(2) +
+          "deg) scale3d(" +
+          scale +
+          ", " +
+          scale +
+          ", " +
+          scale +
+          ")";
+        glare.style.background =
+          "radial-gradient(circle at " +
+          (px * 100).toFixed(1) +
+          "% " +
+          (py * 100).toFixed(1) +
+          "%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 32%, transparent 62%)";
+      });
+    }
+
+    function onLeave() {
+      if (frame) cancelAnimationFrame(frame);
+      target.classList.remove("is-tilting");
+      target.style.transform = "";
+      glare.style.background = "";
+    }
+
+    surface.addEventListener("mousemove", onMove);
+    surface.addEventListener("mouseleave", onLeave);
+  }
+
   function initProjectCoverTilt() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.matchMedia("(hover: none)").matches) return;
 
-    var maxTilt = 10;
-    var cards = document.querySelectorAll(".project-block--media");
-
-    cards.forEach(function (card) {
-      var glare = document.createElement("span");
-      glare.className = "project-media-glare";
-      glare.setAttribute("aria-hidden", "true");
-      card.appendChild(glare);
-
-      var frame = 0;
-
-      function onMove(e) {
-        var rect = card.getBoundingClientRect();
-        if (!rect.width || !rect.height) return;
-
-        var px = (e.clientX - rect.left) / rect.width;
-        var py = (e.clientY - rect.top) / rect.height;
-        var rotateY = (px - 0.5) * (maxTilt * 2);
-        var rotateX = (0.5 - py) * (maxTilt * 2);
-
-        if (frame) cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(function () {
-          card.classList.add("is-tilting");
-          card.style.transform =
-            "perspective(1000px) rotateX(" +
-            rotateX.toFixed(2) +
-            "deg) rotateY(" +
-            rotateY.toFixed(2) +
-            "deg) scale3d(1.03, 1.03, 1.03)";
-          glare.style.background =
-            "radial-gradient(circle at " +
-            (px * 100).toFixed(1) +
-            "% " +
-            (py * 100).toFixed(1) +
-            "%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 32%, transparent 62%)";
-        });
-      }
-
-      function onLeave() {
-        if (frame) cancelAnimationFrame(frame);
-        card.classList.remove("is-tilting");
-        card.style.transform = "";
-        glare.style.background = "";
-      }
-
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
+    document.querySelectorAll(".project-block--media").forEach(function (card) {
+      bindMediaTilt(card, card, { maxTilt: 10, scale: 1.03 });
     });
+
+    var hero = document.querySelector(".hero");
+    var heroMedia = document.querySelector(".hero-media");
+    if (hero && heroMedia) {
+      bindMediaTilt(hero, heroMedia, { maxTilt: 8, scale: 1.045 });
+    }
   }
 
   if (document.readyState === "loading") {

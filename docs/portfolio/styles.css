@@ -521,11 +521,12 @@ body {
     overflow: hidden;
 }
 
-/* PolyU campus photo + dark wash for readable type */
-.hero::before {
-    content: "";
+/* Photo layer tilts like project covers; wash stays readable on top */
+.hero-media {
     position: absolute;
-    inset: 0;
+    inset: -8%;
+    z-index: 0;
+    pointer-events: none;
     background-color: #0d0d0d;
     background-image:
         linear-gradient(
@@ -541,9 +542,23 @@ body {
     background-size: cover;
     background-position: center 40%;
     background-repeat: no-repeat;
-    z-index: 0;
-    pointer-events: none;
-    transform: scale(1.02);
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1.02, 1.02, 1.02);
+    transition:
+        transform 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out);
+    will-change: transform;
+}
+
+.hero-media.is-tilting {
+    transition:
+        transform 0.08s linear,
+        box-shadow 0.2s var(--ease-out);
+}
+
+.hero-media .project-media-glare {
+    border-radius: 0;
+    z-index: 1;
 }
 
 .hero::after {
@@ -615,7 +630,7 @@ html[data-theme="medialab"] .hero-credit--medialab {
     background-clip: text;
 }
 
-[data-theme="polyu"] .hero::before {
+[data-theme="polyu"] .hero-media {
     background-color: #7d1526;
     background-image:
         linear-gradient(
@@ -667,7 +682,7 @@ html[data-theme="polyu"] body {
     background-attachment: fixed;
 }
 
-[data-theme="medialab"] .hero::before {
+[data-theme="medialab"] .hero-media {
     background-color: #000000;
     background-image:
         linear-gradient(
@@ -1687,7 +1702,9 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     .project-block--media,
     .project-block--media.is-tilting,
     .project-block--media .project-image,
-    .project-block--media.is-tilting .project-image {
+    .project-block--media.is-tilting .project-image,
+    .hero-media,
+    .hero-media.is-tilting {
         transform: none !important;
         transition: none !important;
         cursor: default;
@@ -1800,7 +1817,8 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
         padding: 1.5rem 0 2.5rem;
     }
 
-    .hero::before {
+    .hero-media {
+        inset: 0;
         background-position: center 35%;
         transform: none;
     }
