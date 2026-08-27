@@ -249,6 +249,7 @@ window.PORTFOLIO_I18N = {
     ui: {
       themeLight: "Light",
       themeDark: "Dark",
+      themePolyu: "PolyU",
       langZh: "中文",
       langEn: "English"
     },
