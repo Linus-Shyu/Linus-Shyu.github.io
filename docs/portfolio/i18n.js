@@ -121,6 +121,7 @@ window.PORTFOLIO_I18N = {
       themeLight: "浅色",
       themeDark: "深色",
       themePolyu: "PolyU",
+      themeMedialab: "Media Lab",
       langZh: "中文",
       langEn: "English"
     },
@@ -250,6 +251,7 @@ window.PORTFOLIO_I18N = {
       themeLight: "Light",
       themeDark: "Dark",
       themePolyu: "PolyU",
+      themeMedialab: "Media Lab",
       langZh: "中文",
       langEn: "English"
     },

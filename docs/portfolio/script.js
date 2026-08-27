@@ -4,29 +4,44 @@
 
   function getTheme() {
     var theme = localStorage.getItem(STORAGE_THEME) || "dark";
-    if (theme === "light" || theme === "polyu") return theme;
+    if (theme === "light" || theme === "polyu" || theme === "medialab") return theme;
     return "dark";
   }
 
+  function mediaLabIconHtml() {
+    var cells = "";
+    for (var i = 0; i < 49; i++) cells += "<i></i>";
+    return cells;
+  }
+
   function setTheme(theme) {
-    if (theme !== "light" && theme !== "polyu") theme = "dark";
+    if (theme !== "light" && theme !== "polyu" && theme !== "medialab") theme = "dark";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(STORAGE_THEME, theme);
     var icon = document.getElementById("themeIcon");
     if (icon) {
+      icon.classList.remove("theme-icon--polyu", "theme-icon--medialab");
       if (theme === "polyu") {
         icon.classList.add("theme-icon--polyu");
         icon.innerHTML =
           '<img src="/portfolio/img/polyu-symbol.png" alt="" width="18" height="20" decoding="async">';
+      } else if (theme === "medialab") {
+        icon.classList.add("theme-icon--medialab");
+        icon.innerHTML = mediaLabIconHtml();
       } else {
-        icon.classList.remove("theme-icon--polyu");
         icon.textContent = theme === "light" ? "☀️" : "🌙";
       }
     }
     var btn = document.getElementById("themeToggle");
     if (btn) {
       var label =
-        theme === "polyu" ? "PolyU theme" : theme === "light" ? "Light theme" : "Dark theme";
+        theme === "medialab"
+          ? "MIT Media Lab theme"
+          : theme === "polyu"
+            ? "PolyU theme"
+            : theme === "light"
+              ? "Light theme"
+              : "Dark theme";
       btn.setAttribute("aria-label", label);
       btn.setAttribute("title", label);
     }
@@ -35,6 +50,7 @@
   function nextTheme(theme) {
     if (theme === "dark") return "light";
     if (theme === "light") return "polyu";
+    if (theme === "polyu") return "medialab";
     return "dark";
   }
 

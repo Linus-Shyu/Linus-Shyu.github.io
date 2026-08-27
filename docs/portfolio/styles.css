@@ -96,6 +96,45 @@
     --shadow-project: 0 20px 44px rgba(125, 21, 38, 0.14), 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
+/* MIT Media Lab theme — Pentagram black/white pixel grid + classic spectrum accents */
+[data-theme="medialab"] {
+    --color-bg: #ffffff;
+    --color-bg-elevated: #ffffff;
+    --color-bg-subtle: #f2f2f2;
+
+    --color-text: #000000;
+    --color-text-secondary: #333333;
+    --color-text-tertiary: #666666;
+
+    --color-border: #e5e5e5;
+
+    --color-accent: #000000;
+    --color-accent-strong: #111111;
+    --color-accent-soft: rgba(0, 0, 0, 0.06);
+
+    --color-award: #000000;
+    --color-award-strong: #000000;
+    --color-award-bg: rgba(0, 0, 0, 0.05);
+    --color-award-border: rgba(0, 0, 0, 0.85);
+
+    --ml-spectrum: linear-gradient(
+        90deg,
+        #e31c79 0%,
+        #ff6b00 18%,
+        #ffcc00 36%,
+        #00a651 54%,
+        #00a0e3 72%,
+        #662d91 100%
+    );
+
+    --font-sans: Helvetica, "Helvetica Neue", Arial, sans-serif;
+    --radius-pill: 0;
+    --radius-card: 0;
+    --shadow-project: none;
+    --letter-spacing-tight: -0.03em;
+    --letter-spacing-tighter: -0.045em;
+}
+
 /* ========== Terminal-style Header (StarFetch style) ========== */
 .terminal-header {
     position: fixed;
@@ -165,6 +204,86 @@
 
 [data-theme="polyu"] .lang-option {
     color: #1a1012;
+}
+
+/* ===== MIT Media Lab theme chrome ===== */
+[data-theme="medialab"] .terminal-header {
+    background: #000000;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+[data-theme="medialab"] .terminal-header::after {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: var(--ml-spectrum);
+}
+
+[data-theme="medialab"] .terminal-title {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+[data-theme="medialab"] .terminal-title::after {
+    content: "Media Lab";
+    display: inline-block;
+    margin-left: 0.65rem;
+    padding: 0.12rem 0.4rem;
+    border: 1px solid #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    vertical-align: middle;
+}
+
+[data-theme="medialab"] .btn-toggle {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 0;
+}
+
+[data-theme="medialab"] .btn-toggle:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: none;
+    transform: none;
+}
+
+[data-theme="medialab"] .control.close,
+[data-theme="medialab"] .control.minimize,
+[data-theme="medialab"] .control.maximize {
+    border-radius: 0;
+    border: none;
+}
+
+[data-theme="medialab"] .control.close { background: #e31c79; }
+[data-theme="medialab"] .control.minimize { background: #ffcc00; }
+[data-theme="medialab"] .control.maximize { background: #00a0e3; }
+
+[data-theme="medialab"] .lang-dropdown {
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 0;
+    box-shadow: 4px 4px 0 #000000;
+}
+
+[data-theme="medialab"] .lang-option {
+    color: #000000;
+    border-radius: 0;
+}
+
+[data-theme="medialab"] .lang-option:hover {
+    background: #000000;
+    color: #ffffff;
 }
 
 .terminal-bar {
@@ -266,6 +385,44 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.theme-icon--medialab {
+    display: inline-grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 1px;
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: 0;
+    background: transparent;
+}
+
+.theme-icon--medialab i {
+    display: block;
+    background: currentColor;
+    opacity: 0;
+}
+
+/* Simplified ML glyph on 7×7 grid */
+.theme-icon--medialab i:nth-child(1),
+.theme-icon--medialab i:nth-child(7),
+.theme-icon--medialab i:nth-child(8),
+.theme-icon--medialab i:nth-child(14),
+.theme-icon--medialab i:nth-child(15),
+.theme-icon--medialab i:nth-child(16),
+.theme-icon--medialab i:nth-child(20),
+.theme-icon--medialab i:nth-child(21),
+.theme-icon--medialab i:nth-child(22),
+.theme-icon--medialab i:nth-child(24),
+.theme-icon--medialab i:nth-child(28),
+.theme-icon--medialab i:nth-child(29),
+.theme-icon--medialab i:nth-child(35),
+.theme-icon--medialab i:nth-child(36),
+.theme-icon--medialab i:nth-child(42),
+.theme-icon--medialab i:nth-child(43),
+.theme-icon--medialab i:nth-child(49) {
+    opacity: 1;
 }
 
 .lang-text {
@@ -495,6 +652,65 @@ html[data-theme="polyu"] body {
     background-image:
         radial-gradient(ellipse 90% 50% at 0% 0%, rgba(160, 35, 55, 0.08), transparent 50%),
         radial-gradient(ellipse 70% 40% at 100% 20%, rgba(240, 213, 154, 0.12), transparent 45%);
+    background-attachment: fixed;
+}
+
+[data-theme="medialab"] .hero::before {
+    background-color: #000000;
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(0, 0, 0, 0.35) 45%,
+            rgba(0, 0, 0, 0.82) 100%
+        ),
+        image-set(
+            url("/portfolio/img/polyu-campus.webp") type("image/webp"),
+            url("/portfolio/img/polyu-campus.jpg") type("image/jpeg")
+        );
+}
+
+[data-theme="medialab"] .hero::after {
+    background-image:
+        linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.4) 100%),
+        var(--ml-spectrum);
+    background-size: 100% 100%, 100% 4px;
+    background-position: center, bottom;
+    background-repeat: no-repeat;
+}
+
+[data-theme="medialab"] .hero-eyebrow {
+    color: #ffffff;
+    letter-spacing: 0.14em;
+}
+
+[data-theme="medialab"] .hero-headline {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+    text-transform: none;
+    font-weight: 700;
+}
+
+[data-theme="medialab"] .hero-subheadline {
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 36ch;
+}
+
+[data-theme="medialab"] .hero-credit,
+[data-theme="medialab"] .hero-credit a {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+[data-theme="medialab"] .hero-credit a {
+    border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+
+html[data-theme="medialab"] body {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 28px 28px;
     background-attachment: fixed;
 }
 
@@ -1148,6 +1364,167 @@ html[lang="zh-CN"] .hero-headline {
 [data-theme="polyu"] .theme-icon--polyu {
     background: #0a0a0a;
     box-shadow: inset 0 0 0 1px rgba(240, 213, 154, 0.45);
+}
+
+/* ===== MIT Media Lab component overrides ===== */
+[data-theme="medialab"] .section-title {
+    color: #000000;
+    background: none;
+    -webkit-text-fill-color: unset;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+}
+
+[data-theme="medialab"] .section-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    max-width: 7rem;
+    height: 4px;
+    margin-top: 0.75rem;
+    background: var(--ml-spectrum);
+}
+
+[data-theme="medialab"] .about-section__title::after {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[data-theme="medialab"] .project-headline {
+    letter-spacing: -0.04em;
+}
+
+[data-theme="medialab"] .project-award {
+    border-radius: 0;
+    border: 1px solid #000000;
+    border-left: 4px solid #000000;
+    background: #ffffff;
+    box-shadow: 4px 4px 0 #000000;
+}
+
+[data-theme="medialab"] .project-award__mark {
+    color: #666666;
+}
+
+[data-theme="medialab"] .project-award--highlight {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+[data-theme="medialab"] .project-award--highlight .project-award__mark,
+[data-theme="medialab"] .project-award--highlight .project-award__rank,
+[data-theme="medialab"] .project-award--highlight .project-award__meta {
+    color: #ffffff;
+}
+
+[data-theme="medialab"] .project-result {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
+}
+
+[data-theme="medialab"] .project-media-badge {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
+    backdrop-filter: none;
+    box-shadow: 3px 3px 0 #000000;
+}
+
+[data-theme="medialab"] .project-media-badge__dot {
+    background: #e31c79;
+    box-shadow: none;
+}
+
+[data-theme="medialab"] .project-block--media {
+    border-radius: 0;
+    border: 1px solid #000000;
+    box-shadow: 6px 6px 0 #000000;
+}
+
+[data-theme="medialab"] .project-link {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+}
+
+[data-theme="medialab"] .project-link:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0 #000000;
+}
+
+[data-theme="medialab"] .also-card {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+[data-theme="medialab"] .also-card:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 #000000;
+    border-color: #000000;
+}
+
+[data-theme="medialab"] .hobby-link,
+[data-theme="medialab"] .hobby-tags li {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
+
+[data-theme="medialab"] .hobby-link:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+[data-theme="medialab"] .about-photo__img {
+    border-radius: 0;
+    box-shadow: 6px 6px 0 #000000;
+    border: 1px solid #000000;
+}
+
+[data-theme="medialab"] .footer-link {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+[data-theme="medialab"] .footer-link:hover,
+[data-theme="medialab"] .footer-social__link:hover {
+    color: #e31c79;
+}
+
+[data-theme="medialab"] .portfolio-footer {
+    border-top: 1px solid #000000;
+}
+
+[data-theme="medialab"] .back-to-top {
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+}
+
+[data-theme="medialab"] .back-to-top:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+[data-theme="medialab"] .project-cover--solidity {
+    border-radius: 0;
+}
+
+[data-theme="medialab"] .btn-toggle:hover {
+    transform: none;
 }
 
 .project-block--media {
