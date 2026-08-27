@@ -937,6 +937,12 @@ body {
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-project);
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+    transition:
+        transform 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out);
+    will-change: transform;
 }
 
 .project-cover {
@@ -976,13 +982,6 @@ body {
     font-family: var(--font-mono);
     font-size: clamp(0.9rem, 2vw, 1.1rem);
     color: var(--color-text-secondary);
-}
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-    transition:
-        transform 0.45s var(--ease-out),
-        box-shadow 0.45s var(--ease-out);
-    will-change: transform;
 }
 
 .project-block--media.is-tilting {
