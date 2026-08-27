@@ -42,8 +42,8 @@ window.PORTFOLIO_I18N = {
       homelabMeta: "Bilibili",
       paytube: "PayTube",
       paytubeMeta: "Crypto 支付页",
-      solidity: "Solidity 教程",
-      solidityMeta: "B 站系列课",
+      starfetch: "StarFetch",
+      starfetchMeta: "Rust · GitHub",
       ethers: "Ethers.js 教程",
       ethersMeta: "B 站系列课"
     },
@@ -79,6 +79,13 @@ window.PORTFOLIO_I18N = {
         link: "GitHub 查看 >",
         demo: "观看 Demo >"
       },
+      solidity: {
+        title: "Solidity.",
+        subhead: "在 B 站教大家写智能合约的实战教程。",
+        body: "从语言基础到真正能上手写的合约；在 B 站教编程，让更多人走进 Web3。",
+        result: "B 站系列教程",
+        link: "B 站观看 >"
+      },
       causelink: {
         title: "CauseLink.",
         subhead: "聚焦「错因」而不是错题堆叠的学习诊断。",
@@ -88,14 +95,6 @@ window.PORTFOLIO_I18N = {
         awardMeta: "探月学校 2026 · MoonShot48 黑客松寒假场",
         badge: "三等奖 · MoonShot48",
         link: "查看 CauseLink >"
-      },
-      starfetch: {
-        title: "StarFetch.",
-        subhead: "用 Rust 重写的极简系统信息工具。",
-        body: "自适应 ASCII、可点击终端超链接，追求启动快、输出干净。获 neofetch 作者背书。",
-        result: "GitHub 12★ · neofetch 作者背书",
-        link: "GitHub 查看 >",
-        demo: "观看 Demo >"
       },
       photo: {
         title: "风光摄影.",
@@ -116,7 +115,7 @@ window.PORTFOLIO_I18N = {
         link: "打开 PayTube >"
       },
       viewAppStore: "在 App Store 查看",
-      viewGitHub: "在 GitHub 查看 StarFetch"
+      viewGitHub: "在 GitHub 查看"
     },
     ui: {
       themeLight: "浅色",
@@ -171,8 +170,8 @@ window.PORTFOLIO_I18N = {
       homelabMeta: "Bilibili",
       paytube: "PayTube",
       paytubeMeta: "Crypto pay page",
-      solidity: "Solidity tutorials",
-      solidityMeta: "Bilibili series",
+      starfetch: "StarFetch",
+      starfetchMeta: "Rust · GitHub",
       ethers: "Ethers.js tutorials",
       ethersMeta: "Bilibili series"
     },
@@ -208,6 +207,13 @@ window.PORTFOLIO_I18N = {
         link: "View on GitHub >",
         demo: "Watch Demo >"
       },
+      solidity: {
+        title: "Solidity.",
+        subhead: "A hands-on Solidity course for learning smart contracts on Bilibili.",
+        body: "From language basics to contracts you can actually write—teaching programming on Bilibili so more people can enter Web3.",
+        result: "Bilibili tutorial series",
+        link: "Watch on Bilibili >"
+      },
       causelink: {
         title: "CauseLink.",
         subhead: "Learning diagnostics focused on error causes—not piles of wrong answers.",
@@ -217,14 +223,6 @@ window.PORTFOLIO_I18N = {
         awardMeta: "Moonshot Academy 2026 · MoonShot48 Winter Hackathon",
         badge: "3rd · MoonShot48",
         link: "View CauseLink >"
-      },
-      starfetch: {
-        title: "StarFetch.",
-        subhead: "A minimal system-info tool rewritten in Rust.",
-        body: "Adaptive ASCII, clickable terminal hyperlinks, fast startup. Endorsed by the author of neofetch.",
-        result: "12 GitHub ★ · neofetch author endorsement",
-        link: "View on GitHub >",
-        demo: "Watch Demo >"
       },
       photo: {
         title: "Landscape Photography.",
@@ -245,7 +243,7 @@ window.PORTFOLIO_I18N = {
         link: "Open PayTube >"
       },
       viewAppStore: "View FeelFlow on App Store",
-      viewGitHub: "View StarFetch on GitHub"
+      viewGitHub: "View on GitHub"
     },
     ui: {
       themeLight: "Light",
