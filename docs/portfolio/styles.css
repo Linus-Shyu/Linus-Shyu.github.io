@@ -373,12 +373,6 @@ body {
     animation: heroFadeIn var(--duration-slow) var(--ease-out) 0.25s forwards;
 }
 
-[data-theme="light"] .hero-headline {
-    background: linear-gradient(180deg, #1d1d1f 0%, #6e6e73 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
 /* Sub-headline – legible grey */
 .hero-subheadline {
     font-size: var(--font-size-subhead);
