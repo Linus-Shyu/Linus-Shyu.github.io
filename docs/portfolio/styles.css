@@ -396,54 +396,6 @@ body {
     }
 }
 
-/* ========== Proof strip ========== */
-.proof-section {
-    padding: 0 0 var(--spacing-section);
-}
-
-.proof-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    background: var(--color-border);
-}
-
-.proof-item {
-    padding: 1.35rem 1.25rem;
-    background: var(--color-bg-elevated);
-}
-
-.proof-value {
-    margin: 0 0 0.35rem;
-    font-size: clamp(1.15rem, 2vw, 1.45rem);
-    font-weight: 800;
-    letter-spacing: var(--letter-spacing-tight);
-    line-height: 1.15;
-    color: var(--color-award-strong);
-}
-
-.proof-label {
-    margin: 0;
-    font-size: 0.8125rem;
-    line-height: 1.45;
-    color: var(--color-text-secondary);
-}
-
-@media (max-width: 900px) {
-    .proof-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .proof-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ========== Also section ========== */
 .also-section {
     padding: 0 0 var(--spacing-section);
