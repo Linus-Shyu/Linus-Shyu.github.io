@@ -2,15 +2,16 @@ window.PORTFOLIO_I18N = {
   zh: {
     about: {
       title: "个人简介",
-      para1: "我叫许发鑫，来自西宁，目前是一名高三学生。热爱计算机科学，享受动手开发有趣的项目，同时也是一名科技领域的自媒体创作者，乐于分享所学所得。大家可以在B站或YouTube上找到我的频道「Linus Shyu」，那里记录了我的学习与创作点滴。",
+      para1: "我叫许发鑫，来自西宁，目前是一名高三学生。热爱计算机科学，享受动手开发有趣的项目，同时也是一名科技领域的自媒体创作者，乐于在 B 站教大家学编程、分享所学所得。大家可以在 B 站或 YouTube 上找到我的频道「Linus Shyu」，那里记录了我的学习与创作点滴，也包括 Solidity 与 Ethers.js 系列教程。",
       para2: "除了代码，我也喜欢在户外骑自行车、滑滑板，用镜头捕捉生活，或是在钢琴前放松自己。作为一名信息学竞赛选手，我有幸入围了 NOI 2025 冬令营、2024 全国青少年信息学奥林匹克联赛以及 AdventureX 2025、2026。这些经历让我对软件开发和理论计算机科学产生了更深厚的兴趣，也坚定了未来希望进入 MIT 攻读计算机科学博士的理想。我期待能创造出既适合自己、也能帮助到更多有相似经历的人的工具与应用。",
-      para3: "目前，我正使用 Swift 开发并上架了一款名为「FeelFlow」的 App 至 App Store。同时也在学习前端技术，希望能构建出既美观又交互丰富的高质量页面。为了进一步拓宽技术视野，我也在入门 Rust 语言，尝试复刻开源项目 NeoFetch，并深入探索 Linux 底层相关的知识。重新构思我可以用 Solidity 写哪些真正能够打动大家的产品，而并不简单局限于 Crypto。"
+      para3: "目前，我正使用 Swift 开发并上架了一款名为「FeelFlow」的 App 至 App Store。同时也在学习前端技术，希望能构建出既美观又交互丰富的高质量页面。为了进一步拓宽技术视野，我也在入门 Rust 语言，尝试复刻开源项目 NeoFetch，并深入探索 Linux 底层相关的知识。我也在 B 站持续更新 Solidity 与 Ethers.js 教程，重新构思可以用 Solidity 写哪些真正能够打动大家的产品，而并不简单局限于 Crypto。"
     },
     hobby: {
       title: "代码之外",
       creatorLabel: "创作",
       offlineLabel: "线下",
-      para1: "把学习、黑客松和产品进展拍成内容，公开做给同龄 builder 看。",
+      tutorialsLabel: "编程教程",
+      para1: "在 B 站教大家学编程，也分享黑客松与产品进展。目前有 Solidity 与 Ethers.js 系列课。",
       para2: "离开键盘时，更愿意在户外或动手做点别的。",
       tagCycling: "骑行",
       tagSkateboarding: "滑板",
@@ -23,6 +24,8 @@ window.PORTFOLIO_I18N = {
       linkedin: "LinkedIn",
       xiaohongshu: "小红书",
       netease: "网易云音乐",
+      solidity: "Solidity 教程",
+      ethers: "Ethers.js 教程",
       codeforces: "CodeForces"
     },
     hero: {
@@ -38,7 +41,11 @@ window.PORTFOLIO_I18N = {
       homelab: "Homelab",
       homelabMeta: "Bilibili",
       paytube: "PayTube",
-      paytubeMeta: "Crypto 支付页"
+      paytubeMeta: "Crypto 支付页",
+      solidity: "Solidity 教程",
+      solidityMeta: "B 站系列课",
+      ethers: "Ethers.js 教程",
+      ethersMeta: "B 站系列课"
     },
     projects: {
       heading: "核心项目",
@@ -124,15 +131,16 @@ window.PORTFOLIO_I18N = {
   en: {
     about: {
       title: "About me",
-      para1: "My name is Faxin Xu. I'm from Xining, currently a Grade 12 student. I love computer science and enjoy building interesting projects. I'm also a tech creator and like to share what I learn. You can find my channel \"Linus Shyu\" on Bilibili or YouTube, where I document my learning and creations.",
+      para1: "My name is Faxin Xu. I'm from Xining, currently a Grade 12 student. I love computer science and enjoy building interesting projects. I'm also a tech creator who teaches programming on Bilibili and shares what I learn. You can find my channel \"Linus Shyu\" on Bilibili or YouTube—including my Solidity and Ethers.js tutorial series.",
       para2: "Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025 and 2026. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.",
-      para3: "Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals—and rethinking what I could build with Solidity that truly resonates, beyond crypto alone."
+      para3: "Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals. I keep publishing Solidity and Ethers.js tutorials on Bilibili, and I'm rethinking what I could build with Solidity that truly resonates, beyond crypto alone."
     },
     hobby: {
       title: "Beyond code",
       creatorLabel: "Creator",
       offlineLabel: "Offline",
-      para1: "I publish walkthroughs, hackathon runs, and shipping notes for other student builders.",
+      tutorialsLabel: "Tutorials",
+      para1: "I teach programming on Bilibili and share hackathon runs and shipping notes—including Solidity and Ethers.js series.",
       para2: "Away from the keyboard, I stay outside or make things with my hands.",
       tagCycling: "Cycling",
       tagSkateboarding: "Skateboarding",
@@ -145,6 +153,8 @@ window.PORTFOLIO_I18N = {
       linkedin: "LinkedIn",
       xiaohongshu: "Xiaohongshu",
       netease: "NetEase Music",
+      solidity: "Solidity tutorials",
+      ethers: "Ethers.js tutorials",
       codeforces: "CodeForces"
     },
     hero: {
@@ -160,7 +170,11 @@ window.PORTFOLIO_I18N = {
       homelab: "Homelab",
       homelabMeta: "Bilibili",
       paytube: "PayTube",
-      paytubeMeta: "Crypto pay page"
+      paytubeMeta: "Crypto pay page",
+      solidity: "Solidity tutorials",
+      solidityMeta: "Bilibili series",
+      ethers: "Ethers.js tutorials",
+      ethersMeta: "Bilibili series"
     },
     projects: {
       heading: "Core Projects",
