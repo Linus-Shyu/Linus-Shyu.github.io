@@ -864,12 +864,27 @@ html[lang="zh-CN"] .hero-headline {
     width: 320px;
 }
 
-.about-photo__img {
-    width: 100%;
+/* Keep avatar square media card for tilt; round it outside Media Lab */
+.about-photo.project-block--media {
     aspect-ratio: 1;
-    display: block;
+    width: 320px;
+}
+
+html:not([data-theme="medialab"]) .about-photo.project-block--media {
     border-radius: 50%;
+    overflow: hidden;
+    border: none;
     box-shadow: var(--shadow-project);
+}
+
+.about-photo__img,
+.about-photo .project-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    display: block;
+    border-radius: inherit;
+    box-shadow: none;
     object-fit: cover;
 }
 
