@@ -581,6 +581,18 @@ body {
     color: rgba(245, 245, 247, 0.55);
 }
 
+.hero-credit--medialab {
+    display: none;
+}
+
+html[data-theme="medialab"] .hero-credit--polyu {
+    display: none;
+}
+
+html[data-theme="medialab"] .hero-credit--medialab {
+    display: block;
+}
+
 .hero-credit a {
     color: inherit;
     text-decoration: none;
@@ -665,9 +677,10 @@ html[data-theme="polyu"] body {
             rgba(0, 0, 0, 0.82) 100%
         ),
         image-set(
-            url("/portfolio/img/polyu-campus.webp") type("image/webp"),
-            url("/portfolio/img/polyu-campus.jpg") type("image/jpeg")
+            url("/portfolio/img/mit-library.webp") type("image/webp"),
+            url("/portfolio/img/mit-library.jpg") type("image/jpeg")
         );
+    background-position: center 40%;
 }
 
 [data-theme="medialab"] .hero::after {
