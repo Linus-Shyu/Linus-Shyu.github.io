@@ -1365,11 +1365,15 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
 }
 
-[data-theme="polyu"] .about-photo__img {
+[data-theme="polyu"] .about-photo.project-block--media {
     box-shadow:
         0 0 0 4px #ffffff,
         0 0 0 7px #a02337,
         0 18px 40px rgba(125, 21, 38, 0.2);
+}
+
+[data-theme="polyu"] .about-photo__img {
+    box-shadow: none;
 }
 
 [data-theme="polyu"] .project-result {
@@ -1501,10 +1505,20 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     color: #ffffff;
 }
 
+[data-theme="medialab"] .about-photo.project-block--media {
+    border-radius: 0;
+    border: 1px solid #000000;
+    box-shadow: 6px 6px 0 #000000;
+}
+
+[data-theme="medialab"] .about-photo.project-block--media.is-tilting {
+    box-shadow: 10px 14px 0 #000000;
+}
+
 [data-theme="medialab"] .about-photo__img {
-    border-radius: 50%;
-    border: 2px solid #000000;
-    box-shadow: 4px 4px 0 #000000;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
 }
 
 [data-theme="medialab"] .footer-link {
