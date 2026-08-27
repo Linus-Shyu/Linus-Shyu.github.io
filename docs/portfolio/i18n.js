@@ -80,7 +80,7 @@ window.PORTFOLIO_I18N = {
         demo: "观看 Demo >"
       },
       solidity: {
-        title: "Solidity.",
+        title: "Solidity 教程.",
         subhead: "在 B 站教大家写智能合约的实战教程。",
         body: "从语言基础到真正能上手写的合约；在 B 站教编程，让更多人走进 Web3。",
         result: "B 站系列教程",
@@ -208,7 +208,7 @@ window.PORTFOLIO_I18N = {
         demo: "Watch Demo >"
       },
       solidity: {
-        title: "Solidity.",
+        title: "Solidity Tutorials.",
         subhead: "A hands-on Solidity course for learning smart contracts on Bilibili.",
         body: "From language basics to contracts you can actually write—teaching programming on Bilibili so more people can enter Web3.",
         result: "Bilibili tutorial series",

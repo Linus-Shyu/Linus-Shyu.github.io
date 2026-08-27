@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Solidity">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10161a"/>
+      <stop offset="55%" stop-color="#172229"/>
+      <stop offset="100%" stop-color="#0e1418"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="85%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#62a88c" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#62a88c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#glow)"/>
+  <text x="80" y="470" fill="#a7d6c2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" letter-spacing="4">BILIBILI SERIES</text>
+  <text x="80" y="580" fill="#f5f5f7" font-family="SF Pro Display, Helvetica Neue, Arial, sans-serif" font-size="120" font-weight="700">Solidity</text>
+  <text x="80" y="650" fill="#a1a1a6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34">pragma solidity ^0.8.0;</text>
+</svg>
