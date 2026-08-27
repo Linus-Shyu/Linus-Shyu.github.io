@@ -17,7 +17,7 @@
       if (theme === "polyu") {
         icon.classList.add("theme-icon--polyu");
         icon.innerHTML =
-          '<img src="/portfolio/img/polyu-symbol.webp" alt="" width="18" height="20" decoding="async">';
+          '<picture><source type="image/webp" srcset="/portfolio/img/polyu-symbol.webp"><img src="/portfolio/img/polyu-symbol.png" alt="" width="18" height="20" decoding="async"></picture>';
       } else {
         icon.classList.remove("theme-icon--polyu");
         icon.textContent = theme === "light" ? "☀️" : "🌙";
