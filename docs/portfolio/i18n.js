@@ -2,8 +2,9 @@ window.PORTFOLIO_I18N = {
   zh: {
     about: {
       title: "个人简介",
-      para1: "我是林纳斯，来自青海，高三。日常在写 Swift / macOS 原生工具，也在黑客松里把竞赛向 CLI 做出来。NOI 2025 冬令营、AdventureX、探月 MoonShot48 是我验证想法最快的地方。",
-      para2: "现在一边把 FeelFlow、Luma Bar 这类产品继续打磨，一边在 B 站 / YouTube 把过程公开。目标很具体：做出自己天天会用的工具，再让同类人也能用上。"
+      para1: "我叫许发鑫，来自西宁，目前是一名高三学生。热爱计算机科学，享受动手开发有趣的项目，同时也是一名科技领域的自媒体创作者，乐于分享所学所得。大家可以在B站或YouTube上找到我的频道「Linus Shyu」，那里记录了我的学习与创作点滴。",
+      para2: "除了代码，我也喜欢在户外骑自行车、滑滑板，用镜头捕捉生活，或是在钢琴前放松自己。作为一名信息学竞赛选手，我有幸入围了 NOI 2025 冬令营、2024 全国青少年信息学奥林匹克联赛以及 AdventureX 2025、2026。这些经历让我对软件开发和理论计算机科学产生了更深厚的兴趣，也坚定了未来希望进入 MIT 攻读计算机科学博士的理想。我期待能创造出既适合自己、也能帮助到更多有相似经历的人的工具与应用。",
+      para3: "目前，我正使用 Swift 开发并上架了一款名为「FeelFlow」的 App 至 App Store。同时也在学习前端技术，希望能构建出既美观又交互丰富的高质量页面。为了进一步拓宽技术视野，我也在入门 Rust 语言，尝试复刻开源项目 NeoFetch，并深入探索 Linux 底层相关的知识。重新构思我可以用 Solidity 写哪些真正能够打动大家的产品，而并不简单局限于 Crypto。"
     },
     hobby: {
       title: "代码之外",
@@ -123,8 +124,9 @@ window.PORTFOLIO_I18N = {
   en: {
     about: {
       title: "About me",
-      para1: "I'm Linus, from Qinghai, currently in Grade 12. I build native Swift / macOS tools and ship competition-focused CLIs at hackathons. NOI 2025 Winter Camp, AdventureX, and Moonshot Academy's MoonShot48 are where I stress-test ideas fastest.",
-      para2: "Right now I'm polishing products like FeelFlow and Luma Bar while documenting the process on Bilibili and YouTube. The goal is concrete: ship tools I use every day—then make them useful for people on the same path."
+      para1: "My name is Faxin Xu. I'm from Xining, currently a Grade 12 student. I love computer science and enjoy building interesting projects. I'm also a tech creator and like to share what I learn. You can find my channel \"Linus Shyu\" on Bilibili or YouTube, where I document my learning and creations.",
+      para2: "Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025 and 2026. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.",
+      para3: "Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals—and rethinking what I could build with Solidity that truly resonates, beyond crypto alone."
     },
     hobby: {
       title: "Beyond code",
