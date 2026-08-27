@@ -1829,8 +1829,8 @@ html[lang="zh-CN"] .hero-headline {
 
     .about-photo {
         order: 1;
-        width: min(42vw, 168px);
-        max-width: 168px;
+        width: 100%;
+        max-width: 28rem;
         margin: 0 auto;
     }
 
@@ -2038,8 +2038,8 @@ html[lang="zh-CN"] .hero-headline {
     }
 
     .about-photo {
-        width: min(38vw, 140px);
-        max-width: 140px;
+        width: 100%;
+        max-width: 100%;
     }
 
     .also-grid {
