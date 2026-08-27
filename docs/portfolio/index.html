@@ -15,6 +15,7 @@
     <script>
         (function () {
             var theme = localStorage.getItem('portfolio-theme') || 'dark';
+            if (theme !== 'light' && theme !== 'polyu') theme = 'dark';
             var lang = localStorage.getItem('portfolio-lang') || (navigator.language && navigator.language.indexOf('zh') === 0 ? 'zh' : 'en');
             document.documentElement.setAttribute('data-theme', theme);
             document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');

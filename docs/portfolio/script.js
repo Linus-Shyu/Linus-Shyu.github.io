@@ -3,15 +3,39 @@
   var STORAGE_LANG = "portfolio-lang";
 
   function getTheme() {
-    return localStorage.getItem(STORAGE_THEME) || "dark";
+    var theme = localStorage.getItem(STORAGE_THEME) || "dark";
+    if (theme === "light" || theme === "polyu") return theme;
+    return "dark";
+  }
+
+  function themeIcon(theme) {
+    if (theme === "light") return "☀️";
+    if (theme === "polyu") return "P";
+    return "🌙";
   }
 
   function setTheme(theme) {
-    theme = theme === "light" ? "light" : "dark";
+    if (theme !== "light" && theme !== "polyu") theme = "dark";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(STORAGE_THEME, theme);
     var icon = document.getElementById("themeIcon");
-    if (icon) icon.textContent = theme === "dark" ? "🌙" : "☀️";
+    if (icon) {
+      icon.textContent = themeIcon(theme);
+      icon.classList.toggle("theme-icon--polyu", theme === "polyu");
+    }
+    var btn = document.getElementById("themeToggle");
+    if (btn) {
+      var label =
+        theme === "polyu" ? "PolyU theme" : theme === "light" ? "Light theme" : "Dark theme";
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+    }
+  }
+
+  function nextTheme(theme) {
+    if (theme === "dark") return "light";
+    if (theme === "light") return "polyu";
+    return "dark";
   }
 
   function getLang() {
@@ -66,7 +90,7 @@
     var themeBtn = document.getElementById("themeToggle");
     if (themeBtn) {
       themeBtn.addEventListener("click", function () {
-        setTheme(getTheme() === "dark" ? "light" : "dark");
+        setTheme(nextTheme(getTheme()));
       });
     }
 
