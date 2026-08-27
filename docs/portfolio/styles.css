@@ -71,28 +71,29 @@
     --shadow-project: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* PolyU theme — official PolyU Red #A02337 · Grey #58595B · gold foil accent */
+/* PolyU theme — official PolyU Red #A02337 · Grey #58595B · gold foil accent
+   Distinct light academic surface so it does not look like dark mode. */
 [data-theme="polyu"] {
-    --color-bg: #12090c;
-    --color-bg-elevated: #1a1014;
-    --color-bg-subtle: #26151a;
+    --color-bg: #f4eef0;
+    --color-bg-elevated: #ffffff;
+    --color-bg-subtle: #ebe0e3;
 
-    --color-text: #f7f1f2;
-    --color-text-secondary: #c4b4b8;
-    --color-text-tertiary: #8f7a7f;
+    --color-text: #1a1012;
+    --color-text-secondary: #58595b;
+    --color-text-tertiary: #7a6a6e;
 
-    --color-border: #3f272d;
+    --color-border: #d7c4c8;
 
     --color-accent: #a02337;
-    --color-accent-strong: #c43b52;
-    --color-accent-soft: rgba(160, 35, 55, 0.18);
+    --color-accent-strong: #7d1526;
+    --color-accent-soft: rgba(160, 35, 55, 0.12);
 
-    --color-award: #c9a46a;
-    --color-award-strong: #e0c08a;
-    --color-award-bg: rgba(201, 164, 106, 0.12);
-    --color-award-border: rgba(201, 164, 106, 0.42);
+    --color-award: #a02337;
+    --color-award-strong: #7d1526;
+    --color-award-bg: rgba(160, 35, 55, 0.1);
+    --color-award-border: rgba(160, 35, 55, 0.35);
 
-    --shadow-project: 0 24px 48px rgba(80, 12, 24, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-project: 0 20px 44px rgba(125, 21, 38, 0.14), 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
 /* ========== Terminal-style Header (StarFetch style) ========== */
@@ -115,14 +116,56 @@
 }
 
 [data-theme="polyu"] .terminal-header {
-    background: rgba(18, 9, 12, 0.88);
-    border-bottom-color: rgba(160, 35, 55, 0.55);
-    box-shadow: 0 1px 0 rgba(160, 35, 55, 0.25);
+    background: #a02337;
+    border-bottom: none;
+    box-shadow: 0 8px 28px rgba(125, 21, 38, 0.28);
 }
 
-[data-theme="polyu"] .control.close { background: #a02337; }
-[data-theme="polyu"] .control.minimize { background: #c9a46a; }
-[data-theme="polyu"] .control.maximize { background: #58595b; }
+[data-theme="polyu"] .terminal-title {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+[data-theme="polyu"] .terminal-title::after {
+    content: "PolyU";
+    display: inline-block;
+    margin-left: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a02337;
+    background: #f0d59a;
+    vertical-align: middle;
+}
+
+[data-theme="polyu"] .btn-toggle {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+[data-theme="polyu"] .btn-toggle:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(240, 213, 154, 0.7);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="polyu"] .control.close { background: #f0d59a; }
+[data-theme="polyu"] .control.minimize { background: #ffffff; }
+[data-theme="polyu"] .control.maximize { background: #d7c4c8; }
+
+[data-theme="polyu"] .lang-dropdown {
+    background: #ffffff;
+    border-color: #d7c4c8;
+    box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
+}
+
+[data-theme="polyu"] .lang-option {
+    color: #1a1012;
+}
 
 .terminal-bar {
     display: flex;
@@ -399,13 +442,13 @@ body {
 }
 
 [data-theme="polyu"] .hero::before {
-    background-color: #12090c;
+    background-color: #7d1526;
     background-image:
         linear-gradient(
             180deg,
-            rgba(80, 14, 24, 0.72) 0%,
-            rgba(18, 9, 12, 0.52) 42%,
-            rgba(18, 9, 12, 0.88) 100%
+            rgba(125, 21, 38, 0.78) 0%,
+            rgba(160, 35, 55, 0.55) 40%,
+            rgba(26, 16, 18, 0.88) 100%
         ),
         image-set(
             url("/portfolio/img/polyu-campus.webp") type("image/webp"),
@@ -415,31 +458,39 @@ body {
 
 [data-theme="polyu"] .hero::after {
     background:
-        radial-gradient(ellipse 75% 55% at 50% 38%, rgba(160, 35, 55, 0.18) 0%, transparent 62%),
-        radial-gradient(ellipse 70% 55% at 50% 40%, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        radial-gradient(ellipse 80% 60% at 50% 35%, rgba(240, 213, 154, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 55% at 50% 40%, transparent 0%, rgba(0, 0, 0, 0.35) 100%);
 }
 
 [data-theme="polyu"] .hero-eyebrow {
-    color: rgba(224, 192, 138, 0.9);
+    color: #f0d59a;
 }
 
 [data-theme="polyu"] .hero-headline {
-    background: linear-gradient(180deg, #ffffff 0%, #e8c9cf 55%, #c9a46a 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f0d59a 100%);
     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 [data-theme="polyu"] .hero-subheadline {
-    color: rgba(230, 214, 218, 0.86);
+    color: rgba(255, 245, 247, 0.9);
 }
 
 [data-theme="polyu"] .hero-credit,
 [data-theme="polyu"] .hero-credit a {
-    color: rgba(224, 192, 138, 0.65);
+    color: rgba(240, 213, 154, 0.75);
 }
 
 [data-theme="polyu"] .hero-credit a {
-    border-bottom-color: rgba(224, 192, 138, 0.35);
+    border-bottom-color: rgba(240, 213, 154, 0.4);
+}
+
+html[data-theme="polyu"] body {
+    background-image:
+        radial-gradient(ellipse 90% 50% at 0% 0%, rgba(160, 35, 55, 0.08), transparent 50%),
+        radial-gradient(ellipse 70% 40% at 100% 20%, rgba(240, 213, 154, 0.12), transparent 45%);
+    background-attachment: fixed;
 }
 
 /* Eyebrow – small, subtle grey */
@@ -969,15 +1020,29 @@ html[lang="zh-CN"] .hero-headline {
 }
 
 [data-theme="polyu"] .btn-toggle:hover {
-    border-color: rgba(160, 35, 55, 0.55);
-    box-shadow: 0 2px 12px rgba(160, 35, 55, 0.25);
+    border-color: rgba(240, 213, 154, 0.7);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
 [data-theme="polyu"] .section-title {
-    background: linear-gradient(90deg, #f7f1f2 0%, #e0c08a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent);
+    background: none;
+    -webkit-text-fill-color: unset;
+}
+
+[data-theme="polyu"] .section-title::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 3px;
+    margin-top: 0.65rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a02337, #f0d59a);
+}
+
+[data-theme="polyu"] .about-section__title::after {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 [data-theme="polyu"] .project-award {
@@ -986,56 +1051,99 @@ html[lang="zh-CN"] .hero-headline {
 
 [data-theme="polyu"] .project-award--highlight {
     background:
-        linear-gradient(135deg, rgba(160, 35, 55, 0.22) 0%, transparent 65%),
-        var(--color-bg-subtle);
-    border-color: rgba(160, 35, 55, 0.55);
+        linear-gradient(135deg, rgba(160, 35, 55, 0.14) 0%, transparent 65%),
+        var(--color-bg-elevated);
+    border-color: rgba(160, 35, 55, 0.4);
 }
 
 [data-theme="polyu"] .project-media-badge {
-    border-color: rgba(160, 35, 55, 0.65);
-    background: rgba(18, 9, 12, 0.82);
+    border-color: rgba(240, 213, 154, 0.65);
+    background: rgba(160, 35, 55, 0.92);
+    color: #ffffff;
 }
 
 [data-theme="polyu"] .project-media-badge__dot {
-    background: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(160, 35, 55, 0.28);
+    background: #f0d59a;
+    box-shadow: 0 0 0 3px rgba(240, 213, 154, 0.28);
 }
 
 [data-theme="polyu"] .project-link {
-    border-color: rgba(160, 35, 55, 0.4);
-    background: rgba(160, 35, 55, 0.14);
+    color: #ffffff;
+    border-color: transparent;
+    background: #a02337;
 }
 
 [data-theme="polyu"] .project-link:hover {
-    background: rgba(160, 35, 55, 0.28);
-    border-color: rgba(201, 164, 106, 0.55);
+    background: #7d1526;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+[data-theme="polyu"] .also-card {
+    background: #ffffff;
+    border-color: rgba(160, 35, 55, 0.18);
 }
 
 [data-theme="polyu"] .also-card:hover {
     border-color: rgba(160, 35, 55, 0.55);
+    box-shadow: 0 10px 28px rgba(125, 21, 38, 0.12);
+}
+
+[data-theme="polyu"] .hobby-link,
+[data-theme="polyu"] .hobby-tags li {
+    background: #ffffff;
+    border-color: rgba(160, 35, 55, 0.22);
 }
 
 [data-theme="polyu"] .hobby-link:hover {
-    border-color: rgba(160, 35, 55, 0.55);
-    background: rgba(160, 35, 55, 0.16);
+    border-color: #a02337;
+    background: rgba(160, 35, 55, 0.08);
+    color: #a02337;
+}
+
+[data-theme="polyu"] .footer-link {
+    color: #a02337;
 }
 
 [data-theme="polyu"] .footer-link:hover,
 [data-theme="polyu"] .footer-social__link:hover {
-    color: var(--color-accent-strong);
+    color: #7d1526;
+}
+
+[data-theme="polyu"] .portfolio-footer {
+    border-top-color: rgba(160, 35, 55, 0.25);
 }
 
 [data-theme="polyu"] .back-to-top {
-    border-color: rgba(160, 35, 55, 0.45);
+    color: #ffffff;
+    background: #a02337;
+    border-color: transparent;
 }
 
 [data-theme="polyu"] .back-to-top:hover {
-    background: rgba(160, 35, 55, 0.22);
-    border-color: rgba(201, 164, 106, 0.55);
+    background: #7d1526;
+    border-color: transparent;
 }
 
 [data-theme="polyu"] .lang-dropdown {
-    box-shadow: 0 8px 32px rgba(80, 12, 24, 0.45);
+    box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
+}
+
+[data-theme="polyu"] .about-photo__img {
+    box-shadow:
+        0 0 0 4px #ffffff,
+        0 0 0 7px #a02337,
+        0 18px 40px rgba(125, 21, 38, 0.2);
+}
+
+[data-theme="polyu"] .project-result {
+    color: #a02337;
+}
+
+[data-theme="polyu"] .theme-icon--polyu {
+    color: #a02337;
+    background: #f0d59a;
+    box-shadow: none;
 }
 
 .project-block--media {
