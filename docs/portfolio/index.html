@@ -8,9 +8,10 @@
     <meta name="keywords" content="Linus Shyu, 许发鑫, portfolio, FeelFlow, Luma Bar, CauseLink, XTerminal, Solidity, Swift, macOS, Rust, AdventureX, MoonShot48">
     <meta property="og:title" content="Linus Shyu — Portfolio">
     <meta property="og:description" content="18 · Grade 12 · A Qinghai youth hungry for a global view. FeelFlow, Luma Bar, XTerminal, Solidity, CauseLink.">
-    <meta property="og:image" content="https://github.com/Linus-Shyu.png">
+    <meta property="og:image" content="https://linusshyu.dev/portfolio/img/avatar.jpg">
     <meta property="og:url" content="https://linusshyu.dev/portfolio/">
     <meta property="og:type" content="website">
+    <link rel="preload" as="image" href="/portfolio/img/avatar.webp" type="image/webp">
     <link rel="stylesheet" href="/portfolio/styles.css">
     <script>
         (function () {
@@ -74,7 +75,10 @@
                     <p class="about-para" data-i18n="about.para3">Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals. I keep publishing Solidity and Ethers.js tutorials on Bilibili, and I'm rethinking what I could build with Solidity that truly resonates, beyond crypto alone.</p>
                 </div>
                 <div class="about-photo project-block--media" aria-label="Portrait">
-                    <img src="https://github.com/Linus-Shyu.png" alt="许发鑫 / Faxin Xu (Linus Shyu)" class="about-photo__img project-image" width="320" height="320" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="/portfolio/img/avatar.webp" type="image/webp">
+                        <img src="/portfolio/img/avatar.jpg" alt="许发鑫 / Faxin Xu (Linus Shyu)" class="about-photo__img project-image" width="320" height="320" decoding="async" fetchpriority="high">
+                    </picture>
                 </div>
             </div>
         </div>
