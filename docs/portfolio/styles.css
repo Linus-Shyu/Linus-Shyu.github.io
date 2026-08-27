@@ -612,7 +612,7 @@ html[data-theme="medialab"] .hero-media__img {
 
 .hero .hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     max-width: var(--container-max);
     padding: var(--container-padding);
@@ -628,7 +628,7 @@ html[data-theme="medialab"] .hero-media__img {
     position: absolute;
     right: var(--container-padding);
     bottom: 1rem;
-    z-index: 2;
+    z-index: 3;
     margin: 0;
     font-size: 0.6875rem;
     line-height: 1.3;
