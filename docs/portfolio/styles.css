@@ -937,6 +937,46 @@ body {
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-project);
+}
+
+.project-cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-sizing: border-box;
+}
+
+.project-cover--solidity {
+    background:
+        radial-gradient(120% 90% at 100% 0%, rgba(98, 168, 140, 0.22), transparent 55%),
+        linear-gradient(145deg, #10161a 0%, #172229 48%, #0e1418 100%);
+}
+
+.project-cover__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(167, 214, 194, 0.85);
+}
+
+.project-cover__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-text);
+}
+
+.project-cover__code {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--color-text-secondary);
+}
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
     transition:
