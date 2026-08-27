@@ -581,18 +581,6 @@ body {
     color: rgba(245, 245, 247, 0.55);
 }
 
-.hero-credit--medialab {
-    display: none;
-}
-
-html[data-theme="medialab"] .hero-credit--polyu {
-    display: none;
-}
-
-html[data-theme="medialab"] .hero-credit--medialab {
-    display: block;
-}
-
 .hero-credit a {
     color: inherit;
     text-decoration: none;
@@ -677,10 +665,9 @@ html[data-theme="polyu"] body {
             rgba(0, 0, 0, 0.82) 100%
         ),
         image-set(
-            url("/portfolio/img/mit-library.webp") type("image/webp"),
-            url("/portfolio/img/mit-library.jpg") type("image/jpeg")
+            url("/portfolio/img/polyu-campus.webp") type("image/webp"),
+            url("/portfolio/img/polyu-campus.jpg") type("image/jpeg")
         );
-    background-position: center 40%;
 }
 
 [data-theme="medialab"] .hero::after {
@@ -874,22 +861,15 @@ html[lang="zh-CN"] .hero-headline {
 
 .about-photo {
     flex-shrink: 0;
-    width: min(100%, 420px);
-    /* inherits .project-block--media tilt / aspect / shadow */
+    width: 320px;
 }
 
-.about-photo.project-block--media {
-    aspect-ratio: 3 / 2;
-}
-
-.about-photo__img,
-.about-photo .project-image {
+.about-photo__img {
     width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
+    aspect-ratio: 1;
     display: block;
-    border-radius: inherit;
-    box-shadow: none;
+    border-radius: 50%;
+    box-shadow: var(--shadow-project);
     object-fit: cover;
 }
 
@@ -1370,15 +1350,11 @@ html[lang="zh-CN"] .hero-headline {
     box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
 }
 
-[data-theme="polyu"] .about-photo.project-block--media {
-    box-shadow:
-        0 0 0 3px #ffffff,
-        0 0 0 6px #a02337,
-        0 18px 40px rgba(125, 21, 38, 0.2);
-}
-
 [data-theme="polyu"] .about-photo__img {
-    box-shadow: none;
+    box-shadow:
+        0 0 0 4px #ffffff,
+        0 0 0 7px #a02337,
+        0 18px 40px rgba(125, 21, 38, 0.2);
 }
 
 [data-theme="polyu"] .project-result {
@@ -1510,16 +1486,10 @@ html[lang="zh-CN"] .hero-headline {
     color: #ffffff;
 }
 
-[data-theme="medialab"] .about-photo.project-block--media {
-    border-radius: 0;
-    border: 1px solid #000000;
-    box-shadow: 6px 6px 0 #000000;
-}
-
 [data-theme="medialab"] .about-photo__img {
     border-radius: 0;
-    box-shadow: none;
-    border: none;
+    box-shadow: 6px 6px 0 #000000;
+    border: 1px solid #000000;
 }
 
 [data-theme="medialab"] .footer-link {
@@ -1842,8 +1812,8 @@ html[lang="zh-CN"] .hero-headline {
 
     .about-photo {
         order: 1;
-        width: 100%;
-        max-width: 28rem;
+        width: min(42vw, 168px);
+        max-width: 168px;
         margin: 0 auto;
     }
 
@@ -2051,8 +2021,8 @@ html[lang="zh-CN"] .hero-headline {
     }
 
     .about-photo {
-        width: 100%;
-        max-width: 100%;
+        width: min(38vw, 140px);
+        max-width: 140px;
     }
 
     .also-grid {
