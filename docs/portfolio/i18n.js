@@ -29,17 +29,6 @@ window.PORTFOLIO_I18N = {
       headline: "做真正能上手用的 macOS 与竞赛工具。",
       subheadline: "用 Swift 做原生应用，在黑客松里把 CLI 做出来；能用的就开源，能上架的就上架。"
     },
-    proof: {
-      title: "结果",
-      item1Value: "App Store",
-      item1Label: "FeelFlow 已上架",
-      item2Value: "第二名",
-      item2Label: "AdventureX 2026 · 亚马逊云科技赛道",
-      item3Value: "三等奖 ×2",
-      item3Label: "AdventureX 2025 · MoonShot48 2026",
-      item4Value: "开源",
-      item4Label: "XTerminal / StarFetch 各 12★"
-    },
     also: {
       title: "Also",
       lead: "主线之外，这些也是我的一部分。",
@@ -160,17 +149,6 @@ window.PORTFOLIO_I18N = {
       eyebrow: "18 · Grade 12 · Co-founder & CTO",
       headline: "Native tools for Mac and competitive programmers.",
       subheadline: "I ship Swift apps and hackathon-built CLIs—open-source what works, publish what ships."
-    },
-    proof: {
-      title: "Proof",
-      item1Value: "App Store",
-      item1Label: "FeelFlow shipped",
-      item2Value: "2nd Place",
-      item2Label: "AdventureX 2026 · AWS track",
-      item3Value: "3rd ×2",
-      item3Label: "AdventureX 2025 · MoonShot48 2026",
-      item4Value: "Open source",
-      item4Label: "XTerminal / StarFetch · 12★ each"
     },
     also: {
       title: "Also",
