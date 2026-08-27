@@ -52,7 +52,16 @@
     </header>
 
     <section class="hero">
-        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-media" aria-hidden="true">
+            <picture class="hero-media__pic hero-media__pic--default">
+                <source srcset="/portfolio/img/polyu-campus.webp" type="image/webp">
+                <img class="hero-media__img" src="/portfolio/img/polyu-campus.jpg" alt="" width="1920" height="1280" decoding="async" fetchpriority="high">
+            </picture>
+            <picture class="hero-media__pic hero-media__pic--medialab">
+                <source srcset="/portfolio/img/mit-library.webp" type="image/webp">
+                <img class="hero-media__img" src="/portfolio/img/mit-library.jpg" alt="" width="1920" height="1440" decoding="async" fetchpriority="low">
+            </picture>
+        </div>
         <div class="hero-inner container">
             <p class="hero-eyebrow" data-i18n="hero.eyebrow">18 · Grade 12 · Co-founder &amp; CTO</p>
             <h1 class="hero-headline" data-i18n="hero.headline">A Qinghai youth hungry for a global view.</h1>

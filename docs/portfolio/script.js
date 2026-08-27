@@ -148,10 +148,13 @@
   function bindMediaTilt(surface, target, options) {
     var maxTilt = (options && options.maxTilt) || 10;
     var scale = (options && options.scale) || 1.03;
+    var translate = (options && options.translate) || 0;
+    var glareParent = (options && options.glareParent) || target;
+    var markSurface = !!(options && options.markSurface);
     var glare = document.createElement("span");
     glare.className = "project-media-glare";
     glare.setAttribute("aria-hidden", "true");
-    target.appendChild(glare);
+    glareParent.appendChild(glare);
 
     var frame = 0;
 
@@ -163,16 +166,23 @@
       var py = (e.clientY - rect.top) / rect.height;
       var rotateY = (px - 0.5) * (maxTilt * 2);
       var rotateX = (0.5 - py) * (maxTilt * 2);
+      var tx = (px - 0.5) * translate;
+      var ty = (py - 0.5) * translate;
 
       if (frame) cancelAnimationFrame(frame);
       frame = requestAnimationFrame(function () {
         target.classList.add("is-tilting");
+        if (markSurface) surface.classList.add("is-tilting");
         target.style.transform =
           "perspective(1000px) rotateX(" +
           rotateX.toFixed(2) +
           "deg) rotateY(" +
           rotateY.toFixed(2) +
-          "deg) scale3d(" +
+          "deg) translate3d(" +
+          tx.toFixed(1) +
+          "px, " +
+          ty.toFixed(1) +
+          "px, 0) scale3d(" +
           scale +
           ", " +
           scale +
@@ -184,13 +194,14 @@
           (px * 100).toFixed(1) +
           "% " +
           (py * 100).toFixed(1) +
-          "%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 32%, transparent 62%)";
+          "%, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.12) 28%, transparent 58%)";
       });
     }
 
     function onLeave() {
       if (frame) cancelAnimationFrame(frame);
       target.classList.remove("is-tilting");
+      if (markSurface) surface.classList.remove("is-tilting");
       target.style.transform = "";
       glare.style.background = "";
     }
@@ -210,7 +221,13 @@
     var hero = document.querySelector(".hero");
     var heroMedia = document.querySelector(".hero-media");
     if (hero && heroMedia) {
-      bindMediaTilt(hero, heroMedia, { maxTilt: 8, scale: 1.045 });
+      bindMediaTilt(hero, heroMedia, {
+        maxTilt: 14,
+        scale: 1.08,
+        translate: 48,
+        glareParent: hero,
+        markSurface: true
+      });
     }
   }
 
