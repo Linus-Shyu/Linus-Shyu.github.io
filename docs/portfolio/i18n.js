@@ -31,7 +31,7 @@ window.PORTFOLIO_I18N = {
     hero: {
       eyebrow: "18 · 高三 · Co-founder & CTO",
       headline: "一个渴望国际视野的青海少年。",
-      subheadline: "用 Swift 做原生应用，在黑客松里把 CLI 做出来；能用的就开源，能上架的就上架。"
+      subheadline: "从四年级第一次玩守望先锋，走向了计算机编程的不归路。"
     },
     also: {
       title: "Also",
@@ -160,7 +160,7 @@ window.PORTFOLIO_I18N = {
     hero: {
       eyebrow: "18 · Grade 12 · Co-founder & CTO",
       headline: "A Qinghai youth hungry for a global view.",
-      subheadline: "I ship Swift apps and hackathon-built CLIs—open-source what works, publish what ships."
+      subheadline: "From first playing Overwatch in fourth grade to an irreversible path into computer programming."
     },
     also: {
       title: "Also",
