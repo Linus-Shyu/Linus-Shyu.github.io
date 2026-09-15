@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-15T10:10:51.661Z",
+  "updatedAt": "2026-09-15T15:05:32.243Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-09-15T10:10:51.661Z",
+    "dashboardUpdatedAt": "2026-09-15T15:05:32.243Z",
     "analyticsUpdatedAt": "2026-09-15T03:44:25.662Z",
     "usageUpdatedAt": "2026-09-15T03:44:25.582Z",
     "accountCheckedAt": "2026-09-15T01:31:53.134Z",
     "tweetMetricsCheckedAt": "2026-09-15T01:31:53.340Z",
     "checkedAt": "2026-09-15T01:31:53.340Z",
-    "ageMinutes": 519,
+    "ageMinutes": 814,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -36,7 +36,7 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 2
+          "hoursFromNow": 21
         },
         "dailyTarget": 1,
         "packetsLast24h": 0,
@@ -47,7 +47,7 @@
         "avgScore": 0,
         "topPackets": [],
         "latestPacketAt": null,
-        "status": "ready",
+        "status": "scheduled",
         "nextAction": "Next ZH slot is 12:00 UTC; cadence is scoped to this language track."
       },
       {
@@ -63,7 +63,7 @@
         "nextWindow": {
           "hour": 16,
           "label": "16:00 UTC",
-          "hoursFromNow": 6
+          "hoursFromNow": 1
         },
         "dailyTarget": 3,
         "packetsLast24h": 0,
@@ -74,19 +74,19 @@
         "avgScore": 0,
         "topPackets": [],
         "latestPacketAt": null,
-        "status": "scheduled",
+        "status": "ready",
         "nextAction": "Next EN slot is 16:00 UTC; cadence is scoped to this language track."
       }
     ]
   },
   "growthDecision": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -95,7 +95,7 @@
       "nextSlot": {
         "hour": 16,
         "label": "16:00 UTC",
-        "hoursFromNow": 6
+        "hoursFromNow": 1
       },
       "selectedTags": [
         "#devtools",
@@ -103,7 +103,7 @@
       ],
       "canPost": true,
       "budgetSafeRemainingUsd": 2.455,
-      "cadenceReason": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+      "cadenceReason": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
       "nextRoute": {
         "label": "Velocity route: Here’s what’s new with parental control features in iOS 27, iPadOS 27,...",
         "routeLabel": "breakout X route",
@@ -118,7 +118,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 4,
@@ -128,7 +128,7 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 4,
@@ -137,7 +137,7 @@
       "items": []
     },
     "languageMix": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "en",
@@ -155,7 +155,7 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
@@ -192,7 +192,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -382,7 +382,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -467,7 +467,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -558,7 +558,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -647,7 +647,7 @@
         "confidenceScore": 76.3,
         "projectedDays": 0,
         "savedDays": 0,
-        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+        "detail": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
         "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window."
       },
       {
@@ -725,7 +725,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "scale_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -846,97 +846,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-09-14T10:10:51.661Z",
-          "endsAt": "2026-09-14T12:10:51.661Z",
-          "label": "10:10",
+          "startsAt": "2026-09-14T15:05:32.243Z",
+          "endsAt": "2026-09-14T17:05:32.243Z",
+          "label": "15:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-09-14T12:10:51.661Z",
-          "endsAt": "2026-09-14T14:10:51.661Z",
-          "label": "12:10",
+          "startsAt": "2026-09-14T17:05:32.243Z",
+          "endsAt": "2026-09-14T19:05:32.243Z",
+          "label": "17:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 2,
-          "startsAt": "2026-09-14T14:10:51.661Z",
-          "endsAt": "2026-09-14T16:10:51.661Z",
-          "label": "14:10",
+          "startsAt": "2026-09-14T19:05:32.243Z",
+          "endsAt": "2026-09-14T21:05:32.243Z",
+          "label": "19:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-09-14T16:10:51.661Z",
-          "endsAt": "2026-09-14T18:10:51.661Z",
-          "label": "16:10",
+          "startsAt": "2026-09-14T21:05:32.243Z",
+          "endsAt": "2026-09-14T23:05:32.243Z",
+          "label": "21:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 4,
-          "startsAt": "2026-09-14T18:10:51.661Z",
-          "endsAt": "2026-09-14T20:10:51.661Z",
-          "label": "18:10",
+          "startsAt": "2026-09-14T23:05:32.243Z",
+          "endsAt": "2026-09-15T01:05:32.243Z",
+          "label": "23:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 5,
-          "startsAt": "2026-09-14T20:10:51.661Z",
-          "endsAt": "2026-09-14T22:10:51.661Z",
-          "label": "20:10",
+          "startsAt": "2026-09-15T01:05:32.243Z",
+          "endsAt": "2026-09-15T03:05:32.243Z",
+          "label": "01:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-09-14T22:10:51.661Z",
-          "endsAt": "2026-09-15T00:10:51.661Z",
-          "label": "22:10",
+          "startsAt": "2026-09-15T03:05:32.243Z",
+          "endsAt": "2026-09-15T05:05:32.243Z",
+          "label": "03:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-09-15T00:10:51.661Z",
-          "endsAt": "2026-09-15T02:10:51.661Z",
-          "label": "00:10",
+          "startsAt": "2026-09-15T05:05:32.243Z",
+          "endsAt": "2026-09-15T07:05:32.243Z",
+          "label": "05:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-09-15T02:10:51.661Z",
-          "endsAt": "2026-09-15T04:10:51.661Z",
-          "label": "02:10",
+          "startsAt": "2026-09-15T07:05:32.243Z",
+          "endsAt": "2026-09-15T09:05:32.243Z",
+          "label": "07:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-09-15T04:10:51.661Z",
-          "endsAt": "2026-09-15T06:10:51.661Z",
-          "label": "04:10",
+          "startsAt": "2026-09-15T09:05:32.243Z",
+          "endsAt": "2026-09-15T11:05:32.243Z",
+          "label": "09:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-09-15T06:10:51.661Z",
-          "endsAt": "2026-09-15T08:10:51.661Z",
-          "label": "06:10",
+          "startsAt": "2026-09-15T11:05:32.243Z",
+          "endsAt": "2026-09-15T13:05:32.243Z",
+          "label": "11:05",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-09-15T08:10:51.661Z",
-          "endsAt": "2026-09-15T10:10:51.661Z",
-          "label": "08:10",
+          "startsAt": "2026-09-15T13:05:32.243Z",
+          "endsAt": "2026-09-15T15:05:32.243Z",
+          "label": "13:05",
           "value": 0,
           "posts": 0
         }
@@ -1310,7 +1310,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -1373,14 +1373,14 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "wait_for_learned_peak",
     "publishAllowed": false,
     "willBlockPublish": false,
     "manualOverride": false,
     "reasonCode": "learned_peak_wait",
     "severity": "warn",
-    "reason": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+    "reason": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
     "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
     "languageCode": null,
     "dailyPostTarget": 4,
@@ -1392,22 +1392,22 @@
     "safeRemainingUsd": 2.455,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 6.44,
-    "telemetryAgeMinutes": 519,
+    "hoursSinceLastPost": 11.35,
+    "telemetryAgeMinutes": 814,
     "latestTelemetryAt": "2026-09-15T01:31:53.340Z",
     "experimentSlots": 3,
     "hourlyLoad": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
-      "sampleCount": 9,
+      "sampleCount": 8,
       "minSamples": 2,
       "confidence": "low",
       "mode": "wait_for_peak",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 10,
-        "label": "10:00",
+        "hour": 15,
+        "label": "15:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -1415,29 +1415,29 @@
         "status": "dark"
       },
       "nextWindow": {
-        "hour": 13,
-        "label": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "posts": 4,
-        "impressions": 159,
-        "avgScore": 4.4,
-        "status": "hot"
+        "hour": 17,
+        "label": "17:00",
+        "hoursFromNow": 2,
+        "loadScore": 60.4,
+        "posts": 2,
+        "impressions": 80,
+        "avgScore": 2.4,
+        "status": "warm"
       },
       "bestHours": [
         {
           "hour": 13,
           "label": "13:00",
-          "loadScore": 97.7,
-          "posts": 4,
-          "impressions": 159,
-          "avgScore": 4.4,
+          "loadScore": 93.3,
+          "posts": 3,
+          "impressions": 118,
+          "avgScore": 5.1,
           "status": "hot"
         },
         {
           "hour": 14,
           "label": "14:00",
-          "loadScore": 88.6,
+          "loadScore": 88,
           "posts": 2,
           "impressions": 147,
           "avgScore": 3.7,
@@ -1446,7 +1446,7 @@
         {
           "hour": 17,
           "label": "17:00",
-          "loadScore": 61,
+          "loadScore": 60.4,
           "posts": 2,
           "impressions": 80,
           "avgScore": 2.4,
@@ -1455,14 +1455,14 @@
         {
           "hour": 12,
           "label": "12:00",
-          "loadScore": 43.3,
+          "loadScore": 41.9,
           "posts": 1,
           "impressions": 30,
           "avgScore": 2.3,
           "status": "cool"
         }
       ],
-      "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+      "nextAction": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
       "hours": [
         {
           "hour": 0,
@@ -1605,7 +1605,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 11,
@@ -1629,20 +1629,20 @@
           "reposts": 0,
           "replies": 0,
           "avgScore": 2.3,
-          "loadScore": 43.3,
+          "loadScore": 41.9,
           "status": "cool",
           "current": false
         },
         {
           "hour": 13,
           "label": "13:00",
-          "posts": 4,
-          "impressions": 159,
-          "likes": 4,
+          "posts": 3,
+          "impressions": 118,
+          "likes": 3,
           "reposts": 0,
           "replies": 0,
-          "avgScore": 4.4,
-          "loadScore": 97.7,
+          "avgScore": 5.1,
+          "loadScore": 93.3,
           "status": "hot",
           "current": false
         },
@@ -1655,7 +1655,7 @@
           "reposts": 0,
           "replies": 0,
           "avgScore": 3.7,
-          "loadScore": 88.6,
+          "loadScore": 88,
           "status": "hot",
           "current": false
         },
@@ -1670,7 +1670,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": false
+          "current": true
         },
         {
           "hour": 16,
@@ -1694,7 +1694,7 @@
           "reposts": 0,
           "replies": 0,
           "avgScore": 2.4,
-          "loadScore": 61,
+          "loadScore": 60.4,
           "status": "warm",
           "current": false
         },
@@ -1782,8 +1782,8 @@
       "mode": "wait_for_peak",
       "confidence": "low",
       "currentHour": {
-        "hour": 10,
-        "label": "10:00",
+        "hour": 15,
+        "label": "15:00",
         "loadScore": 0,
         "posts": 0,
         "impressions": 0,
@@ -1791,29 +1791,29 @@
         "status": "dark"
       },
       "nextWindow": {
-        "hour": 13,
-        "label": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "posts": 4,
-        "impressions": 159,
-        "avgScore": 4.4,
-        "status": "hot"
+        "hour": 17,
+        "label": "17:00",
+        "hoursFromNow": 2,
+        "loadScore": 60.4,
+        "posts": 2,
+        "impressions": 80,
+        "avgScore": 2.4,
+        "status": "warm"
       },
       "bestHours": [
         {
           "hour": 13,
           "label": "13:00",
-          "loadScore": 97.7,
-          "posts": 4,
-          "impressions": 159,
-          "avgScore": 4.4,
+          "loadScore": 93.3,
+          "posts": 3,
+          "impressions": 118,
+          "avgScore": 5.1,
           "status": "hot"
         },
         {
           "hour": 14,
           "label": "14:00",
-          "loadScore": 88.6,
+          "loadScore": 88,
           "posts": 2,
           "impressions": 147,
           "avgScore": 3.7,
@@ -1822,7 +1822,7 @@
         {
           "hour": 17,
           "label": "17:00",
-          "loadScore": 61,
+          "loadScore": 60.4,
           "posts": 2,
           "impressions": 80,
           "avgScore": 2.4,
@@ -1831,14 +1831,14 @@
         {
           "hour": 12,
           "label": "12:00",
-          "loadScore": 43.3,
+          "loadScore": 41.9,
           "posts": 1,
           "impressions": 30,
           "avgScore": 2.3,
           "status": "cool"
         }
       ],
-      "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+      "nextAction": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
       "zeroExtraXReads": true
     },
     "topicTimingWindow": {
@@ -1847,13 +1847,13 @@
       "routerScore": 85,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 7,
+      "hoursFromNow": 2,
       "activeLane": {
         "id": "17:platform_control:prediction",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 7,
-        "loadScore": 61,
+        "hoursFromNow": 2,
+        "loadScore": 60.4,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -1885,7 +1885,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "6.4h since packet",
+        "value": "11.4h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -1899,7 +1899,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "519 min old",
+        "value": "814 min old",
         "detail": "Latest checked telemetry: 2026-09-15T01:31:53.340Z."
       },
       {
@@ -1913,20 +1913,20 @@
         "id": "hourly_window",
         "ok": false,
         "label": "Learned UTC window",
-        "value": "10:00 score 0.0",
-        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
+        "value": "15:00 score 0.0",
+        "detail": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "17:00 UTC / Platform Control / Near-term Prediction in 7.0h",
+        "value": "17:00 UTC / Platform Control / Near-term Prediction in 2.0h",
         "detail": "Schedule the next standalone packet for 17:00 UTC as Platform Control / Near-term Prediction."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 77.5,
@@ -1963,7 +1963,7 @@
         "label": "publish gate",
         "value": "review",
         "status": "warn",
-        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
+        "detail": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now."
       },
       {
         "id": "read",
@@ -2002,13 +2002,13 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
-    "status": "reactor nominal",
-    "severity": "ok",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
+    "status": "boundary watch",
+    "severity": "warn",
     "reactorFillPct": 54.6,
     "circuit": {
-      "pressurePct": 27.3,
-      "mode": "nominal_cached_first",
+      "pressurePct": 43.3,
+      "mode": "guarded_cached_only",
       "hottestPartition": "read_search",
       "zeroExtraXReads": true
     },
@@ -2034,25 +2034,25 @@
       "failureRatePct": 0
     },
     "runwayGuard": {
-      "active": false,
+      "active": true,
       "enabled": true,
-      "reasonCode": "inside_runway",
-      "severity": "ok",
-      "readGate": "open",
+      "reasonCode": "runway_guard",
+      "severity": "warn",
+      "readGate": "cached_only",
       "budgetUsd": 5,
       "safeCapUsd": 4.5,
       "trackedSpendUsd": 2.045,
-      "projectedCostUsd": 0.05,
+      "projectedCostUsd": 0.1,
       "safeRemainingUsd": 2.455,
       "observedDailyBurnUsd": 0.15,
-      "plannedDailyBurnUsd": 0.11,
-      "projectedDailyBurnUsd": 0.15,
+      "plannedDailyBurnUsd": 0.16,
+      "projectedDailyBurnUsd": 0.16,
       "monthDay": 15,
       "daysRemaining": 15,
-      "monthEndProjectedSpendUsd": 4.345,
-      "monthEndSafe": true,
-      "runwayDays": 16,
-      "reason": "X API runway guard clear: daily burn ~$0.150, projected month-end $4.345 / $4.50 safe cap."
+      "monthEndProjectedSpendUsd": 4.545,
+      "monthEndSafe": false,
+      "runwayDays": 14.7,
+      "reason": "X API runway guard paused live reads: $2.045 tracked + ~$0.100 projected now, daily burn ~$0.160, month-end projection $4.545 > $4.50 safe cap."
     },
     "partitionMatrix": [
       {
@@ -2080,8 +2080,8 @@
         "endpoints": [
           "TWEET_METRICS_LOOKUP"
         ],
-        "gate": "sampled",
-        "status": "ok",
+        "gate": "cached_only",
+        "status": "warn",
         "cache": null,
         "calls": 11,
         "failures": 0,
@@ -2089,8 +2089,8 @@
         "usd": 0.55,
         "lastStatus": 200,
         "lastEndpoint": "TWEET_METRICS_LOOKUP",
-        "pressurePct": 0,
-        "directive": "Refresh only due metrics; no exploratory reads."
+        "pressurePct": 10,
+        "directive": "Skip optional refreshes and keep last known telemetry."
       },
       {
         "id": "account_snapshot",
@@ -2098,25 +2098,25 @@
         "endpoints": [
           "USER_ME_LOOKUP"
         ],
-        "gate": "cached_only",
-        "status": "warn",
+        "gate": "sampled",
+        "status": "ok",
         "cache": {
-          "generatedAt": "2026-09-15T10:10:51.661Z",
+          "generatedAt": "2026-09-15T15:05:32.243Z",
           "enabled": true,
-          "mode": "cache_hit",
-          "status": "ok",
-          "zeroExtraXReads": true,
-          "readGate": "cached_only",
+          "mode": "refresh_due",
+          "status": "warn",
+          "zeroExtraXReads": false,
+          "readGate": "sampled",
           "latestCheckedAt": "2026-09-15T01:31:53.134Z",
           "nextRefreshAt": "2026-09-15T13:31:53.134Z",
-          "ageHours": 8.65,
+          "ageHours": 13.56,
           "maxAgeHours": 12,
-          "fresh": true,
-          "due": false,
+          "fresh": false,
+          "due": true,
           "followers": 84,
-          "estimatedRefreshCostUsd": 0,
-          "savedReadCostUsd": 0.05,
-          "directive": "Account snapshot cache is fresh; skip USER_ME_LOOKUP and preserve X read budget."
+          "estimatedRefreshCostUsd": 0.05,
+          "savedReadCostUsd": 0,
+          "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
         },
         "calls": 11,
         "failures": 0,
@@ -2124,8 +2124,8 @@
         "usd": 0.55,
         "lastStatus": 200,
         "lastEndpoint": "USER_ME_LOOKUP",
-        "pressurePct": 10,
-        "directive": "Account snapshot cache is fresh; skip USER_ME_LOOKUP and preserve X read budget."
+        "pressurePct": 0,
+        "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
       },
       {
         "id": "write",
@@ -2211,9 +2211,9 @@
       {
         "id": "recover",
         "label": "RECOVER",
-        "status": "ok",
-        "value": "now",
-        "detail": "all partitions nominal"
+        "status": "warn",
+        "value": "runway",
+        "detail": "budget runway guard"
       }
     ],
     "cooldown": {
@@ -2252,20 +2252,20 @@
       {
         "id": "account_snapshot",
         "label": "account snapshot",
-        "value": "cache_hit",
-        "status": "ok"
+        "value": "refresh_due",
+        "status": "warn"
       },
       {
         "id": "runway",
         "label": "runway guard",
-        "value": "clear",
-        "status": "ok"
+        "value": "cached_only",
+        "status": "warn"
       },
       {
         "id": "month_end",
         "label": "month-end projection",
-        "value": "$4.345",
-        "status": "ok"
+        "value": "$4.545",
+        "status": "warn"
       },
       {
         "id": "safe_cap",
@@ -2281,67 +2281,67 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-09-15T10:10:51.661Z",
+      "generatedAt": "2026-09-15T15:05:32.243Z",
       "enabled": true,
-      "mode": "cache_hit",
-      "status": "ok",
-      "zeroExtraXReads": true,
-      "readGate": "cached_only",
+      "mode": "refresh_due",
+      "status": "warn",
+      "zeroExtraXReads": false,
+      "readGate": "sampled",
       "latestCheckedAt": "2026-09-15T01:31:53.134Z",
       "nextRefreshAt": "2026-09-15T13:31:53.134Z",
-      "ageHours": 8.65,
+      "ageHours": 13.56,
       "maxAgeHours": 12,
-      "fresh": true,
-      "due": false,
+      "fresh": false,
+      "due": true,
       "followers": 84,
-      "estimatedRefreshCostUsd": 0,
-      "savedReadCostUsd": 0.05,
-      "directive": "Account snapshot cache is fresh; skip USER_ME_LOOKUP and preserve X read budget."
+      "estimatedRefreshCostUsd": 0.05,
+      "savedReadCostUsd": 0,
+      "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
     },
-    "runbook": "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
-    "nextAction": "Stay in cached-first mode; spend X API only on scheduled write paths and due metrics."
+    "runbook": "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
+    "nextAction": "Run cached routing and manual paste; avoid optional metrics/search calls until runway pressure drops."
   },
   "xApiRunwayGuard": {
-    "active": false,
+    "active": true,
     "enabled": true,
-    "reasonCode": "inside_runway",
-    "severity": "ok",
-    "readGate": "open",
+    "reasonCode": "runway_guard",
+    "severity": "warn",
+    "readGate": "cached_only",
     "budgetUsd": 5,
     "safeCapUsd": 4.5,
     "trackedSpendUsd": 2.045,
-    "projectedCostUsd": 0.05,
+    "projectedCostUsd": 0.1,
     "safeRemainingUsd": 2.455,
     "observedDailyBurnUsd": 0.15,
-    "plannedDailyBurnUsd": 0.11,
-    "projectedDailyBurnUsd": 0.15,
+    "plannedDailyBurnUsd": 0.16,
+    "projectedDailyBurnUsd": 0.16,
     "monthDay": 15,
     "daysRemaining": 15,
-    "monthEndProjectedSpendUsd": 4.345,
-    "monthEndSafe": true,
-    "runwayDays": 16,
-    "reason": "X API runway guard clear: daily burn ~$0.150, projected month-end $4.345 / $4.50 safe cap."
+    "monthEndProjectedSpendUsd": 4.545,
+    "monthEndSafe": false,
+    "runwayDays": 14.7,
+    "reason": "X API runway guard paused live reads: $2.045 tracked + ~$0.100 projected now, daily burn ~$0.160, month-end projection $4.545 > $4.50 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "enabled": true,
-    "mode": "cache_hit",
-    "status": "ok",
-    "zeroExtraXReads": true,
-    "readGate": "cached_only",
+    "mode": "refresh_due",
+    "status": "warn",
+    "zeroExtraXReads": false,
+    "readGate": "sampled",
     "latestCheckedAt": "2026-09-15T01:31:53.134Z",
     "nextRefreshAt": "2026-09-15T13:31:53.134Z",
-    "ageHours": 8.65,
+    "ageHours": 13.56,
     "maxAgeHours": 12,
-    "fresh": true,
-    "due": false,
+    "fresh": false,
+    "due": true,
     "followers": 84,
-    "estimatedRefreshCostUsd": 0,
-    "savedReadCostUsd": 0.05,
-    "directive": "Account snapshot cache is fresh; skip USER_ME_LOOKUP and preserve X read budget."
+    "estimatedRefreshCostUsd": 0.05,
+    "savedReadCostUsd": 0,
+    "directive": "Account snapshot TTL expired; next maintenance may spend one USER_ME_LOOKUP read."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -2554,7 +2554,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -2589,7 +2589,7 @@
         "gate": "guarded",
         "status": "warn",
         "efficiencyScore": 46.6,
-        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+        "detail": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
         "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
         "xReadOps": 0,
         "zeroExtraXReads": true
@@ -2673,7 +2673,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2686,7 +2686,7 @@
     "expectedLiftPct": 132.4,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-09-15T10:10:51.661Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $2.46\nTarget: 3 useful manual route ops · expected lift +132.4%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Reuse the current winning format and paste it under active high-signal tech conversations.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-09-15T15:05:32.243Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $2.46\nTarget: 3 useful manual route ops · expected lift +132.4%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Reuse the current winning format and paste it under active high-signal tech conversations.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -2822,7 +2822,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2895,10 +2895,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-09-15T10:10:51.661Z\nMode: wait_for_learned_peak\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +182.9%\n2. OPEN: breakout X route - https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +182.9%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\n   SLA: 30m · target 1 · lift +31.5%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-09-15T15:05:32.243Z\nMode: wait_for_learned_peak\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +182.9%\n2. OPEN: breakout X route - https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +182.9%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\n   SLA: 30m · target 1 · lift +31.5%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -2999,10 +2999,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-09-15T10:10:51.661Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-09-15T15:05:32.243Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -3165,10 +3165,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-09-15T10:10:51.661Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-09-15T15:05:32.243Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -3178,7 +3178,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "sentinelScore": 67.3,
+    "sentinelScore": 66.7,
     "l7Events24h": 0,
     "l7Events7d": 0,
     "dailyBaseline": 0,
@@ -3192,7 +3192,7 @@
     "activeWindow": {
       "hour": 13,
       "label": "13:00",
-      "loadScore": 97.7
+      "loadScore": 93.3
     },
     "primaryRouteLabel": "breakout X route",
     "primaryOpenUrl": "https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
@@ -3293,7 +3293,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -3303,7 +3303,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "cached_only",
     "manualOnly": true,
-    "leakScore": 41.9,
+    "leakScore": 41.8,
     "primaryLeakId": "ack_layer",
     "primaryLeak": {
       "id": "ack_layer",
@@ -3319,9 +3319,9 @@
         "id": "l7_input",
         "label": "L7_INPUT",
         "value": "0",
-        "score": 67.3,
+        "score": 66.7,
         "status": "ok",
-        "leakPct": 32.7,
+        "leakPct": 33.3,
         "detail": "0.00x cached load ratio",
         "nextAction": "Route one cached high-signal packet inside an active technical exchange before generating more standalone output.",
         "zeroExtraXReads": true,
@@ -3439,7 +3439,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -3449,7 +3449,7 @@
     "operatorMode": "human_in_loop",
     "readGate": "browser_only",
     "manualOnly": true,
-    "commandScore": 85.4,
+    "commandScore": 85.3,
     "routeLabel": "breakout X route",
     "openUrl": "https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "pastePayload": "On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
@@ -3538,10 +3538,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-09-15T10:10:51.661Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.4\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-09-15T15:05:32.243Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.3\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -3602,7 +3602,7 @@
         "id": "route_proof",
         "label": "ROUTE_PROOF",
         "value": "armed",
-        "score": 89.7,
+        "score": 89.6,
         "status": "ok",
         "detail": "breakout X route command dock lane",
         "nextAction": "Open breakout X route, paste one useful payload, then stop at the manual gate.",
@@ -3614,7 +3614,7 @@
         "id": "leak_repair",
         "label": "LEAK_REPAIR",
         "value": "ACK_LAYER",
-        "score": 22.4,
+        "score": 22.3,
         "status": "danger",
         "detail": "lowest-scoring cached loop partition",
         "nextAction": "Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save.",
@@ -3687,7 +3687,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 72.0\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "warn",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -3698,7 +3698,7 @@
     "readGate": "cached_only",
     "manualOnly": true,
     "traceScore": 91.3,
-    "totalLatencyMs": 13032,
+    "totalLatencyMs": 13035,
     "savedReadOps": 5,
     "activeSource": "v2ex.com",
     "bottleneckStageId": "learn_writeback",
@@ -3724,7 +3724,7 @@
         "operatorMode": "cached_only",
         "readGate": "cached_only",
         "startPct": 0,
-        "widthPct": 9.58
+        "widthPct": 9.57
       },
       {
         "id": "swarm_rank",
@@ -3744,28 +3744,28 @@
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 9.58,
-        "widthPct": 35.3
+        "startPct": 9.57,
+        "widthPct": 35.29
       },
       {
         "id": "packet_draft",
         "label": "PACKET_DRAFT",
         "subsystem": "TXT",
-        "score": 87.2,
-        "durationMs": 2089,
+        "score": 87.1,
+        "durationMs": 2090,
         "input": "breakout X route",
         "output": "payload armed",
         "detail": "Operator packet is ready for manual paste.",
         "nextAction": "Copy one payload and preserve the operator-grade first line.",
         "status": "ok",
         "startMs": 5848,
-        "endMs": 7937,
+        "endMs": 7938,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 44.87,
+        "startPct": 44.86,
         "widthPct": 16.03
       },
       {
@@ -3773,21 +3773,21 @@
         "label": "MANUAL_ROUTE",
         "subsystem": "X",
         "score": 83.5,
-        "durationMs": 2795,
+        "durationMs": 2797,
         "input": "breakout X route",
         "output": "browser route armed",
         "detail": "Manual X web route is armed; API read partition stays sealed.",
         "nextAction": "Open breakout X route, select one fresh technical exchange, paste the payload, then stop after 1 route op.",
         "readGate": "browser_only",
         "status": "ok",
-        "startMs": 7937,
-        "endMs": 10732,
+        "startMs": 7938,
+        "endMs": 10735,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "human_in_loop",
         "startPct": 60.9,
-        "widthPct": 21.45
+        "widthPct": 21.46
       },
       {
         "id": "learn_writeback",
@@ -3800,15 +3800,15 @@
         "detail": "Maintenance writes cached packet outcomes into the next angle decision.",
         "nextAction": "Let maintenance refresh metrics before widening the topic surface.",
         "status": "warn",
-        "startMs": 10732,
-        "endMs": 13032,
+        "startMs": 10735,
+        "endMs": 13035,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0,
         "operatorMode": "cached_only",
         "readGate": "cached_only",
-        "startPct": 82.35,
-        "widthPct": 17.65
+        "startPct": 82.36,
+        "widthPct": 17.64
       }
     ],
     "edges": [
@@ -3829,7 +3829,7 @@
         "to": "packet_draft",
         "label": "AI->TXT",
         "status": "ok",
-        "score": 93.6,
+        "score": 93.5,
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
         "estimatedIncrementalXApiUsd": 0
@@ -3903,7 +3903,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 91.3\nBottleneck: LEARN_WRITEBACK\nLatency budget: 13.0s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -4051,27 +4051,27 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 73\n\nOPEN: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_next_window_commander",
     "severity": "warn",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 75.9,
+    "commanderScore": 69.2,
     "publishGate": "manual_route_only",
     "readGate": "cached_only",
     "activeWindow": {
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 7,
-      "loadScore": 97.7
+      "hoursFromNow": 2,
+      "loadScore": 60.4
     },
     "window": {
       "hour": 17,
       "label": "17:00",
       "windowLabel": "17:00",
-      "hoursFromNow": 7,
-      "loadScore": 97.7
+      "hoursFromNow": 2,
+      "loadScore": 60.4
     },
     "activeAngle": {
       "formatId": "prediction",
@@ -4103,7 +4103,7 @@
         "label": "Cadence",
         "status": "warn",
         "value": "manual_route_only",
-        "detail": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
+        "detail": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now."
       },
       {
         "id": "budget",
@@ -4132,11 +4132,11 @@
       },
       {
         "id": "angle_load",
-        "label": "13:00 UTC / Near-term Prediction",
-        "score": 100,
-        "status": "hot",
+        "label": "17:00 UTC / Near-term Prediction",
+        "score": 56.2,
+        "status": "watch",
         "source": "angle_load",
-        "detail": "prediction has 2 sample(s) in this UTC hour with avg score 6.3."
+        "detail": "prediction has 1 sample(s) in this UTC hour with avg score 2.5."
       }
     ],
     "checklist": [
@@ -4145,7 +4145,7 @@
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 75.9 / Gate: manual_route_only / X reads: 0\nWindow: 17:00 UTC (7.0h from now)\nAngle: Near-term Prediction / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Near-term Prediction angle warm for 17:00 UTC.\nPrompt bias:\n- Format=prediction\n- Pillar=Platform Control\n- Window=17:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 69.2 / Gate: manual_route_only / X reads: 0\nWindow: 17:00 UTC (2.0h from now)\nAngle: Near-term Prediction / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Near-term Prediction angle warm for 17:00 UTC.\nPrompt bias:\n- Format=prediction\n- Pillar=Platform Control\n- Window=17:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -4153,7 +4153,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_warmup",
     "severity": "ok",
@@ -4168,8 +4168,8 @@
       "source": "topic_timing",
       "hour": 13,
       "windowLabel": "13:00",
-      "hoursFromNow": 3,
-      "loadScore": 97.7,
+      "hoursFromNow": 22,
+      "loadScore": 93.3,
       "formatId": "prediction",
       "formatLabel": "Near-term Prediction",
       "pillarId": "operator_leverage",
@@ -4186,8 +4186,8 @@
         "source": "topic_timing",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "operator_leverage",
@@ -4203,8 +4203,8 @@
         "source": "topic_timing",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "platform_control",
@@ -4220,8 +4220,8 @@
         "source": "topic_timing",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "market_timing",
@@ -4237,102 +4237,102 @@
         "source": "topic_timing",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "risk_boundary",
         "pillarLabel": "Risk Boundary",
         "status": "hot",
-        "score": 100,
+        "score": 99.8,
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 13:00 UTC."
-      },
-      {
-        "id": "13_00_prediction_consumer_behavior_topic_timing",
-        "source": "topic_timing",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
-        "status": "hot",
-        "score": 100,
-        "sampleCount": 0,
-        "l7Events": 0,
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC."
       },
       {
         "id": "14_00_prediction_platform_control_topic_timing",
         "source": "topic_timing",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
+        "hoursFromNow": 23,
+        "loadScore": 88,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "status": "hot",
-        "score": 99.9,
+        "score": 99.8,
         "sampleCount": 1,
         "l7Events": 100,
         "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 14:00 UTC."
       },
       {
-        "id": "13_00_second_order_platform_control_topic_timing",
+        "id": "13_00_prediction_consumer_behavior_topic_timing",
         "source": "topic_timing",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "status": "hot",
-        "score": 99.6,
-        "sampleCount": 0,
-        "l7Events": 0,
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 13:00 UTC."
-      },
-      {
-        "id": "13_00_not_x_but_y_platform_control_topic_timing",
-        "source": "topic_timing",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "formatId": "not_x_but_y",
-        "formatLabel": "Not X But Y",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "status": "hot",
-        "score": 99.6,
-        "sampleCount": 0,
-        "l7Events": 0,
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 13:00 UTC."
-      },
-      {
-        "id": "13_00_prediction_platform_control_temporal_matrix",
-        "source": "temporal_matrix",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
+        "status": "hot",
+        "score": 99,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC."
+      },
+      {
+        "id": "14_00_prediction_operator_leverage_topic_timing",
+        "source": "topic_timing",
+        "hour": 14,
+        "windowLabel": "14:00",
+        "hoursFromNow": 23,
+        "loadScore": 88,
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
+        "status": "hot",
+        "score": 98.5,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 14:00 UTC."
+      },
+      {
+        "id": "13_00_brutal_truth_platform_control_topic_timing",
+        "source": "topic_timing",
+        "hour": 13,
+        "windowLabel": "13:00",
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
+        "formatId": "brutal_truth",
+        "formatLabel": "Brutal Truth",
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "status": "hot",
-        "score": 98.6,
-        "sampleCount": 2,
-        "l7Events": 66,
-        "directive": "prediction has 2 sample(s) in this UTC hour with avg score 6.3."
+        "score": 97.9,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Brutal Truth around 13:00 UTC."
+      },
+      {
+        "id": "14_00_prediction_market_timing_topic_timing",
+        "source": "topic_timing",
+        "hour": 14,
+        "windowLabel": "14:00",
+        "hoursFromNow": 23,
+        "loadScore": 88,
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": "market_timing",
+        "pillarLabel": "Market Timing",
+        "status": "hot",
+        "score": 97.9,
+        "sampleCount": 0,
+        "l7Events": 0,
+        "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 14:00 UTC."
       }
     ],
     "safeCostLeftUsd": 2.455,
@@ -4370,7 +4370,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -4386,7 +4386,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-09-15T10:10:51.661Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-09-15T15:05:32.243Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 0,
@@ -4482,7 +4482,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -4574,7 +4574,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4593,7 +4593,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-09-15T10:10:51.661Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 95.2 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-09-15T15:05:32.243Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(here%20OR%20new%20OR%20parental%20OR%20control%20OR%20features%20OR%20ios)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Here’s what’s new with parental control features in iOS 27, iPadOS 27, an...: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · big_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(apple%20OR%20new%20OR%20child%20OR%20safety%20OR%20features%20OR%20now)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Apple’s new child safety features now available: the useful question is whether this changes a default workflow for Consumer Apps. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 95.2 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: OpenAI didn't ship a policy blog, it shipped a default. In 12 months every vendor will be asked to adopt this framing, and the ones without an answer will lose deals first, not audits.\n",
     "targets": [
       {
         "id": "trend:1:here-s-what-s-new-with-parental-control-fe",
@@ -4691,7 +4691,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -4994,7 +4994,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -5007,7 +5007,7 @@
       "label": "Near-term Prediction",
       "status": "exploit",
       "action": "exploit",
-      "allocationScore": 94.72,
+      "allocationScore": 95.14,
       "avgScore": 5,
       "samples": 7,
       "liftPct": 24.1,
@@ -5020,14 +5020,14 @@
       "nextAction": "Exploit Near-term Prediction with Entity-Led.",
       "reason": "Above baseline 4.0 with enough samples.",
       "rank": 1,
-      "allocationPct": 7.6
+      "allocationPct": 7.7
     },
     "exploreLane": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "brutal_truth",
+      "label": "Brutal Truth",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 94.57,
+      "allocationScore": 94.43,
       "avgScore": 4.03,
       "samples": 0,
       "liftPct": null,
@@ -5036,23 +5036,23 @@
       "exploitScore": 36.27,
       "rewardMomentum": 0,
       "regretPenalty": 0,
-      "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-      "nextAction": "Collect more samples for Second Order; keep first line concrete.",
+      "instruction": "Open with a blunt truth-bomb most people avoid saying. State it as fact, back it with the source's concrete detail, and let the tension pull replies.",
+      "nextAction": "Collect more samples for Brutal Truth; keep first line concrete.",
       "reason": "Needs 2 more sample(s) before the bot trusts it.",
       "rank": 2,
       "allocationPct": 7.6
     },
     "rankedFormatIds": [
       "prediction",
+      "brutal_truth",
+      "playbook",
+      "contrarian_cost",
+      "operator_pain",
       "second_order",
       "not_x_but_y",
       "the_hard_way",
       "myth_busting",
       "massive_value_drop",
-      "brutal_truth",
-      "playbook",
-      "contrarian_cost",
-      "operator_pain",
       "sharp_question",
       "decision_rule"
     ],
@@ -5062,7 +5062,7 @@
         "label": "Near-term Prediction",
         "status": "exploit",
         "action": "exploit",
-        "allocationScore": 94.72,
+        "allocationScore": 95.14,
         "avgScore": 5,
         "samples": 7,
         "liftPct": 24.1,
@@ -5075,114 +5075,14 @@
         "nextAction": "Exploit Near-term Prediction with Entity-Led.",
         "reason": "Above baseline 4.0 with enough samples.",
         "rank": 1,
-        "allocationPct": 7.6
-      },
-      {
-        "id": "second_order",
-        "label": "Second Order",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 94.57,
-        "avgScore": 4.03,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 1.745,
-        "explorationScore": 41.41,
-        "exploitScore": 36.27,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
-        "nextAction": "Collect more samples for Second Order; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 2,
-        "allocationPct": 7.6
-      },
-      {
-        "id": "not_x_but_y",
-        "label": "Not X But Y",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 94.51,
-        "avgScore": 4.03,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 1.745,
-        "explorationScore": 41.41,
-        "exploitScore": 36.27,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Reframe the story as 'not X, but Y': reject the obvious feature-level reading and name the workflow/business shift underneath.",
-        "nextAction": "Collect more samples for Not X But Y; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 3,
-        "allocationPct": 7.6
-      },
-      {
-        "id": "the_hard_way",
-        "label": "The Hard Way",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 94.2,
-        "avgScore": 4.03,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 1.745,
-        "explorationScore": 41.41,
-        "exploitScore": 36.27,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Frame it as a costly lesson learned the hard way: what broke, what it cost (time/money/latency), and the cheat code you'd use next time.",
-        "nextAction": "Collect more samples for The Hard Way; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 4,
-        "allocationPct": 7.6
-      },
-      {
-        "id": "myth_busting",
-        "label": "Myth Busting",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 94.14,
-        "avgScore": 4.03,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 1.745,
-        "explorationScore": 41.41,
-        "exploitScore": 36.27,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Name the belief 90% of people get wrong about this, then deliver the 10% truth with the evidence from the source. Dunk on the myth, not a person.",
-        "nextAction": "Collect more samples for Myth Busting; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 5,
-        "allocationPct": 7.6
-      },
-      {
-        "id": "massive_value_drop",
-        "label": "Massive Value Drop",
-        "status": "explore",
-        "action": "explore",
-        "allocationScore": 94.08,
-        "avgScore": 4.03,
-        "samples": 0,
-        "liftPct": null,
-        "uncertainty": 1.745,
-        "explorationScore": 41.41,
-        "exploitScore": 36.27,
-        "rewardMomentum": 0,
-        "regretPenalty": 0,
-        "instruction": "Give away a dense, bookmark-worthy playbook or config: exact steps, numbers, or an obscure setting others miss. So useful the reader must save it.",
-        "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
-        "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 6,
-        "allocationPct": 7.6
+        "allocationPct": 7.7
       },
       {
         "id": "brutal_truth",
         "label": "Brutal Truth",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 94.01,
+        "allocationScore": 94.43,
         "avgScore": 4.03,
         "samples": 0,
         "liftPct": null,
@@ -5194,7 +5094,7 @@
         "instruction": "Open with a blunt truth-bomb most people avoid saying. State it as fact, back it with the source's concrete detail, and let the tension pull replies.",
         "nextAction": "Collect more samples for Brutal Truth; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 7,
+        "rank": 2,
         "allocationPct": 7.6
       },
       {
@@ -5202,7 +5102,7 @@
         "label": "Playbook",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 93.89,
+        "allocationScore": 94.3,
         "avgScore": 4.03,
         "samples": 0,
         "liftPct": null,
@@ -5214,7 +5114,7 @@
         "instruction": "Turn the story into a practical playbook: what builders/operators should do next, what to stop doing, or which default to change.",
         "nextAction": "Collect more samples for Playbook; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 8,
+        "rank": 3,
         "allocationPct": 7.6
       },
       {
@@ -5222,7 +5122,7 @@
         "label": "Contrarian Cost",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 93.76,
+        "allocationScore": 94.18,
         "avgScore": 4.03,
         "samples": 0,
         "liftPct": null,
@@ -5234,15 +5134,15 @@
         "instruction": "Open with the hidden cost or tradeoff, not the benefit. The take should be debatable but defensible.",
         "nextAction": "Collect more samples for Contrarian Cost; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
-        "rank": 9,
-        "allocationPct": 7.5
+        "rank": 4,
+        "allocationPct": 7.6
       },
       {
         "id": "operator_pain",
         "label": "Operator Pain",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 93.7,
+        "allocationScore": 94.11,
         "avgScore": 4.03,
         "samples": 0,
         "liftPct": null,
@@ -5254,6 +5154,106 @@
         "instruction": "Translate the story into an operator/developer pain point: what gets easier, what gets more annoying, and who now has a new job to do.",
         "nextAction": "Collect more samples for Operator Pain; keep first line concrete.",
         "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 5,
+        "allocationPct": 7.6
+      },
+      {
+        "id": "second_order",
+        "label": "Second Order",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 93.99,
+        "avgScore": 4.03,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 1.745,
+        "explorationScore": 41.41,
+        "exploitScore": 36.27,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Lead with the second-order effect most people are missing, especially what changes for developers, teams, pricing, distribution, or user behavior.",
+        "nextAction": "Collect more samples for Second Order; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 6,
+        "allocationPct": 7.6
+      },
+      {
+        "id": "not_x_but_y",
+        "label": "Not X But Y",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 93.92,
+        "avgScore": 4.03,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 1.745,
+        "explorationScore": 41.41,
+        "exploitScore": 36.27,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Reframe the story as 'not X, but Y': reject the obvious feature-level reading and name the workflow/business shift underneath.",
+        "nextAction": "Collect more samples for Not X But Y; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 7,
+        "allocationPct": 7.6
+      },
+      {
+        "id": "the_hard_way",
+        "label": "The Hard Way",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 93.62,
+        "avgScore": 4.03,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 1.745,
+        "explorationScore": 41.41,
+        "exploitScore": 36.27,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Frame it as a costly lesson learned the hard way: what broke, what it cost (time/money/latency), and the cheat code you'd use next time.",
+        "nextAction": "Collect more samples for The Hard Way; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 8,
+        "allocationPct": 7.5
+      },
+      {
+        "id": "myth_busting",
+        "label": "Myth Busting",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 93.56,
+        "avgScore": 4.03,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 1.745,
+        "explorationScore": 41.41,
+        "exploitScore": 36.27,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Name the belief 90% of people get wrong about this, then deliver the 10% truth with the evidence from the source. Dunk on the myth, not a person.",
+        "nextAction": "Collect more samples for Myth Busting; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
+        "rank": 9,
+        "allocationPct": 7.5
+      },
+      {
+        "id": "massive_value_drop",
+        "label": "Massive Value Drop",
+        "status": "explore",
+        "action": "explore",
+        "allocationScore": 93.49,
+        "avgScore": 4.03,
+        "samples": 0,
+        "liftPct": null,
+        "uncertainty": 1.745,
+        "explorationScore": 41.41,
+        "exploitScore": 36.27,
+        "rewardMomentum": 0,
+        "regretPenalty": 0,
+        "instruction": "Give away a dense, bookmark-worthy playbook or config: exact steps, numbers, or an obscure setting others miss. So useful the reader must save it.",
+        "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
+        "reason": "Needs 2 more sample(s) before the bot trusts it.",
         "rank": 10,
         "allocationPct": 7.5
       },
@@ -5262,7 +5262,7 @@
         "label": "Sharp Question",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 51.06,
+        "allocationScore": 51.48,
         "avgScore": 0.3,
         "samples": 1,
         "liftPct": null,
@@ -5282,7 +5282,7 @@
         "label": "Decision Rule",
         "status": "test",
         "action": "test",
-        "allocationScore": 50.59,
+        "allocationScore": 51,
         "avgScore": 3.8,
         "samples": 12,
         "liftPct": -5.7,
@@ -5298,8 +5298,8 @@
         "allocationPct": 4.1
       }
     ],
-    "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: medium\nprimary_format: prediction\nexploration_lane: second_order\nhook_bias: Entity-Led\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
-    "nextAction": "Allocate next candidates toward Near-term Prediction; reserve Second Order for sample growth.",
+    "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: medium\nprimary_format: prediction\nexploration_lane: brutal_truth\nhook_bias: Entity-Led\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
+    "nextAction": "Allocate next candidates toward Near-term Prediction; reserve Brutal Truth for sample growth.",
     "guardrails": [
       "Uses cached analytics only; 0 X read ops.",
       "Fixed TWEET_CONTENT_FORMAT_ID still overrides allocator.",
@@ -5308,7 +5308,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -5329,7 +5329,7 @@
       "regret": 0,
       "recentRegret": 0,
       "baselineLiftPct": 23.8,
-      "allocationPct": 7.6,
+      "allocationPct": 7.7,
       "actualSharePct": 35,
       "laneStatus": "exploit",
       "nextAction": "Settle Near-term Prediction as a winning arm; keep exploit pressure."
@@ -5366,7 +5366,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": 23.8,
-        "allocationPct": 7.6,
+        "allocationPct": 7.7,
         "actualSharePct": 35,
         "laneStatus": "exploit",
         "nextAction": "Settle Near-term Prediction as a winning arm; keep exploit pressure."
@@ -5417,7 +5417,7 @@
         "regret": 4.99,
         "recentRegret": 4.99,
         "baselineLiftPct": null,
-        "allocationPct": 7.5,
+        "allocationPct": 7.6,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -5434,7 +5434,7 @@
         "regret": 4.99,
         "recentRegret": 4.99,
         "baselineLiftPct": null,
-        "allocationPct": 7.5,
+        "allocationPct": 7.6,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -5485,7 +5485,7 @@
         "regret": 4.99,
         "recentRegret": 4.99,
         "baselineLiftPct": null,
-        "allocationPct": 7.6,
+        "allocationPct": 7.5,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -5502,7 +5502,7 @@
         "regret": 4.99,
         "recentRegret": 4.99,
         "baselineLiftPct": null,
-        "allocationPct": 7.6,
+        "allocationPct": 7.5,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -5519,7 +5519,7 @@
         "regret": 4.99,
         "recentRegret": 4.99,
         "baselineLiftPct": null,
-        "allocationPct": 7.6,
+        "allocationPct": 7.5,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -5679,7 +5679,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "conversion_exploit",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -6057,7 +6057,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -6294,7 +6294,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -6305,8 +6305,8 @@
       "id": "17:platform_control:prediction",
       "hour": 17,
       "windowLabel": "17:00",
-      "hoursFromNow": 7,
-      "loadScore": 61,
+      "hoursFromNow": 2,
+      "loadScore": 60.4,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
       "pillarStatus": "watch",
@@ -6328,8 +6328,8 @@
         "id": "17:platform_control:prediction",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 7,
-        "loadScore": 61,
+        "hoursFromNow": 2,
+        "loadScore": 60.4,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -6350,8 +6350,8 @@
         "id": "13:operator_leverage:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
         "pillarStatus": "expand",
@@ -6372,8 +6372,8 @@
         "id": "13:platform_control:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -6394,8 +6394,8 @@
         "id": "14:platform_control:prediction",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
+        "hoursFromNow": 23,
+        "loadScore": 88,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -6416,15 +6416,15 @@
         "id": "13:market_timing:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "pillarId": "market_timing",
         "pillarLabel": "Market Timing",
         "pillarStatus": "expand",
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "formatStatus": "exploit",
-        "score": 100,
+        "score": 98.9,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
@@ -6438,32 +6438,10 @@
         "id": "13:risk_boundary:prediction",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "pillarId": "risk_boundary",
         "pillarLabel": "Risk Boundary",
-        "pillarStatus": "expand",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "formatStatus": "exploit",
-        "score": 99.8,
-        "samples": 0,
-        "avgScore": 0,
-        "impressions": 0,
-        "engagementRate": 0,
-        "observed": false,
-        "status": "hot",
-        "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 13:00 UTC.",
-        "reason": "Seed Risk Boundary via Near-term Prediction in a learned 13:00 UTC load window."
-      },
-      {
-        "id": "13:consumer_behavior:prediction",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
         "pillarStatus": "expand",
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -6475,15 +6453,15 @@
         "engagementRate": 0,
         "observed": false,
         "status": "hot",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC.",
-        "reason": "Seed Consumer Behavior via Near-term Prediction in a learned 13:00 UTC load window."
+        "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 13:00 UTC.",
+        "reason": "Seed Risk Boundary via Near-term Prediction in a learned 13:00 UTC load window."
       },
       {
         "id": "14:operator_leverage:prediction",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
+        "hoursFromNow": 23,
+        "loadScore": 88,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
         "pillarStatus": "expand",
@@ -6501,13 +6479,13 @@
         "reason": "Seed Operator Leverage via Near-term Prediction in a learned 14:00 UTC load window."
       },
       {
-        "id": "14:market_timing:prediction",
-        "hour": 14,
-        "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
-        "pillarId": "market_timing",
-        "pillarLabel": "Market Timing",
+        "id": "13:consumer_behavior:prediction",
+        "hour": 13,
+        "windowLabel": "13:00",
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
         "pillarStatus": "expand",
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
@@ -6519,66 +6497,44 @@
         "engagementRate": 0,
         "observed": false,
         "status": "hot",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC.",
+        "reason": "Seed Consumer Behavior via Near-term Prediction in a learned 13:00 UTC load window."
+      },
+      {
+        "id": "14:market_timing:prediction",
+        "hour": 14,
+        "windowLabel": "14:00",
+        "hoursFromNow": 23,
+        "loadScore": 88,
+        "pillarId": "market_timing",
+        "pillarLabel": "Market Timing",
+        "pillarStatus": "expand",
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "formatStatus": "exploit",
+        "score": 97.5,
+        "samples": 0,
+        "avgScore": 0,
+        "impressions": 0,
+        "engagementRate": 0,
+        "observed": false,
+        "status": "hot",
         "directive": "Convert the news into a timing, pricing, GTM, or business-model lesson. Use Near-term Prediction around 14:00 UTC.",
         "reason": "Seed Market Timing via Near-term Prediction in a learned 14:00 UTC load window."
-      },
-      {
-        "id": "13:platform_control:second_order",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "pillarStatus": "watch",
-        "formatId": "second_order",
-        "formatLabel": "Second Order",
-        "formatStatus": "explore",
-        "score": 97.4,
-        "samples": 0,
-        "avgScore": 4.2,
-        "impressions": 0,
-        "engagementRate": 2.83,
-        "observed": false,
-        "status": "hot",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Second Order around 13:00 UTC.",
-        "reason": "Seed Platform Control via Second Order in a learned 13:00 UTC load window."
-      },
-      {
-        "id": "13:platform_control:not_x_but_y",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "pillarStatus": "watch",
-        "formatId": "not_x_but_y",
-        "formatLabel": "Not X But Y",
-        "formatStatus": "explore",
-        "score": 97.4,
-        "samples": 0,
-        "avgScore": 4.2,
-        "impressions": 0,
-        "engagementRate": 2.83,
-        "observed": false,
-        "status": "hot",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Not X But Y around 13:00 UTC.",
-        "reason": "Seed Platform Control via Not X But Y in a learned 13:00 UTC load window."
       },
       {
         "id": "14:risk_boundary:prediction",
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
+        "hoursFromNow": 23,
+        "loadScore": 88,
         "pillarId": "risk_boundary",
         "pillarLabel": "Risk Boundary",
         "pillarStatus": "expand",
         "formatId": "prediction",
         "formatLabel": "Near-term Prediction",
         "formatStatus": "exploit",
-        "score": 97.4,
+        "score": 97.3,
         "samples": 0,
         "avgScore": 0,
         "impressions": 0,
@@ -6587,6 +6543,50 @@
         "status": "hot",
         "directive": "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 14:00 UTC.",
         "reason": "Seed Risk Boundary via Near-term Prediction in a learned 14:00 UTC load window."
+      },
+      {
+        "id": "14:consumer_behavior:prediction",
+        "hour": 14,
+        "windowLabel": "14:00",
+        "hoursFromNow": 23,
+        "loadScore": 88,
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
+        "pillarStatus": "expand",
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "formatStatus": "exploit",
+        "score": 96.3,
+        "samples": 0,
+        "avgScore": 0,
+        "impressions": 0,
+        "engagementRate": 0,
+        "observed": false,
+        "status": "hot",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 14:00 UTC.",
+        "reason": "Seed Consumer Behavior via Near-term Prediction in a learned 14:00 UTC load window."
+      },
+      {
+        "id": "13:platform_control:brutal_truth",
+        "hour": 13,
+        "windowLabel": "13:00",
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
+        "pillarId": "platform_control",
+        "pillarLabel": "Platform Control",
+        "pillarStatus": "watch",
+        "formatId": "brutal_truth",
+        "formatLabel": "Brutal Truth",
+        "formatStatus": "explore",
+        "score": 96.2,
+        "samples": 0,
+        "avgScore": 4.2,
+        "impressions": 0,
+        "engagementRate": 2.83,
+        "observed": false,
+        "status": "hot",
+        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Brutal Truth around 13:00 UTC.",
+        "reason": "Seed Platform Control via Brutal Truth in a learned 13:00 UTC load window."
       }
     ],
     "nextAction": "Schedule the next standalone packet for 17:00 UTC as Platform Control / Near-term Prediction.",
@@ -6603,7 +6603,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -6662,54 +6662,6 @@
         ],
         "promptDirectives": [
           "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Near-term Prediction around 17:00 UTC."
-        ]
-      },
-      {
-        "id": "13:any:prediction",
-        "label": "13:00 UTC / Near-term Prediction",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": null,
-        "pillarLabel": null,
-        "hour": 13,
-        "windowLabel": "13:00",
-        "action": "exploit",
-        "status": "hot",
-        "score": 100,
-        "confidence": "low",
-        "sources": [
-          "angle_load"
-        ],
-        "samples": 0,
-        "evidence": [
-          "prediction has 2 sample(s) in this UTC hour with avg score 6.3."
-        ],
-        "promptDirectives": [
-          "Route Near-term Prediction at 13:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments."
-        ]
-      },
-      {
-        "id": "13:any:any",
-        "label": "13:00 UTC",
-        "formatId": null,
-        "formatLabel": null,
-        "pillarId": null,
-        "pillarLabel": null,
-        "hour": 13,
-        "windowLabel": "13:00",
-        "action": "schedule",
-        "status": "hot",
-        "score": 100,
-        "confidence": "low",
-        "sources": [
-          "hourly_load"
-        ],
-        "samples": 4,
-        "evidence": [
-          "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now."
-        ],
-        "promptDirectives": [
-          "Prefer 13:00 UTC if cadence allows."
         ]
       },
       {
@@ -6795,7 +6747,7 @@
         "windowLabel": "13:00",
         "action": "exploit",
         "status": "hot",
-        "score": 97.3,
+        "score": 96.4,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -6819,7 +6771,7 @@
         "windowLabel": "13:00",
         "action": "exploit",
         "status": "hot",
-        "score": 97.1,
+        "score": 96.2,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -6830,30 +6782,6 @@
         ],
         "promptDirectives": [
           "Lead with risk transfer, trust boundaries, compliance cost, or incident response. Use Near-term Prediction around 13:00 UTC."
-        ]
-      },
-      {
-        "id": "13:consumer_behavior:prediction",
-        "label": "13:00 UTC / Consumer Behavior / Near-term Prediction",
-        "formatId": "prediction",
-        "formatLabel": "Near-term Prediction",
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
-        "hour": 13,
-        "windowLabel": "13:00",
-        "action": "exploit",
-        "status": "hot",
-        "score": 96.2,
-        "confidence": "low",
-        "sources": [
-          "topic_timing"
-        ],
-        "samples": 0,
-        "evidence": [
-          "Seed Consumer Behavior via Near-term Prediction in a learned 13:00 UTC load window."
-        ],
-        "promptDirectives": [
-          "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC."
         ]
       },
       {
@@ -6879,6 +6807,86 @@
         "promptDirectives": [
           "Translate the story into how builders and operators gain or lose leverage. Use Near-term Prediction around 14:00 UTC."
         ]
+      },
+      {
+        "id": "13:consumer_behavior:prediction",
+        "label": "13:00 UTC / Consumer Behavior / Near-term Prediction",
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
+        "hour": 13,
+        "windowLabel": "13:00",
+        "action": "exploit",
+        "status": "hot",
+        "score": 95.3,
+        "confidence": "low",
+        "sources": [
+          "topic_timing"
+        ],
+        "samples": 0,
+        "evidence": [
+          "Seed Consumer Behavior via Near-term Prediction in a learned 13:00 UTC load window."
+        ],
+        "promptDirectives": [
+          "Show how a product, app, or device changes user behavior or distribution habits. Use Near-term Prediction around 13:00 UTC."
+        ]
+      },
+      {
+        "id": "any:any:prediction",
+        "label": "00:00 UTC / Near-term Prediction",
+        "formatId": "prediction",
+        "formatLabel": "Near-term Prediction",
+        "pillarId": null,
+        "pillarLabel": null,
+        "hour": null,
+        "windowLabel": "00:00",
+        "action": "exploit",
+        "status": "hot",
+        "score": 83.3,
+        "confidence": "medium",
+        "sources": [
+          "content_bandit",
+          "angle_load",
+          "adaptive_scheduler"
+        ],
+        "samples": 32,
+        "evidence": [
+          "Above baseline 4.0 with enough samples.",
+          "prediction has 2 sample(s) in this UTC hour with avg score 6.3.",
+          "prediction has 1 sample(s) in this UTC hour with avg score 5.0.",
+          "prediction has 1 sample(s) in this UTC hour with avg score 2.5."
+        ],
+        "promptDirectives": [
+          "Exploit Near-term Prediction with Entity-Led.",
+          "near-term prediction / default shift",
+          "near-term prediction / default shift",
+          "near-term prediction / default shift"
+        ]
+      },
+      {
+        "id": "any:platform_control:any",
+        "label": "00:00 UTC / Platform Control",
+        "formatId": null,
+        "formatLabel": null,
+        "pillarId": "platform_control",
+        "pillarLabel": "Platform Control",
+        "hour": null,
+        "windowLabel": "00:00",
+        "action": "route",
+        "status": "watch",
+        "score": 70.7,
+        "confidence": "low",
+        "sources": [
+          "narrative_resonance"
+        ],
+        "samples": 18,
+        "evidence": [
+          "Frame the story as a shift in defaults, distribution, margin, privacy, or control."
+        ],
+        "promptDirectives": [
+          "Frame the story as a shift in defaults, distribution, margin, privacy, or control."
+        ]
       }
     ],
     "scoreBreakdown": {
@@ -6888,25 +6896,39 @@
       ],
       "sources": [
         {
-          "source": "angle_load",
-          "lanes": 1,
-          "avgScore": 100,
-          "samples": 0,
-          "hotLanes": 1
-        },
-        {
-          "source": "hourly_load",
-          "lanes": 1,
-          "avgScore": 100,
-          "samples": 4,
-          "hotLanes": 1
-        },
-        {
           "source": "topic_timing",
           "lanes": 8,
-          "avgScore": 97.7,
+          "avgScore": 97.4,
           "samples": 5,
           "hotLanes": 8
+        },
+        {
+          "source": "content_bandit",
+          "lanes": 1,
+          "avgScore": 83.3,
+          "samples": 32,
+          "hotLanes": 1
+        },
+        {
+          "source": "angle_load",
+          "lanes": 1,
+          "avgScore": 83.3,
+          "samples": 32,
+          "hotLanes": 1
+        },
+        {
+          "source": "adaptive_scheduler",
+          "lanes": 1,
+          "avgScore": 83.3,
+          "samples": 32,
+          "hotLanes": 1
+        },
+        {
+          "source": "narrative_resonance",
+          "lanes": 1,
+          "avgScore": 70.7,
+          "samples": 18,
+          "hotLanes": 0
         }
       ]
     },
@@ -6924,7 +6946,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -6940,10 +6962,10 @@
     "rankedFormatIds": [
       "prediction",
       "brutal_truth",
-      "second_order",
-      "not_x_but_y",
-      "the_hard_way",
-      "myth_busting"
+      "playbook",
+      "contrarian_cost",
+      "operator_pain",
+      "second_order"
     ],
     "avoidFormatIds": [],
     "hookPattern": {
@@ -7015,7 +7037,7 @@
       "Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.",
       "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..",
       "Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.",
-      "Controlled exploration: second_order is allowed only if it is a better fit for this exact story.",
+      "Controlled exploration: brutal_truth is allowed only if it is a better fit for this exact story.",
       "Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=13:00 UTC / Near-term Prediction; route=breakout X route.",
       "Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.",
       "Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.",
@@ -7023,10 +7045,10 @@
       "Persisted strategy: Keep one controlled exploration slot for brutal_truth.",
       "Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence."
     ],
-    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, brutal_truth, second_order, not_x_but_y, the_hard_way, myth_busting\nselected_story: Here’s what’s new with parental control features in iOS 27, iPadOS 27, and macOS 27\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: second_order is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=13:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence."
+    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, brutal_truth, playbook, contrarian_cost, operator_pain, second_order\nselected_story: Here’s what’s new with parental control features in iOS 27, iPadOS 27, and macOS 27\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: brutal_truth is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=13:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -7151,7 +7173,7 @@
         "after": "cached_only",
         "status": "ok",
         "score": 3,
-        "reason": "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens.",
+        "reason": "Hold optional reads, route through prepared web targets, and let the cost boundary recover.",
         "promptBias": "cost boundary: cached_only"
       }
     ],
@@ -8678,7 +8700,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -8898,7 +8920,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -8999,7 +9021,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 85.4,
@@ -9131,7 +9153,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "recovery_route",
     "confidence": "medium",
     "zeroExtraXReads": true,
@@ -9142,18 +9164,18 @@
       "impressions7d": 0,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "10:10",
+        "label": "15:05",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-09-14T10:10:51.672Z",
-        "endsAt": "2026-09-14T14:10:51.672Z"
+        "startsAt": "2026-09-14T15:05:32.260Z",
+        "endsAt": "2026-09-14T19:05:32.260Z"
       },
       "quietBucket": {
-        "label": "10:10",
+        "label": "15:05",
         "value": 0,
         "posts": 0,
-        "startsAt": "2026-09-14T10:10:51.672Z",
-        "endsAt": "2026-09-14T14:10:51.672Z"
+        "startsAt": "2026-09-14T15:05:32.260Z",
+        "endsAt": "2026-09-14T19:05:32.260Z"
       }
     },
     "safeBudgetLeftUsd": 2.455,
@@ -9282,21 +9304,21 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "peak_angle_wait",
     "confidence": "low",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
     "lookbackDays": 30,
-    "sampleCount": 9,
+    "sampleCount": 8,
     "nextAction": "Use Near-term Prediction at 13:00 UTC; prediction has 2 sample(s) in this UTC hour with avg score 6.3.",
     "slots": [
       {
         "slot": 1,
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
-        "loadScore": 97.7,
+        "hoursFromNow": 22,
+        "loadScore": 93.3,
         "formatId": "prediction",
         "label": "Near-term Prediction",
         "angle": "near-term prediction / default shift",
@@ -9312,14 +9334,14 @@
         "slot": 2,
         "hour": 14,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
-        "loadScore": 88.6,
+        "hoursFromNow": 23,
+        "loadScore": 88,
         "formatId": "prediction",
         "label": "Near-term Prediction",
         "angle": "near-term prediction / default shift",
         "action": "exploit",
         "status": "hot",
-        "score": 83,
+        "score": 82.8,
         "avgScore": 5,
         "samples": 1,
         "impressions": 100,
@@ -9329,14 +9351,14 @@
         "slot": 3,
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 7,
-        "loadScore": 61,
+        "hoursFromNow": 2,
+        "loadScore": 60.4,
         "formatId": "prediction",
         "label": "Near-term Prediction",
         "angle": "near-term prediction / default shift",
         "action": "exploit",
         "status": "hot",
-        "score": 56.4,
+        "score": 56.2,
         "avgScore": 2.5,
         "samples": 1,
         "impressions": 48,
@@ -9346,14 +9368,14 @@
         "slot": 4,
         "hour": 12,
         "windowLabel": "12:00",
-        "hoursFromNow": 2,
-        "loadScore": 43.3,
+        "hoursFromNow": 21,
+        "loadScore": 41.9,
         "formatId": "prediction",
         "label": "Near-term Prediction",
         "angle": "near-term prediction / default shift",
         "action": "exploit",
         "status": "hot",
-        "score": 52.3,
+        "score": 51.7,
         "avgScore": 5,
         "samples": 7,
         "impressions": 0,
@@ -9361,8 +9383,8 @@
       },
       {
         "slot": 5,
-        "hour": 10,
-        "windowLabel": "10:00",
+        "hour": 15,
+        "windowLabel": "15:00",
         "hoursFromNow": 0,
         "loadScore": 0,
         "formatId": "prediction",
@@ -9379,23 +9401,23 @@
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
-    "severity": "ok",
-    "activeCommand": "Route Near-term Prediction at 13:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments.",
+    "severity": "warn",
+    "activeCommand": "Route Near-term Prediction at 17:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
     "activeSlot": {
-      "windowLabel": "13:00",
-      "hour": 13,
+      "windowLabel": "17:00",
+      "hour": 17,
       "formatId": "prediction",
       "label": "Near-term Prediction",
       "angle": "near-term prediction / default shift",
-      "score": 100,
-      "loadScore": 97.7,
+      "score": 56.2,
+      "loadScore": 60.4,
       "action": "exploit",
-      "status": "hot",
-      "reason": "prediction has 2 sample(s) in this UTC hour with avg score 6.3."
+      "status": "watch",
+      "reason": "prediction has 1 sample(s) in this UTC hour with avg score 2.5."
     },
     "gates": [
       {
@@ -9413,8 +9435,8 @@
       {
         "id": "explore",
         "label": "EXPLORATION_LANE",
-        "value": "guarded",
-        "status": "warn"
+        "value": "open",
+        "status": "ok"
       },
       {
         "id": "writeback",
@@ -9428,14 +9450,14 @@
         "id": "prediction",
         "slot": 1,
         "windowLabel": "13:00",
-        "hoursFromNow": 3,
+        "hoursFromNow": 22,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
         "angle": "near-term prediction / default shift",
         "status": "hot",
         "score": 100,
-        "loadScore": 97.7,
+        "loadScore": 93.3,
         "samples": 2,
         "avgScore": 6.3,
         "reason": "prediction has 2 sample(s) in this UTC hour with avg score 6.3."
@@ -9444,14 +9466,14 @@
         "id": "prediction",
         "slot": 2,
         "windowLabel": "14:00",
-        "hoursFromNow": 4,
+        "hoursFromNow": 23,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
         "angle": "near-term prediction / default shift",
         "status": "hot",
-        "score": 83,
-        "loadScore": 88.6,
+        "score": 82.8,
+        "loadScore": 88,
         "samples": 1,
         "avgScore": 5,
         "reason": "prediction has 1 sample(s) in this UTC hour with avg score 5.0."
@@ -9460,14 +9482,14 @@
         "id": "prediction",
         "slot": 3,
         "windowLabel": "17:00",
-        "hoursFromNow": 7,
+        "hoursFromNow": 2,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
         "angle": "near-term prediction / default shift",
         "status": "probe",
-        "score": 56.4,
-        "loadScore": 61,
+        "score": 56.2,
+        "loadScore": 60.4,
         "samples": 1,
         "avgScore": 2.5,
         "reason": "prediction has 1 sample(s) in this UTC hour with avg score 2.5."
@@ -9476,14 +9498,14 @@
         "id": "prediction",
         "slot": 4,
         "windowLabel": "12:00",
-        "hoursFromNow": 2,
+        "hoursFromNow": 21,
         "label": "Near-term Prediction",
         "formatId": "prediction",
         "action": "exploit",
         "angle": "near-term prediction / default shift",
         "status": "probe",
-        "score": 52.3,
-        "loadScore": 43.3,
+        "score": 51.7,
+        "loadScore": 41.9,
         "samples": 7,
         "avgScore": 5,
         "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 73.8."
@@ -9491,7 +9513,7 @@
       {
         "id": "prediction",
         "slot": 5,
-        "windowLabel": "10:00",
+        "windowLabel": "15:00",
         "hoursFromNow": 0,
         "label": "Near-term Prediction",
         "formatId": "prediction",
@@ -9506,7 +9528,7 @@
       }
     ],
     "directives": [
-      "Route Near-term Prediction at 13:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments.",
+      "Route Near-term Prediction at 17:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
       "Next angle slot: prediction (near-term prediction / default shift); Above baseline 4.0 with enough samples.",
       "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output.",
@@ -9514,12 +9536,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "medium",
-    "epoch": "2026-09-15T10:10",
+    "epoch": "2026-09-15T15:05",
     "sampleCount": 20,
     "baselineScore": 4,
     "activeRule": {
@@ -9600,7 +9622,7 @@
         "after": "cached_only",
         "status": "ok",
         "score": 3,
-        "reason": "Cached routing is clear. Keep live X reads at zero unless the cadence gate explicitly opens."
+        "reason": "Hold optional reads, route through prepared web targets, and let the cost boundary recover."
       }
     ],
     "directives": [
@@ -9615,7 +9637,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (20 text, 0 media).",
@@ -9662,7 +9684,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -10072,7 +10094,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "updatedAt": "2026-09-15T03:43:34.650Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -10505,17 +10527,17 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
-    "sampleCount": 9,
+    "sampleCount": 8,
     "minSamples": 2,
     "confidence": "low",
     "mode": "wait_for_peak",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 10,
-      "label": "10:00",
+      "hour": 15,
+      "label": "15:00",
       "loadScore": 0,
       "posts": 0,
       "impressions": 0,
@@ -10523,29 +10545,29 @@
       "status": "dark"
     },
     "nextWindow": {
-      "hour": 13,
-      "label": "13:00",
-      "hoursFromNow": 3,
-      "loadScore": 97.7,
-      "posts": 4,
-      "impressions": 159,
-      "avgScore": 4.4,
-      "status": "hot"
+      "hour": 17,
+      "label": "17:00",
+      "hoursFromNow": 2,
+      "loadScore": 60.4,
+      "posts": 2,
+      "impressions": 80,
+      "avgScore": 2.4,
+      "status": "warm"
     },
     "bestHours": [
       {
         "hour": 13,
         "label": "13:00",
-        "loadScore": 97.7,
-        "posts": 4,
-        "impressions": 159,
-        "avgScore": 4.4,
+        "loadScore": 93.3,
+        "posts": 3,
+        "impressions": 118,
+        "avgScore": 5.1,
         "status": "hot"
       },
       {
         "hour": 14,
         "label": "14:00",
-        "loadScore": 88.6,
+        "loadScore": 88,
         "posts": 2,
         "impressions": 147,
         "avgScore": 3.7,
@@ -10554,7 +10576,7 @@
       {
         "hour": 17,
         "label": "17:00",
-        "loadScore": 61,
+        "loadScore": 60.4,
         "posts": 2,
         "impressions": 80,
         "avgScore": 2.4,
@@ -10563,14 +10585,14 @@
       {
         "hour": 12,
         "label": "12:00",
-        "loadScore": 43.3,
+        "loadScore": 41.9,
         "posts": 1,
         "impressions": 30,
         "avgScore": 2.3,
         "status": "cool"
       }
     ],
-    "nextAction": "Hold the standalone packet for 3.0h until 13:00 UTC; use manual route ops now.",
+    "nextAction": "Hold the standalone packet for 2.0h until 17:00 UTC; use manual route ops now.",
     "hours": [
       {
         "hour": 0,
@@ -10713,7 +10735,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 11,
@@ -10737,20 +10759,20 @@
         "reposts": 0,
         "replies": 0,
         "avgScore": 2.3,
-        "loadScore": 43.3,
+        "loadScore": 41.9,
         "status": "cool",
         "current": false
       },
       {
         "hour": 13,
         "label": "13:00",
-        "posts": 4,
-        "impressions": 159,
-        "likes": 4,
+        "posts": 3,
+        "impressions": 118,
+        "likes": 3,
         "reposts": 0,
         "replies": 0,
-        "avgScore": 4.4,
-        "loadScore": 97.7,
+        "avgScore": 5.1,
+        "loadScore": 93.3,
         "status": "hot",
         "current": false
       },
@@ -10763,7 +10785,7 @@
         "reposts": 0,
         "replies": 0,
         "avgScore": 3.7,
-        "loadScore": 88.6,
+        "loadScore": 88,
         "status": "hot",
         "current": false
       },
@@ -10778,7 +10800,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": false
+        "current": true
       },
       {
         "hour": 16,
@@ -10802,7 +10824,7 @@
         "reposts": 0,
         "replies": 0,
         "avgScore": 2.4,
-        "loadScore": 61,
+        "loadScore": 60.4,
         "status": "warm",
         "current": false
       },
@@ -10888,7 +10910,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -11227,7 +11249,7 @@
     "nextExperimentZh": "继续加码 prediction，优先使用 producthunt.com 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "exploit_winners",
     "confidence": "medium",
     "baselineScore": 4,
@@ -11329,7 +11351,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -11343,7 +11365,7 @@
       "id": "prediction",
       "label": "Near-term Prediction",
       "status": "exploit",
-      "allocationPct": 7.6,
+      "allocationPct": 7.7,
       "avgScore": 5,
       "samples": 7,
       "liftPct": 24.1,
@@ -11351,15 +11373,15 @@
       "nextAction": "Exploit Near-term Prediction with Entity-Led."
     },
     "exploreArm": {
-      "id": "second_order",
-      "label": "Second Order",
+      "id": "brutal_truth",
+      "label": "Brutal Truth",
       "status": "explore",
       "allocationPct": 7.6,
       "avgScore": 4,
       "samples": 0,
       "liftPct": null,
       "uncertainty": 1.745,
-      "nextAction": "Collect more samples for Second Order; keep first line concrete."
+      "nextAction": "Collect more samples for Brutal Truth; keep first line concrete."
     },
     "holdArms": [],
     "activeOpportunity": {
@@ -11391,12 +11413,12 @@
       "rankedFormatIds": [
         "prediction",
         "brutal_truth",
+        "playbook",
+        "contrarian_cost",
+        "operator_pain",
         "second_order",
         "not_x_but_y",
-        "the_hard_way",
-        "myth_busting",
-        "massive_value_drop",
-        "playbook"
+        "the_hard_way"
       ],
       "avoidFormatIds": [],
       "promptBias": [
@@ -11405,7 +11427,7 @@
         "Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.",
         "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage.."
       ],
-      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, brutal_truth, second_order, not_x_but_y, the_hard_way, myth_busting\nselected_story: Here’s what’s new with parental control features in iOS 27, iPadOS 27, and macOS 27\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: second_order is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=13:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence.",
+      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: prediction\nranked_formats: prediction, brutal_truth, playbook, contrarian_cost, operator_pain, second_order\nselected_story: Here’s what’s new with parental control features in iOS 27, iPadOS 27, and macOS 27\n\nMUST FOLLOW:\n- Primary format bias: prediction (Near-term Prediction). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 17:00 UTC / Platform Control / Near-term Prediction; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 17:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: brutal_truth is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Near-term Prediction; source=simonwillison.net; topic=hardware; window=13:00 UTC / Near-term Prediction; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn 9to5mac.com into an operator rule, cost, default shift, or distribution consequence.",
       "zeroExtraXReads": true
     },
     "cells": [
@@ -11447,7 +11469,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-09-15T10:10:51.661Z",
+    "generatedAt": "2026-09-15T15:05:32.243Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
