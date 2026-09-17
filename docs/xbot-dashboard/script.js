@@ -428,7 +428,7 @@ function freshnessRows(data) {
     {
       label: lang() === "zh" ? "粉丝快照" : "Follower snapshot",
       detail: accountAt ? `${formatDate(accountAt)} · ${formatRelativeAge(accountAt)}` : (lang() === "zh" ? "等待账号快照" : "waiting for account snapshot"),
-      state: accountAt ? (ageMinutes(accountAt) <= 7 * 24 * 60 ? "ok" : "warn") : "danger",
+      state: accountAt ? (ageMinutes(accountAt) <= 18 * 60 ? "ok" : ageMinutes(accountAt) <= 36 * 60 ? "warn" : "danger") : "danger",
     },
     {
       label: lang() === "zh" ? "刷新模式" : "Refresh mode",
@@ -438,6 +438,15 @@ function freshnessRows(data) {
       state: telemetry.cachedOnlyRefresh ? "warn" : "ok",
     },
   ];
+  if (data.api?.creditsDepleted) {
+    rows.unshift({
+      label: lang() === "zh" ? "X Credits" : "X Credits",
+      detail: lang() === "zh"
+        ? `已耗尽 · 可用剩余强制 $0（本地账本仍记 ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)}）`
+        : `depleted · available remaining forced to $0 (local ledger still ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)})`,
+      state: "danger",
+    });
+  }
   return rows;
 }
 
@@ -579,16 +588,25 @@ function renderHero(data) {
   const last24h = data.last24h || {};
   const last7d = data.last7d || {};
   const api = data.api || {};
+  const followerCheckedAt = profile.followerCheckedAt || data.telemetry?.accountCheckedAt;
   const staleAge = ageMinutes(data.telemetry?.dashboardUpdatedAt || data.updatedAt);
-  const isStale = staleAge != null && staleAge > 60 * 24;
+  const followerAge = ageMinutes(followerCheckedAt);
+  const isStale =
+    (staleAge != null && staleAge > 60 * 24) ||
+    (followerAge != null && followerAge > 60 * 18) ||
+    Boolean(api.creditsDepleted);
   const pill = $("#freshness-pill");
-  pill.textContent = isStale ? t("stale") : t("live");
-  pill.classList.toggle("stale", isStale);
+  pill.textContent = api.creditsDepleted
+    ? (lang() === "zh" ? "Credits 耗尽" : "Credits depleted")
+    : isStale
+      ? t("stale")
+      : t("live");
+  pill.classList.toggle("stale", isStale || Boolean(api.creditsDepleted));
   pill.classList.remove("offline");
   $("#updated-at").textContent = formatDate(data.updatedAt);
-  $("#rail-sync").textContent = `${formatDate(data.updatedAt)} · ${isStale ? t("stale") : t("live")}`;
+  $("#rail-sync").textContent = `${formatDate(data.updatedAt)} · ${pill.textContent}`;
   const signalSync = $("#signal-sync");
-  if (signalSync) signalSync.textContent = `${formatDate(data.updatedAt)} · ${isStale ? t("stale") : t("live")}`;
+  if (signalSync) signalSync.textContent = `${formatDate(data.updatedAt)} · ${pill.textContent}`;
 
   const reach = Number(last7d.impressions ?? last7d.reach ?? 0) || 0;
   const reachPending = reach === 0 && Number(last7d.posts || 0) > 0;
@@ -610,16 +628,22 @@ function renderHero(data) {
   $("#metric-engagement").textContent = `${formatNumber(likes)} likes · ${formatNumber(replies)} replies`;
   $("#metric-reach").textContent = reachPending ? "-" : formatNumber(reach);
   $("#metric-score").textContent = `score ${formatNumber(profile.baselineScore, 1)} · ${formatNumber(profile.measuredPosts)} measured`;
-  $("#metric-api").textContent = formatUsd(api.remaining);
-  $("#metric-api-spend").textContent = `${formatUsd(api.spend)} / ${formatUsd(api.cap)}`;
+  const creditsDepleted = Boolean(api.creditsDepleted || api.cooldown?.reasonCode === "credits_depleted");
+  const availableRemaining = creditsDepleted ? 0 : Number(api.remaining);
+  $("#metric-api").textContent = formatUsd(availableRemaining);
+  $("#metric-api-spend").textContent = creditsDepleted
+    ? (lang() === "zh"
+      ? `已耗尽 · 账本 ${formatUsd(api.spend)} / ${formatUsd(api.cap)}`
+      : `depleted · ledger ${formatUsd(api.spend)} / ${formatUsd(api.cap)}`)
+    : `${formatUsd(api.spend)} / ${formatUsd(api.cap)}`;
 
   const followerText = profile.followers == null
     ? lang() === "zh"
       ? "粉丝数等待下一次账号快照更新。"
       : "Follower count is waiting for the next account snapshot."
     : lang() === "zh"
-      ? `${formatNumber(profile.followers)} 粉丝，${deltaText}。`
-      : `${formatNumber(profile.followers)} followers, ${deltaText}.`;
+      ? `${formatNumber(profile.followers)} 粉丝，${deltaText}${followerCheckedAt ? `（快照 ${formatRelativeAge(followerCheckedAt)}）` : ""}。`
+      : `${formatNumber(profile.followers)} followers, ${deltaText}${followerCheckedAt ? ` (snapshot ${formatRelativeAge(followerCheckedAt)})` : ""}.`;
   $("#growth-headline").textContent = lang() === "zh"
     ? `过去 7 天发了 ${formatNumber(last7d.posts)} 条，${reachPending ? "触达数据待更新" : `触达 ${formatNumber(reach)}`}。`
     : `${formatNumber(last7d.posts)} posts shipped in 7d, ${reachPending ? "reach data pending" : `${formatNumber(reach)} reach`}.`;
@@ -786,12 +810,19 @@ function renderCost(data) {
   const api = data.api || {};
   const spend = Number(api.spend) || 0;
   const cap = Number(api.cap) || 0;
+  const creditsDepleted = Boolean(api.creditsDepleted || api.cooldown?.reasonCode === "credits_depleted");
+  const remaining = creditsDepleted ? 0 : Number(api.remaining) || 0;
+  const estimatedRemaining = Number(api.estimatedRemaining ?? Math.max(0, cap - spend)) || 0;
   const pct = cap > 0 ? Math.min(100, Math.max(0, (spend / cap) * 100)) : 0;
   $("#cost-ring").style.setProperty("--cost-used", `${pct}%`);
   $("#cost-percent").textContent = `${formatNumber(pct, 1)}%`;
-  $("#cost-summary").textContent = lang() === "zh"
-    ? `本月已花 ${formatUsd(spend)}，上限 ${formatUsd(cap)}，剩余 ${formatUsd(api.remaining)}。页面自动更新不增加 X API 读取。`
-    : `${formatUsd(spend)} spent this month against a ${formatUsd(cap)} cap, ${formatUsd(api.remaining)} left. Dashboard refresh adds no X API reads.`;
+  $("#cost-summary").textContent = creditsDepleted
+    ? (lang() === "zh"
+      ? `X Credits 已耗尽，可用剩余 $0.00。本地估算账本：已花 ${formatUsd(spend)} / 上限 ${formatUsd(cap)}（账面剩余 ${formatUsd(estimatedRemaining)}）。页面刷新不增加 X API 读取。`
+      : `X credits depleted — available remaining $0.00. Local estimated ledger: ${formatUsd(spend)} spent / ${formatUsd(cap)} cap (ledger headroom ${formatUsd(estimatedRemaining)}). Dashboard refresh adds no X API reads.`)
+    : (lang() === "zh"
+      ? `本月本地估算已花 ${formatUsd(spend)}，上限 ${formatUsd(cap)}，可用剩余 ${formatUsd(remaining)}。这不是 X 控制台实时余额。页面自动更新不增加 X API 读取。`
+      : `Local estimated ledger: ${formatUsd(spend)} spent against a ${formatUsd(cap)} cap, ${formatUsd(remaining)} available. This is not the live X console balance. Dashboard refresh adds no X API reads.`);
   $("#endpoint-list").innerHTML = (api.endpoints || []).slice(0, 6).map((endpoint) => `
     <div class="endpoint-row">
       <strong>${escapeHtml(endpoint.name)}</strong>
