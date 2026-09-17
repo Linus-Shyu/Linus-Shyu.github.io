@@ -85,7 +85,8 @@ window.PORTFOLIO_I18N = {
         body: "TypeScript · Web3。Hedera x402 与 Arc USDC 支付门禁、自建 The Graph 授权子图，以及只引用真实证据的 LLM 发现报告与可分享 dossier。",
         result: "ETHOnline 2026 · Hedera · The Graph · Arc",
         badge: "ETHOnline 2026",
-        link: "GitHub 查看 >"
+        link: "GitHub 查看 >",
+        demo: "观看 Demo >"
       },
       solidity: {
         title: "Solidity 教程.",
@@ -223,7 +224,8 @@ window.PORTFOLIO_I18N = {
         body: "TypeScript · Web3. Hedera x402 and Arc USDC gates, a from-scratch The Graph subgraph for live approvals, and cite-only LLM findings with a shareable dossier.",
         result: "ETHOnline 2026 · Hedera · The Graph · Arc",
         badge: "ETHOnline 2026",
-        link: "View on GitHub >"
+        link: "View on GitHub >",
+        demo: "Watch Demo >"
       },
       solidity: {
         title: "Solidity Tutorials.",
