@@ -437,13 +437,20 @@ function freshnessRows(data) {
         : `${telemetry.refreshMode || "live"} · metrics refreshed`,
       state: telemetry.cachedOnlyRefresh ? "warn" : "ok",
     },
+    {
+      label: lang() === "zh" ? "自动更新" : "Auto update",
+      detail: lang() === "zh"
+        ? "后台每 2 小时 live_snapshot；每天一次完整 metrics；页面每 60 秒拉最新 data.json"
+        : "Backend live_snapshot every 2h; full metrics daily; page polls data.json every 60s",
+      state: "ok",
+    },
   ];
   if (data.api?.creditsDepleted) {
     rows.unshift({
       label: lang() === "zh" ? "X Credits" : "X Credits",
       detail: lang() === "zh"
-        ? `已耗尽 · 可用剩余强制 $0（本地账本仍记 ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)}）`
-        : `depleted · available remaining forced to $0 (local ledger still ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)})`,
+        ? `已耗尽 · 可用剩余强制 $0（本地账本仍记 ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)}）。Credits 恢复后会自动拉新粉丝数。`
+        : `depleted · available remaining forced to $0 (local ledger still ${formatUsd(data.api.spend)} / ${formatUsd(data.api.cap)}). Follower refresh resumes automatically after credits recover.`,
       state: "danger",
     });
   }
