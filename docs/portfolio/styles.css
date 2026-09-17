@@ -1726,6 +1726,11 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     box-sizing: border-box;
 }
 
+.project-block--media--lumabar .project-image {
+    object-fit: cover;
+    object-position: left center;
+}
+
 .project-block--media.is-tilting {
     transition:
         transform 0.08s linear,
