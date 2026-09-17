@@ -117,10 +117,12 @@ const I18N = {
     language_traffic: "7d reach",
     language_ack: "7d ACKs",
     language_score: "Avg score",
+    language_roi: "traffic/post",
+    language_roi_lead: "Language ROI",
     freshness_eyebrow: "Data Freshness",
     freshness_title: "Can I trust this run?",
     tasks_eyebrow: "Today",
-    tasks_title: "Do these 5 things",
+    tasks_title: "Do these 3 reply jobs",
     funnel_eyebrow: "Growth Funnel",
     funnel_title: "Where growth is leaking",
     evidence_eyebrow: "AI Evidence",
@@ -191,10 +193,12 @@ const I18N = {
     language_traffic: "7日触达",
     language_ack: "7日互动",
     language_score: "平均分",
+    language_roi: "每帖触达",
+    language_roi_lead: "语言 ROI",
     freshness_eyebrow: "数据新鲜度",
     freshness_title: "这次判断可信吗？",
     tasks_eyebrow: "今日",
-    tasks_title: "照着做这 5 件事",
+    tasks_title: "完成这 3 条回复任务",
     funnel_eyebrow: "增长漏斗",
     funnel_title: "增长卡在哪一步",
     evidence_eyebrow: "AI 证据",
@@ -427,21 +431,25 @@ function freshnessRows(data) {
     },
     {
       label: lang() === "zh" ? "粉丝快照" : "Follower snapshot",
-      detail: accountAt ? `${formatDate(accountAt)} · ${formatRelativeAge(accountAt)}` : (lang() === "zh" ? "等待账号快照" : "waiting for account snapshot"),
-      state: accountAt ? (ageMinutes(accountAt) <= 18 * 60 ? "ok" : ageMinutes(accountAt) <= 36 * 60 ? "warn" : "danger") : "danger",
+      detail: accountAt
+        ? `${formatDate(accountAt)} · ${formatRelativeAge(accountAt)}${data.profile?.followers != null ? ` · ${formatNumber(data.profile.followers)}` : ""}`
+        : (lang() === "zh"
+          ? "可用 TWEET_FOLLOWERS_OVERRIDE 免费校正，不要跑 USER_ME"
+          : "Set TWEET_FOLLOWERS_OVERRIDE to correct for free; do not run USER_ME"),
+      state: accountAt ? (ageMinutes(accountAt) <= 18 * 60 ? "ok" : ageMinutes(accountAt) <= 36 * 60 ? "warn" : "danger") : "warn",
     },
     {
       label: lang() === "zh" ? "刷新模式" : "Refresh mode",
       detail: telemetry.cachedOnlyRefresh
         ? `${telemetry.refreshMode || "cached"} · ${telemetry.cachedReason || "cached_only"}`
         : `${telemetry.refreshMode || "live"} · metrics refreshed`,
-      state: telemetry.cachedOnlyRefresh ? "warn" : "ok",
+      state: telemetry.cachedOnlyRefresh ? "ok" : "warn",
     },
     {
       label: lang() === "zh" ? "自动更新" : "Auto update",
       detail: lang() === "zh"
-        ? "后台每 2 小时免费同步缓存看板（0 X 读取）；需要最新粉丝时再手动跑 live_snapshot"
-        : "Free cache sync every 2h (0 X reads); run live_snapshot manually only when you want a paid follower refresh",
+        ? "默认每 2 小时免费 dashboard_only（0 X 读取）；$5 月预算下禁止自动付费读"
+        : "Free dashboard_only every 2h (0 X reads); no automatic paid reads under the $5 monthly cap",
       state: "ok",
     },
   ];
@@ -458,43 +466,46 @@ function freshnessRows(data) {
 }
 
 function buildDailyTasks(data) {
+  const operatorTasks = Array.isArray(data?.operatorTasks?.tasks) ? data.operatorTasks.tasks : [];
+  if (operatorTasks.length) {
+    return operatorTasks.map((task) => ({
+      id: task.id,
+      title: lang() === "zh" ? (task.titleZh || task.title) : task.title,
+      detail: lang() === "zh" ? (task.detailZh || task.detail) : task.detail,
+      url: task.openUrl || null,
+      copy: task.copyText || null,
+    }));
+  }
   const opportunity = data.opportunities?.[0] || {};
   const action = data.actions?.[0] || {};
-  const topPost = data.last7d?.topPosts?.[0] || data.last24h?.topPosts?.[0] || {};
   const routeUrl = routeHref(data);
   const draft = bestDraft(data);
   return [
     {
-      id: "check-freshness",
-      title: lang() === "zh" ? "先看数据新鲜度" : "Check data freshness first",
+      id: "ops-banner-check",
+      title: lang() === "zh" ? "先看顶栏：credits / 冷却 / 是否还能发帖" : "Check ops banner / credits before spending",
       detail: lang() === "zh"
-        ? "如果 X 指标或粉丝快照缺失，先跑 growth maintenance 的 metrics_report。"
-        : "If X metrics or follower snapshot is missing, run growth maintenance in metrics_report mode.",
+        ? "若 credits 耗尽，今天只做网页手动回复，不要触发任何付费 X 读取。"
+        : "If credits are depleted, skip posting and only do manual browser replies.",
     },
     {
       id: "open-route",
-      title: lang() === "zh" ? `打开路线：${opportunity.routeLabel || action.label || "Target Accounts"}` : `Open route: ${opportunity.routeLabel || action.label || "Target Accounts"}`,
+      title: lang() === "zh" ? `回复 #1：${opportunity.routeLabel || action.label || "Target Accounts"}` : `Reply #1: ${opportunity.routeLabel || action.label || "Target Accounts"}`,
       detail: opportunity.reason || action.reason || (lang() === "zh" ? "进入高信号技术讨论。" : "Enter high-signal tech conversations."),
       url: routeUrl,
     },
     {
       id: "copy-draft",
-      title: lang() === "zh" ? "复制最佳回复草稿" : "Copy the best reply draft",
+      title: lang() === "zh" ? "复制并粘贴回复草稿" : "Copy and paste a reply draft",
       detail: draft || (lang() === "zh" ? "当前没有草稿，先跑维护任务。" : "No draft available; run maintenance first."),
       copy: draft,
     },
     {
       id: "reply-three",
-      title: lang() === "zh" ? "只回复 3 个高质量讨论" : "Reply to only 3 high-quality threads",
+      title: lang() === "zh" ? "一共只回复 3 个高质量讨论" : "Reply to only 3 high-quality threads",
       detail: lang() === "zh"
-        ? "不要乱贴；只选最新、相关、有真实技术讨论的帖子。"
-        : "Do not spray replies; choose fresh, relevant threads with real technical discussion.",
-    },
-    {
-      id: "review-winner",
-      title: lang() === "zh" ? "复盘最近最强内容" : "Review the strongest recent post",
-      detail: topPost.text || (lang() === "zh" ? "等待下一次发帖数据。" : "Waiting for post data."),
-      url: topPost.url,
+        ? "不要乱贴；只选最新、相关、有真实技术讨论的帖子。全部 $0。"
+        : "Do not spray replies; choose fresh, relevant threads. All $0.",
     },
   ];
 }
@@ -851,6 +862,29 @@ function renderFreshness(data) {
   `).join("");
 }
 
+function renderOpsBanner(data) {
+  const el = $("#ops-banner");
+  if (!el) return;
+  const banner = data?.opsBanner || null;
+  if (!banner) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  const title = lang() === "zh" ? (banner.titleZh || banner.title) : banner.title;
+  const detail = lang() === "zh" ? (banner.detailZh || banner.detail) : banner.detail;
+  const severity = banner.severity || "ok";
+  el.hidden = false;
+  el.className = `ops-banner severity-${escapeHtml(severity)}${banner.active ? " active" : ""}`;
+  el.innerHTML = `
+    <div>
+      <strong>${escapeHtml(title || "")}</strong>
+      <span>${escapeHtml(detail || "")}</span>
+    </div>
+    <em>$${formatNumber(banner.remainingUsd, 2)} / $${formatNumber(banner.capUsd, 2)}</em>
+  `;
+}
+
 function renderTasks(data) {
   const done = taskDoneSet(data);
   $("#task-list").innerHTML = buildDailyTasks(data).map((task, index) => `
@@ -887,9 +921,22 @@ function renderFunnel(data) {
 }
 
 function renderLanguageTracks(data) {
+  const roi = data.languageRoi || null;
+  const summary = $("#language-roi-summary");
+  if (summary) {
+    if (roi?.summary) {
+      const winner = roi.winnerLabel || roi.winnerId || "-";
+      summary.textContent = lang() === "zh"
+        ? `${t("language_roi_lead")}：领先 ${winner} · ${roi.summary}`
+        : `${t("language_roi_lead")}: ${winner} leads · ${roi.summary}`;
+    } else {
+      summary.textContent = "";
+    }
+  }
   const sourceTracks = data.languageTracks?.tracks?.length
     ? data.languageTracks.tracks
     : languageTrackDefaults();
+  const roiById = Object.fromEntries((roi?.tracks || []).map((track) => [track.id, track]));
   const sorted = [...sourceTracks].sort((left, right) => {
     const order = { zh: 0, en: 1 };
     return (order[left.id] ?? 9) - (order[right.id] ?? 9);
@@ -904,8 +951,10 @@ function renderLanguageTracks(data) {
     const label = track.id === "zh"
       ? (lang() === "zh" ? "中文" : "Chinese")
       : (lang() === "zh" ? "英文" : "English");
+    const roiTrack = roiById[track.id] || null;
+    const trafficPerPost = roiTrack?.trafficPerPost ?? null;
     return `
-      <article class="language-track-card">
+      <article class="language-track-card${roi?.winnerId === track.id ? " winner" : ""}">
         <div class="language-track-head">
           <div>
             <span class="language-track-code">${escapeHtml(track.label || track.id?.toUpperCase() || "-")}</span>
@@ -927,8 +976,9 @@ function renderLanguageTracks(data) {
           <div><span>${escapeHtml(t("language_traffic"))}</span><b>${formatNumber(track.traffic7d)}</b></div>
           <div><span>${escapeHtml(t("language_ack"))}</span><b>${formatNumber(track.ack7d)}</b></div>
           <div><span>${escapeHtml(t("language_score"))}</span><b>${formatNumber(track.avgScore, 1)}</b></div>
+          <div><span>${escapeHtml(t("language_roi"))}</span><b>${trafficPerPost == null ? "-" : formatNumber(trafficPerPost, 1)}</b></div>
         </div>
-        <span>${escapeHtml(track.nextAction || "")}</span>
+        <span>${escapeHtml(roiTrack?.recommendation || track.nextAction || "")}</span>
       </article>
     `;
   }).join("");
@@ -961,6 +1011,7 @@ function render(data) {
   dashboardData = data || fallbackData;
   applyTranslations();
   setPreferenceButtons();
+  renderOpsBanner(dashboardData);
   renderHero(dashboardData);
   renderPrimaryAdvice(dashboardData);
   renderGrowthDecision(dashboardData);
