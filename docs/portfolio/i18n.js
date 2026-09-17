@@ -79,6 +79,14 @@ window.PORTFOLIO_I18N = {
         link: "GitHub 查看 >",
         demo: "观看 Demo >"
       },
+      etherhunt: {
+        title: "Ether Hunt.",
+        subhead: "按次付费的 AI 链上授权审计。",
+        body: "TypeScript · Web3。Hedera x402 与 Arc USDC 支付门禁、自建 The Graph 授权子图，以及只引用真实证据的 LLM 发现报告与可分享 dossier。",
+        result: "ETHOnline 2026 · Hedera · The Graph · Arc",
+        badge: "ETHOnline 2026",
+        link: "GitHub 查看 >"
+      },
       solidity: {
         title: "Solidity 教程.",
         subhead: "在 B 站教大家写智能合约的实战教程。",
@@ -208,6 +216,14 @@ window.PORTFOLIO_I18N = {
         badge: "2nd · AdventureX 2026",
         link: "View on GitHub >",
         demo: "Watch Demo >"
+      },
+      etherhunt: {
+        title: "Ether Hunt.",
+        subhead: "Pay-per-scan AI on-chain allowance audit.",
+        body: "TypeScript · Web3. Hedera x402 and Arc USDC gates, a from-scratch The Graph subgraph for live approvals, and cite-only LLM findings with a shareable dossier.",
+        result: "ETHOnline 2026 · Hedera · The Graph · Arc",
+        badge: "ETHOnline 2026",
+        link: "View on GitHub >"
       },
       solidity: {
         title: "Solidity Tutorials.",

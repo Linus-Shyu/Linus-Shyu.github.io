@@ -1680,6 +1680,18 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     background: #10161a;
 }
 
+.project-block--media--etherhunt {
+    background: #0b1220;
+}
+
+.project-block--media--etherhunt .project-image {
+    object-fit: contain;
+    object-position: center;
+    background: #0b1220;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    box-sizing: border-box;
+}
+
 .project-block--media.is-tilting {
     transition:
         transform 0.08s linear,
