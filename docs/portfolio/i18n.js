@@ -109,6 +109,14 @@ window.PORTFOLIO_I18N = {
         badge: "三等奖 · MoonShot48",
         link: "查看 CauseLink >"
       },
+      dotcrypto: {
+        title: "Dot Crypto Ticker.",
+        subhead: "把实时币价打到 Dot 墨水屏上。",
+        body: "Rust。从币安拉 BTC / ETH / USDT 行情，经 Dot Text API 推送到设备——做成一直挂着的桌面行情条。",
+        result: "GitHub 4★ · Rust · Dot 硬件",
+        badge: "硬件 · Rust",
+        link: "GitHub 查看 >"
+      },
       photo: {
         title: "风光摄影.",
         subhead: "星空与自然。",
@@ -251,6 +259,14 @@ window.PORTFOLIO_I18N = {
         awardMeta: "Moonshot Academy 2026 · MoonShot48 Winter Hackathon",
         badge: "3rd · MoonShot48",
         link: "View CauseLink >"
+      },
+      dotcrypto: {
+        title: "Dot Crypto Ticker.",
+        subhead: "Real-time crypto prices on a Dot e-ink display.",
+        body: "Rust. Pulls live BTC / ETH / USDT from Binance and pushes compact updates to Dot Text API—built as an always-on desk ticker.",
+        result: "4 GitHub ★ · Rust · Dot hardware",
+        badge: "Hardware · Rust",
+        link: "View on GitHub >"
       },
       photo: {
         title: "Landscape Photography.",
