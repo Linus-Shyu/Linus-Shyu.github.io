@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Linus Shyu — Portfolio</title>
-    <meta name="description" content="Linus Shyu · 18岁高三开发者，Star Lake Explorer AI 联合创始人兼 CTO。核心项目：Luma Bar、Ether Hunt、FeelFlow、XGrowth、XTerminal、Dot Crypto Ticker、Solidity 教程、CauseLink。">
-    <meta name="keywords" content="Linus Shyu, 许发鑫, portfolio, FeelFlow, Luma Bar, Ether Hunt, Dot Crypto Ticker, CauseLink, XGrowth, XTerminal, Solidity, Swift, macOS, Rust, AdventureX, ETHOnline, MoonShot48">
+    <meta name="description" content="Linus Shyu · 18岁高三开发者，Star Lake Explorer AI 联合创始人兼 CTO。核心项目：Luma Bar、Dot Crypto Ticker、FeelFlow、XGrowth、Ether Hunt、XTerminal、CauseLink、Solidity 教程。">
+    <meta name="keywords" content="Linus Shyu, 许发鑫, portfolio, FeelFlow, Luma Bar, XGrowth, Ether Hunt, Dot Crypto Ticker, CauseLink, XTerminal, Solidity, Swift, macOS, Rust, AdventureX, ETHOnline, MoonShot48">
     <meta property="og:title" content="Linus Shyu — Portfolio">
-    <meta property="og:description" content="18 · Grade 12 · A Qinghai youth hungry for a global view. Luma Bar, Ether Hunt, FeelFlow, Dot Crypto Ticker, XTerminal, Solidity, CauseLink.">
+    <meta property="og:description" content="18 · Grade 12 · A Qinghai youth hungry for a global view. Luma Bar, Dot Crypto Ticker, FeelFlow, XGrowth, Ether Hunt, XTerminal, CauseLink, Solidity.">
     <meta property="og:image" content="https://linusshyu.dev/portfolio/img/avatar.jpg">
     <meta property="og:url" content="https://linusshyu.dev/portfolio/">
     <meta property="og:type" content="website">
+    <link rel="icon" href="/portfolio/img/avatar.webp" type="image/webp">
+    <link rel="icon" href="/portfolio/img/avatar.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="/portfolio/img/avatar.jpg">
     <link rel="preload" as="image" href="/portfolio/img/avatar.webp" type="image/webp">
     <link rel="stylesheet" href="/portfolio/styles.css">
     <script>
@@ -32,7 +35,10 @@
                 <span class="control minimize" aria-hidden="true"></span>
                 <span class="control maximize" aria-hidden="true"></span>
             </div>
-            <div class="terminal-title">Linus Shyu — Portfolio</div>
+            <a class="terminal-brand" href="/portfolio/" aria-label="Linus Shyu Portfolio">
+                <img class="terminal-logo" src="/portfolio/img/avatar.webp" width="28" height="28" alt="" decoding="async">
+                <span class="terminal-title">Linus Shyu — Portfolio</span>
+            </a>
             <div class="terminal-actions">
                 <button type="button" class="btn btn-toggle" id="themeToggle" aria-label="Toggle theme">
                     <span class="theme-icon" id="themeIcon">🌙</span>
@@ -130,23 +136,20 @@
         <article class="project-row project-row--text-left">
             <div class="project-row__inner container">
                 <div class="project-block project-block--text">
-                    <h3 class="project-headline" data-i18n="projects.etherhunt.title">Ether Hunt.</h3>
-                    <p class="project-result" data-i18n="projects.etherhunt.result">ETHOnline 2026 · Hedera · The Graph · Arc</p>
-                    <p class="project-subhead" data-i18n="projects.etherhunt.subhead">Pay-per-scan AI on-chain allowance audit.</p>
-                    <p class="project-body" data-i18n="projects.etherhunt.body">TypeScript · Web3. Hedera x402 and Arc USDC gates, a from-scratch The Graph subgraph for live approvals, and cite-only LLM findings with a shareable dossier.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/Linus-Shyu/Ether-Hunt" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Ether Hunt on GitHub" data-i18n="projects.etherhunt.link">View on GitHub &gt;</a>
-                        <a href="https://www.bilibili.com/video/BV1kBY36QEKN/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Watch Ether Hunt demo" data-i18n="projects.etherhunt.demo">Watch Demo &gt;</a>
-                    </div>
+                    <h3 class="project-headline" data-i18n="projects.dotcrypto.title">Dot Crypto Ticker.</h3>
+                    <p class="project-result" data-i18n="projects.dotcrypto.result">4 GitHub ★ · Rust · Dot hardware</p>
+                    <p class="project-subhead" data-i18n="projects.dotcrypto.subhead">Real-time crypto prices on a Dot e-ink display.</p>
+                    <p class="project-body" data-i18n="projects.dotcrypto.body">Rust. Pulls live BTC / ETH / USDT from Binance and pushes compact updates to Dot Text API—built as an always-on desk ticker.</p>
+                    <a href="https://github.com/Linus-Shyu/dot-crypto-ticker" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Dot Crypto Ticker on GitHub" data-i18n="projects.dotcrypto.link">View on GitHub &gt;</a>
                 </div>
-                <div class="project-block project-block--media project-block--media--etherhunt">
+                <div class="project-block project-block--media">
                     <span class="project-media-badge" aria-hidden="true">
                         <span class="project-media-badge__dot"></span>
-                        <span data-i18n="projects.etherhunt.badge">ETHOnline 2026</span>
+                        <span data-i18n="projects.dotcrypto.badge">Hardware · Rust</span>
                     </span>
                     <picture>
-                        <source type="image/webp" srcset="/portfolio/img/EtherHunt.webp">
-                        <img src="/portfolio/img/EtherHunt.png" alt="Ether Hunt — AI on-chain allowance audit" class="project-image" width="512" height="512" loading="lazy" decoding="async">
+                        <source type="image/webp" srcset="/portfolio/img/DotCrypto.webp">
+                        <img src="/portfolio/img/DotCrypto.jpg" alt="Dot Crypto Ticker — e-ink crypto prices on a Dot device" class="project-image" width="1600" height="900" loading="lazy" decoding="async">
                     </picture>
                 </div>
             </div>
@@ -166,6 +169,56 @@
                     <p class="project-subhead" data-i18n="projects.feelflow.subhead">Privacy-first emotional journal. Live on the App Store.</p>
                     <p class="project-body" data-i18n="projects.feelflow.body">SwiftUI · iOS 18. On-device only. Multiple AI personalities for unscripted empathy—built for people who journal and care about privacy.</p>
                     <a href="https://apps.apple.com/us/app/feelflow/id6753738362" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View FeelFlow on App Store" data-i18n="projects.feelflow.link">View on App Store &gt;</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="project-row project-row--text-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.xgrowth.title">XGrowth.</h3>
+                    <p class="project-result" data-i18n="projects.xgrowth.result">Open source · Live dashboard</p>
+                    <p class="project-subhead" data-i18n="projects.xgrowth.subhead">Autonomous X growth engine with a live ops console.</p>
+                    <p class="project-body" data-i18n="projects.xgrowth.body">GitHub Actions · AI. Credits-aware bilingual posting, self-evolving hooks, and a public dashboard that shows decisions, spend, and reach—not just screenshots.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Linus-Shyu/XGrowth" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View XGrowth on GitHub" data-i18n="projects.xgrowth.link">View on GitHub &gt;</a>
+                        <a href="/xbot-dashboard/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Open XGrowth live dashboard" data-i18n="projects.xgrowth.dashboard">Live Dashboard &gt;</a>
+                    </div>
+                </div>
+                <div class="project-block project-block--media">
+                    <span class="project-media-badge" aria-hidden="true">
+                        <span class="project-media-badge__dot"></span>
+                        <span data-i18n="projects.xgrowth.badge">Open source · Live</span>
+                    </span>
+                    <picture>
+                        <source type="image/webp" srcset="/portfolio/img/XGrowth.webp">
+                        <img src="/portfolio/img/XGrowth.jpg" alt="XGrowth — live X growth ops dashboard" class="project-image" width="1440" height="900" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+            </div>
+        </article>
+
+        <article class="project-row project-row--image-left">
+            <div class="project-row__inner container">
+                <div class="project-block project-block--media project-block--media--etherhunt">
+                    <span class="project-media-badge" aria-hidden="true">
+                        <span class="project-media-badge__dot"></span>
+                        <span data-i18n="projects.etherhunt.badge">ETHOnline 2026</span>
+                    </span>
+                    <picture>
+                        <source type="image/webp" srcset="/portfolio/img/EtherHunt.webp">
+                        <img src="/portfolio/img/EtherHunt.png" alt="Ether Hunt — AI on-chain allowance audit" class="project-image" width="512" height="512" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="project-block project-block--text">
+                    <h3 class="project-headline" data-i18n="projects.etherhunt.title">Ether Hunt.</h3>
+                    <p class="project-result" data-i18n="projects.etherhunt.result">ETHOnline 2026 · Hedera · The Graph · Arc</p>
+                    <p class="project-subhead" data-i18n="projects.etherhunt.subhead">Pay-per-scan AI on-chain allowance audit.</p>
+                    <p class="project-body" data-i18n="projects.etherhunt.body">TypeScript · Web3. Hedera x402 and Arc USDC gates, a from-scratch The Graph subgraph for live approvals, and cite-only LLM findings with a shareable dossier.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/Linus-Shyu/Ether-Hunt" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Ether Hunt on GitHub" data-i18n="projects.etherhunt.link">View on GitHub &gt;</a>
+                        <a href="https://www.bilibili.com/video/BV1kBY36QEKN/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Watch Ether Hunt demo" data-i18n="projects.etherhunt.demo">Watch Demo &gt;</a>
+                    </div>
                 </div>
             </div>
         </article>
@@ -202,25 +255,16 @@
 
         <article class="project-row project-row--image-left">
             <div class="project-row__inner container">
-                <div class="project-block project-block--media project-block--media--solidity">
-                    <div class="project-cover project-cover--solidity" aria-hidden="true">
-                        <span class="project-cover__kicker">Bilibili Series</span>
-                        <span class="project-cover__title">Solidity</span>
-                        <code class="project-cover__code">pragma solidity ^0.8.0;</code>
-                    </div>
+                <div class="project-block project-block--media project-block--media--contain">
+                    <span class="project-media-badge" aria-hidden="true">
+                        <span class="project-media-badge__dot"></span>
+                        <span data-i18n="projects.causelink.badge">3rd · MoonShot48</span>
+                    </span>
+                    <picture>
+                        <source type="image/webp" srcset="/portfolio/img/CauseLink.webp">
+                        <img src="/portfolio/img/CauseLink.JPG" alt="CauseLink — 错因分析 AI 学习诊断" class="project-image" width="848" height="1200" loading="lazy" decoding="async">
+                    </picture>
                 </div>
-                <div class="project-block project-block--text">
-                    <h3 class="project-headline" data-i18n="projects.solidity.title">Solidity 教程.</h3>
-                    <p class="project-result" data-i18n="projects.solidity.result">B 站系列教程</p>
-                    <p class="project-subhead" data-i18n="projects.solidity.subhead">在 B 站教大家写智能合约的实战教程。</p>
-                    <p class="project-body" data-i18n="projects.solidity.body">从语言基础到真正能上手写的合约；在 B 站教编程，让更多人走进 Web3。</p>
-                    <a href="https://space.bilibili.com/411591950/lists/3269107?type=series" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="在 B 站观看 Solidity 教程" data-i18n="projects.solidity.link">B 站观看 &gt;</a>
-                </div>
-            </div>
-        </article>
-
-        <article class="project-row project-row--text-left">
-            <div class="project-row__inner container">
                 <div class="project-block project-block--text">
                     <h3 class="project-headline" data-i18n="projects.causelink.title">CauseLink.</h3>
                     <div class="project-award">
@@ -233,37 +277,24 @@
                     <p class="project-body" data-i18n="projects.causelink.body">OCR, AI parsing, mind maps, and targeted drills. Students get causes; teachers get cohort insight.</p>
                     <a href="https://linusshyu.dev/causelink/" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View CauseLink" data-i18n="projects.causelink.link">View CauseLink &gt;</a>
                 </div>
-                <div class="project-block project-block--media project-block--media--contain">
-                    <span class="project-media-badge" aria-hidden="true">
-                        <span class="project-media-badge__dot"></span>
-                        <span data-i18n="projects.causelink.badge">3rd · MoonShot48</span>
-                    </span>
-                    <picture>
-                        <source type="image/webp" srcset="/portfolio/img/CauseLink.webp">
-                        <img src="/portfolio/img/CauseLink.JPG" alt="CauseLink — 错因分析 AI 学习诊断" class="project-image" width="848" height="1200" loading="lazy" decoding="async">
-                    </picture>
-                </div>
             </div>
         </article>
 
-        <article class="project-row project-row--image-left">
+        <article class="project-row project-row--text-left">
             <div class="project-row__inner container">
-                <div class="project-block project-block--media">
-                    <span class="project-media-badge" aria-hidden="true">
-                        <span class="project-media-badge__dot"></span>
-                        <span data-i18n="projects.dotcrypto.badge">Hardware · Rust</span>
-                    </span>
-                    <picture>
-                        <source type="image/webp" srcset="/portfolio/img/DotCrypto.webp">
-                        <img src="/portfolio/img/DotCrypto.jpg" alt="Dot Crypto Ticker — e-ink crypto prices on a Dot device" class="project-image" width="1600" height="900" loading="lazy" decoding="async">
-                    </picture>
-                </div>
                 <div class="project-block project-block--text">
-                    <h3 class="project-headline" data-i18n="projects.dotcrypto.title">Dot Crypto Ticker.</h3>
-                    <p class="project-result" data-i18n="projects.dotcrypto.result">4 GitHub ★ · Rust · Dot hardware</p>
-                    <p class="project-subhead" data-i18n="projects.dotcrypto.subhead">Real-time crypto prices on a Dot e-ink display.</p>
-                    <p class="project-body" data-i18n="projects.dotcrypto.body">Rust. Pulls live BTC / ETH / USDT from Binance and pushes compact updates to Dot Text API—built as an always-on desk ticker.</p>
-                    <a href="https://github.com/Linus-Shyu/dot-crypto-ticker" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Dot Crypto Ticker on GitHub" data-i18n="projects.dotcrypto.link">View on GitHub &gt;</a>
+                    <h3 class="project-headline" data-i18n="projects.solidity.title">Solidity 教程.</h3>
+                    <p class="project-result" data-i18n="projects.solidity.result">B 站系列教程</p>
+                    <p class="project-subhead" data-i18n="projects.solidity.subhead">在 B 站教大家写智能合约的实战教程。</p>
+                    <p class="project-body" data-i18n="projects.solidity.body">从语言基础到真正能上手写的合约；在 B 站教编程，让更多人走进 Web3。</p>
+                    <a href="https://space.bilibili.com/411591950/lists/3269107?type=series" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="在 B 站观看 Solidity 教程" data-i18n="projects.solidity.link">B 站观看 &gt;</a>
+                </div>
+                <div class="project-block project-block--media project-block--media--solidity">
+                    <div class="project-cover project-cover--solidity" aria-hidden="true">
+                        <span class="project-cover__kicker">Bilibili Series</span>
+                        <span class="project-cover__title">Solidity</span>
+                        <code class="project-cover__code">pragma solidity ^0.8.0;</code>
+                    </div>
                 </div>
             </div>
         </article>
@@ -274,14 +305,6 @@
             <h2 id="also-heading" class="section-title" data-i18n="also.title">Also</h2>
             <p class="also-lead" data-i18n="also.lead">Outside the core line, these still shape how I build.</p>
             <div class="also-grid">
-                <a class="also-card" href="https://github.com/Linus-Shyu/XGrowth" target="_blank" rel="noopener noreferrer">
-                    <span class="also-card__title" data-i18n="also.xgrowth">XGrowth</span>
-                    <span class="also-card__meta" data-i18n="also.xgrowthMeta">Open-source X growth engine</span>
-                </a>
-                <a class="also-card" href="/xbot-dashboard/" target="_blank" rel="noopener noreferrer">
-                    <span class="also-card__title" data-i18n="also.xgrowthDash">XGrowth Dashboard</span>
-                    <span class="also-card__meta" data-i18n="also.xgrowthDashMeta">Live growth console</span>
-                </a>
                 <a class="also-card" href="https://www.instagram.com/linusshyu/" target="_blank" rel="noopener noreferrer">
                     <span class="also-card__title" data-i18n="also.photo">Landscape photography</span>
                     <span class="also-card__meta" data-i18n="also.photoMeta">Instagram</span>

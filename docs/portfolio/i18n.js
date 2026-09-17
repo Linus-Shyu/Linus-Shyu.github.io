@@ -44,10 +44,6 @@ window.PORTFOLIO_I18N = {
       paytubeMeta: "Crypto 支付页",
       starfetch: "StarFetch",
       starfetchMeta: "Rust · GitHub",
-      xgrowth: "XGrowth",
-      xgrowthMeta: "开源 X 增长引擎",
-      xgrowthDash: "XGrowth Dashboard",
-      xgrowthDashMeta: "实时增长看板",
       ethers: "Ethers.js 教程",
       ethersMeta: "B 站系列课"
     },
@@ -82,6 +78,15 @@ window.PORTFOLIO_I18N = {
         badge: "第二名 · AdventureX 2026",
         link: "GitHub 查看 >",
         demo: "观看 Demo >"
+      },
+      xgrowth: {
+        title: "XGrowth.",
+        subhead: "自主运行的 X 增长引擎，附实时运维看板。",
+        body: "GitHub Actions · AI。Credits 感知的双语发帖、自进化钩子，以及公开看板展示决策、花费与触达——不只是截图宣传。",
+        result: "开源 · 实时看板",
+        badge: "开源 · Live",
+        link: "GitHub 查看 >",
+        dashboard: "实时看板 >"
       },
       etherhunt: {
         title: "Ether Hunt.",
@@ -195,10 +200,6 @@ window.PORTFOLIO_I18N = {
       paytubeMeta: "Crypto pay page",
       starfetch: "StarFetch",
       starfetchMeta: "Rust · GitHub",
-      xgrowth: "XGrowth",
-      xgrowthMeta: "Open-source X growth engine",
-      xgrowthDash: "XGrowth Dashboard",
-      xgrowthDashMeta: "Live growth console",
       ethers: "Ethers.js tutorials",
       ethersMeta: "Bilibili series"
     },
@@ -233,6 +234,15 @@ window.PORTFOLIO_I18N = {
         badge: "2nd · AdventureX 2026",
         link: "View on GitHub >",
         demo: "Watch Demo >"
+      },
+      xgrowth: {
+        title: "XGrowth.",
+        subhead: "Autonomous X growth engine with a live ops console.",
+        body: "GitHub Actions · AI. Credits-aware bilingual posting, self-evolving hooks, and a public dashboard that shows decisions, spend, and reach—not just screenshots.",
+        result: "Open source · Live dashboard",
+        badge: "Open source · Live",
+        link: "View on GitHub >",
+        dashboard: "Live Dashboard >"
       },
       etherhunt: {
         title: "Ether Hunt.",
