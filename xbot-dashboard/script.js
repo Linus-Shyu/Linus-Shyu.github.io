@@ -123,6 +123,9 @@ const I18N = {
     freshness_title: "Can I trust this run?",
     tasks_eyebrow: "Today",
     tasks_title: "Do these 3 reply jobs",
+    task_engagement: "Reply engagement",
+    task_export: "Copy operator log",
+    task_export_hint: "Paste into Actions → growth maintenance → mode=operator_log",
     funnel_eyebrow: "Growth Funnel",
     funnel_title: "Where growth is leaking",
     evidence_eyebrow: "AI Evidence",
@@ -199,6 +202,9 @@ const I18N = {
     freshness_title: "这次判断可信吗？",
     tasks_eyebrow: "今日",
     tasks_title: "完成这 3 条回复任务",
+    task_engagement: "回复互动",
+    task_export: "复制操作日志",
+    task_export_hint: "粘贴到 Actions → growth maintenance → mode=operator_log",
     funnel_eyebrow: "增长漏斗",
     funnel_title: "增长卡在哪一步",
     evidence_eyebrow: "AI 证据",
@@ -887,9 +893,10 @@ function renderOpsBanner(data) {
 
 function renderTasks(data) {
   const done = taskDoneSet(data);
+  const logged = new Set(data?.operatorTaskLog?.completedTaskIds || []);
   $("#task-list").innerHTML = buildDailyTasks(data).map((task, index) => `
-    <article class="task-card ${done.has(task.id) ? "done" : ""}" data-task-id="${escapeHtml(task.id)}">
-      <button class="task-check" type="button" data-task-toggle="${escapeHtml(task.id)}" aria-label="${escapeHtml(t("done"))}">${done.has(task.id) ? "✓" : index + 1}</button>
+    <article class="task-card ${done.has(task.id) || logged.has(task.id) ? "done" : ""}" data-task-id="${escapeHtml(task.id)}">
+      <button class="task-check" type="button" data-task-toggle="${escapeHtml(task.id)}" aria-label="${escapeHtml(t("done"))}">${done.has(task.id) || logged.has(task.id) ? "✓" : index + 1}</button>
       <div>
         <strong>${escapeHtml(task.title)}</strong>
         <span>${escapeHtml(task.detail || "")}</span>
@@ -900,6 +907,25 @@ function renderTasks(data) {
       </div>
     </article>
   `).join("");
+  const hint = $("#task-log-hint");
+  if (hint) {
+    const log = data?.operatorTaskLog;
+    hint.textContent = log?.entriesToday
+      ? `${t("task_export_hint")} · today ${formatNumber(log.entriesToday)} log(s), completed ${formatNumber((log.completedTaskIds || []).length)}`
+      : t("task_export_hint");
+  }
+}
+
+function buildOperatorLogPayload(data) {
+  const done = [...taskDoneSet(data)];
+  const engagement = $("#task-engagement")?.value || "unknown";
+  return {
+    mode: "operator_log",
+    completed_task_ids: done.join(","),
+    reply_engagement: engagement,
+    notes: `dashboard export ${new Date().toISOString()}`,
+    day: String(data?.updatedAt || new Date().toISOString()).slice(0, 10),
+  };
 }
 
 function renderFunnel(data) {
@@ -1079,6 +1105,19 @@ function bindEvents() {
   });
   $("#refresh-button")?.addEventListener("click", () => loadDashboardData());
   $("#copy-best-draft")?.addEventListener("click", () => copyText(bestDraft(dashboardData)));
+  $("#copy-operator-log")?.addEventListener("click", () => {
+    const payload = buildOperatorLogPayload(dashboardData);
+    const text = [
+      `mode=operator_log`,
+      `completed_task_ids=${payload.completed_task_ids || ""}`,
+      `reply_engagement=${payload.reply_engagement}`,
+      `notes=${payload.notes}`,
+      "",
+      "Open: https://github.com/Linus-Shyu/x_bot/actions/workflows/growth-maintenance.yml",
+      "Run workflow → mode=operator_log → paste the fields above.",
+    ].join("\n");
+    copyText(text);
+  });
   document.addEventListener("click", (event) => {
     const button = event.target.closest("[data-copy]");
     if (button) copyText(button.dataset.copy);

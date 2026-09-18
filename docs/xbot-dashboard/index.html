@@ -24,7 +24,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260917-budget5-v1" />
+    <link rel="stylesheet" href="./styles.css?v=20260918-ops-v1" />
   </head>
   <body>
     <div class="app-shell">
@@ -164,6 +164,19 @@
               <h2 data-i18n="tasks_title">Do these 3 reply jobs</h2>
             </div>
             <div class="task-list" id="task-list"></div>
+            <div class="task-log-bar">
+              <label>
+                <span data-i18n="task_engagement">Reply engagement</span>
+                <select id="task-engagement">
+                  <option value="unknown">unknown</option>
+                  <option value="none">none</option>
+                  <option value="some">some</option>
+                  <option value="strong">strong</option>
+                </select>
+              </label>
+              <button class="button secondary" id="copy-operator-log" type="button" data-i18n="task_export">Copy operator log</button>
+            </div>
+            <p class="task-log-hint" id="task-log-hint"></p>
           </article>
         </section>
 
@@ -263,6 +276,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=20260917-budget5-v1"></script>
+    <script src="./script.js?v=20260918-ops-v1"></script>
   </body>
 </html>

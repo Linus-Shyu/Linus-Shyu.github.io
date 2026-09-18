@@ -452,9 +452,35 @@ h1 {
   background: color-mix(in srgb, #f59e0b 10%, var(--surface));
 }
 
-.ops-banner.severity-info,
-.ops-banner.severity-ok {
-  border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+.task-log-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-top: 14px;
+}
+
+.task-log-bar label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.task-log-bar select {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 10px;
+  font: inherit;
+}
+
+.task-log-hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 .language-roi-summary {
