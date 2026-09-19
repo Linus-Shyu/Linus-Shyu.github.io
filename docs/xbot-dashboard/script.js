@@ -94,6 +94,7 @@ const I18N = {
     cost_title: "Keep growth cheap",
     used: "used",
     live: "Live data",
+    cached: "Cached sync",
     stale: "Data stale",
     offline: "Offline data",
     copied: "Copied",
@@ -173,6 +174,7 @@ const I18N = {
     cost_title: "低成本增长",
     used: "已用",
     live: "实时数据",
+    cached: "缓存同步",
     stale: "数据较旧",
     offline: "离线数据",
     copied: "已复制",
@@ -421,6 +423,7 @@ function latestTelemetryAt(data) {
 
 function freshnessRows(data) {
   const telemetry = data.telemetry || {};
+  const cachedOnly = Boolean(telemetry.cachedOnlyRefresh);
   const dashboardAt = telemetry.dashboardUpdatedAt || data.updatedAt;
   const metricsAt = telemetry.tweetMetricsCheckedAt || telemetry.checkedAt;
   const accountAt = telemetry.accountCheckedAt || data.profile?.followerCheckedAt;
@@ -432,8 +435,15 @@ function freshnessRows(data) {
     },
     {
       label: lang() === "zh" ? "X 指标" : "X metrics",
-      detail: metricsAt ? `${formatDate(metricsAt)} · ${formatRelativeAge(metricsAt)}` : (lang() === "zh" ? "等待 metrics_report" : "waiting for metrics_report"),
-      state: metricsAt ? (ageMinutes(metricsAt) <= 36 * 60 ? "ok" : "warn") : "danger",
+      detail: metricsAt
+        ? `${formatDate(metricsAt)} · ${formatRelativeAge(metricsAt)}`
+        : (lang() === "zh"
+          ? (cachedOnly ? "免费模式：等手动 metrics_report" : "等待 metrics_report")
+          : (cachedOnly ? "cached_only: wait for manual metrics_report" : "waiting for metrics_report")),
+      // Cached-only runs intentionally skip paid metrics; missing/old is expected, not a fetch failure.
+      state: metricsAt
+        ? (ageMinutes(metricsAt) <= 36 * 60 ? "ok" : "warn")
+        : (cachedOnly ? "warn" : "danger"),
     },
     {
       label: lang() === "zh" ? "粉丝快照" : "Follower snapshot",
@@ -442,7 +452,9 @@ function freshnessRows(data) {
         : (lang() === "zh"
           ? "可用 TWEET_FOLLOWERS_OVERRIDE 免费校正，不要跑 USER_ME"
           : "Set TWEET_FOLLOWERS_OVERRIDE to correct for free; do not run USER_ME"),
-      state: accountAt ? (ageMinutes(accountAt) <= 18 * 60 ? "ok" : ageMinutes(accountAt) <= 36 * 60 ? "warn" : "danger") : "warn",
+      state: accountAt
+        ? (ageMinutes(accountAt) <= 18 * 60 ? "ok" : "warn")
+        : "warn",
     },
     {
       label: lang() === "zh" ? "刷新模式" : "Refresh mode",
@@ -612,19 +624,23 @@ function renderHero(data) {
   const last24h = data.last24h || {};
   const last7d = data.last7d || {};
   const api = data.api || {};
+  const cachedOnly = Boolean(data.telemetry?.cachedOnlyRefresh);
   const followerCheckedAt = profile.followerCheckedAt || data.telemetry?.accountCheckedAt;
   const staleAge = ageMinutes(data.telemetry?.dashboardUpdatedAt || data.updatedAt);
   const followerAge = ageMinutes(followerCheckedAt);
+  // Free cached_only syncs skip paid follower/metrics reads; only dashboard sync age counts as stale.
   const isStale =
     (staleAge != null && staleAge > 60 * 24) ||
-    (followerAge != null && followerAge > 60 * 18) ||
+    (!cachedOnly && followerAge != null && followerAge > 60 * 18) ||
     Boolean(api.creditsDepleted);
   const pill = $("#freshness-pill");
   pill.textContent = api.creditsDepleted
     ? (lang() === "zh" ? "Credits 耗尽" : "Credits depleted")
     : isStale
       ? t("stale")
-      : t("live");
+      : cachedOnly
+        ? t("cached")
+        : t("live");
   pill.classList.toggle("stale", isStale || Boolean(api.creditsDepleted));
   pill.classList.remove("offline");
   $("#updated-at").textContent = formatDate(data.updatedAt);
