@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-19T07:19:05.411Z",
+  "updatedAt": "2026-09-19T12:29:08.979Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-09-19T07:19:05.411Z",
-    "analyticsUpdatedAt": "2026-09-19T07:10:49.014Z",
+    "dashboardUpdatedAt": "2026-09-19T12:29:08.979Z",
+    "analyticsUpdatedAt": "2026-09-19T07:19:05.240Z",
     "usageUpdatedAt": "2026-09-19T07:09:22.478Z",
     "accountCheckedAt": "2026-09-17T15:09:15.798Z",
     "tweetMetricsCheckedAt": "2026-09-19T07:09:22.479Z",
     "checkedAt": "2026-09-19T07:09:22.479Z",
-    "ageMinutes": 10,
+    "ageMinutes": 320,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -35,10 +35,10 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 5
+          "hoursFromNow": 0
         },
         "dailyTarget": 1,
-        "packetsLast24h": 2,
+        "packetsLast24h": 1,
         "packetsLast7d": 12,
         "measuredPackets": 0,
         "traffic7d": 0,
@@ -150,7 +150,7 @@
         "nextWindow": {
           "hour": 13,
           "label": "13:00 UTC",
-          "hoursFromNow": 6
+          "hoursFromNow": 1
         },
         "dailyTarget": 1,
         "packetsLast24h": 3,
@@ -255,7 +255,7 @@
     ]
   },
   "languageRoi": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_language_roi",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -281,7 +281,7 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 5
+          "hoursFromNow": 0
         },
         "recommendation": "Do not add volume; keep one peak slot and improve hooks before spending credits."
       },
@@ -304,7 +304,7 @@
         "nextWindow": {
           "hour": 13,
           "label": "13:00 UTC",
-          "hoursFromNow": 6
+          "hoursFromNow": 1
         },
         "recommendation": "Do not add volume; keep one peak slot and improve hooks before spending credits."
       }
@@ -323,10 +323,10 @@
     "capUsd": 5,
     "remainingUsd": 2.565,
     "zeroExtraXReads": true,
-    "generatedAt": "2026-09-19T07:19:05.411Z"
+    "generatedAt": "2026-09-19T12:29:08.979Z"
   },
   "operatorTasks": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_operator_tasks",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -409,7 +409,7 @@
     ]
   },
   "operatorTaskLog": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "day": "2026-09-19",
@@ -425,13 +425,13 @@
     "recent": []
   },
   "growthDecision": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -440,7 +440,7 @@
       "nextSlot": {
         "hour": 13,
         "label": "13:00 UTC",
-        "hoursFromNow": 6
+        "hoursFromNow": 1
       },
       "selectedTags": [
         "#devtools",
@@ -448,7 +448,7 @@
       ],
       "canPost": true,
       "budgetSafeRemainingUsd": 1.815,
-      "cadenceReason": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h.",
+      "cadenceReason": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
       "nextRoute": {
         "label": "Velocity route: Google's Gemini AI hacked three companies in security test",
         "routeLabel": "breakout X route",
@@ -463,13 +463,13 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 4.3,
-      "total": 5,
+      "total": 4,
       "counts": {
-        "wait_metrics": 5
+        "wait_metrics": 4
       },
       "items": [
         {
@@ -551,32 +551,12 @@
           "action": "wait_metrics",
           "status": "watch",
           "reason": "No metrics snapshot yet."
-        },
-        {
-          "id": "2100889699376136516",
-          "url": "https://x.com/i/web/status/2100889699376136516",
-          "text": "simonwillison.net story 我交过学费：演示好看、线上卡回滚，下次先测真实流程，再决定要不要变成默认。 #DevTools #BigTech",
-          "language": "zh",
-          "postedAt": "2026-09-18T10:08:31.911Z",
-          "score": 0,
-          "impressions": 0,
-          "likes": 0,
-          "reposts": 0,
-          "replies": 0,
-          "template": "the_hard_way",
-          "hashtags": [
-            "devtools",
-            "bigtech"
-          ],
-          "action": "wait_metrics",
-          "status": "watch",
-          "reason": "No metrics snapshot yet."
         }
       ]
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 4.3,
@@ -708,7 +688,7 @@
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "en",
@@ -726,7 +706,7 @@
       }
     },
     "failureStats": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
@@ -764,7 +744,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -833,7 +813,7 @@
     "dailyDigest": {
       "utcDay": "2026-09-19",
       "last24h": {
-        "posts": 5,
+        "posts": 4,
         "measuredPosts": 0,
         "impressions": 0,
         "likes": 0,
@@ -974,7 +954,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "ignition",
@@ -1059,7 +1039,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -1150,7 +1130,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -1239,8 +1219,8 @@
         "confidenceScore": 76.6,
         "projectedDays": 0,
         "savedDays": 0,
-        "detail": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h.",
-        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane."
+        "detail": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
+        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window."
       },
       {
         "id": "media_post_surge",
@@ -1317,7 +1297,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "ignition_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -1411,41 +1391,12 @@
     ]
   },
   "last24h": {
-    "posts": 5,
+    "posts": 4,
     "impressions": 0,
     "likes": 0,
     "reposts": 0,
     "replies": 0,
     "topPosts": [
-      {
-        "id": "2100889699376136516",
-        "text": "simonwillison.net story 我交过学费：演示好看、线上卡回滚，下次先测真实流程，再决定要不要变成默认。 #DevTools #BigTech",
-        "url": "https://x.com/i/web/status/2100889699376136516",
-        "score": 0,
-        "impressions": 0,
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "template": "the_hard_way",
-        "source": "simonwillison.net",
-        "postedAt": "2026-09-18T10:08:31.911Z",
-        "candidateScore": 223.4,
-        "candidateReason": null,
-        "angleMutationScore": null,
-        "angleMutationDiagnostics": [],
-        "hookPatternScore": null,
-        "hookPatternDiagnostics": [],
-        "hookPattern": null,
-        "contentBanditScore": null,
-        "contentBanditDiagnostics": [],
-        "narrativeResonanceScore": null,
-        "narrativeResonanceDiagnostics": [],
-        "narrativePillar": null,
-        "topicTimingScore": null,
-        "topicTimingDiagnostics": [],
-        "topicTimingLane": null,
-        "generationDecisionTrace": null
-      },
       {
         "id": "2100967100919492941",
         "text": "iPhone 18 Pro 开卖首日，我先把相机丢到一边——新款最贵的不是硬件，是那条「AI 拍摄默认关不掉」的链路， 多数人上手先试拍照，老手先翻设置里的 AI 开关，算法一旦默认介入，你手机的每一帧输出都不再由你签名， 先把默认关掉，再谈体验。 #BigTech #AI github.com/Linus-Shyu/XGrowth",
@@ -2397,97 +2348,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-09-18T07:19:05.411Z",
-          "endsAt": "2026-09-18T09:19:05.411Z",
-          "label": "07:19",
+          "startsAt": "2026-09-18T12:29:08.979Z",
+          "endsAt": "2026-09-18T14:29:08.979Z",
+          "label": "12:29",
           "value": 0,
           "posts": 0
         },
         {
           "index": 1,
-          "startsAt": "2026-09-18T09:19:05.411Z",
-          "endsAt": "2026-09-18T11:19:05.411Z",
-          "label": "09:19",
+          "startsAt": "2026-09-18T14:29:08.979Z",
+          "endsAt": "2026-09-18T16:29:08.979Z",
+          "label": "14:29",
           "value": 0,
           "posts": 1
         },
         {
           "index": 2,
-          "startsAt": "2026-09-18T11:19:05.411Z",
-          "endsAt": "2026-09-18T13:19:05.411Z",
-          "label": "11:19",
+          "startsAt": "2026-09-18T16:29:08.979Z",
+          "endsAt": "2026-09-18T18:29:08.979Z",
+          "label": "16:29",
           "value": 0,
-          "posts": 0
+          "posts": 1
         },
         {
           "index": 3,
-          "startsAt": "2026-09-18T13:19:05.411Z",
-          "endsAt": "2026-09-18T15:19:05.411Z",
-          "label": "13:19",
+          "startsAt": "2026-09-18T18:29:08.979Z",
+          "endsAt": "2026-09-18T20:29:08.979Z",
+          "label": "18:29",
           "value": 0,
           "posts": 1
         },
         {
           "index": 4,
-          "startsAt": "2026-09-18T15:19:05.411Z",
-          "endsAt": "2026-09-18T17:19:05.411Z",
-          "label": "15:19",
+          "startsAt": "2026-09-18T20:29:08.979Z",
+          "endsAt": "2026-09-18T22:29:08.979Z",
+          "label": "20:29",
           "value": 0,
-          "posts": 1
+          "posts": 0
         },
         {
           "index": 5,
-          "startsAt": "2026-09-18T17:19:05.411Z",
-          "endsAt": "2026-09-18T19:19:05.411Z",
-          "label": "17:19",
+          "startsAt": "2026-09-18T22:29:08.979Z",
+          "endsAt": "2026-09-19T00:29:08.979Z",
+          "label": "22:29",
           "value": 0,
           "posts": 1
         },
         {
           "index": 6,
-          "startsAt": "2026-09-18T19:19:05.411Z",
-          "endsAt": "2026-09-18T21:19:05.411Z",
-          "label": "19:19",
+          "startsAt": "2026-09-19T00:29:08.979Z",
+          "endsAt": "2026-09-19T02:29:08.979Z",
+          "label": "00:29",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-09-18T21:19:05.411Z",
-          "endsAt": "2026-09-18T23:19:05.411Z",
-          "label": "21:19",
+          "startsAt": "2026-09-19T02:29:08.979Z",
+          "endsAt": "2026-09-19T04:29:08.979Z",
+          "label": "02:29",
           "value": 0,
-          "posts": 1
+          "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-09-18T23:19:05.411Z",
-          "endsAt": "2026-09-19T01:19:05.411Z",
-          "label": "23:19",
+          "startsAt": "2026-09-19T04:29:08.979Z",
+          "endsAt": "2026-09-19T06:29:08.979Z",
+          "label": "04:29",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-09-19T01:19:05.411Z",
-          "endsAt": "2026-09-19T03:19:05.411Z",
-          "label": "01:19",
+          "startsAt": "2026-09-19T06:29:08.979Z",
+          "endsAt": "2026-09-19T08:29:08.979Z",
+          "label": "06:29",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-09-19T03:19:05.411Z",
-          "endsAt": "2026-09-19T05:19:05.411Z",
-          "label": "03:19",
+          "startsAt": "2026-09-19T08:29:08.979Z",
+          "endsAt": "2026-09-19T10:29:08.979Z",
+          "label": "08:29",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-09-19T05:19:05.411Z",
-          "endsAt": "2026-09-19T07:19:05.411Z",
-          "label": "05:19",
+          "startsAt": "2026-09-19T10:29:08.979Z",
+          "endsAt": "2026-09-19T12:29:08.979Z",
+          "label": "10:29",
           "value": 0,
           "posts": 0
         }
@@ -2861,7 +2812,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (32 text, 0 media).",
@@ -2924,55 +2875,55 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-09-19T07:19:05.411Z",
-    "mode": "wait_for_topic_timing",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
+    "mode": "wait_for_learned_peak",
     "publishAllowed": false,
     "willBlockPublish": false,
     "manualOverride": false,
-    "reasonCode": "topic_timing_wait",
+    "reasonCode": "learned_peak_wait",
     "severity": "warn",
-    "reason": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h.",
-    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+    "reason": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
+    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
     "languageCode": null,
     "dailyPostTarget": 1,
-    "postsLast24h": 5,
+    "postsLast24h": 4,
     "postsUtcDay": 0,
-    "allLanguagePostsLast24h": 5,
+    "allLanguagePostsLast24h": 4,
     "allLanguagePostsUtcDay": 0,
     "safeTextPostsLeft": 121,
     "safeRemainingUsd": 1.815,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 8.4,
-    "telemetryAgeMinutes": 10,
+    "hoursSinceLastPost": 13.56,
+    "telemetryAgeMinutes": 320,
     "latestTelemetryAt": "2026-09-19T07:09:22.479Z",
     "experimentSlots": 2,
     "hourlyLoad": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
-      "sampleCount": 15,
+      "sampleCount": 14,
       "minSamples": 10,
       "confidence": "low",
-      "mode": "manual_distribution",
+      "mode": "wait_for_peak",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 7,
-        "label": "07:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
-      },
-      "nextWindow": {
         "hour": 12,
         "label": "12:00",
-        "hoursFromNow": 5,
-        "loadScore": 52.8,
-        "posts": 4,
-        "impressions": 156,
+        "loadScore": 46.9,
+        "posts": 3,
+        "impressions": 126,
         "avgScore": 2.4,
+        "status": "cool"
+      },
+      "nextWindow": {
+        "hour": 13,
+        "label": "13:00",
+        "hoursFromNow": 1,
+        "loadScore": 61.2,
+        "posts": 1,
+        "impressions": 37,
+        "avgScore": 10.4,
         "status": "warm"
       },
       "bestHours": [
@@ -3013,7 +2964,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 16:00 UTC.",
+      "nextAction": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
       "hours": [
         {
           "hour": 0,
@@ -3117,7 +3068,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 8,
@@ -3174,15 +3125,15 @@
         {
           "hour": 12,
           "label": "12:00",
-          "posts": 4,
-          "impressions": 156,
-          "likes": 4,
+          "posts": 3,
+          "impressions": 126,
+          "likes": 3,
           "reposts": 0,
           "replies": 0,
           "avgScore": 2.4,
-          "loadScore": 52.8,
-          "status": "warm",
-          "current": false
+          "loadScore": 46.9,
+          "status": "cool",
+          "current": true
         },
         {
           "hour": 13,
@@ -3330,25 +3281,25 @@
       ]
     },
     "cadenceWindow": {
-      "mode": "manual_distribution",
+      "mode": "wait_for_peak",
       "confidence": "low",
       "currentHour": {
-        "hour": 7,
-        "label": "07:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
-      },
-      "nextWindow": {
         "hour": 12,
         "label": "12:00",
-        "hoursFromNow": 5,
-        "loadScore": 52.8,
-        "posts": 4,
-        "impressions": 156,
+        "loadScore": 46.9,
+        "posts": 3,
+        "impressions": 126,
         "avgScore": 2.4,
+        "status": "cool"
+      },
+      "nextWindow": {
+        "hour": 13,
+        "label": "13:00",
+        "hoursFromNow": 1,
+        "loadScore": 61.2,
+        "posts": 1,
+        "impressions": 37,
+        "avgScore": 10.4,
         "status": "warm"
       },
       "bestHours": [
@@ -3389,7 +3340,7 @@
           "status": "warm"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 16:00 UTC.",
+      "nextAction": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
       "zeroExtraXReads": true
     },
     "topicTimingWindow": {
@@ -3398,12 +3349,12 @@
       "routerScore": 94.4,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 9,
+      "hoursFromNow": 4,
       "activeLane": {
         "id": "16:platform_control:the_hard_way",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -3436,7 +3387,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "8.4h since packet",
+        "value": "13.6h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -3450,7 +3401,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "10 min old",
+        "value": "320 min old",
         "detail": "Latest checked telemetry: 2026-09-19T07:09:22.479Z."
       },
       {
@@ -3462,27 +3413,27 @@
       },
       {
         "id": "hourly_window",
-        "ok": true,
+        "ok": false,
         "label": "Learned UTC window",
-        "value": "07:00 score 0.0",
-        "detail": "No near-term learned peak; use manual distribution now and schedule the next packet near 16:00 UTC."
+        "value": "12:00 score 46.9",
+        "detail": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "16:00 UTC / Platform Control / The Hard Way in 9.0h",
+        "value": "16:00 UTC / Platform Control / The Hard Way in 4.0h",
         "detail": "Schedule the next standalone packet for 16:00 UTC as Platform Control / The Hard Way."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 72.1,
     "decision": "Spend this loop on manual route ops under high-signal conversations before another standalone packet.",
-    "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+    "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
     "publishGate": "review",
     "readGate": "cached_only",
     "distributionGate": "ready",
@@ -3492,7 +3443,7 @@
       "drafts": 5,
       "routes": 3,
       "experimentSlots": 2,
-      "postsLast24h": 5
+      "postsLast24h": 4
     },
     "topRoute": {
       "label": "breakout X route",
@@ -3514,7 +3465,7 @@
         "label": "publish gate",
         "value": "review",
         "status": "warn",
-        "detail": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h."
+        "detail": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "read",
@@ -3553,7 +3504,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "status": "reactor nominal",
     "severity": "ok",
     "reactorFillPct": 42.7,
@@ -3567,7 +3518,7 @@
     "gates": {
       "read": "cached_only",
       "publish": "review",
-      "cadence": "wait_for_topic_timing"
+      "cadence": "wait_for_learned_peak"
     },
     "budget": {
       "capUsd": 5,
@@ -3652,7 +3603,7 @@
         "gate": "cached_only",
         "status": "warn",
         "cache": {
-          "generatedAt": "2026-09-19T07:19:05.411Z",
+          "generatedAt": "2026-09-19T12:29:08.979Z",
           "enabled": false,
           "mode": "disabled",
           "status": "warn",
@@ -3660,7 +3611,7 @@
           "readGate": "cached_only",
           "latestCheckedAt": "2026-09-17T15:09:15.798Z",
           "nextRefreshAt": null,
-          "ageHours": 40.16,
+          "ageHours": 45.33,
           "maxAgeHours": 168,
           "fresh": false,
           "due": false,
@@ -3832,7 +3783,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-09-19T07:19:05.411Z",
+      "generatedAt": "2026-09-19T12:29:08.979Z",
       "enabled": false,
       "mode": "disabled",
       "status": "warn",
@@ -3840,7 +3791,7 @@
       "readGate": "cached_only",
       "latestCheckedAt": "2026-09-17T15:09:15.798Z",
       "nextRefreshAt": null,
-      "ageHours": 40.16,
+      "ageHours": 45.33,
       "maxAgeHours": 168,
       "fresh": false,
       "due": false,
@@ -3874,7 +3825,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.120, projected month-end $3.805 / $4.25 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "enabled": false,
     "mode": "disabled",
     "status": "warn",
@@ -3882,7 +3833,7 @@
     "readGate": "cached_only",
     "latestCheckedAt": "2026-09-17T15:09:15.798Z",
     "nextRefreshAt": null,
-    "ageHours": 40.16,
+    "ageHours": 45.33,
     "maxAgeHours": 168,
     "fresh": false,
     "due": false,
@@ -3892,7 +3843,7 @@
     "directive": "Account snapshot refresh is disabled; use the latest cached active conn telemetry."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -4105,7 +4056,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -4140,8 +4091,8 @@
         "gate": "guarded",
         "status": "warn",
         "efficiencyScore": 48,
-        "detail": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h.",
-        "nextAction": "Use manual route ops now; publish the standalone packet inside the selected topic timing lane.",
+        "detail": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
+        "nextAction": "Use manual route ops now; packet the standalone take in the learned UTC window.",
         "xReadOps": 0,
         "zeroExtraXReads": true
       },
@@ -4224,7 +4175,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4237,7 +4188,7 @@
     "expectedLiftPct": 153.3,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-09-19T07:19:05.411Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $1.82\nTarget: 3 useful manual route ops · expected lift +153.3%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. AI / DevTools · SLA 30m · target 1 · READY\nWhy: Stories from this source have outperformed baseline; look for fresh related discussions before dispatching more standalone takes.\nRoute: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-09-19T12:29:08.979Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $1.82\nTarget: 3 useful manual route ops · expected lift +153.3%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. AI / DevTools · SLA 30m · target 1 · READY\nWhy: Stories from this source have outperformed baseline; look for fresh related discussions before dispatching more standalone takes.\nRoute: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -4373,7 +4324,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4446,10 +4397,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-09-19T07:19:05.411Z\nMode: wait_for_topic_timing\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +168.2%\n2. OPEN: breakout X route - https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +168.2%\n3. OPEN: AI / DevTools - https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\n   SLA: 30m · target 1 · lift +123.5%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-09-19T12:29:08.979Z\nMode: wait_for_learned_peak\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +168.2%\n2. OPEN: breakout X route - https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +168.2%\n3. OPEN: AI / DevTools - https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\n   SLA: 30m · target 1 · lift +123.5%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4550,10 +4501,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-09-19T07:19:05.411Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. AI / DevTools · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-09-19T12:29:08.979Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. AI / DevTools · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -4716,10 +4667,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-09-19T07:19:05.411Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. AI / DevTools · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-09-19T12:29:08.979Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. AI / DevTools · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -4837,7 +4788,6 @@
       0,
       0,
       0,
-      0,
       0
     ],
     "traceMax": 1,
@@ -4848,7 +4798,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -4994,7 +4944,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -5093,10 +5043,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-09-19T07:19:05.411Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-09-19T12:29:08.979Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 85.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -5242,7 +5192,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 77.8\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "ok",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -5458,7 +5408,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 93.5\nBottleneck: LEARN_WRITEBACK\nLatency budget: 12.8s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -5606,27 +5556,27 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 70\n\nOPEN: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_next_window_commander",
     "severity": "warn",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 87.4,
+    "commanderScore": 71.5,
     "publishGate": "manual_route_only",
     "readGate": "cached_only",
     "activeWindow": {
       "hour": 16,
       "windowLabel": "16:00",
-      "hoursFromNow": 9,
-      "loadScore": 52.8
+      "hoursFromNow": 4,
+      "loadScore": 61.2
     },
     "window": {
       "hour": 16,
       "label": "16:00",
       "windowLabel": "16:00",
-      "hoursFromNow": 9,
-      "loadScore": 52.8
+      "hoursFromNow": 4,
+      "loadScore": 61.2
     },
     "activeAngle": {
       "formatId": "the_hard_way",
@@ -5634,7 +5584,7 @@
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
       "opportunityScore": 100,
-      "timingScore": 94.4
+      "timingScore": 92.9
     },
     "command": "Hold the standalone packet; run one manual route op and keep the The Hard Way angle warm for 16:00 UTC.",
     "promptBias": [
@@ -5658,7 +5608,7 @@
         "label": "Cadence",
         "status": "warn",
         "value": "manual_route_only",
-        "detail": "Topic timing router prefers 16:00 UTC / Platform Control / The Hard Way in 9.0h."
+        "detail": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now."
       },
       {
         "id": "budget",
@@ -5687,9 +5637,9 @@
       },
       {
         "id": "angle_load",
-        "label": "12:00 UTC / Brutal Truth",
-        "score": 49.5,
-        "status": "probe",
+        "label": "13:00 UTC / Brutal Truth",
+        "score": 60.6,
+        "status": "watch",
         "source": "angle_load",
         "detail": "No hour-specific sample yet; routed from adaptive scheduler weight 70.0."
       }
@@ -5700,7 +5650,7 @@
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 87.4 / Gate: manual_route_only / X reads: 0\nWindow: 16:00 UTC (9.0h from now)\nAngle: The Hard Way / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the The Hard Way angle warm for 16:00 UTC.\nPrompt bias:\n- Format=the_hard_way\n- Pillar=Platform Control\n- Window=16:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 71.5 / Gate: manual_route_only / X reads: 0\nWindow: 16:00 UTC (4.0h from now)\nAngle: The Hard Way / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the The Hard Way angle warm for 16:00 UTC.\nPrompt bias:\n- Format=the_hard_way\n- Pillar=Platform Control\n- Window=16:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -5708,7 +5658,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_warmup",
     "severity": "ok",
@@ -5723,7 +5673,7 @@
       "source": "topic_timing",
       "hour": 16,
       "windowLabel": "16:00",
-      "hoursFromNow": 9,
+      "hoursFromNow": 4,
       "loadScore": 82.6,
       "formatId": "the_hard_way",
       "formatLabel": "The Hard Way",
@@ -5741,7 +5691,7 @@
         "source": "topic_timing",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
@@ -5758,7 +5708,7 @@
         "source": "topic_timing",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "massive_value_drop",
         "formatLabel": "Massive Value Drop",
@@ -5775,7 +5725,7 @@
         "source": "topic_timing",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
@@ -5792,14 +5742,14 @@
         "source": "topic_timing",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
         "status": "hot",
-        "score": 98.1,
+        "score": 98.2,
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use The Hard Way around 16:00 UTC."
@@ -5809,14 +5759,14 @@
         "source": "topic_timing",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
         "status": "hot",
-        "score": 97.4,
+        "score": 97.5,
         "sampleCount": 0,
         "l7Events": 0,
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Myth Busting around 16:00 UTC."
@@ -5826,7 +5776,7 @@
         "source": "topic_timing",
         "hour": 1,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "loadScore": 57.8,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -5843,7 +5793,7 @@
         "source": "topic_timing",
         "hour": 1,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "loadScore": 57.8,
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
@@ -5860,7 +5810,7 @@
         "source": "topic_timing",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 12,
+        "hoursFromNow": 7,
         "loadScore": 54.9,
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
@@ -5877,7 +5827,7 @@
         "source": "temporal_matrix",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
@@ -5925,7 +5875,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -5941,7 +5891,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-09-19T07:19:05.411Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-09-19T12:29:08.979Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 0.0d to next milestone · 0.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 0,
@@ -6037,7 +5987,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -6129,7 +6079,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -6148,7 +6098,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-09-19T07:19:05.411Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · ai_platform_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. AI / DevTools · ai_platform_load · score 91.3 · target 1\nOpen: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-09-19T12:29:08.979Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · ai_platform_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(google%20OR%20gemini%20OR%20hacked%20OR%20three%20OR%20companies%20OR%20security)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Google's Gemini AI hacked three companies in security test: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(actually%20OR%20breaks%20OR%20you%20OR%20build%20OR%20webrtc%20OR%20sfu)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On What actually breaks when you build a WebRTC SFU in Go: the useful question is whether this changes a default workflow for Security / Cloud. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. AI / DevTools · ai_platform_load · score 91.3 · target 1\nOpen: https://x.com/search?q=(OpenAI%20OR%20Anthropic%20OR%20Cursor%20OR%20Gemini%20OR%20Nvidia%20OR%20%22AI%20coding%22%20OR%20agents)%20(AI%20OR%20model%20OR%20API%20OR%20developer%20OR%20cloud)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: VMware migrations are not cloud wins. Broadcom made renewal so painful that moving 40k workloads became the cheaper path. The hard way: the exit gets postponed, the cost compounds.\n",
     "targets": [
       {
         "id": "trend:1:google-s-gemini-ai-hacked-three-companies-",
@@ -6246,7 +6196,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -6535,7 +6485,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -6548,7 +6498,7 @@
       "label": "Massive Value Drop",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 93.07,
+      "allocationScore": 93.32,
       "avgScore": 4.25,
       "samples": 0,
       "liftPct": null,
@@ -6561,14 +6511,14 @@
       "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
       "reason": "Needs 10 more sample(s) before the bot trusts it.",
       "rank": 1,
-      "allocationPct": 23.3
+      "allocationPct": 23.4
     },
     "exploreLane": {
       "id": "massive_value_drop",
       "label": "Massive Value Drop",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 93.07,
+      "allocationScore": 93.32,
       "avgScore": 4.25,
       "samples": 0,
       "liftPct": null,
@@ -6581,7 +6531,7 @@
       "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
       "reason": "Needs 10 more sample(s) before the bot trusts it.",
       "rank": 1,
-      "allocationPct": 23.3
+      "allocationPct": 23.4
     },
     "rankedFormatIds": [
       "massive_value_drop",
@@ -6595,7 +6545,7 @@
         "label": "Massive Value Drop",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 93.07,
+        "allocationScore": 93.32,
         "avgScore": 4.25,
         "samples": 0,
         "liftPct": null,
@@ -6608,14 +6558,14 @@
         "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
         "reason": "Needs 10 more sample(s) before the bot trusts it.",
         "rank": 1,
-        "allocationPct": 23.3
+        "allocationPct": 23.4
       },
       {
         "id": "brutal_truth",
         "label": "Brutal Truth",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 87.06,
+        "allocationScore": 86.31,
         "avgScore": 5.1,
         "samples": 3,
         "liftPct": null,
@@ -6628,14 +6578,14 @@
         "nextAction": "Collect more samples for Brutal Truth; keep first line concrete.",
         "reason": "Needs 7 more sample(s) before the bot trusts it.",
         "rank": 2,
-        "allocationPct": 21.8
+        "allocationPct": 21.6
       },
       {
         "id": "the_hard_way",
         "label": "The Hard Way",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 79.64,
+        "allocationScore": 79.89,
         "avgScore": 4.7,
         "samples": 6,
         "liftPct": null,
@@ -6648,14 +6598,14 @@
         "nextAction": "Collect more samples for The Hard Way; keep first line concrete.",
         "reason": "Needs 4 more sample(s) before the bot trusts it.",
         "rank": 3,
-        "allocationPct": 19.9
+        "allocationPct": 20
       },
       {
         "id": "myth_busting",
         "label": "Myth Busting",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 75.72,
+        "allocationScore": 75.97,
         "avgScore": 3.9,
         "samples": 3,
         "liftPct": null,
@@ -6681,7 +6631,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -6702,7 +6652,7 @@
       "regret": 0,
       "recentRegret": 0,
       "baselineLiftPct": null,
-      "allocationPct": 21.8,
+      "allocationPct": 21.6,
       "actualSharePct": 9.4,
       "laneStatus": "explore",
       "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -6721,7 +6671,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": null,
-        "allocationPct": 21.8,
+        "allocationPct": 21.6,
         "actualSharePct": 9.4,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -6738,7 +6688,7 @@
         "regret": 4.25,
         "recentRegret": 4.25,
         "baselineLiftPct": null,
-        "allocationPct": 23.3,
+        "allocationPct": 23.4,
         "actualSharePct": 0,
         "laneStatus": "explore",
         "nextAction": "Under-sampled versus allocation; schedule a clean test."
@@ -6772,7 +6722,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": null,
-        "allocationPct": 19.9,
+        "allocationPct": 20,
         "actualSharePct": 18.8,
         "laneStatus": "explore",
         "nextAction": "Collect more reward samples for The Hard Way."
@@ -6949,7 +6899,7 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "conversion_exploit",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -7341,7 +7291,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -7578,18 +7528,18 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
     "zeroExtraXReads": true,
     "sampleCount": 32,
-    "routerScore": 94.4,
+    "routerScore": 92.9,
     "activeLane": {
       "id": "16:platform_control:the_hard_way",
       "hour": 16,
       "windowLabel": "16:00",
-      "hoursFromNow": 9,
+      "hoursFromNow": 4,
       "loadScore": 82.6,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
@@ -7612,7 +7562,7 @@
         "id": "16:platform_control:the_hard_way",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -7634,7 +7584,7 @@
         "id": "19:platform_control:brutal_truth",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 12,
+        "hoursFromNow": 7,
         "loadScore": 54.9,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -7656,7 +7606,7 @@
         "id": "1:platform_control:myth_busting",
         "hour": 1,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "loadScore": 57.8,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -7678,7 +7628,7 @@
         "id": "1:operator_leverage:brutal_truth",
         "hour": 1,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "loadScore": 57.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7700,7 +7650,7 @@
         "id": "16:operator_leverage:massive_value_drop",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7722,7 +7672,7 @@
         "id": "16:operator_leverage:brutal_truth",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7744,7 +7694,7 @@
         "id": "16:operator_leverage:the_hard_way",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7752,7 +7702,7 @@
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
         "formatStatus": "explore",
-        "score": 99,
+        "score": 99.1,
         "samples": 0,
         "avgScore": 3.1,
         "impressions": 0,
@@ -7766,7 +7716,7 @@
         "id": "16:operator_leverage:myth_busting",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7774,7 +7724,7 @@
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
         "formatStatus": "explore",
-        "score": 98.1,
+        "score": 98.2,
         "samples": 0,
         "avgScore": 3.1,
         "impressions": 0,
@@ -7788,7 +7738,7 @@
         "id": "19:operator_leverage:myth_busting",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 12,
+        "hoursFromNow": 7,
         "loadScore": 54.9,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7807,32 +7757,10 @@
         "reason": "myth_busting x Operator Leverage has 1 sample(s) at 19:00 UTC with avg 2.3."
       },
       {
-        "id": "12:platform_control:the_hard_way",
-        "hour": 12,
-        "windowLabel": "12:00",
-        "hoursFromNow": 5,
-        "loadScore": 52.8,
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
-        "pillarStatus": "watch",
-        "formatId": "the_hard_way",
-        "formatLabel": "The Hard Way",
-        "formatStatus": "explore",
-        "score": 95.4,
-        "samples": 3,
-        "avgScore": 2.4,
-        "impressions": 126,
-        "engagementRate": 2.38,
-        "observed": true,
-        "status": "hot",
-        "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use The Hard Way around 12:00 UTC.",
-        "reason": "the_hard_way x Platform Control has 3 sample(s) at 12:00 UTC with avg 2.4."
-      },
-      {
         "id": "13:operator_leverage:massive_value_drop",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 1,
         "loadScore": 61.2,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7854,7 +7782,7 @@
         "id": "13:operator_leverage:brutal_truth",
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 1,
         "loadScore": 61.2,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -7862,7 +7790,7 @@
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
         "formatStatus": "explore",
-        "score": 95.1,
+        "score": 95,
         "samples": 0,
         "avgScore": 3.1,
         "impressions": 0,
@@ -7871,6 +7799,28 @@
         "status": "hot",
         "directive": "Translate the story into how builders and operators gain or lose leverage. Use Brutal Truth around 13:00 UTC.",
         "reason": "Seed Operator Leverage via Brutal Truth in a learned 13:00 UTC load window."
+      },
+      {
+        "id": "1:operator_leverage:massive_value_drop",
+        "hour": 1,
+        "windowLabel": "01:00",
+        "hoursFromNow": 13,
+        "loadScore": 57.8,
+        "pillarId": "operator_leverage",
+        "pillarLabel": "Operator Leverage",
+        "pillarStatus": "expand",
+        "formatId": "massive_value_drop",
+        "formatLabel": "Massive Value Drop",
+        "formatStatus": "explore",
+        "score": 94.2,
+        "samples": 0,
+        "avgScore": 3.1,
+        "impressions": 0,
+        "engagementRate": 3.5,
+        "observed": false,
+        "status": "hot",
+        "directive": "Translate the story into how builders and operators gain or lose leverage. Use Massive Value Drop around 01:00 UTC.",
+        "reason": "Seed Operator Leverage via Massive Value Drop in a learned 01:00 UTC load window."
       }
     ],
     "nextAction": "Schedule the next standalone packet for 16:00 UTC as Platform Control / The Hard Way.",
@@ -7887,7 +7837,7 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
     "confidence": "medium",
@@ -8007,7 +7957,7 @@
         "windowLabel": "01:00",
         "action": "exploit",
         "status": "hot",
-        "score": 100,
+        "score": 99.9,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -8031,7 +7981,7 @@
         "windowLabel": "16:00",
         "action": "exploit",
         "status": "hot",
-        "score": 99,
+        "score": 98.7,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -8055,7 +8005,7 @@
         "windowLabel": "16:00",
         "action": "exploit",
         "status": "hot",
-        "score": 99,
+        "score": 98.7,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -8079,7 +8029,7 @@
         "windowLabel": "16:00",
         "action": "exploit",
         "status": "hot",
-        "score": 98.2,
+        "score": 98,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -8103,7 +8053,7 @@
         "windowLabel": "16:00",
         "action": "exploit",
         "status": "hot",
-        "score": 97.4,
+        "score": 97.2,
         "confidence": "low",
         "sources": [
           "topic_timing"
@@ -8127,47 +8077,57 @@
         "windowLabel": "00:00",
         "action": "rotate",
         "status": "hot",
-        "score": 81.6,
+        "score": 77.3,
         "confidence": "high",
         "sources": [
           "content_bandit",
           "angle_load",
           "adaptive_scheduler"
         ],
-        "samples": 15,
+        "samples": 18,
         "evidence": [
           "Needs 4 more sample(s) before the bot trusts it.",
           "the_hard_way has 3 sample(s) in this UTC hour with avg score 7.0.",
+          "the_hard_way has 3 sample(s) in this UTC hour with avg score 2.4.",
           "Needs 4 more sample(s) before the bot trusts it."
         ],
         "promptDirectives": [
           "Collect more samples for The Hard Way; keep first line concrete.",
           "costly lesson / cheat code",
+          "costly lesson / cheat code",
           "costly lesson / cheat code"
         ]
       },
       {
-        "id": "any:operator_leverage:any",
-        "label": "00:00 UTC / Operator Leverage",
-        "formatId": null,
-        "formatLabel": null,
-        "pillarId": "operator_leverage",
-        "pillarLabel": "Operator Leverage",
+        "id": "any:any:brutal_truth",
+        "label": "00:00 UTC / Brutal Truth",
+        "formatId": "brutal_truth",
+        "formatLabel": "Brutal Truth",
+        "pillarId": null,
+        "pillarLabel": null,
         "hour": null,
         "windowLabel": "00:00",
-        "action": "route",
+        "action": "rotate",
         "status": "watch",
-        "score": 73.4,
-        "confidence": "low",
+        "score": 74.5,
+        "confidence": "high",
         "sources": [
-          "narrative_resonance"
+          "content_bandit",
+          "angle_load",
+          "adaptive_scheduler"
         ],
-        "samples": 4,
+        "samples": 12,
         "evidence": [
-          "Translate the story into how builders and operators gain or lose leverage."
+          "Needs 7 more sample(s) before the bot trusts it.",
+          "No hour-specific sample yet; routed from adaptive scheduler weight 70.0.",
+          "brutal_truth has 1 sample(s) in this UTC hour with avg score 5.4.",
+          "brutal_truth has 2 sample(s) in this UTC hour with avg score 4.9."
         ],
         "promptDirectives": [
-          "Translate the story into how builders and operators gain or lose leverage."
+          "Collect more samples for Brutal Truth; keep first line concrete.",
+          "truth-bomb / unpopular but evidenced take",
+          "truth-bomb / unpopular but evidenced take",
+          "truth-bomb / unpopular but evidenced take"
         ]
       }
     ],
@@ -8180,37 +8140,30 @@
         {
           "source": "topic_timing",
           "lanes": 8,
-          "avgScore": 99.2,
+          "avgScore": 99.1,
           "samples": 8,
           "hotLanes": 8
         },
         {
           "source": "content_bandit",
-          "lanes": 1,
-          "avgScore": 81.6,
-          "samples": 15,
+          "lanes": 2,
+          "avgScore": 75.9,
+          "samples": 30,
           "hotLanes": 1
         },
         {
           "source": "angle_load",
-          "lanes": 1,
-          "avgScore": 81.6,
-          "samples": 15,
+          "lanes": 2,
+          "avgScore": 75.9,
+          "samples": 30,
           "hotLanes": 1
         },
         {
           "source": "adaptive_scheduler",
-          "lanes": 1,
-          "avgScore": 81.6,
-          "samples": 15,
+          "lanes": 2,
+          "avgScore": 75.9,
+          "samples": 30,
           "hotLanes": 1
-        },
-        {
-          "source": "narrative_resonance",
-          "lanes": 1,
-          "avgScore": 73.4,
-          "samples": 4,
-          "hotLanes": 0
         }
       ]
     },
@@ -8228,7 +8181,7 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
@@ -8334,7 +8287,7 @@
     "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: the_hard_way\nranked_formats: the_hard_way, brutal_truth, massive_value_drop, myth_busting\nselected_story: Google's Gemini AI hacked three companies in security test\n\nMUST FOLLOW:\n- Primary format bias: the_hard_way (The Hard Way). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Entity-Led. Name the company or product in the first line, then make a non-obvious claim.\n- Opportunity lane: 16:00 UTC / Platform Control / The Hard Way; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 16:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Brutal Truth; source=openai.com; topic=hardware; window=16:00 UTC / The Hard Way; route=breakout X route.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn feeds.bbci.co.uk into an operator rule, cost, default shift, or distribution consequence."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -9089,7 +9042,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -9309,7 +9262,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -9410,7 +9363,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "reply_burst",
     "zeroExtraXReads": true,
     "velocityScore": 81.6,
@@ -9542,7 +9495,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "recovery_route",
     "confidence": "low",
     "zeroExtraXReads": true,
@@ -9553,18 +9506,18 @@
       "impressions7d": 0,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "07:19",
+        "label": "12:29",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-09-18T07:19:05.427Z",
-        "endsAt": "2026-09-18T11:19:05.427Z"
+        "startsAt": "2026-09-18T12:29:08.988Z",
+        "endsAt": "2026-09-18T16:29:08.988Z"
       },
       "quietBucket": {
-        "label": "07:19",
+        "label": "12:29",
         "value": 0,
         "posts": 1,
-        "startsAt": "2026-09-18T07:19:05.427Z",
-        "endsAt": "2026-09-18T11:19:05.427Z"
+        "startsAt": "2026-09-18T12:29:08.988Z",
+        "endsAt": "2026-09-18T16:29:08.988Z"
       }
     },
     "safeBudgetLeftUsd": 1.815,
@@ -9690,20 +9643,20 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
-    "mode": "temporal_rotation",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
+    "mode": "peak_angle_wait",
     "confidence": "medium",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
     "lookbackDays": 30,
-    "sampleCount": 15,
+    "sampleCount": 14,
     "nextAction": "Use The Hard Way at 16:00 UTC; the_hard_way has 3 sample(s) in this UTC hour with avg score 7.0.",
     "slots": [
       {
         "slot": 1,
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "loadScore": 82.6,
         "formatId": "the_hard_way",
         "label": "The Hard Way",
@@ -9720,7 +9673,7 @@
         "slot": 2,
         "hour": 13,
         "windowLabel": "13:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 1,
         "loadScore": 61.2,
         "formatId": "brutal_truth",
         "label": "Brutal Truth",
@@ -9737,7 +9690,7 @@
         "slot": 3,
         "hour": 1,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "loadScore": 57.8,
         "formatId": "brutal_truth",
         "label": "Brutal Truth",
@@ -9754,7 +9707,7 @@
         "slot": 4,
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 12,
+        "hoursFromNow": 7,
         "loadScore": 54.9,
         "formatId": "brutal_truth",
         "label": "Brutal Truth",
@@ -9771,38 +9724,38 @@
         "slot": 5,
         "hour": 12,
         "windowLabel": "12:00",
-        "hoursFromNow": 5,
-        "loadScore": 52.8,
-        "formatId": "brutal_truth",
-        "label": "Brutal Truth",
-        "angle": "truth-bomb / unpopular but evidenced take",
+        "hoursFromNow": 0,
+        "loadScore": 46.9,
+        "formatId": "the_hard_way",
+        "label": "The Hard Way",
+        "angle": "costly lesson / cheat code",
         "action": "explore",
         "status": "probe",
         "score": 49.5,
-        "avgScore": 5.1,
+        "avgScore": 2.4,
         "samples": 3,
-        "impressions": 0,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 70.0."
+        "impressions": 126,
+        "reason": "the_hard_way has 3 sample(s) in this UTC hour with avg score 2.4."
       }
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
-    "severity": "danger",
-    "activeCommand": "Route Brutal Truth at 12:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
+    "severity": "warn",
+    "activeCommand": "Route Brutal Truth at 13:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
     "activeSlot": {
-      "windowLabel": "12:00",
-      "hour": 12,
+      "windowLabel": "13:00",
+      "hour": 13,
       "formatId": "brutal_truth",
       "label": "Brutal Truth",
       "angle": "truth-bomb / unpopular but evidenced take",
-      "score": 49.5,
-      "loadScore": 52.8,
+      "score": 60.6,
+      "loadScore": 61.2,
       "action": "explore",
-      "status": "probe",
+      "status": "watch",
       "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 70.0."
     },
     "gates": [
@@ -9836,7 +9789,7 @@
         "id": "the_hard_way",
         "slot": 1,
         "windowLabel": "16:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 4,
         "label": "The Hard Way",
         "formatId": "the_hard_way",
         "action": "explore",
@@ -9852,7 +9805,7 @@
         "id": "brutal_truth",
         "slot": 2,
         "windowLabel": "13:00",
-        "hoursFromNow": 6,
+        "hoursFromNow": 1,
         "label": "Brutal Truth",
         "formatId": "brutal_truth",
         "action": "explore",
@@ -9868,7 +9821,7 @@
         "id": "brutal_truth",
         "slot": 3,
         "windowLabel": "01:00",
-        "hoursFromNow": 18,
+        "hoursFromNow": 13,
         "label": "Brutal Truth",
         "formatId": "brutal_truth",
         "action": "explore",
@@ -9884,7 +9837,7 @@
         "id": "brutal_truth",
         "slot": 4,
         "windowLabel": "19:00",
-        "hoursFromNow": 12,
+        "hoursFromNow": 7,
         "label": "Brutal Truth",
         "formatId": "brutal_truth",
         "action": "explore",
@@ -9897,24 +9850,24 @@
         "reason": "brutal_truth has 2 sample(s) in this UTC hour with avg score 4.9."
       },
       {
-        "id": "brutal_truth",
+        "id": "the_hard_way",
         "slot": 5,
         "windowLabel": "12:00",
-        "hoursFromNow": 5,
-        "label": "Brutal Truth",
-        "formatId": "brutal_truth",
+        "hoursFromNow": 0,
+        "label": "The Hard Way",
+        "formatId": "the_hard_way",
         "action": "explore",
-        "angle": "truth-bomb / unpopular but evidenced take",
+        "angle": "costly lesson / cheat code",
         "status": "probe",
         "score": 49.5,
-        "loadScore": 52.8,
+        "loadScore": 46.9,
         "samples": 3,
-        "avgScore": 5.1,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 70.0."
+        "avgScore": 2.4,
+        "reason": "the_hard_way has 3 sample(s) in this UTC hour with avg score 2.4."
       }
     ],
     "directives": [
-      "Route Brutal Truth at 12:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
+      "Route Brutal Truth at 13:00 UTC. Keep one controlled exploration lane open, but ship the primary proven angle first.",
       "Next angle slot: brutal_truth (truth-bomb / unpopular but evidenced take); Needs 7 more sample(s) before the bot trusts it.",
       "Traffic load is soft; write a useful reply-ready angle that earns manual distribution.",
       "Avoid summary-only takes; make the angle useful enough to paste as a route output.",
@@ -9922,12 +9875,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "low",
-    "epoch": "2026-09-19T07:19",
+    "epoch": "2026-09-19T12:29",
     "sampleCount": 32,
     "baselineScore": 4.3,
     "activeRule": {
@@ -10023,7 +9976,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (32 text, 0 media).",
@@ -10070,7 +10023,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -10480,7 +10433,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "updatedAt": "2026-09-19T07:09:32.669Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -10913,31 +10866,31 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
-    "sampleCount": 15,
+    "sampleCount": 14,
     "minSamples": 10,
     "confidence": "low",
-    "mode": "manual_distribution",
+    "mode": "wait_for_peak",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 7,
-      "label": "07:00",
-      "loadScore": 0,
-      "posts": 0,
-      "impressions": 0,
-      "avgScore": 0,
-      "status": "dark"
-    },
-    "nextWindow": {
       "hour": 12,
       "label": "12:00",
-      "hoursFromNow": 5,
-      "loadScore": 52.8,
-      "posts": 4,
-      "impressions": 156,
+      "loadScore": 46.9,
+      "posts": 3,
+      "impressions": 126,
       "avgScore": 2.4,
+      "status": "cool"
+    },
+    "nextWindow": {
+      "hour": 13,
+      "label": "13:00",
+      "hoursFromNow": 1,
+      "loadScore": 61.2,
+      "posts": 1,
+      "impressions": 37,
+      "avgScore": 10.4,
       "status": "warm"
     },
     "bestHours": [
@@ -10978,7 +10931,7 @@
         "status": "warm"
       }
     ],
-    "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 16:00 UTC.",
+    "nextAction": "Hold the standalone packet for 1.0h until 13:00 UTC; use manual route ops now.",
     "hours": [
       {
         "hour": 0,
@@ -11082,7 +11035,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 8,
@@ -11139,15 +11092,15 @@
       {
         "hour": 12,
         "label": "12:00",
-        "posts": 4,
-        "impressions": 156,
-        "likes": 4,
+        "posts": 3,
+        "impressions": 126,
+        "likes": 3,
         "reposts": 0,
         "replies": 0,
         "avgScore": 2.4,
-        "loadScore": 52.8,
-        "status": "warm",
-        "current": false
+        "loadScore": 46.9,
+        "status": "cool",
+        "current": true
       },
       {
         "hour": 13,
@@ -11296,7 +11249,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -11614,7 +11567,7 @@
     "nextExperimentZh": "继续加码 decision rule，优先使用 simonwillison.net 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "explore_formats",
     "confidence": "medium",
     "baselineScore": 4.3,
@@ -11696,7 +11649,7 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "cached_learning_contract",
     "status": "online",
     "confidence": "medium",
@@ -11710,7 +11663,7 @@
       "id": "massive_value_drop",
       "label": "Massive Value Drop",
       "status": "explore",
-      "allocationPct": 23.3,
+      "allocationPct": 23.4,
       "avgScore": 4.3,
       "samples": 0,
       "liftPct": null,
@@ -11721,7 +11674,7 @@
       "id": "massive_value_drop",
       "label": "Massive Value Drop",
       "status": "explore",
-      "allocationPct": 23.3,
+      "allocationPct": 23.4,
       "avgScore": 4.3,
       "samples": 0,
       "liftPct": null,
@@ -11810,7 +11763,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-09-19T07:19:05.411Z",
+    "generatedAt": "2026-09-19T12:29:08.979Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -12044,7 +11997,7 @@
   "diagnosis": [
     "Today: prioritize EN at 13:00 UTC; use #devtools #ai when story-fit allows.",
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 7 天记录到 28 条、0 次触达；24 小时 5 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
+    "最近 7 天记录到 28 条、0 次触达；24 小时 4 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
     "路由操作优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
