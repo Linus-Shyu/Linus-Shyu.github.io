@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ABC327B题解 | Linus Shyu的认知库</title>
-  <meta name="keywords" content=" C++基础语法 , ATcoder , abc ">
-  <meta name="description" content="ABC327B题解 | Linus Shyu的认知库">
+  <title>Linus科技周报#19：Meta 彻底摊牌 | Linus Shyu的认知库</title>
+  <meta name="keywords" content=" 科技周报 , Meta , Muse , Ray-Ban , AI ">
+  <meta name="description" content="Linus科技周报#19：Meta 彻底摊牌 | Linus Shyu的认知库">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="人在青海，刚刚起床。没去 One Hacker Way，在 YouTube 把整场 Meta Connect 2026 看完了。Meta 这次彻底摊牌：个人 AI 助手深度绑硬件，Lisa 代言的新眼镜也来了。 Personal AssistantMuse 是 Meta 的个人 Agent，形象长得和拉布布一样。它会帮你排健身计划、比价、把东西买回来。 它和 Grok bot 是同一类东西：个人">
 <meta property="og:type" content="article">
@@ -526,9 +526,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-[ABC327B] A^A 题解" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Linus科技周报19" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ABC327B题解</h1>
+        <h1 class="article-title">Linus科技周报#19：Meta 彻底摊牌</h1>
     
     <div class="article-meta">
         
@@ -538,7 +538,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="题解">题解</a>
+            <a  data-rel="科技">科技</a>
             
         </span>
         
@@ -546,18 +546,22 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">C++基础语法</a>
+            <a class="color5">科技周报</a>
             
-            <a class="color3">ATcoder</a>
+            <a class="color5">Meta</a>
             
-            <a class="color4">abc</a>
+            <a class="color5">Muse</a>
+            
+            <a class="color3">Ray-Ban</a>
+            
+            <a class="color3">AI</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2025-12-08 22:23:18'>2023-11-21 00:00</time>
+            Created At : <time class="date" title='Updated At: 2026-09-24 09:00:26'>2026-09-24 08:30</time>
         
     </div>
     <div class="article-meta">
@@ -579,7 +583,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%A7%E6%84%8F"><span class="toc-text">题目大意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Personal-Assistant"><span class="toc-text">Personal Assistant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#New-Glasses"><span class="toc-text">New Glasses</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#New-Headset"><span class="toc-text">New Headset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Muse-Charm"><span class="toc-text">Muse Charm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linus-%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-text">Linus 的总结</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -595,146 +599,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>常规思路是用C++当中的pow()函数来做这一道题目，但是pow()函数也是有一定限制的，所以数据量稍微大一点就过不去这一道题，而且Atcoder没有像洛谷一样AC多少测试点给多少分的习惯，必须要把题调清楚才能拿分，所以你骗分基本是不可能的，像我花了差不多一个小时也没把这一道题写出来，还是太菜了。</p>
-<h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>设计一个程序找到A这个能满足一下表达式的数字：<br>$$<br>A^{A} &#x3D; B<br>$$<br>如果有就输出a，如果没有就输出-1。</p>
-<p>正如之前所说我用pow()函数做这一题代码只能过一点点测试点，现在给大家看看我之前的代码。</p>
-<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
-
-<span class="keyword">typedef</span> <span class="type">long</span> l;
-<span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;
-<span class="keyword">typedef</span> <span class="type">long</span> <span class="type">double</span> ld;
-<span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;
-
-<span class="keyword">using</span> <span class="keyword">namespace</span> std;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;
-    x = <span class="number">0</span>; T f = <span class="number">1</span>; <span class="type">char</span> c = <span class="built_in">getchar</span>();
-    <span class="keyword">for</span> (; !<span class="built_in">isdigit</span>(c); c = <span class="built_in">getchar</span>()) <span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>;
-    <span class="keyword">for</span> (; <span class="built_in">isdigit</span>(c); c = <span class="built_in">getchar</span>()) x = (x &lt;&lt; <span class="number">3</span>) + (x &lt;&lt; <span class="number">1</span>) + c - <span class="number">48</span>; x *= f;
-&#125;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">write</span><span class="params">(T x)</span> </span>&#123;
-    <span class="keyword">if</span> (x &gt; <span class="number">9</span>) <span class="built_in">write</span>(x / <span class="number">10</span>); <span class="built_in">putchar</span>(x % <span class="number">10</span> + <span class="number">48</span>);
-&#125;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T x,<span class="type">char</span> ed = <span class="string">&#x27;\n&#x27;</span>)</span> </span>&#123;
-    <span class="keyword">if</span>(x &lt; <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>), x = -x; <span class="built_in">write</span>(x), <span class="built_in">putchar</span>(ed);
-&#125;
-
-<span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>
-<span class="function"></span>&#123;
-    ull B;
-    cin &gt;&gt; B;
-    <span class="type">int</span> ans = <span class="number">0</span>;
-    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= B; i++)
-    &#123;
-        <span class="type">double</span> m = <span class="built_in">pow</span>(i,i);
-        <span class="keyword">if</span>(m == B)
-        &#123;
-            ans ++;
-            cout &lt;&lt; i;
-            <span class="keyword">break</span>;
-        &#125;
-    &#125;
-    <span class="keyword">if</span>(ans &lt;= <span class="number">0</span>)    cout &lt;&lt; <span class="string">&quot;-1&quot;</span>;
-&#125;
-
-<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>
-<span class="function"></span>&#123;
-    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);
-    cin.<span class="built_in">tie</span>(<span class="number">0</span>);
-    cout.<span class="built_in">tie</span>(<span class="number">0</span>);
-    <span class="type">int</span> T = <span class="number">1</span>;
-    <span class="keyword">while</span>(T--)
-    &#123;
-        <span class="built_in">solve</span>();
-    &#125;
-    <span class="keyword">return</span> <span class="number">0</span>;
-&#125;</code></pre>
-
-<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc327/submissions/47270597">过了一点点测试点的代码</a></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我没能成功实现计算表达式的方法，所以我在看了AA竞程dreamoon老师的视频之后终于知道我的问题出现在了哪里。</p>
-<p>以下是dreamoon老师的AC代码，我们来拆开研究一下。</p>
-<pre><code class="highlight cpp"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span>
-<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
-
-<span class="keyword">typedef</span> <span class="type">long</span> l;
-<span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;
-<span class="keyword">typedef</span> <span class="type">long</span> <span class="type">double</span> ld;
-<span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;
-
-<span class="keyword">using</span> <span class="keyword">namespace</span> std;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;
-    x = <span class="number">0</span>; T f = <span class="number">1</span>; <span class="type">char</span> c = <span class="built_in">getchar</span>();
-    <span class="keyword">for</span> (; !<span class="built_in">isdigit</span>(c); c = <span class="built_in">getchar</span>()) <span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>;
-    <span class="keyword">for</span> (; <span class="built_in">isdigit</span>(c); c = <span class="built_in">getchar</span>()) x = (x &lt;&lt; <span class="number">3</span>) + (x &lt;&lt; <span class="number">1</span>) + c - <span class="number">48</span>; x *= f;
-&#125;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">write</span><span class="params">(T x)</span> </span>&#123;
-    <span class="keyword">if</span> (x &gt; <span class="number">9</span>) <span class="built_in">write</span>(x / <span class="number">10</span>); <span class="built_in">putchar</span>(x % <span class="number">10</span> + <span class="number">48</span>);
-&#125;
-
-<span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T x,<span class="type">char</span> ed = <span class="string">&#x27;\n&#x27;</span>)</span> </span>&#123;
-    <span class="keyword">if</span>(x &lt; <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>), x = -x; <span class="built_in">write</span>(x), <span class="built_in">putchar</span>(ed);
-&#125;
-
-<span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>
-<span class="function"></span>&#123;
-    ll B;
-    <span class="built_in">read</span>(B);
-    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">15</span>; i++)
-    &#123;
-        ll var = <span class="number">1</span>;
-        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++)
-        &#123;
-            var *= i;
-        &#125;
-        <span class="keyword">if</span>(var == B)
-        &#123;
-            <span class="built_in">write</span>(i);
-            <span class="keyword">return</span>;
-        &#125;
-    &#125;
-    <span class="built_in">print</span>(<span class="number">-1</span>);
-
-&#125;
-
-<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>
-<span class="function"></span>&#123;
-    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);
-    cin.<span class="built_in">tie</span>(<span class="number">0</span>);
-    cout.<span class="built_in">tie</span>(<span class="number">0</span>);
-    <span class="type">int</span> T = <span class="number">1</span>;
-    <span class="keyword">while</span>(T--)
-    &#123;
-        <span class="built_in">solve</span>();
-    &#125;
-    <span class="keyword">return</span> <span class="number">0</span>;
-&#125;</code></pre>
-
-<p>dreamoon老师写了两个for循环，我寻思这东西不是一个循环就能解决吗还在纠结这个问题，如果只用j &lt;&#x3D; i的这个循环仅仅只能每次只能*i，没办法实现判断是否存在i的i次方，所以我们要写两个循环。</p>
-<p>第二个for循环类似于计数器，可以实现计算i的i次方的方法，这个类似于一个模板，如果下次还需要用到类似于计算i的i次方的这种问题我们可以用上他。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>还是需要培养解决难题的能力，我也很庆幸能够弄懂这道题目的解决思路，在期中考试开始前半个小时我还在思考为什么不能用一个for循环这件事，也许我比较较真吧，不过没影响文化课考试，这一道题目也顺利解决了。</p>
+        <p>人在青海，刚刚起床。没去 One Hacker Way，在 YouTube 把整场 Meta Connect 2026 看完了。Meta 这次彻底摊牌：个人 AI 助手深度绑硬件，Lisa 代言的新眼镜也来了。</p>
+<h3 id="Personal-Assistant"><a href="#Personal-Assistant" class="headerlink" title="Personal Assistant"></a>Personal Assistant</h3><p>Muse 是 Meta 的个人 Agent，形象长得和拉布布一样。它会帮你排健身计划、比价、把东西买回来。</p>
+<p>它和 Grok bot 是同一类东西：个人 Agent，背后有一台自己的电脑。Muse 绑得更深。这台电脑是一台虚拟机，叫 Muse Secure VM，Agent 和你的数据都放在里面。用眼镜的时候有提示灯，数据两边都要加密。今年晚些时候还有 Confidential VM，整台机器用一把只有你自己拿着的钥匙解开。</p>
+<p>Connector 把外面的服务接进来。我记得演示里闪过 iMessage，台上明确接到的有 Gap、Notion、GitHub，还有 Walmart、Best Buy 这类美国电商。Meta 要卖的是 Connector 这个平台，已经对开发者开放。Alexander Wang 说，不到一周收到了一千五百份申请。</p>
+<p>我的感觉是，Meta 要做的不只是一个 Personal Assistant，而是一个超级 App。你可以跟 Muse 实时语音说话，声音也能换。演示里有一个 cowboy。</p>
+<h3 id="New-Glasses"><a href="#New-Glasses" class="headerlink" title="New Glasses"></a>New Glasses</h3><p>眼镜这边是把 Ray-Ban 和 Muse 放在一起。软硬件绑死，真的拿来当 personal assistant，人机交互基本就是语音。</p>
+<p>声学我听得很认真。Hearing Enhancement 用声学模型补听力损失，放大人声，先在 App 里做一次听力测试再调。对我挺有用的，我自己有听力损失。</p>
+<p>硬件我按台上的顺序记了三条。</p>
+<p>Ray-Ban Meta Audio 没有摄像头，Clubmaster 是其中一种样式。它是目前最薄的 Ray-Ban Meta，电池也最长，349 美元起，10 月 13 日发货。</p>
+<p>第三代 Ray-Ban Meta 继续带摄像头。麦克风加到 6 颗，视频可以收杜比全景声，电池比上一代更好，449 美元起。Aviator 还有一款 limited edition，他们显然想把这东西做成时尚单品。</p>
+<p>Meta 自有品牌里，Adventurer 卖 249 美元，10 月 23 日开卖，是目前最便宜的一档。我应该会用黑客松奖金买一个。Ray-Ban Display 这次恢复网购，并扩到英国、加拿大、法国、意大利和德国。</p>
+<p>卧槽，Lisa 代言了。她这套挂在 Meta 自有品牌上，Adventurer 和猫眼 Capri 各 399 美元，镜腿上有她的星星，买眼镜送一个她宠物主题的挂件。</p>
+<p><img src="/images/weekly-19/zuckerberg.jpg" alt="小扎在发布会上戴着新眼镜"></p>
+<h3 id="New-Headset"><a href="#New-Headset" class="headerlink" title="New Headset"></a>New Headset</h3><p>新头显叫 Meta VR Glasses。小扎自己说，比 Vision Pro 亮，比 Quest 3 亮五倍。宣传片里 Casey 戴上去走了一段。Demo 放了 Dolby Vision，片源是 National Geographic。任意一个平面都能当键盘。</p>
+<p><img src="/images/weekly-19/keyboard.jpg" alt="桌面变成键盘，输入框里写着 Is this a dream?"></p>
+<p>Muse 接进了 Meta OS，说话就能操作系统。Xbox cloud gaming 已经在。今年还会接 HBO Max、Disney，以及 NBA、MLB 这类赛事。打电话被重做成全息，对面那个人可以站在你面前。算力和电池在一根光缆连着的 puck 里，眼镜大约 100 克。1299 美元，2027 年春季发布。</p>
+<h3 id="Muse-Charm"><a href="#Muse-Charm" class="headerlink" title="Muse Charm"></a>Muse Charm</h3><p>最后一个硬件没细说。Muse Charm 把整套 Muse 塞进一个能挂在钥匙上的小设备里，实时语音和形象都在。我的第一反应是 AI Pin。按一下角上的指纹就能说，不用掏手机。12 月假期发布，价格没讲。</p>
+<h3 id="Linus-的总结"><a href="#Linus-的总结" class="headerlink" title="Linus 的总结"></a>Linus 的总结</h3><p>Meta 干了我真的想干的事情。去年 10 月我发布 FeelFlow，就是希望有一个个人 Agent。我的技术能力只够做文本上的后训练，让 AI 明白我是个什么样的人，做不到 Meta 团队这种从虚拟机、Connector 到眼镜摄像头的一整套。FeelFlow 可以说是彻底死了。无所谓，打不过就加入。说不定哪天去 Meta 做 HCI。</p>
+<p>Meta Ray-Ban 的摄像头联动 AI 语音，是整场让我眼前一亮的东西，也是我之后还想做的事。</p>
+<p>Alexander Wang 的发型真不错。我也想来一个。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 0x11@linusshyu.dev </span>
@@ -748,12 +632,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>ABC327B题解</p>
+    <p><span class="copy-title">Title:</span>Linus科技周报#19：Meta 彻底摊牌</p>
     
     <p><span class="copy-title">Author:</span><a  title="LinusShyu">LinusShyu</a></p>
-    <p><span class="copy-title">Created At:</span>2023-11-21, 00:00:00</p>
-    <p><span class="copy-title">Updated At:</span>2025-12-08, 22:23:18</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/" title="ABC327B题解">https://linusshyu.dev/2023/11/21/[ABC327B]%20A^A%20%E9%A2%98%E8%A7%A3/</a>
+    <p><span class="copy-title">Created At:</span>2026-09-24, 08:30:00</p>
+    <p><span class="copy-title">Updated At:</span>2026-09-24, 09:00:26</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2026/09/24/Linus%E7%A7%91%E6%8A%80%E5%91%A8%E6%8A%A519/" title="Linus科技周报#19：Meta 彻底摊牌">https://linusshyu.dev/2026/09/24/Linus%E7%A7%91%E6%8A%80%E5%91%A8%E6%8A%A519/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
@@ -763,46 +647,6 @@
 
 
 
-    
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<input type="hidden" id="MathJax-js"
-        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</input>
     
 
 
