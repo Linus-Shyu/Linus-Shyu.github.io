@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07T08:37:05.338Z",
+  "updatedAt": "2026-10-07T17:24:58.527Z",
   "telemetry": {
-    "dashboardUpdatedAt": "2026-10-07T08:37:05.338Z",
-    "analyticsUpdatedAt": "2026-10-07T01:31:05.353Z",
+    "dashboardUpdatedAt": "2026-10-07T17:24:58.527Z",
+    "analyticsUpdatedAt": "2026-10-07T08:37:05.129Z",
     "usageUpdatedAt": "2026-10-07T00:14:12.181Z",
     "accountCheckedAt": "2026-10-06T10:45:55.821Z",
     "tweetMetricsCheckedAt": "2026-10-06T10:45:55.950Z",
     "checkedAt": "2026-10-06T10:45:55.950Z",
-    "ageMinutes": 1311,
+    "ageMinutes": 1839,
     "refreshMode": "dashboard_only",
     "cachedOnlyRefresh": true,
     "cachedReason": "dashboard_only"
@@ -19,7 +19,7 @@
   },
   "languageTracks": {
     "mode": "timezone",
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -35,15 +35,15 @@
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 4
+          "hoursFromNow": 19
         },
         "dailyTarget": 1,
         "packetsLast24h": 1,
-        "packetsLast7d": 6,
-        "measuredPackets": 5,
-        "traffic7d": 151,
-        "ack7d": 6,
-        "avgScore": 4.4,
+        "packetsLast7d": 5,
+        "measuredPackets": 4,
+        "traffic7d": 123,
+        "ack7d": 5,
+        "avgScore": 4.8,
         "topPackets": [
           {
             "id": "2106776970935611665",
@@ -4715,9 +4715,9 @@
           21
         ],
         "nextWindow": {
-          "hour": 13,
-          "label": "13:00 UTC",
-          "hoursFromNow": 5
+          "hour": 21,
+          "label": "21:00 UTC",
+          "hoursFromNow": 4
         },
         "dailyTarget": 1,
         "packetsLast24h": 1,
@@ -9483,7 +9483,7 @@
     ]
   },
   "languageRoi": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_language_roi",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -9499,17 +9499,17 @@
         "utcHours": [
           12
         ],
-        "posts7d": 6,
-        "traffic7d": 151,
-        "ack7d": 6,
-        "avgScore": 4.4,
-        "trafficPerPost": 25.2,
-        "ackRatePct": 3.97,
+        "posts7d": 5,
+        "traffic7d": 123,
+        "ack7d": 5,
+        "avgScore": 4.8,
+        "trafficPerPost": 24.6,
+        "ackRatePct": 4.07,
         "status": "done",
         "nextWindow": {
           "hour": 12,
           "label": "12:00 UTC",
-          "hoursFromNow": 4
+          "hoursFromNow": 19
         },
         "recommendation": "Keep this rail at its timezone peak; it is earning relative to volume."
       },
@@ -9530,9 +9530,9 @@
         "ackRatePct": 2.16,
         "status": "done",
         "nextWindow": {
-          "hour": 13,
-          "label": "13:00 UTC",
-          "hoursFromNow": 5
+          "hour": 21,
+          "label": "21:00 UTC",
+          "hoursFromNow": 4
         },
         "recommendation": "Keep this rail at its timezone peak; it is earning relative to volume."
       }
@@ -9551,10 +9551,10 @@
     "capUsd": 5,
     "remainingUsd": 4.655,
     "zeroExtraXReads": true,
-    "generatedAt": "2026-10-07T08:37:05.338Z"
+    "generatedAt": "2026-10-07T17:24:58.527Z"
   },
   "operatorTasks": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_operator_tasks",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -9627,8 +9627,8 @@
         "priority": 4,
         "title": "Review ZH vs EN rail before next packet",
         "titleZh": "发帖前看一眼中英轨道谁更赚",
-        "detail": "ZH traffic7d=151, EN traffic7d=231. Keep dispatching only in the scheduled language slot.",
-        "detailZh": "中文 7 日触达 151，英文 231。只在对应时区窗口发对应语言。",
+        "detail": "ZH traffic7d=123, EN traffic7d=231. Keep dispatching only in the scheduled language slot.",
+        "detailZh": "中文 7 日触达 123，英文 231。只在对应时区窗口发对应语言。",
         "openUrl": null,
         "copyText": null,
         "zeroExtraXReads": true,
@@ -9637,7 +9637,7 @@
     ]
   },
   "operatorTaskLog": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "day": "2026-10-07",
@@ -9653,13 +9653,13 @@
     "recent": []
   },
   "growthDecision": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_growth_decision_layer",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
     "today": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "mode": "publish_or_route",
@@ -9668,7 +9668,7 @@
       "nextSlot": {
         "hour": 12,
         "label": "12:00 UTC",
-        "hoursFromNow": 4
+        "hoursFromNow": 19
       },
       "selectedTags": [
         "#devtools",
@@ -9691,7 +9691,7 @@
     },
     "review24h": {
       "hours": 24,
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 5.1,
@@ -9744,15 +9744,14 @@
     },
     "review72h": {
       "hours": 72,
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "baselineScore": 5.1,
-      "total": 5,
+      "total": 3,
       "counts": {
         "wait_metrics": 2,
-        "reframe": 2,
-        "follow_up": 1
+        "reframe": 1
       },
       "items": [
         {
@@ -9814,48 +9813,11 @@
           "action": "reframe",
           "status": "warn",
           "reason": "Got distribution but weak ACK; change the angle before repeating."
-        },
-        {
-          "id": "2106796151680999877",
-          "url": "https://x.com/i/web/status/2106796151680999877",
-          "text": "The story is not Trump's Super Intelligence Force. It's that a task force on AI safety will become a default gate on compute and model access overnight, and most teams have no seat at the table. If your agent strategy depends on free API quotas, you… github.com/Linus-Shyu/XGrowth",
-          "language": "en",
-          "postedAt": "2026-10-04T17:18:39.821Z",
-          "score": 2.7,
-          "impressions": 69,
-          "likes": 1,
-          "reposts": 0,
-          "replies": 0,
-          "template": "the_hard_way",
-          "hashtags": [],
-          "action": "reframe",
-          "status": "warn",
-          "reason": "Got distribution but weak ACK; change the angle before repeating."
-        },
-        {
-          "id": "2106776970935611665",
-          "url": "https://x.com/i/web/status/2106776970935611665",
-          "text": "Rust 编译慢不是语言问题，是你把元数据当垃圾最后才吐， headstart 让编译器提前发射 metadata，构建和检查直接快 2 倍， 旧流程先编译再校验，等于烧完油才看地图， 把 headstart 挂进你的 cargo 前置链路，今天省下的不是 2 倍，是每天 2 倍的等待税。 #DevTools #BigTech",
-          "language": "zh",
-          "postedAt": "2026-10-04T16:02:26.771Z",
-          "score": 10.3,
-          "impressions": 25,
-          "likes": 1,
-          "reposts": 0,
-          "replies": 0,
-          "template": "the_hard_way",
-          "hashtags": [
-            "devtools",
-            "bigtech"
-          ],
-          "action": "follow_up",
-          "status": "hot",
-          "reason": "Strong relative score or conversation signal; write a follow-up angle."
         }
       ]
     },
     "languageMix": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "primary": "zh",
@@ -9867,18 +9829,18 @@
       },
       "scores": {
         "en": 1.8,
-        "zh": 4.4,
+        "zh": 4.8,
         "enSamples": 6,
-        "zhSamples": 5
+        "zhSamples": 4
       }
     },
     "failureStats": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
       "lookbackDays": 7,
       "totalEvents": 13,
-      "scannedEvents": 26,
+      "scannedEvents": 25,
       "topReasons": [
         {
           "reason": "cadence",
@@ -9911,7 +9873,7 @@
       }
     },
     "abPlan": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "mode": "zero_read_low_cost_ab",
       "zeroExtraXReads": true,
       "estimatedXReadOps": 0,
@@ -9988,12 +9950,12 @@
         "avgScore": 0
       },
       "last7d": {
-        "posts": 13,
-        "measuredPosts": 11,
-        "impressions": 382,
-        "likes": 10,
+        "posts": 12,
+        "measuredPosts": 10,
+        "impressions": 354,
+        "likes": 9,
         "replies": 1,
-        "avgScore": 3.5
+        "avgScore": 3.7
       },
       "bestFormat": {
         "id": "the_hard_way",
@@ -10005,9 +9967,9 @@
       "worstFormat": {
         "id": "brutal_truth",
         "action": "watch",
-        "avgScore": 1.2,
-        "samples": 2,
-        "liftPct": -76.9
+        "avgScore": 0.1,
+        "samples": 1,
+        "liftPct": -98.2
       },
       "formatRows24h": [],
       "formatRows7d": [
@@ -10028,18 +9990,18 @@
         {
           "id": "brutal_truth",
           "action": "watch",
-          "avgScore": 1.2,
-          "samples": 2,
-          "liftPct": -76.9
+          "avgScore": 0.1,
+          "samples": 1,
+          "liftPct": -98.2
         }
       ],
       "languageRows": [
         {
           "id": "zh",
           "action": "watch",
-          "avgScore": 5.3,
-          "samples": 5,
-          "liftPct": 3.5
+          "avgScore": 6.1,
+          "samples": 4,
+          "liftPct": 18.3
         },
         {
           "id": "en",
@@ -10265,7 +10227,7 @@
     "dailyPosts": 1
   },
   "growthKinetics": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "source": "cached packet telemetry + active conn snapshots",
     "zeroExtraXReads": true,
     "mode": "acceleration",
@@ -10277,13 +10239,13 @@
     "nextMilestone": 100,
     "remainingToMilestone": 8,
     "impressions24h": 0,
-    "impressions7d": 382,
+    "impressions7d": 354,
     "engagements24h": 0,
-    "engagements7d": 11,
+    "engagements7d": 10,
     "engagementRate24h": 0,
-    "engagementRate7d": 2.88,
-    "observedConversionPer1k": 15.71,
-    "effectiveConversionPer1k": 15.71,
+    "engagementRate7d": 2.82,
+    "observedConversionPer1k": 16.95,
+    "effectiveConversionPer1k": 16.95,
     "projectedDaysToMilestone": 9.3,
     "routeReadinessPct": 100,
     "replyCoveragePct": 100,
@@ -10304,7 +10266,7 @@
       {
         "id": "conversion",
         "label": "conn / 1k events",
-        "value": "15.71",
+        "value": "16.95",
         "status": "ok"
       },
       {
@@ -10321,7 +10283,7 @@
         "value": 0,
         "score": 0,
         "status": "danger",
-        "detail": "382 L7 events over 7d"
+        "detail": "354 L7 events over 7d"
       },
       {
         "id": "ack",
@@ -10334,7 +10296,7 @@
       {
         "id": "conversion",
         "label": "conn conversion",
-        "value": "15.71/1k",
+        "value": "16.95/1k",
         "score": 100,
         "status": "ok",
         "detail": "6 active conn delta"
@@ -10350,7 +10312,7 @@
     ]
   },
   "growthMissionControl": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "ignition_loop",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -10441,7 +10403,7 @@
     ]
   },
   "growthRunwaySimulator": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "route_acceleration",
     "source": "cached traffic kinetics + route amplifier + budget allocation optimizer",
     "zeroExtraXReads": true,
@@ -10451,13 +10413,13 @@
     "currentFollowers": 92,
     "nextMilestone": 100,
     "remainingToMilestone": 8,
-    "dailyThroughput": 54.6,
-    "conversionPer1k": 15.71,
+    "dailyThroughput": 50.6,
+    "conversionPer1k": 16.95,
     "baseline": {
       "projectedDays": 9.3,
-      "dailyThroughput": 54.6,
+      "dailyThroughput": 50.6,
       "dailyNewFollowers": 0.86,
-      "conversionPer1k": 15.71
+      "conversionPer1k": 16.95
     },
     "recommendedLaneId": "manual_route_burst",
     "recommendedAction": "Execute first; this route has the strongest distribution leverage.",
@@ -10608,7 +10570,7 @@
     ]
   },
   "autopilotDirectiveDeck": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "scale_directive_deck",
     "source": "cached learning writeback + temporal matrix + mission control + cost governor",
     "zeroExtraXReads": true,
@@ -14022,9 +13984,9 @@
     ]
   },
   "last7d": {
-    "posts": 13,
-    "impressions": 382,
-    "likes": 10,
+    "posts": 12,
+    "impressions": 354,
+    "likes": 9,
     "reposts": 0,
     "replies": 1,
     "topPosts": [
@@ -26634,1601 +26596,6 @@
         }
       },
       {
-        "id": "2105342856873591030",
-        "text": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？ #AI #DevTools github.com/Linus-Shyu/XGrowth",
-        "url": "https://x.com/i/web/status/2105342856873591030",
-        "score": 2.3,
-        "impressions": 28,
-        "likes": 1,
-        "reposts": 0,
-        "replies": 0,
-        "template": "brutal_truth",
-        "source": "openai.com",
-        "postedAt": "2026-09-30T17:03:47.311Z",
-        "candidateScore": 205.5,
-        "candidateReason": "暴论开场，直接戳中开发者对工作流失控的恐惧，引发回滚和可控性的讨论。",
-        "angleMutationScore": 10,
-        "angleMutationDiagnostics": [
-          "mutation primary format"
-        ],
-        "hookPatternScore": -3,
-        "hookPatternDiagnostics": [
-          "missed hook reactor",
-          "compact first line"
-        ],
-        "hookPattern": {
-          "primaryId": "operator_pain",
-          "primaryLabel": "Operator Pain",
-          "patternIds": [
-            "operator_pain",
-            "prediction",
-            "sharp_question",
-            "entity_led"
-          ],
-          "firstLine": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？"
-        },
-        "contentBanditScore": 3.2,
-        "contentBanditDiagnostics": [
-          "bandit rotation lane"
-        ],
-        "narrativeResonanceScore": 9.1,
-        "narrativeResonanceDiagnostics": [
-          "narrative rotation lane",
-          "durable account memory"
-        ],
-        "narrativePillar": {
-          "id": "platform_control",
-          "label": "Platform Control",
-          "matchScore": 1.22
-        },
-        "topicTimingScore": 19.2,
-        "topicTimingDiagnostics": [
-          "topic timing pillar",
-          "topic timing hot lane",
-          "observed timing sample"
-        ],
-        "topicTimingLane": {
-          "id": "18:platform_control:brutal_truth",
-          "windowLabel": "18:00",
-          "hour": 18,
-          "pillarId": "platform_control",
-          "pillarLabel": "Platform Control",
-          "formatId": "brutal_truth",
-          "formatLabel": "Brutal Truth",
-          "score": 100,
-          "status": "hot"
-        },
-        "generationDecisionTrace": {
-          "generatedAt": "2026-09-30T17:03:46.999Z",
-          "mode": "candidate_ranker_with_hook_angle_load_narrative_and_topic_timing",
-          "zeroExtraXReads": true,
-          "estimatedXReadOps": 0,
-          "selectedRank": 1,
-          "selectedTemplateId": "brutal_truth",
-          "selectedScore": 205.5,
-          "selectedReason": "暴论开场，直接戳中开发者对工作流失控的恐惧，引发回滚和可控性的讨论。",
-          "candidateCount": 5,
-          "localFallback": {
-            "enabled": true,
-            "seedEnabled": true,
-            "used": false,
-            "selected": false,
-            "candidateCount": 2,
-            "aiCandidateCount": 4,
-            "error": null,
-            "mode": "cached_policy_local_fallback",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "language": "zh",
-          "story": {
-            "title": "Introducing dots",
-            "source": "openai.com",
-            "hotScore": 7.437590243388564,
-            "learnedScore": 7.437590243388564
-          },
-          "angleMutation": {
-            "mode": "cached_angle_mutation_reactor",
-            "severity": "ok",
-            "confidence": "high",
-            "mutationScore": 100,
-            "nextPromptBias": "Exploit The Hard Way; source=tailscale.com; topic=cloud; window=18:00 UTC / Brutal Truth; route=standalone packet generation lane.",
-            "primaryMutation": {
-              "id": "prompt_rule",
-              "label": "prompt rule",
-              "before": "baseline rotation",
-              "after": "the_hard_way",
-              "status": "ok",
-              "score": 100,
-              "reason": "Above baseline 5.1 with enough samples.",
-              "promptBias": "Lead with The Hard Way."
-            },
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "hookPattern": {
-            "mode": "cached_hook_pattern_reactor",
-            "confidence": "high",
-            "recommendedPattern": {
-              "id": "contrast_reframe",
-              "label": "Contrast Reframe",
-              "status": "probe",
-              "score": 6.94,
-              "avgScore": 5.52,
-              "samples": 3,
-              "primarySamples": 3,
-              "liftPct": null,
-              "directive": "Start with a clean not-X-but-Y reframe.",
-              "nextHook": "The story is not the launch. The story is who loses distribution when this becomes the default.",
-              "examples": [
-                {
-                  "text": "The real bottleneck in real-time AI is not the model. It's the pipeline that worked in dev but silently dies in production. Latency hides defects. Your cache, queue, and retry logic are where the fail. Harden those, and the model is the easy part.",
-                  "score": 7.4,
-                  "url": "https://x.com/i/web/status/2091696869692895232",
-                  "postedAt": "2026-08-24T01:19:30.421Z"
-                },
-                {
-                  "text": "wired.com story 真正值钱的不是发布，而是谁先改默认流程，功能清单只是噪音。",
-                  "score": 6.7,
-                  "url": "https://x.com/i/web/status/2094812055207661902",
-                  "postedAt": "2026-09-01T15:38:08.534Z"
-                },
-                {
-                  "text": "Apple consumer app shift 真正值钱的不是发布，而是谁先改默认流程，功能清单只是噪音。",
-                  "score": 2.5,
-                  "url": "https://x.com/i/web/status/2094085954156048640",
-                  "postedAt": "2026-08-30T15:32:52.517Z"
-                }
-              ],
-              "reason": "Needs 5+ measured packets; use controlled exploration."
-            },
-            "avoidPatterns": [
-              {
-                "id": "weak_recap",
-                "label": "Weak News Recap",
-                "status": "hold",
-                "score": 0,
-                "avgScore": 0,
-                "samples": 0,
-                "primarySamples": 0,
-                "liftPct": null,
-                "directive": "Do not recap the headline. Replace it with a take, rule, or tradeoff.",
-                "nextHook": "Skip the recap. Start with the consequence.",
-                "examples": [],
-                "reason": "Needs 5+ measured packets; use controlled exploration."
-              }
-            ],
-            "promptPatch": "First line hook pattern: Contrast Reframe. Start with a clean not-X-but-Y reframe. Example shape: The story is not the launch. The story is who loses distribution when this becomes the default. Avoid: Weak News Recap.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "contentBandit": {
-            "mode": "cached_ucb_content_bandit",
-            "confidence": "medium",
-            "recommendedLane": {
-              "id": "the_hard_way",
-              "label": "The Hard Way",
-              "status": "exploit",
-              "action": "exploit",
-              "allocationScore": 114.51,
-              "avgScore": 6.7,
-              "samples": 10,
-              "liftPct": 31.6,
-              "uncertainty": 0.564,
-              "explorationScore": 10.15,
-              "exploitScore": 82.42,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Frame it as a costly lesson learned the hard way: what broke, what it cost (time/money/latency), and the cheat code you'd use next time.",
-              "nextAction": "Exploit The Hard Way with Contrast Reframe.",
-              "reason": "Above baseline 5.1 with enough samples.",
-              "rank": 1,
-              "allocationPct": 25.8
-            },
-            "exploreLane": {
-              "id": "massive_value_drop",
-              "label": "Massive Value Drop",
-              "status": "explore",
-              "action": "explore",
-              "allocationScore": 105.95,
-              "avgScore": 5.09,
-              "samples": 0,
-              "liftPct": null,
-              "uncertainty": 1.87,
-              "explorationScore": 43.66,
-              "exploitScore": 45.81,
-              "rewardMomentum": 0,
-              "regretPenalty": 0,
-              "instruction": "Give away a dense, bookmark-worthy playbook or config: exact steps, numbers, or an obscure setting others miss. So useful the reader must save it.",
-              "nextAction": "Collect more samples for Massive Value Drop; keep first line concrete.",
-              "reason": "Needs 10 more sample(s) before the bot trusts it.",
-              "rank": 2,
-              "allocationPct": 23.9
-            },
-            "rankedFormatIds": [
-              "the_hard_way",
-              "massive_value_drop",
-              "myth_busting",
-              "brutal_truth"
-            ],
-            "promptPatch": "CODEX CONTENT BANDIT PATCH\nmode: cached_ucb_allocator\nzero_extra_x_reads: true\nconfidence: medium\nprimary_format: the_hard_way\nexploration_lane: massive_value_drop\nhook_bias: Contrast Reframe\nRule: prefer primary_format unless the selected story strongly fits the exploration_lane.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "angleLoadRouter": {
-            "mode": "cached_angle_load_router",
-            "severity": "ok",
-            "activeSlot": {
-              "windowLabel": "18:00",
-              "hour": 18,
-              "formatId": "brutal_truth",
-              "label": "Brutal Truth",
-              "angle": "truth-bomb / unpopular but evidenced take",
-              "score": 95,
-              "loadScore": 80.6,
-              "action": "test",
-              "status": "hot",
-              "reason": "brutal_truth has 1 sample(s) in this UTC hour with avg score 16.1."
-            },
-            "rankedFormatIds": [
-              "brutal_truth",
-              "the_hard_way"
-            ],
-            "lanes": [
-              {
-                "id": "brutal_truth",
-                "slot": 1,
-                "windowLabel": "18:00",
-                "hoursFromNow": 1,
-                "label": "Brutal Truth",
-                "formatId": "brutal_truth",
-                "action": "test",
-                "angle": "truth-bomb / unpopular but evidenced take",
-                "status": "hot",
-                "score": 95,
-                "loadScore": 80.6,
-                "samples": 1,
-                "avgScore": 16.1,
-                "reason": "brutal_truth has 1 sample(s) in this UTC hour with avg score 16.1."
-              },
-              {
-                "id": "the_hard_way",
-                "slot": 2,
-                "windowLabel": "21:00",
-                "hoursFromNow": 4,
-                "label": "The Hard Way",
-                "formatId": "the_hard_way",
-                "action": "exploit",
-                "angle": "costly lesson / cheat code",
-                "status": "watch",
-                "score": 74.3,
-                "loadScore": 67.5,
-                "samples": 10,
-                "avgScore": 6.7,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 81.6."
-              },
-              {
-                "id": "brutal_truth",
-                "slot": 3,
-                "windowLabel": "03:00",
-                "hoursFromNow": 10,
-                "label": "Brutal Truth",
-                "formatId": "brutal_truth",
-                "action": "test",
-                "angle": "truth-bomb / unpopular but evidenced take",
-                "status": "watch",
-                "score": 73.7,
-                "loadScore": 62,
-                "samples": 1,
-                "avgScore": 8.4,
-                "reason": "brutal_truth has 1 sample(s) in this UTC hour with avg score 8.4."
-              },
-              {
-                "id": "brutal_truth",
-                "slot": 4,
-                "windowLabel": "15:00",
-                "hoursFromNow": 22,
-                "label": "Brutal Truth",
-                "formatId": "brutal_truth",
-                "action": "test",
-                "angle": "truth-bomb / unpopular but evidenced take",
-                "status": "watch",
-                "score": 58.7,
-                "loadScore": 44.4,
-                "samples": 1,
-                "avgScore": 6.7,
-                "reason": "brutal_truth has 1 sample(s) in this UTC hour with avg score 6.7."
-              },
-              {
-                "id": "the_hard_way",
-                "slot": 5,
-                "windowLabel": "17:00",
-                "hoursFromNow": 0,
-                "label": "The Hard Way",
-                "formatId": "the_hard_way",
-                "action": "exploit",
-                "angle": "costly lesson / cheat code",
-                "status": "probe",
-                "score": 40.6,
-                "loadScore": 0,
-                "samples": 10,
-                "avgScore": 6.7,
-                "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 81.6."
-              }
-            ],
-            "activeCommand": "Route Brutal Truth at 18:00 UTC. Exploit the strongest proven angle; do not dilute the packet with experiments.",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "narrativeResonance": {
-            "mode": "narrative_tune",
-            "severity": "warn",
-            "accountPromise": "Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-            "resonanceScore": 60.3,
-            "primaryPillar": {
-              "id": "operator_leverage",
-              "label": "Operator Leverage",
-              "status": "expand",
-              "score": 69.3,
-              "samples": 9,
-              "avgScore": 3.6,
-              "liftPct": null,
-              "sharePct": 17.3,
-              "targetSharePct": 30,
-              "impressions": 716,
-              "engagementRate": 1.68,
-              "directive": "Translate the story into how builders and operators gain or lose leverage.",
-              "lexicon": [
-                "workflow",
-                "operator",
-                "permission",
-                "rollback",
-                "tooling",
-                "incident",
-                "automation"
-              ],
-              "examples": [
-                {
-                  "id": "2086065027321086214",
-                  "url": "https://x.com/i/web/status/2086065027321086214",
-                  "text": "Databricks 把 agentic workflow 捧成下一代，但多数团队连 prompt 基线都没建，规则：先量化当前单轮 prompt 的耗时和失败率，再上 workflow，如果基线没数据，上 workflow 就是给自己造黑盒。 #AI #De",
-                  "score": 2.5
-                },
-                {
-                  "id": "2089346309845397954",
-                  "url": "https://x.com/i/web/status/2089346309845397954",
-                  "text": "Runbook 不再只是文档，而是基础设施，明年，每个 AI 团队都会把 runbook 当作代码一样 review、测试、版本化，谁不这么做，谁就在为故障买单。 #DevTools #AI",
-                  "score": 2.3
-                }
-              ],
-              "nextAction": "Expand Operator Leverage; it is below target share but broad enough for active conn growth."
-            },
-            "promptDirectives": [
-              "Translate the story into how builders and operators gain or lose leverage.",
-              "Account promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.",
-              "Every packet must reinforce one durable memory: operator leverage, platform control, consumer behavior, risk boundary, or market timing.",
-              "Prefer reusable rules and tradeoffs over standalone news takes."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "topicTimingRouter": {
-            "mode": "topic_timing_exploit",
-            "severity": "ok",
-            "routerScore": 96,
-            "activeLane": {
-              "id": "21:platform_control:myth_busting",
-              "hour": 21,
-              "windowLabel": "21:00",
-              "hoursFromNow": 4,
-              "loadScore": 67.5,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "pillarStatus": "watch",
-              "formatId": "myth_busting",
-              "formatLabel": "Myth Busting",
-              "formatStatus": "explore",
-              "score": 100,
-              "samples": 2,
-              "avgScore": 5.1,
-              "impressions": 412,
-              "engagementRate": 0.73,
-              "observed": true,
-              "status": "hot",
-              "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC.",
-              "reason": "myth_busting x Platform Control has 2 sample(s) at 21:00 UTC with avg 5.1."
-            },
-            "lanes": [
-              {
-                "id": "21:platform_control:myth_busting",
-                "hour": 21,
-                "windowLabel": "21:00",
-                "hoursFromNow": 4,
-                "loadScore": 67.5,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 2,
-                "avgScore": 5.1,
-                "impressions": 412,
-                "engagementRate": 0.73,
-                "observed": true,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC.",
-                "reason": "myth_busting x Platform Control has 2 sample(s) at 21:00 UTC with avg 5.1."
-              },
-              {
-                "id": "18:platform_control:brutal_truth",
-                "hour": 18,
-                "windowLabel": "18:00",
-                "hoursFromNow": 1,
-                "loadScore": 80.6,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "pillarStatus": "watch",
-                "formatId": "brutal_truth",
-                "formatLabel": "Brutal Truth",
-                "formatStatus": "test",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 16.1,
-                "impressions": 308,
-                "engagementRate": 0.65,
-                "observed": true,
-                "status": "hot",
-                "directive": "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Brutal Truth around 18:00 UTC.",
-                "reason": "brutal_truth x Platform Control has 1 sample(s) at 18:00 UTC with avg 16.1."
-              },
-              {
-                "id": "21:consumer_behavior:myth_busting",
-                "hour": 21,
-                "windowLabel": "21:00",
-                "hoursFromNow": 4,
-                "loadScore": 67.5,
-                "pillarId": "consumer_behavior",
-                "pillarLabel": "Consumer Behavior",
-                "pillarStatus": "expand",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "formatStatus": "explore",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 13,
-                "impressions": 97,
-                "engagementRate": 2.06,
-                "observed": true,
-                "status": "hot",
-                "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Myth Busting around 21:00 UTC.",
-                "reason": "myth_busting x Consumer Behavior has 1 sample(s) at 21:00 UTC with avg 13.0."
-              },
-              {
-                "id": "3:operator_leverage:brutal_truth",
-                "hour": 3,
-                "windowLabel": "03:00",
-                "hoursFromNow": 10,
-                "loadScore": 62,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "pillarStatus": "expand",
-                "formatId": "brutal_truth",
-                "formatLabel": "Brutal Truth",
-                "formatStatus": "test",
-                "score": 100,
-                "samples": 1,
-                "avgScore": 8.4,
-                "impressions": 244,
-                "engagementRate": 1.23,
-                "observed": true,
-                "status": "hot",
-                "directive": "Translate the story into how builders and operators gain or lose leverage. Use Brutal Truth around 03:00 UTC.",
-                "reason": "brutal_truth x Operator Leverage has 1 sample(s) at 03:00 UTC with avg 8.4."
-              },
-              {
-                "id": "18:operator_leverage:the_hard_way",
-                "hour": 18,
-                "windowLabel": "18:00",
-                "hoursFromNow": 1,
-                "loadScore": 80.6,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "pillarStatus": "expand",
-                "formatId": "the_hard_way",
-                "formatLabel": "The Hard Way",
-                "formatStatus": "exploit",
-                "score": 100,
-                "samples": 0,
-                "avgScore": 3.6,
-                "impressions": 0,
-                "engagementRate": 1.68,
-                "observed": false,
-                "status": "hot",
-                "directive": "Translate the story into how builders and operators gain or lose leverage. Use The Hard Way around 18:00 UTC.",
-                "reason": "Seed Operator Leverage via The Hard Way in a learned 18:00 UTC load window."
-              }
-            ],
-            "promptDirectives": [
-              "Topic timing: 21:00 UTC -> Platform Control using Myth Busting.",
-              "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC.",
-              "If dispatching outside the selected UTC window, keep the same pillar but tighten the hook.",
-              "0 extra X reads; no live trend scraping required for this timing route."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "growthOpportunityScorer": {
-            "mode": "cached_opportunity_fusion",
-            "severity": "ok",
-            "confidence": "medium",
-            "opportunityScore": 100,
-            "activeOpportunity": {
-              "id": "21:platform_control:myth_busting",
-              "label": "21:00 UTC / Platform Control / Myth Busting",
-              "formatId": "myth_busting",
-              "formatLabel": "Myth Busting",
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "hour": 21,
-              "windowLabel": "21:00",
-              "action": "exploit",
-              "status": "hot",
-              "score": 100,
-              "confidence": "low",
-              "sources": [
-                "topic_timing"
-              ],
-              "samples": 2,
-              "evidence": [
-                "myth_busting x Platform Control has 2 sample(s) at 21:00 UTC with avg 5.1."
-              ],
-              "promptDirectives": [
-                "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC."
-              ]
-            },
-            "lanes": [
-              {
-                "id": "21:platform_control:myth_busting",
-                "label": "21:00 UTC / Platform Control / Myth Busting",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 21,
-                "windowLabel": "21:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 2,
-                "evidence": [
-                  "myth_busting x Platform Control has 2 sample(s) at 21:00 UTC with avg 5.1."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC."
-                ]
-              },
-              {
-                "id": "18:platform_control:brutal_truth",
-                "label": "18:00 UTC / Platform Control / Brutal Truth",
-                "formatId": "brutal_truth",
-                "formatLabel": "Brutal Truth",
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "hour": 18,
-                "windowLabel": "18:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "brutal_truth x Platform Control has 1 sample(s) at 18:00 UTC with avg 16.1."
-                ],
-                "promptDirectives": [
-                  "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Brutal Truth around 18:00 UTC."
-                ]
-              },
-              {
-                "id": "21:consumer_behavior:myth_busting",
-                "label": "21:00 UTC / Consumer Behavior / Myth Busting",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "pillarId": "consumer_behavior",
-                "pillarLabel": "Consumer Behavior",
-                "hour": 21,
-                "windowLabel": "21:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "myth_busting x Consumer Behavior has 1 sample(s) at 21:00 UTC with avg 13.0."
-                ],
-                "promptDirectives": [
-                  "Show how a product, app, or device changes user behavior or distribution habits. Use Myth Busting around 21:00 UTC."
-                ]
-              },
-              {
-                "id": "3:operator_leverage:brutal_truth",
-                "label": "03:00 UTC / Operator Leverage / Brutal Truth",
-                "formatId": "brutal_truth",
-                "formatLabel": "Brutal Truth",
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "hour": 3,
-                "windowLabel": "03:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 100,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 1,
-                "evidence": [
-                  "brutal_truth x Operator Leverage has 1 sample(s) at 03:00 UTC with avg 8.4."
-                ],
-                "promptDirectives": [
-                  "Translate the story into how builders and operators gain or lose leverage. Use Brutal Truth around 03:00 UTC."
-                ]
-              },
-              {
-                "id": "18:operator_leverage:the_hard_way",
-                "label": "18:00 UTC / Operator Leverage / The Hard Way",
-                "formatId": "the_hard_way",
-                "formatLabel": "The Hard Way",
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "hour": 18,
-                "windowLabel": "18:00",
-                "action": "exploit",
-                "status": "hot",
-                "score": 99.3,
-                "confidence": "low",
-                "sources": [
-                  "topic_timing"
-                ],
-                "samples": 0,
-                "evidence": [
-                  "Seed Operator Leverage via The Hard Way in a learned 18:00 UTC load window."
-                ],
-                "promptDirectives": [
-                  "Translate the story into how builders and operators gain or lose leverage. Use The Hard Way around 18:00 UTC."
-                ]
-              }
-            ],
-            "promptDirectives": [
-              "Primary format: myth_busting.",
-              "Primary narrative: Platform Control.",
-              "Preferred UTC window: 21:00.",
-              "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC.",
-              "No live X search/read calls are required for this opportunity score."
-            ],
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "cachedGenerationPolicy": {
-            "mode": "cached_generation_policy",
-            "confidence": "medium",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0,
-            "estimatedIncrementalXApiUsd": 0,
-            "primaryFormatId": "myth_busting",
-            "primaryFormatLabel": "Myth Busting",
-            "exploreFormatId": "brutal_truth",
-            "rankedFormatIds": [
-              "myth_busting",
-              "brutal_truth",
-              "the_hard_way",
-              "massive_value_drop"
-            ],
-            "avoidFormatIds": [],
-            "hookPattern": {
-              "id": "contrast_reframe",
-              "label": "Contrast Reframe",
-              "directive": "Start with a clean not-X-but-Y reframe.",
-              "nextHook": "The story is not the launch. The story is who loses distribution when this becomes the default."
-            },
-            "narrativePillar": {
-              "id": "operator_leverage",
-              "label": "Operator Leverage",
-              "directive": "Translate the story into how builders and operators gain or lose leverage."
-            },
-            "opportunity": {
-              "id": "21:platform_control:myth_busting",
-              "label": "21:00 UTC / Platform Control / Myth Busting",
-              "score": 100,
-              "sources": [
-                "topic_timing"
-              ],
-              "promptDirectives": [
-                "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use Myth Busting around 21:00 UTC."
-              ]
-            },
-            "directives": [
-              "Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.",
-              "First-line hook: Contrast Reframe. Start with a clean not-X-but-Y reframe.",
-              "Opportunity lane: 21:00 UTC / Platform Control / Myth Busting; sources=topic_timing; score=100.0.",
-              "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..",
-              "Timing bias: write for the 21:00 UTC learned traffic window; do not mention the window in the packet.",
-              "Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.",
-              "Mutation bias: Exploit The Hard Way; source=tailscale.com; topic=cloud; window=18:00 UTC / Brutal Truth; route=standalone packet generation lane.",
-              "Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.",
-              "Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.",
-              "Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype."
-            ],
-            "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: myth_busting\nranked_formats: myth_busting, brutal_truth, the_hard_way, massive_value_drop\nselected_story: Introducing dots\n\nMUST FOLLOW:\n- Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Contrast Reframe. Start with a clean not-X-but-Y reframe.\n- Opportunity lane: 21:00 UTC / Platform Control / Myth Busting; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 21:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit The Hard Way; source=tailscale.com; topic=cloud; window=18:00 UTC / Brutal Truth; route=standalone packet generation lane.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Keep one controlled exploration slot for brutal_truth.\n- Source bias: turn openai.com into an operator rule, cost, default shift, or distribution consequence."
-          },
-          "growthStrategy": {
-            "mode": "self_evolving_daily_traffic",
-            "status": "insufficient_recent_samples",
-            "confidence": "medium",
-            "promotedFormats": [
-              {
-                "id": "the_hard_way",
-                "action": "promote",
-                "avgScore": 6.7,
-                "samples": 10,
-                "liftPct": 31.4
-              },
-              {
-                "id": "myth_busting",
-                "action": "promote",
-                "avgScore": 5.4,
-                "samples": 8,
-                "liftPct": 6.1
-              },
-              {
-                "id": "brutal_truth",
-                "action": "promote",
-                "avgScore": 5.3,
-                "samples": 14,
-                "liftPct": 3.4
-              }
-            ],
-            "holdFormats": [],
-            "exploreFormatId": "brutal_truth",
-            "formatWeights": {
-              "brutal_truth": 1,
-              "massive_value_drop": 1,
-              "myth_busting": 1,
-              "the_hard_way": 1
-            },
-            "utcDay": "2026-09-30",
-            "preferredHashtags": [
-              "Cloud",
-              "ConsumerTech",
-              "Hardware",
-              "DevTools",
-              "AI"
-            ],
-            "nextAction": "Exploit the_hard_way while keeping one controlled exploration candidate (brutal_truth).",
-            "zeroExtraXReads": true,
-            "estimatedXReadOps": 0
-          },
-          "selectedCandidate": {
-            "rank": 1,
-            "selected": true,
-            "templateId": "brutal_truth",
-            "score": 205.5,
-            "angleMutationScore": 10,
-            "hookPatternScore": -3,
-            "contentBanditScore": 3.2,
-            "narrativeResonanceScore": 9.1,
-            "narrativePillar": {
-              "id": "platform_control",
-              "label": "Platform Control",
-              "matchScore": 1.22
-            },
-            "topicTimingScore": 19.2,
-            "topicTimingLane": {
-              "id": "18:platform_control:brutal_truth",
-              "windowLabel": "18:00",
-              "hour": 18,
-              "pillarId": "platform_control",
-              "pillarLabel": "Platform Control",
-              "formatId": "brutal_truth",
-              "formatLabel": "Brutal Truth",
-              "score": 100,
-              "status": "hot"
-            },
-            "growthOpportunityScore": 15.7,
-            "growthOpportunityLane": {
-              "id": "18:platform_control:brutal_truth",
-              "label": "18:00 UTC / Platform Control / Brutal Truth",
-              "formatId": "brutal_truth",
-              "pillarId": "platform_control",
-              "score": 100,
-              "status": "hot",
-              "sources": [
-                "topic_timing"
-              ]
-            },
-            "cachedGenerationPolicyScore": 0,
-            "cachedGenerationPolicyHits": {
-              "directive": [],
-              "narrative": [],
-              "opportunity": []
-            },
-            "hookPattern": {
-              "primaryId": "operator_pain",
-              "primaryLabel": "Operator Pain",
-              "patternIds": [
-                "operator_pain",
-                "prediction",
-                "sharp_question",
-                "entity_led"
-              ],
-              "firstLine": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？"
-            },
-            "reason": "暴论开场，直接戳中开发者对工作流失控的恐惧，引发回滚和可控性的讨论。",
-            "diagnostics": [
-              "tight length",
-              "reframe hook",
-              "time-bound prediction",
-              "template lift 4%",
-              "autopilot test",
-              "angle scheduler format",
-              "mutation primary format",
-              "missed hook reactor",
-              "compact first line",
-              "bandit rotation lane",
-              "angle load active slot",
-              "angle load hot lane"
-            ],
-            "angleMutationDiagnostics": [
-              "mutation primary format"
-            ],
-            "hookPatternDiagnostics": [
-              "missed hook reactor",
-              "compact first line"
-            ],
-            "contentBanditDiagnostics": [
-              "bandit rotation lane"
-            ],
-            "angleLoadRouterScore": 22.2,
-            "angleLoadRouterDiagnostics": [
-              "angle load active slot",
-              "angle load hot lane"
-            ],
-            "narrativeResonanceDiagnostics": [
-              "narrative rotation lane",
-              "durable account memory"
-            ],
-            "topicTimingDiagnostics": [
-              "topic timing pillar",
-              "topic timing hot lane",
-              "observed timing sample"
-            ],
-            "growthOpportunityDiagnostics": [
-              "opportunity narrative",
-              "hot opportunity lane"
-            ],
-            "cachedGenerationPolicyDiagnostics": [
-              "policy ranked format",
-              "missed policy hook"
-            ],
-            "selfEvolvingStrategyScore": 11,
-            "selfEvolvingStrategyDiagnostics": [
-              "self-evolving promote",
-              "self-evolving tag match"
-            ],
-            "qualityIssues": [
-              "headline_frame_risk",
-              "strategy_headline_similarity_risk"
-            ],
-            "viralHookGate": {
-              "allow": true,
-              "score": 50,
-              "reasons": [
-                "compact standalone hook",
-                "repostable hook frame",
-                "concrete entity",
-                "operator action"
-              ],
-              "warnings": [],
-              "entityHits": [
-                "openai",
-                "dots"
-              ],
-              "firstLine": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？",
-              "mode": "local_zero_api_viral_hook_gate",
-              "zeroExtraXReads": true,
-              "estimatedXReadOps": 0
-            },
-            "aiQualityVerdict": {
-              "allow": true,
-              "reason": "AI quality gate disabled",
-              "risk": null
-            },
-            "generationSource": "openai",
-            "angle": "默认接管的残酷真相",
-            "characterCount": 97,
-            "text": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？\n#AI #DevTools\ngithub.com/Linus-Shyu/XGrowth"
-          },
-          "candidates": [
-            {
-              "rank": 1,
-              "selected": true,
-              "templateId": "brutal_truth",
-              "score": 205.5,
-              "angleMutationScore": 10,
-              "hookPatternScore": -3,
-              "contentBanditScore": 3.2,
-              "narrativeResonanceScore": 9.1,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 19.2,
-              "topicTimingLane": {
-                "id": "18:platform_control:brutal_truth",
-                "windowLabel": "18:00",
-                "hour": 18,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "brutal_truth",
-                "formatLabel": "Brutal Truth",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 15.7,
-              "growthOpportunityLane": {
-                "id": "18:platform_control:brutal_truth",
-                "label": "18:00 UTC / Platform Control / Brutal Truth",
-                "formatId": "brutal_truth",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 0,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "prediction",
-                  "sharp_question",
-                  "entity_led"
-                ],
-                "firstLine": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？"
-              },
-              "reason": "暴论开场，直接戳中开发者对工作流失控的恐惧，引发回滚和可控性的讨论。",
-              "diagnostics": [
-                "tight length",
-                "reframe hook",
-                "time-bound prediction",
-                "template lift 4%",
-                "autopilot test",
-                "angle scheduler format",
-                "mutation primary format",
-                "missed hook reactor",
-                "compact first line",
-                "bandit rotation lane",
-                "angle load active slot",
-                "angle load hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit rotation lane"
-              ],
-              "angleLoadRouterScore": 22.2,
-              "angleLoadRouterDiagnostics": [
-                "angle load active slot",
-                "angle load hot lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity narrative",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "missed policy hook"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [
-                "headline_frame_risk",
-                "strategy_headline_similarity_risk"
-              ],
-              "viralHookGate": {
-                "allow": true,
-                "score": 50,
-                "reasons": [
-                  "compact standalone hook",
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "openai",
-                  "dots"
-                ],
-                "firstLine": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": {
-                "allow": true,
-                "reason": "AI quality gate disabled",
-                "risk": null
-              },
-              "generationSource": "openai",
-              "angle": "默认接管的残酷真相",
-              "characterCount": 97,
-              "text": "OpenAI 的 dots 不是助手升级，是工作流的默认接管。你写回滚脚本了吗？没有的话，你的公司能修吗？\n#AI #DevTools\ngithub.com/Linus-Shyu/XGrowth"
-            },
-            {
-              "rank": 2,
-              "selected": false,
-              "templateId": "the_hard_way",
-              "score": 202.3,
-              "angleMutationScore": 10,
-              "hookPatternScore": -3,
-              "contentBanditScore": 11.2,
-              "narrativeResonanceScore": 9.1,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 17.2,
-              "topicTimingLane": {
-                "id": "18:operator_leverage:the_hard_way",
-                "windowLabel": "18:00",
-                "hour": 18,
-                "pillarId": "operator_leverage",
-                "pillarLabel": "Operator Leverage",
-                "formatId": "the_hard_way",
-                "formatLabel": "The Hard Way",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 15.6,
-              "growthOpportunityLane": {
-                "id": "18:operator_leverage:the_hard_way",
-                "label": "18:00 UTC / Operator Leverage / The Hard Way",
-                "formatId": "the_hard_way",
-                "pillarId": "operator_leverage",
-                "score": 99.3,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 0,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "cost_tradeoff"
-                ],
-                "firstLine": "dots 上线我第一反应：这玩意儿会让你的工作流变得不可迁移，测试方法——强制回滚一次，记录迁移成本，跑不通就别上。"
-              },
-              "reason": "提供可操作的回滚测试，把抽象风险变成可执行步骤，实用性强，容易引发转发。",
-              "diagnostics": [
-                "tight length",
-                "practical takeaway",
-                "usable structure",
-                "template lift 32%",
-                "autopilot exploit",
-                "angle scheduler format",
-                "mutation primary format",
-                "missed hook reactor",
-                "compact first line",
-                "bandit exploit lane",
-                "angle load watch lane",
-                "narrative rotation lane"
-              ],
-              "angleMutationDiagnostics": [
-                "mutation primary format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploit lane"
-              ],
-              "angleLoadRouterScore": 7.7,
-              "angleLoadRouterDiagnostics": [
-                "angle load watch lane"
-              ],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity narrative",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "missed policy hook"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": true,
-                "score": 48,
-                "reasons": [
-                  "compact standalone hook",
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "dots"
-                ],
-                "firstLine": "dots 上线我第一反应：这玩意儿会让你的工作流变得不可迁移，测试方法——强制回滚一次，记录迁移成本，跑不通就别上。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "锁定风险与硬核测试步骤",
-              "characterCount": 72,
-              "text": "dots 上线我第一反应：这玩意儿会让你的工作流变得不可迁移，测试方法——强制回滚一次，记录迁移成本，跑不通就别上。\n#AI #DevTools"
-            },
-            {
-              "rank": 3,
-              "selected": false,
-              "templateId": "myth_busting",
-              "score": 190.1,
-              "angleMutationScore": -3,
-              "hookPatternScore": -3,
-              "contentBanditScore": 6.6,
-              "narrativeResonanceScore": 9.1,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "21:platform_control:myth_busting",
-                "windowLabel": "21:00",
-                "hour": 21,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 22.7,
-              "growthOpportunityLane": {
-                "id": "21:platform_control:myth_busting",
-                "label": "21:00 UTC / Platform Control / Myth Busting",
-                "formatId": "myth_busting",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 6,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "cost_tradeoff",
-                  "prediction",
-                  "entity_led"
-                ],
-                "firstLine": "90%的人都以为 dots 是效率工具，其实它是锁定工具，一旦跨项目持续运行，迁移成本指数级上升，OpenAI 的新默认，就是你的新债务。"
-              },
-              "reason": "用反差真相打破普遍认知，提醒运营者注意迁移成本，值得收藏作为决策依据。",
-              "diagnostics": [
-                "tight length",
-                "time-bound prediction",
-                "practical takeaway",
-                "autopilot explore",
-                "angle scheduler format",
-                "missed mutation format",
-                "missed hook reactor",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "durable account memory",
-                "topic timing active lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity active lane",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "missed policy hook"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": true,
-                "score": 50,
-                "reasons": [
-                  "compact standalone hook",
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "openai",
-                  "dots"
-                ],
-                "firstLine": "90%的人都以为 dots 是效率工具，其实它是锁定工具，一旦跨项目持续运行，迁移成本指数级上升，OpenAI 的新默认，就是你的新债务。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "拆解效率神话，点破锁定本质",
-              "characterCount": 80,
-              "text": "90%的人都以为 dots 是效率工具，其实它是锁定工具，一旦跨项目持续运行，迁移成本指数级上升，OpenAI 的新默认，就是你的新债务。\n#AI #Cloud"
-            },
-            {
-              "rank": 4,
-              "selected": false,
-              "templateId": "myth_busting",
-              "score": 175.4,
-              "angleMutationScore": -3,
-              "hookPatternScore": -3,
-              "contentBanditScore": 6.6,
-              "narrativeResonanceScore": 10.7,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.26
-              },
-              "topicTimingScore": 26.2,
-              "topicTimingLane": {
-                "id": "21:platform_control:myth_busting",
-                "windowLabel": "21:00",
-                "hour": 21,
-                "pillarId": "platform_control",
-                "pillarLabel": "Platform Control",
-                "formatId": "myth_busting",
-                "formatLabel": "Myth Busting",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 22.7,
-              "growthOpportunityLane": {
-                "id": "21:platform_control:myth_busting",
-                "label": "21:00 UTC / Platform Control / Myth Busting",
-                "formatId": "myth_busting",
-                "pillarId": "platform_control",
-                "score": 100,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 9.9,
-              "cachedGenerationPolicyHits": {
-                "directive": [
-                  "contrast",
-                  "reframe"
-                ],
-                "narrative": [],
-                "opportunity": [
-                  "frame"
-                ]
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "cost_tradeoff",
-                  "entity_led"
-                ],
-                "firstLine": "别信 openai AI model cycle 会让你少干活，多数人看错了：它把成本藏进权限、提示词和回滚里。"
-              },
-              "reason": "local cached policy candidate for OpenAI fallback and ranker calibration",
-              "diagnostics": [
-                "tight length",
-                "usable structure",
-                "autopilot explore",
-                "angle scheduler format",
-                "missed mutation format",
-                "missed hook reactor",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "account lexicon",
-                "durable account memory",
-                "topic timing active lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "account lexicon",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing active lane",
-                "topic timing hot lane",
-                "observed timing sample"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity active lane",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy primary format",
-                "missed policy hook",
-                "policy opportunity lane",
-                "policy directive match"
-              ],
-              "selfEvolvingStrategyScore": 11,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving promote",
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": true,
-                "score": 35,
-                "reasons": [
-                  "compact standalone hook",
-                  "concrete entity",
-                  "operator action",
-                  "not headline recap"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "openai"
-                ],
-                "firstLine": "别信 openai AI model cycle 会让你少干活，多数人看错了：它把成本藏进权限、提示词和回滚里。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "local_cached_policy",
-              "angle": "Contrast Reframe",
-              "characterCount": 69,
-              "text": "别信 openai AI model cycle 会让你少干活，多数人看错了：它把成本藏进权限、提示词和回滚里。\n#AI #BigTech"
-            },
-            {
-              "rank": 5,
-              "selected": false,
-              "templateId": "massive_value_drop",
-              "score": 150.7,
-              "angleMutationScore": -3,
-              "hookPatternScore": -3,
-              "contentBanditScore": 7,
-              "narrativeResonanceScore": 9.1,
-              "narrativePillar": {
-                "id": "platform_control",
-                "label": "Platform Control",
-                "matchScore": 1.22
-              },
-              "topicTimingScore": 17.2,
-              "topicTimingLane": {
-                "id": "18:consumer_behavior:massive_value_drop",
-                "windowLabel": "18:00",
-                "hour": 18,
-                "pillarId": "consumer_behavior",
-                "pillarLabel": "Consumer Behavior",
-                "formatId": "massive_value_drop",
-                "formatLabel": "Massive Value Drop",
-                "score": 100,
-                "status": "hot"
-              },
-              "growthOpportunityScore": 15.6,
-              "growthOpportunityLane": {
-                "id": "18:consumer_behavior:massive_value_drop",
-                "label": "18:00 UTC / Consumer Behavior / Massive Value Drop",
-                "formatId": "massive_value_drop",
-                "pillarId": "consumer_behavior",
-                "score": 99.3,
-                "status": "hot",
-                "sources": [
-                  "topic_timing"
-                ]
-              },
-              "cachedGenerationPolicyScore": 0,
-              "cachedGenerationPolicyHits": {
-                "directive": [],
-                "narrative": [],
-                "opportunity": []
-              },
-              "hookPattern": {
-                "primaryId": "operator_pain",
-                "primaryLabel": "Operator Pain",
-                "patternIds": [
-                  "operator_pain",
-                  "cost_tradeoff"
-                ],
-                "firstLine": "用 dots 前先做这三步：一，跑通一条真实工作流；二，统计每一步的调用成本和延迟；三，模拟回滚，任何一步失败，就是锁定信号。"
-              },
-              "reason": "给出具体的三步操作清单，信息密度高，读者会收藏以备后用，增强账号实用价值。",
-              "diagnostics": [
-                "tight length",
-                "usable structure",
-                "autopilot explore",
-                "angle scheduler format",
-                "missed mutation format",
-                "missed hook reactor",
-                "compact first line",
-                "bandit exploration lane",
-                "narrative rotation lane",
-                "durable account memory",
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "angleMutationDiagnostics": [
-                "missed mutation format"
-              ],
-              "hookPatternDiagnostics": [
-                "missed hook reactor",
-                "compact first line"
-              ],
-              "contentBanditDiagnostics": [
-                "bandit exploration lane"
-              ],
-              "angleLoadRouterScore": 0,
-              "angleLoadRouterDiagnostics": [],
-              "narrativeResonanceDiagnostics": [
-                "narrative rotation lane",
-                "durable account memory"
-              ],
-              "topicTimingDiagnostics": [
-                "topic timing pillar",
-                "topic timing hot lane"
-              ],
-              "growthOpportunityDiagnostics": [
-                "opportunity narrative",
-                "hot opportunity lane"
-              ],
-              "cachedGenerationPolicyDiagnostics": [
-                "policy ranked format",
-                "missed policy hook"
-              ],
-              "selfEvolvingStrategyScore": 3,
-              "selfEvolvingStrategyDiagnostics": [
-                "self-evolving tag match"
-              ],
-              "qualityIssues": [],
-              "viralHookGate": {
-                "allow": true,
-                "score": 48,
-                "reasons": [
-                  "compact standalone hook",
-                  "repostable hook frame",
-                  "concrete entity",
-                  "operator action"
-                ],
-                "warnings": [],
-                "entityHits": [
-                  "dots"
-                ],
-                "firstLine": "用 dots 前先做这三步：一，跑通一条真实工作流；二，统计每一步的调用成本和延迟；三，模拟回滚，任何一步失败，就是锁定信号。",
-                "mode": "local_zero_api_viral_hook_gate",
-                "zeroExtraXReads": true,
-                "estimatedXReadOps": 0
-              },
-              "aiQualityVerdict": null,
-              "generationSource": "openai",
-              "angle": "可复用的三步决策清单",
-              "characterCount": 74,
-              "text": "用 dots 前先做这三步：一，跑通一条真实工作流；二，统计每一步的调用成本和延迟；三，模拟回滚，任何一步失败，就是锁定信号。\n#AI #Cloud"
-            }
-          ],
-          "gates": {
-            "qualityGateEnabled": true,
-            "viralHookGateEnabled": true,
-            "aiQualityGateEnabled": false,
-            "strictQualityGate": false
-          }
-        }
-      },
-      {
         "id": "2106173438750511204",
         "text": "Hard lesson on Apple agent tooling: the demo was free, the rollback was not. Next time, measure one real workflow before it becomes default. #AI #BigTech",
         "url": "https://x.com/i/web/status/2106173438750511204",
@@ -34716,97 +33083,97 @@
       "points": [
         {
           "index": 0,
-          "startsAt": "2026-10-06T08:37:05.338Z",
-          "endsAt": "2026-10-06T10:37:05.338Z",
-          "label": "08:37",
+          "startsAt": "2026-10-06T17:24:58.527Z",
+          "endsAt": "2026-10-06T19:24:58.527Z",
+          "label": "17:24",
           "value": 0,
-          "posts": 0
+          "posts": 1
         },
         {
           "index": 1,
-          "startsAt": "2026-10-06T10:37:05.338Z",
-          "endsAt": "2026-10-06T12:37:05.338Z",
-          "label": "10:37",
+          "startsAt": "2026-10-06T19:24:58.527Z",
+          "endsAt": "2026-10-06T21:24:58.527Z",
+          "label": "19:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 2,
-          "startsAt": "2026-10-06T12:37:05.338Z",
-          "endsAt": "2026-10-06T14:37:05.338Z",
-          "label": "12:37",
+          "startsAt": "2026-10-06T21:24:58.527Z",
+          "endsAt": "2026-10-06T23:24:58.527Z",
+          "label": "21:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 3,
-          "startsAt": "2026-10-06T14:37:05.338Z",
-          "endsAt": "2026-10-06T16:37:05.338Z",
-          "label": "14:37",
-          "value": 0,
-          "posts": 0
-        },
-        {
-          "index": 4,
-          "startsAt": "2026-10-06T16:37:05.338Z",
-          "endsAt": "2026-10-06T18:37:05.338Z",
-          "label": "16:37",
+          "startsAt": "2026-10-06T23:24:58.527Z",
+          "endsAt": "2026-10-07T01:24:58.527Z",
+          "label": "23:24",
           "value": 0,
           "posts": 1
         },
         {
+          "index": 4,
+          "startsAt": "2026-10-07T01:24:58.527Z",
+          "endsAt": "2026-10-07T03:24:58.527Z",
+          "label": "01:24",
+          "value": 0,
+          "posts": 0
+        },
+        {
           "index": 5,
-          "startsAt": "2026-10-06T18:37:05.338Z",
-          "endsAt": "2026-10-06T20:37:05.338Z",
-          "label": "18:37",
+          "startsAt": "2026-10-07T03:24:58.527Z",
+          "endsAt": "2026-10-07T05:24:58.527Z",
+          "label": "03:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 6,
-          "startsAt": "2026-10-06T20:37:05.338Z",
-          "endsAt": "2026-10-06T22:37:05.338Z",
-          "label": "20:37",
+          "startsAt": "2026-10-07T05:24:58.527Z",
+          "endsAt": "2026-10-07T07:24:58.527Z",
+          "label": "05:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 7,
-          "startsAt": "2026-10-06T22:37:05.338Z",
-          "endsAt": "2026-10-07T00:37:05.338Z",
-          "label": "22:37",
+          "startsAt": "2026-10-07T07:24:58.527Z",
+          "endsAt": "2026-10-07T09:24:58.527Z",
+          "label": "07:24",
           "value": 0,
-          "posts": 1
+          "posts": 0
         },
         {
           "index": 8,
-          "startsAt": "2026-10-07T00:37:05.338Z",
-          "endsAt": "2026-10-07T02:37:05.338Z",
-          "label": "00:37",
+          "startsAt": "2026-10-07T09:24:58.527Z",
+          "endsAt": "2026-10-07T11:24:58.527Z",
+          "label": "09:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 9,
-          "startsAt": "2026-10-07T02:37:05.338Z",
-          "endsAt": "2026-10-07T04:37:05.338Z",
-          "label": "02:37",
+          "startsAt": "2026-10-07T11:24:58.527Z",
+          "endsAt": "2026-10-07T13:24:58.527Z",
+          "label": "11:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 10,
-          "startsAt": "2026-10-07T04:37:05.338Z",
-          "endsAt": "2026-10-07T06:37:05.338Z",
-          "label": "04:37",
+          "startsAt": "2026-10-07T13:24:58.527Z",
+          "endsAt": "2026-10-07T15:24:58.527Z",
+          "label": "13:24",
           "value": 0,
           "posts": 0
         },
         {
           "index": 11,
-          "startsAt": "2026-10-07T06:37:05.338Z",
-          "endsAt": "2026-10-07T08:37:05.338Z",
-          "label": "06:37",
+          "startsAt": "2026-10-07T15:24:58.527Z",
+          "endsAt": "2026-10-07T17:24:58.527Z",
+          "label": "15:24",
           "value": 0,
           "posts": 0
         }
@@ -34818,7 +33185,7 @@
       "source": "tweet_metrics",
       "aggregate": "sum",
       "pointCount": 8,
-      "total": 382,
+      "total": 354,
       "current": 0,
       "points": [
         {
@@ -34826,8 +33193,8 @@
           "startsAt": "2026-09-30T00:00:00.000Z",
           "endsAt": "2026-10-01T00:00:00.000Z",
           "label": "2026-09-30",
-          "value": 84,
-          "posts": 2
+          "value": 56,
+          "posts": 1
         },
         {
           "index": 1,
@@ -35180,7 +33547,7 @@
       "enabled": true,
       "decision": "hold",
       "attachImageAllowed": false,
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "zeroExtraXReads": true,
       "confidence": "low_samples",
       "reason": "Need 3+ measured text and media packets before spending on images (82 text, 0 media).",
@@ -35243,7 +33610,7 @@
   "cadence": {
     "enabled": true,
     "enforcement": "budget_guard",
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_distribution_only",
     "publishAllowed": false,
     "willBlockPublish": true,
@@ -35262,32 +33629,32 @@
     "safeRemainingUsd": 3.905,
     "textPostCostUsd": 0.015,
     "minHoursBetweenPosts": 0,
-    "hoursSinceLastPost": 8.38,
-    "telemetryAgeMinutes": 1311,
+    "hoursSinceLastPost": 17.18,
+    "telemetryAgeMinutes": 1839,
     "latestTelemetryAt": "2026-10-06T10:45:55.950Z",
     "experimentSlots": 2,
     "hourlyLoad": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "source": "tweet_analytics.postedAt + tweet_metrics",
       "lookbackDays": 30,
-      "sampleCount": 21,
+      "sampleCount": 20,
       "minSamples": 10,
       "confidence": "low",
-      "mode": "manual_distribution",
+      "mode": "publish_now",
       "zeroExtraXReads": true,
       "currentHour": {
-        "hour": 8,
-        "label": "08:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 17,
+        "label": "17:00",
+        "loadScore": 69.3,
+        "posts": 5,
+        "impressions": 205,
+        "avgScore": 10.2,
+        "status": "warm"
       },
       "nextWindow": {
         "hour": 17,
         "label": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "posts": 5,
         "impressions": 205,
@@ -35325,14 +33692,14 @@
         {
           "hour": 16,
           "label": "16:00",
-          "loadScore": 46.5,
-          "posts": 3,
-          "impressions": 74,
-          "avgScore": 6.2,
+          "loadScore": 47.1,
+          "posts": 2,
+          "impressions": 57,
+          "avgScore": 8.3,
           "status": "cool"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 21:00 UTC.",
+      "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
       "hours": [
         {
           "hour": 0,
@@ -35449,7 +33816,7 @@
           "avgScore": 0,
           "loadScore": 0,
           "status": "dark",
-          "current": true
+          "current": false
         },
         {
           "hour": 9,
@@ -35545,13 +33912,13 @@
         {
           "hour": 16,
           "label": "16:00",
-          "posts": 3,
-          "impressions": 74,
-          "likes": 3,
+          "posts": 2,
+          "impressions": 57,
+          "likes": 2,
           "reposts": 0,
           "replies": 0,
-          "avgScore": 6.2,
-          "loadScore": 46.5,
+          "avgScore": 8.3,
+          "loadScore": 47.1,
           "status": "cool",
           "current": false
         },
@@ -35566,7 +33933,7 @@
           "avgScore": 10.2,
           "loadScore": 69.3,
           "status": "warm",
-          "current": false
+          "current": true
         },
         {
           "hour": 18,
@@ -35649,21 +34016,21 @@
       ]
     },
     "cadenceWindow": {
-      "mode": "manual_distribution",
+      "mode": "publish_now",
       "confidence": "low",
       "currentHour": {
-        "hour": 8,
-        "label": "08:00",
-        "loadScore": 0,
-        "posts": 0,
-        "impressions": 0,
-        "avgScore": 0,
-        "status": "dark"
+        "hour": 17,
+        "label": "17:00",
+        "loadScore": 69.3,
+        "posts": 5,
+        "impressions": 205,
+        "avgScore": 10.2,
+        "status": "warm"
       },
       "nextWindow": {
         "hour": 17,
         "label": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "posts": 5,
         "impressions": 205,
@@ -35701,14 +34068,14 @@
         {
           "hour": 16,
           "label": "16:00",
-          "loadScore": 46.5,
-          "posts": 3,
-          "impressions": 74,
-          "avgScore": 6.2,
+          "loadScore": 47.1,
+          "posts": 2,
+          "impressions": 57,
+          "avgScore": 8.3,
           "status": "cool"
         }
       ],
-      "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 21:00 UTC.",
+      "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
       "zeroExtraXReads": true
     },
     "topicTimingWindow": {
@@ -35717,13 +34084,13 @@
       "routerScore": 100,
       "trusted": true,
       "windowHours": 1.5,
-      "hoursFromNow": 8,
+      "hoursFromNow": 23,
       "activeLane": {
         "id": "16:platform_control:the_hard_way",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 8,
-        "loadScore": 46.5,
+        "hoursFromNow": 23,
+        "loadScore": 47.1,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -35755,7 +34122,7 @@
         "id": "interval",
         "ok": true,
         "label": "Interval",
-        "value": "8.4h since packet",
+        "value": "17.2h since packet",
         "detail": "No minimum interval configured."
       },
       {
@@ -35769,7 +34136,7 @@
         "id": "telemetry",
         "ok": true,
         "label": "Telemetry",
-        "value": "1311 min old",
+        "value": "1839 min old",
         "detail": "Latest checked telemetry: 2026-10-06T10:45:55.950Z."
       },
       {
@@ -35783,20 +34150,20 @@
         "id": "hourly_window",
         "ok": true,
         "label": "Learned UTC window",
-        "value": "08:00 score 0.0",
-        "detail": "No near-term learned peak; use manual distribution now and schedule the next packet near 21:00 UTC."
+        "value": "17:00 score 69.3",
+        "detail": "Current UTC hour 17:00 is inside a learned warm window."
       },
       {
         "id": "topic_timing",
         "ok": false,
         "label": "Topic timing",
-        "value": "16:00 UTC / Platform Control / The Hard Way in 8.0h",
+        "value": "16:00 UTC / Platform Control / The Hard Way in 23.0h",
         "detail": "Schedule the next standalone packet for 16:00 UTC as Platform Control / The Hard Way."
       }
     ]
   },
   "controlPlane": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_distribution",
     "severity": "warn",
     "pressureScore": 78,
@@ -35861,7 +34228,7 @@
         "label": "learning load",
         "value": "0",
         "status": "ok",
-        "detail": "382 L7 events in 7d feedback window"
+        "detail": "354 L7 events in 7d feedback window"
       }
     ],
     "safeguards": [
@@ -35872,7 +34239,7 @@
     ]
   },
   "rateLimitGovernor": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "status": "boundary watch",
     "severity": "warn",
     "reactorFillPct": 91.9,
@@ -35971,7 +34338,7 @@
         "gate": "cached_only",
         "status": "warn",
         "cache": {
-          "generatedAt": "2026-10-07T08:37:05.338Z",
+          "generatedAt": "2026-10-07T17:24:58.527Z",
           "enabled": false,
           "mode": "disabled",
           "status": "warn",
@@ -35979,7 +34346,7 @@
           "readGate": "cached_only",
           "latestCheckedAt": "2026-10-06T10:45:55.821Z",
           "nextRefreshAt": null,
-          "ageHours": 21.85,
+          "ageHours": 30.65,
           "maxAgeHours": 168,
           "fresh": false,
           "due": false,
@@ -36151,7 +34518,7 @@
       }
     ],
     "accountSnapshotCache": {
-      "generatedAt": "2026-10-07T08:37:05.338Z",
+      "generatedAt": "2026-10-07T17:24:58.527Z",
       "enabled": false,
       "mode": "disabled",
       "status": "warn",
@@ -36159,7 +34526,7 @@
       "readGate": "cached_only",
       "latestCheckedAt": "2026-10-06T10:45:55.821Z",
       "nextRefreshAt": null,
-      "ageHours": 21.85,
+      "ageHours": 30.65,
       "maxAgeHours": 168,
       "fresh": false,
       "due": false,
@@ -36193,7 +34560,7 @@
     "reason": "X API runway guard clear: daily burn ~$0.080, projected month-end $2.315 / $4.25 safe cap."
   },
   "accountSnapshotCache": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "enabled": false,
     "mode": "disabled",
     "status": "warn",
@@ -36201,7 +34568,7 @@
     "readGate": "cached_only",
     "latestCheckedAt": "2026-10-06T10:45:55.821Z",
     "nextRefreshAt": null,
-    "ageHours": 21.85,
+    "ageHours": 30.65,
     "maxAgeHours": 168,
     "fresh": false,
     "due": false,
@@ -36211,7 +34578,7 @@
     "directive": "Account snapshot refresh is disabled; use the latest cached active conn telemetry."
   },
   "budgetBurnReactor": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "zeroExtraXReads": true,
     "source": "x_api_usage ledger + publish budget ledger",
     "severity": "ok",
@@ -36424,7 +34791,7 @@
     ]
   },
   "budgetAllocationOptimizer": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_budget_allocator",
     "zeroExtraXReads": true,
     "source": "cached cost ledger + route amplifier + cadence controller",
@@ -36543,7 +34910,7 @@
     "runbook": "Allocate the next growth loop to manual route burst; keep live X reads sealed and spend only when cadence/ROI gates are open."
   },
   "operatorDispatchPacket": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_distribution",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -36556,7 +34923,7 @@
     "expectedLiftPct": 115.4,
     "bestRouteLabel": "breakout X route",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
-    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-10-07T08:37:05.338Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.91\nTarget: 3 useful manual route ops · expected lift +115.4%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
+    "copyBlock": "CODEX DAILY DISPATCH PACKET\nGenerated: 2026-10-07T17:24:58.527Z\nMode: manual_distribution\nCost guard: 0 extra X search/read API ops · safe budget $3.91\nTarget: 3 useful manual route ops · expected lift +115.4%\n\nProtocol:\n1. Open the top X web route; use live recency in the browser only.\n2. Pick technical conversations with active exchange and clear topic fit.\n3. Paste one useful route op, lightly edit for context, then move to the next route.\n4. Stop at the target count; metrics write back on the next maintenance run.\n\nPackets:\n1. breakout X route · SLA 10m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n2. breakout X route · SLA 20m · target 1 · READY\nWhy: Open live X web search and reply manually under active high-throughput conversations.\nRoute: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n3. Target Accounts · SLA 30m · target 1 · READY\nWhy: Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.\nRoute: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nStop conditions: skip politics, giveaways, ragebait, unsupported claims, and weak tech fit.",
     "checks": [
       {
         "id": "x_reads",
@@ -36692,7 +35059,7 @@
     ]
   },
   "dailyExecutionConsole": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_daily_execution_console",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -36705,9 +35072,9 @@
     "primaryReplyText": "On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
     "nextAction": "Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.",
     "activeOpportunity": {
-      "label": "16:00 UTC / Platform Control / The Hard Way",
-      "formatId": "the_hard_way",
-      "pillarId": "platform_control",
+      "label": "00:00 UTC / Myth Busting",
+      "formatId": "myth_busting",
+      "pillarId": null,
       "score": 100
     },
     "guardrails": [
@@ -36765,10 +35132,10 @@
         "stopCondition": "Stop after one useful reply unless the thread is already giving signal."
       }
     ],
-    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-10-07T08:37:05.338Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +122.6%\n2. OPEN: breakout X route - https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +122.6%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\n   SLA: 30m · target 1 · lift +101.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
+    "copyBlock": "CODEX DAILY EXECUTION CONSOLE\nGenerated: 2026-10-07T17:24:58.527Z\nMode: manual_distribution_only\nTarget: 3 manual route ops\nX API: 0 live search/read ops; browser-only execution\n\nDo this now:\n1. OPEN: breakout X route - https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 10m · target 1 · lift +122.6%\n2. OPEN: breakout X route - https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\n   PASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n   SLA: 20m · target 1 · lift +122.6%\n3. OPEN: Target Accounts - https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\n   PASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\n   SLA: 30m · target 1 · lift +101.1%\n\nPrimary command: Open breakout X route in X web, paste the first ready output, then stop at 3 useful route ops.\nStop: skip politics, giveaways, ragebait, weak tech fit, and any thread older than the useful window."
   },
   "operatorPasteQueue": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_paste_queue",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -36869,10 +35236,10 @@
         "detail": "Stop at the target count or when quality drops."
       }
     ],
-    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-10-07T08:37:05.338Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
+    "copyBlock": "CODEX OPERATOR PASTE QUEUE\nGenerated: 2026-10-07T17:24:58.527Z\nMode: manual_paste_queue\nCost guard: 0 live X search/read ops\nTarget: 3 manual route ops\n\nSteps:\n1. Open the route link in X web.\n2. Choose one fresh technical exchange with visible discussion.\n3. Paste the paired payload, edit only for context, then move on.\n4. Stop at the target count; maintenance writes learning back later.\n\nQueue:\n1. breakout X route · READY · SLA 10m · target 1\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n2. breakout X route · READY · SLA 20m · target 1\nOPEN: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n3. Target Accounts · READY · SLA 30m · target 1\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDone signal: stop after the target count or when route quality drops."
   },
   "routeOpportunityMatrix": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_route_opportunity_matrix",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -36897,7 +35264,7 @@
       "readOps": 0,
       "manualTarget": 3,
       "activeWindow": "16:00",
-      "activeAngle": "The Hard Way"
+      "activeAngle": "Myth Busting"
     },
     "cells": [
       {
@@ -36944,10 +35311,10 @@
         "operatorSlaMinutes": 10,
         "confidence": "high",
         "windowLabel": "16:00",
-        "formatId": "the_hard_way",
-        "formatLabel": "The Hard Way",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "pillarId": null,
+        "pillarLabel": null,
         "relatedSource": "wired.com",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
         "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
@@ -36978,10 +35345,10 @@
         "operatorSlaMinutes": 20,
         "confidence": "high",
         "windowLabel": "16:00",
-        "formatId": "the_hard_way",
-        "formatLabel": "The Hard Way",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "pillarId": null,
+        "pillarLabel": null,
         "relatedSource": "wired.com",
         "routeReason": "Open live X web search and reply manually under active high-throughput conversations.",
         "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
@@ -37012,10 +35379,10 @@
         "operatorSlaMinutes": 30,
         "confidence": "high confidence",
         "windowLabel": "16:00",
-        "formatId": "the_hard_way",
-        "formatLabel": "The Hard Way",
-        "pillarId": "platform_control",
-        "pillarLabel": "Platform Control",
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "pillarId": null,
+        "pillarLabel": null,
         "relatedSource": "wired.com",
         "routeReason": "Use the best recent packet as the angle anchor, then join adjacent conversations instead of repeating the same main packet.",
         "editRule": "Only edit nouns, timing, and one concrete reference needed by the target exchange.",
@@ -37035,10 +35402,10 @@
       "No rate-limit circumvention; use normal backoff and cached telemetry.",
       "Stop at target count and let maintenance write learning back."
     ],
-    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-10-07T08:37:05.338Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
+    "copyBlock": "CODEX ROUTE OPPORTUNITY MATRIX\nGenerated: 2026-10-07T17:24:58.527Z\nMode: zero_read_route_opportunity_matrix\nCost guard: 0 extra X search/read ops · $0 incremental X API\nReady lanes: 3/3 · avg score 100.0\n\nProtocol:\n1. Open the top browser route.\n2. Pick one fresh technical exchange with real discussion.\n3. Paste the paired payload and edit only context.\n4. Stop at the target count or when route quality drops.\n\n1. breakout X route · HOT · score 100.0 · SLA 10m\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n2. breakout X route · HOT · score 100.0 · SLA 20m\nOPEN: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n\n3. Target Accounts · HOT · score 100.0 · SLA 30m\nOPEN: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nPASTE: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\n"
   },
   "l7SurgeSentinel": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_l7_surge_sentinel",
     "severity": "warn",
     "source": "cached packet metrics + route matrix + cost governor",
@@ -37050,11 +35417,11 @@
     "manualOnly": true,
     "sentinelScore": 65.4,
     "l7Events24h": 0,
-    "l7Events7d": 382,
-    "dailyBaseline": 54.6,
+    "l7Events7d": 354,
+    "dailyBaseline": 50.6,
     "surgeRatio": 0,
     "ackRate24h": 0,
-    "ackRate7d": 2.88,
+    "ackRate7d": 2.82,
     "routeCoveragePct": 100,
     "routeScore": 100,
     "breakoutCount": 12,
@@ -37107,7 +35474,7 @@
         "value": "0",
         "score": 0,
         "status": "danger",
-        "detail": "54.6 baseline/day · 0.00x",
+        "detail": "50.6 baseline/day · 0.00x",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
@@ -37117,7 +35484,7 @@
         "value": "0.0%",
         "score": 0,
         "status": "danger",
-        "detail": "2.9% 7d baseline",
+        "detail": "2.8% 7d baseline",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0
       },
@@ -37164,7 +35531,7 @@
     ]
   },
   "growthLeakProfiler": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_growth_leak_profiler",
     "severity": "danger",
     "source": "cached packet metrics + active conn proxy + route matrix",
@@ -37232,7 +35599,7 @@
         "score": 100,
         "status": "ok",
         "leakPct": 0,
-        "detail": "15.71/1k observed · 15.71/1k prior",
+        "detail": "16.95/1k observed · 16.95/1k prior",
         "nextAction": "Run the strongest route lane and make the account promise explicit in the first sentence.",
         "zeroExtraXReads": true,
         "estimatedXReadOps": 0,
@@ -37310,7 +35677,7 @@
     ]
   },
   "commandPacketDock": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_command_packet_dock",
     "severity": "warn",
     "source": "cached route matrix + leak profiler + paste queue",
@@ -37409,10 +35776,10 @@
       "Use X web route links; search/read API operations stay at 0.",
       "No rate-limit circumvention; use normal cooldown and cached telemetry."
     ],
-    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-10-07T08:37:05.338Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 89.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
+    "copyBlock": "CODEX COMMAND PACKET DOCK\nGenerated: 2026-10-07T17:24:58.527Z\nMode: zero_read_command_packet_dock\nCost guard: 0 X search/read API operations\nCommand score: 89.8\nPrimary route: breakout X route\nPrimary leak: ACK_LAYER\nOperator protocol:\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nDONE: One useful manual response pasted, or this route skipped for quality."
   },
   "identityConversionFirewall": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_identity_conversion_firewall",
     "severity": "danger",
     "source": "cached account promise + active conn proxy + route dock",
@@ -37558,7 +35925,7 @@
     "copyBlock": "CODEX IDENTITY CONVERSION FIREWALL\nMode: zero_read_identity_conversion_firewall\nCost guard: 0 X search/read API operations\nIdentity score: 83.1\nAccount promise: Tech Signals: explain how AI, platforms, apps, cloud, security, and startups change operator leverage, defaults, distribution, and risk.\nPrimary lane: Operator Leverage\nRoute: breakout X route\nAction: Tighten the first line into one decision rule; make the payload useful enough for a senior operator to save."
   },
   "growthLoopTrace": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_growth_loop_trace",
     "severity": "ok",
     "source": "cached RSS + generation policy + command dock + learning contract",
@@ -37774,7 +36141,7 @@
     "copyBlock": "CODEX GROWTH LOOP TRACE\nMode: zero_read_growth_loop_trace\nCost guard: 0 X search/read API operations\nTrace score: 95.7\nBottleneck: LEARN_WRITEBACK\nLatency budget: 12.7s derived\nAction: Let maintenance refresh metrics before widening the topic surface."
   },
   "routeFireDrill": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_route_fire_drill",
     "severity": "ok",
     "source": "cached route matrix + command dock + growth loop trace",
@@ -37922,39 +36289,39 @@
     "copyBlock": "CODEX ROUTE FIRE DRILL\nMode: zero_read_route_fire_drill\nCost guard: 0 X search/read API operations\nPrimary: ALPHA_FIRE · breakout X route\nScore: 99.3 · projected L7 61\n\nOPEN: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nPASTE: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nEDIT: Only edit nouns, timing, and one concrete reference needed by the target exchange.\nSKIP: Skip stale, political, giveaway, ragebait, low-signal, or off-topic exchanges.\nSTOP: One useful manual response pasted, or this route skipped for quality."
   },
   "nextWindowAngleCommander": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_next_window_commander",
     "severity": "danger",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "source": "cached cadence + topic timing + opportunity scorer + angle load",
-    "commanderScore": 75,
+    "commanderScore": 80,
     "publishGate": "blocked",
     "readGate": "cached_only",
     "activeWindow": {
       "hour": 16,
       "windowLabel": "16:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 23,
       "loadScore": 69.3
     },
     "window": {
       "hour": 16,
       "label": "16:00",
       "windowLabel": "16:00",
-      "hoursFromNow": 8,
+      "hoursFromNow": 23,
       "loadScore": 69.3
     },
     "activeAngle": {
-      "formatId": "the_hard_way",
-      "formatLabel": "The Hard Way",
+      "formatId": "myth_busting",
+      "formatLabel": "Myth Busting",
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
       "opportunityScore": 100,
       "timingScore": 100
     },
-    "command": "Hold the standalone packet; run one manual route op and keep the The Hard Way angle warm for 16:00 UTC.",
+    "command": "Hold the standalone packet; run one manual route op and keep the Myth Busting angle warm for 16:00 UTC.",
     "promptBias": [
-      "Format=the_hard_way",
+      "Format=myth_busting",
       "Pillar=Platform Control",
       "Window=16:00 UTC",
       "Hook must state a rule, cost, prediction, or sharp question in the first line.",
@@ -37987,11 +36354,11 @@
     "lanes": [
       {
         "id": "opportunity",
-        "label": "16:00 UTC / Platform Control / The Hard Way",
+        "label": "00:00 UTC / Myth Busting",
         "score": 100,
         "status": "hot",
-        "source": "topic_timing",
-        "detail": "the_hard_way x Platform Control has 7 sample(s) at 16:00 UTC with avg 6.4."
+        "source": "content_bandit + angle_load + adaptive_scheduler",
+        "detail": "Above baseline 5.1 with enough samples."
       },
       {
         "id": "timing",
@@ -38012,11 +36379,11 @@
     ],
     "checklist": [
       "Do not force a standalone packet while cadence/budget gates are in review.",
-      "Use this prompt bias: Format=the_hard_way · Pillar=Platform Control · Window=16:00 UTC.",
+      "Use this prompt bias: Format=myth_busting · Pillar=Platform Control · Window=16:00 UTC.",
       "Open one prepared X web route and paste one useful reply; stop after a real contribution.",
       "After metrics refresh, let cached learning update the next command."
     ],
-    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 75.0 / Gate: blocked / X reads: 0\nWindow: 16:00 UTC (8.0h from now)\nAngle: The Hard Way / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the The Hard Way angle warm for 16:00 UTC.\nPrompt bias:\n- Format=the_hard_way\n- Pillar=Platform Control\n- Window=16:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
+    "copyBlock": "NEXT WINDOW COMMANDER\nScore: 80.0 / Gate: blocked / X reads: 0\nWindow: 16:00 UTC (23.0h from now)\nAngle: Myth Busting / Platform Control\nCommand: Hold the standalone packet; run one manual route op and keep the Myth Busting angle warm for 16:00 UTC.\nPrompt bias:\n- Format=myth_busting\n- Pillar=Platform Control\n- Window=16:00 UTC\n- Hook must state a rule, cost, prediction, or sharp question in the first line.\n- No headline recap; no generic AI phrasing.",
     "guardrails": [
       "0 X search/read ops; no scraping, no rate-limit bypass.",
       "Cadence, OAuth, budget, and platform gates are hard stops.",
@@ -38024,7 +36391,7 @@
     ]
   },
   "l7FireWindowRouter": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_l7_fire_window_router",
     "firingMode": "manual_route_holding",
     "severity": "ok",
@@ -38039,7 +36406,7 @@
       "source": "topic_timing",
       "hour": 21,
       "windowLabel": "21:00",
-      "hoursFromNow": 13,
+      "hoursFromNow": 4,
       "loadScore": 76.8,
       "formatId": "myth_busting",
       "formatLabel": "Myth Busting",
@@ -38057,7 +36424,7 @@
         "source": "topic_timing",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38074,7 +36441,7 @@
         "source": "topic_timing",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
@@ -38091,7 +36458,7 @@
         "source": "topic_timing",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38108,7 +36475,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38125,7 +36492,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38142,7 +36509,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38159,7 +36526,7 @@
         "source": "topic_timing",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "formatId": "the_hard_way",
         "formatLabel": "The Hard Way",
@@ -38176,7 +36543,7 @@
         "source": "topic_timing",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "formatId": "brutal_truth",
         "formatLabel": "Brutal Truth",
@@ -38193,7 +36560,7 @@
         "source": "topic_timing",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "formatId": "myth_busting",
         "formatLabel": "Myth Busting",
@@ -38241,7 +36608,7 @@
     ]
   },
   "operatorFlightDeck": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_operator_flight_deck",
     "commandMode": "armed_manual_dispatch",
     "source": "operator dispatch packet + route amplifier + growth runway simulator",
@@ -38257,7 +36624,7 @@
     "routeLabel": "breakout X route",
     "routeUrl": "https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live",
     "draftText": "On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.",
-    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-10-07T08:37:05.338Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 4.3d to next milestone · 5.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
+    "copyBlock": "CODEX OPERATOR FLIGHT DECK\nGenerated: 2026-10-07T17:24:58.527Z\nMode: armed_manual_dispatch\nCost guard: 0 extra X search/read API ops\nRoute: breakout X route\nOpen: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nTarget: 3 useful route ops\nRunway model: 4.3d to next milestone · 5.0d compressed\nCommand:\nOpen breakout X route, paste the paired output once, then continue until 3 useful route ops are complete.\nOutput:\nOn Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\nStop conditions: no politics, no giveaways, no ragebait, no unsupported claims, no weak tech fit.",
     "runway": {
       "recommendedLaneId": "manual_route_burst",
       "projectedDaysToMilestone": 4.3,
@@ -38353,7 +36720,7 @@
     ]
   },
   "routeAmplifier": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_route_amplifier",
     "zeroExtraXReads": true,
     "severity": "ok",
@@ -38445,7 +36812,7 @@
     ]
   },
   "manualReplyTargetAtlas": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "zero_read_web_target_atlas",
     "severity": "ok",
     "zeroExtraXReads": true,
@@ -38464,7 +36831,7 @@
       "Prefer fresh technical threads with visible exchange.",
       "Stop at the target count; learning writes back on maintenance."
     ],
-    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-10-07T08:37:05.338Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 94.5 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\n",
+    "copyBlock": "CODEX MANUAL REPLY TARGET ATLAS\nGenerated: 2026-10-07T17:24:58.527Z\nMode: zero_read_web_targeting · X search/read API: 0\nReady targets: 3/3 · reply target 3\n\nProtocol:\n1. Open the top route in X web.\n2. Choose a fresh technical thread with real replies.\n3. Paste the paired output, edit nouns/context only, then move on.\n4. Stop at the target count and let metrics write back later.\n\n1. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(mistral%20OR%20large%20OR%20comment%20OR%20mdash%20OR%20hacker%20OR%20news)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On Mistral Large 4: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n2. breakout X route · broad_tech_load · score 100.0 · target 1\nOpen: https://x.com/search?q=(llm%20OR%20mistral%20OR%20release%20OR%20adds%20OR%20support%20OR%20reasoning)%20-is%3Aretweet%20lang%3Aen%20min_faves%3A5&src=typed_query&f=live\nReply: On llm-mistral 0.16: the useful question is whether this changes a default workflow for AI / Agent Stack. If yes, the winner is whoever owns distribution, fallback risk, and switching cost.\n\n3. Target Accounts · target_account_mesh · score 94.5 · target 1\nOpen: https://x.com/search?q=(from%3Akarpathy%20OR%20from%3Asama%20OR%20from%3Apaulg%20OR%20from%3Alevelsio%20OR%20from%3Agregisenberg%20OR%20from%3Arauchg%20OR%20from%3Aamasad%20OR%20from%3Adabit3%20OR%20from%3Asvpino%20OR%20from%3Anearcyan)%20(AI%20OR%20tech%20OR%20Apple%20OR%20Google%20OR%20Microsoft%20OR%20startup%20OR%20cloud%20OR%20security%20OR%20app%20OR%20product)%20-is%3Aretweet%20lang%3Aen&src=typed_query&f=live\nReply: Brutal truth: most consumer apps don't fail because of bad UX. They fail because the distribution channel owns the user. If you can't reach them outside the app store, you're renting your audience.\n",
     "targets": [
       {
         "id": "trend:1:mistral-large-4",
@@ -38562,7 +36929,7 @@
     ]
   },
   "hookPatternReactor": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_hook_pattern_reactor",
     "zeroExtraXReads": true,
     "source": "cached packet analytics first-line classifier",
@@ -38908,7 +37275,7 @@
     ]
   },
   "contentBanditAllocator": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_ucb_content_bandit",
     "zeroExtraXReads": true,
     "source": "cached packet analytics template buckets",
@@ -38921,7 +37288,7 @@
       "label": "Myth Busting",
       "status": "exploit",
       "action": "exploit",
-      "allocationScore": 118.27,
+      "allocationScore": 118.52,
       "avgScore": 6.9,
       "samples": 14,
       "liftPct": 34.7,
@@ -38934,14 +37301,14 @@
       "nextAction": "Exploit Myth Busting with Cost Tradeoff.",
       "reason": "Above baseline 5.1 with enough samples.",
       "rank": 1,
-      "allocationPct": 31.1
+      "allocationPct": 31.2
     },
     "exploreLane": {
       "id": "massive_value_drop",
       "label": "Massive Value Drop",
       "status": "explore",
       "action": "explore",
-      "allocationScore": 67.1,
+      "allocationScore": 67.35,
       "avgScore": 2.2,
       "samples": 2,
       "liftPct": null,
@@ -38968,7 +37335,7 @@
         "label": "Myth Busting",
         "status": "exploit",
         "action": "exploit",
-        "allocationScore": 118.27,
+        "allocationScore": 118.52,
         "avgScore": 6.9,
         "samples": 14,
         "liftPct": 34.7,
@@ -38981,14 +37348,14 @@
         "nextAction": "Exploit Myth Busting with Cost Tradeoff.",
         "reason": "Above baseline 5.1 with enough samples.",
         "rank": 1,
-        "allocationPct": 31.1
+        "allocationPct": 31.2
       },
       {
         "id": "the_hard_way",
         "label": "The Hard Way",
         "status": "exploit",
         "action": "test",
-        "allocationScore": 74.95,
+        "allocationScore": 74.2,
         "avgScore": 5.5,
         "samples": 19,
         "liftPct": 7.4,
@@ -39001,14 +37368,14 @@
         "nextAction": "Exploit The Hard Way with Cost Tradeoff.",
         "reason": "Near baseline; keep in controlled rotation.",
         "rank": 2,
-        "allocationPct": 19.7
+        "allocationPct": 19.5
       },
       {
         "id": "massive_value_drop",
         "label": "Massive Value Drop",
         "status": "explore",
         "action": "explore",
-        "allocationScore": 67.1,
+        "allocationScore": 67.35,
         "avgScore": 2.2,
         "samples": 2,
         "liftPct": null,
@@ -39028,7 +37395,7 @@
         "label": "Brutal Truth",
         "status": "test",
         "action": "test",
-        "allocationScore": 58.68,
+        "allocationScore": 58.93,
         "avgScore": 5.1,
         "samples": 25,
         "liftPct": -0.4,
@@ -39054,7 +37421,7 @@
     ]
   },
   "contentBanditSettlement": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_bandit_reward_settlement",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry by template arm",
@@ -39075,7 +37442,7 @@
       "regret": 0,
       "recentRegret": 0,
       "baselineLiftPct": 34.7,
-      "allocationPct": 31.1,
+      "allocationPct": 31.2,
       "actualSharePct": 17.1,
       "laneStatus": "exploit",
       "nextAction": "Settle Myth Busting as a winning arm; keep exploit pressure."
@@ -39129,7 +37496,7 @@
         "regret": 0,
         "recentRegret": 0,
         "baselineLiftPct": 34.7,
-        "allocationPct": 31.1,
+        "allocationPct": 31.2,
         "actualSharePct": 17.1,
         "laneStatus": "exploit",
         "nextAction": "Settle Myth Busting as a winning arm; keep exploit pressure."
@@ -39163,7 +37530,7 @@
         "regret": 1.37,
         "recentRegret": 2.67,
         "baselineLiftPct": 8,
-        "allocationPct": 19.7,
+        "allocationPct": 19.5,
         "actualSharePct": 23.2,
         "laneStatus": "exploit",
         "nextAction": "Collect more reward samples for The Hard Way."
@@ -39357,14 +37724,14 @@
     ]
   },
   "activeConnConversionOptimizer": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "conversion_exploit",
     "severity": "ok",
     "zeroExtraXReads": true,
     "source": "cached packet telemetry + active conn snapshots + private profile-click metrics when available",
     "conversionScore": 83.2,
-    "observedConversionPer1k": 15.71,
-    "fallbackConversionPer1k": 15.71,
+    "observedConversionPer1k": 16.95,
+    "fallbackConversionPer1k": 16.95,
     "activeConnDelta": 6,
     "sampleCount": 82,
     "profileClicks": 26,
@@ -39384,7 +37751,7 @@
       "avgScore": 6.9,
       "engagementRate": 2.37,
       "profileClickPer1k": 7.57,
-      "expectedConnPer1k": 24.14,
+      "expectedConnPer1k": 26.05,
       "conversionScore": 94,
       "lastPostedAt": "2026-10-01T17:34:16.648Z",
       "examples": [
@@ -39406,7 +37773,7 @@
         "bandit"
       ]
     },
-    "nextAction": "Bias next packet toward Myth Busting; expected 24.14 active conns / 1k L7 events.",
+    "nextAction": "Bias next packet toward Myth Busting; expected 26.05 active conns / 1k L7 events.",
     "promptDirectives": [
       "Lead with Myth Busting; write for follow-worthy utility, not raw L7 traffic events.",
       "Keep content format aligned with bandit lane myth_busting.",
@@ -39454,7 +37821,7 @@
         "avgScore": 6.9,
         "engagementRate": 2.37,
         "profileClickPer1k": 7.57,
-        "expectedConnPer1k": 24.14,
+        "expectedConnPer1k": 26.05,
         "conversionScore": 94,
         "lastPostedAt": "2026-10-01T17:34:16.648Z",
         "examples": [
@@ -39490,7 +37857,7 @@
         "avgScore": 5.6,
         "engagementRate": 3.09,
         "profileClickPer1k": 6.33,
-        "expectedConnPer1k": 23.25,
+        "expectedConnPer1k": 25.08,
         "conversionScore": 90,
         "lastPostedAt": "2026-10-06T01:36:06.499Z",
         "examples": [
@@ -39511,40 +37878,6 @@
         "boosters": []
       },
       {
-        "id": "format:the_hard_way",
-        "bucketId": "the_hard_way",
-        "kind": "format",
-        "label": "The Hard Way",
-        "status": "exploit",
-        "sampleConfidence": "low",
-        "samples": 19,
-        "impressions": 1208,
-        "engagements": 27,
-        "profileClicks": 8,
-        "avgScore": 5.5,
-        "engagementRate": 2.24,
-        "profileClickPer1k": 6.62,
-        "expectedConnPer1k": 22.75,
-        "conversionScore": 86.8,
-        "lastPostedAt": "2026-10-04T17:18:39.821Z",
-        "examples": [
-          {
-            "id": "2090841741926506843",
-            "text": "Hard lesson on Apple consumer app shift: the demo was free, the rollback was not. Next time, measure one real workflow b",
-            "url": "https://x.com/i/web/status/2090841741926506843",
-            "score": 8.5
-          },
-          {
-            "id": "2091136735774175427",
-            "text": "Product Hunt launch 我交过学费：演示好看、线上卡回滚，下次先测真实流程，再决定要不要变成默认。 #AI #BigTech",
-            "url": "https://x.com/i/web/status/2091136735774175427",
-            "score": 2.3
-          }
-        ],
-        "nextAction": "Exploit The Hard Way; it has the strongest active-conn conversion proxy.",
-        "boosters": []
-      },
-      {
         "id": "audience:security_cloud",
         "bucketId": "security_cloud",
         "kind": "audience",
@@ -39558,7 +37891,7 @@
         "avgScore": 8.1,
         "engagementRate": 1.8,
         "profileClickPer1k": 10.02,
-        "expectedConnPer1k": 22.79,
+        "expectedConnPer1k": 24.58,
         "conversionScore": 86.1,
         "lastPostedAt": "2026-09-07T19:40:50.409Z",
         "examples": [
@@ -39581,6 +37914,40 @@
         ]
       },
       {
+        "id": "format:the_hard_way",
+        "bucketId": "the_hard_way",
+        "kind": "format",
+        "label": "The Hard Way",
+        "status": "exploit",
+        "sampleConfidence": "low",
+        "samples": 19,
+        "impressions": 1208,
+        "engagements": 27,
+        "profileClicks": 8,
+        "avgScore": 5.5,
+        "engagementRate": 2.24,
+        "profileClickPer1k": 6.62,
+        "expectedConnPer1k": 23.87,
+        "conversionScore": 82.8,
+        "lastPostedAt": "2026-10-04T17:18:39.821Z",
+        "examples": [
+          {
+            "id": "2090841741926506843",
+            "text": "Hard lesson on Apple consumer app shift: the demo was free, the rollback was not. Next time, measure one real workflow b",
+            "url": "https://x.com/i/web/status/2090841741926506843",
+            "score": 8.5
+          },
+          {
+            "id": "2091136735774175427",
+            "text": "Product Hunt launch 我交过学费：演示好看、线上卡回滚，下次先测真实流程，再决定要不要变成默认。 #AI #BigTech",
+            "url": "https://x.com/i/web/status/2091136735774175427",
+            "score": 2.3
+          }
+        ],
+        "nextAction": "Exploit The Hard Way; it has the strongest active-conn conversion proxy.",
+        "boosters": []
+      },
+      {
         "id": "audience:ai_platform",
         "bucketId": "ai_platform",
         "kind": "audience",
@@ -39594,8 +37961,8 @@
         "avgScore": 5.1,
         "engagementRate": 2.5,
         "profileClickPer1k": 4.76,
-        "expectedConnPer1k": 22.63,
-        "conversionScore": 86,
+        "expectedConnPer1k": 23.74,
+        "conversionScore": 82,
         "lastPostedAt": "2026-10-04T17:18:39.821Z",
         "examples": [
           {
@@ -39628,7 +37995,7 @@
         "avgScore": 5.1,
         "engagementRate": 1.59,
         "profileClickPer1k": 2.64,
-        "expectedConnPer1k": 21.92,
+        "expectedConnPer1k": 23.65,
         "conversionScore": 81.5,
         "lastPostedAt": "2026-10-06T01:36:06.499Z",
         "examples": [
@@ -39662,7 +38029,7 @@
         "avgScore": 7.6,
         "engagementRate": 1.67,
         "profileClickPer1k": 10.44,
-        "expectedConnPer1k": 21.63,
+        "expectedConnPer1k": 23.34,
         "conversionScore": 79.7,
         "lastPostedAt": "2026-09-08T17:05:34.250Z",
         "examples": [
@@ -39696,7 +38063,7 @@
         "avgScore": 5.2,
         "engagementRate": 1.62,
         "profileClickPer1k": 2.78,
-        "expectedConnPer1k": 21.49,
+        "expectedConnPer1k": 23.19,
         "conversionScore": 78.8,
         "lastPostedAt": "2026-10-02T16:53:14.402Z",
         "examples": [
@@ -39730,7 +38097,7 @@
         "avgScore": 4.7,
         "engagementRate": 4.31,
         "profileClickPer1k": 9.57,
-        "expectedConnPer1k": 21.85,
+        "expectedConnPer1k": 23.58,
         "conversionScore": 81.1,
         "lastPostedAt": "2026-10-02T00:18:46.203Z",
         "examples": [
@@ -39753,7 +38120,7 @@
     ]
   },
   "narrativeResonanceController": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "narrative_tune",
     "severity": "warn",
     "zeroExtraXReads": true,
@@ -40003,7 +38370,7 @@
     ]
   },
   "topicTimingRouter": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "topic_timing_exploit",
     "severity": "ok",
     "source": "cached hourly load + narrative resonance + content bandit",
@@ -40014,8 +38381,8 @@
       "id": "16:platform_control:the_hard_way",
       "hour": 16,
       "windowLabel": "16:00",
-      "hoursFromNow": 8,
-      "loadScore": 46.5,
+      "hoursFromNow": 23,
+      "loadScore": 47.1,
       "pillarId": "platform_control",
       "pillarLabel": "Platform Control",
       "pillarStatus": "watch",
@@ -40037,8 +38404,8 @@
         "id": "16:platform_control:the_hard_way",
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 8,
-        "loadScore": 46.5,
+        "hoursFromNow": 23,
+        "loadScore": 47.1,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
         "pillarStatus": "watch",
@@ -40059,7 +38426,7 @@
         "id": "19:platform_control:brutal_truth",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -40081,7 +38448,7 @@
         "id": "17:platform_control:myth_busting",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -40103,7 +38470,7 @@
         "id": "21:platform_control:myth_busting",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "pillarId": "platform_control",
         "pillarLabel": "Platform Control",
@@ -40125,7 +38492,7 @@
         "id": "19:operator_leverage:myth_busting",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -40147,7 +38514,7 @@
         "id": "19:consumer_behavior:brutal_truth",
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
@@ -40169,7 +38536,7 @@
         "id": "21:operator_leverage:brutal_truth",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -40191,7 +38558,7 @@
         "id": "21:consumer_behavior:myth_busting",
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
@@ -40210,32 +38577,10 @@
         "reason": "myth_busting x Consumer Behavior has 1 sample(s) at 21:00 UTC with avg 13.0."
       },
       {
-        "id": "16:consumer_behavior:myth_busting",
-        "hour": 16,
-        "windowLabel": "16:00",
-        "hoursFromNow": 8,
-        "loadScore": 46.5,
-        "pillarId": "consumer_behavior",
-        "pillarLabel": "Consumer Behavior",
-        "pillarStatus": "expand",
-        "formatId": "myth_busting",
-        "formatLabel": "Myth Busting",
-        "formatStatus": "exploit",
-        "score": 100,
-        "samples": 0,
-        "avgScore": 6.1,
-        "impressions": 0,
-        "engagementRate": 1.43,
-        "observed": false,
-        "status": "hot",
-        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Myth Busting around 16:00 UTC.",
-        "reason": "Seed Consumer Behavior via Myth Busting in a learned 16:00 UTC load window."
-      },
-      {
         "id": "17:operator_leverage:myth_busting",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "pillarId": "operator_leverage",
         "pillarLabel": "Operator Leverage",
@@ -40257,7 +38602,7 @@
         "id": "17:consumer_behavior:myth_busting",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
@@ -40279,7 +38624,7 @@
         "id": "17:consumer_behavior:the_hard_way",
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "pillarId": "consumer_behavior",
         "pillarLabel": "Consumer Behavior",
@@ -40296,6 +38641,28 @@
         "status": "hot",
         "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use The Hard Way around 17:00 UTC.",
         "reason": "Seed Consumer Behavior via The Hard Way in a learned 17:00 UTC load window."
+      },
+      {
+        "id": "19:consumer_behavior:myth_busting",
+        "hour": 19,
+        "windowLabel": "19:00",
+        "hoursFromNow": 2,
+        "loadScore": 69.5,
+        "pillarId": "consumer_behavior",
+        "pillarLabel": "Consumer Behavior",
+        "pillarStatus": "expand",
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "formatStatus": "exploit",
+        "score": 100,
+        "samples": 0,
+        "avgScore": 6.1,
+        "impressions": 0,
+        "engagementRate": 1.43,
+        "observed": false,
+        "status": "hot",
+        "directive": "Show how a product, app, or device changes user behavior or distribution habits. Use Myth Busting around 19:00 UTC.",
+        "reason": "Seed Consumer Behavior via Myth Busting in a learned 19:00 UTC load window."
       }
     ],
     "nextAction": "Schedule the next standalone packet for 16:00 UTC as Platform Control / The Hard Way.",
@@ -40312,10 +38679,10 @@
     ]
   },
   "growthOpportunityScorer": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_opportunity_fusion",
     "severity": "ok",
-    "confidence": "medium",
+    "confidence": "high",
     "source": "cached topic timing + content bandit + angle load + narrative resonance",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
@@ -40323,32 +38690,68 @@
     "opportunityScore": 100,
     "readGate": "cached_only",
     "publishGate": "closed",
-    "primaryCommand": "Bias the next packet toward 16:00 UTC / Platform Control / The Hard Way; use cached signals only.",
+    "primaryCommand": "Bias the next packet toward 00:00 UTC / Myth Busting; use cached signals only.",
     "activeOpportunity": {
-      "id": "16:platform_control:the_hard_way",
-      "label": "16:00 UTC / Platform Control / The Hard Way",
-      "formatId": "the_hard_way",
-      "formatLabel": "The Hard Way",
-      "pillarId": "platform_control",
-      "pillarLabel": "Platform Control",
-      "hour": 16,
-      "windowLabel": "16:00",
+      "id": "any:any:myth_busting",
+      "label": "00:00 UTC / Myth Busting",
+      "formatId": "myth_busting",
+      "formatLabel": "Myth Busting",
+      "pillarId": null,
+      "pillarLabel": null,
+      "hour": null,
+      "windowLabel": "00:00",
       "action": "exploit",
       "status": "hot",
       "score": 100,
-      "confidence": "low",
+      "confidence": "high",
       "sources": [
-        "topic_timing"
+        "content_bandit",
+        "angle_load",
+        "adaptive_scheduler"
       ],
-      "samples": 7,
+      "samples": 30,
       "evidence": [
-        "the_hard_way x Platform Control has 7 sample(s) at 16:00 UTC with avg 6.4."
+        "Above baseline 5.1 with enough samples.",
+        "myth_busting has 2 sample(s) in this UTC hour with avg score 21.9.",
+        "Above baseline 5.1 with enough samples."
       ],
       "promptDirectives": [
-        "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use The Hard Way around 16:00 UTC."
+        "Exploit Myth Busting with Cost Tradeoff.",
+        "90% wrong / 10% truth",
+        "90% wrong / 10% truth"
       ]
     },
     "lanes": [
+      {
+        "id": "any:any:myth_busting",
+        "label": "00:00 UTC / Myth Busting",
+        "formatId": "myth_busting",
+        "formatLabel": "Myth Busting",
+        "pillarId": null,
+        "pillarLabel": null,
+        "hour": null,
+        "windowLabel": "00:00",
+        "action": "exploit",
+        "status": "hot",
+        "score": 100,
+        "confidence": "high",
+        "sources": [
+          "content_bandit",
+          "angle_load",
+          "adaptive_scheduler"
+        ],
+        "samples": 30,
+        "evidence": [
+          "Above baseline 5.1 with enough samples.",
+          "myth_busting has 2 sample(s) in this UTC hour with avg score 21.9.",
+          "Above baseline 5.1 with enough samples."
+        ],
+        "promptDirectives": [
+          "Exploit Myth Busting with Cost Tradeoff.",
+          "90% wrong / 10% truth",
+          "90% wrong / 10% truth"
+        ]
+      },
       {
         "id": "16:platform_control:the_hard_way",
         "label": "16:00 UTC / Platform Control / The Hard Way",
@@ -40564,44 +38967,14 @@
         "promptDirectives": [
           "Route Myth Busting at 17:00 UTC. Use manual distribution first and let cached writeback update the next run."
         ]
-      },
-      {
-        "id": "any:any:myth_busting",
-        "label": "00:00 UTC / Myth Busting",
-        "formatId": "myth_busting",
-        "formatLabel": "Myth Busting",
-        "pillarId": null,
-        "pillarLabel": null,
-        "hour": null,
-        "windowLabel": "00:00",
-        "action": "exploit",
-        "status": "hot",
-        "score": 94,
-        "confidence": "high",
-        "sources": [
-          "content_bandit",
-          "angle_load",
-          "adaptive_scheduler"
-        ],
-        "samples": 44,
-        "evidence": [
-          "Above baseline 5.1 with enough samples.",
-          "myth_busting has 2 sample(s) in this UTC hour with avg score 21.9.",
-          "No hour-specific sample yet; routed from adaptive scheduler weight 84.7.",
-          "Above baseline 5.1 with enough samples."
-        ],
-        "promptDirectives": [
-          "Exploit Myth Busting with Cost Tradeoff.",
-          "90% wrong / 10% truth",
-          "90% wrong / 10% truth",
-          "90% wrong / 10% truth"
-        ]
       }
     ],
     "scoreBreakdown": {
       "formula": "weighted cached signals + source diversity + sample depth + active-lane boost",
       "activeSources": [
-        "topic_timing"
+        "content_bandit",
+        "angle_load",
+        "adaptive_scheduler"
       ],
       "sources": [
         {
@@ -40612,33 +38985,32 @@
           "hotLanes": 8
         },
         {
-          "source": "angle_load",
-          "lanes": 2,
-          "avgScore": 95.5,
-          "samples": 44,
-          "hotLanes": 2
-        },
-        {
           "source": "content_bandit",
           "lanes": 1,
-          "avgScore": 94,
-          "samples": 44,
+          "avgScore": 100,
+          "samples": 30,
           "hotLanes": 1
         },
         {
           "source": "adaptive_scheduler",
           "lanes": 1,
-          "avgScore": 94,
-          "samples": 44,
+          "avgScore": 100,
+          "samples": 30,
           "hotLanes": 1
+        },
+        {
+          "source": "angle_load",
+          "lanes": 2,
+          "avgScore": 98.5,
+          "samples": 30,
+          "hotLanes": 2
         }
       ]
     },
     "promptDirectives": [
-      "Primary format: the_hard_way.",
-      "Primary narrative: Platform Control.",
-      "Preferred UTC window: 16:00.",
-      "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use The Hard Way around 16:00 UTC.",
+      "Primary format: myth_busting.",
+      "Preferred UTC window: 00:00.",
+      "Exploit Myth Busting with Cost Tradeoff.",
       "No live X search/read calls are required for this opportunity score."
     ],
     "guardrails": [
@@ -40648,23 +39020,23 @@
     ]
   },
   "cachedGenerationPolicy": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_generation_policy",
     "source": "cached analytics learning stack",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
-    "confidence": "medium",
+    "confidence": "high",
     "language": null,
     "storyTitle": "Mistral Large 4",
     "storySource": "simonwillison.net",
-    "primaryFormatId": "the_hard_way",
-    "primaryFormatLabel": "The Hard Way",
+    "primaryFormatId": "myth_busting",
+    "primaryFormatLabel": "Myth Busting",
     "exploreFormatId": "massive_value_drop",
     "rankedFormatIds": [
-      "the_hard_way",
-      "massive_value_drop",
       "myth_busting",
+      "massive_value_drop",
+      "the_hard_way",
       "brutal_truth"
     ],
     "avoidFormatIds": [
@@ -40682,14 +39054,18 @@
       "directive": "Translate the story into how builders and operators gain or lose leverage."
     },
     "opportunity": {
-      "id": "16:platform_control:the_hard_way",
-      "label": "16:00 UTC / Platform Control / The Hard Way",
+      "id": "any:any:myth_busting",
+      "label": "00:00 UTC / Myth Busting",
       "score": 100,
       "sources": [
-        "topic_timing"
+        "content_bandit",
+        "angle_load",
+        "adaptive_scheduler"
       ],
       "promptDirectives": [
-        "Frame the story as a shift in defaults, distribution, margin, privacy, or control. Use The Hard Way around 16:00 UTC."
+        "Exploit Myth Busting with Cost Tradeoff.",
+        "90% wrong / 10% truth",
+        "90% wrong / 10% truth"
       ]
     },
     "growthStrategy": {
@@ -40741,11 +39117,11 @@
       "estimatedXReadOps": 0
     },
     "directives": [
-      "Primary format bias: the_hard_way (The Hard Way). Use this unless the selected story strongly fits another listed format.",
+      "Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.",
       "First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.",
-      "Opportunity lane: 16:00 UTC / Platform Control / The Hard Way; sources=topic_timing; score=100.0.",
+      "Opportunity lane: 00:00 UTC / Myth Busting; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.",
       "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..",
-      "Timing bias: write for the 16:00 UTC learned traffic window; do not mention the window in the packet.",
+      "Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.",
       "Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.",
       "Mutation bias: Exploit Myth Busting; source=tailscale.com; topic=cloud; window=21:00 UTC / Brutal Truth; route=breakout X route.",
       "Avoid low-reward formats unless unavoidable: brutal_truth.",
@@ -40754,10 +39130,10 @@
       "Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.",
       "Persisted strategy: Never open with 'Hard lesson on', 'Before adopting', or '我交过学费'."
     ],
-    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: the_hard_way\nranked_formats: the_hard_way, massive_value_drop, myth_busting, brutal_truth\navoid_formats: brutal_truth\nselected_story: Mistral Large 4\n\nMUST FOLLOW:\n- Primary format bias: the_hard_way (The Hard Way). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.\n- Opportunity lane: 16:00 UTC / Platform Control / The Hard Way; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 16:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Myth Busting; source=tailscale.com; topic=cloud; window=21:00 UTC / Brutal Truth; route=breakout X route.\n- Avoid low-reward formats unless unavoidable: brutal_truth.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Never open with 'Hard lesson on', 'Before adopting', or '我交过学费'."
+    "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: high\nprimary_format: myth_busting\nranked_formats: myth_busting, massive_value_drop, the_hard_way, brutal_truth\navoid_formats: brutal_truth\nselected_story: Mistral Large 4\n\nMUST FOLLOW:\n- Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.\n- Opportunity lane: 00:00 UTC / Myth Busting; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Myth Busting; source=tailscale.com; topic=cloud; window=21:00 UTC / Brutal Truth; route=breakout X route.\n- Avoid low-reward formats unless unavoidable: brutal_truth.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Never open with 'Hard lesson on', 'Before adopting', or '我交过学费'."
   },
   "angleMutationReactor": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_angle_mutation_reactor",
     "source": "cached learning writeback + route amplifier + temporal matrix",
     "zeroExtraXReads": true,
@@ -41512,7 +39888,7 @@
     }
   },
   "distributionOps": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_distribution",
     "queueHealth": "ok",
     "zeroExtraXReads": true,
@@ -41732,7 +40108,7 @@
     ]
   },
   "operatorSlo": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_zero_read_slo",
     "status": "ok",
     "zeroExtraXReads": true,
@@ -41833,7 +40209,7 @@
     ]
   },
   "viralFlywheel": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "manual_distribution",
     "zeroExtraXReads": true,
     "velocityScore": 91.8,
@@ -41848,7 +40224,7 @@
       "action": "Execute the top route burst, then let maintenance write outcomes back."
     },
     "ackRate24h": 0,
-    "ackRate7d": 2.88,
+    "ackRate7d": 2.82,
     "routeCoveragePct": 100,
     "swarmCoveragePct": 166.7,
     "nextBurst": {
@@ -41863,9 +40239,9 @@
       {
         "id": "ingress",
         "label": "signal ingress",
-        "value": "13 pkts",
+        "value": "12 pkts",
         "status": "ok",
-        "detail": "382 L7 events in 7d telemetry"
+        "detail": "354 L7 events in 7d telemetry"
       },
       {
         "id": "ranker",
@@ -41901,9 +40277,9 @@
         "id": "ingress_ranker",
         "from": "INGRESS",
         "to": "RANKER",
-        "load": "382 L7",
+        "load": "354 L7",
         "status": "ok",
-        "detail": "13 packets scored"
+        "detail": "12 packets scored"
       },
       {
         "id": "ranker_swarm",
@@ -41933,7 +40309,7 @@
         "id": "writeback_ingress",
         "from": "WRITEBACK",
         "to": "INGRESS",
-        "load": "2.88% ACK",
+        "load": "2.82% ACK",
         "status": "warn",
         "detail": "learning signal density"
       }
@@ -41965,7 +40341,7 @@
     ]
   },
   "adaptiveAngleScheduler": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "recovery_route",
     "confidence": "high",
     "zeroExtraXReads": true,
@@ -41973,21 +40349,21 @@
     "baselineScore": 5.1,
     "load": {
       "impressions24h": 0,
-      "impressions7d": 382,
+      "impressions7d": 354,
       "avgBucket": 0,
       "peakBucket": {
-        "label": "08:37",
+        "label": "17:24",
         "value": 0,
-        "posts": 0,
-        "startsAt": "2026-10-06T08:37:05.355Z",
-        "endsAt": "2026-10-06T12:37:05.355Z"
+        "posts": 1,
+        "startsAt": "2026-10-06T17:24:58.542Z",
+        "endsAt": "2026-10-06T21:24:58.542Z"
       },
       "quietBucket": {
-        "label": "08:37",
+        "label": "17:24",
         "value": 0,
-        "posts": 0,
-        "startsAt": "2026-10-06T08:37:05.355Z",
-        "endsAt": "2026-10-06T12:37:05.355Z"
+        "posts": 1,
+        "startsAt": "2026-10-06T17:24:58.542Z",
+        "endsAt": "2026-10-06T21:24:58.542Z"
       }
     },
     "safeBudgetLeftUsd": 3.905,
@@ -42111,20 +40487,20 @@
     }
   },
   "temporalAngleMatrix": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "temporal_rotation",
     "confidence": "medium",
     "source": "cached packet analytics only",
     "zeroExtraXReads": true,
     "lookbackDays": 30,
-    "sampleCount": 21,
+    "sampleCount": 20,
     "nextAction": "Use Brutal Truth at 21:00 UTC; brutal_truth has 1 sample(s) in this UTC hour with avg score 10.2.",
     "slots": [
       {
         "slot": 1,
         "hour": 21,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "loadScore": 76.8,
         "formatId": "brutal_truth",
         "label": "Brutal Truth",
@@ -42141,7 +40517,7 @@
         "slot": 2,
         "hour": 19,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "loadScore": 69.5,
         "formatId": "brutal_truth",
         "label": "Brutal Truth",
@@ -42158,7 +40534,7 @@
         "slot": 3,
         "hour": 17,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "loadScore": 69.3,
         "formatId": "myth_busting",
         "label": "Myth Busting",
@@ -42175,40 +40551,23 @@
         "slot": 4,
         "hour": 16,
         "windowLabel": "16:00",
-        "hoursFromNow": 8,
-        "loadScore": 46.5,
+        "hoursFromNow": 23,
+        "loadScore": 47.1,
         "formatId": "the_hard_way",
         "label": "The Hard Way",
         "angle": "costly lesson / cheat code",
         "action": "test",
         "status": "hot",
-        "score": 77.3,
+        "score": 80.7,
         "avgScore": 8.3,
         "samples": 2,
         "impressions": 57,
         "reason": "the_hard_way has 2 sample(s) in this UTC hour with avg score 8.3."
-      },
-      {
-        "slot": 5,
-        "hour": 8,
-        "windowLabel": "08:00",
-        "hoursFromNow": 0,
-        "loadScore": 0,
-        "formatId": "myth_busting",
-        "label": "Myth Busting",
-        "angle": "90% wrong / 10% truth",
-        "action": "exploit",
-        "status": "hot",
-        "score": 42.5,
-        "avgScore": 6.9,
-        "samples": 14,
-        "impressions": 0,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 84.7."
       }
     ]
   },
   "angleLoadRouter": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_angle_load_router",
     "source": "hourly load balancer + temporal angle matrix + adaptive scheduler",
     "zeroExtraXReads": true,
@@ -42257,7 +40616,7 @@
         "id": "brutal_truth",
         "slot": 1,
         "windowLabel": "21:00",
-        "hoursFromNow": 13,
+        "hoursFromNow": 4,
         "label": "Brutal Truth",
         "formatId": "brutal_truth",
         "action": "test",
@@ -42273,7 +40632,7 @@
         "id": "brutal_truth",
         "slot": 2,
         "windowLabel": "19:00",
-        "hoursFromNow": 11,
+        "hoursFromNow": 2,
         "label": "Brutal Truth",
         "formatId": "brutal_truth",
         "action": "test",
@@ -42289,7 +40648,7 @@
         "id": "myth_busting",
         "slot": 3,
         "windowLabel": "17:00",
-        "hoursFromNow": 9,
+        "hoursFromNow": 0,
         "label": "Myth Busting",
         "formatId": "myth_busting",
         "action": "exploit",
@@ -42305,33 +40664,17 @@
         "id": "the_hard_way",
         "slot": 4,
         "windowLabel": "16:00",
-        "hoursFromNow": 8,
+        "hoursFromNow": 23,
         "label": "The Hard Way",
         "formatId": "the_hard_way",
         "action": "test",
         "angle": "costly lesson / cheat code",
         "status": "hot",
-        "score": 77.3,
-        "loadScore": 46.5,
+        "score": 80.7,
+        "loadScore": 47.1,
         "samples": 2,
         "avgScore": 8.3,
         "reason": "the_hard_way has 2 sample(s) in this UTC hour with avg score 8.3."
-      },
-      {
-        "id": "myth_busting",
-        "slot": 5,
-        "windowLabel": "08:00",
-        "hoursFromNow": 0,
-        "label": "Myth Busting",
-        "formatId": "myth_busting",
-        "action": "exploit",
-        "angle": "90% wrong / 10% truth",
-        "status": "probe",
-        "score": 42.5,
-        "loadScore": 0,
-        "samples": 14,
-        "avgScore": 6.9,
-        "reason": "No hour-specific sample yet; routed from adaptive scheduler weight 84.7."
       }
     ],
     "directives": [
@@ -42343,12 +40686,12 @@
     ]
   },
   "learningWriteback": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "source": "cached packet analytics + adaptive scheduler + cost governor",
     "zeroExtraXReads": true,
     "mode": "controlled_rule_writeback",
     "confidence": "high",
-    "epoch": "2026-10-07T08:37",
+    "epoch": "2026-10-07T17:24",
     "sampleCount": 82,
     "baselineScore": 5.1,
     "activeRule": {
@@ -42444,7 +40787,7 @@
     "enabled": true,
     "decision": "hold",
     "attachImageAllowed": false,
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "zeroExtraXReads": true,
     "confidence": "low_samples",
     "reason": "Need 3+ measured text and media packets before spending on images (82 text, 0 media).",
@@ -42491,7 +40834,7 @@
   },
   "audienceExpansionRouter": {
     "enabled": true,
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "zeroExtraXReads": true,
     "source": "cached packet analytics + RSS classifier",
     "mode": "wide_tech_router",
@@ -42901,7 +41244,7 @@
     ]
   },
   "rssSourceMesh": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "updatedAt": "2026-10-07T00:13:13.657Z",
     "mode": "zero_read_rss_source_mesh",
     "source": "rss_health_cache + trend_velocity_cache",
@@ -43334,27 +41677,27 @@
     ]
   },
   "hourlyLoadBalancer": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "source": "tweet_analytics.postedAt + tweet_metrics",
     "lookbackDays": 30,
-    "sampleCount": 21,
+    "sampleCount": 20,
     "minSamples": 10,
     "confidence": "low",
-    "mode": "manual_distribution",
+    "mode": "publish_now",
     "zeroExtraXReads": true,
     "currentHour": {
-      "hour": 8,
-      "label": "08:00",
-      "loadScore": 0,
-      "posts": 0,
-      "impressions": 0,
-      "avgScore": 0,
-      "status": "dark"
+      "hour": 17,
+      "label": "17:00",
+      "loadScore": 69.3,
+      "posts": 5,
+      "impressions": 205,
+      "avgScore": 10.2,
+      "status": "warm"
     },
     "nextWindow": {
       "hour": 17,
       "label": "17:00",
-      "hoursFromNow": 9,
+      "hoursFromNow": 0,
       "loadScore": 69.3,
       "posts": 5,
       "impressions": 205,
@@ -43392,14 +41735,14 @@
       {
         "hour": 16,
         "label": "16:00",
-        "loadScore": 46.5,
-        "posts": 3,
-        "impressions": 74,
-        "avgScore": 6.2,
+        "loadScore": 47.1,
+        "posts": 2,
+        "impressions": 57,
+        "avgScore": 8.3,
         "status": "cool"
       }
     ],
-    "nextAction": "No near-term learned peak; use manual distribution now and schedule the next packet near 21:00 UTC.",
+    "nextAction": "Current UTC hour 17:00 is inside a learned warm window.",
     "hours": [
       {
         "hour": 0,
@@ -43516,7 +41859,7 @@
         "avgScore": 0,
         "loadScore": 0,
         "status": "dark",
-        "current": true
+        "current": false
       },
       {
         "hour": 9,
@@ -43612,13 +41955,13 @@
       {
         "hour": 16,
         "label": "16:00",
-        "posts": 3,
-        "impressions": 74,
-        "likes": 3,
+        "posts": 2,
+        "impressions": 57,
+        "likes": 2,
         "reposts": 0,
         "replies": 0,
-        "avgScore": 6.2,
-        "loadScore": 46.5,
+        "avgScore": 8.3,
+        "loadScore": 47.1,
         "status": "cool",
         "current": false
       },
@@ -43633,7 +41976,7 @@
         "avgScore": 10.2,
         "loadScore": 69.3,
         "status": "warm",
-        "current": false
+        "current": true
       },
       {
         "hour": 18,
@@ -43717,7 +42060,7 @@
   },
   "signalMap": {
     "version": 1,
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "coordinateSystem": "percent",
     "source": "packet_analytics + rss_health + x_api_usage",
     "core": {
@@ -44056,7 +42399,7 @@
     "nextExperimentZh": "继续加码 myth busting，优先使用 producthunt.com 这类来源；少用 sharp question，除非观点足够具体、能引发讨论。"
   },
   "learningAutopilot": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "exploit_winners",
     "confidence": "high",
     "baselineScore": 5.1,
@@ -44158,10 +42501,10 @@
     ]
   },
   "learningLoopContract": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "cached_learning_contract",
     "status": "online",
-    "confidence": "medium",
+    "confidence": "high",
     "zeroExtraXReads": true,
     "estimatedXReadOps": 0,
     "estimatedIncrementalXApiUsd": 0,
@@ -44172,7 +42515,7 @@
       "id": "myth_busting",
       "label": "Myth Busting",
       "status": "exploit",
-      "allocationPct": 31.1,
+      "allocationPct": 31.2,
       "avgScore": 6.9,
       "samples": 14,
       "liftPct": 34.7,
@@ -44192,8 +42535,8 @@
     },
     "holdArms": [],
     "activeOpportunity": {
-      "id": "16:platform_control:the_hard_way",
-      "label": "16:00 UTC / Platform Control / The Hard Way",
+      "id": "any:any:myth_busting",
+      "label": "00:00 UTC / Myth Busting",
       "score": 100,
       "status": "hot",
       "directive": ""
@@ -44213,26 +42556,26 @@
     },
     "policy": {
       "mode": "cached_generation_policy",
-      "confidence": "medium",
-      "primaryFormatId": "the_hard_way",
-      "primaryFormatLabel": "The Hard Way",
+      "confidence": "high",
+      "primaryFormatId": "myth_busting",
+      "primaryFormatLabel": "Myth Busting",
       "exploreFormatId": "massive_value_drop",
       "rankedFormatIds": [
-        "the_hard_way",
-        "massive_value_drop",
         "myth_busting",
+        "massive_value_drop",
+        "the_hard_way",
         "brutal_truth"
       ],
       "avoidFormatIds": [
         "brutal_truth"
       ],
       "promptBias": [
-        "Primary format bias: the_hard_way (The Hard Way). Use this unless the selected story strongly fits another listed format.",
+        "Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.",
         "First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.",
-        "Opportunity lane: 16:00 UTC / Platform Control / The Hard Way; sources=topic_timing; score=100.0.",
+        "Opportunity lane: 00:00 UTC / Myth Busting; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.",
         "Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage.."
       ],
-      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: medium\nprimary_format: the_hard_way\nranked_formats: the_hard_way, massive_value_drop, myth_busting, brutal_truth\navoid_formats: brutal_truth\nselected_story: Mistral Large 4\n\nMUST FOLLOW:\n- Primary format bias: the_hard_way (The Hard Way). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.\n- Opportunity lane: 16:00 UTC / Platform Control / The Hard Way; sources=topic_timing; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 16:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Myth Busting; source=tailscale.com; topic=cloud; window=21:00 UTC / Brutal Truth; route=breakout X route.\n- Avoid low-reward formats unless unavoidable: brutal_truth.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Never open with 'Hard lesson on', 'Before adopting', or '我交过学费'.",
+      "promptBlock": "CODEX CACHED GENERATION POLICY (hard constraints, 0 extra X reads)\nmode: cached_generation_policy\nconfidence: high\nprimary_format: myth_busting\nranked_formats: myth_busting, massive_value_drop, the_hard_way, brutal_truth\navoid_formats: brutal_truth\nselected_story: Mistral Large 4\n\nMUST FOLLOW:\n- Primary format bias: myth_busting (Myth Busting). Use this unless the selected story strongly fits another listed format.\n- First-line hook: Cost Tradeoff. Lead with the hidden cost, budget tradeoff, or margin transfer.\n- Opportunity lane: 00:00 UTC / Myth Busting; sources=content_bandit+angle_load+adaptive_scheduler; score=100.0.\n- Narrative pillar: Operator Leverage; Translate the story into how builders and operators gain or lose leverage..\n- Timing bias: write for the 00:00 UTC learned traffic window; do not mention the window in the packet.\n- Controlled exploration: massive_value_drop is allowed only if it is a better fit for this exact story.\n- Mutation bias: Exploit Myth Busting; source=tailscale.com; topic=cloud; window=21:00 UTC / Brutal Truth; route=breakout X route.\n- Avoid low-reward formats unless unavoidable: brutal_truth.\n- Persisted strategy: Never begin with 'Decision rule for ...' or repeat the article title as the subject.\n- Persisted strategy: Lead with one concrete company/product/entity and one non-obvious operator, user, platform, or market consequence.\n- Persisted strategy: Prefer a reusable take that invites replies; avoid summaries, headline rewrites, and generic hype.\n- Persisted strategy: Never open with 'Hard lesson on', 'Before adopting', or '我交过学费'.",
       "zeroExtraXReads": true
     },
     "cells": [
@@ -44260,12 +42603,12 @@
       {
         "id": "policy_patch",
         "label": "POLICY_PATCH",
-        "value": "the_hard_way",
+        "value": "myth_busting",
         "status": "ok",
-        "detail": "medium"
+        "detail": "high"
       }
     ],
-    "nextAction": "Bias the next packet toward 16:00 UTC / Platform Control / The Hard Way; use cached signals only.",
+    "nextAction": "Bias the next packet toward 00:00 UTC / Myth Busting; use cached signals only.",
     "guardrails": [
       "Cached analytics only; 0 X search/read ops.",
       "No auto-replies, no scraping, no rate-limit bypass.",
@@ -44274,7 +42617,7 @@
     ]
   },
   "modelInferenceStream": {
-    "generatedAt": "2026-10-07T08:37:05.338Z",
+    "generatedAt": "2026-10-07T17:24:58.527Z",
     "mode": "tracked_model_inference_stream",
     "status": "ok",
     "source": "openai_usage_ledger + manual_route_output_cache",
@@ -44519,7 +42862,7 @@
   "diagnosis": [
     "Today: prioritize ZH at 12:00 UTC; use #devtools #ai when story-fit allows.",
     "主贴质量不算差，但小账号阶段缺少初始互动，单独发帖很难被系统分发。",
-    "最近 7 天记录到 13 条、382 次触达；24 小时 2 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
+    "最近 7 天记录到 12 条、354 次触达；24 小时 2 条、0 次触达。瓶颈是分发入口，不是发帖数量。",
     "当前低成本路线是人工点网页搜索、复制输出，避免增加 X search/read API。",
     "路由操作优先贴在 2 小时内仍有讨论的大号帖子下面；主贴负责让主页可信。"
   ],
