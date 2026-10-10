@@ -36,7 +36,7 @@ About 页的「网站目录 / Site Map」由 **`source/_data/site_directory.yml`
 - 页面：<https://linusshyu.dev/xbot-dashboard/>
 - 源文件：`xbot-dashboard/`
 - 发布目录：`docs/xbot-dashboard/`
-- 数据文件：`xbot-dashboard/data.json` 与 `docs/xbot-dashboard/data.json`，由 `Linus-Shyu/x_bot` 的 `growth maintenance` workflow 同步更新。
+- 数据文件：`xbot-dashboard/panel.json` 与 `docs/xbot-dashboard/panel.json`（约 3 KB 的精简 v2 面板数据），由 `Linus-Shyu/x_bot` 的 `growth maintenance` workflow 每 2 小时自动生成、校验并同步更新；面板页面每 5 分钟自动拉取刷新，无需人工操作。
 
 ## 自定义域名
 - `docs/CNAME` 固定为 `linusshyu.dev`，无需每次手动设置。若需更换域名，直接修改该文件。
