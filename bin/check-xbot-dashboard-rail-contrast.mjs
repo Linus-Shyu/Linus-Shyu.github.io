@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Contrast gate for the lean single-file panel: reads the inline <style> in
+// index.html and enforces WCAG AA (4.5:1) for text/background pairs.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -38,23 +40,56 @@ function luminance(rgb) {
 }
 
 function contrast(foreground, background) {
-  const fg = hexToRgb(foreground);
-  const bg = hexToRgb(background);
-  if (!fg || !bg) return 0;
-  const a = luminance(fg);
-  const b = luminance(bg);
-  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+  const fg = luminance(foreground);
+  const bg = luminance(background);
+  const lighter = Math.max(fg, bg);
+  const darker = Math.min(fg, bg);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function themeVariables(style, selector) {
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(`${escaped}\\s*\\{([^}]*)\\}`, "i");
+  const match = style.match(pattern);
+  if (!match) return null;
+  const variables = {};
+  for (const line of match[1].split(";")) {
+    const pair = line.match(/--([\w-]+)\s*:\s*([#\w(),\s.%-]+)/);
+    if (pair) variables[pair[1].trim()] = pair[2].trim();
+  }
+  return variables;
 }
 
 for (const dir of dashboards) {
-  const css = read(`${dir}/styles.css`);
   const html = read(`${dir}/index.html`);
-  for (const token of [".left-rail", ".rail-nav", ".rail-status", "data-theme-value=\"light\"", "data-theme-value=\"dark\""]) {
-    const source = token.startsWith("data-") ? html : css;
-    if (!source.includes(token)) fail(`${dir} is missing readable navigation contract token.`, token);
+  const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/i);
+  if (!styleMatch) fail(`${dir}/index.html has no inline <style> block.`);
+  const style = styleMatch[1];
+
+  for (const [theme, selector] of [
+    ["dark", ":root"],
+    ["light", 'html[data-theme="light"]'],
+  ]) {
+    const vars = themeVariables(style, selector);
+    if (!vars) fail(`${dir} is missing ${theme} theme variables.`);
+    const pairs = [
+      ["ink", "bg"],
+      ["muted", "panel"],
+      ["ink", "panel"],
+      ["accent", "panel"],
+    ];
+    for (const [fgName, bgName] of pairs) {
+      const fg = hexToRgb(vars[fgName]);
+      const bg = hexToRgb(vars[bgName]);
+      if (!fg || !bg) fail(`${dir} ${theme} theme is missing --${fgName} or --${bgName}.`);
+      const ratio = contrast(fg, bg);
+      if (ratio < 4.5) {
+        fail(
+          `${dir} ${theme} theme --${fgName} on --${bgName} contrast ${ratio.toFixed(2)} is below 4.5.`,
+        );
+      }
+    }
   }
-  if (contrast("#f7f9f9", "#05080d") < 12) fail(`${dir} dark rail contrast is too low.`);
-  if (contrast("#0f1419", "#ffffff") < 12) fail(`${dir} light rail contrast is too low.`);
 }
 
 console.log("X bot dashboard rail contrast check passed.");

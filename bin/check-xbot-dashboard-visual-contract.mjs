@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
+// Visual contract for the lean single-file panel: required sections/ids must
+// exist, and the inline script must be syntactically valid JavaScript.
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -19,58 +22,37 @@ function read(file) {
 
 for (const dir of dashboards) {
   const html = read(`${dir}/index.html`);
-  const css = read(`${dir}/styles.css`);
-  const script = read(`${dir}/script.js`);
   for (const id of [
-    "metric-followers",
-    "reach-chart",
-    "cost-chart",
-    "post-list",
-    "draft-list",
-    "advice-list",
-    "language-track-grid",
-    "decision-grid",
-    "freshness-list",
-    "task-list",
-    "funnel-list",
-    "evidence-grid",
-    "endpoint-list",
+    "sync-dot",
+    "banner",
+    "k-followers",
+    "k-baseline",
+    "k-xapi",
+    "k-llm",
+    "lastpost",
+    "bestpost",
+    "formats",
+    "bar-xapi",
+    "bar-llm",
+    "chart-posts",
+    "chart-spend",
+    "tasks",
+    "f-updated",
   ]) {
-    if (!html.includes(`id="${id}"`)) fail(`${dir}/index.html is missing visual surface.`, id);
+    if (!html.includes(`id="${id}"`)) fail(`${dir} is missing element #${id}.`);
   }
-  for (const selector of [
-    ".hero-card",
-    ".hero-metrics",
-    ".trend-grid",
-    ".post-card",
-    ".draft-card",
-    ".advice-card",
-    ".language-track-card",
-    ".decision-card",
-    ".freshness-row",
-    ".task-card",
-    ".funnel-row",
-    ".evidence-card",
-    ".cost-ring",
-    "@media (max-width: 720px)",
-  ]) {
-    if (!css.includes(selector)) fail(`${dir}/styles.css is missing responsive visual selector.`, selector);
-  }
-  for (const token of [
-    "fetch(`./data.json?ts=${Date.now()}`",
-    "window.setInterval(() => loadDashboardData({ silent: true }), 60000)",
-    "renderLineChart",
-    "renderPosts",
-    "renderAdvice",
-    "renderLanguageTracks",
-    "renderGrowthDecision",
-    "renderFreshness",
-    "renderTasks",
-    "renderFunnel",
-    "renderEvidence",
-    "renderCost",
-  ]) {
-    if (!script.includes(token)) fail(`${dir}/script.js is missing live rendering contract.`, token);
+
+  const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/i);
+  if (!scriptMatch) fail(`${dir}/index.html has no inline script block.`);
+  const tmpFile = path.join(root, ".tmp-panel-script-check.mjs");
+  try {
+    fs.writeFileSync(tmpFile, scriptMatch[1]);
+    execFileSync(process.execPath, ["--check", tmpFile], { stdio: "pipe" });
+  } catch (error) {
+    const message = error?.stderr ? String(error.stderr) : String(error);
+    fail(`${dir}/index.html inline script failed syntax check.`, message.slice(0, 500));
+  } finally {
+    fs.rmSync(tmpFile, { force: true });
   }
 }
 
