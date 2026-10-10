@@ -1,281 +1,289 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>X Growth Dashboard</title>
-    <meta
-      name="description"
-      content="Live X growth dashboard for Linus Shyu: growth trend, posted content, AI suggestions, and cost controls."
-    />
-    <script>
-      (() => {
-        const theme = localStorage.getItem("xbot-dashboard-theme") || "dark";
-        const savedLang = localStorage.getItem("xbot-dashboard-lang");
-        const lang = savedLang || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en");
-        document.documentElement.dataset.theme = theme;
-        document.documentElement.dataset.lang = lang;
-        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-      })();
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css?v=20260918-ops-v1" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <aside class="left-rail" aria-label="Navigation">
-        <a class="brand" href="#overview" aria-label="Linus Shyu dashboard">
-          <span class="brand-mark" aria-hidden="true">
-            <i></i><i></i><i></i><i></i>
-          </span>
-          <strong>Growth</strong>
-        </a>
-        <nav class="rail-nav">
-          <a href="#overview" class="active" data-i18n="nav_overview">Overview</a>
-          <a href="#decision" data-i18n="nav_decision">Decision</a>
-          <a href="#language" data-i18n="nav_language">Language</a>
-          <a href="#tasks" data-i18n="nav_tasks">Tasks</a>
-          <a href="#funnel" data-i18n="nav_funnel">Funnel</a>
-          <a href="#trend" data-i18n="nav_trend">Trend</a>
-          <a href="#posts" data-i18n="nav_posts">Posts</a>
-          <a href="#advice" data-i18n="nav_advice">AI Advice</a>
-        </nav>
-        <div class="rail-status">
-          <span class="live-dot"></span>
-          <div>
-            <strong data-i18n="auto_update">Auto update</strong>
-            <small id="rail-sync">data.json</small>
-          </div>
-        </div>
-      </aside>
-
-      <main class="main">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow" data-i18n="eyebrow">Linus Shyu / X Growth</p>
-            <h1 data-i18n="title">Growth dashboard that shows what matters.</h1>
-          </div>
-          <div class="top-actions">
-            <div class="segmented" aria-label="Theme">
-              <button type="button" data-theme-value="light">Light</button>
-              <button type="button" data-theme-value="dark">Dark</button>
-            </div>
-            <div class="segmented" aria-label="Language">
-              <button type="button" data-lang-value="en">EN</button>
-              <button type="button" data-lang-value="zh">中文</button>
-            </div>
-            <button class="button secondary" id="refresh-button" type="button" data-i18n="refresh">Refresh</button>
-            <a class="button primary open-x-button" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_x">Open X</a>
-          </div>
-        </header>
-
-        <div class="signal-strip" aria-label="Live operator feed">
-          <span class="signal-pulse"></span>
-          <span data-i18n="signal_feed">Operator feed</span>
-          <span class="signal-sep"></span>
-          <span id="signal-sync">data.json</span>
-          <span class="signal-sep"></span>
-          <span data-i18n="decision_zero_reads">0 extra X reads</span>
-          <span class="signal-sep"></span>
-          <span data-i18n="signal_manual">Manual routes only</span>
-        </div>
-
-        <div id="ops-banner" class="ops-banner" hidden aria-live="polite"></div>
-
-        <section class="hero-grid" id="overview">
-          <article class="hero-card">
-            <div class="hero-head">
-              <span class="status-pill" id="freshness-pill">Live data</span>
-              <span id="updated-at">-</span>
-            </div>
-            <h2 id="growth-headline">Loading growth signal...</h2>
-            <p id="growth-summary">Fetching the latest dashboard data.</p>
-            <div class="hero-metrics">
-              <div>
-                <span data-i18n="followers">Followers</span>
-                <strong id="metric-followers">-</strong>
-                <small id="metric-follower-delta">-</small>
-              </div>
-              <div>
-                <span data-i18n="posts_24h">24h Posts</span>
-                <strong id="metric-posts">-</strong>
-                <small id="metric-engagement">-</small>
-              </div>
-              <div>
-                <span data-i18n="traffic_7d">7d Reach</span>
-                <strong id="metric-reach">-</strong>
-                <small id="metric-score">-</small>
-              </div>
-              <div>
-                <span data-i18n="api_left">API Left</span>
-                <strong id="metric-api">-</strong>
-                <small id="metric-api-spend">-</small>
-              </div>
-            </div>
-          </article>
-
-          <article class="focus-card" id="advice">
-            <div class="section-head compact">
-              <p data-i18n="ai_today">AI Today</p>
-              <h2 id="primary-advice-title">Next best move</h2>
-            </div>
-            <p id="primary-advice">Loading AI suggestions...</p>
-            <div class="action-row">
-              <a class="button primary" id="primary-route" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer" data-i18n="open_route">Open route</a>
-              <button class="button secondary" id="copy-best-draft" type="button" data-i18n="copy_best">Copy best draft</button>
-            </div>
-          </article>
-        </section>
-
-        <section class="panel decision-panel" id="decision">
-          <div class="section-head">
-            <p data-i18n="decision_eyebrow">Growth Decision</p>
-            <h2 data-i18n="decision_title">Today’s operating call</h2>
-          </div>
-          <div class="decision-grid" id="decision-grid"></div>
-        </section>
-
-        <section class="panel language-panel" id="language">
-          <div class="section-head">
-            <p data-i18n="language_eyebrow">Language Tracks</p>
-            <h2 data-i18n="language_title">Chinese and English run in their own windows</h2>
-          </div>
-          <p class="language-roi-summary" id="language-roi-summary"></p>
-          <div class="language-track-grid" id="language-track-grid"></div>
-        </section>
-
-        <section class="ops-grid">
-          <article class="panel freshness-panel" id="freshness">
-            <div class="section-head compact">
-              <p data-i18n="freshness_eyebrow">Data Freshness</p>
-              <h2 data-i18n="freshness_title">Can I trust this run?</h2>
-            </div>
-            <div class="freshness-list" id="freshness-list"></div>
-          </article>
-
-          <article class="panel task-panel" id="tasks">
-            <div class="section-head compact">
-              <p data-i18n="tasks_eyebrow">Today</p>
-              <h2 data-i18n="tasks_title">Do these 3 reply jobs</h2>
-            </div>
-            <div class="task-list" id="task-list"></div>
-            <div class="task-log-bar">
-              <label>
-                <span data-i18n="task_engagement">Reply engagement</span>
-                <select id="task-engagement">
-                  <option value="unknown">unknown</option>
-                  <option value="none">none</option>
-                  <option value="some">some</option>
-                  <option value="strong">strong</option>
-                </select>
-              </label>
-              <button class="button secondary" id="copy-operator-log" type="button" data-i18n="task_export">Copy operator log</button>
-            </div>
-            <p class="task-log-hint" id="task-log-hint"></p>
-          </article>
-        </section>
-
-        <section class="panel" id="funnel">
-          <div class="section-head">
-            <p data-i18n="funnel_eyebrow">Growth Funnel</p>
-            <h2 data-i18n="funnel_title">Where growth is leaking</h2>
-          </div>
-          <div class="funnel-list" id="funnel-list"></div>
-        </section>
-
-        <section class="panel" id="trend">
-          <div class="section-head">
-            <p data-i18n="growth_trend">Growth Trend</p>
-            <h2 data-i18n="trend_title">Follower, reach, and posting velocity</h2>
-          </div>
-          <div class="trend-grid">
-            <div class="chart-card">
-              <div class="chart-title">
-                <strong data-i18n="reach_chart">Reach over time</strong>
-                <span id="reach-total">-</span>
-              </div>
-              <div class="chart-wrap">
-                <svg id="reach-chart" viewBox="0 0 640 220" role="img" aria-label="Reach trend"></svg>
-              </div>
-            </div>
-            <div class="chart-card">
-              <div class="chart-title">
-                <strong data-i18n="cost_chart">X API spend</strong>
-                <span id="cost-total">-</span>
-              </div>
-              <div class="chart-wrap">
-                <svg id="cost-chart" viewBox="0 0 640 220" role="img" aria-label="Cost trend"></svg>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="content-grid">
-          <article class="panel" id="posts">
-            <div class="section-head">
-              <p data-i18n="posted_content">Posted Content</p>
-              <h2 data-i18n="posts_title">What the bot published recently</h2>
-            </div>
-            <div class="post-list" id="post-list"></div>
-          </article>
-
-          <article class="panel" id="drafts">
-            <div class="section-head">
-              <p data-i18n="reply_queue">Reply Queue</p>
-              <h2 data-i18n="drafts_title">Copy-paste drafts for manual replies</h2>
-            </div>
-            <div class="draft-list" id="draft-list"></div>
-          </article>
-        </section>
-
-        <section class="content-grid lower">
-          <article class="panel">
-            <div class="section-head">
-              <p data-i18n="ai_reasoning">AI Reasoning</p>
-              <h2 data-i18n="advice_title">What the system thinks you should do</h2>
-            </div>
-            <div class="advice-list" id="advice-list"></div>
-          </article>
-
-          <article class="panel" id="cost">
-            <div class="section-head">
-              <p data-i18n="cost_guard">Cost Guard</p>
-              <h2 data-i18n="cost_title">Keep growth cheap</h2>
-            </div>
-            <div class="cost-card">
-              <div class="cost-ring" id="cost-ring">
-                <strong id="cost-percent">-</strong>
-                <span data-i18n="used">used</span>
-              </div>
-              <div class="cost-copy">
-                <p id="cost-summary">Loading cost data...</p>
-                <div class="endpoint-list" id="endpoint-list"></div>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section class="panel" id="evidence">
-          <div class="section-head">
-            <p data-i18n="evidence_eyebrow">AI Evidence</p>
-            <h2 data-i18n="evidence_title">Why the AI suggested this</h2>
-          </div>
-          <div class="evidence-grid" id="evidence-grid"></div>
-        </section>
-
-        <footer class="footer">
-          <span>© <span id="copyright-year"></span> Linus Shyu.</span>
-          <span id="footer-sync">Auto-updated from GitHub Actions.</span>
-        </footer>
-      </main>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Growth Panel · Linus Shyu</title>
+<meta name="description" content="Lean auto-updating X growth panel: followers, posting, budget and tasks — updated automatically every 2 hours." />
+<style>
+  :root {
+    --bg: #0b0e14; --panel: #121722; --line: #1f2735; --ink: #e7ecf4; --muted: #8a94a6;
+    --accent: #4f8cff; --good: #2fbf71; --warn: #f5a524; --bad: #f0574f; --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  }
+  html[data-theme="light"] {
+    --bg: #f4f6fa; --panel: #ffffff; --line: #e3e8f0; --ink: #14181f; --muted: #5c6675;
+    --accent: #2f6fe4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 -apple-system, "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", sans-serif; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 24px 20px 60px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), #7c4dff); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px; }
+  h1 { font-size: 20px; margin: 0; font-weight: 700; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button, .btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 7px 12px; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  button:hover, .btn:hover { border-color: var(--accent); }
+  .sync { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 8px var(--good); }
+  .dot.stale { background: var(--warn); box-shadow: 0 0 8px var(--warn); }
+  .dot.dead { background: var(--bad); box-shadow: 0 0 8px var(--bad); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .card h2 { font-size: 13px; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+  .kpi .value { font-size: 30px; font-weight: 800; font-family: var(--mono); }
+  .kpi .note { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .delta-up { color: var(--good); } .delta-down { color: var(--bad); }
+  .banner { display: flex; gap: 10px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin-bottom: 14px; font-size: 13px; flex-wrap: wrap; }
+  .banner.warn { border-color: var(--warn); }
+  .banner.bad { border-color: var(--bad); }
+  .row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+  .row:last-child { border-bottom: 0; }
+  .row .k { color: var(--muted); }
+  .row .v { font-family: var(--mono); font-weight: 600; }
+  .bar { height: 10px; border-radius: 6px; background: var(--line); overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #7c4dff); }
+  .format { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+  .format .name { width: 150px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .format .track { flex: 1; }
+  .format .score { width: 90px; text-align: right; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .chart { display: flex; align-items: flex-end; gap: 3px; height: 120px; margin-top: 8px; }
+  .chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+  .chart .stack { width: 100%; max-width: 26px; border-radius: 4px 4px 2px 2px; display: flex; flex-direction: column-reverse; justify-content: flex-end; overflow: hidden; background: var(--line); }
+  .chart .stack i { display: block; width: 100%; }
+  .chart .stack i.xapi { background: var(--warn); }
+  .chart .stack i.llm { background: var(--accent); }
+  .chart .stack i.posts { background: var(--good); }
+  .chart .lbl { font-size: 9px; color: var(--muted); font-family: var(--mono); transform: rotate(-45deg); transform-origin: center; white-space: nowrap; margin-top: 2px; }
+  .task { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; text-decoration: none; color: var(--ink); }
+  .task:hover { border-color: var(--accent); }
+  .task .t { font-weight: 600; font-size: 14px; }
+  .task .d { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .task .c { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-top: 8px; display: block; word-break: break-word; }
+  .quote { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 10px 0; font-size: 14px; white-space: pre-wrap; }
+  .quote a { color: var(--ink); text-decoration: none; }
+  .quote a:hover { color: var(--accent); }
+  footer { color: var(--muted); font-size: 12px; margin-top: 30px; text-align: center; font-family: var(--mono); }
+  footer a { color: var(--accent); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } .format .name { width: 110px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="brand-mark">G</span>
+      <div>
+        <h1>Growth Panel</h1>
+        <div class="sub">Linus Shyu · X Growth · <span data-i18n="auto">自动更新, 无需人工操作</span></div>
+      </div>
     </div>
+    <div class="top-actions">
+      <div class="sync"><span class="dot" id="sync-dot"></span><span id="sync-text">…</span></div>
+      <button type="button" data-theme-toggle>🌓</button>
+      <button type="button" data-lang-toggle>中/EN</button>
+      <button type="button" id="refresh" data-i18n="refresh">刷新</button>
+      <a class="btn" href="https://x.com/Linus_Shyu" target="_blank" rel="noreferrer">X</a>
+    </div>
+  </header>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./script.js?v=20260918-ops-v1"></script>
-  </body>
+  <div id="banner"></div>
+
+  <div class="grid">
+    <div class="card kpi"><h2 data-i18n="followers">粉丝</h2><div class="value" id="k-followers">—</div><div class="note" id="k-followers-note"></div></div>
+    <div class="card kpi"><h2 data-i18n="baseline">基线分</h2><div class="value" id="k-baseline">—</div><div class="note" id="k-baseline-note"></div></div>
+    <div class="card kpi"><h2 data-i18n="xapi">X API 花费</h2><div class="value" id="k-xapi">—</div><div class="note" id="k-xapi-note"></div></div>
+    <div class="card kpi"><h2 data-i18n="llm">LLM 花费</h2><div class="value" id="k-llm">—</div><div class="note" id="k-llm-note"></div></div>
+  </div>
+
+  <div class="two">
+    <div class="card"><h2 data-i18n="lastpost">最近发帖</h2><div id="lastpost"></div></div>
+    <div class="card"><h2 data-i18n="bestpost">最佳表现帖</h2><div id="bestpost"></div></div>
+  </div>
+
+  <div class="two" style="margin-top:14px">
+    <div class="card"><h2 data-i18n="formats">内容格式表现</h2><div id="formats"></div></div>
+    <div class="card"><h2 data-i18n="budget">本月预算</h2>
+      <div class="row"><span class="k">X API</span><span class="v" id="b-xapi"></span></div>
+      <div class="bar"><i id="bar-xapi" style="width:0%"></i></div>
+      <div class="row"><span class="k">DeepSeek</span><span class="v" id="b-llm"></span></div>
+      <div class="bar"><i id="bar-llm" style="width:0%"></i></div>
+      <div class="row"><span class="k" data-i18n="llmcalls">LLM 调用 / tokens</span><span class="v" id="b-llm-meta">—</span></div>
+      <div class="row"><span class="k" id="b-rss-k">RSS · X auth</span><span class="v" id="b-rss">—</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2 data-i18n="charts">近 14 天 · 发帖</h2><div class="chart" id="chart-posts"></div></div>
+  <div class="card" style="margin-top:14px"><h2 data-i18n="spend">近 14 天 · 花费 (USD)</h2><div class="chart" id="chart-spend"></div></div>
+
+  <div class="card" style="margin-top:14px"><h2 data-i18n="tasks">今日任务</h2><div id="tasks"></div></div>
+
+  <footer>
+    <span data-i18n="footer">数据由 GitHub Actions 每 2 小时自动生成并同步 · 本次生成于 </span><span id="f-updated">—</span>
+    · <a href="https://github.com/Linus-Shyu/x_bot" target="_blank" rel="noreferrer">x_bot</a>
+    · <a href="https://github.com/Linus-Shyu/XGrowth" target="_blank" rel="noreferrer">XGrowth</a>
+    · <span data-i18n="auto2">页面每 5 分钟自动刷新</span>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const I18N = {
+  zh: { auto:"自动更新, 无需人工操作", refresh:"刷新", followers:"粉丝", baseline:"基线分(增长得分)", xapi:"X API 花费", llm:"LLM 花费",
+        lastpost:"最近发帖", bestpost:"最佳表现帖", formats:"内容格式表现", budget:"本月预算", llmcalls:"LLM 调用 / tokens",
+        charts:"近 14 天 · 发帖", spend:"近 14 天 · 花费 (USD)", tasks:"今日任务",
+        footer:"数据由 GitHub Actions 每 2 小时自动生成并同步 · 本次生成于 ", auto2:"页面每 5 分钟自动刷新",
+        ago:"前发帖", hours:"小时", cached:"缓存遥测", live:"实时遥测", ok:"正常", depleted:"耗尽",
+        fans:"前粉丝", delta:"变化", posts:"发帖", measured:"已测量", tracked:"追踪",
+        spendOf:"花费 / 预算", noData:"暂无数据", noBudget:"未设硬预算",
+        noTasks:"今日无任务(全部完成或未到窗口)", postLink:"在 X 上查看", score:"得分", copy:"复制",
+        rssOk:"RSS 源正常", xAuth:"X 授权", promo:"promo vs organic", saved:"已复制" },
+  en: { auto:"auto-updates, zero manual work", refresh:"Refresh", followers:"Followers", baseline:"Baseline score", xapi:"X API spend", llm:"LLM spend",
+        lastpost:"Last post", bestpost:"Best post", formats:"Content formats", budget:"Monthly budget", llmcalls:"LLM calls / tokens",
+        charts:"Last 14 days · posts", spend:"Last 14 days · spend (USD)", tasks:"Today's tasks",
+        footer:"Data auto-generated & synced by GitHub Actions every 2h · generated at ", auto2:"page auto-refreshes every 5 min",
+        ago:"ago", hours:"h", cached:"cached telemetry", live:"live telemetry", ok:"ok", depleted:"depleted",
+        fans:"followers", delta:"delta", posts:"posts", measured:"measured", tracked:"tracked",
+        spendOf:"spent / budget", noData:"No data yet", noBudget:"no hard budget set",
+        noTasks:"No tasks today", postLink:"View on X", score:"score", copy:"Copy",
+        rssOk:"RSS feeds ok", xAuth:"X auth", promo:"promo vs organic", saved:"Copied" },
+};
+let lang = ((navigator.language || "").toLowerCase().startsWith("zh")) ? "zh" : "en";
+const t = (key) => (I18N[lang] || I18N.en)[key] || key;
+function applyI18n() {
+  document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
+}
+function esc(s) { const d = document.createElement("div"); d.textContent = String(s ?? ""); return d.innerHTML; }
+
+let DATA = null;
+function num(v, digits = 0) {
+  const n = Number(v);
+  return Number.isFinite(n) ? (digits > 0 ? n.toFixed(digits) : String(Math.round(n))) : "—";
+}
+function pct(part, whole) { return whole > 0 ? Math.min(100, Math.round((part / whole) * 100)) : 0; }
+
+function renderBanner() {
+  const el = document.getElementById("banner");
+  const d = DATA;
+  if (!d) { el.innerHTML = ""; return; }
+  const rows = [];
+  const stale = d.posting && d.posting.hoursAgo > 30;
+  const dead = !d.posting;
+  const cls = dead ? "bad" : (stale ? "warn" : "");
+  const source = d.telemetry.source === "live" ? t("live") : t("cached");
+  rows.push(`<strong>${dead ? "⚠ 停更" : (stale ? "⚠ 发帖间隔偏长" : "● 运行中")}</strong> · ${source}${d.telemetry.reason ? " · " + esc(d.telemetry.reason) : ""}`);
+  if (d.posting) rows.push(`${t("lastpost")}: ${num(d.posting.hoursAgo, 1)}${t("hours")}${t("ago")}`);
+  if (d.telemetry.dataAgeMinutes != null) rows.push(`metrics ${Math.round(d.telemetry.dataAgeMinutes / 60)}h ${t("ago")}`);
+  if (d.budget.xApi.credits === "depleted") rows.push(`<strong style="color:var(--bad)">credits ${t("depleted")}</strong>`);
+  el.innerHTML = `<div class="banner ${cls}">${rows.join("<span style='color:var(--muted)'> · </span>")}</div>`;
+}
+
+function render() {
+  const d = DATA; if (!d) return;
+  document.getElementById("k-followers").textContent = d.account.followers != null ? num(d.account.followers) : "—";
+  const delta = d.account.delta;
+  const note = document.getElementById("k-followers-note");
+  note.innerHTML = delta != null
+    ? `<span class="${delta >= 0 ? "delta-up" : "delta-down"}">${delta >= 0 ? "+" : ""}${num(delta)}</span> ${t("delta")} / ${num(d.account.deltaDays, 1)}d`
+    : `${num(d.account.trackedPosts)} ${t("tracked")} · ${num(d.account.measuredPosts)} ${t("measured")}`;
+  document.getElementById("k-baseline").textContent = num(d.account.baselineScore, 1);
+  document.getElementById("k-baseline-note").textContent = `${num(d.account.measuredPosts)} ${t("measured")} ${t("posts")}`;
+  document.getElementById("k-xapi").textContent = `$${num(d.budget.xApi.spentUsd, 2)}`;
+  document.getElementById("k-xapi-note").textContent = `${t("spendOf")} $${num(d.budget.xApi.budgetUsd)}`;
+  document.getElementById("k-llm").textContent = `$${num(d.budget.llm.spentUsd, 2)}`;
+  document.getElementById("k-llm-note").textContent = `${num(d.budget.llm.calls)} calls`;
+
+  document.getElementById("lastpost").innerHTML = d.posting
+    ? `<div class="quote"><a href="${esc(d.posting.url)}" target="_blank" rel="noreferrer">${esc(d.posting.text)}</a></div>
+       <div class="row"><span class="k">${t("ago")}</span><span class="v">${num(d.posting.hoursAgo, 1)} ${t("hours")}</span></div>`
+    : `<div class="sub">${t("noData")}</div>`;
+  document.getElementById("bestpost").innerHTML = d.content.bestPost
+    ? `<div class="quote"><a href="${esc(d.content.bestPost.url)}" target="_blank" rel="noreferrer">${esc(d.content.bestPost.text)}</a></div>
+       <div class="row"><span class="k">${t("score")}</span><span class="v">${num(d.content.bestPost.score, 1)}</span></div>`
+    : `<div class="sub">${t("noData")}</div>`;
+
+  const maxFmt = Math.max(1, ...d.content.topFormats.map((f) => Number(f.avgScore) || 0));
+  document.getElementById("formats").innerHTML = d.content.topFormats.length
+    ? d.content.topFormats.map((f) => `
+      <div class="format"><span class="name">${esc(f.id)}</span><div class="track"><div class="bar"><i style="width:${pct(f.avgScore, maxFmt)}%"></i></div></div>
+      <span class="score">${num(f.avgScore, 1)} · n=${num(f.count)}</span></div>`).join("")
+    : `<div class="sub">${t("noData")}</div>`;
+
+  const x = d.budget.xApi, l = d.budget.llm;
+  document.getElementById("b-xapi").textContent = `$${num(x.spentUsd, 2)} / $${num(x.budgetUsd)} ${x.credits === "depleted" ? "· " + t("depleted") : ""}`;
+  document.getElementById("bar-xapi").style.width = pct(x.spentUsd, x.safeCapUsd) + "%";
+  document.getElementById("b-llm").textContent = l.budgetUsd > 0 ? `$${num(l.spentUsd, 2)} / $${num(l.budgetUsd)}` : `$${num(l.spentUsd, 2)} (${t("noBudget")})`;
+  document.getElementById("bar-llm").style.width = l.budgetUsd > 0 ? pct(l.spentUsd, l.budgetUsd) + "%" : "0%";
+  document.getElementById("b-llm-meta").textContent = `${num(l.calls)} · ${num(l.inputTokens)}i / ${num(l.outputTokens)}o`;
+  document.getElementById("b-rss").textContent = `${d.health.rss.ok}/${d.health.rss.total} ${t("rssOk")} · ${t("xAuth")} ${d.health.xAuth}`;
+
+  const maxPosts = Math.max(1, ...d.charts.postsDaily.map((p) => p.posts));
+  document.getElementById("chart-posts").innerHTML = d.charts.postsDaily.map((p) => `
+    <div class="col"><div class="stack" style="height:${pct(p.posts, maxPosts) * 0.9 + 4}%"><i class="posts" style="height:100%"></i></div><span class="lbl">${p.day}</span></div>`).join("");
+  const maxSpend = Math.max(0.001, ...d.charts.spendDaily.map((s) => (s.xApiUsd || 0) + (s.llmUsd || 0)));
+  document.getElementById("chart-spend").innerHTML = d.charts.spendDaily.map((s) => {
+    const total = (s.xApiUsd || 0) + (s.llmUsd || 0);
+    const h = pct(total, maxSpend) * 0.9 + (total > 0 ? 4 : 2);
+    const hx = total > 0 ? pct(s.xApiUsd, total) : 0;
+    return `<div class="col"><div class="stack" style="height:${h}%"><i class="llm" style="height:${100 - hx}%"></i><i class="xapi" style="height:${hx}%"></i></div><span class="lbl">${s.day}</span></div>`;
+  }).join("");
+
+  const promo = d.promo;
+  if (promo) {
+    const lift = promo.organicAvg > 0 ? Math.round(((promo.promoAvg - promo.organicAvg) / promo.organicAvg) * 100) : 0;
+    document.getElementById("b-rss").textContent += ` · promo ${promo.promoAvg} vs ${promo.organicAvg} (${lift >= 0 ? "+" : ""}${lift}%)`;
+  }
+
+  document.getElementById("tasks").innerHTML = (d.tasks && d.tasks.length)
+    ? d.tasks.map((task) => `
+      <a class="task" ${task.url ? `href="${esc(task.url)}" target="_blank" rel="noreferrer"` : ""}>
+        <div class="t">${esc(task.title)}</div><div class="d">${esc(task.detail)}</div>
+        ${task.text ? `<span class="c">${esc(task.text.length > 200 ? task.text.slice(0, 200) + "…" : task.text)}</span>` : ""}
+      </a>`).join("")
+    : `<div class="sub">${t("noTasks")}</div>`;
+
+  document.getElementById("f-updated").textContent = d.updatedAt || "—";
+  const dot = document.getElementById("sync-dot");
+  const ageMin = Math.max(0, (Date.now() - Date.parse(d.updatedAt || Date.now())) / 60000);
+  dot.className = "dot" + (ageMin > 180 ? " stale" : "") + (ageMin > 1440 ? " dead" : "");
+  document.getElementById("sync-text").textContent = d.updatedAt
+    ? `${t("auto").split(",")[0]} · ${new Date(d.updatedAt).toLocaleString(lang === "zh" ? "zh-CN" : "en-US")}`
+    : "…";
+  renderBanner();
+}
+
+async function load() {
+  try {
+    const res = await fetch("panel.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(String(res.status));
+    DATA = await res.json();
+    render();
+  } catch (err) {
+    document.getElementById("banner").innerHTML =
+      `<div class="banner bad">panel.json 加载失败 (${esc(err.message)}) — 等待下一次自动同步</div>`;
+  }
+}
+
+document.getElementById("refresh").addEventListener("click", load);
+document.querySelector("[data-theme-toggle]").addEventListener("click", () => {
+  const root = document.documentElement;
+  const next = root.dataset.theme === "dark" ? "light" : "dark";
+  root.dataset.theme = next;
+  localStorage.setItem("growth-panel-theme", next);
+});
+document.querySelector("[data-lang-toggle]").addEventListener("click", () => {
+  lang = lang === "zh" ? "en" : "zh";
+  localStorage.setItem("growth-panel-lang", lang);
+  applyI18n(); render();
+});
+try { document.documentElement.dataset.theme = localStorage.getItem("growth-panel-theme") || "dark"; } catch {}
+try { const saved = localStorage.getItem("growth-panel-lang"); if (saved) lang = saved; } catch {}
+applyI18n();
+load();
+setInterval(load, 5 * 60 * 1000);
+</script>
+</body>
 </html>
