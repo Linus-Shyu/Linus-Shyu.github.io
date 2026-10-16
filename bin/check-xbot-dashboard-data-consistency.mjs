@@ -43,11 +43,15 @@ for (const dir of dashboards) {
   const spendDaily = data?.charts?.spendDaily || [];
   const xDaily = spendDaily.reduce((sum, point) => sum + number(point?.xApiUsd || 0), 0);
   const llmDaily = spendDaily.reduce((sum, point) => sum + number(point?.llmUsd || 0), 0);
-  if (Math.abs(xDaily - xSpent) > 0.02) {
-    fail(`${file} daily X API spend (${xDaily.toFixed(3)}) disagrees with monthly total (${xSpent.toFixed(3)}).`);
+  // The chart covers the last 14 days while the totals are monthly, so on
+  // month boundaries the window sum is legitimately LOWER than the total
+  // (early-month days fall outside the window). The only invalid state is the
+  // daily sum exceeding the monthly total beyond float tolerance.
+  if (xDaily - xSpent > 0.02) {
+    fail(`${file} daily X API spend (${xDaily.toFixed(3)}) exceeds monthly total (${xSpent.toFixed(3)}).`);
   }
-  if (Math.abs(llmDaily - llmSpent) > 0.02) {
-    fail(`${file} daily LLM spend (${llmDaily.toFixed(3)}) disagrees with monthly total (${llmSpent.toFixed(3)}).`);
+  if (llmDaily - llmSpent > 0.02) {
+    fail(`${file} daily LLM spend (${llmDaily.toFixed(3)}) exceeds monthly total (${llmSpent.toFixed(3)}).`);
   }
 
   const postsDaily = data?.charts?.postsDaily || [];
