@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - ".github/workflows/xbot-dashboard-quality.yml"
-      - "bin/check-xbot-dashboard-vocabulary.mjs"
+      - "bin/check-xbot-dashboard-*.mjs"
       - "docs/xbot-dashboard/**"
       - "package-lock.json"
       - "package.json"
@@ -14,7 +14,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/xbot-dashboard-quality.yml"
-      - "bin/check-xbot-dashboard-vocabulary.mjs"
+      - "bin/check-xbot-dashboard-*.mjs"
       - "docs/xbot-dashboard/**"
       - "package-lock.json"
       - "package.json"
