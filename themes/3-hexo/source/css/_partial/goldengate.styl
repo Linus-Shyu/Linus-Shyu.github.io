@@ -2,21 +2,51 @@
 // Frames are a real time sequence (moon drifts from upper left to the tower
 // tip); goldengate.js cross-fades them. Only rendered on the homepage.
 
+// Full-window immersive band.
+//
+// The reading column is capped at 900px, far too small for a 4K photograph —
+// the bridge lost all its detail at that width. The band therefore escapes the
+// column and spans the whole content viewport, while the article text below
+// keeps its usual measure.
+//
+// Sidebar geometry, measured from the theme (not assumed):
+//   >=1920px   .nav is 542px, relative/float-left  -> content starts at 542
+//   1024-1440  .nav is 492px, relative/float-left  -> content starts at 492
+//   <=1024     .nav is absolute (an overlay)       -> content starts at 0
+// Keeping these values in sync with the media queries below is what makes the
+// band land exactly at the sidebar's right edge.
+//
+// `left` is used instead of negative margins because the column's overflow
+// clipping would otherwise win; a viewport-relative offset is not clipped.
+
 .gg-hero
   position relative
   padding 0
   overflow hidden
   background #0a1526
   isolation isolate
-  // Native 16:9 frame: height follows the photographs' own aspect ratio so no
-  // part of the image is cropped away by the container. No max-height here —
-  // capping it while the image uses object-fit: contain would letterbox the
-  // photograph inside the band.
+  // Native 16:9 frame so the photograph is never cropped.
   aspect-ratio 16 / 9
-  // Break out of article's 2.5em padding and white card so the band runs
-  // edge to edge; the negative margins cancel that padding on all three sides.
-  width calc(100% + 5em)
-  margin -2.5em -2.5em 1.5em -2.5em
+  margin-top -2.5em
+  margin-bottom 1.5em
+
+// Floor: sidebar is an overlay, content spans the full width.
+.gg-hero
+  width 100vw
+  margin-left 0
+  left calc(-50vw + 50%)
+
+@media screen and (min-width 1025px)
+  .gg-hero
+    // Sidebar occupies 492px of the layout.
+    width calc(100vw - 492px)
+    left calc(-50vw + 246px + 50%)
+
+@media screen and (min-width 1441px)
+  .gg-hero
+    // Sidebar widens to 542px.
+    width calc(100vw - 542px)
+    left calc(-50vw + 271px + 50%)
 
 .gg-timelapse
   position absolute
@@ -107,3 +137,11 @@
 @media (prefers-reduced-motion: reduce)
   .gg-timelapse__frame
     transition none
+
+// The band is wider than the reading column, so the two clipping ancestors must
+// stop clipping on the homepage. Scoped to the index page: article pages keep
+// their normal scroll containers and never render this band.
+#post.index
+  .pjax
+    overflow-x visible
+    overflow-y visible

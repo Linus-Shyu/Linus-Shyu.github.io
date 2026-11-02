@@ -9,6 +9,19 @@
  * srcset carries the full 4K resolution for hi-DPI displays.
  */
 var ggWidths = [1280, 1920, 2560, 3840];
+/**
+ * sizes must describe the width the band is actually drawn at, otherwise the
+ * browser picks a source for the wrong size and hi-DPI screens end up
+ * upscaling it. Measured values (see the sidebar geometry note in
+ * css/_partial/goldengate.styl): the band spans the window minus the sidebar —
+ * 492px up to 1440px, 542px above that, and the full window when the sidebar
+ * becomes an overlay on small screens.
+ */
+var ggSizes = [
+  '(max-width: 1024px) 100vw',
+  '(max-width: 1440px) calc(100vw - 492px)',
+  'calc(100vw - 542px)'
+].join(', ');
 var ggSrcset = function (ext) {
   return ggWidths.map(function (w) {
     return url_for('/img/goldengate/goldengate-' + i + '-' + w + '.' + ext) + ' ' + w + 'w';
@@ -22,11 +35,11 @@ var ggSrcset = function (ext) {
             <picture>
                 <source type="image/webp"
                         srcset="<%= ggSrcset('webp') %>"
-                        sizes="100vw">
+                        sizes="<%= ggSizes %>">
                 <img class="gg-timelapse__img"
                      src="<%= url_for('/img/goldengate/goldengate-' + i + '-1920.jpg') %>"
                      srcset="<%= ggSrcset('jpg') %>"
-                     sizes="100vw"
+                     sizes="<%= ggSizes %>"
                      width="1920" height="1080"
                      alt=""
                      loading="<%= i === 0 ? 'eager' : 'lazy' %>"

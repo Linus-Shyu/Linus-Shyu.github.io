@@ -513,8 +513,25 @@
   background: #0a1526;
   isolation: isolate;
   aspect-ratio: 16/9;
-  width: calc(100% + 5em);
-  margin: -2.5em -2.5em 1.5em -2.5em;
+  margin-top: -2.5em;
+  margin-bottom: 1.5em;
+}
+.gg-hero {
+  width: 100vw;
+  margin-left: 0;
+  left: calc(-50vw + 50%);
+}
+@media screen and (min-width: 1025px) {
+  .gg-hero {
+    width: calc(100vw - 492px);
+    left: calc(-50vw + 246px + 50%);
+  }
+}
+@media screen and (min-width: 1441px) {
+  .gg-hero {
+    width: calc(100vw - 542px);
+    left: calc(-50vw + 271px + 50%);
+  }
 }
 .gg-timelapse {
   position: absolute;
@@ -591,6 +608,10 @@
   .gg-timelapse__frame {
     transition: none;
   }
+}
+#post.index .pjax {
+  overflow-x: visible;
+  overflow-y: visible;
 }
 @-moz-keyframes gg-drift {
   from {
