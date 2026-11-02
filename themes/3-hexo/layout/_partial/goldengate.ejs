@@ -1,11 +1,14 @@
 <%
 /**
  * Golden Gate moonrise band — homepage only.
+ *
  * Four frames of one timelapse: the full moon drifts from the upper left down
- * to the tip of the near tower. goldengate.js cross-fades them so the drift
- * reads as motion. <picture> keeps WebP where supported and falls back to JPEG.
+ * to the tip of the near tower. They are shown in the photographs' native 16:9
+ * frame — never cropped — so the moon, both towers and the bridge deck are all
+ * visible. <picture> serves WebP where supported and falls back to JPEG, and
+ * srcset carries the full 4K resolution for hi-DPI displays.
  */
-var ggWidths = [960, 1600, 2400];
+var ggWidths = [1280, 1920, 2560, 3840];
 var ggSrcset = function (ext) {
   return ggWidths.map(function (w) {
     return url_for('/img/goldengate/goldengate-' + i + '-' + w + '.' + ext) + ' ' + w + 'w';
@@ -21,10 +24,10 @@ var ggSrcset = function (ext) {
                         srcset="<%= ggSrcset('webp') %>"
                         sizes="100vw">
                 <img class="gg-timelapse__img"
-                     src="<%= url_for('/img/goldengate/goldengate-' + i + '-1600.jpg') %>"
+                     src="<%= url_for('/img/goldengate/goldengate-' + i + '-1920.jpg') %>"
                      srcset="<%= ggSrcset('jpg') %>"
                      sizes="100vw"
-                     width="1600" height="900"
+                     width="1920" height="1080"
                      alt=""
                      loading="<%= i === 0 ? 'eager' : 'lazy' %>"
                      decoding="async">

@@ -509,12 +509,10 @@
 .gg-hero {
   position: relative;
   padding: 0;
-  height: 46vh;
-  min-height: 300px;
-  max-height: 460px;
   overflow: hidden;
   background: #0a1526;
   isolation: isolate;
+  aspect-ratio: 16/9;
   width: calc(100% + 5em);
   margin: -2.5em -2.5em 1.5em -2.5em;
 }
@@ -537,8 +535,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 50% 58%;
+  object-fit: contain;
+  object-position: 50% 50%;
   animation: gg-drift 26s ease-in-out infinite alternate;
 }
 .gg-hero.is-static .gg-timelapse__img {
@@ -582,12 +580,8 @@
   color: rgba(255,255,255,0.62);
 }
 @media screen and (max-width: 768px) {
-  .gg-hero {
-    height: 34vh;
-    min-height: 220px;
-  }
   .gg-hero__caption {
-    padding: 0 1.25rem 1rem;
+    padding: 0 1.25rem 0.9rem;
   }
   .gg-hero__title {
     font-size: 0.85rem;
@@ -600,34 +594,34 @@
 }
 @-moz-keyframes gg-drift {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.001);
   }
   to {
-    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+    transform: scale(1.015);
   }
 }
 @-webkit-keyframes gg-drift {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.001);
   }
   to {
-    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+    transform: scale(1.015);
   }
 }
 @-o-keyframes gg-drift {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.001);
   }
   to {
-    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+    transform: scale(1.015);
   }
 }
 @keyframes gg-drift {
   from {
-    transform: scale(1.02) translate3d(0, 0, 0);
+    transform: scale(1.001);
   }
   to {
-    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+    transform: scale(1.015);
   }
 }
 .nav-left {

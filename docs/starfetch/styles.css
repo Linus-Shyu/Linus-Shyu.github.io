@@ -1033,6 +1033,9 @@ body {
 .gg-hero-bg {
     position: absolute;
     inset: 0;
+    /* The photo sits as a full-width 16:9 band anchored to the bottom of the
+       hero, so the composition is never cropped; the hero's own background
+       colour fills the remaining height. */
     z-index: 0;
     overflow: hidden;
     background: #0a1526;
@@ -1042,7 +1045,10 @@ body {
 
 .gg-hero__frame {
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
     opacity: 0;
     transition: opacity 1.9s ease-in-out;
     will-change: opacity;
@@ -1055,10 +1061,13 @@ body {
 .gg-hero__img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    /* contain, not cover: the whole photograph stays visible instead of being
+       cropped to fill the hero. */
+    object-fit: contain;
     object-position: center 50%;
-    /* Slow push keeps the night sky from feeling static between cross-fades. */
+    /* A whisper of movement so the night sky is not perfectly static between
+       cross-fades; small enough that nothing is pushed out of frame. */
     animation: gg-hero-drift 30s ease-in-out infinite alternate;
 }
 
@@ -1068,10 +1077,10 @@ body {
 
 @keyframes gg-hero-drift {
     from {
-        transform: scale(1.02) translate3d(0, 0, 0);
+        transform: scale(1.001);
     }
     to {
-        transform: scale(1.09) translate3d(-1.5%, -1.2%, 0);
+        transform: scale(1.015);
     }
 }
 

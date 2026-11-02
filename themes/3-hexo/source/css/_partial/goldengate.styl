@@ -5,12 +5,14 @@
 .gg-hero
   position relative
   padding 0
-  height 46vh
-  min-height 300px
-  max-height 460px
   overflow hidden
   background #0a1526
   isolation isolate
+  // Native 16:9 frame: height follows the photographs' own aspect ratio so no
+  // part of the image is cropped away by the container. No max-height here —
+  // capping it while the image uses object-fit: contain would letterbox the
+  // photograph inside the band.
+  aspect-ratio 16 / 9
   // Break out of article's 2.5em padding and white card so the band runs
   // edge to edge; the negative margins cancel that padding on all three sides.
   width calc(100% + 5em)
@@ -34,9 +36,12 @@
   display block
   width 100%
   height 100%
-  object-fit cover
-  object-position 50% 58%
-  // Slight drift keeps the still composition alive between cross-fades.
+  // contain, not cover: the whole photograph must stay visible. On a viewport
+  // narrower than 16:9 the frame shrinks to fit rather than cropping the moon.
+  object-fit contain
+  object-position 50% 50%
+  // Very slight drift keeps the still composition alive between cross-fades;
+  // kept under 1.5% so no part of the image is pushed out of frame.
   animation gg-drift 26s ease-in-out infinite alternate
 
 .gg-hero.is-static
@@ -45,9 +50,9 @@
 
 @keyframes gg-drift
   from
-    transform scale(1.02) translate3d(0, 0, 0)
+    transform scale(1.001)
   to
-    transform scale(1.08) translate3d(-1.2%, -1%, 0)
+    transform scale(1.015)
 
 // Legibility scrim: dark at the bottom so text over it stays readable,
 // transparent at the top to keep the moon crisp.
@@ -93,12 +98,9 @@
   text-transform uppercase
   color rgba(255, 255, 255, 0.62)
 
-@media screen and (max-width: 768px)
-  .gg-hero
-    height 34vh
-    min-height 220px
+@media screen and (max-width 768px)
   .gg-hero__caption
-    padding 0 1.25rem 1rem
+    padding 0 1.25rem 0.9rem
   .gg-hero__title
     font-size 0.85rem
 
