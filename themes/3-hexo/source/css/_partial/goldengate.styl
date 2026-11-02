@@ -1,0 +1,107 @@
+// Golden Gate moonrise — homepage timelapse band.
+// Frames are a real time sequence (moon drifts from upper left to the tower
+// tip); goldengate.js cross-fades them. Only rendered on the homepage.
+
+.gg-hero
+  position relative
+  padding 0
+  height 46vh
+  min-height 300px
+  max-height 460px
+  overflow hidden
+  background #0a1526
+  isolation isolate
+  // Break out of article's 2.5em padding and white card so the band runs
+  // edge to edge; the negative margins cancel that padding on all three sides.
+  width calc(100% + 5em)
+  margin -2.5em -2.5em 1.5em -2.5em
+
+.gg-timelapse
+  position absolute
+  inset 0
+  overflow hidden
+
+.gg-timelapse__frame
+  position absolute
+  inset 0
+  opacity 0
+  transition opacity 1.6s ease-in-out
+  will-change opacity
+  &.is-active
+    opacity 1
+
+.gg-timelapse__img
+  display block
+  width 100%
+  height 100%
+  object-fit cover
+  object-position 50% 58%
+  // Slight drift keeps the still composition alive between cross-fades.
+  animation gg-drift 26s ease-in-out infinite alternate
+
+.gg-hero.is-static
+  .gg-timelapse__img
+    animation none
+
+@keyframes gg-drift
+  from
+    transform scale(1.02) translate3d(0, 0, 0)
+  to
+    transform scale(1.08) translate3d(-1.2%, -1%, 0)
+
+// Legibility scrim: dark at the bottom so text over it stays readable,
+// transparent at the top to keep the moon crisp.
+.gg-hero__veil
+  position absolute
+  inset 0
+  pointer-events none
+  z-index 3
+  background linear-gradient(
+    180deg,
+    rgba(8, 16, 30, 0.10) 0%,
+    rgba(8, 16, 30, 0.18) 42%,
+    rgba(8, 16, 30, 0.72) 100%
+  )
+
+.gg-hero__caption
+  position absolute
+  left 0
+  right 0
+  bottom 0
+  z-index 4
+  padding 0 2rem 1.35rem
+  max-width 900px
+  margin 0 auto
+  display flex
+  align-items baseline
+  justify-content space-between
+  gap 1rem
+  flex-wrap wrap
+  color rgba(255, 255, 255, 0.92)
+  text-shadow 0 1px 12px rgba(0, 0, 0, 0.55)
+
+.gg-hero__title
+  margin 0
+  font-size 0.95rem
+  font-weight 500
+  letter-spacing 0.02em
+
+.gg-hero__meta
+  margin 0
+  font-size 0.72rem
+  letter-spacing 0.14em
+  text-transform uppercase
+  color rgba(255, 255, 255, 0.62)
+
+@media screen and (max-width: 768px)
+  .gg-hero
+    height 34vh
+    min-height 220px
+  .gg-hero__caption
+    padding 0 1.25rem 1rem
+  .gg-hero__title
+    font-size 0.85rem
+
+@media (prefers-reduced-motion: reduce)
+  .gg-timelapse__frame
+    transition none

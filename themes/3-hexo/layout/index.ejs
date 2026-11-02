@@ -26,7 +26,9 @@
 <div id="post" class="index">
     <div class="pjax">
         <article class="index">
-            <%- partial('_partial/toc-ref', {index: true}) %>
+            <%# This layout also renders archives/categories/tags. The timelapse
+                band belongs to the landing page only, so gate it on is_home()
+                rather than shipping 4 large frames to every index page. %><% if (is_home()) { %><%- partial('_partial/goldengate') %><% } %><%- partial('_partial/toc-ref', {index: true}) %>
             <%- partial('indexs-about.md') %>
             <%- partial('_partial/site-map') %>
             <%- partial('indexs.md') %>

@@ -1,0 +1,41 @@
+<%
+/**
+ * Golden Gate moonrise band — homepage only.
+ * Four frames of one timelapse: the full moon drifts from the upper left down
+ * to the tip of the near tower. goldengate.js cross-fades them so the drift
+ * reads as motion. <picture> keeps WebP where supported and falls back to JPEG.
+ */
+var ggWidths = [960, 1600, 2400];
+var ggSrcset = function (ext) {
+  return ggWidths.map(function (w) {
+    return url_for('/img/goldengate/goldengate-' + i + '-' + w + '.' + ext) + ' ' + w + 'w';
+  }).join(', ');
+};
+%>
+<section class="gg-hero" aria-label="金门大桥月升延时">
+    <div class="gg-timelapse" aria-hidden="true">
+        <% for (var i = 0; i < 4; i++) { %>
+        <div class="gg-timelapse__frame">
+            <picture>
+                <source type="image/webp"
+                        srcset="<%= ggSrcset('webp') %>"
+                        sizes="100vw">
+                <img class="gg-timelapse__img"
+                     src="<%= url_for('/img/goldengate/goldengate-' + i + '-1600.jpg') %>"
+                     srcset="<%= ggSrcset('jpg') %>"
+                     sizes="100vw"
+                     width="1600" height="900"
+                     alt=""
+                     loading="<%= i === 0 ? 'eager' : 'lazy' %>"
+                     decoding="async">
+            </picture>
+        </div>
+        <% } %>
+    </div>
+    <div class="gg-hero__veil"></div>
+    <div class="gg-hero__caption">
+        <p class="gg-hero__title">金门大桥 · 月升</p>
+        <p class="gg-hero__meta">San Francisco</p>
+    </div>
+</section>
+<script src="<%= url_for('/js/goldengate.js') %>" defer></script>
