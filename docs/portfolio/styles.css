@@ -2262,3 +2262,100 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
         display: none;
     }
 }
+
+/* ==========================================================================
+   Security research
+   One advisory card, laid out like the project rows but text-led: there is no
+   screenshot to show, so the card leans on typography and a fact strip.
+   ========================================================================== */
+
+.security-section {
+    padding: var(--spacing-section) 0 0;
+}
+
+.security-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-elevated);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    position: relative;
+    overflow: hidden;
+}
+
+/* A thin accent edge reads as "this is a security finding" without shouting. */
+.security-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--color-accent, #007aff);
+}
+
+.security-card__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0 0 0.9rem;
+}
+
+.security-card__headline {
+    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    color: var(--color-text);
+    margin: 0 0 1rem;
+}
+
+.security-card__body {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 68ch;
+}
+
+.security-card__facts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+    padding: 0;
+    margin: 1.75rem 0 0;
+}
+
+.security-card__facts li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.security-card__fact-key {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+}
+
+.security-card__fact-val {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+}
+
+/* The default .project-links margin is sized for the project rows, where the
+   links follow a short paragraph. Here they follow a dense fact strip, so give
+   the buttons room to breathe. */
+.security-card .project-links {
+    margin-top: 1.9rem;
+}
+
+@media (max-width: 768px) {
+    .security-card__facts {
+        gap: 0.9rem 1.5rem;
+    }
+}

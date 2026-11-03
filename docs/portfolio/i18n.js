@@ -47,6 +47,22 @@ window.PORTFOLIO_I18N = {
       ethers: "Ethers.js 教程",
       ethersMeta: "B 站系列课"
     },
+    security: {
+      title: "安全研究",
+      kicker: "已公开安全公告 · Automattic Mongoose",
+      headline: "schema.virtual() 的原型污染",
+      body: "Mongoose 构建 Schema 时会拆分点号路径，而 schema.virtual() 从不校验路径片段。路径里带上 __proto__、constructor 或 prototype，写入就会落到 Object.prototype 或 Function.prototype 上，并且是 own + enumerable。2022 年的修复加固了 path() 与 add()，却漏掉了这第三个入口，因此它在 6.x、7.x、8.x、9.x 四条维护线上存活了约四年。",
+      factClassKey: "类型",
+      factClassVal: "原型污染",
+      factSeverityKey: "评级",
+      factSeverityVal: "Moderate · CVSS 6.5",
+      factScopeKey: "影响",
+      factScopeVal: "6.x · 7.x · 8.x · 9.x",
+      factFixedKey: "修复版本",
+      factFixedVal: "9.11.4 · 8.24.7 · 7.8.13 · 6.13.12",
+      linkAdvisory: "查看安全公告 >",
+      linkWriteup: "完整分析 >"
+    },
     projects: {
       heading: "核心项目",
       awardMark: "获奖",
@@ -202,6 +218,22 @@ window.PORTFOLIO_I18N = {
       starfetchMeta: "Rust · GitHub",
       ethers: "Ethers.js tutorials",
       ethersMeta: "Bilibili series"
+    },
+    security: {
+      title: "Security research",
+      kicker: "Published advisory · Automattic Mongoose",
+      headline: "Prototype pollution through schema.virtual()",
+      body: "Mongoose splits dotted paths when building a schema, and schema.virtual() never checked the segments. A path containing __proto__, constructor or prototype writes straight onto Object.prototype or Function.prototype — as own, enumerable properties. The 2022 fix hardened path() and add() but missed this third entry point, so it survived roughly four years across the 6.x, 7.x, 8.x and 9.x lines.",
+      factClassKey: "Class",
+      factClassVal: "Prototype pollution",
+      factSeverityKey: "Severity",
+      factSeverityVal: "Moderate · CVSS 6.5",
+      factScopeKey: "Affected",
+      factScopeVal: "6.x · 7.x · 8.x · 9.x",
+      factFixedKey: "Fixed in",
+      factFixedVal: "9.11.4 · 8.24.7 · 7.8.13 · 6.13.12",
+      linkAdvisory: "Read the advisory >",
+      linkWriteup: "Full write-up >"
     },
     projects: {
       heading: "Core Projects",

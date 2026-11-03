@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj） | Linus Shyu的认知库</title>
+  <meta name="keywords" content=" 安全研究 , 原型污染 , Mongoose , Node.js , GHSA ">
+  <meta name="description" content="一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj） | Linus Shyu的认知库">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="前言2026 年 10 月，我给 Mongoose 报告了一个原型污染漏洞。它是”补丁漏修”的典型样本：2022 年官方修过同类问题，但只修了其中一个入口，另一个入口一直没被防护，在 6、7、8、9 四条维护线上存活了大约四年。 这篇记录写清楚三件事：漏洞是怎么找到的、为什么它值得修、以及修复长什么样。 背景：Mongoose 是什么Mongoose 是 Node.js 里最主流的 MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）">
+<meta property="og:url" content="https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="Linus Shyu的认知库">
+<meta property="og:description" content="前言2026 年 10 月，我给 Mongoose 报告了一个原型污染漏洞。它是”补丁漏修”的典型样本：2022 年官方修过同类问题，但只修了其中一个入口，另一个入口一直没被防护，在 6、7、8、9 四条维护线上存活了大约四年。 这篇记录写清楚三件事：漏洞是怎么找到的、为什么它值得修、以及修复长什么样。 背景：Mongoose 是什么Mongoose 是 Node.js 里最主流的 MongoDB">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-03T15:30:00.000Z">
+<meta property="article:modified_time" content="2026-11-03T14:49:22.877Z">
+<meta property="article:author" content="LinusShyu">
+<meta property="article:tag" content="安全研究">
+<meta property="article:tag" content="原型污染">
+<meta property="article:tag" content="Mongoose">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="GHSA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://avatars.githubusercontent.com/u/83543818?s=400&u=91c63ed9cc4734532b3567b31173be3f8e927fcb&v=4">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+<script src="/js/custom-iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://avatars.githubusercontent.com/u/83543818?s=400&amp;u=91c63ed9cc4734532b3567b31173be3f8e927fcb&amp;v=4"/>
+</a>
+<div class="author">
+    <span>LinusShyu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="youtube"
+               href="https://www.youtube.com/channel/UC4KtR-YsWDfWtikRGOZb58Q"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-youtube"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="bilibili"
+               href="https://space.bilibili.com/411591950"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/Linus-Shyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="twitter"
+               href="https://twitter.com/Linus_Shyu"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-twitter"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="instagram"
+               href="https://www.instagram.com/linusshyu/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:0x11@linusshyu.dev"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=1697689923&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=3321151478"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="Podcast"
+               href="https://podcasts.apple.com/us/podcast/ethers-js/id1697357336"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-Podcast"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="wechat"
+               href="https://linus-shyu.github.io/img/wechat.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-wechat"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="ETH"
+               href="https://linus-shyu.github.io/img/ETH.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-ETH"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="coin-bitcoin"
+               href="https://linus-shyu.github.io/img/BTC.jpg"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-coin-bitcoin"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+    <a class="more-menus">更多菜单</a>
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(7)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="生活">
+            
+            生活
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="题解">
+            
+            题解
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="安全">
+            
+            安全
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="科技">
+            
+            科技
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+                <a class="dynamic-menu "
+                   target="_blank"
+                        
+                   href="https://github.com/Linus-Shyu">github</a>
+        
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="7">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/3461565867100564/">一颗照烧脆骨丸的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/543786075/">是檩子耶的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/2031197724/">我叫王大钢的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/3493287352600775/">Linus_Shyu的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1965727865/">東鴆的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/525755416/">无聊得自己的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/538790154/">阿某不会打oi的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1092504546/">蚀与修的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1834085711/">姗姗来迟的文sir的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/325357448">晓费同学的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1403990279/">YangNing2022的B站</a></li>
+            
+            <li><a target="_blank" href="https://www.luogu.com.cn/blog/A-zjzj/">A_zjzj的博客</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/393496433/">RoamMate的B站</a></li>
+            
+            <li><a target="_blank" href="https://space.bilibili.com/1345353920/">DuckweedOS的B站</a></li>
+            
+            <li><a target="_blank" href="https://sma.zone/">sma.zone</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>安全研究</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>北京</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>电影</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>黑客松</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>科技周报</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>探月</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>原型污染</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>abc</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>AI</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ATcoder</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>C++基础语法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>codeforces</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>div.3</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GHSA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Meta</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mongoose</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MoonShot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Muse</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Node.js</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Ray-Ban</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All 安全 "
+           href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/"
+           data-tag="安全研究,原型污染,Mongoose,Node.js,GHSA"
+           data-author="" >
+            <span class="post-title" title="一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）">一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）</span>
+            <span class="post-date" title="2026-11-03 23:30:00">2026/11/03</span>
+        </a>
+        
+        
+        <a  class="All 科技 "
+           href="/2026/09/24/Linus%E7%A7%91%E6%8A%80%E5%91%A8%E6%8A%A519/"
+           data-tag="科技周报,Meta,Muse,Ray-Ban,AI"
+           data-author="" >
+            <span class="post-title" title="Linus科技周报#19：Meta 彻底摊牌">Linus科技周报#19：Meta 彻底摊牌</span>
+            <span class="post-date" title="2026-09-24 08:30:00">2026/09/24</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2026/01/29/MoonShot48%E6%B8%B8%E8%AE%B0/"
+           data-tag="游记,探月,黑客松,北京,MoonShot"
+           data-author="" >
+            <span class="post-title" title="MoonShot48游记">MoonShot48游记</span>
+            <span class="post-date" title="2026-01-29 00:00:00">2026/01/29</span>
+        </a>
+        
+        
+        <a  class="All 题解 "
+           href="/2024/03/29/Codeforces%20Round%20918%20(Div.%204)%20B/"
+           data-tag="C++基础语法,codeforces,div.3"
+           data-author="" >
+            <span class="post-title" title="Codeforces Round 918 (Div. 4) B">Codeforces Round 918 (Div. 4) B</span>
+            <span class="post-date" title="2024-03-29 00:00:00">2024/03/29</span>
+        </a>
+        
+        
+        <a  class="All 题解 "
+           href="/2024/03/24/Codeforces-Round-933-Div-3-A/"
+           data-tag="C++基础语法,codeforces,div.3"
+           data-author="" >
+            <span class="post-title" title="Codeforces Round 933 (Div. 3) A">Codeforces Round 933 (Div. 3) A</span>
+            <span class="post-date" title="2024-03-24 00:00:00">2024/03/24</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2024/02/24/%E9%A3%9E%E9%A9%B0%E4%BA%BA%E7%94%9F2/"
+           data-tag="电影"
+           data-author="" >
+            <span class="post-title" title="飞驰人生2影评">飞驰人生2影评</span>
+            <span class="post-date" title="2024-02-24 00:00:00">2024/02/24</span>
+        </a>
+        
+        
+        <a  class="All 题解 "
+           href="/2023/11/21/%5BABC327B%5D%20A%5EA%20%E9%A2%98%E8%A7%A3/"
+           data-tag="C++基础语法,ATcoder,abc"
+           data-author="" >
+            <span class="post-title" title="ABC327B题解">ABC327B题解</span>
+            <span class="post-date" title="2023-11-21 00:00:00">2023/11/21</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-一个补丁漏掉四年-Mongoose原型污染漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="安全">安全</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">安全研究</a>
+            
+            <a class="color5">原型污染</a>
+            
+            <a class="color4">Mongoose</a>
+            
+            <a class="color3">Node.js</a>
+            
+            <a class="color5">GHSA</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2026-11-03 22:49:22'>2026-11-03 23:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%EF%BC%9AMongoose-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">背景：Mongoose 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%9C%BA%E5%88%B6"><span class="toc-text">漏洞机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9D%E8%A1%A5%E4%B8%81%E6%BC%8F%E4%BF%AE%E2%80%9D"><span class="toc-text">为什么是”补丁漏修”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D"><span class="toc-text">影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D"><span class="toc-text">修复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%8D%AE%E9%93%BE%EF%BC%88%E5%85%A8%E9%83%A8%E5%8F%AF%E6%A0%B8%E9%AA%8C%EF%BC%89"><span class="toc-text">证据链（全部可核验）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>2026 年 10 月，我给 Mongoose 报告了一个原型污染漏洞。它是”补丁漏修”的典型样本：2022 年官方修过同类问题，但只修了其中一个入口，另一个入口一直没被防护，在 6、7、8、9 四条维护线上存活了大约四年。</p>
+<p>这篇记录写清楚三件事：漏洞是怎么找到的、为什么它值得修、以及修复长什么样。</p>
+<h3 id="背景：Mongoose-是什么"><a href="#背景：Mongoose-是什么" class="headerlink" title="背景：Mongoose 是什么"></a>背景：Mongoose 是什么</h3><p>Mongoose 是 Node.js 里最主流的 MongoDB 对象建模库（ODM）。它用 <code>Schema</code> 声明数据结构，编译成 <code>Model</code>，业务代码用 Model 做增删改查。</p>
+<ul>
+<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose">https://github.com/Automattic/mongoose</a>（star 约 2.7 万）</li>
+<li>npm 月下载量：约 2500 万（<code>api.npmjs.org</code> 实测，2026-10）</li>
+<li>维护者：Valeri Karpov（<code>vkarpov15</code>），托管在 Automattic 组织下</li>
+</ul>
+<p><code>Schema</code> 上有两类字段：</p>
+<ul>
+<li><strong>真实字段</strong>：<code>schema.path(&#39;a.b&#39;, ...)</code> &#x2F; <code>schema.add(...)</code></li>
+<li><strong>虚拟字段</strong>：<code>schema.virtual(&#39;a.b&#39;)</code>，不存库的派生属性</li>
+</ul>
+<p>而虚拟字段和多层嵌套路径，都支持用点号分隔的路径字符串。</p>
+<h3 id="漏洞机制"><a href="#漏洞机制" class="headerlink" title="漏洞机制"></a>漏洞机制</h3><p><code>Schema.prototype.virtual()</code> 内部用 <code>reduce</code> 从 <code>this.tree</code> 开始逐段下钻，创建嵌套对象：</p>
+<pre><code class="highlight js">virtuals[name] = parts.<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">mem, part, i</span>) &#123;
+  mem[part] || (mem[part] = (i === parts.<span class="property">length</span> - <span class="number">1</span>)
+    ? <span class="keyword">new</span> <span class="title class_">VirtualType</span>(options, name)
+    : &#123;&#125;);
+  <span class="keyword">return</span> mem[part];
+&#125;, <span class="variable language_">this</span>.<span class="property">tree</span>);</code></pre>
+
+<p>问题在于：它<strong>没有校验路径片段</strong>。当 <code>name</code> 里包含 <code>__proto__</code>、<code>constructor</code>、<code>prototype</code> 这类片段时，<code>mem[part]</code> 会沿原型链解析，写入就落到 <code>Object.prototype</code> 或 <code>Function.prototype</code> 上，而且是 <strong>own + enumerable</strong>。</p>
+<pre><code class="highlight js"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">&#x27;mongoose&#x27;</span>);
+<span class="keyword">const</span> schema = <span class="keyword">new</span> mongoose.<span class="title class_">Schema</span>(&#123;&#125;);
+
+schema.<span class="title function_">virtual</span>(<span class="string">&#x27;__proto__.polluted&#x27;</span>);
+(&#123;&#125;).<span class="property">polluted</span>;                                   <span class="comment">// VirtualType 实例</span>
+<span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;polluted&#x27;</span>);     <span class="comment">// true</span>
+
+schema.<span class="title function_">virtual</span>(<span class="string">&#x27;constructor.prototype.opol&#x27;</span>);
+(&#123;&#125;).<span class="property">opol</span>;                                       <span class="comment">// true</span>
+
+schema.<span class="title function_">virtual</span>(<span class="string">&#x27;hasOwnProperty.__proto__.fpol&#x27;</span>);
+(<span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;).<span class="property">fpol</span>;                           <span class="comment">// Function.prototype 被污染</span></code></pre>
+
+<h3 id="为什么是”补丁漏修”"><a href="#为什么是”补丁漏修”" class="headerlink" title="为什么是”补丁漏修”"></a>为什么是”补丁漏修”</h3><p>2022 年的 CVE-2022-2564 &#x2F; CVE-2022-24304 就是同一类问题：<code>Schema</code> 路径接受 <code>__proto__</code> 导致原型污染。当年的修复给 <code>path()</code> &#x2F; <code>add()</code> 加了 <code>specialProperties</code> 检查——查看修复历史，这两个函数里都有类似：</p>
+<pre><code class="highlight js"><span class="keyword">if</span> (utils.<span class="property">specialProperties</span>.<span class="title function_">has</span>(last)) &#123;
+  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">MongooseError</span>(<span class="string">&#x27;Cannot set special property `&#x27;</span> + last + <span class="string">&#x27;` on a schema&#x27;</span>);
+&#125;</code></pre>
+
+<p>但 <code>virtual()</code> 在同一份文件里，却始终没有拿到这套校验。</p>
+<p>我的切入方式很朴素：<strong>拿到一个已知的漏洞类别，枚举所有接受”路径字符串”的 API 入口，逐个试。</strong> <code>virtual()</code> 是唯一漏掉的那个。</p>
+<p>这也解释了为什么它能活四年：安全审计看的是”有没有 CVE 补丁”，而”补丁是不是覆盖了同一类的全部入口”很少被复查。</p>
+<h3 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h3><ul>
+<li>影响范围：6.x &#x2F; 7.x &#x2F; 8.x &#x2F; 9.x 全部维护线</li>
+<li>触发前提：攻击者能影响传给 <code>schema.virtual()</code> 的字段名</li>
+<li>典型场景：运行时动态构建 Schema 的系统（CMS 表单构建器、低代码平台、schema-as-code）</li>
+</ul>
+<p>危害不在”数据被改”，而在 <strong>属性存在性判断被污染</strong>：</p>
+<pre><code class="highlight js"><span class="keyword">if</span> (<span class="string">&#x27;isAdmin&#x27;</span> <span class="keyword">in</span> user) &#123; ... &#125;              <span class="comment">// 永远 true</span>
+<span class="keyword">if</span> (user.<span class="property">role</span> !== <span class="literal">undefined</span>) &#123; ... &#125;        <span class="comment">// 被污染的属性&quot;存在&quot;</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> k <span class="keyword">in</span> obj) &#123; ... &#125;                <span class="comment">// 多出不应有的键</span></code></pre>
+
+<p>对 <code>Function.prototype</code> 的污染则是服务端 JS 里的经典 gadget 原语，实际危害取决于下游代码。</p>
+<h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>官方于 2026-10-22 合并修复，提交 <code>74df7769</code>：</p>
+<pre><code class="highlight diff"><span class="addition">+  const parts = name.split(&#x27;.&#x27;);</span>
+<span class="addition">+  for (const part of parts) &#123;</span>
+<span class="addition">+    if (utils.specialProperties.has(part)) &#123;</span>
+<span class="addition">+      throw new MongooseError(&#x27;Cannot set special property `&#x27; + part + &#x27;` on a schema&#x27;);</span>
+<span class="addition">+    &#125;</span>
+<span class="addition">+  &#125;</span></code></pre>
+
+<p>测试用例覆盖了我报告里的三条路径：</p>
+<pre><code class="highlight js"><span class="keyword">for</span> (<span class="keyword">const</span> name <span class="keyword">of</span> [<span class="string">&#x27;__proto__.polluted&#x27;</span>, <span class="string">&#x27;constructor.prototype.polluted&#x27;</span>, <span class="string">&#x27;hasOwnProperty.__proto__.polluted&#x27;</span>]) &#123;
+  assert.<span class="title function_">throws</span>(<span class="function">() =&gt;</span> schema.<span class="title function_">virtual</span>(name), <span class="regexp">/Cannot set special property/</span>);
+&#125;</code></pre>
+
+<p>修复随 <code>9.11.4</code> 发布（2026-10-23），advice 也已更新为 <code>^6.13.12 || ^7.8.13 || ^8.24.7 || ^9.11.4</code>。</p>
+<h3 id="证据链（全部可核验）"><a href="#证据链（全部可核验）" class="headerlink" title="证据链（全部可核验）"></a>证据链（全部可核验）</h3><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安全公告（Credits：Linus-Shyu &#x2F; Analyst）</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj">https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj</a></td>
+</tr>
+<tr>
+<td>修复提交 <code>74df7769</code></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467">https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467</a></td>
+</tr>
+<tr>
+<td>发布版本 <code>9.11.4</code></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/releases/tag/9.11.4">https://github.com/Automattic/mongoose/releases/tag/9.11.4</a></td>
+</tr>
+<tr>
+<td>同批次对照（sanitizeFilter 相关）</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-gg4r-jv3p-qx3c">https://github.com/Automattic/mongoose/security/advisories/GHSA-gg4r-jv3p-qx3c</a></td>
+</tr>
+</tbody></table>
+<p>时间线：</p>
+<pre><code class="highlight plaintext">2026-10-22  维护者提交修复 74df7769
+2026-10-23  9.11.4 发布（npm latest 同步）
+2026-11-02  advisory 公开，署名 Linus-Shyu (Analyst)</code></pre>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>这个漏洞的评级是 Moderate（CVSS 6.5），前提条件也明确，不是”任何 mongoose 应用都能被打”的那种问题。但它让我确认了一件事：</p>
+<blockquote>
+<p>修一个入口不等于修完一类问题。看到「已修复原型污染」，值得再问一句：所有入口都查了吗？</p>
+</blockquote>
+<p>对做安全研究的人来说，这比单次找到一个点更有复利——<strong>变体分析（variant analysis）是可持续的方法论，而不是运气。</strong></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>GHSA-6972-9mcm-vhwj：<a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj">https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj</a></li>
+<li>CVE-2022-2564：<a target="_blank" rel="noopener" href="https://github.com/advisories/GHSA-f825-f98c-gj3g">https://github.com/advisories/GHSA-f825-f98c-gj3g</a></li>
+<li>CVE-2022-24304：<a target="_blank" rel="noopener" href="https://github.com/advisories/GHSA-h8hf-x3f4-xwgp">https://github.com/advisories/GHSA-h8hf-x3f4-xwgp</a></li>
+<li>修复提交：<a target="_blank" rel="noopener" href="https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467">https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467</a></content></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 0x11@linusshyu.dev </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">Title:</span>一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）</p>
+    
+    <p><span class="copy-title">Author:</span><a  title="LinusShyu">LinusShyu</a></p>
+    <p><span class="copy-title">Created At:</span>2026-11-03, 23:30:00</p>
+    <p><span class="copy-title">Updated At:</span>2026-11-03, 22:49:22</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/" title="一个补丁漏掉的入口：记 Mongoose 原型污染漏洞（GHSA-6972-9mcm-vhwj）">https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/</a>
+    <p>
+        <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2026 LinusShyu
+</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    #post {
+        background: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg);
+    }
+    
+    
+    #post .index {
+        background: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg);
+    }
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+<div class="mobile-menus-out" >
+
+</div>
+<div class="mobile-menus">
+    
+    
+    
+    
+    <a class="dynamic-menu " target="_blank"  href="https://github.com/Linus-Shyu">github</a>
+    
+</div>
+
+
+</html>
