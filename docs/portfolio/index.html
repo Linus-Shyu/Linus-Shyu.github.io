@@ -94,29 +94,6 @@
         </p>
     </section>
 
-    <section class="security-section" aria-labelledby="security-heading">
-        <div class="container">
-            <h2 id="security-heading" class="section-title" data-i18n="security.title">Security research</h2>
-            <article class="security-card">
-                <div class="security-card__main">
-                    <p class="security-card__kicker" data-i18n="security.kicker">Published advisory · Automattic Mongoose</p>
-                    <h3 class="security-card__headline" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
-                    <p class="security-card__body" data-i18n="security.body">Mongoose splits dotted paths when building a schema, and schema.virtual() never checked the segments. A path containing __proto__, constructor or prototype writes straight onto Object.prototype or Function.prototype — as own, enumerable properties. The 2022 fix hardened path() and add() but missed this third entry point, so it survived roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
-                    <ul class="security-card__facts">
-                        <li><span class="security-card__fact-key" data-i18n="security.factClassKey">Class</span><span class="security-card__fact-val" data-i18n="security.factClassVal">Prototype pollution</span></li>
-                        <li><span class="security-card__fact-key" data-i18n="security.factSeverityKey">Severity</span><span class="security-card__fact-val" data-i18n="security.factSeverityVal">Moderate · CVSS 6.5</span></li>
-                        <li><span class="security-card__fact-key" data-i18n="security.factScopeKey">Affected</span><span class="security-card__fact-val" data-i18n="security.factScopeVal">6.x · 7.x · 8.x · 9.x</span></li>
-                        <li><span class="security-card__fact-key" data-i18n="security.factFixedKey">Fixed in</span><span class="security-card__fact-val" data-i18n="security.factFixedVal">9.11.4 · 8.24.7 · 7.8.13 · 6.13.12</span></li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Read the published security advisory" data-i18n="security.linkAdvisory">Read the advisory &gt;</a>
-                        <a href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/" class="project-link" data-i18n="security.linkWriteup">Full write-up &gt;</a>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
-
     <section class="about-section" aria-labelledby="about-heading">
         <div class="container">
             <h2 id="about-heading" class="section-title about-section__title" data-i18n="about.title">About me</h2>
@@ -133,6 +110,57 @@
                     </picture>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="security-section" aria-labelledby="security-heading">
+        <div class="container">
+            <h2 id="security-heading" class="section-title" data-i18n="security.title">Security research</h2>
+
+            <article class="security-terminal">
+                <div class="security-terminal__bar">
+                    <span class="security-terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="security-terminal__id">GHSA-6972-9mcm-vhwj</span>
+                    <span class="security-terminal__tag" data-i18n="security.tag">Published advisory</span>
+                </div>
+
+                <div class="security-terminal__shell">
+                    <p><span class="st-prompt">$</span> node poc.mjs --mongoose 8.24.6</p>
+                    <p class="st-dim">mongoose 8.24.6</p>
+                    <p>schema.virtual(<span class="st-str">'__proto__.polluted'</span>)</p>
+                    <p class="st-bad">✗ Object.prototype.hasOwnProperty('polluted') → true</p>
+                    <p aria-hidden="true">&nbsp;</p>
+                    <p><span class="st-prompt">$</span> node poc.mjs --mongoose 9.11.4</p>
+                    <p class="st-good">✓ Cannot set special property `__proto__` on a schema<span class="security-terminal__cursor" aria-hidden="true"></span></p>
+                </div>
+
+                <div class="security-terminal__content">
+                    <h3 class="security-terminal__headline" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
+                    <p class="security-terminal__desc" data-i18n="security.body">Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
+
+                    <div class="security-terminal__risk">
+                        <span class="security-terminal__risk-label" data-i18n="security.severityLabel">Severity</span>
+                        <span class="security-terminal__risk-value">Moderate &middot; CVSS 6.5</span>
+                        <span class="security-terminal__meter" role="img" aria-label="CVSS 6.5 / 10"><i></i></span>
+                    </div>
+
+                    <dl class="security-terminal__facts">
+                        <div>
+                            <dt data-i18n="security.factScopeKey">Affected</dt>
+                            <dd>6.x &middot; 7.x &middot; 8.x &middot; 9.x</dd>
+                        </div>
+                        <div>
+                            <dt data-i18n="security.factFixedKey">Fixed in</dt>
+                            <dd>9.11.4 &middot; 8.24.7 &middot; 7.8.13 &middot; 6.13.12</dd>
+                        </div>
+                    </dl>
+
+                    <div class="project-links">
+                        <a href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Read the published security advisory" data-i18n="security.linkAdvisory">Read the advisory &gt;</a>
+                        <a href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/" class="project-link" data-i18n="security.linkWriteup">Full write-up &gt;</a>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
 

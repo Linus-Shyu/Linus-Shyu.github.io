@@ -2264,98 +2264,259 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
 }
 
 /* ==========================================================================
-   Security research
-   One advisory card, laid out like the project rows but text-led: there is no
-   screenshot to show, so the card leans on typography and a fact strip.
+   Security research — terminal card
+   The panel stays dark in every theme on purpose: it reads as a shell window
+   dropped onto the page, which is both the honest artefact (the printed output
+   is the real 8.24.6 vs 9.11.4 comparison) and the visual signal the section
+   needed. All colours are scoped locally so no theme can wash it out.
    ========================================================================== */
 
 .security-section {
     padding: var(--spacing-section) 0 0;
 }
 
-.security-card {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    background: var(--color-bg-elevated);
-    padding: clamp(1.5rem, 4vw, 2.75rem);
+.security-terminal {
+    --st-bg: #0b0f14;
+    --st-edge: rgba(122, 255, 180, 0.16);
+    --st-ink: #e9f1f8;
+    --st-dim: #93a6b8;
+    --st-faint: #5f7488;
+    --st-good: #3ddc84;
+    --st-bad: #ff6b6b;
+    --st-amber: #f0b45a;
+
     position: relative;
     overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--st-bg);
+    border: 1px solid var(--st-edge);
+    box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.38),
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    color: var(--st-ink);
 }
 
-/* A thin accent edge reads as "this is a security finding" without shouting. */
-.security-card::before {
+/* Faint CRT scanlines: texture only, never over body copy. */
+.security-terminal::after {
     content: "";
     position: absolute;
-    inset: 0 auto 0 0;
-    width: 3px;
-    background: var(--color-accent, #007aff);
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.028) 0 1px,
+        transparent 1px 4px
+    );
 }
 
-.security-card__kicker {
+.security-terminal__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1.15rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.025);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-tertiary);
-    margin: 0 0 0.9rem;
 }
 
-.security-card__headline {
-    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+.security-terminal__dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.security-terminal__dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2a3440;
+    display: block;
+}
+
+.security-terminal__dots i:nth-child(1) { background: #ff5f57; }
+.security-terminal__dots i:nth-child(2) { background: #febc2e; }
+.security-terminal__dots i:nth-child(3) { background: #28c840; }
+
+.security-terminal__id {
+    color: var(--st-dim);
+    letter-spacing: 0.05em;
+}
+
+.security-terminal__tag {
+    margin-left: auto;
+    color: var(--st-good);
+    border: 1px solid var(--st-edge);
+    border-radius: var(--radius-pill);
+    padding: 0.15rem 0.6rem;
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    white-space: nowrap;
+}
+
+.security-terminal__shell {
+    padding: 1.15rem 1.15rem 1.25rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.75;
+    overflow-x: auto;
+}
+
+.security-terminal__shell p {
+    margin: 0;
+    white-space: pre;
+}
+
+.st-prompt { color: var(--st-good); margin-right: 0.6ch; }
+.st-dim    { color: var(--st-faint); }
+.st-str    { color: var(--st-amber); }
+.st-bad    { color: var(--st-bad); }
+.st-good   { color: var(--st-good); }
+
+.security-terminal__cursor {
+    display: inline-block;
+    width: 0.55ch;
+    height: 1em;
+    margin-left: 0.35ch;
+    vertical-align: -0.12em;
+    background: var(--st-good);
+    animation: st-blink 1.1s steps(1) infinite;
+}
+
+@keyframes st-blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+}
+
+.security-terminal__content {
+    position: relative;
+    z-index: 1;
+    padding: clamp(1.35rem, 3.5vw, 2.1rem) clamp(1.15rem, 3.5vw, 2.1rem) clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.security-terminal__headline {
+    font-size: clamp(1.45rem, 3vw, 2rem);
     font-weight: 700;
     letter-spacing: var(--letter-spacing-tight);
     line-height: var(--line-height-tight);
-    color: var(--color-text);
-    margin: 0 0 1rem;
+    color: var(--st-ink);
+    margin: 0 0 0.85rem;
 }
 
-.security-card__body {
+.security-terminal__desc {
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);
-    color: var(--color-text-secondary);
+    color: var(--st-dim);
     margin: 0;
-    max-width: 68ch;
+    max-width: 66ch;
 }
 
-.security-card__facts {
-    list-style: none;
+.security-terminal__risk {
     display: flex;
+    align-items: center;
+    gap: 0.8rem;
     flex-wrap: wrap;
-    gap: 0.6rem 2rem;
-    padding: 0;
-    margin: 1.75rem 0 0;
-}
-
-.security-card__facts li {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-
-.security-card__fact-key {
+    margin-top: 1.6rem;
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.1em;
+}
+
+.security-terminal__risk-label {
+    font-size: 0.66rem;
     text-transform: uppercase;
-    color: var(--color-text-tertiary);
+    letter-spacing: 0.15em;
+    color: var(--st-faint);
 }
 
-.security-card__fact-val {
-    font-size: 0.95rem;
+.security-terminal__risk-value {
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text);
-    font-variant-numeric: tabular-nums;
+    color: var(--st-amber);
 }
 
-/* The default .project-links margin is sized for the project rows, where the
-   links follow a short paragraph. Here they follow a dense fact strip, so give
-   the buttons room to breathe. */
-.security-card .project-links {
+.security-terminal__meter {
+    flex: 1 1 180px;
+    min-width: 120px;
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+/* CVSS 6.5 of 10 */
+.security-terminal__meter i {
+    display: block;
+    height: 100%;
+    width: 65%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--st-good), var(--st-amber));
+}
+
+.security-terminal__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem 1.75rem;
+    margin: 1.5rem 0 0;
+    font-family: var(--font-mono);
+}
+
+.security-terminal__facts dt {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--st-faint);
+}
+
+.security-terminal__facts dd {
+    margin: 0.3rem 0 0;
+    font-size: 0.85rem;
+    color: var(--st-ink);
+}
+
+/* The shared .project-link is themed for light surfaces; re-skin it for the
+   dark panel so it keeps its contrast. */
+.security-terminal .project-link {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: var(--st-ink);
+}
+
+.security-terminal .project-link:hover,
+.security-terminal .project-link:focus-visible {
+    background: rgba(61, 220, 132, 0.12);
+    border-color: var(--st-good);
+    color: #ffffff;
+}
+
+.security-terminal .project-links {
     margin-top: 1.9rem;
 }
 
-@media (max-width: 768px) {
-    .security-card__facts {
-        gap: 0.9rem 1.5rem;
+@media (max-width: 640px) {
+    .security-terminal__shell {
+        font-size: 0.72rem;
+    }
+
+    /* A phone cannot show these lines in full. Wrapping keeps the evidence
+       readable instead of slicing it off at the panel edge. */
+    .security-terminal__shell p {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    .security-terminal__bar {
+        flex-wrap: wrap;
+        gap: 0.5rem 0.7rem;
+    }
+
+    .security-terminal__tag {
+        margin-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .security-terminal__cursor {
+        animation: none;
     }
 }
