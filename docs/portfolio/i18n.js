@@ -64,7 +64,7 @@ window.PORTFOLIO_I18N = {
       title: "开源贡献",
       mongoose: {
         role: "MongoDB 对象建模 · Node.js",
-        contrib: "安全研究 — 报告并协助修复 schema.virtual() 的原型污染"
+        contrib: "安全研究 — 报告并分析 schema.virtual() 的原型污染"
       },
       dsh: {
         role: "DeepSeek Harness macOS 客户端 · Dart",
@@ -244,7 +244,7 @@ window.PORTFOLIO_I18N = {
       title: "Open source",
       mongoose: {
         role: "MongoDB object modeling · Node.js",
-        contrib: "Security research — reported and helped fix a prototype pollution via schema.virtual()"
+        contrib: "Security research — reported and analysed a prototype pollution via schema.virtual()"
       },
       dsh: {
         role: "DeepSeek Harness macOS client · Dart",

@@ -2350,7 +2350,9 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     top: -20%;
     height: 22%;
     pointer-events: none;
-    z-index: 2;
+    /* Under the content: the band should read as a scan behind the text, not
+       wash across it (text at z-index 1/3 sits above this). */
+    z-index: 0;
     background: linear-gradient(180deg, transparent, rgba(0, 255, 157, 0.055), transparent);
     animation: vk-sweep 7s linear infinite;
 }
@@ -2429,12 +2431,21 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
 }
 
 /* Attack chain. */
+/* Full-width row under the two columns: the four nodes need ~650px, which does
+   not fit in the 537px left column — there they wrapped mid-chain and left a
+   dangling arrow on the next line. */
+.vuln__chainwrap {
+    position: relative;
+    z-index: 1;
+    padding: 0 clamp(1.25rem, 3.5vw, 2.25rem) clamp(1.2rem, 3vw, 1.6rem);
+}
+
 .vuln__chain {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 0;
-    margin: 1.5rem 0 0;
+    flex-wrap: nowrap;
+    gap: 0;
+    margin: 0;
     font-family: var(--font-mono);
     font-size: 0.74rem;
 }
@@ -2633,6 +2644,37 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
 @media (max-width: 900px) {
     .vuln__grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Below this width the chain cannot stay on one line, so it becomes a vertical
+   trace with downward connectors instead of wrapping into a broken row. */
+@media (max-width: 900px) {
+    .vuln__chain {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chain-node {
+        white-space: normal;
+    }
+
+    .chain-link {
+        width: 1px;
+        height: 1.1rem;
+        margin-left: 1.05rem;
+        background: var(--vk-green);
+        opacity: 0.55;
+    }
+
+    .chain-link::after {
+        right: auto;
+        top: auto;
+        bottom: -1px;
+        left: -2.5px;
+        border: 3px solid transparent;
+        border-left-color: transparent;
+        border-top-color: var(--vk-green);
     }
 }
 

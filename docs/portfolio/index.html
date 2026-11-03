@@ -134,15 +134,7 @@
                         <h3 class="vuln__title" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
                         <p class="vuln__desc" data-i18n="security.body">Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
 
-                        <div class="vuln__chain" role="img" aria-label="Attack chain: a dotted path with __proto__ reaches schema.virtual(), writes to Object.prototype, and pollutes every object">
-                            <span class="chain-node"><code>'__proto__.polluted'</code></span>
-                            <span class="chain-link" aria-hidden="true"></span>
-                            <span class="chain-node">schema.virtual()</span>
-                            <span class="chain-link" aria-hidden="true"></span>
-                            <span class="chain-node chain-node--bad">Object.prototype</span>
-                            <span class="chain-link" aria-hidden="true"></span>
-                            <span class="chain-node chain-node--bad">polluted = true</span>
-                        </div>
+
 
                         <dl class="vuln__facts">
                             <div class="vuln__fact">
@@ -174,6 +166,18 @@
                             <p><span class="st-prompt">$</span> node poc.mjs --mongoose 9.11.4</p>
                             <p class="st-good">✓ Cannot set special property `__proto__` on a schema<span class="vuln__cursor" aria-hidden="true"></span></p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="vuln__chainwrap">
+                    <div class="vuln__chain" role="img" aria-label="Attack chain: a dotted path with __proto__ reaches schema.virtual(), writes to Object.prototype, and pollutes every object">
+                        <span class="chain-node"><code>'__proto__.polluted'</code></span>
+                        <span class="chain-link" aria-hidden="true"></span>
+                        <span class="chain-node">schema.virtual()</span>
+                        <span class="chain-link" aria-hidden="true"></span>
+                        <span class="chain-node chain-node--bad">Object.prototype</span>
+                        <span class="chain-link" aria-hidden="true"></span>
+                        <span class="chain-node chain-node--bad">polluted = true</span>
                     </div>
                 </div>
 
