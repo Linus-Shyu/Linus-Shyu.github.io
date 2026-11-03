@@ -49,6 +49,8 @@ window.PORTFOLIO_I18N = {
     },
     security: {
       title: "安全研究",
+      callsign: "漏洞披露",
+      status: "已修复",
       tag: "已公开安全公告",
       headline: "schema.virtual() 的原型污染",
       body: "Mongoose 构建 Schema 时会拆分点号路径，而 schema.virtual() 从不校验路径片段。2022 年的修复加固了 path() 与 add()，却漏掉了这第三个入口，同一类漏洞因此在 6.x、7.x、8.x、9.x 四条维护线上继续可利用约四年。",
@@ -216,6 +218,8 @@ window.PORTFOLIO_I18N = {
     },
     security: {
       title: "Security research",
+      callsign: "VULNERABILITY DISCLOSURE",
+      status: "PATCHED",
       tag: "Published advisory",
       headline: "Prototype pollution through schema.virtual()",
       body: "Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.",

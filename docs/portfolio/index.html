@@ -115,51 +115,75 @@
 
     <section class="security-section" aria-labelledby="security-heading">
         <div class="container">
-            <h2 id="security-heading" class="section-title" data-i18n="security.title">Security research</h2>
+            <h2 id="security-heading" class="section-title security-section__title" data-i18n="security.title">Security research</h2>
 
-            <article class="security-terminal">
-                <div class="security-terminal__bar">
-                    <span class="security-terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="security-terminal__id">GHSA-6972-9mcm-vhwj</span>
-                    <span class="security-terminal__tag" data-i18n="security.tag">Published advisory</span>
-                </div>
+            <article class="vuln">
+                <span class="vuln__corner vuln__corner--tl" aria-hidden="true"></span>
+                <span class="vuln__corner vuln__corner--tr" aria-hidden="true"></span>
+                <span class="vuln__corner vuln__corner--bl" aria-hidden="true"></span>
+                <span class="vuln__corner vuln__corner--br" aria-hidden="true"></span>
+                <span class="vuln__sweep" aria-hidden="true"></span>
 
-                <div class="security-terminal__shell">
-                    <p><span class="st-prompt">$</span> node poc.mjs --mongoose 8.24.6</p>
-                    <p class="st-dim">mongoose 8.24.6</p>
-                    <p>schema.virtual(<span class="st-str">'__proto__.polluted'</span>)</p>
-                    <p class="st-bad">✗ Object.prototype.hasOwnProperty('polluted') → true</p>
-                    <p aria-hidden="true">&nbsp;</p>
-                    <p><span class="st-prompt">$</span> node poc.mjs --mongoose 9.11.4</p>
-                    <p class="st-good">✓ Cannot set special property `__proto__` on a schema<span class="security-terminal__cursor" aria-hidden="true"></span></p>
-                </div>
+                <header class="vuln__head">
+                    <span class="vuln__live" aria-hidden="true"><i></i><span data-i18n="security.callsign">VULNERABILITY DISCLOSURE</span></span>
+                    <span class="vuln__ghsa">GHSA-6972-9mcm-vhwj</span>
+                </header>
 
-                <div class="security-terminal__content">
-                    <h3 class="security-terminal__headline" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
-                    <p class="security-terminal__desc" data-i18n="security.body">Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
+                <div class="vuln__grid">
+                    <div class="vuln__main">
+                        <h3 class="vuln__title" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
+                        <p class="vuln__desc" data-i18n="security.body">Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
 
-                    <div class="security-terminal__risk">
-                        <span class="security-terminal__risk-label" data-i18n="security.severityLabel">Severity</span>
-                        <span class="security-terminal__risk-value">Moderate &middot; CVSS 6.5</span>
-                        <span class="security-terminal__meter" role="img" aria-label="CVSS 6.5 / 10"><i></i></span>
+                        <div class="vuln__chain" role="img" aria-label="Attack chain: a dotted path with __proto__ reaches schema.virtual(), writes to Object.prototype, and pollutes every object">
+                            <span class="chain-node"><code>'__proto__.polluted'</code></span>
+                            <span class="chain-link" aria-hidden="true"></span>
+                            <span class="chain-node">schema.virtual()</span>
+                            <span class="chain-link" aria-hidden="true"></span>
+                            <span class="chain-node chain-node--bad">Object.prototype</span>
+                            <span class="chain-link" aria-hidden="true"></span>
+                            <span class="chain-node chain-node--bad">polluted = true</span>
+                        </div>
+
+                        <dl class="vuln__facts">
+                            <div class="vuln__fact">
+                                <dt data-i18n="security.severityLabel">Severity</dt>
+                                <dd><span class="vuln__sev">Moderate</span> CVSS 6.5</dd>
+                            </div>
+                            <div class="vuln__fact">
+                                <dt data-i18n="security.factScopeKey">Affected</dt>
+                                <dd>6.x &middot; 7.x &middot; 8.x &middot; 9.x</dd>
+                            </div>
+                            <div class="vuln__fact">
+                                <dt data-i18n="security.factFixedKey">Fixed in</dt>
+                                <dd>9.11.4 &middot; 8.24.7 &middot; 7.8.13 &middot; 6.13.12</dd>
+                            </div>
+                        </dl>
                     </div>
 
-                    <dl class="security-terminal__facts">
-                        <div>
-                            <dt data-i18n="security.factScopeKey">Affected</dt>
-                            <dd>6.x &middot; 7.x &middot; 8.x &middot; 9.x</dd>
+                    <div class="vuln__term">
+                        <div class="vuln__term-bar">
+                            <span class="vuln__term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="vuln__term-title">poc.mjs</span>
                         </div>
-                        <div>
-                            <dt data-i18n="security.factFixedKey">Fixed in</dt>
-                            <dd>9.11.4 &middot; 8.24.7 &middot; 7.8.13 &middot; 6.13.12</dd>
+                        <div class="vuln__term-body">
+                            <p><span class="st-prompt">$</span> node poc.mjs --mongoose 8.24.6</p>
+                            <p class="st-dim">mongoose 8.24.6</p>
+                            <p>schema.virtual(<span class="st-str">'__proto__.polluted'</span>)</p>
+                            <p class="st-bad">✗ Object.prototype.hasOwnProperty('polluted') → true</p>
+                            <p aria-hidden="true">&nbsp;</p>
+                            <p><span class="st-prompt">$</span> node poc.mjs --mongoose 9.11.4</p>
+                            <p class="st-good">✓ Cannot set special property `__proto__` on a schema<span class="vuln__cursor" aria-hidden="true"></span></p>
                         </div>
-                    </dl>
+                    </div>
+                </div>
 
+                <footer class="vuln__foot">
+                    <span class="vuln__status"><i aria-hidden="true"></i><span data-i18n="security.status">PATCHED</span></span>
                     <div class="project-links">
                         <a href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Read the published security advisory" data-i18n="security.linkAdvisory">Read the advisory &gt;</a>
                         <a href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/" class="project-link" data-i18n="security.linkWriteup">Full write-up &gt;</a>
                     </div>
-                </div>
+                </footer>
             </article>
         </div>
     </section>

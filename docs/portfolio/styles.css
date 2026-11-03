@@ -2264,259 +2264,408 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
 }
 
 /* ==========================================================================
-   Security research — terminal card
-   The panel stays dark in every theme on purpose: it reads as a shell window
-   dropped onto the page, which is both the honest artefact (the printed output
-   is the real 8.24.6 vs 9.11.4 comparison) and the visual signal the section
-   needed. All colours are scoped locally so no theme can wash it out.
+   Security research — vulnerability dossier
+   A green-on-black "exploit report" slab that stays dark in every theme so it
+   reads as a screen dropped onto the page. The transcript is the real 8.24.6
+   vs 9.11.4 run, and the chain is the actual pollution path — the decoration
+   is the evidence. All tokens are scoped locally; nothing here depends on the
+   theme palette.
    ========================================================================== */
 
 .security-section {
     padding: var(--spacing-section) 0 0;
 }
 
-.security-terminal {
-    --st-bg: #0b0f14;
-    --st-edge: rgba(122, 255, 180, 0.16);
-    --st-ink: #e9f1f8;
-    --st-dim: #93a6b8;
-    --st-faint: #5f7488;
-    --st-good: #3ddc84;
-    --st-bad: #ff6b6b;
-    --st-amber: #f0b45a;
+.security-section__title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.security-section__title::before {
+    content: ">";
+    font-family: var(--font-mono);
+    color: #00ff9d;
+    font-weight: 700;
+    animation: vk-blink 1.6s steps(1) infinite;
+}
+
+.vuln {
+    --vk-bg: #050a08;
+    --vk-bg2: #08110d;
+    --vk-line: rgba(0, 255, 157, 0.22);
+    --vk-line-soft: rgba(0, 255, 157, 0.09);
+    --vk-ink: #d9ffe9;
+    --vk-dim: #7fb398;
+    --vk-faint: #43705b;
+    --vk-green: #00ff9d;
+    --vk-red: #ff3b5c;
+    --vk-amber: #ffb648;
 
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius-card);
-    background: var(--st-bg);
-    border: 1px solid var(--st-edge);
+    background: var(--vk-bg);
+    border: 1px solid var(--vk-line);
+    border-radius: 16px;
     box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.38),
-        0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-    color: var(--st-ink);
+        0 0 0 1px rgba(0, 0, 0, 0.6),
+        0 30px 80px rgba(0, 0, 0, 0.5),
+        0 0 60px rgba(0, 255, 157, 0.06);
+    color: var(--vk-ink);
 }
 
-/* Faint CRT scanlines: texture only, never over body copy. */
-.security-terminal::after {
+/* Matrix grid backdrop. */
+.vuln::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.028) 0 1px,
-        transparent 1px 4px
-    );
+    background-image:
+        linear-gradient(rgba(0, 255, 157, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 157, 0.05) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(120% 120% at 50% 0%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(120% 120% at 50% 0%, #000 40%, transparent 100%);
 }
 
-.security-terminal__bar {
+/* Corner brackets. */
+.vuln__corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.vuln__corner--tl { top: 8px; left: 8px; border-top: 2px solid var(--vk-green); border-left: 2px solid var(--vk-green); }
+.vuln__corner--tr { top: 8px; right: 8px; border-top: 2px solid var(--vk-green); border-right: 2px solid var(--vk-green); }
+.vuln__corner--bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--vk-green); border-left: 2px solid var(--vk-green); }
+.vuln__corner--br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--vk-green); border-right: 2px solid var(--vk-green); }
+
+/* Periodic scan sweep. */
+.vuln__sweep {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -20%;
+    height: 22%;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(180deg, transparent, rgba(0, 255, 157, 0.055), transparent);
+    animation: vk-sweep 7s linear infinite;
+}
+
+.vuln__head {
+    position: relative;
+    z-index: 3;
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    padding: 0.8rem 1.15rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.025);
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--vk-line-soft);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
 }
 
-.security-terminal__dots {
-    display: flex;
-    gap: 0.4rem;
-}
-
-.security-terminal__dots i {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #2a3440;
-    display: block;
-}
-
-.security-terminal__dots i:nth-child(1) { background: #ff5f57; }
-.security-terminal__dots i:nth-child(2) { background: #febc2e; }
-.security-terminal__dots i:nth-child(3) { background: #28c840; }
-
-.security-terminal__id {
-    color: var(--st-dim);
-    letter-spacing: 0.05em;
-}
-
-.security-terminal__tag {
-    margin-left: auto;
-    color: var(--st-good);
-    border: 1px solid var(--st-edge);
-    border-radius: var(--radius-pill);
-    padding: 0.15rem 0.6rem;
-    font-size: 0.64rem;
+.vuln__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--vk-dim);
     text-transform: uppercase;
-    letter-spacing: 0.13em;
+}
+
+.vuln__live i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vk-green);
+    box-shadow: 0 0 8px var(--vk-green);
+    animation: vk-blink 1.4s steps(1) infinite;
+}
+
+.vuln__ghsa {
+    margin-left: auto;
+    color: var(--vk-green);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--vk-line);
+    border-radius: 6px;
+    background: rgba(0, 255, 157, 0.06);
+    letter-spacing: 0.06em;
     white-space: nowrap;
 }
 
-.security-terminal__shell {
-    padding: 1.15rem 1.15rem 1.25rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+.vuln__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+    padding: clamp(1.4rem, 3.5vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.25rem);
+}
+
+.vuln__title {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    line-height: 1.75;
+    font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--vk-ink);
+    margin: 0 0 0.9rem;
+    text-shadow:
+        0 0 22px rgba(0, 255, 157, 0.28),
+        -1px 0 0 rgba(255, 59, 92, 0.35),
+        1px 0 0 rgba(0, 255, 157, 0.42);
+}
+
+.vuln__desc {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    color: var(--vk-dim);
+    margin: 0;
+    max-width: 62ch;
+}
+
+/* Attack chain. */
+.vuln__chain {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0;
+    margin: 1.5rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+
+.chain-node {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--vk-line);
+    border-radius: 6px;
+    background: rgba(0, 255, 157, 0.05);
+    color: var(--vk-ink);
+    white-space: nowrap;
+}
+
+.chain-node code {
+    color: var(--vk-amber);
+    font-family: inherit;
+}
+
+.chain-node--bad {
+    border-color: rgba(255, 59, 92, 0.45);
+    background: rgba(255, 59, 92, 0.09);
+    color: #ffb3c1;
+}
+
+.chain-link {
+    width: 1.6rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--vk-green), transparent);
+    position: relative;
+    flex: none;
+}
+
+.chain-link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -2.5px;
+    border: 3px solid transparent;
+    border-left-color: var(--vk-green);
+}
+
+/* Fact readout. */
+.vuln__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem 1.5rem;
+    margin: 1.4rem 0 0;
+    font-family: var(--font-mono);
+}
+
+.vuln__fact dt {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--vk-faint);
+}
+
+.vuln__fact dd {
+    margin: 0.35rem 0 0;
+    font-size: 0.82rem;
+    color: var(--vk-ink);
+}
+
+.vuln__sev {
+    color: var(--vk-amber);
+    font-weight: 600;
+    margin-right: 0.4rem;
+}
+
+/* Terminal pane. */
+.vuln__term {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--vk-line-soft);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    align-self: start;
+}
+
+.vuln__term-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--vk-line-soft);
+    background: rgba(255, 255, 255, 0.02);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--vk-faint);
+}
+
+.vuln__term-dots {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.vuln__term-dots i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: block;
+}
+
+.vuln__term-dots i:nth-child(1) { background: #ff5f57; }
+.vuln__term-dots i:nth-child(2) { background: #febc2e; }
+.vuln__term-dots i:nth-child(3) { background: #28c840; }
+
+.vuln__term-body {
+    padding: 1rem 1rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.8;
     overflow-x: auto;
 }
 
-.security-terminal__shell p {
+.vuln__term-body p {
     margin: 0;
     white-space: pre;
 }
 
-.st-prompt { color: var(--st-good); margin-right: 0.6ch; }
-.st-dim    { color: var(--st-faint); }
-.st-str    { color: var(--st-amber); }
-.st-bad    { color: var(--st-bad); }
-.st-good   { color: var(--st-good); }
+.st-prompt { color: var(--vk-green); margin-right: 0.6ch; }
+.st-dim    { color: var(--vk-faint); }
+.st-str    { color: var(--vk-amber); }
+.st-bad    { color: var(--vk-red); }
+.st-good   { color: var(--vk-green); }
 
-.security-terminal__cursor {
+.vuln__cursor {
     display: inline-block;
     width: 0.55ch;
     height: 1em;
     margin-left: 0.35ch;
     vertical-align: -0.12em;
-    background: var(--st-good);
-    animation: st-blink 1.1s steps(1) infinite;
+    background: var(--vk-green);
+    animation: vk-blink 1.1s steps(1) infinite;
 }
 
-@keyframes st-blink {
-    0%, 50% { opacity: 1; }
-    50.01%, 100% { opacity: 0; }
-}
-
-.security-terminal__content {
+/* Footer. */
+.vuln__foot {
     position: relative;
-    z-index: 1;
-    padding: clamp(1.35rem, 3.5vw, 2.1rem) clamp(1.15rem, 3.5vw, 2.1rem) clamp(1.5rem, 4vw, 2.2rem);
-}
-
-.security-terminal__headline {
-    font-size: clamp(1.45rem, 3vw, 2rem);
-    font-weight: 700;
-    letter-spacing: var(--letter-spacing-tight);
-    line-height: var(--line-height-tight);
-    color: var(--st-ink);
-    margin: 0 0 0.85rem;
-}
-
-.security-terminal__desc {
-    font-size: var(--font-size-body);
-    line-height: var(--line-height-body);
-    color: var(--st-dim);
-    margin: 0;
-    max-width: 66ch;
-}
-
-.security-terminal__risk {
+    z-index: 3;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    margin-top: 1.6rem;
+    padding: 1rem 1.5rem 1.25rem;
+    border-top: 1px solid var(--vk-line-soft);
+}
+
+.vuln__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-mono);
-}
-
-.security-terminal__risk-label {
-    font-size: 0.66rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--st-faint);
+    color: var(--vk-green);
 }
 
-.security-terminal__risk-value {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--st-amber);
+.vuln__status i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vk-green);
+    box-shadow: 0 0 10px var(--vk-green);
 }
 
-.security-terminal__meter {
-    flex: 1 1 180px;
-    min-width: 120px;
-    height: 6px;
-    border-radius: var(--radius-pill);
-    background: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
+.vuln .project-links {
+    margin-top: 0;
 }
 
-/* CVSS 6.5 of 10 */
-.security-terminal__meter i {
-    display: block;
-    height: 100%;
-    width: 65%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--st-good), var(--st-amber));
+.vuln .project-link {
+    background: rgba(0, 255, 157, 0.06);
+    border-color: var(--vk-line);
+    color: var(--vk-ink);
 }
 
-.security-terminal__facts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 1rem 1.75rem;
-    margin: 1.5rem 0 0;
-    font-family: var(--font-mono);
-}
-
-.security-terminal__facts dt {
-    font-size: 0.66rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--st-faint);
-}
-
-.security-terminal__facts dd {
-    margin: 0.3rem 0 0;
-    font-size: 0.85rem;
-    color: var(--st-ink);
-}
-
-/* The shared .project-link is themed for light surfaces; re-skin it for the
-   dark panel so it keeps its contrast. */
-.security-terminal .project-link {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.16);
-    color: var(--st-ink);
-}
-
-.security-terminal .project-link:hover,
-.security-terminal .project-link:focus-visible {
-    background: rgba(61, 220, 132, 0.12);
-    border-color: var(--st-good);
+.vuln .project-link:hover,
+.vuln .project-link:focus-visible {
+    background: rgba(0, 255, 157, 0.14);
+    border-color: var(--vk-green);
     color: #ffffff;
 }
 
-.security-terminal .project-links {
-    margin-top: 1.9rem;
+@keyframes vk-blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0.15; }
+}
+
+@keyframes vk-sweep {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(680%); }
+}
+
+@media (max-width: 900px) {
+    .vuln__grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 640px) {
-    .security-terminal__shell {
-        font-size: 0.72rem;
+    .vuln__head {
+        flex-wrap: wrap;
+        gap: 0.5rem 0.75rem;
+        padding: 0.9rem 1.1rem;
     }
 
-    /* A phone cannot show these lines in full. Wrapping keeps the evidence
-       readable instead of slicing it off at the panel edge. */
-    .security-terminal__shell p {
+    .vuln__ghsa {
+        margin-left: 0;
+    }
+
+    .vuln__term-body {
+        font-size: 0.7rem;
+    }
+
+    .vuln__term-body p {
         white-space: pre-wrap;
         overflow-wrap: anywhere;
     }
 
-    .security-terminal__bar {
-        flex-wrap: wrap;
-        gap: 0.5rem 0.7rem;
-    }
-
-    .security-terminal__tag {
-        margin-left: 0;
+    .vuln__chain {
+        gap: 0.4rem 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .security-terminal__cursor {
+    .vuln__sweep,
+    .vuln__cursor,
+    .vuln__live i,
+    .security-section__title::before {
         animation: none;
     }
 }
