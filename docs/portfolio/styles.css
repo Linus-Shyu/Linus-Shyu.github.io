@@ -2669,3 +2669,75 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
         animation: none;
     }
 }
+
+/* ==========================================================================
+   Open source contributions
+   Two repo cards with a star badge; sits between the security dossier and the
+   project list because both entries are contributions to *other people's*
+   codebases.
+   ========================================================================== */
+
+.oss-section {
+    padding: var(--spacing-section) 0 0;
+}
+
+.oss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.oss-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.35rem 1.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-bg-elevated);
+    text-decoration: none;
+    transition: transform 0.25s var(--ease-out), border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+.oss-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-text-tertiary);
+    box-shadow: var(--shadow-project);
+}
+
+.oss-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.oss-card__name {
+    font-size: 1.1rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+}
+
+.oss-card__stars {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-award-strong);
+    background: var(--color-award-bg);
+    border: 1px solid var(--color-award-border);
+    border-radius: var(--radius-pill);
+    padding: 0.12rem 0.6rem;
+    white-space: nowrap;
+}
+
+.oss-card__role {
+    font-size: 0.86rem;
+    color: var(--color-text-tertiary);
+}
+
+.oss-card__contrib {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}

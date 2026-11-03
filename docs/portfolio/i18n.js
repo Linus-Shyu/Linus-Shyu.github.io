@@ -60,6 +60,17 @@ window.PORTFOLIO_I18N = {
       linkAdvisory: "查看安全公告 >",
       linkWriteup: "完整分析 >"
     },
+    oss: {
+      title: "开源贡献",
+      mongoose: {
+        role: "MongoDB 对象建模 · Node.js",
+        contrib: "安全研究 — 报告并协助修复 schema.virtual() 的原型污染"
+      },
+      dsh: {
+        role: "DeepSeek Harness macOS 客户端 · Dart",
+        contrib: "16 commits · 3 个已合并 PR — CI/发布流水线、macOS WebView 崩溃修复、文档"
+      }
+    },
     projects: {
       heading: "核心项目",
       awardMark: "获奖",
@@ -228,6 +239,17 @@ window.PORTFOLIO_I18N = {
       factFixedKey: "Fixed in",
       linkAdvisory: "Read the advisory >",
       linkWriteup: "Full write-up >"
+    },
+    oss: {
+      title: "Open source",
+      mongoose: {
+        role: "MongoDB object modeling · Node.js",
+        contrib: "Security research — reported and helped fix a prototype pollution via schema.virtual()"
+      },
+      dsh: {
+        role: "DeepSeek Harness macOS client · Dart",
+        contrib: "16 commits · 3 merged PRs — CI/release pipeline, macOS WebView crash fixes, docs"
+      }
     },
     projects: {
       heading: "Core Projects",
