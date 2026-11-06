@@ -76,14 +76,24 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       var val = getNested(t, key);
-      if (val != null) el.textContent = val;
+      if (val != null) setTranslation(el, val);
     });
 
     document.querySelectorAll("[data-i18n-ui]").forEach(function (el) {
       var key = el.getAttribute("data-i18n-ui");
       var val = getNested(t, "ui." + key);
-      if (val != null) el.textContent = val;
+      if (val != null) setTranslation(el, val);
     });
+
+    function setTranslation(el, val) {
+      // Dictionary strings may carry inline markup (<code>, <a>, <strong>);
+      // render those as HTML, keep everything else as plain text.
+      if (typeof val === "string" && val.indexOf("<") !== -1) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    }
 
     var currentLangText = document.getElementById("currentLangText");
     if (currentLangText) currentLangText.textContent = lang === "zh" ? "中文" : "English";

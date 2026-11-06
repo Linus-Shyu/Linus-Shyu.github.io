@@ -47,18 +47,16 @@ window.PORTFOLIO_I18N = {
       ethers: "Ethers.js 教程",
       ethersMeta: "B 站系列课"
     },
-    security: {
-      title: "安全研究",
-      callsign: "漏洞披露",
-      status: "已修复",
-      tag: "已公开安全公告",
-      headline: "schema.virtual() 的原型污染",
-      body: "Mongoose 构建 Schema 时会拆分点号路径，而 schema.virtual() 从不校验路径片段。2022 年的修复加固了 path() 与 add()，却漏掉了这第三个入口，同一类漏洞因此在 6.x、7.x、8.x、9.x 四条维护线上继续可利用约四年。",
-      severityLabel: "评级",
-      factScopeKey: "影响",
-      factFixedKey: "修复版本",
-      linkAdvisory: "查看安全公告 >",
-      linkWriteup: "完整分析 >"
+    disclosures: {
+      title: "Security disclosures",
+      lead: "Coordinated vulnerability disclosure in widely used open-source dependencies — reported through GitHub private advisories, Tidelift and MITRE, each with a locally reproducible proof of concept and, where accepted, a prepared fix.",
+      mongoose: "<strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>.",
+      youget: "Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">technical report &amp; PoC</a>.",
+      cssselect: "Deeply nested <code>:is()</code> / <code>:not()</code> selectors overflow the call stack while compiling. Affects 1.0.0 through 7.0.0. Accepted by the maintainer, CVE requested, fix PR submitted; advisory pending publication.",
+      cheerio: "Uncaught <code>RangeError</code> and quadratic parsing on deeply nested HTML. Retracked by the maintainer into two upstream advisories in <code>domutils</code> and <code>domhandler</code>, credited on both. Advisories pending publication.",
+      parse5: "Uncaught <code>RangeError</code> in the serializer at ~22&nbsp;KB of nested markup, plus quadratic tree construction. Still reproducible on 8.0.1. Advisory pending publication.",
+      htmlparser2: "Quadratic CPU in xml mode via <code>stack.unshift</code>; limited to the 10.x line, later fixed upstream.",
+      foot: "Each report was reproduced against the published package before submission. Two further reports were withdrawn once maintainer review clarified the parser's input contract."
     },
     oss: {
       title: "开源贡献",
@@ -227,18 +225,18 @@ window.PORTFOLIO_I18N = {
       ethers: "Ethers.js tutorials",
       ethersMeta: "Bilibili series"
     },
-    security: {
-      title: "Security research",
-      callsign: "VULNERABILITY DISCLOSURE",
-      status: "PATCHED",
-      tag: "Published advisory",
-      headline: "Prototype pollution through schema.virtual()",
-      body: "Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.",
-      severityLabel: "Severity",
-      factScopeKey: "Affected",
-      factFixedKey: "Fixed in",
-      linkAdvisory: "Read the advisory >",
-      linkWriteup: "Full write-up >"
+    disclosures: {
+      title: "Security disclosures",
+      lead: "Coordinated vulnerability disclosure in widely used open-source dependencies — reported through GitHub private advisories, Tidelift and MITRE, each with a locally reproducible proof of concept and, where accepted, a prepared fix. Published records link out; entries still under embargo are marked pending publication.",
+      mongoose: "Prototype pollution via <code>Schema.prototype.virtual()</code> — bypassed the 2022 fix for CVE-2022-2564 / CVE-2022-24304, fixed by <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">commit 74df7769</a>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>",
+      youget: "Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">technical report &amp; PoC</a>.",
+      cssselect: "Deeply nested selectors overflow the call stack while compiling. Accepted by the maintainer, CVE requested, fix PR submitted; advisory pending publication.",
+      cheerio: "Crashes and quadratic parsing on deeply nested HTML — retracked upstream as domutils and domhandler. Advisories pending publication.",
+      parse5: "Uncaught RangeError in the serializer and quadratic tree construction. Advisory pending publication.",
+      htmlparser2: "Quadratic CPU in xml mode via <code>stack.unshift</code> (fixed in 11.x)",
+      refparser: "Quadratic CPU in JSON pointer resolution when resolving <code>$ref</code> documents",
+      reported: "reported",
+      foot: "Two further reports were withdrawn after maintainer review clarified the parser input contract."
     },
     oss: {
       title: "Open source",

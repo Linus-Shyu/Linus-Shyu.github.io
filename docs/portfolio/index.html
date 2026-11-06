@@ -113,82 +113,33 @@
         </div>
     </section>
 
-    <section class="security-section" aria-labelledby="security-heading">
+    <section class="disclosures" aria-labelledby="disclosures-heading">
         <div class="container">
-            <h2 id="security-heading" class="section-title security-section__title" data-i18n="security.title">Security research</h2>
+            <h2 id="disclosures-heading" class="section-title" data-i18n="disclosures.title">Security disclosures</h2>
+            <p class="disclosures__lead" data-i18n="disclosures.lead">Coordinated vulnerability disclosure in widely used open-source dependencies — reported through GitHub private advisories, Tidelift and MITRE, each with a locally reproducible proof of concept and, where accepted, a prepared fix.</p>
 
-            <article class="vuln">
-                <span class="vuln__corner vuln__corner--tl" aria-hidden="true"></span>
-                <span class="vuln__corner vuln__corner--tr" aria-hidden="true"></span>
-                <span class="vuln__corner vuln__corner--bl" aria-hidden="true"></span>
-                <span class="vuln__corner vuln__corner--br" aria-hidden="true"></span>
-                <span class="vuln__sweep" aria-hidden="true"></span>
+            <ul class="disclosures__list">
+                <li class="disclosures__item disclosures__item--featured">
+                    <span class="disclosures__pkg">you-get</span>
+                    <span class="disclosures__desc" data-i18n="disclosures.youget">Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href="https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3" target="_blank" rel="noopener noreferrer">technical report &amp; PoC</a>.</span>
+                    <span class="disclosures__idcell">
+                        <a class="disclosures__id disclosures__id--cve" href="https://www.cve.org/CVERecord?id=CVE-2026-117081" target="_blank" rel="noopener noreferrer">CVE-2026-117081</a>
+                        <span class="disclosures__date">assigned · 2026-11-06</span>
+                    </span>
+                </li>
+                <li class="disclosures__item">
+                    <span class="disclosures__pkg">mongoose</span>
+                    <span class="disclosures__desc" data-i18n="disclosures.mongoose"><strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href="https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href="https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/">technical write-up</a>.</span>
+                    <span class="disclosures__idcell">
+                        <a class="disclosures__id" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" target="_blank" rel="noopener noreferrer">GHSA-6972-9mcm-vhwj</a>
+                        <span class="disclosures__date">published · 2026-11-02</span>
+                    </span>
+                </li>
+                </ul>
 
-                <header class="vuln__head">
-                    <span class="vuln__live" aria-hidden="true"><i></i><span data-i18n="security.callsign">VULNERABILITY DISCLOSURE</span></span>
-                    <span class="vuln__ghsa">GHSA-6972-9mcm-vhwj</span>
-                </header>
-
-                <div class="vuln__grid">
-                    <div class="vuln__main">
-                        <h3 class="vuln__title" data-i18n="security.headline">Prototype pollution through schema.virtual()</h3>
-                        <p class="vuln__desc" data-i18n="security.body">Mongoose splits dotted paths when it builds a schema, and schema.virtual() never validated the segments. The 2022 fix hardened path() and add() but missed this third entry point, so the same class of bug stayed exploitable for roughly four years across the 6.x, 7.x, 8.x and 9.x lines.</p>
-
-
-
-                        <dl class="vuln__facts">
-                            <div class="vuln__fact">
-                                <dt data-i18n="security.severityLabel">Severity</dt>
-                                <dd><span class="vuln__sev">Moderate</span> CVSS 6.5</dd>
-                            </div>
-                            <div class="vuln__fact">
-                                <dt data-i18n="security.factScopeKey">Affected</dt>
-                                <dd>6.x &middot; 7.x &middot; 8.x &middot; 9.x</dd>
-                            </div>
-                            <div class="vuln__fact">
-                                <dt data-i18n="security.factFixedKey">Fixed in</dt>
-                                <dd>9.11.4 &middot; 8.24.7 &middot; 7.8.13 &middot; 6.13.12</dd>
-                            </div>
-                        </dl>
-                    </div>
-
-                    <div class="vuln__term">
-                        <div class="vuln__term-bar">
-                            <span class="vuln__term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                            <span class="vuln__term-title">poc.mjs</span>
-                        </div>
-                        <div class="vuln__term-body">
-                            <p><span class="st-prompt">$</span> node poc.mjs --mongoose 8.24.6</p>
-                            <p class="st-dim">mongoose 8.24.6</p>
-                            <p>schema.virtual(<span class="st-str">'__proto__.polluted'</span>)</p>
-                            <p class="st-bad">✗ Object.prototype.hasOwnProperty('polluted') → true</p>
-                            <p aria-hidden="true">&nbsp;</p>
-                            <p><span class="st-prompt">$</span> node poc.mjs --mongoose 9.11.4</p>
-                            <p class="st-good">✓ Cannot set special property `__proto__` on a schema<span class="vuln__cursor" aria-hidden="true"></span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="vuln__chainwrap">
-                    <div class="vuln__chain" role="img" aria-label="Attack chain: a dotted path with __proto__ reaches schema.virtual(), writes to Object.prototype, and pollutes every object">
-                        <span class="chain-node"><code>'__proto__.polluted'</code></span>
-                        <span class="chain-link" aria-hidden="true"></span>
-                        <span class="chain-node">schema.virtual()</span>
-                        <span class="chain-link" aria-hidden="true"></span>
-                        <span class="chain-node chain-node--bad">Object.prototype</span>
-                        <span class="chain-link" aria-hidden="true"></span>
-                        <span class="chain-node chain-node--bad">polluted = true</span>
-                    </div>
-                </div>
-
-                <footer class="vuln__foot">
-                    <span class="vuln__status"><i aria-hidden="true"></i><span data-i18n="security.status">PATCHED</span></span>
-                    <div class="project-links">
-                        <a href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Read the published security advisory" data-i18n="security.linkAdvisory">Read the advisory &gt;</a>
-                        <a href="/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/" class="project-link" data-i18n="security.linkWriteup">Full write-up &gt;</a>
-                    </div>
-                </footer>
-            </article>
+            <div class="disclosures__notes">
+                <p data-i18n="disclosures.foot">Each report was reproduced against the published package before submission. Two further reports were withdrawn once maintainer review clarified the parser's input contract.</p>
+            </div>
         </div>
     </section>
 
