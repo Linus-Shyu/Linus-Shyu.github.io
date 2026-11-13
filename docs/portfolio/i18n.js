@@ -32,7 +32,7 @@ window.PORTFOLIO_I18N = {
       eyebrow: "18 · 高三 · Co-founder & CTO",
       headline: "一个渴望国际视野的青海少年。",
       subheadline: "从四年级第一次玩守望先锋，走向了计算机编程的不归路。",
-      application: "拟申请香港高校计算机科学本科 · 2027 年入学"
+      application: "拟申请香港及澳门高校计算机科学本科 · 2027 年入学"
     },
     also: {
       title: "Also",
@@ -213,7 +213,7 @@ window.PORTFOLIO_I18N = {
       eyebrow: "18 · Grade 12 · Co-founder & CTO",
       headline: "A Qinghai youth hungry for a global view.",
       subheadline: "From first playing Overwatch in fourth grade to an irreversible path into computer programming.",
-      application: "Applying for undergraduate Computer Science · 2027 entry · Hong Kong"
+      application: "Applying for undergraduate Computer Science · 2027 entry · Hong Kong & Macau"
     },
     also: {
       title: "Also",
