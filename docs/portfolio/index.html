@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="medialab">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -15,17 +15,16 @@
     <link rel="icon" href="/portfolio/img/avatar.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="/portfolio/img/avatar.jpg">
     <link rel="preload" as="image" href="/portfolio/img/avatar.webp" type="image/webp">
-    <link rel="stylesheet" href="/portfolio/styles.css?v=20261108">
+    <link rel="stylesheet" href="/portfolio/styles.css?v=20261114">
     <script>
         (function () {
-            var theme = localStorage.getItem('portfolio-theme-v2') || 'medialab';
-            if (theme !== 'light' && theme !== 'polyu' && theme !== 'medialab' && theme !== 'dark') theme = 'medialab';
+            // The portfolio is pinned to the MIT Media Lab theme; no theme switcher.
+            document.documentElement.setAttribute('data-theme', 'medialab');
             var lang = localStorage.getItem('portfolio-lang') || (navigator.language && navigator.language.indexOf('zh') === 0 ? 'zh' : 'en');
-            document.documentElement.setAttribute('data-theme', theme);
             document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
         })();
     </script>
-    <script src="/portfolio/i18n.js?v=20261108"></script>
+    <script src="/portfolio/i18n.js?v=20261114"></script>
 </head>
 <body>
     <header class="terminal-header" role="banner">
@@ -40,9 +39,6 @@
                 <span class="terminal-title">Linus Shyu — Portfolio</span>
             </a>
             <div class="terminal-actions">
-                <button type="button" class="btn btn-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <span class="theme-icon" id="themeIcon">🌙</span>
-                </button>
                 <div class="lang-selector">
                     <button type="button" class="btn btn-toggle" id="langToggle" aria-label="Language">
                         <span class="lang-icon" aria-hidden="true">🌐</span>
@@ -65,19 +61,12 @@
                     <img class="hero-media__img" src="/portfolio/img/goldengate/goldengate-0-1920.jpg" srcset="/portfolio/img/goldengate/goldengate-0-1280.jpg 1280w, /portfolio/img/goldengate/goldengate-0-1920.jpg 1920w, /portfolio/img/goldengate/goldengate-0-2560.jpg 2560w, /portfolio/img/goldengate/goldengate-0-3840.jpg 3840w" sizes="100vw" alt="" width="1920" height="1080" loading="eager" decoding="async" fetchpriority="high">
                 </picture>
             </div>
-            <div class="hero-media__pic hero-media__pic--light">
-                <picture>
-                    <source type="image/webp" srcset="/portfolio/img/goldengate/goldengate-1-1280.webp 1280w, /portfolio/img/goldengate/goldengate-1-1920.webp 1920w, /portfolio/img/goldengate/goldengate-1-2560.webp 2560w, /portfolio/img/goldengate/goldengate-1-3840.webp 3840w" sizes="100vw">
-                    <img class="hero-media__img" src="/portfolio/img/goldengate/goldengate-1-1920.jpg" srcset="/portfolio/img/goldengate/goldengate-1-1280.jpg 1280w, /portfolio/img/goldengate/goldengate-1-1920.jpg 1920w, /portfolio/img/goldengate/goldengate-1-2560.jpg 2560w, /portfolio/img/goldengate/goldengate-1-3840.jpg 3840w" sizes="100vw" alt="" width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low">
-                </picture>
-            </div>
-            <div class="hero-media__pic hero-media__pic--polyu">
-                <picture>
-                    <source type="image/webp" srcset="/portfolio/img/goldengate/goldengate-2-1280.webp 1280w, /portfolio/img/goldengate/goldengate-2-1920.webp 1920w, /portfolio/img/goldengate/goldengate-2-2560.webp 2560w, /portfolio/img/goldengate/goldengate-2-3840.webp 3840w" sizes="100vw">
-                    <img class="hero-media__img" src="/portfolio/img/goldengate/goldengate-2-1920.jpg" srcset="/portfolio/img/goldengate/goldengate-2-1280.jpg 1280w, /portfolio/img/goldengate/goldengate-2-1920.jpg 1920w, /portfolio/img/goldengate/goldengate-2-2560.jpg 2560w, /portfolio/img/goldengate/goldengate-2-3840.jpg 3840w" sizes="100vw" alt="" width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low">
-                </picture>
-            </div>
             <div class="hero-media__pic hero-media__pic--medialab">
+                <picture>
+                    <source type="image/webp" srcset="/portfolio/img/goldengate/goldengate-3-1280.webp 1280w, /portfolio/img/goldengate/goldengate-3-1920.webp 1920w, /portfolio/img/goldengate/goldengate-3-2560.webp 2560w, /portfolio/img/goldengate/goldengate-3-3840.webp 3840w" sizes="100vw">
+                    <img class="hero-media__img" src="/portfolio/img/goldengate/goldengate-3-1920.jpg" srcset="/portfolio/img/goldengate/goldengate-3-1280.jpg 1280w, /portfolio/img/goldengate/goldengate-3-1920.jpg 1920w, /portfolio/img/goldengate/goldengate-3-2560.jpg 2560w, /portfolio/img/goldengate/goldengate-3-3840.jpg 3840w" sizes="100vw" alt="" width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low">
+                </picture>
+            </div>
                 <picture>
                     <source type="image/webp" srcset="/portfolio/img/goldengate/goldengate-3-1280.webp 1280w, /portfolio/img/goldengate/goldengate-3-1920.webp 1920w, /portfolio/img/goldengate/goldengate-3-2560.webp 2560w, /portfolio/img/goldengate/goldengate-3-3840.webp 3840w" sizes="100vw">
                     <img class="hero-media__img" src="/portfolio/img/goldengate/goldengate-3-1920.jpg" srcset="/portfolio/img/goldengate/goldengate-3-1280.jpg 1280w, /portfolio/img/goldengate/goldengate-3-1920.jpg 1920w, /portfolio/img/goldengate/goldengate-3-2560.jpg 2560w, /portfolio/img/goldengate/goldengate-3-3840.jpg 3840w" sizes="100vw" alt="" width="1920" height="1080" loading="lazy" decoding="async" fetchpriority="low">
@@ -88,6 +77,7 @@
             <p class="hero-eyebrow" data-i18n="hero.eyebrow">18 · Grade 12 · Co-founder &amp; CTO</p>
             <h1 class="hero-headline" data-i18n="hero.headline">A Qinghai youth hungry for a global view.</h1>
             <p class="hero-subheadline" data-i18n="hero.subheadline">From first playing Overwatch in fourth grade to an irreversible path into computer programming.</p>
+            <p class="hero-application" data-i18n="hero.application">Applying for undergraduate Computer Science · 2027 entry · Hong Kong</p>
         </div>
         <p class="hero-credit">
             <a href="/index.html">Golden Gate Bridge · moonrise · Linus Shyu</a>
@@ -120,19 +110,22 @@
 
             <ul class="disclosures__list">
                 <li class="disclosures__item disclosures__item--featured">
-                    <span class="disclosures__pkg">you-get</span>
-                    <span class="disclosures__desc" data-i18n="disclosures.youget">Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href="https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3" target="_blank" rel="noopener noreferrer">technical report &amp; PoC</a>.</span>
-                    <span class="disclosures__idcell">
-                        <a class="disclosures__id disclosures__id--cve" href="https://www.cve.org/CVERecord?id=CVE-2026-117081" target="_blank" rel="noopener noreferrer">CVE-2026-117081</a>
-                        <span class="disclosures__date" data-i18n="disclosures.yougetId">assigned · 2026-11-06</span>
-                    </span>
-                </li>
-                <li class="disclosures__item">
                     <span class="disclosures__pkg">mongoose</span>
                     <span class="disclosures__desc" data-i18n="disclosures.mongoose"><strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href="https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href="https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/">technical write-up</a>.</span>
                     <span class="disclosures__idcell">
-                        <a class="disclosures__id" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" target="_blank" rel="noopener noreferrer">GHSA-6972-9mcm-vhwj</a>
-                        <span class="disclosures__date" data-i18n="disclosures.mongooseId">published · 2026-11-02</span>
+                        <span class="disclosures__ids">
+                            <a class="disclosures__id disclosures__id--cve" href="https://www.cve.org/CVERecord?id=CVE-2026-125118" target="_blank" rel="noopener noreferrer">CVE-2026-125118</a>
+                            <a class="disclosures__id" href="https://github.com/Automattic/mongoose/security/advisories/GHSA-6972-9mcm-vhwj" target="_blank" rel="noopener noreferrer">GHSA-6972-9mcm-vhwj</a>
+                        </span>
+                        <span class="disclosures__date" data-i18n="disclosures.mongooseId">published · 2026-11-09</span>
+                    </span>
+                </li>
+                <li class="disclosures__item">
+                    <span class="disclosures__pkg">you-get</span>
+                    <span class="disclosures__desc" data-i18n="disclosures.youget">Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href="https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3" target="_blank" rel="noopener noreferrer">technical report &amp; PoC</a>.</span>
+                    <span class="disclosures__idcell">
+                        <a class="disclosures__id disclosures__id--pending" href="https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3" target="_blank" rel="noopener noreferrer">CVE-2026-117081</a>
+                        <span class="disclosures__date" data-i18n="disclosures.yougetId">assigned · 2026-11-06 · pending publication</span>
                     </span>
                 </li>
                 </ul>
@@ -461,6 +454,6 @@
 
     <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
-    <script src="/portfolio/script.js?v=20261108"></script>
+    <script src="/portfolio/script.js?v=20261114"></script>
 </body>
 </html>

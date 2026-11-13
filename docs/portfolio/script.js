@@ -1,58 +1,8 @@
 (function () {
-  var STORAGE_THEME = "portfolio-theme-v2";
   var STORAGE_LANG = "portfolio-lang";
 
-  function getTheme() {
-    var theme = localStorage.getItem(STORAGE_THEME) || "medialab";
-    if (theme === "light" || theme === "polyu" || theme === "medialab" || theme === "dark") return theme;
-    return "medialab";
-  }
-
-  function mediaLabIconHtml() {
-    var cells = "";
-    for (var i = 0; i < 49; i++) cells += "<i></i>";
-    return cells;
-  }
-
-  function setTheme(theme) {
-    if (theme !== "light" && theme !== "polyu" && theme !== "medialab") theme = "dark";
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem(STORAGE_THEME, theme);
-    var icon = document.getElementById("themeIcon");
-    if (icon) {
-      icon.classList.remove("theme-icon--polyu", "theme-icon--medialab");
-      if (theme === "polyu") {
-        icon.classList.add("theme-icon--polyu");
-        icon.innerHTML =
-          '<img src="/portfolio/img/polyu-symbol.png" alt="" width="18" height="20" decoding="async">';
-      } else if (theme === "medialab") {
-        icon.classList.add("theme-icon--medialab");
-        icon.innerHTML = mediaLabIconHtml();
-      } else {
-        icon.textContent = theme === "light" ? "☀️" : "🌙";
-      }
-    }
-    var btn = document.getElementById("themeToggle");
-    if (btn) {
-      var label =
-        theme === "medialab"
-          ? "MIT Media Lab theme"
-          : theme === "polyu"
-            ? "PolyU theme"
-            : theme === "light"
-              ? "Light theme"
-              : "Dark theme";
-      btn.setAttribute("aria-label", label);
-      btn.setAttribute("title", label);
-    }
-  }
-
-  function nextTheme(theme) {
-    if (theme === "dark") return "light";
-    if (theme === "light") return "polyu";
-    if (theme === "polyu") return "medialab";
-    return "dark";
-  }
+  // The portfolio is pinned to the MIT Media Lab theme; the theme switch is
+  // gone, so no theme state or icon logic remains.
 
   function getLang() {
     return localStorage.getItem(STORAGE_LANG) || (navigator.language && navigator.language.indexOf("zh") === 0 ? "zh" : "en");
@@ -110,15 +60,7 @@
   }
 
   function init() {
-    setTheme(getTheme());
     applyLang(getLang());
-
-    var themeBtn = document.getElementById("themeToggle");
-    if (themeBtn) {
-      themeBtn.addEventListener("click", function () {
-        setTheme(nextTheme(getTheme()));
-      });
-    }
 
     var langBtn = document.getElementById("langToggle");
     var langDropdown = document.getElementById("langDropdown");

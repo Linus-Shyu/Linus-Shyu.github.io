@@ -52,49 +52,9 @@
 }
 
 /* Light theme */
-[data-theme="light"] {
-    --color-bg: #f5f5f7;
-    --color-bg-elevated: #ffffff;
-    --color-bg-subtle: #e8e8ed;
-    
-    --color-text: #1d1d1f;
-    --color-text-secondary: #6e6e73;
-    --color-text-tertiary: #86868b;
-    
-    --color-border: #d2d2d7;
-
-    --color-award: #9a6b1f;
-    --color-award-strong: #7a5214;
-    --color-award-bg: rgba(154, 107, 31, 0.1);
-    --color-award-border: rgba(154, 107, 31, 0.35);
-    
-    --shadow-project: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.08);
-}
 
 /* PolyU theme — official PolyU Red #A02337 · Grey #58595B · gold foil accent
    Distinct light academic surface so it does not look like dark mode. */
-[data-theme="polyu"] {
-    --color-bg: #f4eef0;
-    --color-bg-elevated: #ffffff;
-    --color-bg-subtle: #ebe0e3;
-
-    --color-text: #1a1012;
-    --color-text-secondary: #58595b;
-    --color-text-tertiary: #7a6a6e;
-
-    --color-border: #d7c4c8;
-
-    --color-accent: #a02337;
-    --color-accent-strong: #7d1526;
-    --color-accent-soft: rgba(160, 35, 55, 0.12);
-
-    --color-award: #a02337;
-    --color-award-strong: #7d1526;
-    --color-award-bg: rgba(160, 35, 55, 0.1);
-    --color-award-border: rgba(160, 35, 55, 0.35);
-
-    --shadow-project: 0 20px 44px rgba(125, 21, 38, 0.14), 0 8px 20px rgba(0, 0, 0, 0.06);
-}
 
 /* MIT Media Lab theme — Pentagram black/white pixel grid + classic spectrum accents */
 [data-theme="medialab"] {
@@ -150,66 +110,15 @@
     transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
 }
 
-[data-theme="light"] .terminal-header {
-    background: rgba(245, 245, 247, 0.85);
-}
 
-[data-theme="polyu"] .terminal-header {
-    background: #a02337;
-    border-bottom: none;
-    box-shadow: 0 8px 28px rgba(125, 21, 38, 0.28);
-}
 
-[data-theme="polyu"] .terminal-title {
-    color: #ffffff;
-    font-weight: 600;
-}
 
-[data-theme="polyu"] .terminal-logo {
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
-}
 
-[data-theme="polyu"] .terminal-title::after {
-    content: "PolyU";
-    display: inline-block;
-    margin-left: 0.65rem;
-    padding: 0.15rem 0.45rem;
-    border-radius: 999px;
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #a02337;
-    background: #f0d59a;
-    vertical-align: middle;
-}
 
-[data-theme="polyu"] .btn-toggle {
-    background: rgba(255, 255, 255, 0.14);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.28);
-}
 
-[data-theme="polyu"] .btn-toggle:hover {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(240, 213, 154, 0.7);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
-}
 
-[data-theme="polyu"] .control.close { background: #f0d59a; }
-[data-theme="polyu"] .control.minimize { background: #ffffff; }
-[data-theme="polyu"] .control.maximize { background: #d7c4c8; }
 
-[data-theme="polyu"] .lang-dropdown {
-    background: #ffffff;
-    border-color: #d7c4c8;
-    box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
-}
 
-[data-theme="polyu"] .lang-option {
-    color: #1a1012;
-}
 
 /* ===== MIT Media Lab theme chrome ===== */
 [data-theme="medialab"] .terminal-header {
@@ -382,9 +291,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="light"] .btn-toggle:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
 
 .lang-selector {
     position: relative;
@@ -480,9 +386,6 @@
     overflow: hidden;
 }
 
-[data-theme="light"] .lang-dropdown {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
 
 .lang-dropdown.active {
     opacity: 1;
@@ -594,16 +497,12 @@ body {
     transition: opacity 0.6s var(--ease-out), visibility 0s linear 0s;
 }
 
-html[data-theme="medialab"] .hero-media__pic--default,
-html[data-theme="light"] .hero-media__pic--default,
-html[data-theme="polyu"] .hero-media__pic--default {
+html[data-theme="medialab"] .hero-media__pic--default {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s var(--ease-out), visibility 0s linear 0.6s;
 }
 
-html[data-theme="light"] .hero-media__pic--light,
-html[data-theme="polyu"] .hero-media__pic--polyu,
 html[data-theme="medialab"] .hero-media__pic--medialab {
     opacity: 1;
     visibility: visible;
@@ -615,9 +514,6 @@ html[data-theme="medialab"] .hero-media__pic--medialab {
     filter: saturate(1.05) contrast(1.04);
 }
 
-html[data-theme="light"] .hero-media__img {
-    filter: brightness(1.08) saturate(1.02);
-}
 
 @media (prefers-reduced-motion: reduce) {
     .hero-media__pic,
@@ -639,10 +535,6 @@ html[data-theme="light"] .hero-media__img {
 }
 
 html[data-theme="medialab"] .hero-media__img,
-html[data-theme="light"] .hero-media__img,
-html[data-theme="polyu"] .hero-media__img {
-    object-position: center 50%;
-}
 
 .hero-media.is-tilting .hero-media__img {
     transform: scale(1.08);
@@ -730,63 +622,15 @@ html[data-theme="medialab"] .hero-credit--medialab {
 }
 
 /* On photo hero, keep light type even in light theme */
-[data-theme="light"] .hero-eyebrow,
-[data-theme="light"] .hero-subheadline {
-    color: rgba(245, 245, 247, 0.78);
-}
 
-[data-theme="light"] .hero-headline {
-    background: linear-gradient(180deg, #ffffff 0%, #d2d2d7 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
 
-[data-theme="polyu"] .hero::before {
-    background:
-        linear-gradient(
-            180deg,
-            rgba(125, 21, 38, 0.78) 0%,
-            rgba(160, 35, 55, 0.55) 40%,
-            rgba(26, 16, 18, 0.88) 100%
-        );
-}
 
-[data-theme="polyu"] .hero::after {
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 35%, rgba(240, 213, 154, 0.16) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 55% at 50% 40%, transparent 0%, rgba(0, 0, 0, 0.35) 100%);
-}
 
-[data-theme="polyu"] .hero-eyebrow {
-    color: #f0d59a;
-}
 
-[data-theme="polyu"] .hero-headline {
-    background: linear-gradient(180deg, #ffffff 0%, #f0d59a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
 
-[data-theme="polyu"] .hero-subheadline {
-    color: rgba(255, 245, 247, 0.9);
-}
 
-[data-theme="polyu"] .hero-credit,
-[data-theme="polyu"] .hero-credit a {
-    color: rgba(240, 213, 154, 0.75);
-}
 
-[data-theme="polyu"] .hero-credit a {
-    border-bottom-color: rgba(240, 213, 154, 0.4);
-}
 
-html[data-theme="polyu"] body {
-    background-image:
-        radial-gradient(ellipse 90% 50% at 0% 0%, rgba(160, 35, 55, 0.08), transparent 50%),
-        radial-gradient(ellipse 70% 40% at 100% 20%, rgba(240, 213, 154, 0.12), transparent 45%);
-    background-attachment: fixed;
-}
 
 [data-theme="medialab"] .hero::before {
     background:
@@ -887,6 +731,23 @@ html[lang="zh-CN"] .hero-headline {
     margin: 0 auto;
     opacity: 0;
     animation: heroFadeIn var(--duration-slow) var(--ease-out) 0.4s forwards;
+}
+
+/* Application intent – the one thing an admissions reader should see in
+   20 seconds. A quiet but high-contrast chip that names the target. */
+.hero-application {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: 0.35rem 0.9rem;
+    margin: 0.6rem auto 0;
+    opacity: 0;
+    animation: heroFadeIn var(--duration-slow) var(--ease-out) 0.55s forwards;
 }
 
 @keyframes heroFadeIn {
@@ -1315,11 +1176,6 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-[data-theme="light"] .project-media-badge {
-    background: rgba(255, 255, 255, 0.88);
-    border-color: rgba(154, 107, 31, 0.4);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
 
 .project-media-badge__dot {
     width: 0.4rem;
@@ -1384,135 +1240,29 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     outline-offset: 4px;
 }
 
-[data-theme="polyu"] .btn-toggle:hover {
-    border-color: rgba(240, 213, 154, 0.7);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
-}
 
-[data-theme="polyu"] .section-title {
-    color: var(--color-accent);
-    background: none;
-    -webkit-text-fill-color: unset;
-}
 
-[data-theme="polyu"] .section-title::after {
-    content: "";
-    display: block;
-    width: 3rem;
-    height: 3px;
-    margin-top: 0.65rem;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #a02337, #f0d59a);
-}
 
-[data-theme="polyu"] .about-section__title::after {
-    margin-left: auto;
-    margin-right: auto;
-}
 
-[data-theme="polyu"] .project-award {
-    border-left-color: var(--color-accent);
-}
 
-[data-theme="polyu"] .project-award--highlight {
-    background:
-        linear-gradient(135deg, rgba(160, 35, 55, 0.14) 0%, transparent 65%),
-        var(--color-bg-elevated);
-    border-color: rgba(160, 35, 55, 0.4);
-}
 
-[data-theme="polyu"] .project-media-badge {
-    border-color: rgba(240, 213, 154, 0.65);
-    background: rgba(160, 35, 55, 0.92);
-    color: #ffffff;
-}
 
-[data-theme="polyu"] .project-media-badge__dot {
-    background: #f0d59a;
-    box-shadow: 0 0 0 3px rgba(240, 213, 154, 0.28);
-}
 
-[data-theme="polyu"] .project-link {
-    color: #ffffff;
-    border-color: transparent;
-    background: #a02337;
-}
 
-[data-theme="polyu"] .project-link:hover {
-    background: #7d1526;
-    border-color: transparent;
-    color: #ffffff;
-}
 
-[data-theme="polyu"] .also-card {
-    background: #ffffff;
-    border-color: rgba(160, 35, 55, 0.18);
-}
 
-[data-theme="polyu"] .also-card:hover {
-    border-color: rgba(160, 35, 55, 0.55);
-    box-shadow: 0 10px 28px rgba(125, 21, 38, 0.12);
-}
 
-[data-theme="polyu"] .hobby-link,
-[data-theme="polyu"] .hobby-tags li {
-    background: #ffffff;
-    border-color: rgba(160, 35, 55, 0.22);
-}
 
-[data-theme="polyu"] .hobby-link:hover {
-    border-color: #a02337;
-    background: rgba(160, 35, 55, 0.08);
-    color: #a02337;
-}
 
-[data-theme="polyu"] .footer-link {
-    color: #a02337;
-}
 
-[data-theme="polyu"] .footer-link:hover,
-[data-theme="polyu"] .footer-social__link:hover {
-    color: #7d1526;
-}
 
-[data-theme="polyu"] .portfolio-footer {
-    border-top-color: rgba(160, 35, 55, 0.25);
-}
 
-[data-theme="polyu"] .back-to-top {
-    color: #ffffff;
-    background: #a02337;
-    border-color: transparent;
-}
 
-[data-theme="polyu"] .back-to-top:hover {
-    background: #7d1526;
-    border-color: transparent;
-}
 
-[data-theme="polyu"] .lang-dropdown {
-    box-shadow: 0 8px 32px rgba(125, 21, 38, 0.18);
-}
 
-[data-theme="polyu"] .about-photo.project-block--media {
-    box-shadow:
-        0 0 0 4px #ffffff,
-        0 0 0 7px #a02337,
-        0 18px 40px rgba(125, 21, 38, 0.2);
-}
 
-[data-theme="polyu"] .about-photo__img {
-    box-shadow: none;
-}
 
-[data-theme="polyu"] .project-result {
-    color: #a02337;
-}
 
-[data-theme="polyu"] .theme-icon--polyu {
-    background: #0a0a0a;
-    box-shadow: inset 0 0 0 1px rgba(240, 213, 154, 0.45);
-}
 
 /* ===== MIT Media Lab component overrides ===== */
 [data-theme="medialab"] .section-title {
@@ -1779,11 +1529,6 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
         0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
-[data-theme="light"] .project-block--media.is-tilting {
-    box-shadow:
-        0 28px 56px rgba(0, 0, 0, 0.16),
-        0 12px 28px rgba(0, 0, 0, 0.1);
-}
 
 .project-media-glare {
     position: absolute;
@@ -1894,9 +1639,6 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
         --shadow-project: 0 14px 32px rgba(0, 0, 0, 0.32), 0 6px 16px rgba(0, 0, 0, 0.22);
     }
 
-    [data-theme="light"] {
-        --shadow-project: 0 14px 32px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(0, 0, 0, 0.06);
-    }
 
     body {
         padding-top: 3.25rem;
@@ -2332,6 +2074,14 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     font-weight: 600;
 }
 
+/* Plain-language lead for non-technical readers; sits before the jargon. */
+.disclosures__plain {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
 /* Inline identifiers: monospace, no background chip. */
 .disclosures__desc code {
     font-family: var(--font-mono);
@@ -2361,15 +2111,19 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
 .disclosures__id {
     justify-self: end;
     align-self: start;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 1.72rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.78rem;
+    line-height: 1;
     color: var(--color-text);
     text-decoration: none;
     white-space: nowrap;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-pill);
-    padding: 0.16rem 0.66rem;
+    padding: 0 0.68rem;
     background: transparent;
     transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out),
         background-color 0.2s var(--ease-out);
@@ -2390,15 +2144,14 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     cursor: default;
 }
 
-/* The CVE is the one identifier worth emphasising: inverse chip. */
+/* The CVE is the one identifier worth emphasising: inverse chip. It keeps
+   the same 1px border box as the GHSA chip so a pair sits flush. */
 .disclosures__id--cve,
 .disclosures__id--cve:hover {
     background: var(--color-text);
     color: var(--color-bg);
-    border: 0;
+    border-color: var(--color-text);
     border-radius: var(--radius-pill);
-    padding: 0.16rem 0.68rem;
-    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.01em;
 }
@@ -2409,6 +2162,24 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     flex-direction: column;
     align-items: flex-end;
     gap: 0.3rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Multiple identifiers for one entry stack on separate lines, flush right. */
+.disclosures__ids {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 0.3rem;
+}
+
+/* Chips inside the id column must hug the right edge; `.disclosures__id`
+   sets align-self: start for its original grid placement, which would
+   left-align it inside the flex column. */
+.disclosures__idcell .disclosures__id {
+    align-self: auto;
 }
 
 .disclosures__date {
@@ -2416,7 +2187,8 @@ html:not([data-theme="medialab"]) .about-photo.project-block--media {
     font-size: 0.68rem;
     line-height: 1.4;
     color: var(--color-text-tertiary);
-    white-space: nowrap;
+    white-space: normal;
+    text-align: right;
     letter-spacing: 0.01em;
 }
 

@@ -3,7 +3,7 @@ window.PORTFOLIO_I18N = {
     about: {
       title: "个人简介",
       para1: "我叫许发鑫，来自西宁，目前是一名高三学生。热爱计算机科学，享受动手开发有趣的项目，同时也是一名科技领域的自媒体创作者，乐于在 B 站教大家学编程、分享所学所得。大家可以在 B 站或 YouTube 上找到我的频道「Linus Shyu」，那里记录了我的学习与创作点滴，也包括 Solidity 与 Ethers.js 系列教程。",
-      para2: "除了代码，我也喜欢在户外骑自行车、滑滑板，用镜头捕捉生活，或是在钢琴前放松自己。作为一名信息学竞赛选手，我有幸入围了 NOI 2025 冬令营、2024 全国青少年信息学奥林匹克联赛以及 AdventureX 2025、2026。这些经历让我对软件开发和理论计算机科学产生了更深厚的兴趣，也坚定了未来希望进入 MIT 攻读计算机科学博士的理想。我期待能创造出既适合自己、也能帮助到更多有相似经历的人的工具与应用。",
+      para2: "除了代码，我也喜欢在户外骑自行车、滑滑板，用镜头捕捉生活，或是在钢琴前放松自己。作为一名信息学竞赛选手，我有幸入围了 NOI 2025 冬令营、2024 全国青少年信息学奥林匹克联赛以及 AdventureX 2025、2026。这些经历让我对软件开发和理论计算机科学产生了更深厚的兴趣，也坚定了我本科毕业后在系统与理论方向继续深造、进入一流研究机构或工业实验室的长期目标。我期待能创造出既适合自己、也能帮助到更多有相似经历的人的工具与应用。",
       para3: "目前，我正使用 Swift 开发并上架了一款名为「FeelFlow」的 App 至 App Store。同时也在学习前端技术，希望能构建出既美观又交互丰富的高质量页面。为了进一步拓宽技术视野，我也在入门 Rust 语言，尝试复刻开源项目 NeoFetch，并深入探索 Linux 底层相关的知识。我也把 XGrowth（原 x_bot）开源了——一套关注 API 成本与自进化策略的 X 增长引擎，并在 B 站持续更新 Solidity 与 Ethers.js 教程。"
     },
     hobby: {
@@ -31,7 +31,8 @@ window.PORTFOLIO_I18N = {
     hero: {
       eyebrow: "18 · 高三 · Co-founder & CTO",
       headline: "一个渴望国际视野的青海少年。",
-      subheadline: "从四年级第一次玩守望先锋，走向了计算机编程的不归路。"
+      subheadline: "从四年级第一次玩守望先锋，走向了计算机编程的不归路。",
+      application: "拟申请香港高校计算机科学本科 · 2027 年入学"
     },
     also: {
       title: "Also",
@@ -50,10 +51,10 @@ window.PORTFOLIO_I18N = {
     disclosures: {
       title: "安全披露",
       lead: "在广泛使用的开源依赖中进行的协作式漏洞披露——通过 GitHub 私有安全公告、Tidelift 与 MITRE 上报；每条都附有可在本地复现的 PoC，维护者接受时还附上修复补丁。",
-      mongoose: "<strong>通过 <code>Schema.prototype.virtual()</code> 的原型污染。</strong>2022 年为 CVE-2022-2564 / CVE-2022-24304 做的修复加固了 <code>path()</code> 与 <code>add()</code>，却漏掉了这第三个入口；一条带 <code>__proto__</code> 的点号路径可以污染到 <code>Function.prototype</code>。影响全部四条维护线。维护者已发布公告；修复提交 <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">74df7769</a>，已在 <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code> 中发布；<a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">技术分析</a>。",
+      mongoose: "<span class=\"disclosures__plain\">简单来说：一个影响数百万 Node.js 应用的数据库库中的安全漏洞。经负责任披露，被维护者确认、在四条维护线中修复，并在公开公告中具名致谢。</span> <strong>通过 <code>Schema.prototype.virtual()</code> 的原型污染。</strong>2022 年为 CVE-2022-2564 / CVE-2022-24304 做的修复加固了 <code>path()</code> 与 <code>add()</code>，却漏掉了这第三个入口；一条带 <code>__proto__</code> 的点号路径可以污染到 <code>Function.prototype</code>。影响全部四条维护线。维护者已发布公告；修复提交 <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">74df7769</a>，已在 <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code> 中发布；<a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">技术分析</a>。",
       youget: "通过 <code>common.py</code> 中的 <code>get_content</code> / <code>post_content</code> 造成敏感信息泄露，可远程触发；影响 0.4.1743 及更早版本。经 MITRE CNA-LR 上报；<a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">技术报告与 PoC</a>。",
-      yougetId: "已分配 · 2026-11-06",
-      mongooseId: "已发布 · 2026-11-02",
+      yougetId: "已分配 · 2026-11-06 · 待发布",
+      mongooseId: "已发布 · 2026-11-09",
       cssselect: "深度嵌套的 <code>:is()</code> / <code>:not()</code> 选择器在编译时导致调用栈溢出。影响 1.0.0 至 7.0.0。维护者已接受，已请求 CVE，修复 PR 已提交；公告待发布。",
       cheerio: "处理深度嵌套 HTML 时出现未捕获的 <code>RangeError</code> 与二次方解析耗时。已被维护者转入 <code>domutils</code> 与 <code>domhandler</code> 两个上游公告，并在两处获得署名。公告待发布。",
       parse5: "序列化器在大约 22&nbsp;KB 嵌套标记时抛出未捕获的 <code>RangeError</code>，树构建呈二次方复杂度。在 8.0.1 上仍可复现。公告待发布。",
@@ -183,7 +184,7 @@ window.PORTFOLIO_I18N = {
     about: {
       title: "About me",
       para1: "My name is Faxin Xu. I'm from Xining, currently a Grade 12 student. I love computer science and enjoy building interesting projects. I'm also a tech creator who teaches programming on Bilibili and shares what I learn. You can find my channel \"Linus Shyu\" on Bilibili or YouTube—including my Solidity and Ethers.js tutorial series.",
-      para2: "Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025 and 2026. These experiences deepened my interest in software development and theoretical computer science, and strengthened my goal to pursue a PhD in CS at MIT. I hope to build tools and apps that work for me and help others with similar journeys.",
+      para2: "Beyond code, I enjoy cycling and skateboarding outdoors, capturing life through the lens, or relaxing at the piano. As an informatics competitor, I was selected for NOI 2025 Winter Camp, the 2024 National Olympiad in Informatics in Provinces, and AdventureX 2025 and 2026. These experiences deepened my interest in software development and theoretical computer science, and set a long-term goal of pursuing systems and theory research at a leading graduate school or industry lab after my undergraduate studies. I hope to build tools and apps that work for me and help others with similar journeys.",
       para3: "Right now I'm developing and shipping an app called FeelFlow on the App Store with Swift. I'm also learning front-end to build beautiful, interactive pages. To broaden my technical horizons, I'm getting started with Rust—recreating the NeoFetch open-source project and exploring Linux internals. I also open-sourced XGrowth (formerly x_bot)—an X growth engine that treats API credits as a first-class constraint—and keep publishing Solidity and Ethers.js tutorials on Bilibili."
     },
     hobby: {
@@ -211,7 +212,8 @@ window.PORTFOLIO_I18N = {
     hero: {
       eyebrow: "18 · Grade 12 · Co-founder & CTO",
       headline: "A Qinghai youth hungry for a global view.",
-      subheadline: "From first playing Overwatch in fourth grade to an irreversible path into computer programming."
+      subheadline: "From first playing Overwatch in fourth grade to an irreversible path into computer programming.",
+      application: "Applying for undergraduate Computer Science · 2027 entry · Hong Kong"
     },
     also: {
       title: "Also",
@@ -230,10 +232,10 @@ window.PORTFOLIO_I18N = {
     disclosures: {
       title: "Security disclosures",
       lead: "Coordinated vulnerability disclosure in widely used open-source dependencies — reported through GitHub private advisories, Tidelift and MITRE, each with a locally reproducible proof of concept and, where accepted, a prepared fix.",
-      mongoose: "<strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>.",
+      mongoose: "<span class=\"disclosures__plain\">In plain terms: a vulnerability in a database library used by millions of Node.js applications. Reported responsibly, confirmed by the maintainers, fixed across all four release lines, and credited by name in the public advisory.</span> <strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>.",
       youget: "Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">technical report &amp; PoC</a>.",
-      yougetId: "assigned · 2026-11-06",
-      mongooseId: "published · 2026-11-02",
+      yougetId: "assigned · 2026-11-06 · pending publication",
+      mongooseId: "published · 2026-11-09",
       cssselect: "Deeply nested selectors overflow the call stack while compiling. Accepted by the maintainer, CVE requested, fix PR submitted; advisory pending publication.",
       cheerio: "Crashes and quadratic parsing on deeply nested HTML — retracked upstream as domutils and domhandler. Advisories pending publication.",
       parse5: "Uncaught RangeError in the serializer and quadratic tree construction. Advisory pending publication.",
