@@ -737,14 +737,15 @@ html[lang="zh-CN"] .hero-headline {
    20 seconds. A quiet but high-contrast chip that names the target. */
 .hero-application {
     display: inline-block;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     line-height: 1.5;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.66);
+    border: 1px solid rgba(255, 255, 255, 0.32);
     border-radius: var(--radius-pill);
-    padding: 0.35rem 0.9rem;
+    padding: 0.42rem 1.05rem;
     margin: 0.6rem auto 0;
     opacity: 0;
     animation: heroFadeIn var(--duration-slow) var(--ease-out) 0.55s forwards;
