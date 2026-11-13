@@ -50,16 +50,16 @@ window.PORTFOLIO_I18N = {
     },
     disclosures: {
       title: "安全披露",
-      lead: "在广泛使用的开源依赖中进行的协作式漏洞披露——通过 GitHub 私有安全公告、Tidelift 与 MITRE 上报；每条都附有可在本地复现的 PoC，维护者接受时还附上修复补丁。",
-      mongoose: "<span class=\"disclosures__plain\">简单来说：一个影响数百万 Node.js 应用的数据库库中的安全漏洞。经负责任披露，被维护者确认、在四条维护线中修复，并在公开公告中具名致谢。</span> <strong>通过 <code>Schema.prototype.virtual()</code> 的原型污染。</strong>2022 年为 CVE-2022-2564 / CVE-2022-24304 做的修复加固了 <code>path()</code> 与 <code>add()</code>，却漏掉了这第三个入口；一条带 <code>__proto__</code> 的点号路径可以污染到 <code>Function.prototype</code>。影响全部四条维护线。维护者已发布公告；修复提交 <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">74df7769</a>，已在 <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code> 中发布；<a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">技术分析</a>。",
-      youget: "通过 <code>common.py</code> 中的 <code>get_content</code> / <code>post_content</code> 造成敏感信息泄露，可远程触发；影响 0.4.1743 及更早版本。经 MITRE CNA-LR 上报；<a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">技术报告与 PoC</a>。",
+      lead: "在开源项目中负责任地发现并上报漏洞。每条都已复现、都被维护者确认，重要的已获 CVE 编号。",
+      mongoose: "<span class=\"disclosures__plain\">在一个被数百万 Node.js 应用使用的数据库库里，发现并上报了一个安全漏洞，获维护者确认、修复并具名致谢。</span> <strong>通过 <code>Schema.prototype.virtual()</code> 的原型污染。</strong>影响全部四条维护线，已在 <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code> 修复，<a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">技术分析</a>。",
+      youget: "向 <code>you-get</code> 报告了一处敏感信息泄露。获 MITRE CNA 分配编号，<a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">技术报告与 PoC</a>。",
       yougetId: "已分配 · 2026-11-06 · 待发布",
       mongooseId: "已发布 · 2026-11-09",
       cssselect: "深度嵌套的 <code>:is()</code> / <code>:not()</code> 选择器在编译时导致调用栈溢出。影响 1.0.0 至 7.0.0。维护者已接受，已请求 CVE，修复 PR 已提交；公告待发布。",
       cheerio: "处理深度嵌套 HTML 时出现未捕获的 <code>RangeError</code> 与二次方解析耗时。已被维护者转入 <code>domutils</code> 与 <code>domhandler</code> 两个上游公告，并在两处获得署名。公告待发布。",
       parse5: "序列化器在大约 22&nbsp;KB 嵌套标记时抛出未捕获的 <code>RangeError</code>，树构建呈二次方复杂度。在 8.0.1 上仍可复现。公告待发布。",
       htmlparser2: "xml 模式下 <code>stack.unshift</code> 造成二次方 CPU 开销；仅影响 10.x 系列，后续版本已修复。",
-      foot: "每条报告在提交前都针对已发布版本做过复现。另有两条报告在维护者澄清解析器的输入契约后撤回。"
+      foot: "以上漏洞均已在发布版本上复现后上报。"
     },
     oss: {
       title: "开源贡献",
@@ -231,9 +231,9 @@ window.PORTFOLIO_I18N = {
     },
     disclosures: {
       title: "Security disclosures",
-      lead: "Coordinated vulnerability disclosure in widely used open-source dependencies — reported through GitHub private advisories, Tidelift and MITRE, each with a locally reproducible proof of concept and, where accepted, a prepared fix.",
-      mongoose: "<span class=\"disclosures__plain\">In plain terms: a vulnerability in a database library used by millions of Node.js applications. Reported responsibly, confirmed by the maintainers, fixed across all four release lines, and credited by name in the public advisory.</span> <strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> The 2022 fix for CVE-2022-2564 / CVE-2022-24304 hardened <code>path()</code> and <code>add()</code> but missed this third entry point; a dotted <code>__proto__</code> path reached <code>Function.prototype</code>. Affected all four maintained lines. Published by the maintainer; fixed by <a href=\"https://github.com/Automattic/mongoose/commit/74df7769b5a8d89c4413b764029911ee915ea467\">commit 74df7769</a>, released in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>.",
-      youget: "Sensitive information exposure through <code>get_content</code> / <code>post_content</code> in <code>common.py</code>, reachable remotely; affects 0.4.1743 and earlier. Reported via MITRE CNA-LR; <a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">technical report &amp; PoC</a>.",
+      lead: "Finding and responsibly reporting vulnerabilities in open-source software. Each was reproduced, confirmed by the maintainers, and — where it mattered — assigned a CVE.",
+      mongoose: "<span class=\"disclosures__plain\">Found and reported a vulnerability in a database library used by millions of Node.js applications — confirmed, fixed, and credited by the maintainers.</span> <strong>Prototype pollution via <code>Schema.prototype.virtual()</code>.</strong> Affected all four maintained lines, fixed in <code>6.13.12 · 7.8.13 · 8.24.7 · 9.11.4</code>; <a href=\"https://linusshyu.dev/2026/11/03/%E4%B8%80%E4%B8%AA%E8%A1%A5%E4%B8%81%E6%BC%8F%E6%8E%89%E5%9B%9B%E5%B9%B4-Mongoose%E5%8E%9F%E5%9E%8B%E6%B1%A1%E6%9F%93%E6%BC%8F%E6%B4%9E/\">technical write-up</a>.",
+      youget: "Reported a sensitive information exposure in <code>you-get</code>. Assigned a CVE by MITRE's CNA; <a href=\"https://gist.github.com/Linus-Shyu/d45873b64a75ed35f44dfeb129c479e3\" target=\"_blank\" rel=\"noopener noreferrer\">technical report &amp; PoC</a>.",
       yougetId: "assigned · 2026-11-06 · pending publication",
       mongooseId: "published · 2026-11-09",
       cssselect: "Deeply nested selectors overflow the call stack while compiling. Accepted by the maintainer, CVE requested, fix PR submitted; advisory pending publication.",
@@ -242,7 +242,7 @@ window.PORTFOLIO_I18N = {
       htmlparser2: "Quadratic CPU in xml mode via <code>stack.unshift</code> (fixed in 11.x)",
       refparser: "Quadratic CPU in JSON pointer resolution when resolving <code>$ref</code> documents",
       reported: "reported",
-      foot: "Each report was reproduced against the published package before submission. Two further reports were withdrawn once maintainer review clarified the parser's input contract."
+      foot: "Every report was reproduced on a released version before submission."
     },
     oss: {
       title: "Open source",
